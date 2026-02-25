@@ -23,6 +23,9 @@
             scroll-behavior: smooth;
             font-size: 14px;
             transition: font-size 0.2s ease;
+            /* 스와이프 시 텍스트 선택 방지 */
+            -webkit-user-select: none;
+            user-select: none;
         }
         @media (min-width: 768px) {
             body { font-size: 16px; }
@@ -88,7 +91,7 @@
         
         .event-bar { 
             font-size: var(--event-font-size); 
-            padding: 2px 4px; /* 왼쪽 정렬 시 가독성을 위해 좌우 패딩을 약간 늘림 */
+            padding: 2px 2px; 
             border-radius: 4px; 
             margin-top: 2px; 
             width: 98%; 
@@ -97,7 +100,7 @@
             text-overflow: clip;
             font-weight: 700; 
             cursor: pointer; 
-            text-align: left; /* 왼쪽 정렬 적용 */
+            text-align: left; 
             border-width: 1.5px;
             line-height: 1.1;
             flex-shrink: 0;
@@ -159,7 +162,8 @@
 
     <main class="max-w-[99%] mx-auto pb-16">
         <section id="schedule" class="mt-1 md:mt-4">
-            <div class="section-card p-1 md:p-8 lg:p-10">
+            <!-- 달력 영역에 스와이프 감지를 위해 id 추가 -->
+            <div id="calendarContainer" class="section-card p-1 md:p-8 lg:p-10">
                 <div class="flex justify-between items-center mb-3 md:mb-8 px-1">
                     <button id="prevMonth" class="p-2 md:p-4 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
                         <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
@@ -241,6 +245,12 @@
         let events = []; 
         const todayObj = new Date();
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
+
+        // 스와이프 감지 변수
+        let touchstartX = 0;
+        let touchendX = 0;
+        let touchstartY = 0;
+        let touchendY = 0;
 
         window.hideLoader = () => {
             document.getElementById('loadingOverlay').classList.add('opacity-0');
@@ -345,6 +355,41 @@
             }
         }
 
+        // 스와이프 감지 핸들러
+        function handleGesture() {
+            const deltaX = touchendX - touchstartX;
+            const deltaY = touchendY - touchstartY;
+
+            // 수평 이동 거리가 수직 이동 거리보다 크고, 최소 50px 이상 이동했을 때만 실행
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX < 0) {
+                    // 왼쪽으로 밀기 -> 다음 달
+                    changeMonth(1);
+                } else {
+                    // 오른쪽으로 밀기 -> 이전 달
+                    changeMonth(-1);
+                }
+            }
+        }
+
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            renderCalendar();
+        }
+
+        // 이벤트 리스너 등록 (터치)
+        const calendarContainer = document.getElementById('calendarContainer');
+        calendarContainer.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY;
+        }, {passive: true});
+
+        calendarContainer.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            touchendY = e.changedTouches[0].screenY;
+            handleGesture();
+        }, {passive: true});
+
         window.openDayInfo = (y, m, d) => {
             const target = new Date(y, m, d);
             const dayEvents = events.filter(e => {
@@ -384,8 +429,8 @@
         }
 
         window.closeModal = () => { document.getElementById('detailModal').classList.add('hidden'); document.body.style.overflow = 'auto'; };
-        document.getElementById('prevMonth').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-        document.getElementById('nextMonth').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+        document.getElementById('prevMonth').onclick = () => { changeMonth(-1); };
+        document.getElementById('nextMonth').onclick = () => { changeMonth(1); };
         window.goToToday = () => { currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); renderCalendar(); };
         fetchGoogleSheetData();
     </script>
