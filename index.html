@@ -88,7 +88,7 @@
         
         .event-bar { 
             font-size: var(--event-font-size); 
-            padding: 2px 2px; 
+            padding: 2px 4px; /* 왼쪽 정렬 시 가독성을 위해 좌우 패딩을 약간 늘림 */
             border-radius: 4px; 
             margin-top: 2px; 
             width: 98%; 
@@ -97,7 +97,7 @@
             text-overflow: clip;
             font-weight: 700; 
             cursor: pointer; 
-            text-align: center; 
+            text-align: left; /* 왼쪽 정렬 적용 */
             border-width: 1.5px;
             line-height: 1.1;
             flex-shrink: 0;
@@ -107,7 +107,7 @@
         @media (min-width: 768px) { 
             .event-bar { 
                 font-size: var(--event-font-size-pc); 
-                padding: 4px 4px; 
+                padding: 4px 6px; 
                 border-radius: 6px; 
                 margin-top: 3px;
                 border-width: 2px;
@@ -231,7 +231,6 @@
                         <p class="text-xs text-slate-500 leading-relaxed pl-8">우측 상단 '점 세개(⋮)' 클릭 후 '홈 화면에 추가'를 선택하세요.</p>
                     </div>
                 </div>
-                <!-- 버튼 색상을 검은색(slate-900)으로 변경하여 시인성 확보 -->
                 <button onclick="closeInstallModal()" class="w-full mt-8 bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition-all">닫기</button>
             </div>
         </div>
