@@ -9,29 +9,29 @@
     <style>
         :root {
             /* 기본(보통) 사이즈 변수 */
-            --day-min-height-mobile: 75px;
-            --day-min-height-tablet: 85px;
-            --day-min-height-pc: 140px;
+            --day-min-height-mobile: 85px;
+            --day-min-height-tablet: 95px;
+            --day-min-height-pc: 145px;
             --date-font-size: 0.875rem; /* 14px */
-            --event-font-size: 8px;
-            --event-font-size-pc: 10px;
+            --event-font-size: 9px;
+            --event-font-size-pc: 11px;
         }
 
         /* 작게 옵션 */
         .zoom-small {
-            --day-min-height-mobile: 60px;
-            --day-min-height-tablet: 70px;
-            --day-min-height-pc: 110px;
+            --day-min-height-mobile: 70px;
+            --day-min-height-tablet: 80px;
+            --day-min-height-pc: 115px;
             --date-font-size: 0.75rem;
-            --event-font-size: 7px;
-            --event-font-size-pc: 9px;
+            --event-font-size: 8px;
+            --event-font-size-pc: 10px;
         }
 
         /* 크게 옵션 */
         .zoom-large {
-            --day-min-height-mobile: 90px;
-            --day-min-height-tablet: 105px;
-            --day-min-height-pc: 180px;
+            --day-min-height-mobile: 100px;
+            --day-min-height-tablet: 115px;
+            --day-min-height-pc: 185px;
             --date-font-size: 1.125rem;
             --event-font-size: 10px;
             --event-font-size-pc: 13px;
@@ -55,19 +55,20 @@
             align-items: center; 
             justify-content: flex-start; 
             padding: 0.2rem 0.1rem; 
-            border-radius: 0.4rem; 
+            border-radius: 0.5rem; 
             position: relative; 
             transition: all 0.2s ease-in-out; 
             border: 1px solid #f1f5f9; 
             background: white; 
+            /* 내부 스크롤 허용을 위해 overflow 수정 */
             overflow: hidden; 
         }
 
         @media (max-width: 767px) {
             .calendar-day { 
                 min-height: var(--day-min-height-mobile); 
-                padding: 0.15rem 0.05rem;
-                border-radius: 0.25rem;
+                padding: 0.2rem 0.1rem;
+                border-radius: 0.3rem;
             }
         }
 
@@ -75,7 +76,7 @@
             .calendar-day { 
                 min-height: var(--day-min-height-pc); 
                 padding: 0.5rem 0.25rem; 
-                border-radius: 0.75rem; 
+                border-radius: 0.8rem; 
             } 
         }
 
@@ -86,16 +87,33 @@
             transform: translateY(-2px);
         }
 
+        /* 일정 목록 컨테이너: 일정이 많을 경우 내부 스크롤 제공 */
+        .event-container {
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 스크롤바 숨기기 (필요 시) */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .event-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
         /* 날짜 숫자 크기 조절 */
         .date-label {
             font-size: var(--date-font-size);
             font-weight: 900;
+            flex-shrink: 0;
         }
         
         .event-bar { 
             font-size: var(--event-font-size); 
-            padding: 1px 2px; 
-            border-radius: 2px; 
+            padding: 2px 3px; 
+            border-radius: 3px; 
             margin-top: 1px; 
             width: 96%; 
             overflow: hidden; 
@@ -104,33 +122,33 @@
             font-weight: 700; 
             cursor: pointer; 
             text-align: left; 
-            border-width: 1px;
-            line-height: 1.1;
+            border-width: 1.5px;
+            line-height: 1.2;
+            flex-shrink: 0;
         }
 
         @media (min-width: 768px) { 
             .event-bar { 
                 font-size: var(--event-font-size-pc); 
-                padding: 2px 4px; 
-                border-radius: 4px; 
+                padding: 3px 5px; 
+                border-radius: 5px; 
                 margin-top: 2px;
-                line-height: 1.2;
-                border-width: 1.5px;
+                line-height: 1.3;
+                border-width: 2px;
             } 
         }
         
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #fb923c; border-radius: 50%; width: 28px; height: 28px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .section-card { background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; overflow: hidden; }
+        .section-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; overflow: hidden; }
         @media (min-width: 768px) {
-            .section-card { border-radius: 2rem; }
+            .section-card { border-radius: 2.5rem; }
         }
 
         .kids-gradient { background: linear-gradient(135deg, #fb923c 0%, #facc15 100%); }
         .keep-all { word-break: keep-all; }
 
-        /* 사이즈 조절 버튼 활성화 상태 */
         .size-btn-active {
             background-color: #fb923c;
             color: white;
@@ -147,18 +165,17 @@
     </div>
 
     <!-- 네비게이션 -->
-    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-orange-100">
-        <div class="max-w-6xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-orange-100 px-2 md:px-0">
+        <div class="max-w-6xl mx-auto px-2 md:px-6 h-14 md:h-16 flex items-center justify-between">
             <div class="flex items-center gap-2 md:gap-3">
-                <div class="w-7 h-7 md:w-8 md:h-8 kids-gradient rounded-lg flex items-center justify-center text-white font-black shadow-sm text-sm md:text-base">꿈</div>
-                <span class="font-black text-base md:text-xl tracking-tight text-slate-800">안양교회 유초등부</span>
+                <div class="w-7 h-7 md:w-8 md:h-8 kids-gradient rounded-lg flex items-center justify-center text-white font-black shadow-sm text-xs md:text-base">꿈</div>
+                <span class="font-black text-sm md:text-xl tracking-tight text-slate-800">안양교회 유초등부</span>
             </div>
             
-            <!-- 사이즈 조절 컨트롤러 -->
             <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
-                <button onclick="changeSize('small')" id="btn-small" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500 hover:bg-white">작게</button>
+                <button onclick="changeSize('small')" id="btn-small" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500">작게</button>
                 <button onclick="changeSize('normal')" id="btn-normal" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all size-btn-active">보통</button>
-                <button onclick="changeSize('large')" id="btn-large" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500 hover:bg-white">크게</button>
+                <button onclick="changeSize('large')" id="btn-large" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500">크게</button>
             </div>
         </div>
     </nav>
@@ -168,12 +185,12 @@
         <h1 class="text-2xl md:text-5xl font-black text-slate-900 mb-1 md:mb-3 leading-tight keep-all">
             우리들의 <span class="text-orange-500">즐거운 약속</span>
         </h1>
-        <p class="text-slate-500 text-[11px] md:text-base opacity-80 keep-all">함께 모여 예배하고 활동하는 소중한 시간들을 확인하세요.</p>
+        <p class="text-slate-500 text-[11px] md:text-base opacity-80 keep-all">예배와 활동 소중한 시간을 확인하세요.</p>
     </header>
 
-    <main class="max-w-7xl mx-auto px-2 md:px-6 pb-16">
+    <main class="max-w-7xl mx-auto px-1 md:px-6 pb-16">
         <section id="schedule" class="mt-2 md:mt-4">
-            <div class="section-card p-2 md:p-8 lg:p-10">
+            <div class="section-card p-1 md:p-8 lg:p-10">
                 <!-- 달력 컨트롤러 -->
                 <div class="flex justify-between items-center mb-4 md:mb-8 px-1">
                     <button id="prevMonth" class="p-2 md:p-3 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
@@ -194,13 +211,13 @@
 
                 <!-- 요일 헤더 -->
                 <div class="grid grid-cols-7 gap-1 md:gap-3 text-center mb-1 md:mb-4 border-b border-slate-50 pb-2">
-                    <div class="text-red-400 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Sun</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Mon</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Tue</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Wed</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Thu</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Fri</div>
-                    <div class="text-blue-400 font-black text-[10px] md:text-sm uppercase tracking-tighter sm:tracking-normal">Sat</div>
+                    <div class="text-red-400 font-black text-[10px] md:text-sm uppercase tracking-tighter">Sun</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Mon</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Tue</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Wed</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Thu</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Fri</div>
+                    <div class="text-blue-400 font-black text-[10px] md:text-sm uppercase tracking-tighter">Sat</div>
                 </div>
 
                 <!-- 달력 그리드 -->
@@ -211,7 +228,7 @@
 
     <!-- 푸터 -->
     <footer class="py-12 text-center text-slate-300 text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase px-4 keep-all">
-        © 2026 ANYANG CHURCH CHILDREN MINISTRY. ALL RIGHTS RESERVED.
+        © 2026 ANYANG CHURCH CHILDREN MINISTRY.
     </footer>
 
     <!-- 상세 일정 모달 -->
@@ -219,11 +236,11 @@
         <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity" onclick="closeModal()"></div>
         <div class="flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl w-full max-w-lg relative overflow-hidden transform transition-all animate-in zoom-in duration-200">
-                <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-300 hover:text-slate-800 bg-slate-50 rounded-full p-2 md:p-2.5 transition-colors z-10">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-slate-300 hover:text-slate-800 bg-slate-100 rounded-full p-2 md:p-2.5 transition-colors z-10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-                <div id="modalContent" class="p-6 md:p-12">
-                    <!-- 상세 내용 삽입 -->
+                <div id="modalContent" class="max-h-[85vh] overflow-y-auto p-6 md:p-12">
+                    <!-- 상세 내용 삽입 (여러 일정 대응) -->
                 </div>
             </div>
         </div>
@@ -236,26 +253,22 @@
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
         let currentSize = 'normal';
 
-        // 사이즈 변경 함수
         window.changeSize = (size) => {
             currentSize = size;
             document.body.classList.remove('zoom-small', 'zoom-large');
             if (size === 'small') document.body.classList.add('zoom-small');
             if (size === 'large') document.body.classList.add('zoom-large');
 
-            // 버튼 상태 업데이트
             ['small', 'normal', 'large'].forEach(s => {
                 const btn = document.getElementById(`btn-${s}`);
                 if (s === size) {
                     btn.classList.add('size-btn-active');
-                    btn.classList.remove('text-slate-500', 'hover:bg-white');
+                    btn.classList.remove('text-slate-500');
                 } else {
                     btn.classList.remove('size-btn-active');
-                    btn.classList.add('text-slate-500', 'hover:bg-white');
+                    btn.classList.add('text-slate-500');
                 }
             });
-
-            // 달력 다시 그리기 (레이아웃 변동 대응)
             renderCalendar();
         };
 
@@ -334,14 +347,14 @@
             const y = currentDate.getFullYear(), m = currentDate.getMonth();
             document.getElementById('calendarTitle').innerHTML = `${y}년 <span class="text-orange-500">${m+1}월</span>`;
             
-            const first = new Date(y, m, 1).getDay();
-            const last = new Date(y, m+1, 0).getDate();
+            const firstDay = new Date(y, m, 1).getDay();
+            const daysInMonth = new Date(y, m+1, 0).getDate();
             const grid = document.getElementById('calendarGrid');
             grid.innerHTML = '';
             
-            for(let i=0; i<first; i++) grid.innerHTML += '<div></div>';
+            for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
             
-            for(let i=1; i<=last; i++) {
+            for(let i=1; i<=daysInMonth; i++) {
                 const targetDate = new Date(y, m, i);
                 const isToday = (y === todayObj.getFullYear() && m === todayObj.getMonth() && i === todayObj.getDate());
                 
@@ -358,133 +371,27 @@
                 if (dayOfWeek === 0) textClass = "text-red-400";
                 else if (dayOfWeek === 6) textClass = "text-blue-400";
 
-                const eventHtml = dayEvents.map(e => {
-                    const displayTitle = e.meetingType;
-                    return `
-                        <div class="event-bar border ${getEventColor(e.meetingType)}" onclick="event.stopPropagation(); openModal(${e.id})">
-                            ${e.startTime ? `<span class="opacity-60 mr-0.5">${e.startTime}</span>` : ''}${displayTitle}
-                        </div>
-                    `;
-                }).join('');
+                const eventHtml = dayEvents.map(e => `
+                    <div class="event-bar border ${getEventColor(e.meetingType)}" onclick="event.stopPropagation(); openSingleEventModal(${e.id})">
+                        ${e.startTime ? `<span class="opacity-60 mr-0.5">${e.startTime}</span>` : ''}${e.meetingType}
+                    </div>
+                `).join('');
 
                 grid.innerHTML += `
                     <div class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i})">
-                        <div class="flex items-center justify-center w-6 h-6 md:w-9 md:h-9 ${isToday?'bg-orange-500 text-white rounded-full shadow-md':textClass} date-label mb-0.5 md:mb-1">
+                        <div class="date-label ${isToday?'bg-orange-500 text-white rounded-full w-6 h-6 md:w-9 md:h-9 flex items-center justify-center shadow-sm':'w-6 h-6 md:w-9 md:h-9 flex items-center justify-center '+textClass} mb-1">
                             ${i}
                         </div>
-                        <div class="w-full flex flex-col items-center overflow-hidden px-px">
+                        <div class="event-container px-px">
                             ${eventHtml}
                         </div>
                     </div>`;
             }
         }
 
-        window.openModal = (eventId) => {
-            const e = events.find(item => item.id === eventId);
-            if (!e) return;
-
-            const sDate = new Date(e.start).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
-            const eDate = e.end ? new Date(e.end).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) : sDate;
-            const dateDisplay = (sDate === eDate) ? sDate : `${sDate} ~ ${eDate}`;
-            const timeDisplay = (e.startTime || e.endTime) ? `${e.startTime || ''} ~ ${e.endTime || ''}` : "종일 일정";
-
-            let detailHtml = '';
-
-            if (e.meetingType === '주일집회') {
-                detailHtml = `
-                    <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
-                        <div class="bg-blue-50/50 px-4 py-2 border-b border-blue-100 text-[9px] md:text-[11px] font-black text-blue-400 uppercase tracking-widest text-center">주일 집회 정보</div>
-                        <div class="p-5 md:p-7 space-y-4 md:space-y-6">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">진행 담당</span>
-                                <span class="text-sm md:text-base font-black text-slate-700">${e.leader}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">말씀 담당</span>
-                                <span class="text-sm md:text-base font-black text-slate-700">${e.speaker}</span>
-                            </div>
-                            <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-50">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">분반 담당</span>
-                                <span class="text-sm md:text-base font-black text-blue-600">${e.division}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else if (e.meetingType === '소그룹') {
-                detailHtml = `
-                    <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
-                        <div class="bg-orange-50/50 px-4 py-2 border-b border-orange-100 text-[9px] md:text-[11px] font-black text-orange-400 uppercase tracking-widest text-center">소그룹 및 식사 안내</div>
-                        <div class="p-5 md:p-7 space-y-4 md:space-y-6">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">진행/봉사담당</span>
-                                <span class="text-sm md:text-base font-black text-slate-700">${e.leader}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">식사준비 / 팀</span>
-                                <span class="text-sm md:text-base font-black text-slate-700">${e.mealPrep} <span class="text-slate-300 font-normal">|</span> ${e.mealTeam}</span>
-                            </div>
-                            <div class="pt-4 md:pt-6 border-t border-slate-50 text-center">
-                                <div class="text-[9px] md:text-[11px] font-bold text-orange-400 mb-1 flex items-center justify-center gap-1">🍽️ 오늘의 메뉴</div>
-                                <div class="text-lg md:text-2xl font-black text-slate-800 leading-tight">${e.menu}</div>
-                            </div>
-                            <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-50">
-                                <span class="text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-tighter">설거지 봉사</span>
-                                <span class="text-sm md:text-base font-bold text-slate-600">${e.wash}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                detailHtml = `
-                    <div class="bg-slate-50 p-5 md:p-8 rounded-2xl border border-slate-100 shadow-sm">
-                        <div class="text-[9px] md:text-[11px] font-bold text-slate-400 mb-3 uppercase tracking-widest text-center border-b border-slate-200 pb-2">상세 내역</div>
-                        <div class="text-sm md:text-base text-slate-700 leading-relaxed font-medium whitespace-pre-wrap keep-all">
-                            ${e.note || "등록된 상세 내역이 없습니다."}
-                        </div>
-                    </div>
-                `;
-            }
-
-            const mainTitle = e.subject || e.meetingType;
-
-            document.getElementById('modalContent').innerHTML = `
-                <div class="text-center mb-6 md:mb-10">
-                    <div class="inline-block px-5 md:px-8 py-2 md:py-3 ${getEventColor(e.meetingType)} rounded-full text-base md:text-2xl font-black uppercase tracking-widest border-2 shadow-sm mb-3 leading-tight">
-                        ${e.meetingType}
-                    </div>
-                    ${e.subject ? `
-                        <div class="text-slate-500 font-bold text-sm md:text-lg mt-1 italic tracking-tight opacity-80 keep-all">
-                            ${e.subject}
-                        </div>
-                    ` : ''}
-                </div>
-                
-                <div class="space-y-4 md:space-y-6">
-                    <div class="grid grid-cols-2 gap-2 md:gap-4">
-                        <div class="bg-slate-50 p-3 md:p-5 rounded-xl border border-slate-100 shadow-sm">
-                            <div class="text-[9px] md:text-[11px] font-bold text-slate-400 mb-1 uppercase tracking-tighter">일시</div>
-                            <div class="text-[11px] md:text-sm font-bold text-slate-700">${dateDisplay}</div>
-                        </div>
-                        <div class="bg-slate-50 p-3 md:p-5 rounded-xl border border-slate-100 shadow-sm">
-                            <div class="text-[9px] md:text-[11px] font-bold text-slate-400 mb-1 uppercase tracking-tighter">시간</div>
-                            <div class="text-[11px] md:text-sm font-bold text-orange-500">${timeDisplay}</div>
-                        </div>
-                    </div>
-
-                    ${detailHtml}
-
-                    ${e.note && (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? `
-                    <div class="bg-orange-50/30 p-4 md:p-6 rounded-xl border border-orange-100 border-dashed">
-                        <div class="text-[9px] md:text-[11px] font-bold text-orange-400 mb-1 uppercase tracking-tighter">비고 사항</div>
-                        <div class="text-[11px] md:text-sm text-slate-600 leading-relaxed whitespace-pre-wrap keep-all">${e.note}</div>
-                    </div>` : ''}
-                </div>
-            `;
-            document.getElementById('detailModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        };
-
+        // 특정 일자 클릭 시 해당 일의 모든 일정을 상세 모달에 표시
         window.openDayInfo = (y, m, d) => {
+            const targetDateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
             const target = new Date(y, m, d);
             const dayEvents = events.filter(e => {
                 const start = new Date(e.start); start.setHours(0,0,0,0);
@@ -492,8 +399,100 @@
                 end.setHours(23,59,59,999);
                 return target >= start && target <= end;
             });
-            if (dayEvents.length > 0) openModal(dayEvents[0].id);
+
+            if (dayEvents.length > 0) {
+                renderMultipleEventsModal(dayEvents, target);
+            }
         };
+
+        // 개별 이벤트 바 클릭 시
+        window.openSingleEventModal = (eventId) => {
+            const e = events.find(item => item.id === eventId);
+            if (e) renderMultipleEventsModal([e], new Date(e.start));
+        };
+
+        // 모달 렌더링 (하나 이상의 일정 대응)
+        function renderMultipleEventsModal(dayEvents, date) {
+            const dayName = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
+            const dateStr = `${date.getMonth() + 1}월 ${date.getDate()}일 (${dayName})`;
+            
+            let html = `
+                <div class="text-center mb-8 border-b border-slate-100 pb-4">
+                    <div class="text-[10px] md:text-xs font-black text-orange-400 uppercase tracking-widest mb-1">Daily Schedule</div>
+                    <h2 class="text-xl md:text-2xl font-black text-slate-800">${dateStr}</h2>
+                </div>
+                <div class="space-y-10">
+            `;
+
+            dayEvents.forEach((e, idx) => {
+                const timeDisplay = (e.startTime || e.endTime) ? `${e.startTime || ''} ~ ${e.endTime || ''}` : "종일 일정";
+                let detailHtml = '';
+
+                if (e.meetingType === '주일집회') {
+                    detailHtml = `
+                        <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <div class="bg-blue-50/50 px-4 py-2 border-b border-blue-100 text-[9px] md:text-[11px] font-black text-blue-400 uppercase tracking-widest text-center">주일 집회 정보</div>
+                            <div class="p-5 md:p-7 space-y-4 md:space-y-5">
+                                <div class="flex justify-between items-center"><span class="text-[11px] md:text-xs font-bold text-slate-400">진행 담당</span><span class="text-sm md:text-base font-black text-slate-700">${e.leader}</span></div>
+                                <div class="flex justify-between items-center"><span class="text-[11px] md:text-xs font-bold text-slate-400">말씀 담당</span><span class="text-sm md:text-base font-black text-slate-700">${e.speaker}</span></div>
+                                <div class="flex justify-between items-center pt-3 border-t border-slate-50"><span class="text-[11px] md:text-xs font-bold text-slate-400">분반 담당</span><span class="text-sm md:text-base font-black text-blue-600">${e.division}</span></div>
+                            </div>
+                        </div>
+                    `;
+                } else if (e.meetingType === '소그룹') {
+                    detailHtml = `
+                        <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <div class="bg-orange-50/50 px-4 py-2 border-b border-orange-100 text-[9px] md:text-[11px] font-black text-orange-400 uppercase tracking-widest text-center">소그룹 및 식사 안내</div>
+                            <div class="p-5 md:p-7 space-y-4 md:space-y-5">
+                                <div class="flex justify-between items-center"><span class="text-[11px] md:text-xs font-bold text-slate-400">진행/봉사담당</span><span class="text-sm md:text-base font-black text-slate-700">${e.leader}</span></div>
+                                <div class="flex justify-between items-center"><span class="text-[11px] md:text-xs font-bold text-slate-400">식사준비/팀</span><span class="text-sm md:text-base font-black text-slate-700">${e.mealPrep} | ${e.mealTeam}</span></div>
+                                <div class="pt-4 border-t border-slate-50 text-center">
+                                    <div class="text-[9px] md:text-[11px] font-bold text-orange-400 mb-1 flex items-center justify-center gap-1">🍽️ 오늘의 메뉴</div>
+                                    <div class="text-lg md:text-2xl font-black text-slate-800 leading-tight">${e.menu}</div>
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t border-slate-50"><span class="text-[11px] md:text-xs font-bold text-slate-400">설거지 봉사</span><span class="text-sm md:text-base font-bold text-slate-600">${e.wash}</span></div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    detailHtml = `
+                        <div class="bg-slate-50 p-5 md:p-8 rounded-2xl border border-slate-100 shadow-sm">
+                            <div class="text-[9px] md:text-[11px] font-bold text-slate-400 mb-3 uppercase tracking-widest text-center border-b border-slate-200 pb-2">상세 내역</div>
+                            <div class="text-sm md:text-base text-slate-700 leading-relaxed font-medium whitespace-pre-wrap keep-all">${e.note || "등록된 상세 내역이 없습니다."}</div>
+                        </div>
+                    `;
+                }
+
+                html += `
+                    <div class="event-detail-item ${idx !== dayEvents.length - 1 ? 'border-b-2 border-dashed border-slate-100 pb-10' : ''}">
+                        <div class="text-center mb-6">
+                            <div class="inline-block px-5 md:px-8 py-2 md:py-3 ${getEventColor(e.meetingType)} rounded-full text-base md:text-2xl font-black uppercase tracking-widest border-2 shadow-sm mb-2 leading-tight">
+                                ${e.meetingType}
+                            </div>
+                            ${e.subject ? `<div class="text-slate-500 font-bold text-sm md:text-lg mt-1 italic tracking-tight opacity-80 keep-all">${e.subject}</div>` : ''}
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 p-3 md:p-5 rounded-xl border border-slate-100 shadow-sm flex justify-between items-center">
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">시간</div>
+                                <div class="text-[11px] md:text-sm font-bold text-orange-500">${timeDisplay}</div>
+                            </div>
+                            ${detailHtml}
+                            ${e.note && (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? `
+                                <div class="bg-orange-50/30 p-4 md:p-6 rounded-xl border border-orange-100 border-dashed">
+                                    <div class="text-[10px] font-bold text-orange-400 mb-1 uppercase tracking-tighter">비고 사항</div>
+                                    <div class="text-[11px] md:text-sm text-slate-600 leading-relaxed whitespace-pre-wrap keep-all">${e.note}</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            document.getElementById('modalContent').innerHTML = html;
+            document.getElementById('detailModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
 
         window.closeModal = () => {
             document.getElementById('detailModal').classList.add('hidden');
