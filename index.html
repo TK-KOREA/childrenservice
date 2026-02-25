@@ -24,26 +24,26 @@
         .month-view { width: 33.3333%; display: grid; grid-template-columns: repeat(7, 1fr); align-content: start; }
         .sliding-transition { transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-        /* 날짜 칸 스타일 (균등한 크기 보장) */
+        /* 날짜 칸 스타일 (중앙 정렬로 수정) */
         .calendar-day { 
             height: 85px; 
-            display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
             padding: 4px;
             cursor: pointer; position: relative;
             border: 1px solid #f1f5f9;
             margin-right: -1px;
             margin-bottom: -1px;
-            overflow: hidden; /* 내용이 넘쳐도 칸 크기 유지 */
+            overflow: hidden;
         }
         @media (min-width: 768px) { .calendar-day { height: 120px; padding: 6px; } }
 
-        /* 날짜 헤더 (날짜 + 공휴일 바로 옆 표시) */
+        /* 날짜 헤더 (수직 라인 정렬을 위해 center 정렬) */
         .day-header { 
             width: 100%; 
             display: flex; 
+            flex-direction: column; 
             justify-content: flex-start; 
             align-items: center; 
-            gap: 4px; /* 날짜와 공휴일 사이 간격 최소화 */
             margin-bottom: 4px; 
         }
 
@@ -88,11 +88,13 @@
         .bar-HCD { background-color: #faf5ff; color: #a855f7; border-color: #f3e8ff; }
         .bar-기타 { background-color: #f0fdf4; color: #22c55e; border-color: #dcfce7; }
 
-        /* 공휴일 이름 스타일 (날짜 바로 옆) */
+        /* 공휴일 이름 스타일 (수직 라인 정렬 - 중앙 정렬) */
         .holiday-name { 
             font-size: 9px; color: #ef4444; font-weight: 700; 
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            max-width: calc(100% - 32px); /* 칸 안에서 겹치지 않게 */
+            width: 100%;
+            text-align: center;
+            margin-top: 1px;
         }
         @media (min-width: 768px) { .holiday-name { font-size: 10px; } }
         
