@@ -26,6 +26,7 @@
             margin: 0;
         }
 
+        /* 캘린더 슬라이드 구조 */
         #calendarViewport { position: relative; width: 100%; overflow: hidden; min-height: 420px; }
         #calendarStrip { display: flex; width: 300%; transform: translateX(-33.3333%); will-change: transform; }
         .month-view { width: 33.3333%; display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; align-content: start; }
@@ -34,6 +35,363 @@
 
         .calendar-day { 
             height: var(--day-height-mobile); 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
+            padding: 0.2rem 0.05rem; border: 1px solid #f1f5f9; 
+            background: white; overflow: hidden; cursor: pointer;
+        }
+        @media (min-width: 768px) { .calendar-day { height: var(--day-height-tablet); } }
+        @media (min-width: 1024px) { .calendar-day { height: var(--day-height-pc); padding: 0.5rem 0.15rem; } }
+
+        .calendar-day:hover { background-color: #fffaf5; }
+        .calendar-day.selected-day { border-color: #fb923c; background-color: #fff7ed; box-shadow: inset 0 0 0 1px #fb923c; }
+
+        .event-container { width: 100%; flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; scrollbar-width: none; }
+        .event-container::-webkit-scrollbar { display: none; }
+        .date-label { font-size: var(--date-font-size); font-weight: 900; flex-shrink: 0; margin-bottom: 2px; }
+        
+        .event-bar { 
+            font-size: var(--event-font-size); padding: 2px 1px; border-radius: 3px; margin-top: 2px; 
+            width: 98%; white-space: nowrap; overflow: hidden; text-overflow: clip; 
+            font-weight: 700; text-align: left; border-width: 1.5px; line-height: 1.1; flex-shrink: 0; letter-spacing: -0.06em;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
+
+        .holiday-label { font-size: 8px; color: #ef4444; margin-top: -2px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: clip; max-width: 90%; }
+        
+        .ribbon-enter { animation: ribbonIn 0.3s ease-out forwards; }
+        @keyframes ribbonIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .search-container { display: flex; align-items: center; background: #f1f5f9; border-radius: 9999px; padding: 0.2rem 0.6rem; width: 120px; }
+        
+        #statusIndicator { height: 2px; width: 0%; background: #fb923c; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.3s; }
+
+        /* 상세 카드 스타일 */
+        .info-card { background: white; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.04); transition: all 0.2s; }
+        .tag { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+        .tag-red { background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; }
+        .tag-blue { background: #eff6ff; color: #3b82f6; border: 1px solid #dbeafe; }
+        .tag-green { background: #f0fdf4; color: #22c55e; border: 1px solid #dcfce7; }
+    </style>
+</head>
+<body>
+
+    <div id="statusIndicator"></div>
+
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div id="navTitle" class="text-xl md:text-3xl font-black tracking-tighter text-slate-800">0000년 0월</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="일정 검색" class="bg-transparent border-none outline-none text-xs font-bold w-full">
+                <button onclick="handleSearch()" class="text-slate-400 p-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-[100%] mx-auto pb-4 pt-2 md:pt-6 px-1 md:px-4">
+        <!-- 캘린더 섹션 -->
+        <section id="calendarSection">
+            <div id="calendarContainer" class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden p-1 md:p-6">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <button id="prevMonth" class="p-2 text-slate-300 hover:text-orange-500 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button onclick="goToToday()" class="text-[11px] font-black text-orange-600 bg-orange-50 px-5 py-2 rounded-full border border-orange-100 uppercase tracking-widest active:scale-95 transition-all shadow-sm">Today</button>
+                    <button id="nextMonth" class="p-2 text-slate-300 hover:text-orange-500 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-7 gap-1 text-center mb-1 border-b border-slate-50 pb-2">
+                    <div class="text-red-400 font-black text-[10px] md:text-xs">주일</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">월</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">화</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">수</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">목</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">금</div>
+                    <div class="text-blue-400 font-black text-[10px] md:text-xs">토</div>
+                </div>
+
+                <div id="calendarViewport">
+                    <div id="calendarStrip">
+                        <div id="prevGrid" class="month-view"></div>
+                        <div id="currGrid" class="month-view"></div>
+                        <div id="nextGrid" class="month-view"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 상세 리본 영역 (단 한 번만 존재) -->
+        <section id="detailRibbonSection" class="max-w-6xl mx-auto mt-8 px-2 md:px-0 scroll-mt-24">
+            <div id="ribbonContent" class="space-y-5">
+                <!-- 날짜 정보와 일정이 여기에 렌더링됩니다 -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-xl mx-auto px-6 py-12 text-center border-t border-slate-100">
+        <button onclick="openInstallModal()" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition-all flex items-center justify-center gap-2 mb-8">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            홈 화면에 바로가기 추가
+        </button>
+        <p class="text-slate-300 text-[10px] font-medium tracking-[0.2em] uppercase">© 2026 ANYANG CHURCH CHILDREN MINISTRY.</p>
+    </footer>
+
+    <!-- 모달 -->
+    <div id="modalOverlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="bg-white rounded-[32px] shadow-2xl w-full max-w-lg relative overflow-hidden transform transition-all p-6 md:p-10 z-10">
+            <div id="modalContent" class="max-h-[70vh] overflow-y-auto"></div>
+            <button onclick="closeModal()" class="mt-8 w-full py-4 bg-slate-50 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-colors">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const SHEET_ID = '18zGuXQQWPm_dM2W6xD2Ugysaiz-sukIFJByO_TZrFy0'; 
+        const HOLIDAY_ICS_URL = 'https://calendar.google.com/calendar/ical/ko.south_korea%23holiday%40group.v.google.com/public/basic.ics';
+        
+        let events = []; 
+        let holidays = {
+            "2025-01-01": "신정", "2025-01-28": "설날", "2025-01-29": "설날", "2025-01-30": "설날", "2025-03-01": "삼일절", "2025-03-03": "대체공휴일", "2025-05-05": "어린이날", "2025-05-06": "대체공휴일", "2025-06-06": "현충일", "2025-08-15": "광복절", "2025-10-03": "개천절", "2025-10-05": "추석", "2025-10-06": "추석", "2025-10-07": "추석", "2025-10-09": "한글날", "2025-12-25": "성탄절",
+            "2026-01-01": "신정", "2026-02-16": "설날", "2026-02-17": "설날", "2026-02-18": "설날", "2026-03-01": "삼일절", "2026-03-02": "대체공휴일", "2026-05-05": "어린이날", "2026-05-24": "부처님오신날", "2026-10-09": "한글날", "2026-12-25": "성탄절"
+        };
+
+        const todayObj = new Date();
+        let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
+        const WEEK_NAMES = ['주일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+
+        const strip = document.getElementById('calendarStrip');
+        const indicator = document.getElementById('statusIndicator');
+
+        function fastRender() {
+            const titleEl = document.getElementById('navTitle');
+            if(titleEl) titleEl.innerHTML = `${currentDate.getFullYear()}년 <span class="text-orange-500">${currentDate.getMonth() + 1}월</span>`;
+            
+            document.getElementById('prevGrid').innerHTML = generateMonthHtml(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+            document.getElementById('currGrid').innerHTML = generateMonthHtml(currentDate);
+            document.getElementById('nextGrid').innerHTML = generateMonthHtml(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+        }
+
+        async function fetchEvents() {
+            indicator.style.width = '40%';
+            try {
+                const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=${Date.now()}`);
+                const text = await res.text();
+                const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+                events = json.table.rows.map((r, idx) => {
+                    const c = r.c;
+                    if (!c || !c[0]) return null;
+                    return {
+                        id: idx,
+                        start: parseGoogleDate(c[0]?.v),
+                        end: parseGoogleDate(c[1]?.v),
+                        startTime: (c[2] && (c[2].f || c[2].v)) ? (c[2].f || c[2].v) : "",
+                        endTime: (c[3] && (c[3].f || c[3].v)) ? (c[3].f || c[3].v) : "",
+                        meetingType: c[4]?.v || "기타",
+                        leader: c[5]?.v || "-", 
+                        speaker: c[6]?.v || "-", 
+                        division: c[7]?.v || "-", 
+                        mealPrep: c[8]?.v || "-", 
+                        menu: c[10]?.v || "-", 
+                        wash: c[11]?.v || "-",
+                        subject: c[12]?.v || "", 
+                        note: c[13]?.v || ""
+                    };
+                }).filter(e => e !== null);
+                
+                indicator.style.width = '100%';
+                fastRender();
+                openDayInfo(todayObj.getFullYear(), todayObj.getMonth(), todayObj.getDate(), false);
+                setTimeout(() => indicator.style.width = '0%', 400);
+            } catch (e) { indicator.style.width = '0%'; }
+        }
+
+        function parseGoogleDate(v) {
+            if (!v) return null;
+            if (typeof v === 'string' && v.startsWith('Date')) {
+                const m = v.match(/Date\((\d+),(\d+),(\d+)\)/);
+                return m ? new Date(m[1], m[2], m[3]) : new Date(v);
+            }
+            return new Date(v);
+        }
+
+        function generateMonthHtml(date) {
+            const y = date.getFullYear(), m = date.getMonth();
+            const last = new Date(y, m+1, 0).getDate();
+            const first = new Date(y, m, 1).getDay();
+            let html = '';
+            for(let i=0; i<first; i++) html += '<div></div>';
+            for(let i=1; i<=last; i++) {
+                const target = new Date(y, m, i);
+                const hDate = `${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+                const holiday = holidays[hDate];
+                const dayEvents = events.filter(e => {
+                    if(!e.start) return false;
+                    const s = new Date(e.start); s.setHours(0,0,0,0);
+                    const end = e.end ? new Date(e.end) : new Date(e.start); end.setHours(23,59,59,999);
+                    return target >= s && target <= end;
+                });
+                const isToday = (target.toDateString() === todayObj.toDateString());
+                const color = (target.getDay() === 0 || holiday) ? 'text-red-500' : target.getDay() === 6 ? 'text-blue-500' : 'text-slate-800';
+                
+                const eventHtml = dayEvents.slice(0,2).map(e => {
+                    const theme = e.meetingType === '주일집회' ? 'bg-red-50 text-red-600 border-red-100' : e.meetingType === '소그룹' ? 'bg-blue-50 text-blue-600 border-blue-100' : 'bg-green-50 text-green-600 border-green-100';
+                    return `<div class="event-bar border ${theme}">${e.meetingType}</div>`;
+                }).join('');
+                
+                html += `<div id="day-${y}-${m}-${i}" class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i}, false)"><div class="date-label ${isToday ? 'bg-orange-500 text-white rounded-full w-7 h-7 md:w-9 md:h-9 flex items-center justify-center shadow-md' : 'w-7 h-7 md:w-9 md:h-9 flex items-center justify-center ' + color}">${i}</div>${holiday ? `<div class="holiday-label">${holiday}</div>` : ''}<div class="event-container">${eventHtml}</div></div>`;
+            }
+            return html;
+        }
+
+        window.openDayInfo = (y, m, d, doScroll = true) => {
+            document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected-day'));
+            const selectedEl = document.getElementById(`day-${y}-${m}-${d}`);
+            if(selectedEl) selectedEl.classList.add('selected-day');
+
+            const target = new Date(y, m, d);
+            const hDate = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+            const holiday = holidays[hDate];
+            const dayEvents = events.filter(e => {
+                const s = new Date(e.start); s.setHours(0,0,0,0);
+                const end = e.end ? new Date(e.end) : new Date(e.start); end.setHours(23,59,59,999);
+                return target >= s && target <= end;
+            });
+
+            const dayName = WEEK_NAMES[target.getDay()];
+            let html = `<div class="flex items-center gap-4 mb-6 px-4 ribbon-enter"><span class="text-4xl font-black ${target.getDay() === 0 || holiday ? 'text-red-500' : 'text-slate-800'}">${d}</span><div class="text-sm font-bold text-slate-500"><div>${y}년 ${m+1}월</div><div>${dayName} ${holiday ? `<span class="text-red-400">| ${holiday}</span>` : ''}</div></div></div>`;
+
+            if (dayEvents.length === 0) {
+                html += `<div class="text-center py-16 bg-white rounded-3xl border border-slate-100 ribbon-enter"><p class="text-slate-300 font-bold">등록된 일정이 없습니다.</p></div>`;
+            } else {
+                html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-5 ribbon-enter">`;
+                dayEvents.forEach(e => {
+                    const isMeeting = e.meetingType === '주일집회';
+                    const isGroup = e.meetingType === '소그룹';
+                    const colorSet = isMeeting ? 'tag-red' : isGroup ? 'tag-blue' : 'tag-green';
+                    
+                    let specialInfo = '';
+                    if (isMeeting) {
+                        specialInfo = `
+                            <div class="mt-5 pt-5 border-t border-slate-50 grid grid-cols-3 gap-2 text-center">
+                                <div><p class="text-[10px] text-slate-400 mb-1 font-bold">진행</p><p class="text-sm font-black text-slate-700">${e.leader}</p></div>
+                                <div><p class="text-[10px] text-slate-400 mb-1 font-bold">말씀</p><p class="text-sm font-black text-slate-700">${e.speaker}</p></div>
+                                <div><p class="text-[10px] text-slate-400 mb-1 font-bold">분반</p><p class="text-sm font-black text-blue-600">${e.division}</p></div>
+                            </div>`;
+                    } else if (isGroup) {
+                        specialInfo = `
+                            <div class="mt-5 pt-5 border-t border-slate-50 space-y-4">
+                                <div class="flex justify-between items-center text-xs px-1">
+                                    <span class="text-slate-400 font-bold">식사준비팀</span>
+                                    <span class="font-black text-slate-700">${e.mealPrep}</span>
+                                </div>
+                                <div class="bg-orange-50/50 p-4 rounded-2xl text-center border border-orange-100/50">
+                                    <p class="text-[10px] text-orange-400 font-black mb-1 uppercase tracking-tighter">Today's Menu</p>
+                                    <p class="text-base font-black text-slate-800">🍽️ ${e.menu}</p>
+                                </div>
+                                <div class="flex justify-between items-center text-[11px] px-1">
+                                    <span class="text-slate-400 font-medium">설거지 봉사</span>
+                                    <span class="font-bold text-slate-500">${e.wash}</span>
+                                </div>
+                            </div>`;
+                    }
+
+                    html += `
+                        <div class="info-card p-6 md:p-8 relative overflow-hidden hover:shadow-md">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="tag ${colorSet}">${e.meetingType}</span>
+                                <span class="text-[12px] font-bold text-slate-400 tracking-tight">${e.startTime} - ${e.endTime}</span>
+                            </div>
+                            <h3 class="text-xl font-black text-slate-800 mb-2 leading-tight">${e.subject || e.meetingType}</h3>
+                            ${specialInfo}
+                            ${e.note ? `<div class="mt-5 text-[12px] text-slate-500 bg-slate-50/80 p-3 rounded-xl leading-relaxed border border-slate-100/50"><b>비고:</b> ${e.note}</div>` : ''}
+                        </div>`;
+                });
+                html += `</div>`;
+            }
+            document.getElementById('ribbonContent').innerHTML = html;
+            if(doScroll) document.getElementById('detailRibbonSection').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        function changeMonth(offset) {
+            strip.classList.add('sliding-transition');
+            strip.style.transform = `translateX(${offset > 0 ? -66.6666 : 0}%)`;
+            setTimeout(() => {
+                currentDate.setMonth(currentDate.getMonth() + offset);
+                strip.classList.remove('sliding-transition');
+                fastRender();
+                strip.style.transform = `translateX(-33.3333%)`;
+            }, 300);
+        }
+
+        window.handleSearch = () => {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+            const res = events.filter(e => e.meetingType.includes(query) || e.subject.includes(query) || (e.note && e.note.includes(query)));
+            let html = `<h2 class="text-2xl font-black mb-6 text-slate-800">'${query}' 검색 결과</h2>`;
+            if (res.length === 0) html += `<p class="py-12 text-slate-400 text-center font-medium">검색 결과가 없습니다.</p>`;
+            else res.forEach(e => {
+                const d = new Date(e.start);
+                html += `<div class="p-4 mb-3 bg-slate-50 rounded-2xl cursor-pointer hover:bg-orange-50 border border-transparent hover:border-orange-100 transition-all" onclick="closeModal(); setTimeout(()=> { currentDate = new Date(${d.getFullYear()}, ${d.getMonth()}, 1); fastRender(); openDayInfo(${d.getFullYear()}, ${d.getMonth()}, ${d.getDate()}, true); }, 100)"><div class="text-[10px] font-black text-orange-500 uppercase mb-1">${d.getMonth()+1}월 ${d.getDate()}일</div><div class="font-bold text-slate-700">${e.meetingType}: ${e.subject || '상세 일정 없음'}</div></div>`;
+            });
+            document.getElementById('modalContent').innerHTML = html;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        };
+
+        window.closeModal = () => document.getElementById('modalOverlay').classList.add('hidden');
+        window.openInstallModal = () => {
+            document.getElementById('modalContent').innerHTML = `<div class="text-center"><h3 class="text-2xl font-black mb-6 text-slate-800">홈 화면 추가</h3><div class="text-left space-y-5"><div class="bg-slate-50 p-5 rounded-2xl"><p class="text-xs font-bold text-slate-400 mb-2 uppercase">Apple iPhone</p><p class="text-sm text-slate-600 leading-relaxed">하단 <span class="font-bold text-blue-500">공유 버튼</span>을 누르고<br>'홈 화면에 추가'를 선택하세요.</p></div><div class="bg-slate-50 p-5 rounded-2xl"><p class="text-xs font-bold text-slate-400 mb-2 uppercase">Android / Chrome</p><p class="text-sm text-slate-600 leading-relaxed">상단 <span class="font-bold text-orange-500">설정(점 3개)</span> 메뉴에서<br>'홈 화면에 추가'를 선택하세요.</p></div></div></div>`;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        };
+
+        let startX_pos = 0;
+        document.getElementById('calendarViewport').addEventListener('touchstart', e => { startX_pos = e.touches[0].clientX; strip.classList.remove('sliding-transition'); }, {passive: true});
+        document.getElementById('calendarViewport').addEventListener('touchmove', e => {
+            const dx = e.touches[0].clientX - startX_pos;
+            strip.style.transform = `translateX(${-33.3333 + (dx / window.innerWidth) * 33.3333}%)`;
+        }, {passive: true});
+        document.getElementById('calendarViewport').addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - startX_pos;
+            if (Math.abs(dx) > 60) changeMonth(dx > 0 ? -1 : 1);
+            else { strip.classList.add('sliding-transition'); strip.style.transform = `translateX(-33.3333%)`; }
+        }, {passive: true});
+
+        document.getElementById('prevMonth').onclick = () => changeMonth(-1);
+        document.getElementById('nextMonth').onclick = () => changeMonth(1);
+        window.goToToday = () => { currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); fastRender(); openDayInfo(todayObj.getFullYear(), todayObj.getMonth(), todayObj.getDate(), true); };
+
+        // 즉시 실행
+        fastRender();
+        fetchEvents();
+        
+        // 공휴일 백그라운드 업데이트
+        setTimeout(async () => {
+            try {
+                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(HOLIDAY_ICS_URL)}&t=${Date.now()}`;
+                const response = await fetch(proxyUrl);
+                const data = await response.json();
+                const icsText = data.contents;
+                const vevents = icsText.split('BEGIN:VEVENT');
+                vevents.shift(); 
+                vevents.forEach(vevent => {
+                    const dMatch = vevent.match(/DTSTART(?:;VALUE=DATE)?:(\d{8})/);
+                    const sMatch = vevent.match(/SUMMARY:(.*)/);
+                    if (dMatch && sMatch) {
+                        const ds = dMatch[1];
+                        holidays[`${ds.substring(0, 4)}-${ds.substring(4, 6)}-${ds.substring(6, 8)}`] = sMatch[1].replace(/\r/g, '').replace(/\\,/g, ',').trim();
+                    }
+                });
+                fastRender();
+            } catch (e) {}
+        }, 1200);
+    </script>
+</body>
+</html>
+
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
             padding: 0.2rem 0.05rem; border: 1px solid #f1f5f9; 
             background: white; overflow: hidden; cursor: pointer;
