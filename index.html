@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>안양교회 유초등부 일정 안내</title>
+    <title>안양교회 유초등부 일정</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 사이즈 조절 변수 */
-            --day-min-height-mobile: 95px;
-            --day-min-height-tablet: 110px;
-            --day-min-height-pc: 160px;
+            --day-height-mobile: 90px; 
+            --day-height-tablet: 110px;
+            --day-height-pc: 150px;
             --date-font-size: 0.95rem; 
             --event-font-size: 10px; 
             --event-font-size-pc: 12px;
@@ -23,32 +22,56 @@
             scroll-behavior: smooth;
             font-size: 14px;
             transition: font-size 0.2s ease;
-            /* 스와이프 시 텍스트 선택 방지 */
             -webkit-user-select: none;
             user-select: none;
+            overflow-x: hidden;
         }
-        @media (min-width: 768px) {
-            body { font-size: 16px; }
-        }
+        @media (min-width: 768px) { body { font-size: 16px; } }
         
+        #calendarViewport {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #calendarStrip {
+            display: flex;
+            width: 300%; 
+            transform: translateX(-33.3333%); 
+            will-change: transform;
+        }
+
+        .month-view {
+            width: 33.3333%; 
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            align-content: start;
+        }
+        @media (min-width: 640px) { .month-view { gap: 4px; } }
+        @media (min-width: 768px) { .month-view { gap: 6px; } }
+
+        .sliding-transition {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         .calendar-day { 
-            min-height: var(--day-min-height-tablet); 
+            height: var(--day-height-tablet); 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: flex-start; 
             padding: 0.2rem 0.05rem; 
             border-radius: 0.5rem; 
-            position: relative; 
-            transition: all 0.2s ease-in-out; 
             border: 1px solid #f1f5f9; 
             background: white; 
-            overflow: hidden; 
+            overflow: hidden;
+            cursor: pointer;
         }
 
         @media (max-width: 767px) {
             .calendar-day { 
-                min-height: var(--day-min-height-mobile); 
+                height: var(--day-height-mobile); 
                 padding: 0.15rem 0.02rem;
                 border-radius: 0.3rem;
             }
@@ -56,18 +79,14 @@
 
         @media (min-width: 1024px) { 
             .calendar-day { 
-                min-height: var(--day-min-height-pc); 
+                height: var(--day-height-pc); 
                 padding: 0.5rem 0.15rem; 
                 border-radius: 1rem; 
             } 
         }
 
-        .calendar-day:hover { 
-            background-color: #fffaf5; 
-            z-index: 10; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
-            transform: translateY(-2px);
-        }
+        .calendar-day:hover { background-color: #fffaf5; }
+        .calendar-day.selected-day { border-color: #fb923c; background-color: #fff7ed; box-shadow: inset 0 0 0 1px #fb923c; }
 
         .event-container {
             width: 100%;
@@ -76,45 +95,43 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            -ms-overflow-style: none;
             scrollbar-width: none;
+            padding-bottom: 4px;
         }
-        .event-container::-webkit-scrollbar {
-            display: none;
-        }
+        .event-container::-webkit-scrollbar { display: none; }
 
         .date-label {
             font-size: var(--date-font-size);
             font-weight: 900;
             flex-shrink: 0;
+            margin-bottom: 2px;
         }
         
         .event-bar { 
             font-size: var(--event-font-size); 
-            padding: 2px 2px; 
-            border-radius: 4px; 
+            padding: 2px 1px; 
+            border-radius: 3px; 
             margin-top: 2px; 
             width: 98%; 
             white-space: nowrap;
             overflow: hidden;
             text-overflow: clip;
             font-weight: 700; 
-            cursor: pointer; 
             text-align: left; 
             border-width: 1.5px;
             line-height: 1.1;
             flex-shrink: 0;
-            letter-spacing: -0.04em; 
+            letter-spacing: -0.06em; 
         }
 
         @media (min-width: 768px) { 
             .event-bar { 
                 font-size: var(--event-font-size-pc); 
-                padding: 4px 6px; 
-                border-radius: 6px; 
+                padding: 3px 2px; 
+                border-radius: 5px; 
                 margin-top: 3px;
                 border-width: 2px;
-                letter-spacing: -0.02em;
+                letter-spacing: -0.03em;
             } 
         }
         
@@ -122,12 +139,35 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .section-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; overflow: hidden; }
-        @media (min-width: 768px) {
-            .section-card { border-radius: 3rem; }
-        }
+        @media (min-width: 768px) { .section-card { border-radius: 3rem; } }
 
         .kids-gradient { background: linear-gradient(135deg, #fb923c 0%, #facc15 100%); }
         .keep-all { word-break: keep-all; }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 9999px;
+            padding: 0.25rem 0.5rem;
+            width: 130px;
+            transition: width 0.3s ease;
+        }
+        .search-container:focus-within {
+            width: 180px;
+            background: #e2e8f0;
+        }
+        @media (min-width: 768px) {
+            .search-container { width: 200px; padding: 0.5rem 1rem; }
+            .search-container:focus-within { width: 300px; }
+        }
+
+        /* 리본 애니메이션 */
+        .ribbon-enter { animation: ribbonIn 0.4s ease-out forwards; }
+        @keyframes ribbonIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="text-slate-800">
@@ -135,80 +175,87 @@
     <!-- 로딩 화면 -->
     <div id="loadingOverlay" class="fixed inset-0 bg-white/95 backdrop-blur-md z-50 flex flex-col items-center justify-center transition-opacity duration-500">
         <div class="loader mb-4" id="mainLoader"></div>
-        <p class="text-orange-600 font-bold tracking-tight text-sm md:text-base" id="loadingStatus">정보를 불러오는 중입니다...</p>
-        <button onclick="hideLoader()" id="forceCloseBtn" class="hidden mt-8 text-xs text-slate-400 underline">수동으로 닫기</button>
+        <p class="text-orange-600 font-bold tracking-tight text-sm md:text-base" id="loadingStatus">일정을 불러오는 중입니다...</p>
+        <button onclick="hideLoader()" id="forceCloseBtn" class="hidden mt-8 text-xs text-slate-400 underline text-center">수동으로 닫기</button>
     </div>
 
     <!-- 네비게이션 -->
-    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-orange-100 px-2 md:px-0">
-        <div class="max-w-6xl mx-auto px-2 md:px-6 h-14 md:h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 md:gap-3">
-                <div class="w-7 h-7 md:w-8 md:h-8 kids-gradient rounded-lg flex items-center justify-center text-white font-black shadow-sm text-xs md:text-base">꿈</div>
-                <span class="font-black text-sm md:text-xl tracking-tight text-slate-800">안양교회 유초등부</span>
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div id="navTitle" class="text-xl md:text-3xl font-black text-slate-800 tracking-tighter">로딩중...</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="일정 검색" class="bg-transparent border-none outline-none text-xs md:text-sm font-bold w-full px-2">
+                <button onclick="handleSearch()" class="text-slate-400 hover:text-orange-500 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
             </div>
-            
-            <button onclick="openInstallModal()" class="flex items-center gap-1.5 bg-orange-50 text-orange-500 px-3 py-1.5 rounded-full border border-orange-100 hover:bg-orange-100 transition-colors shadow-sm">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                <span class="text-[10px] md:text-xs font-bold">홈화면 추가</span>
-            </button>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-4 md:px-6 pt-4 md:pt-10 pb-2 md:pb-6 text-center">
-        <h1 class="text-xl md:text-5xl font-black text-slate-900 mb-1 md:mb-3 leading-tight keep-all">
-            우리들의 <span class="text-orange-500">즐거운 약속</span>
-        </h1>
-    </header>
-
-    <main class="max-w-[99%] mx-auto pb-16">
-        <section id="schedule" class="mt-1 md:mt-4">
-            <!-- 달력 영역에 스와이프 감지를 위해 id 추가 -->
+    <main class="max-w-[99%] mx-auto pb-4 pt-4 md:pt-8">
+        <section id="schedule">
             <div id="calendarContainer" class="section-card p-1 md:p-8 lg:p-10">
-                <div class="flex justify-between items-center mb-3 md:mb-8 px-1">
+                <div class="flex justify-between items-center mb-4 md:mb-8 px-1">
                     <button id="prevMonth" class="p-2 md:p-4 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
                         <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
-                    
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center gap-2 md:gap-6">
-                            <h3 id="calendarTitle" class="text-xl md:text-4xl font-black text-slate-800 tracking-tighter">로딩중...</h3>
-                            <button onclick="goToToday()" class="text-[10px] md:text-xs font-black text-orange-600 bg-orange-50 hover:bg-orange-100 border border-orange-200 px-3 md:px-5 py-1.5 rounded-full shadow-sm">Today</button>
-                        </div>
-                    </div>
-
+                    <button onclick="goToToday()" class="text-[10px] md:text-xs font-black text-orange-600 bg-orange-50 hover:bg-orange-100 border border-orange-200 px-4 md:px-6 py-2 rounded-full shadow-sm transition-all active:scale-95 uppercase">Today</button>
                     <button id="nextMonth" class="p-2 md:p-4 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
                         <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
 
                 <div class="grid grid-cols-7 gap-1 text-center mb-1 md:mb-4 border-b border-slate-50 pb-2">
-                    <div class="text-red-400 font-black text-[10px] md:text-sm uppercase">Sun</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase">Mon</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase">Tue</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase">Wed</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase">Thu</div>
-                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase">Fri</div>
-                    <div class="text-blue-400 font-black text-[10px] md:text-sm uppercase">Sat</div>
+                    <div class="text-red-400 font-black text-[10px] md:text-sm uppercase tracking-tighter">Lord's</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Mon</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Tue</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Wed</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Thu</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-sm uppercase tracking-tighter">Fri</div>
+                    <div class="text-blue-400 font-black text-[10px] md:text-sm uppercase tracking-tighter">Sat</div>
                 </div>
 
-                <div id="calendarGrid" class="grid grid-cols-7 gap-px sm:gap-1 md:gap-2 text-center"></div>
+                <div id="calendarViewport">
+                    <div id="calendarStrip">
+                        <div id="prevGrid" class="month-view"></div>
+                        <div id="currGrid" class="month-view"></div>
+                        <div id="nextGrid" class="month-view"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 상세 일정 리본 영역 -->
+        <section id="detailRibbonSection" class="max-w-6xl mx-auto mt-6 md:mt-10 px-2 md:px-0 scroll-mt-24">
+            <div id="ribbonContent" class="space-y-6">
+                <!-- 선택된 날짜의 일정이 여기에 렌더링됨 -->
+                <div class="text-center py-20 bg-white/50 rounded-[2rem] border-2 border-dashed border-slate-200">
+                    <p class="text-slate-400 font-bold">날짜를 클릭하여 상세 일정을 확인하세요.</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 text-center text-slate-300 text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase px-4 keep-all">
-        © 2026 ANYANG CHURCH CHILDREN MINISTRY.
-    </footer>
+    <!-- 하단 영역 -->
+    <div class="max-w-xl mx-auto px-6 py-12 text-center border-t border-slate-100">
+        <button onclick="openInstallModal()" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition-all flex items-center justify-center gap-2 mb-8">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            홈 화면에 바로가기 추가
+        </button>
+        <p class="text-slate-300 text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase">
+            © 2026 ANYANG CHURCH CHILDREN MINISTRY.
+        </p>
+    </div>
 
-    <!-- 상세 일정 모달 -->
-    <div id="detailModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
-        <div class="fixed inset-0 bg-slate-900/70 backdrop-blur-md transition-opacity" onclick="closeModal()"></div>
+    <!-- 검색 결과용 모달 -->
+    <div id="searchModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="fixed inset-0 bg-slate-900/70 backdrop-blur-md transition-opacity" onclick="closeSearchModal()"></div>
         <div class="flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg relative overflow-hidden transform transition-all animate-in zoom-in duration-200">
-                <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 bg-slate-100 rounded-full p-2 md:p-3 transition-colors z-10">
+                <button onclick="closeSearchModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 bg-slate-100 rounded-full p-2 transition-colors z-10">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-                <div id="modalContent" class="max-h-[85vh] overflow-y-auto p-8 md:p-12"></div>
+                <div id="searchModalContent" class="max-h-[80vh] overflow-y-auto p-8 md:p-12"></div>
             </div>
         </div>
     </div>
@@ -217,25 +264,17 @@
     <div id="installModal" class="hidden fixed inset-0 z-[60] overflow-y-auto">
         <div class="fixed inset-0 bg-orange-900/40 backdrop-blur-sm transition-opacity" onclick="closeInstallModal()"></div>
         <div class="flex min-h-full items-center justify-center p-4">
-            <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-md relative overflow-hidden transform transition-all p-8 md:p-10">
-                <button onclick="closeInstallModal()" class="absolute top-5 right-5 text-slate-300 hover:text-slate-800 bg-slate-100 rounded-full p-2.5 transition-colors">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-md relative overflow-hidden transform transition-all p-8 md:p-10 text-center">
+                <button onclick="closeInstallModal()" class="absolute top-5 right-5 text-slate-300 hover:text-slate-800 bg-slate-50 rounded-full p-2.5 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 kids-gradient rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg mx-auto mb-4">꿈</div>
-                    <h3 class="text-xl md:text-2xl font-black text-slate-800 tracking-tight">홈 화면에 추가하기</h3>
+                <div class="w-16 h-16 kids-gradient rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-lg mx-auto mb-4">꿈</div>
+                <h3 class="text-xl md:text-2xl font-black text-slate-800 mb-6">홈 화면 추가 안내</h3>
+                <div class="space-y-4 text-left text-sm text-slate-600">
+                    <div class="bg-slate-50 p-4 rounded-xl"><p class="font-bold text-slate-400 mb-1">아이폰 (Safari)</p>하단 '공유(□↑)' → '홈 화면에 추가'</div>
+                    <div class="bg-slate-50 p-4 rounded-xl"><p class="font-bold text-slate-400 mb-1">안드로이드 (Chrome)</p>우측 상단 '설정(⋮)' → '홈 화면에 추가'</div>
                 </div>
-                <div class="space-y-6">
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                        <div class="flex items-center gap-3 mb-3"><span class="bg-blue-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">1</span><span class="font-bold text-slate-700">아이폰 (Safari)</span></div>
-                        <p class="text-xs text-slate-500 leading-relaxed pl-8">하단 중앙의 '공유 버튼(□↑)' 클릭 후 '홈 화면에 추가'를 선택하세요.</p>
-                    </div>
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                        <div class="flex items-center gap-3 mb-3"><span class="bg-green-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">2</span><span class="font-bold text-slate-700">안드로이드 (Chrome)</span></div>
-                        <p class="text-xs text-slate-500 leading-relaxed pl-8">우측 상단 '점 세개(⋮)' 클릭 후 '홈 화면에 추가'를 선택하세요.</p>
-                    </div>
-                </div>
-                <button onclick="closeInstallModal()" class="w-full mt-8 bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl hover:bg-black transition-all">닫기</button>
+                <button onclick="closeInstallModal()" class="w-full mt-8 bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl">확인</button>
             </div>
         </div>
     </div>
@@ -246,11 +285,8 @@
         const todayObj = new Date();
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
 
-        // 스와이프 감지 변수
-        let touchstartX = 0;
-        let touchendX = 0;
-        let touchstartY = 0;
-        let touchendY = 0;
+        let startX = 0, startY = 0, isDragging = false, lockDirection = null; 
+        const strip = document.getElementById('calendarStrip');
 
         window.hideLoader = () => {
             document.getElementById('loadingOverlay').classList.add('opacity-0');
@@ -259,179 +295,182 @@
 
         window.openInstallModal = () => { document.getElementById('installModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
         window.closeInstallModal = () => { document.getElementById('installModal').classList.add('hidden'); document.body.style.overflow = 'auto'; };
+        window.closeSearchModal = () => { document.getElementById('searchModal').classList.add('hidden'); document.body.style.overflow = 'auto'; };
+
+        // 검색 처리
+        window.handleSearch = () => {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+            const results = events.filter(e => e.meetingType.includes(query) || e.subject.includes(query) || e.note.includes(query) || e.leader.includes(query) || e.speaker.includes(query));
+            let html = `<div class="text-center mb-8 border-b pb-4"><h2 class="text-xl font-black text-slate-800">'${query}' 검색 결과</h2></div><div class="space-y-4">`;
+            if (results.length === 0) { html += `<p class="text-center py-10 text-slate-400">검색 결과가 없습니다.</p>`; }
+            else {
+                results.forEach(res => {
+                    const d = new Date(res.start);
+                    html += `<div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 cursor-pointer hover:bg-orange-50 transition-colors" onclick="closeSearchModal(); setTimeout(()=> { currentDate = new Date(${d.getFullYear()}, ${d.getMonth()}, 1); renderAllGrids(); openDayInfo(${d.getFullYear()}, ${d.getMonth()}, ${d.getDate()}); }, 100)"><div class="text-[10px] font-black text-orange-500 mb-1">${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}</div><div class="font-black text-slate-800">${res.meetingType}</div><div class="text-xs text-slate-500">${res.subject || ''}</div></div>`;
+                });
+            }
+            html += `</div>`;
+            document.getElementById('searchModalContent').innerHTML = html;
+            document.getElementById('searchModal').classList.remove('hidden');
+        };
+        document.getElementById('searchInput').addEventListener('keypress', e => { if(e.key==='Enter') handleSearch(); });
 
         async function fetchGoogleSheetData() {
             try {
                 const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=${Date.now()}`;
                 const res = await fetch(url);
-                if (!res.ok) throw new Error("네트워크 오류");
                 const text = await res.text();
-                const startIdx = text.indexOf('{');
-                const endIdx = text.lastIndexOf('}') + 1;
-                const jsonText = text.substring(startIdx, endIdx);
-                const json = JSON.parse(jsonText);
-                const rows = json.table.rows;
-                
+                const jsonText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+                const rows = JSON.parse(jsonText).table.rows;
                 events = rows.map((r, idx) => {
-                    const rowData = r.c;
-                    if (!rowData || !rowData[0] || rowData[0].f === "시작일") return null; 
+                    const c = r.c;
+                    if (!c || !c[0] || c[0].f === "시작일") return null; 
                     return {
                         id: idx,
-                        start: parseGoogleDate(rowData[0]?.v, rowData[0]?.f),
-                        end: parseGoogleDate(rowData[1]?.v, rowData[1]?.f),
-                        startTime: formatGoogleTime(rowData[2]?.v),
-                        endTime: formatGoogleTime(rowData[3]?.v),
-                        meetingType: rowData[4]?.v || "소그룹",
-                        leader: rowData[5]?.v || "-",
-                        speaker: rowData[6]?.v || "-",
-                        division: rowData[7]?.v || "-",
-                        mealPrep: rowData[8]?.v || "-",
-                        mealTeam: rowData[9]?.v || "-",
-                        menu: rowData[10]?.v || "-",
-                        wash: rowData[11]?.v || "-",
-                        subject: rowData[12]?.v || "",
-                        note: rowData[13]?.v || ""
+                        start: parseGoogleDate(c[0]?.v, c[0]?.f),
+                        end: parseGoogleDate(c[1]?.v, c[1]?.f),
+                        startTime: formatGoogleTime(c[2]?.v),
+                        endTime: formatGoogleTime(c[3]?.v),
+                        meetingType: c[4]?.v || "소그룹",
+                        leader: c[5]?.v || "-",
+                        speaker: c[6]?.v || "-",
+                        division: c[7]?.v || "-",
+                        mealPrep: c[8]?.v || "-",
+                        mealTeam: c[9]?.v || "-",
+                        menu: c[10]?.v || "-",
+                        wash: c[11]?.v || "-",
+                        subject: c[12]?.v || "",
+                        note: c[13]?.v || ""
                     };
                 }).filter(e => e !== null);
                 hideLoader();
-            } catch (e) { 
-                console.error(e);
-                document.getElementById('loadingStatus').innerText = "데이터 로드 실패";
-                document.getElementById('forceCloseBtn').classList.remove('hidden');
-                document.getElementById('mainLoader').classList.add('hidden');
-            }
-            renderCalendar();
+                renderAllGrids();
+                openDayInfo(todayObj.getFullYear(), todayObj.getMonth(), todayObj.getDate(), false);
+            } catch (e) { console.error(e); }
         }
 
-        function parseGoogleDate(raw, formatted) {
-            if (!raw) return null;
-            if (typeof raw === 'string' && raw.startsWith('Date')) {
-                const m = raw.match(/Date\((\d+),(\d+),(\d+)\)/);
+        function parseGoogleDate(v, f) {
+            if (!v) return null;
+            if (typeof v === 'string' && v.startsWith('Date')) {
+                const m = v.match(/Date\((\d+),(\d+),(\d+)\)/);
                 if (m) return new Date(m[1], m[2], m[3]);
             }
-            return new Date(formatted || raw);
+            return new Date(f || v);
         }
 
-        function formatGoogleTime(raw) {
-            if (!raw || typeof raw !== 'string') return raw || "";
-            if (raw.startsWith('Date(1899,11,30')) {
-                const m = raw.match(/Date\(1899,11,30,(\d+),(\d+),(\d+)\)/);
-                if (m) return `${m[1].padStart(2, '0')}:${m[2].padStart(2, '0')}`;
-            }
-            return raw;
+        function formatGoogleTime(v) {
+            if (!v || typeof v !== 'string' || !v.startsWith('Date(1899')) return v || "";
+            const m = v.match(/Date\(1899,11,30,(\d+),(\d+),(\d+)\)/);
+            return m ? `${m[1].padStart(2, '0')}:${m[2].padStart(2, '0')}` : v;
         }
 
         function getEventColor(type) {
             switch(type) {
-                case '주일집회': return 'bg-blue-50 text-blue-700 border-blue-200';
-                case '소그룹': return 'bg-orange-50 text-orange-700 border-orange-200';
-                case '아웃팅': return 'bg-green-50 text-green-700 border-green-200';
-                case '특별집회': return 'bg-purple-50 text-purple-700 border-purple-200';
-                case '섞임': return 'bg-pink-50 text-pink-700 border-pink-200';
-                default: return 'bg-slate-50 text-slate-500 border-slate-200';
+                case '주일집회': return 'bg-red-50 text-red-700 border-red-200';
+                case '소그룹': return 'bg-blue-50 text-blue-700 border-blue-200';
+                default: return 'bg-green-50 text-green-700 border-green-200';
             }
         }
 
-        function renderCalendar() {
-            const y = currentDate.getFullYear(), m = currentDate.getMonth();
-            document.getElementById('calendarTitle').innerHTML = `${y}년 <span class="text-orange-500">${m+1}월</span>`;
-            const firstDay = new Date(y, m, 1).getDay();
-            const daysInMonth = new Date(y, m+1, 0).getDate();
-            const grid = document.getElementById('calendarGrid');
-            grid.innerHTML = '';
-            for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
-            for(let i=1; i<=daysInMonth; i++) {
-                const targetDate = new Date(y, m, i);
+        function generateMonthHtml(date) {
+            const y = date.getFullYear(), m = date.getMonth();
+            const last = new Date(y, m+1, 0).getDate();
+            const first = new Date(y, m, 1).getDay();
+            let html = '';
+            for(let i=0; i<first; i++) html += '<div></div>';
+            for(let i=1; i<=last; i++) {
+                const target = new Date(y, m, i);
                 const isToday = (y === todayObj.getFullYear() && m === todayObj.getMonth() && i === todayObj.getDate());
                 const dayEvents = events.filter(e => {
-                    if(!e.start) return false;
                     const s = new Date(e.start); s.setHours(0,0,0,0);
-                    const end = e.end ? new Date(e.end) : new Date(e.start); 
-                    end.setHours(23,59,59,999);
-                    return targetDate >= s && targetDate <= end;
+                    const end = e.end ? new Date(e.end) : new Date(e.start); end.setHours(23,59,59,999);
+                    return target >= s && target <= end;
                 });
-                const eventHtml = dayEvents.map(e => `<div class="event-bar border ${getEventColor(e.meetingType)}" onclick="event.stopPropagation(); openSingleEventModal(${e.id})">${e.meetingType}</div>`).join('');
-                grid.innerHTML += `<div class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i})"><div class="date-label ${isToday?'bg-orange-500 text-white rounded-full w-6 h-6 md:w-10 md:h-10 flex items-center justify-center shadow-md':'w-6 h-6 md:w-10 md:h-10 flex items-center justify-center '+(targetDate.getDay()===0?'text-red-500':targetDate.getDay()===6?'text-blue-500':'text-slate-800')} mb-1">${i}</div><div class="event-container">${eventHtml}</div></div>`;
+                const eventHtml = dayEvents.map(e => `<div class="event-bar border ${getEventColor(e.meetingType)}">${e.meetingType}</div>`).join('');
+                const color = target.getDay() === 0 ? 'text-red-500' : target.getDay() === 6 ? 'text-blue-500' : 'text-slate-800';
+                html += `<div id="day-${y}-${m}-${i}" class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i})"><div class="date-label ${isToday ? 'bg-orange-500 text-white rounded-full w-6 h-6 md:w-10 md:h-10 flex items-center justify-center shadow-md' : 'w-6 h-6 md:w-10 md:h-10 flex items-center justify-center ' + color} mb-1">${i}</div><div class="event-container">${eventHtml}</div></div>`;
             }
+            return html;
         }
 
-        // 스와이프 감지 핸들러
-        function handleGesture() {
-            const deltaX = touchendX - touchstartX;
-            const deltaY = touchendY - touchstartY;
-
-            // 수평 이동 거리가 수직 이동 거리보다 크고, 최소 50px 이상 이동했을 때만 실행
-            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-                if (deltaX < 0) {
-                    // 왼쪽으로 밀기 -> 다음 달
-                    changeMonth(1);
-                } else {
-                    // 오른쪽으로 밀기 -> 이전 달
-                    changeMonth(-1);
-                }
-            }
+        function renderAllGrids() {
+            document.getElementById('navTitle').innerHTML = `${currentDate.getFullYear()}년 <span class="text-orange-500">${currentDate.getMonth() + 1}월</span>`;
+            document.getElementById('prevGrid').innerHTML = generateMonthHtml(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+            document.getElementById('currGrid').innerHTML = generateMonthHtml(currentDate);
+            document.getElementById('nextGrid').innerHTML = generateMonthHtml(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
         }
 
         function changeMonth(offset) {
-            currentDate.setMonth(currentDate.getMonth() + offset);
-            renderCalendar();
+            strip.classList.add('sliding-transition');
+            strip.style.transform = `translateX(${offset > 0 ? -66.6666 : 0}%)`;
+            setTimeout(() => {
+                currentDate.setMonth(currentDate.getMonth() + offset);
+                strip.classList.remove('sliding-transition');
+                renderAllGrids();
+                strip.style.transform = `translateX(-33.3333%)`;
+            }, 300);
         }
 
-        // 이벤트 리스너 등록 (터치)
-        const calendarContainer = document.getElementById('calendarContainer');
-        calendarContainer.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-            touchstartY = e.changedTouches[0].screenY;
+        const container = document.getElementById('calendarViewport');
+        container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; isDragging = true; lockDirection = null; strip.classList.remove('sliding-transition'); }, {passive: true});
+        container.addEventListener('touchmove', e => {
+            if (!isDragging) return;
+            const diffX = e.touches[0].clientX - startX, diffY = e.touches[0].clientY - startY;
+            if (lockDirection === null && (Math.abs(diffX) > 10 || Math.abs(diffY) > 10)) lockDirection = Math.abs(diffX) > Math.abs(diffY) ? 'horizontal' : 'vertical';
+            if (lockDirection === 'horizontal') {
+                strip.style.transform = `translateX(${-33.3333 + (diffX / container.offsetWidth) * 33.3333}%)`;
+                if (e.cancelable) e.preventDefault();
+            }
+        }, {passive: false});
+        container.addEventListener('touchend', e => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diffX = e.changedTouches[0].clientX - startX;
+            if (lockDirection === 'horizontal' && Math.abs(diffX) > 70) changeMonth(diffX > 0 ? -1 : 1);
+            else { strip.classList.add('sliding-transition'); strip.style.transform = `translateX(-33.3333%)`; }
         }, {passive: true});
 
-        calendarContainer.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            touchendY = e.changedTouches[0].screenY;
-            handleGesture();
-        }, {passive: true});
+        window.openDayInfo = (y, m, d, doScroll = true) => {
+            document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected-day'));
+            const selectedEl = document.getElementById(`day-${y}-${currentDate.getMonth() === m ? m : currentDate.getMonth()}-${d}`);
+            if(selectedEl) selectedEl.classList.add('selected-day');
 
-        window.openDayInfo = (y, m, d) => {
             const target = new Date(y, m, d);
             const dayEvents = events.filter(e => {
                 const s = new Date(e.start); s.setHours(0,0,0,0);
-                const end = e.end ? new Date(e.end) : new Date(e.start); 
-                end.setHours(23,59,59,999);
+                const end = e.end ? new Date(e.end) : new Date(e.start); end.setHours(23,59,59,999);
                 return target >= s && target <= end;
             });
-            if (dayEvents.length > 0) renderMultipleEventsModal(dayEvents, target);
+
+            // 헤더 정보를 제거하고 바로 카드 그리드 시작
+            let html = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 ribbon-enter">`;
+
+            if (dayEvents.length === 0) {
+                html = `<div class="text-center py-20 bg-white rounded-[2rem] border-2 border-dashed border-slate-200 ribbon-enter"><p class="text-slate-400 font-bold">${m+1}월 ${d}일에는 등록된 일정이 없습니다.</p></div>`;
+            } else {
+                dayEvents.forEach(e => {
+                    const time = (e.startTime || e.endTime) ? `${e.startTime || ''} ~ ${e.endTime || ''}` : "종일 일정";
+                    const colorSet = getEventColor(e.meetingType);
+                    let innerHtml = '';
+                    if (e.meetingType === '주일집회') {
+                        innerHtml = `<div class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs"><div class="bg-slate-50 p-2 rounded-xl"><p class="text-slate-400 font-bold mb-1">진행</p><p class="font-black text-slate-700">${e.leader}</p></div><div class="bg-slate-50 p-2 rounded-xl"><p class="text-slate-400 font-bold mb-1">말씀</p><p class="font-black text-slate-700">${e.speaker}</p></div><div class="bg-blue-50 p-2 rounded-xl"><p class="text-blue-400 font-bold mb-1">분반</p><p class="font-black text-blue-600">${e.division}</p></div></div>`;
+                    } else if (e.meetingType === '소그룹') {
+                        innerHtml = `<div class="mt-4 pt-4 border-t border-slate-100"><div class="flex justify-between text-xs mb-3"><span>담당: <b>${e.leader}</b></span><span>식사: <b>${e.mealPrep}</b></span></div><div class="bg-orange-50/50 p-4 rounded-2xl text-center"><p class="text-[10px] text-orange-400 font-bold mb-1">🍽️ 오늘의 메뉴</p><p class="text-lg font-black text-slate-800">${e.menu}</p></div></div>`;
+                    } else {
+                        innerHtml = `<div class="mt-4 pt-4 border-t border-slate-100"><p class="text-sm text-slate-600 leading-relaxed font-medium whitespace-pre-wrap">${e.note || '상세 내용이 없습니다.'}</p></div>`;
+                    }
+                    html += `<div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden"><div class="absolute top-0 left-0 w-2 h-full ${colorSet.split(' ')[0]}"></div><div class="flex justify-between items-start mb-4"><span class="px-3 py-1 ${colorSet} rounded-full text-[11px] font-black uppercase tracking-widest border shadow-sm">${e.meetingType}</span><span class="text-xs font-bold text-orange-500">${time}</span></div><h3 class="text-xl font-black text-slate-800 mb-2">${e.subject || e.meetingType}</h3>${innerHtml}${e.note && (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? `<div class="mt-4 p-3 bg-slate-50 rounded-xl text-[11px] text-slate-500 italic leading-snug"><b>참고:</b> ${e.note}</div>` : ''}</div>`;
+                });
+                html += `</div>`;
+            }
+            document.getElementById('ribbonContent').innerHTML = html;
+            if(doScroll) document.getElementById('detailRibbonSection').scrollIntoView({ behavior: 'smooth' });
         };
 
-        window.openSingleEventModal = (eventId) => {
-            const e = events.find(item => item.id === eventId);
-            if (e) renderMultipleEventsModal([e], new Date(e.start));
-        };
-
-        function renderMultipleEventsModal(dayEvents, date) {
-            const dayName = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
-            const dateStr = `${date.getMonth() + 1}월 ${date.getDate()}일 (${dayName})`;
-            let html = `<div class="text-center mb-8 border-b border-slate-100 pb-4"><h2 class="text-2xl md:text-3xl font-black text-slate-800">${dateStr}</h2></div><div class="space-y-10">`;
-            dayEvents.forEach((e, idx) => {
-                const timeDisplay = (e.startTime || e.endTime) ? `${e.startTime || ''} ~ ${e.endTime || ''}` : "종일 일정";
-                let detailHtml = '';
-                if (e.meetingType === '주일집회') {
-                    detailHtml = `<div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm"><div class="bg-blue-50/50 px-4 py-2 border-b border-blue-100 text-[9px] md:text-[11px] font-black text-blue-400 uppercase tracking-widest text-center">주일 집회 정보</div><div class="p-5 md:p-7 space-y-4 md:space-y-5"><div class="flex justify-between items-center"><span>진행</span><span class="font-black">${e.leader}</span></div><div class="flex justify-between items-center"><span>말씀</span><span class="font-black">${e.speaker}</span></div><div class="flex justify-between items-center pt-3 border-t"><span>분반</span><span class="font-black text-blue-600">${e.division}</span></div></div></div>`;
-                } else if (e.meetingType === '소그룹') {
-                    detailHtml = `<div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm"><div class="bg-orange-50/50 px-4 py-2 border-b border-orange-100 text-[9px] md:text-[11px] font-black text-orange-400 uppercase tracking-widest text-center">소그룹 및 식사 안내</div><div class="p-5 md:p-7 space-y-4 md:space-y-5"><div class="flex justify-between items-center"><span>담당</span><span class="font-black">${e.leader}</span></div><div class="flex justify-between items-center"><span>식사팀</span><span class="font-black">${e.mealPrep} | ${e.mealTeam}</span></div><div class="pt-4 border-t text-center"><div class="text-[9px] font-bold text-orange-400 mb-1">🍽️ 오늘의 메뉴</div><div class="text-lg md:text-2xl font-black text-slate-800 leading-tight text-center">${e.menu}</div></div><div class="flex justify-between items-center pt-3 border-t"><span>설거지</span><span class="font-bold">${e.wash}</span></div></div></div>`;
-                } else {
-                    detailHtml = `<div class="bg-slate-50 p-5 md:p-8 rounded-2xl border border-slate-100 shadow-sm"><div class="text-[9px] font-bold text-slate-400 mb-3 uppercase tracking-widest text-center border-b pb-2 text-center">상세 내역</div><div class="text-sm md:text-base text-slate-700 leading-relaxed font-medium whitespace-pre-wrap text-center">${e.note || "상세 내역 없음"}</div></div>`;
-                }
-                html += `<div class="${idx !== dayEvents.length - 1 ? 'border-b-2 border-dashed border-slate-100 pb-10' : ''}"><div class="text-center mb-6"><div class="inline-block px-5 md:px-8 py-2 md:py-3 ${getEventColor(e.meetingType)} rounded-full text-base md:text-2xl font-black uppercase tracking-widest border-2 shadow-sm mb-2 leading-tight">${e.meetingType}</div>${e.subject ? `<div class="text-slate-500 font-bold text-sm md:text-lg mt-1 italic tracking-tight opacity-80">${e.subject}</div>` : ''}</div><div class="space-y-4"><div class="bg-slate-50 p-3 md:p-5 rounded-xl flex justify-between items-center"><span>시간</span><span class="font-bold text-orange-500">${timeDisplay}</span></div>${detailHtml}${e.note && (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? `<div class="bg-orange-50/30 p-4 md:p-6 rounded-xl border border-orange-100 border-dashed"><div class="text-[10px] font-bold text-orange-400 mb-1 uppercase">비고</div><div class="text-[11px] md:text-sm text-slate-600 leading-relaxed whitespace-pre-wrap keep-all">${e.note}</div></div>` : ''}</div></div>`;
-            });
-            html += `</div>`;
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('detailModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        window.closeModal = () => { document.getElementById('detailModal').classList.add('hidden'); document.body.style.overflow = 'auto'; };
         document.getElementById('prevMonth').onclick = () => { changeMonth(-1); };
         document.getElementById('nextMonth').onclick = () => { changeMonth(1); };
-        window.goToToday = () => { currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); renderCalendar(); };
+        window.goToToday = () => { currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); renderAllGrids(); openDayInfo(todayObj.getFullYear(), todayObj.getMonth(), todayObj.getDate()); };
         fetchGoogleSheetData();
     </script>
 </body>
