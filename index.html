@@ -7,20 +7,49 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* 기본(보통) 사이즈 변수 */
+            --day-min-height-mobile: 75px;
+            --day-min-height-tablet: 85px;
+            --day-min-height-pc: 140px;
+            --date-font-size: 0.875rem; /* 14px */
+            --event-font-size: 8px;
+            --event-font-size-pc: 10px;
+        }
+
+        /* 작게 옵션 */
+        .zoom-small {
+            --day-min-height-mobile: 60px;
+            --day-min-height-tablet: 70px;
+            --day-min-height-pc: 110px;
+            --date-font-size: 0.75rem;
+            --event-font-size: 7px;
+            --event-font-size-pc: 9px;
+        }
+
+        /* 크게 옵션 */
+        .zoom-large {
+            --day-min-height-mobile: 90px;
+            --day-min-height-tablet: 105px;
+            --day-min-height-pc: 180px;
+            --date-font-size: 1.125rem;
+            --event-font-size: 10px;
+            --event-font-size-pc: 13px;
+        }
+
         body { 
             font-family: 'Noto Sans KR', sans-serif; 
             background-color: #fdfcf8; 
             scroll-behavior: smooth;
-            /* 기본 폰트 사이즈 최적화 */
             font-size: 14px;
+            transition: font-size 0.2s ease;
         }
         @media (min-width: 768px) {
             body { font-size: 16px; }
         }
         
-        /* [PC 버전] 달력 스타일: 넉넉한 공간과 시인성 강조 */
         .calendar-day { 
-            min-height: 85px; 
+            min-height: var(--day-min-height-tablet); 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -34,10 +63,9 @@
             overflow: hidden; 
         }
 
-        /* [모바일 버전] 달력 스타일: 터치 영역 확보 및 컴팩트 레이아웃 */
         @media (max-width: 767px) {
             .calendar-day { 
-                min-height: 75px; 
+                min-height: var(--day-min-height-mobile); 
                 padding: 0.15rem 0.05rem;
                 border-radius: 0.25rem;
             }
@@ -45,7 +73,7 @@
 
         @media (min-width: 1024px) { 
             .calendar-day { 
-                min-height: 140px; 
+                min-height: var(--day-min-height-pc); 
                 padding: 0.5rem 0.25rem; 
                 border-radius: 0.75rem; 
             } 
@@ -57,10 +85,15 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
             transform: translateY(-2px);
         }
+
+        /* 날짜 숫자 크기 조절 */
+        .date-label {
+            font-size: var(--date-font-size);
+            font-weight: 900;
+        }
         
-        /* 이벤트 바 디자인: 모바일에서는 더욱 얇고 간결하게 */
         .event-bar { 
-            font-size: 8px; 
+            font-size: var(--event-font-size); 
             padding: 1px 2px; 
             border-radius: 2px; 
             margin-top: 1px; 
@@ -77,7 +110,7 @@
 
         @media (min-width: 768px) { 
             .event-bar { 
-                font-size: 10px; 
+                font-size: var(--event-font-size-pc); 
                 padding: 2px 4px; 
                 border-radius: 4px; 
                 margin-top: 2px;
@@ -95,9 +128,14 @@
         }
 
         .kids-gradient { background: linear-gradient(135deg, #fb923c 0%, #facc15 100%); }
-        
-        /* 텍스트 줄바꿈 제어 */
         .keep-all { word-break: keep-all; }
+
+        /* 사이즈 조절 버튼 활성화 상태 */
+        .size-btn-active {
+            background-color: #fb923c;
+            color: white;
+            border-color: #fb923c;
+        }
     </style>
 </head>
 <body class="text-slate-800">
@@ -115,8 +153,12 @@
                 <div class="w-7 h-7 md:w-8 md:h-8 kids-gradient rounded-lg flex items-center justify-center text-white font-black shadow-sm text-sm md:text-base">꿈</div>
                 <span class="font-black text-base md:text-xl tracking-tight text-slate-800">안양교회 유초등부</span>
             </div>
-            <div class="hidden sm:block text-[10px] md:text-xs font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100 uppercase tracking-widest">
-                Ministry Calendar
+            
+            <!-- 사이즈 조절 컨트롤러 -->
+            <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
+                <button onclick="changeSize('small')" id="btn-small" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500 hover:bg-white">작게</button>
+                <button onclick="changeSize('normal')" id="btn-normal" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all size-btn-active">보통</button>
+                <button onclick="changeSize('large')" id="btn-large" class="px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold rounded-md transition-all text-slate-500 hover:bg-white">크게</button>
             </div>
         </div>
     </nav>
@@ -192,6 +234,30 @@
         let events = []; 
         const todayObj = new Date();
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
+        let currentSize = 'normal';
+
+        // 사이즈 변경 함수
+        window.changeSize = (size) => {
+            currentSize = size;
+            document.body.classList.remove('zoom-small', 'zoom-large');
+            if (size === 'small') document.body.classList.add('zoom-small');
+            if (size === 'large') document.body.classList.add('zoom-large');
+
+            // 버튼 상태 업데이트
+            ['small', 'normal', 'large'].forEach(s => {
+                const btn = document.getElementById(`btn-${s}`);
+                if (s === size) {
+                    btn.classList.add('size-btn-active');
+                    btn.classList.remove('text-slate-500', 'hover:bg-white');
+                } else {
+                    btn.classList.remove('size-btn-active');
+                    btn.classList.add('text-slate-500', 'hover:bg-white');
+                }
+            });
+
+            // 달력 다시 그리기 (레이아웃 변동 대응)
+            renderCalendar();
+        };
 
         async function fetchGoogleSheetData() {
             try {
@@ -303,7 +369,7 @@
 
                 grid.innerHTML += `
                     <div class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i})">
-                        <div class="flex items-center justify-center w-6 h-6 md:w-9 md:h-9 ${isToday?'bg-orange-500 text-white rounded-full shadow-md':textClass} font-black text-[10px] md:text-lg mb-0.5 md:mb-1">
+                        <div class="flex items-center justify-center w-6 h-6 md:w-9 md:h-9 ${isToday?'bg-orange-500 text-white rounded-full shadow-md':textClass} date-label mb-0.5 md:mb-1">
                             ${i}
                         </div>
                         <div class="w-full flex flex-col items-center overflow-hidden px-px">
