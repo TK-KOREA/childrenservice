@@ -3,348 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>즐거운 어린이 소그룹</title>
+    <title>안양교회 유초등부 - 일정 및 봉사 안내</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
-        .calendar-day { min-height: 85px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 0.25rem; padding-bottom: 0.25rem; border-radius: 0.5rem; position: relative; transition: all 0.2s; border: 1px solid transparent; }
-        @media (min-width: 768px) { .calendar-day { min-height: 120px; padding-top: 0.75rem; border-radius: 1rem; } }
-        .normal-date:hover { background-color: #f1f5f9; }
-        .highlight-date { background-color: #f8fafc; border: 2px solid #bfdbfe; }
-        .highlight-date:hover { background-color: #eff6ff; border-color: #60a5fa; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2); }
-        /* 로딩 애니메이션 */
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3b82f6; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #fdfcf8; scroll-behavior: smooth; }
+        
+        /* 달력 칸 간격 최소화 */
+        .calendar-day { 
+            min-height: 90px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; 
+            padding: 0.2rem 0.1rem; 
+            border-radius: 0.4rem; 
+            position: relative; 
+            transition: all 0.2s; 
+            border: 1px solid #f1f5f9; 
+            background: white; 
+            overflow: hidden; 
+        }
+        @media (min-width: 768px) { 
+            .calendar-day { 
+                min-height: 135px; 
+                padding: 0.4rem 0.2rem; 
+                border-radius: 0.6rem; 
+            } 
+        }
+        .calendar-day:hover { background-color: #fffaf5; z-index: 10; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        
+        /* 이벤트 바 텍스트 최적화 */
+        .event-bar { 
+            font-size: 10px; 
+            padding: 2px 4px; 
+            border-radius: 3px; 
+            margin-top: 1px; 
+            width: 98%; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-align: left; 
+            border-width: 1.5px;
+            line-height: 1.2;
+        }
+        @media (max-width: 768px) { 
+            .event-bar { 
+                font-size: 8px; 
+                padding: 1px 2px; 
+                letter-spacing: -0.05em;
+            } 
+        }
+        
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #fb923c; border-radius: 50%; width: 28px; height: 28px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .section-card { background: white; border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; overflow: hidden; }
+        .kids-gradient { background: linear-gradient(135deg, #fb923c 0%, #facc15 100%); }
     </style>
 </head>
-<body class="py-10 px-2 md:px-4 relative">
+<body class="text-slate-800">
 
-    <!-- 데이터 로딩 표시 -->
-    <div id="loadingOverlay" class="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+    <!-- 로딩 화면 -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white/95 backdrop-blur-md z-50 flex flex-col items-center justify-center transition-opacity duration-500">
         <div class="loader mb-4"></div>
-        <p id="loadingText" class="text-slate-600 font-bold">구글 시트에서 일정을 불러오는 중입니다...</p>
+        <p class="text-orange-600 font-bold tracking-tight">정보를 불러오는 중입니다...</p>
     </div>
 
-    <div class="max-w-4xl mx-auto relative z-0">
-        <!-- 상단 헤더 -->
-        <div class="text-center mb-8">
-            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-2">어린이 소그룹 안내</h1>
-            <p class="text-sm text-slate-500">달력에서 일정이 있는 날짜를 클릭해 상세 내용을 확인하세요.</p>
+    <!-- 네비게이션 -->
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-orange-100">
+        <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 kids-gradient rounded-lg flex items-center justify-center text-white font-black shadow-sm text-sm">꿈</div>
+                <span class="font-black text-lg tracking-tight text-slate-800">안양교회 유초등부</span>
+            </div>
+            <div class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100 uppercase tracking-widest">
+                Ministry Calendar
+            </div>
         </div>
+    </nav>
 
-        <!-- 달력 섹션 -->
-        <div class="bg-white p-3 md:p-8 rounded-3xl shadow-lg border border-slate-100">
-            <div class="flex justify-between items-center mb-6 md:mb-8 relative px-2">
-                <!-- 이전 달 버튼 -->
-                <button id="prevMonth" class="p-2 text-slate-400 hover:text-slate-800 rounded-full hover:bg-slate-100 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                
-                <!-- 년월 표시 및 컨트롤 -->
-                <div class="relative flex flex-col items-center">
-                    <div class="flex items-center gap-2 md:gap-3">
-                        <h2 id="calendarTitle" class="text-xl md:text-3xl font-bold text-slate-800 cursor-pointer hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-slate-50" onclick="toggleDatePicker()">
-                            로딩중...
-                        </h2>
-                        <button onclick="goToToday()" class="text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3 py-1.5 rounded-full transition-colors shadow-sm whitespace-nowrap">오늘</button>
-                    </div>
+    <!-- 히어로 섹션 -->
+    <header class="max-w-6xl mx-auto px-6 pt-6 pb-2 text-center">
+        <h1 class="text-2xl md:text-4xl font-black text-slate-900 mb-1">
+            우리들의 <span class="text-orange-500">즐거운 약속</span>
+        </h1>
+        <p class="text-slate-500 text-xs md:text-sm">모임 유형별 상세 일정을 확인하세요.</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-1 md:px-4 pb-16">
+        <section id="schedule" class="mt-2">
+            <div class="section-card p-1 md:p-4">
+                <!-- 달력 컨트롤러 -->
+                <div class="flex justify-between items-center mb-4 px-1">
+                    <button id="prevMonth" class="p-2 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
                     
-                    <!-- 년월 선택 드롭다운 -->
-                    <div id="datePickerDropdown" class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white border border-slate-200 shadow-xl rounded-xl p-4 z-20 w-64">
-                        <div class="flex gap-2 mb-4">
-                            <select id="yearSelect" class="flex-1 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"></select>
-                            <select id="monthSelect" class="flex-1 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"></select>
+                    <div class="flex flex-col items-center">
+                        <div class="flex items-center gap-2">
+                            <h3 id="calendarTitle" class="text-xl md:text-3xl font-black text-slate-800 tracking-tight">로딩중...</h3>
+                            <button onclick="goToToday()" class="text-[10px] font-black text-orange-600 bg-orange-50 border border-orange-200 px-2 py-1 rounded-full">Today</button>
                         </div>
-                        <button onclick="changeYearMonth()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            이동하기
-                        </button>
                     </div>
+
+                    <button id="nextMonth" class="p-2 text-slate-400 hover:text-orange-500 rounded-full hover:bg-orange-50 active:scale-90 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                 </div>
 
-                <!-- 다음 달 버튼 -->
-                <button id="nextMonth" class="p-2 text-slate-400 hover:text-slate-800 rounded-full hover:bg-slate-100 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <!-- 요일 헤더 -->
+                <div class="grid grid-cols-7 gap-1 md:gap-1.5 text-center mb-1 border-b border-slate-50 pb-1">
+                    <div class="text-red-400 font-black text-[10px] md:text-xs">Sun</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">Mon</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">Tue</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">Wed</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">Thu</div>
+                    <div class="text-slate-300 font-black text-[10px] md:text-xs">Fri</div>
+                    <div class="text-blue-400 font-black text-[10px] md:text-xs">Sat</div>
+                </div>
+
+                <!-- 달력 그리드 -->
+                <div id="calendarGrid" class="grid grid-cols-7 gap-1 md:gap-1 text-center"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 상세 일정 모달 -->
+    <div id="detailModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity" onclick="closeModal()"></div>
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg relative overflow-hidden transform transition-all animate-in zoom-in duration-200">
+                <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-300 hover:text-slate-800 bg-slate-100 rounded-full p-2 transition-colors z-10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
-            </div>
-
-            <!-- 요일 헤더 -->
-            <div class="grid grid-cols-7 gap-1 md:gap-3 text-center mb-2 md:mb-3">
-                <div class="text-red-500 font-bold text-xs md:text-sm">일</div>
-                <div class="text-slate-500 font-bold text-xs md:text-sm">월</div>
-                <div class="text-slate-500 font-bold text-xs md:text-sm">화</div>
-                <div class="text-slate-500 font-bold text-xs md:text-sm">수</div>
-                <div class="text-slate-500 font-bold text-xs md:text-sm">목</div>
-                <div class="text-slate-500 font-bold text-xs md:text-sm">금</div>
-                <div class="text-blue-500 font-bold text-xs md:text-sm">토</div>
-            </div>
-
-            <!-- 달력 그리드 -->
-            <div id="calendarGrid" class="grid grid-cols-7 gap-1 md:gap-3 text-center">
-                <!-- 달력 내용 삽입 -->
-            </div>
-        </div>
-
-        <!-- 푸터 -->
-        <div class="mt-8 text-center text-slate-400 text-sm">
-            © 2026 안양교회 유초등부 섬김 위원회.
-        </div>
-    </div>
-
-    <!-- 팝업 (모달) 영역 -->
-    <div id="detailModal" class="hidden relative z-50">
-        <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        <div class="fixed inset-0 z-10 overflow-y-auto pointer-events-none">
-            <div class="flex min-h-full items-center justify-center p-4 text-center pointer-events-auto">
-                <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm relative text-left overflow-hidden transform transition-all">
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 rounded-full p-2 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                    <div id="modalContent" class="p-6 md:p-8">
-                        <!-- 상세 내용 삽입 -->
-                    </div>
+                <div id="modalContent" class="p-8 md:p-10">
+                    <!-- 상세 내용 삽입 -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // 요청하신 구글 시트 ID 적용
-        // ==========================================
         const SHEET_ID = '18zGuXQQWPm_dM2W6xD2Ugysaiz-sukIFJByO_TZrFy0'; 
-        
-        let scheduleData = {}; 
+        let events = []; 
         const todayObj = new Date();
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); 
 
-        // 1. 구글 시트 데이터 가져오기 (시트 이름 무시, 첫번째 시트 강제 로드 및 캐시 방지)
         async function fetchGoogleSheetData() {
             try {
-                // sheet 파라미터를 빼면 무조건 첫 번째 탭의 데이터를 가져옵니다. 
-                // t 파라미터로 현재 시간을 주어 브라우저 캐시를 무력화(항상 최신본 로드)합니다.
-                const queryUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=${new Date().getTime()}`;
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&t=${Date.now()}`;
+                const res = await fetch(url);
+                const text = await res.text();
+                const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+                const rows = json.table.rows;
                 
-                const response = await fetch(queryUrl);
-                const text = await response.text();
-                
-                // 더 안정적인 JSON 파싱 방식 적용 (정규식 오류 방지)
-                const startIdx = text.indexOf('{');
-                const endIdx = text.lastIndexOf('}') + 1;
-                const jsonText = text.substring(startIdx, endIdx);
-                const data = JSON.parse(jsonText);
-                
-                const rows = data.table.rows;
-                const newScheduleData = {};
-                
-                rows.forEach(row => {
-                    if (row.c && row.c[0] && row.c[0].v) {
-                        let dateStr = row.c[0].f || row.c[0].v;
-                        
-                        // 구글 시트 날짜 포맷 (Date(2026,1,21) 형태) 대응
-                        if(typeof row.c[0].v === 'string' && row.c[0].v.startsWith('Date')) {
-                            const dateMatch = row.c[0].v.match(/Date\((\d+),(\d+),(\d+)\)/);
-                            if(dateMatch) {
-                                const y = dateMatch[1];
-                                const m = String(parseInt(dateMatch[2]) + 1).padStart(2, '0');
-                                const d = String(dateMatch[3]).padStart(2, '0');
-                                dateStr = `${y}-${m}-${d}`;
-                            }
-                        } else if (typeof dateStr === 'string' && dateStr.includes('-')) {
-                            const parts = dateStr.split('-');
-                            if(parts.length === 3) {
-                                dateStr = `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
-                            }
-                        }
+                events = rows.map((r, idx) => {
+                    const startRaw = r.c[0]?.v;
+                    if (!startRaw || r.c[0]?.f === "시작일") return null; 
 
-                        // 헤더(제목 줄) 건너뛰기
-                        const managerName = row.c[1] && row.c[1].v ? String(row.c[1].v).trim() : "-";
-                        if (managerName === "봉사담당" || managerName === "봉사자") return;
-
-                        newScheduleData[dateStr] = {
-                            manager: managerName,
-                            team: row.c[2] && row.c[2].v ? String(row.c[2].v).trim() : "-",
-                            teamName: row.c[3] && row.c[3].v ? String(row.c[3].v).trim() : "-",
-                            menu: row.c[4] && row.c[4].v ? String(row.c[4].v).trim() : "-",
-                            dishwashing: row.c[5] && row.c[5].v ? String(row.c[5].v).trim() : "-"
-                        };
-                    }
-                });
-                
-                if(Object.keys(newScheduleData).length > 0) {
-                    scheduleData = newScheduleData;
-                }
-                
-            } catch (error) {
-                console.error("데이터 로드 실패:", error);
-                document.getElementById('loadingText').innerText = "데이터를 불러오지 못했습니다. 엑셀 공유 권한을 확인해주세요.";
-                document.getElementById('loadingText').classList.add("text-red-500");
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').classList.add('hidden');
-                }, 3000);
-                return; // 에러 시 달력 그리기 진행 안함 (또는 빈 달력 표시)
-            } 
-
-            // 성공 시 로딩 오버레이 숨기고 달력 렌더링
+                    return {
+                        id: idx,
+                        start: parseGoogleDate(startRaw, r.c[0]?.f),
+                        end: parseGoogleDate(r.c[1]?.v, r.c[1]?.f),
+                        startTime: formatGoogleTime(r.c[2]?.v),
+                        endTime: formatGoogleTime(r.c[3]?.v),
+                        meetingType: r.c[4]?.v || "소그룹",
+                        leader: r.c[5]?.v || "-",
+                        speaker: r.c[6]?.v || "-",
+                        division: r.c[7]?.v || "-",
+                        mealPrep: r.c[8]?.v || "-",
+                        mealTeam: r.c[9]?.v || "-",
+                        menu: r.c[10]?.v || "-",
+                        wash: r.c[11]?.v || "-",
+                        subject: r.c[12]?.v || "",
+                        note: r.c[13]?.v || ""
+                    };
+                }).filter(e => e !== null);
+            } catch (e) { 
+                console.error("Data Fetch Error:", e); 
+            }
+            
             document.getElementById('loadingOverlay').classList.add('hidden');
-            initDropdowns();
             renderCalendar();
         }
 
-        // 2. 팀 약어 색상 클래스
-        function getTeamColorClass(teamCode) {
-            const code = String(teamCode).trim().toUpperCase();
-            if (code === "GEM") return "bg-blue-100 text-blue-700";
-            if (code === "YCDB") return "bg-orange-100 text-orange-700";
-            if (code === "PSA") return "bg-green-100 text-green-700";
-            if (code === "-" || !code) return "bg-slate-50 text-slate-400 border border-slate-100";
-            return "bg-purple-100 text-purple-700"; 
+        function parseGoogleDate(raw, formatted) {
+            if (!raw) return null;
+            if (typeof raw === 'string' && raw.startsWith('Date')) {
+                const m = raw.match(/Date\((\d+),(\d+),(\d+)\)/);
+                if (m) return new Date(m[1], m[2], m[3]);
+            }
+            return new Date(formatted || raw);
         }
 
-        // 3. 드롭다운 초기화
-        function initDropdowns() {
-            const yearSelect = document.getElementById('yearSelect');
-            const monthSelect = document.getElementById('monthSelect');
-            yearSelect.innerHTML = ''; monthSelect.innerHTML = '';
-            for (let y = 2024; y <= 2030; y++) yearSelect.add(new Option(`${y}년`, y));
-            for (let m = 1; m <= 12; m++) monthSelect.add(new Option(`${m}월`, m));
+        function formatGoogleTime(raw) {
+            if (!raw || typeof raw !== 'string') return raw || "";
+            if (raw.startsWith('Date(1899,11,30')) {
+                const m = raw.match(/Date\(1899,11,30,(\d+),(\d+),(\d+)\)/);
+                if (m) {
+                    const h = m[1].padStart(2, '0');
+                    const min = m[2].padStart(2, '0');
+                    return `${h}:${min}`;
+                }
+            }
+            return raw;
         }
 
-        // 4. 달력 렌더링
+        function getEventColor(type) {
+            switch(type) {
+                case '주일집회': return 'bg-blue-50 text-blue-700 border-blue-200';
+                case '소그룹': return 'bg-orange-50 text-orange-700 border-orange-200';
+                case '아웃팅': return 'bg-green-50 text-green-700 border-green-200';
+                case '특별집회': return 'bg-purple-50 text-purple-700 border-purple-200';
+                case '섞임': return 'bg-pink-50 text-pink-700 border-pink-200';
+                default: return 'bg-slate-50 text-slate-500 border-slate-200';
+            }
+        }
+
         function renderCalendar() {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-
-            document.getElementById('calendarTitle').innerText = `${year}년 ${month + 1}월`;
-            document.getElementById('yearSelect').value = year;
-            document.getElementById('monthSelect').value = month + 1;
-
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const y = currentDate.getFullYear(), m = currentDate.getMonth();
+            document.getElementById('calendarTitle').innerHTML = `${y}년 <span class="text-orange-500">${m+1}월</span>`;
+            
+            const first = new Date(y, m, 1).getDay();
+            const last = new Date(y, m+1, 0).getDate();
             const grid = document.getElementById('calendarGrid');
             grid.innerHTML = '';
-
-            for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div></div>`;
-
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                const data = scheduleData[dateStr];
-                const isToday = (year === todayObj.getFullYear() && month === todayObj.getMonth() && i === todayObj.getDate());
-
-                let dayClasses = "calendar-day ";
-                let textClass = "text-slate-700";
+            
+            for(let i=0; i<first; i++) grid.innerHTML += '<div></div>';
+            
+            for(let i=1; i<=last; i++) {
+                const targetDate = new Date(y, m, i);
+                const isToday = (y === todayObj.getFullYear() && m === todayObj.getMonth() && i === todayObj.getDate());
                 
-                if (new Date(year, month, i).getDay() === 0) textClass = "text-red-500";
-                else if (new Date(year, month, i).getDay() === 6) textClass = "text-blue-500";
+                const dayEvents = events.filter(e => {
+                    if(!e.start) return false;
+                    const start = new Date(e.start); start.setHours(0,0,0,0);
+                    const end = e.end ? new Date(e.end) : new Date(e.start); 
+                    end.setHours(23,59,59,999);
+                    return targetDate >= start && targetDate <= end;
+                });
 
-                let dateDisplay = `<span class="font-bold text-sm md:text-lg ${textClass} mb-0.5">${i}</span>`;
-                if (isToday) {
-                    dateDisplay = `<span class="font-bold text-sm md:text-base text-white bg-blue-600 rounded-full w-6 h-6 md:w-7 md:h-7 flex items-center justify-center mb-0.5 shadow-md">${i}</span>`;
-                }
+                let textClass = "text-slate-800";
+                const dayOfWeek = targetDate.getDay();
+                if (dayOfWeek === 0) textClass = "text-red-400";
+                else if (dayOfWeek === 6) textClass = "text-blue-400";
 
-                if (data) {
-                    dayClasses += "highlight-date cursor-pointer ";
-                    if (isToday) dayClasses += "ring-2 ring-blue-300 ring-offset-2 ";
-                    
-                    const teamClass = getTeamColorClass(data.team);
-                    
-                    // 타이틀(봉사담당, 식사팀)을 제거하고 짤림 없이 가운데 정렬 뱃지로 표시
-                    let infoHtml = `
-                        <div class="mt-0.5 w-[96%] mx-auto flex flex-col gap-1 md:gap-1.5">
-                            <div class="w-full text-center bg-white text-slate-800 text-[10px] sm:text-[11px] md:text-xs py-1 px-0.5 rounded border border-slate-200 font-bold shadow-sm break-words leading-tight" title="봉사담당: ${data.manager}">
-                                ${data.manager}
-                            </div>
-                            <div class="w-full text-center ${teamClass} text-[10px] sm:text-[11px] md:text-xs py-1 px-0.5 rounded font-bold shadow-sm break-words leading-tight" title="식사팀: ${data.team}">
-                                ${data.team !== '-' ? data.team : '-'}
-                            </div>
+                const eventHtml = dayEvents.map(e => {
+                    const displayTitle = e.meetingType;
+                    return `
+                        <div class="event-bar border ${getEventColor(e.meetingType)}" onclick="event.stopPropagation(); openModal(${e.id})">
+                            ${e.startTime ? `<span class="opacity-60 mr-0.5">${e.startTime}</span>` : ''}${displayTitle}
                         </div>
                     `;
+                }).join('');
 
-                    grid.innerHTML += `<div class="${dayClasses}" data-date="${dateStr}">${dateDisplay}${infoHtml}</div>`;
-                } else {
-                    dayClasses += "normal-date border-slate-50 ";
-                    if (isToday) dayClasses += "bg-blue-50/40 "; 
-                    grid.innerHTML += `<div class="${dayClasses}">${dateDisplay}</div>`;
-                }
+                grid.innerHTML += `
+                    <div class="calendar-day" onclick="openDayInfo(${y}, ${m}, ${i})">
+                        <div class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 ${isToday?'bg-orange-500 text-white rounded-full shadow-md':textClass} font-black text-[10px] md:text-sm mb-0.5">
+                            ${i}
+                        </div>
+                        <div class="w-full flex flex-col items-center overflow-hidden px-px">
+                            ${eventHtml}
+                        </div>
+                    </div>`;
             }
         }
 
-        // 5. 달력 클릭 이벤트 (팝업)
-        document.getElementById('calendarGrid').addEventListener('click', function(e) {
-            const targetEl = e.target.closest('[data-date]');
-            if (targetEl) openModal(targetEl.getAttribute('data-date'));
-        });
+        window.openModal = (eventId) => {
+            const e = events.find(item => item.id === eventId);
+            if (!e) return;
 
-        function openModal(dateStr) {
-            const data = scheduleData[dateStr];
-            if (!data) return;
+            const sDate = new Date(e.start).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
+            const eDate = e.end ? new Date(e.end).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }) : sDate;
+            const dateDisplay = (sDate === eDate) ? sDate : `${sDate} ~ ${eDate}`;
+            const timeDisplay = (e.startTime || e.endTime) ? `${e.startTime || ''} ~ ${e.endTime || ''}` : "종일 일정";
 
-            const [y, m, d] = dateStr.split('-');
-            const dateObj = new Date(y, m - 1, d);
-            const dayName = ['일', '월', '화', '수', '목', '금', '토'][dateObj.getDay()];
+            let detailHtml = '';
 
-            const teamClass = getTeamColorClass(data.team);
-            const displayTeam = data.team !== '-' ? `${data.team} <span class="text-slate-500 font-medium">(${data.teamName})</span>` : '-';
+            if (e.meetingType === '주일집회') {
+                detailHtml = `
+                    <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="bg-blue-50/50 px-4 py-2 border-b border-blue-100 text-[10px] font-black text-blue-400 uppercase tracking-widest text-center">주일 집회 정보</div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">진행 담당</span>
+                                <span class="text-sm font-black text-slate-700">${e.leader}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">말씀 담당</span>
+                                <span class="text-sm font-black text-slate-700">${e.speaker}</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-50">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">분반 담당</span>
+                                <span class="text-sm font-black text-blue-600">${e.division}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (e.meetingType === '소그룹') {
+                detailHtml = `
+                    <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="bg-orange-50/50 px-4 py-2 border-b border-orange-100 text-[10px] font-black text-orange-400 uppercase tracking-widest text-center">소그룹 및 식사 안내</div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">진행/봉사담당</span>
+                                <span class="text-sm font-black text-slate-700">${e.leader}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">식사준비 / 팀</span>
+                                <span class="text-sm font-black text-slate-700">${e.mealPrep} <span class="text-slate-300 font-normal">|</span> ${e.mealTeam}</span>
+                            </div>
+                            <div class="pt-4 border-t border-slate-50">
+                                <div class="text-[10px] font-bold text-orange-400 mb-1 flex items-center justify-center gap-1">🍽️ 오늘의 메뉴</div>
+                                <div class="text-lg md:text-xl font-black text-slate-800 text-center leading-tight">${e.menu}</div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-50">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter">설거지 봉사</span>
+                                <span class="text-sm font-bold text-slate-600">${e.wash}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // DEFAULT 팝업 화면 구성 (주일집회, 소그룹이 아닌 경우)
+                detailHtml = `
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-widest text-center border-b border-slate-200 pb-2">상세 내역</div>
+                        <div class="text-sm text-slate-700 leading-relaxed font-medium whitespace-pre-wrap">
+                            ${e.note || "등록된 상세 내역이 없습니다."}
+                        </div>
+                    </div>
+                `;
+            }
 
-            const content = document.getElementById('modalContent');
-            content.innerHTML = `
-                <div class="text-center border-b border-slate-100 pb-5 mb-5 mt-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold mb-3 inline-block">봉사 일정</span>
-                    <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800">${parseInt(m)}월 ${parseInt(d)}일 <span class="text-lg md:text-xl text-slate-500">(${dayName})</span></h3>
+            document.getElementById('modalContent').innerHTML = `
+                <div class="text-center mb-6">
+                    <!-- 메인 타이틀: 모임 유형 -->
+                    <div class="inline-block px-6 py-2.5 ${getEventColor(e.meetingType)} rounded-full text-lg md:text-2xl font-black uppercase tracking-widest border-2 shadow-sm mb-2 leading-tight">
+                        ${e.meetingType}
+                    </div>
+                    <!-- 부제: 주제 -->
+                    ${e.subject ? `
+                        <div class="text-slate-500 font-bold text-sm md:text-base mt-1 italic tracking-tight opacity-80">
+                            ${e.subject}
+                        </div>
+                    ` : ''}
                 </div>
                 
-                <div class="space-y-3 md:space-y-4">
-                    <div class="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="text-sm font-bold text-slate-500">봉사담당</span>
-                        <span class="font-bold text-slate-800 text-lg">${data.manager}</span>
-                    </div>
-                    
-                    <div class="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="text-sm font-bold text-slate-500">식사팀</span>
-                        <span class="px-3 py-1 ${teamClass} rounded-full text-sm font-bold shadow-sm">${displayTeam}</span>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <div class="text-sm font-bold text-slate-500 mb-1">식사 메뉴</div>
-                        <div class="font-medium text-slate-800 text-lg">${data.menu}</div>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 shadow-sm">
+                            <div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-tighter">일시</div>
+                            <div class="text-xs font-bold text-slate-700">${dateDisplay}</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 shadow-sm">
+                            <div class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-tighter">시간</div>
+                            <div class="text-xs font-bold text-orange-500">${timeDisplay}</div>
+                        </div>
                     </div>
 
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <div class="text-sm font-bold text-slate-500 mb-1">설거지 담당</div>
-                        <div class="font-medium text-slate-800 leading-relaxed">${data.dishwashing}</div>
-                    </div>
+                    ${detailHtml}
+
+                    <!-- 비고 사항 표시 (주일집회/소그룹인 경우에만 추가 하단 섹션으로 표시) -->
+                    ${e.note && (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? `
+                    <div class="bg-orange-50/30 p-4 rounded-xl border border-orange-100 border-dashed">
+                        <div class="text-[10px] font-bold text-orange-400 mb-1 uppercase tracking-tighter">비고 사항</div>
+                        <div class="text-slate-600 text-xs leading-relaxed whitespace-pre-wrap">${e.note}</div>
+                    </div>` : ''}
                 </div>
             `;
-            
             document.getElementById('detailModal').classList.remove('hidden');
-        }
+            document.body.style.overflow = 'hidden';
+        };
 
-        // 6. UI 컨트롤
-        function closeModal() { document.getElementById('detailModal').classList.add('hidden'); }
-        function toggleDatePicker() { document.getElementById('datePickerDropdown').classList.toggle('hidden'); }
-        
-        function changeYearMonth() {
-            currentDate = new Date(parseInt(document.getElementById('yearSelect').value), parseInt(document.getElementById('monthSelect').value) - 1, 1);
-            renderCalendar();
-            document.getElementById('datePickerDropdown').classList.add('hidden');
-        }
+        window.openDayInfo = (y, m, d) => {
+            const target = new Date(y, m, d);
+            const dayEvents = events.filter(e => {
+                const start = new Date(e.start); start.setHours(0,0,0,0);
+                const end = e.end ? new Date(e.end) : new Date(e.start); 
+                end.setHours(23,59,59,999);
+                return target >= start && target <= end;
+            });
+            if (dayEvents.length > 0) openModal(dayEvents[0].id);
+        };
 
-        function goToToday() {
-            currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1);
-            renderCalendar();
-            document.getElementById('datePickerDropdown').classList.add('hidden');
-        }
+        window.closeModal = () => {
+            document.getElementById('detailModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
 
-        window.addEventListener('click', function(e) {
-            if (!document.getElementById('calendarTitle').contains(e.target) && !document.getElementById('datePickerDropdown').contains(e.target)) {
-                document.getElementById('datePickerDropdown').classList.add('hidden');
-            }
-        });
+        document.getElementById('prevMonth').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+        document.getElementById('nextMonth').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+        window.goToToday = () => { currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1); renderCalendar(); };
 
-        document.getElementById('prevMonth').addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
-        document.getElementById('nextMonth').addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
-
-        // 앱 시작 시 구글 시트 데이터 로드 실행
         fetchGoogleSheetData();
     </script>
 </body>
