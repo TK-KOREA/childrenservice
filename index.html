@@ -24,7 +24,7 @@
         .month-view { width: 33.3333%; display: grid; grid-template-columns: repeat(7, 1fr); align-content: start; }
         .sliding-transition { transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-        /* 날짜 칸 스타일 (균등 크기 고정 및 테두리 표시) */
+        /* 날짜 칸 스타일 (가로 오버플로우 허용으로 바 연결) */
         .calendar-day { 
             height: 85px; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
@@ -33,18 +33,19 @@
             border: 1px solid #f1f5f9;
             margin-right: -1px;
             margin-bottom: -1px;
-            overflow: hidden;
         }
         @media (min-width: 768px) { .calendar-day { height: 120px; padding: 8px 6px; } }
 
-        /* 날짜 헤더 */
+        /* 날짜 헤더 - 항상 일정한 높이를 갖도록 z-index와 함께 설정 */
         .day-header { 
             width: 100%; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-start; 
             align-items: center; 
-            margin-bottom: 4px; 
+            margin-bottom: 2px; 
+            position: relative;
+            z-index: 5; /* 연속 미니바 위로 오도록 설정 */
         }
 
         .day-circle {
@@ -53,7 +54,7 @@
             border-radius: 50%;
             font-weight: 700;
             font-size: 13px;
-            z-index: 1;
+            z-index: 5;
             transition: all 0.2s;
             flex-shrink: 0;
         }
@@ -61,12 +62,15 @@
         .selected-circle { background-color: #f1f5f9; color: #000000; }
         .selected-day { border-color: #fb923c !important; z-index: 10; box-shadow: inset 0 0 0 1px #fb923c; }
 
-        /* 일정 미니바 (가운데 정렬) */
+        /* 일정 미니바 컨테이너 */
         .event-box-container { 
             width: 100%; 
             display: flex; flex-direction: column; gap: 2px; 
-            overflow: hidden;
+            position: relative;
+            z-index: 2;
         }
+
+        /* 일정 미니바 (연속 표시를 위한 구조) */
         .mini-event-bar {
             font-size: 8px;
             padding: 1.5px 4px;
@@ -79,41 +83,81 @@
             border: 1px solid transparent;
             line-height: 1.1;
             letter-spacing: -0.05em;
+            min-height: 14px; /* 높이 고정으로 빈 슬롯 유지 */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
-        @media (min-width: 768px) { .mini-event-bar { font-size: 10px; padding: 2px 6px; border-radius: 4px; } }
+        @media (min-width: 768px) { .mini-event-bar { font-size: 10px; padding: 2px 6px; border-radius: 4px; min-height: 18px; } }
+
+        /* 비어있는 슬롯 (수평 맞춤용) */
+        .mini-event-bar.empty-slot {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        /* 기간 일정: 오른쪽으로 이어짐 */
+        .mini-event-bar.span-right {
+            margin-right: -5px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right-color: transparent !important;
+            padding-right: 5px;
+        }
         
-        /* 모임유형별 색상 (소그룹: 파랑, 주일집회: 빨강, 기타: 보라) */
+        /* 기간 일정: 왼쪽에서 이어짐 */
+        .mini-event-bar.span-left {
+            margin-left: -5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left-color: transparent !important;
+            padding-left: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .mini-event-bar.span-right { margin-right: -7px; padding-right: 7px; }
+            .mini-event-bar.span-left { margin-left: -7px; padding-left: 7px; }
+        }
+        
+        /* 모임유형별 색상 */
         .bar-주일집회 { background-color: #fef2f2; color: #ef4444; border-color: #fee2e2; }
         .bar-소그룹 { background-color: #eff6ff; color: #3b82f6; border-color: #dbeafe; }
         .bar-기타, .bar-HCD { background-color: #f5f3ff; color: #8b5cf6; border-color: #ede9fe; }
 
+        /* 공휴일 이름 스타일 (빈 공간 항상 확보) */
         .holiday-name { 
             font-size: 9px; color: #ef4444; font-weight: 700; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            white-space: nowrap; overflow: hidden; text-overflow: clip;
             width: 100%;
             text-align: center;
             margin-top: 1px;
+            height: 13px; /* 공휴일이 없어도 동일한 공간을 유지하여 미니바 수평 맞춤 */
         }
         
-        /* 상세 정보 카드 */
-        .info-card { background: #fafafa; border-radius: 24px; padding: 24px; border-left: 6px solid #ddd; margin-bottom: 20px; text-align: left; position: relative; }
+        /* 상세 정보 카드 - 완전히 각진 형태와 좌측 플래그 색상 적용 */
+        .info-card { 
+            background: #ffffff; 
+            border-radius: 0; /* 모서리 라운드 제거, 각진 형태 */
+            padding: 16px 20px; 
+            border: 1px solid #e2e8f0; 
+            border-left: 6px solid #ddd; /* 좌측 플래그 색상 */
+            text-align: left; 
+            position: relative; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+        }
         .border-주일집회 { border-left-color: #ef4444; }
         .border-소그룹 { border-left-color: #3b82f6; }
         .border-기타, .border-HCD { border-left-color: #8b5cf6; }
 
-        /* 내용 박스 - 시트 서식 완벽 표현 */
+        /* 내용 박스 (시트 서식 완벽 표현, 내부 박스 제거하고 일반 문단처럼 변경) */
         .content-box { 
-            background: #ffffff; 
-            border-radius: 12px; 
-            padding: 18px; 
-            border: 1px solid #eeeeee; 
             font-size: 14px; 
             color: #444; 
             line-height: 1.6; 
             word-break: break-word; 
             white-space: pre-wrap; 
-            margin-top: 12px; 
-            text-align: left; 
         }
         .content-box span { display: inline; line-height: inherit; }
 
@@ -130,6 +174,9 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         .error-container { padding: 24px; background: #fff1f2; border: 1px solid #fecaca; border-radius: 20px; margin: 20px; text-align: left; }
+        .error-title { color: #e11d48; font-weight: 800; margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+        .error-desc { color: #4b5563; font-size: 14px; line-height: 1.6; }
+        .error-link { display: inline-block; margin-top: 12px; color: #2563eb; text-decoration: underline; font-weight: 700; word-break: break-all; }
     </style>
 </head>
 <body>
@@ -174,7 +221,7 @@
 
     <section id="detailRibbonSection" class="px-6 py-8 border-t border-gray-100 min-h-[40vh] bg-white scroll-mt-20">
         <div class="w-10 h-1.5 bg-gray-100 rounded-full mx-auto mb-10"></div>
-        <div id="ribbonContent" class="space-y-8"></div>
+        <div id="ribbonContent"></div>
     </section>
 
     <div class="fixed bottom-8 left-0 right-0 flex justify-center pointer-events-none z-30">
@@ -191,7 +238,6 @@
     </div>
 
     <script>
-        // --- 구글 시트 REST API v4 설정 ---
         const SHEET_API_KEY = "AIzaSyBpK_l4T6TtI4T7xH0MnBSWCARszUxI9nA"; 
         const SHEET_ID = '18zGuXQQWPm_dM2W6xD2Ugysaiz-sukIFJByO_TZrFy0';
         const RANGE = "'시트1'!A2:P200"; 
@@ -199,7 +245,16 @@
         const HOLIDAY_ICS_URL = 'https://calendar.google.com/calendar/ical/ko.south_korea%23holiday%40group.v.google.com/public/basic.ics';
         
         let events = [];
-        let holidays = {};
+        let holidays = {
+            "2025-01-01": "신정", "2025-01-28": "설날", "2025-01-29": "설날", "2025-01-30": "설날",
+            "2025-03-01": "삼일절", "2025-03-03": "대체공휴일", "2025-05-05": "어린이날", "2025-05-06": "대체공휴일",
+            "2025-06-06": "현충일", "2025-08-15": "광복절", "2025-10-03": "개천절", 
+            "2025-10-05": "추석", "2025-10-06": "추석", "2025-10-07": "추석", "2025-10-08": "대체공휴일", "2025-10-09": "한글날", "2025-12-25": "성탄절",
+            "2026-01-01": "신정", "2026-02-16": "설날", "2026-02-17": "설날", "2026-02-18": "설날",
+            "2026-03-01": "삼일절", "2026-03-02": "대체공휴일", "2026-05-05": "어린이날",
+            "2026-05-24": "부처님오신날", "2026-06-06": "현충일", "2026-08-15": "광복절",
+            "2026-10-03": "개천절", "2026-10-09": "한글날", "2026-12-25": "성탄절"
+        };
 
         const todayObj = new Date();
         todayObj.setHours(0,0,0,0);
@@ -207,9 +262,6 @@
         let selectedDate = new Date(todayObj);
         const WEEK_NAMES = ['주일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
-        /**
-         * 구글 시트의 Rich Text와 기본 서식을 결합하여 HTML을 생성하는 고정밀 파서
-         */
         function parseFullRichText(cell) {
             if (!cell || !cell.formattedValue) return "";
             
@@ -217,7 +269,6 @@
             const runs = cell.textFormatRuns;
             const baseFormat = cell.effectiveFormat?.textFormat || {};
 
-            // 헬퍼: 서식 객체를 CSS 스타일 문자열로 변환
             const getStyle = (format) => {
                 let s = "";
                 if (format.bold) s += "font-weight: 800; color: #000; ";
@@ -239,7 +290,6 @@
                 return s;
             };
 
-            // 서식 구간이 없으면 기본 서식만 적용하여 반환
             if (!runs || runs.length === 0) {
                 return `<span style="${getStyle(baseFormat)}">${text}</span>`;
             }
@@ -338,6 +388,10 @@
             const first = new Date(y, m, 1).getDay();
             let html = '';
             for(let i=0; i<first; i++) html += '<div class="calendar-day opacity-0 pointer-events-none"></div>';
+            
+            // 다중 기간 일정을 가로로 이어지게 하기 위해 슬롯(위치) 추적 (최대 3개 유지)
+            let slots = [null, null, null];
+
             for(let i=1; i<=last; i++) {
                 const target = new Date(y, m, i);
                 target.setHours(0,0,0,0);
@@ -346,26 +400,81 @@
                 const isToday = target.getTime() === todayObj.getTime();
                 const isSelected = target.getTime() === selectedDate.getTime();
                 
+                // 만료된 슬롯 초기화 (어제 일정이 끝난 경우)
+                slots = slots.map(e => {
+                    if (!e) return null;
+                    const end = e.end || e.start;
+                    if (target.getTime() > end.getTime()) return null;
+                    return e;
+                });
+
+                // 오늘 활성화된 이벤트 찾기 및 기간 일정(Duration) 우선순위로 정렬
                 const dayEvents = events.filter(e => {
                     if(!e || !e.start) return false;
                     const checkEnd = e.end || e.start;
                     return target >= e.start && target <= checkEnd;
+                }).sort((a, b) => {
+                    const durA = (a.end || a.start).getTime() - a.start.getTime();
+                    const durB = (b.end || b.start).getTime() - b.start.getTime();
+                    if (durA !== durB) return durB - durA; // 기간이 긴 일정을 위로 배치 (우선순위)
+                    return a.start.getTime() - b.start.getTime(); // 시작일이 빠른 순
+                });
+
+                // 빈 슬롯에 새로운 이벤트 할당
+                dayEvents.forEach(e => {
+                    if (!slots.some(s => s && s.id === e.id)) {
+                        const emptyIdx = slots.indexOf(null);
+                        if (emptyIdx !== -1) {
+                            slots[emptyIdx] = e;
+                        }
+                    }
                 });
 
                 const isRed = target.getDay() === 0 || holiday;
                 const colorClass = isRed ? 'text-red-500' : (target.getDay() === 6 ? 'text-blue-500' : 'text-gray-800');
                 const circleClass = isToday ? 'today-circle' : (isSelected ? 'selected-circle' : '');
                 
-                let bars = '';
-                if (dayEvents.length > 0) {
-                    const uniqueTypes = [...new Set(dayEvents.map(e => e.meetingType))];
-                    bars = uniqueTypes.slice(0, 3).map(t => {
-                        const tId = (t === '주일집회' || t === '소그룹') ? t : '기타';
-                        return `<div class="mini-event-bar bar-${tId}">${t}</div>`;
+                // 슬롯 기반으로 HTML 생성
+                let maxSlot = -1;
+                for (let s = 2; s >= 0; s--) {
+                    if (slots[s]) { maxSlot = s; break; }
+                }
+
+                let renderedBars = '';
+                if (maxSlot >= 0) {
+                    renderedBars = slots.slice(0, maxSlot + 1).map(e => {
+                        // 슬롯이 비었거나 오늘 범위에 속하지 않는 경우 빈 공간 렌더링 유지 (수평 맞춤)
+                        if (!e || target.getTime() < e.start.getTime() || target.getTime() > (e.end || e.start).getTime()) {
+                            return `<div class="mini-event-bar empty-slot"></div>`;
+                        }
+
+                        const isStart = target.getTime() === e.start.getTime();
+                        const isEnd = target.getTime() === (e.end || e.start).getTime();
+                        const isSunday = target.getDay() === 0;
+
+                        const tId = (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? e.meetingType : '기타';
+                        let classes = `mini-event-bar bar-${tId}`;
+                        
+                        // 기간 일정 연결 CSS 부여
+                        if (!isStart) classes += ` span-left`;
+                        if (!isEnd) classes += ` span-right`;
+
+                        // 시작일이거나 주 시작(일요일)일 때만 텍스트 노출, 중간은 공백으로 연결감 강조
+                        const showText = isStart || isSunday;
+                        const text = showText ? e.meetingType : '&nbsp;';
+
+                        return `<div class="${classes}">${text}</div>`;
                     }).join('');
                 }
 
-                html += `<div class="calendar-day ${isSelected ? 'selected-day' : ''}" onclick="onDayClick(${y}, ${m}, ${i})"><div class="day-header"><div class="day-circle ${circleClass} ${colorClass}">${i}</div>${holiday ? `<div class="holiday-name">${holiday}</div>` : ''}</div><div class="event-box-container">${bars}</div></div>`;
+                html += `
+                    <div class="calendar-day ${isSelected ? 'selected-day' : ''}" onclick="onDayClick(${y}, ${m}, ${i})">
+                        <div class="day-header">
+                            <div class="day-circle ${circleClass} ${colorClass}">${i}</div>
+                            <div class="holiday-name">${holiday ? holiday : ''}</div>
+                        </div>
+                        <div class="event-box-container">${renderedBars}</div>
+                    </div>`;
             }
             return html;
         }
@@ -389,7 +498,10 @@
             const dateKey = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
             const holiday = holidays[dateKey];
 
-            let html = `<div class="flex items-baseline gap-2 mb-6 ribbon-enter"><span class="text-3xl font-black ${date.getDay() === 0 || holiday ? 'text-red-500' : 'text-slate-800'}">${date.getDate()}. ${WEEK_NAMES[date.getDay()]}</span></div>`;
+            let html = `<div class="flex items-baseline gap-2 mb-4 ribbon-enter"><span class="text-3xl font-black ${date.getDay() === 0 || holiday ? 'text-red-500' : 'text-slate-800'}">${date.getDate()}. ${WEEK_NAMES[date.getDay()]}</span>${holiday ? `<span class="text-red-400 font-bold text-sm ml-1">${holiday}</span>` : ''}</div>`;
+            
+            // 카드 사이 간격을 좁게 하기 위해 flex-col과 gap-2 적용
+            html += `<div class="flex flex-col gap-2">`;
             
             if (dayEvents.length === 0) {
                 html += `<div class="text-center py-10 ribbon-enter"><p class="text-gray-300 font-medium">등록된 일정이 없습니다.</p></div>`;
@@ -400,24 +512,48 @@
 
                     const tId = (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? e.meetingType : '기타';
                     const isSameDay = e.start && e.end && e.start.getTime() === e.end.getTime();
-                    let dateTimeStr = "";
                     
-                    const startStr = `${e.start.getMonth() + 1}. ${e.start.getDate()}`;
-                    dateTimeStr = (isSameDay || !e.end) ? startStr : `${startStr} - ${e.end.getMonth() + 1}. ${e.end.getDate()} `;
+                    // 기간 표시 (하루 일정인 경우 표시 안함)
+                    let dateStr = "";
+                    if (!isSameDay && e.end) {
+                        const startStr = `${e.start.getMonth() + 1}. ${e.start.getDate()}`;
+                        dateStr = `${startStr} - ${e.end.getMonth() + 1}. ${e.end.getDate()}`;
+                    }
                     
-                    if (e.startTime) dateTimeStr += ` (${e.startTime}${e.endTime ? ' - ' + e.endTime : ''})`;
+                    // 시간 표시
+                    let timeStr = "";
+                    if (e.startTime) {
+                        timeStr = e.startTime;
+                        if (e.endTime) timeStr += ` - ${e.endTime}`;
+                    }
+
+                    // 일자 및 시간 조합 ( | 사용)
+                    let dateTimeDisplay = "";
+                    if (dateStr && timeStr) {
+                        dateTimeDisplay = `${dateStr} | ${timeStr}`;
+                    } else if (dateStr) {
+                        dateTimeDisplay = dateStr;
+                    } else if (timeStr) {
+                        dateTimeDisplay = timeStr;
+                    }
 
                     html += `
                         <div class="info-card border-${tId} ribbon-enter">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="mini-event-bar bar-${tId} px-3 py-1 rounded text-[11px] font-black">${e.meetingType}</div>
-                                <div class="text-[11px] font-bold text-orange-500 text-right">${dateTimeStr}</div>
+                            <!-- 첫번째 라인: 좌(모임유형 + 주제) / 우(기간 | 시간) -->
+                            <div class="flex justify-between items-start gap-3">
+                                <div class="flex items-center gap-2 flex-wrap flex-1">
+                                    <div class="mini-event-bar bar-${tId} px-2 py-0.5 text-[11px] font-black shrink-0" style="border-radius: 0;">${e.meetingType}</div>
+                                    <h3 class="text-[15px] font-black text-slate-800 leading-tight">${e.subject || e.meetingType}</h3>
+                                </div>
+                                ${dateTimeDisplay ? `<div class="text-[12px] font-bold text-gray-500 text-right shrink-0 mt-0.5">${dateTimeDisplay}</div>` : ''}
                             </div>
-                            <h3 class="text-xl font-black text-slate-800 leading-tight mb-2">${e.subject || e.meetingType}</h3>
-                            ${e.contentHtml ? `<div class="content-box">${e.contentHtml}</div>` : ''}
+                            
+                            <!-- 두번째 라인: 상세 내역 (구분선과 함께 구글시트 서식 그대로 표현) -->
+                            ${e.contentHtml ? `<div class="content-box pt-3 mt-3 border-t border-gray-100">${e.contentHtml}</div>` : ''}
                         </div>`;
                 });
             }
+            html += `</div>`;
             contentEl.innerHTML = html;
         }
 
@@ -433,7 +569,7 @@
                 
                 if (json.sheets && json.sheets[0].data[0].rowData) {
                     const rows = json.sheets[0].data[0].rowData;
-                    events = rows.map(row => {
+                    events = rows.map((row, idx) => {
                         if (!row.values || row.values.length < 1) return null;
                         const v = row.values;
                         const start = parseAnyDate(v[0]?.formattedValue);
@@ -441,6 +577,7 @@
                         if(!start) return null;
                         
                         return {
+                            id: `evt-${idx}`, 
                             start: start,
                             end: end,
                             startTime: v[2]?.formattedValue || "",
@@ -459,29 +596,74 @@
                 setTimeout(() => { if(indicator) indicator.style.width = '0%'; }, 500);
             } catch (e) { 
                 console.error('Data Load Error:', e);
-                const contentEl = document.getElementById('ribbonContent');
-                if (contentEl) contentEl.innerHTML = `<div class="error-container"><p class="text-red-400 font-medium">데이터 로드 오류: ${e.message}</p></div>`;
+                // gviz fallback 로직 
+                try {
+                    const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`);
+                    const text = await res.text();
+                    const fbJson = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+                    events = fbJson.table.rows.map((r, idx) => {
+                        const c = r.c;
+                        const start = parseAnyDate(c[0]?.f || c[0]?.v);
+                        if (!start) return null;
+                        return {
+                            id: `fb-${idx}`,
+                            start: start, 
+                            end: parseAnyDate(c[1]?.f || c[1]?.v),
+                            meetingType: c[4]?.v || "기타", subject: c[5]?.v || "",
+                            contentHtml: c[6]?.v || "", startTime: c[2]?.f || "", endTime: c[3]?.f || ""
+                        };
+                    }).filter(e => e);
+                    fastRender();
+                    updateDetail(selectedDate);
+                } catch(fallbackErr) {
+                    const contentEl = document.getElementById('ribbonContent');
+                    if (contentEl) {
+                        if (e.message.includes('not been used') || e.message.includes('disabled')) {
+                            contentEl.innerHTML = `<div class="error-container"><div class="error-title">⚠️ Google Sheets API 활성화 필요</div><div class="error-desc">API 키에서 'Google Sheets API' 서비스가 활성화되어 있지 않습니다. Google Cloud 콘솔에서 활성화 후 새로고침하세요.</div></div>`;
+                        } else if (e.message.includes('Unable to parse range')) {
+                            contentEl.innerHTML = `<div class="error-container"><div class="error-title">⚠️ 시트 이름 오류</div><div class="error-desc">범위를 찾을 수 없습니다: <b>${RANGE}</b><br>시트 탭 이름이 '시트1'인지 확인하세요.</div></div>`;
+                        } else {
+                            contentEl.innerHTML = `<div class="text-center py-10"><p class="text-red-400 font-medium">데이터 로드 오류: ${e.message}</p></div>`;
+                        }
+                    }
+                }
             }
 
-            // 공휴일 로드
+            // 공휴일 로드 (에러가 나도 앱이 멈추지 않도록 무시 처리 및 정적 데이터 활용)
             setTimeout(async () => {
                 try {
-                    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(HOLIDAY_ICS_URL)}`;
+                    const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(HOLIDAY_ICS_URL)}`;
                     const r = await fetch(proxy);
-                    const d = await r.json();
-                    const vevents = d.contents.split('BEGIN:VEVENT');
-                    vevents.shift();
-                    vevents.forEach(v => {
-                        const dMatch = v.match(/DTSTART(?:;VALUE=DATE)?:(\d{8})/);
-                        const sMatch = v.match(/SUMMARY:(.*)/);
-                        if(dMatch && sMatch) {
-                            const ds = dMatch[1];
-                            holidays[`${ds.substring(0,4)}-${ds.substring(4,6)}-${ds.substring(6,8)}`] = sMatch[1].replace(/\r/g,'').replace(/\\,/g,',').trim();
+                    if (!r.ok) return; 
+                    const text = await r.text();
+                    
+                    if (text && text.includes('BEGIN:VCALENDAR')) {
+                        const lines = text.split(/\r?\n/);
+                        let currentEvent = {};
+                        for (let line of lines) {
+                            if (line.startsWith('BEGIN:VEVENT')) {
+                                currentEvent = {};
+                            } else if (line.startsWith('DTSTART')) {
+                                const val = line.substring(line.indexOf(':') + 1);
+                                if (val) currentEvent.date = val.substring(0, 8);
+                            } else if (line.startsWith('SUMMARY')) {
+                                const val = line.substring(line.indexOf(':') + 1);
+                                if (val) currentEvent.summary = val.trim();
+                            } else if (line.startsWith('END:VEVENT')) {
+                                if (currentEvent.date && currentEvent.summary) {
+                                    const ds = currentEvent.date;
+                                    const dateKey = `${ds.substring(0,4)}-${ds.substring(4,6)}-${ds.substring(6,8)}`;
+                                    holidays[dateKey] = currentEvent.summary;
+                                }
+                            }
                         }
-                    });
-                    fastRender();
-                } catch(e) {}
-            }, 1000);
+                        fastRender();
+                        updateDetail(selectedDate);
+                    }
+                } catch(e) {
+                    console.log("Holiday fetch proxy blocked. Falling back to static 2025/2026 holiday data.");
+                }
+            }, 500);
         }
 
         function parseAnyDate(v) {
