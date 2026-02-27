@@ -418,16 +418,24 @@
                     return e;
                 });
 
-                // 오늘 활성화된 이벤트 찾기 및 기간 일정(Duration) 우선순위로 정렬
+                // 오늘 활성화된 이벤트 찾기
                 const dayEvents = events.filter(e => {
                     if(!e || !e.start) return false;
                     const checkEnd = e.end || e.start;
                     return target >= e.start && target <= checkEnd;
                 }).sort((a, b) => {
+                    // 1순위: 기간이 긴 일정을 위로 (달력 바 연결 유지 목적)
                     const durA = (a.end || a.start).getTime() - a.start.getTime();
                     const durB = (b.end || b.start).getTime() - b.start.getTime();
-                    if (durA !== durB) return durB - durA; // 기간이 긴 일정을 위로 배치 (우선순위)
-                    return a.start.getTime() - b.start.getTime(); // 시작일이 빠른 순
+                    if (durA !== durB) return durB - durA; 
+
+                    // 2순위: 시작 시간이 빠른 순서대로 (추가된 정렬 조건)
+                    const timeA = parseInt(a.startTime?.replace(/[^0-9]/g, '')) || 9999;
+                    const timeB = parseInt(b.startTime?.replace(/[^0-9]/g, '')) || 9999;
+                    if (timeA !== timeB) return timeA - timeB;
+
+                    // 3순위: 시작일이 빠른 순
+                    return a.start.getTime() - b.start.getTime();
                 });
 
                 // 빈 슬롯에 새로운 이벤트 할당
