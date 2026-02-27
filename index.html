@@ -127,6 +127,7 @@
         .bar-섞임 { background-color: #fff7ed; color: #f97316; border-color: #ffedd5; } /* 주황색 */
         .bar-출장 { background-color: #f0fdf4; color: #22c55e; border-color: #dcfce7; } /* 녹색 */
         .bar-기타, .bar-HCD { background-color: #f5f3ff; color: #8b5cf6; border-color: #ede9fe; }
+        .bar-특별집회 { background-color: #fefce8; color: #a16207; border-color: #fde047; }
 
         /* 공휴일 이름 스타일 (빈 공간 항상 확보) */
         .holiday-name { 
@@ -153,6 +154,7 @@
         .border-소그룹 { border-left-color: #3b82f6; }
         .border-섞임 { border-left-color: #f97316; }
         .border-출장 { border-left-color: #22c55e; }
+        .border-특별집회 { border-left-color: #eab308; }
         .border-기타, .border-HCD { border-left-color: #8b5cf6; }
 
         /* 내용 박스 (시트 서식 완벽 표현, 내부 박스 제거하고 일반 문단처럼 변경) */
@@ -787,6 +789,7 @@
             if (['소그룹'].includes(type)) return '소그룹';
             if (['섞임'].includes(type)) return '섞임';
             if (['출장'].includes(type)) return '출장';
+            if (['특별집회'].includes(type)) return '특별집회';
             if (['기타', 'HCD'].includes(type)) return '기타';
             return '기타';
         }
