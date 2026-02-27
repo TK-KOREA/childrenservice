@@ -456,7 +456,8 @@
                         const isEnd = target.getTime() === (e.end || e.start).getTime();
                         const isSunday = target.getDay() === 0;
 
-                        const tId = (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? e.meetingType : '기타';
+                        // 주일집회, LDM은 '주일집회' 그룹으로 / 소그룹, SGM은 '소그룹' 그룹으로 분류
+                        const tId = getCategoryId(e.meetingType);
                         let classes = `mini-event-bar bar-${tId}`;
                         
                         // 기간 일정 연결 CSS 부여
@@ -514,7 +515,7 @@
                     // 데이터 안전 검사
                     if (!e || !e.start) return;
 
-                    const tId = (e.meetingType === '주일집회' || e.meetingType === '소그룹') ? e.meetingType : '기타';
+                    const tId = getCategoryId(e.meetingType);
                     const isSameDay = e.start && e.end && e.start.getTime() === e.end.getTime();
                     
                     // 기간 표시 (하루 일정인 경우 표시 안함)
@@ -774,6 +775,14 @@
             html += `</div>`;
             const modalContent = document.getElementById('modalContent');
             if (modalContent) { modalContent.innerHTML = html; document.getElementById('modalOverlay')?.classList.remove('hidden'); }
+        }
+
+        // 모임유형 설정
+        function getCategoryId(type) {
+            if (['주일집회', 'LDM'].includes(type)) return '주일집회';
+            if (['소그룹', 'SGM'].includes(type)) return '소그룹';
+            if (['기타', 'HCD'].includes(type)) return '기타';
+            return '기타';
         }
 
         window.selectPickerDate = (y, m) => {
