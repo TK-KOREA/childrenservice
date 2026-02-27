@@ -513,17 +513,20 @@
                 return date >= e.start && date <= checkEnd;
             });
 
-            // 2. 시작 시간순 정렬 로직 추가
+            // 2. 정렬 로직 수정: 시간이 없는(기간 일정) 것을 최상단으로, 그 외에는 시간순
             dayEvents.sort((a, b) => {
-                // 시간이 없는 경우 가장 뒤로 보냄
-                if (!a.startTime) return 1;
-                if (!b.startTime) return -1;
+                // 시작 시간을 숫자로 변환 (없으면 0으로 설정하여 가장 위로 보냄)
+                const timeA = a.startTime ? parseInt(a.startTime.replace(/[^0-9]/g, '')) || 0 : 0;
+                const timeB = b.startTime ? parseInt(b.startTime.replace(/[^0-9]/g, '')) || 0 : 0;
 
-                // "HH:mm" 형식을 비교 가능한 숫자로 변환 (예: "09:30" -> 930)
-                const timeA = parseInt(a.startTime.replace(/[^0-9]/g, '')) || 0;
-                const timeB = parseInt(b.startTime.replace(/[^0-9]/g, '')) || 0;
+                if (timeA !== timeB) {
+                    return timeA - timeB; // 숫자가 작을수록(시간이 없거나 빠를수록) 위로
+                }
 
-                return timeA - timeB;
+                // 시작 시간이 같거나 둘 다 없는 경우: 기간이 긴 일정을 우선순위로
+                const durA = (a.end || a.start).getTime() - a.start.getTime();
+                const durB = (b.end || b.start).getTime() - b.start.getTime();
+                return durB - durA;
             });
 
             const contentEl = document.getElementById('ribbonContent');
