@@ -24,7 +24,7 @@
         .month-view { width: 33.3333%; display: grid; grid-template-columns: repeat(7, 1fr); align-content: start; }
         .sliding-transition { transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-        /* 날짜 칸 스타일 */
+        /* 날짜 칸 스타일 (텍스트 길이에 따라 칸이 늘어나지 않도록 min-width: 0 추가) */
         .calendar-day { 
             height: 85px; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
@@ -33,6 +33,7 @@
             border: 1px solid #f1f5f9;
             margin-right: -1px;
             margin-bottom: -1px;
+            min-width: 0; /* 그리드 팽창 방지 */
         }
         @media (min-width: 768px) { .calendar-day { height: 120px; padding: 8px 6px; } }
 
@@ -46,6 +47,7 @@
             margin-bottom: 2px; 
             position: relative;
             z-index: 5;
+            overflow: hidden; /* 영역 밖으로 나가는 컨텐츠 숨김 */
         }
 
         .day-circle {
@@ -112,10 +114,12 @@
         .bar-기타 { background-color: #f8fafc; color: #64748b; border-color: #e2e8f0; }
         .bar-특별집회 { background-color: #fefce8; color: #a16207; border-color: #fde047; }
 
+        /* 공휴일 이름 스타일 (블록 처리 및 최대 넓이 제한으로 잘리게 만듦) */
         .holiday-name { 
             font-size: 9px; color: #ef4444; font-weight: 700; 
-            white-space: nowrap; overflow: hidden; text-overflow: clip;
-            width: 100%; text-align: center; margin-top: 1px; height: 13px;
+            white-space: nowrap; overflow: hidden; text-overflow: clip; /* clip으로 칸 밖은 잘라냄 */
+            width: 100%; max-width: 100%; display: block;
+            text-align: center; margin-top: 1px; height: 13px;
         }
         
         .info-card { 
@@ -133,6 +137,12 @@
         .content-box { font-size: 14px; color: #444; line-height: 1.6; word-break: break-word; white-space: pre-wrap; }
         .content-box span { display: inline; line-height: inherit; }
 
+        /* 하단 상세내역 및 모달(검색 결과 등) 텍스트 선택 허용 */
+        #detailRibbonSection, #modalContent {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
         .ribbon-enter { animation: ribbonIn 0.3s ease-out forwards; }
         @keyframes ribbonIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -148,12 +158,6 @@
         .error-container { padding: 24px; background: #fff1f2; border: 1px solid #fecaca; border-radius: 20px; margin: 20px; text-align: left; }
         .error-title { color: #e11d48; font-weight: 800; margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
         .error-desc { color: #4b5563; font-size: 14px; line-height: 1.6; }
-
-	/* 하단 상세내역 및 모달(검색 결과 등) 텍스트 선택 허용 */
-        #detailRibbonSection, #modalContent {
-            -webkit-user-select: text;
-            user-select: text;
-        }
     </style>
 </head>
 <body>
@@ -162,15 +166,15 @@
 
     <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 flex items-center justify-between px-4">
         <div class="flex items-center gap-3">
-            <button id="todayBtn" class="px-3 py-1.5 border border-gray-300 rounded-full text-[13px] font-bold text-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors">
+            <button id="todayBtn" class="px-3 py-1.5 border border-gray-300 rounded-full text-[13px] font-bold text-gray-800 hover:bg-gray-50 active:bg-gray-100 transition-colors whitespace-nowrap flex-shrink-0">
                 오늘
             </button>
             
             <div class="flex items-center gap-1">
-                <button id="prevMonth" class="p-1.5 text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
+                <button id="prevMonth" class="p-1.5 text-gray-700 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                 </button>
-                <button id="nextMonth" class="p-1.5 text-gray-700 hover:bg-gray-100 rounded-full transition-colors">
+                <button id="nextMonth" class="p-1.5 text-gray-700 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                 </button>
             </div>
@@ -180,7 +184,7 @@
             </div>
         </div>
 
-        <div class="search-box">
+        <div class="search-box ml-2">
             <input type="text" id="searchInput" placeholder="검색" class="bg-transparent border-none outline-none text-xs font-bold w-full">
             <button id="searchBtn"><svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
         </div>
@@ -377,8 +381,7 @@
         function fastRender() {
             const navTitle = document.getElementById('navTitle');
             if (navTitle) {
-                // 수정: "YYYY년 M월" 형식으로 렌더링하고, 역삼각형(dropdown) 아이콘을 적용
-                navTitle.innerHTML = `${currentDate.getFullYear()}년 ${currentDate.getMonth() + 1}월 <svg class="w-4 h-4 opacity-70 inline ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>`;
+                navTitle.innerHTML = `${currentDate.getFullYear()}년 ${currentDate.getMonth() + 1}월 <svg class="w-4 h-4 opacity-70 inline ml-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>`;
             }
             document.getElementById('prevGrid').innerHTML = generateGrid(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
             document.getElementById('currGrid').innerHTML = generateGrid(currentDate);
