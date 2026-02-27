@@ -498,11 +498,26 @@
         };
 
         function updateDetail(date) {
+            // 1. 해당 날짜의 이벤트 필터링
             const dayEvents = events.filter(e => {
                 if(!e || !e.start) return false;
                 const checkEnd = e.end || e.start;
                 return date >= e.start && date <= checkEnd;
             });
+
+            // 2. 시작 시간순 정렬 로직 추가
+            dayEvents.sort((a, b) => {
+                // 시간이 없는 경우 가장 뒤로 보냄
+                if (!a.startTime) return 1;
+                if (!b.startTime) return -1;
+
+                // "HH:mm" 형식을 비교 가능한 숫자로 변환 (예: "09:30" -> 930)
+                const timeA = parseInt(a.startTime.replace(/[^0-9]/g, '')) || 0;
+                const timeB = parseInt(b.startTime.replace(/[^0-9]/g, '')) || 0;
+
+                return timeA - timeB;
+            });
+
             const contentEl = document.getElementById('ribbonContent');
             if (!contentEl) return;
 
@@ -511,34 +526,29 @@
 
             let html = `<div class="flex items-baseline gap-2 mb-4 ribbon-enter"><span class="text-3xl font-black ${date.getDay() === 0 || holiday ? 'text-red-500' : 'text-slate-800'}">${date.getDate()}. ${WEEK_NAMES[date.getDay()]}</span>${holiday ? `<span class="text-red-400 font-bold text-sm ml-1">${holiday}</span>` : ''}</div>`;
             
-            // 카드 사이 간격을 좁게 하기 위해 flex-col과 gap-2 적용
             html += `<div class="flex flex-col gap-2">`;
             
             if (dayEvents.length === 0) {
                 html += `<div class="text-center py-10 ribbon-enter"><p class="text-gray-300 font-medium">등록된 일정이 없습니다.</p></div>`;
             } else {
                 dayEvents.forEach(e => {
-                    // 데이터 안전 검사
                     if (!e || !e.start) return;
 
                     const tId = getCategoryId(e.meetingType);
                     const isSameDay = e.start && e.end && e.start.getTime() === e.end.getTime();
                     
-                    // 기간 표시 (하루 일정인 경우 표시 안함)
                     let dateStr = "";
                     if (!isSameDay && e.end) {
                         const startStr = `${e.start.getMonth() + 1}. ${e.start.getDate()}`;
                         dateStr = `${startStr} - ${e.end.getMonth() + 1}. ${e.end.getDate()}`;
                     }
                     
-                    // 시간 표시
                     let timeStr = "";
                     if (e.startTime) {
                         timeStr = e.startTime;
                         if (e.endTime) timeStr += ` - ${e.endTime}`;
                     }
 
-                    // 일자 및 시간 조합 ( | 사용)
                     let dateTimeDisplay = "";
                     if (dateStr && timeStr) {
                         dateTimeDisplay = `${dateStr} | ${timeStr}`;
@@ -550,7 +560,6 @@
 
                     html += `
                         <div class="info-card border-${tId} ribbon-enter">
-                            <!-- 첫번째 라인: 좌(모임유형 + 주제) / 우(기간 | 시간) -->
                             <div class="flex justify-between items-start gap-3">
                                 <div class="flex items-center gap-2 flex-wrap flex-1">
                                     <div class="mini-event-bar bar-${tId} px-2 py-0.5 text-[11px] font-black shrink-0" style="border-radius: 0;">${e.meetingType}</div>
@@ -558,8 +567,6 @@
                                 </div>
                                 ${dateTimeDisplay ? `<div class="text-[12px] font-bold text-gray-500 text-right shrink-0 mt-0.5">${dateTimeDisplay}</div>` : ''}
                             </div>
-                            
-                            <!-- 두번째 라인: 상세 내역 (구분선과 함께 구글시트 서식 그대로 표현) -->
                             ${e.contentHtml ? `<div class="content-box pt-3 mt-3 border-t border-gray-100">${e.contentHtml}</div>` : ''}
                         </div>`;
                 });
