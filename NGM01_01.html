@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(NGM01_01) 하나님의 경륜을 성취하여 시대를 전환하도록 믿음을 전수하는 가정생활과 번성하는 교회생활을 세움</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0369a1;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+        }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: var(--bg); scroll-behavior: smooth; }
+        h1, h2, h3, .myeongjo { font-family: 'Nanum Myeongjo', serif; }
+
+        /* 1. 도입부 레이어 벗기기 애니메이션 */
+        #intro-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            color: white; text-align: center; padding: 20px;
+        }
+        #intro-overlay.peel { transform: translateY(-100%); }
+
+        /* 2. 대시보드 및 레이아웃 */
+        .dashboard-card {
+            background: white; border-top: 5px solid var(--primary);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 3. 아코디언 애니메이션 */
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        .accordion-content.active {
+            max-height: 5000px; opacity: 1;
+            padding-bottom: 2.5rem;
+        }
+        .chevron { transition: transform 0.4s; }
+        .chevron.active { transform: rotate(180deg); }
+
+        /* 4. 성경구절 박스 및 하이라이트 */
+        .verse-box {
+            background-color: #fefce8; border-left: 5px solid #f59e0b;
+            padding: 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; line-height: 1.8;
+            border-radius: 0 0.75rem 0.75rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .highlight-bold { 
+            color: #b45309; font-weight: 800; 
+            background: linear-gradient(to top, #fde68a 30%, transparent 30%);
+        }
+        .bible-link {
+            display: inline-flex; align-items: center; padding: 6px 14px;
+            background-color: #fef3c7; color: #92400e; border-radius: 9999px;
+            font-size: 0.75rem; font-weight: 700; margin-top: 10px; transition: 0.3s;
+        }
+        .bible-link:hover { background-color: #fcd34d; transform: translateY(-1px); }
+
+        /* 5. 퀴즈 섹션 개선 */
+        .quiz-badge {
+            width: 32px; height: 32px; background-color: var(--accent);
+            color: white; border-radius: 50%; display: inline-flex;
+            align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;
+        }
+        .quiz-option {
+            transition: all 0.2s; border: 2px solid #334155;
+            background-color: #1e293b; color: #cbd5e1; width: 100%;
+            padding: 1.25rem; border-radius: 1rem; text-align: left;
+            display: flex; align-items: center; cursor: pointer;
+        }
+        .quiz-option:hover {
+            border-color: var(--accent); color: white; background-color: #334155;
+        }
+        .quiz-option.selected {
+            border-color: var(--accent); background-color: #475569; color: white;
+        }
+
+        /* 기타 요소 */
+        .flow-line { width: 2px; height: 40px; background: #e2e8f0; margin: 0 auto; }
+        .detail-card { border-left: 3px solid #cbd5e1; padding-left: 1.5rem; margin-left: 0.5rem; }
+
+        @media (max-width: 640px) {
+            .title-responsive { font-size: 1.75rem; }
+            .text-responsive { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 도입부 레이어 -->
+    <div id="intro-overlay">
+        <p class="text-amber-400 mb-4 tracking-[0.2em] uppercase font-bold text-sm">하나님의 영원한 경륜 성취</p>
+        <h1 class="text-4xl md:text-6xl mb-6 title-responsive leading-tight">시대를 전환하는<br>믿음의 전수</h1>
+        <p class="text-lg md:text-xl mb-12 opacity-80 font-light">가정생활과 교회생활을 통한 인재 양성</p>
+        <button onclick="peelIntro()" class="bg-amber-500 hover:bg-amber-600 text-white px-12 py-5 rounded-full font-bold text-xl shadow-2xl transition-all transform hover:scale-105 active:scale-95">
+            메시지 열기
+        </button>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="py-16 bg-white text-center px-4 border-b">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight">시대 전환을 위한 두 기둥</h1>
+        <p class="mt-6 text-slate-500 max-w-3xl mx-auto text-lg leading-relaxed">
+            하나님의 경륜을 성취하기 위해 믿음을 전수하는 <span class="text-blue-700 font-bold">가정생활</span>과 <br class="hidden md:block">
+            번성하는 <span class="text-blue-700 font-bold">교회생활</span>을 세우는 시대적 이상과 실행
+        </p>
+    </header>
+
+    <!-- 핵심 요약 대시보드 (전체 흐름 시각화) -->
+    <section class="max-w-6xl mx-auto px-4 py-10">
+        <div class="dashboard-card rounded-3xl p-8 md:p-12">
+            <h2 class="text-2xl font-bold text-slate-800 mb-10 flex items-center">
+                <i class="fas fa-layer-group mr-4 text-blue-600"></i> 전체 실행 체계 대시보드
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="text-center group">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg transform group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-bible text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">1. 성경적 이상</h3>
+                    <p class="text-sm text-slate-500 mt-3 leading-relaxed">구약의 가정교육과<br>신약의 복음 위임의 균형</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="text-center group">
+                    <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg transform group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-child-reaching text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">2. 가정의 실재</h3>
+                    <p class="text-sm text-slate-500 mt-3 leading-relaxed">삼대 간의 영적 전수와<br>매일 말씀 교육의 확립</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="text-center group">
+                    <div class="w-16 h-16 bg-orange-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg transform group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-users-viewfinder text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">3. 교회의 번성</h3>
+                    <p class="text-sm text-slate-500 mt-3 leading-relaxed">복음 전파와 양육,<br>온전케 하는 집회 세우기</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="text-center group">
+                    <div class="w-16 h-16 bg-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg transform group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-award text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-lg">4. 왕국의 보상</h3>
+                    <p class="text-sm text-slate-500 mt-3 leading-relaxed">신실한 노예의 섬김과<br>주님의 즐거움 참여</p>
+                </div>
+                <!-- 커넥터 라인 -->
+                <div class="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-slate-100 -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 상세 개요 (아코디언) -->
+    <main class="max-w-4xl mx-auto px-4 pb-24">
+        
+        <!-- I. 하나님의 영원한 경륜에 따른 계시 -->
+        <div class="mb-6 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <button onclick="toggleAccordion(1)" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
+                <span class="flex items-center font-bold text-slate-800 text-lg">
+                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mr-4 font-black">I</span>
+                    경륜에 따른 가정생활과 교회생활의 계시
+                </span>
+                <i id="icon-1" class="fas fa-chevron-down text-slate-400 chevron text-xl"></i>
+            </button>
+            <div id="content-1" class="accordion-content px-8">
+                <div class="space-y-8">
+                    <section>
+                        <h4 class="font-bold text-blue-800 border-b-2 border-blue-100 pb-2 mb-4 flex items-center">
+                            <i class="fas fa-circle-info mr-2"></i> 핵심 의미 및 배경
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            하나님의 경륜에 따른 가정생활은 <strong>구약의 영적인 가정교육(믿음 전수)</strong>과 <strong>신약의 복음 확산(교회 생활)</strong>이 조화롭게 결합된 생활입니다. 이스라엘은 영적인 가정교육 전통을 통해 인재를 양성하는 나라를 만들었으며, 신약 초기에 복음은 가정을 통해 교회와 하나 되었습니다.
+                        </p>
+                    </section>
+                    
+                    <div class="verse-box">
+                        <p>"내가 그를 안다. 그는 자기 자녀들과 자기 뒤에 올 집안 식구들에게 명령하여 <span class="highlight-bold">의와 정의를 실행함으로써 나 여호와의 길을 지키게 할 것이고</span>, 나 여호와는 아브라함에 관하여 말한 것을 그에게 다 이루어 줄 것이다.”</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=0&bibleSelOp=1&bibChapt=18&bibVerse=19" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 창세기 18:19</a>
+                    </div>
+                    <div class="verse-box">
+                        <p>"아브라함은 반드시 크고 강한 민족이 되고, <span class="highlight-bold">땅의 모든 민족은 그 안에서 복을 받게 될 것</span>이 아닌가?"</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=0&bibleSelOp=1&bibChapt=18&bibVerse=18" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 창세기 18:18</a>
+                    </div>
+                    <div class="verse-box">
+                        <p>"그러므로 여러분은 가서, <span class="highlight-bold">모든 민족을 나의 제자로 삼아</span>, 아버지와 아들과 성령의 이름 안으로 침례를 주고,"</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=1&bibleSelOp=1&bibChapt=28&bibVerse=19" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 마태복음 28:19</a>
+                    </div>
+
+                    <section>
+                        <h4 class="font-bold text-blue-800 border-b-2 border-blue-100 pb-2 mb-4">실행 및 전환 지침</h4>
+                        <div class="detail-card space-y-3 text-slate-600 text-sm">
+                            <p>• <strong>조화로운 실행:</strong> 복음 확산의 위임과 믿음 전수의 가정교육이 균형을 이루어야 교회의 장래가 보장됩니다.</p>
+                            <p>• <strong>보편적 상황으로의 전환:</strong> 특별한 일이나 특별한 사람이 없어도 인재를 양성하고 후대를 얻을 수 있도록 실행을 보편화해야 합니다.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-line"></div>
+
+        <!-- II. 믿음을 전수하는 가정생활과 교육의 실행 -->
+        <div class="mb-6 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <button onclick="toggleAccordion(2)" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
+                <span class="flex items-center font-bold text-slate-800 text-lg">
+                    <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mr-4 font-black">II</span>
+                    믿음을 전수하는 가정생활과 교육의 실행
+                </span>
+                <i id="icon-2" class="fas fa-chevron-down text-slate-400 chevron text-xl"></i>
+            </button>
+            <div id="content-2" class="accordion-content px-8">
+                <div class="space-y-8">
+                    <section>
+                        <h4 class="font-bold text-emerald-800 border-b-2 border-emerald-100 pb-2 mb-4">구체적 사례: 이스라엘의 기초</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            이스라엘은 <strong>가정에서 삼대가 함께 하는 안식일</strong>을 지키는 일에서 모든 영적인 활동이 시작되었습니다. 이는 오늘날 잠자리와 식탁에서 갖는 가정교육의 기반이 되었으며, 후대를 하나님의 백성으로 조성하는 효시가 되었습니다.
+                        </p>
+                    </section>
+                    
+                    <div class="verse-box">
+                        <p>"하나님께서 또 말씀하셨다. “나는 너의 조상의 하나님, 곧 <span class="highlight-bold">아브라함의 하나님이요, 이삭의 하나님이요, 야곱의 하나님이다.</span>” 그러자 모세는 하나님을 뵙기가 두려워 얼굴을 가렸다."</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=0&bibleSelOp=2&bibChapt=3&bibVerse=6" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 출애굽기 3:6</a>
+                    </div>
+                    <div class="verse-box">
+                        <p>"그대는 자녀에게 이 말씀을 부지런히 가르치고, 그대가 집에 앉아 있을 때나 길을 갈 때나 <span class="highlight-bold">누울 때나 일어날 때나 이 말씀을 그들에게 말해 주어야 합니다.</span>"</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=0&bibleSelOp=5&bibChapt=6&bibVerse=7" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 신명기 6:7</a>
+                    </div>
+
+                    <section>
+                        <h4 class="font-bold text-emerald-800 border-b-2 border-emerald-100 pb-2 mb-4">실행 로드맵: 영적인 문화 확립</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-5 bg-emerald-50 rounded-2xl border border-emerald-100">
+                                <h5 class="font-bold text-emerald-700 mb-2 underline">매주 실행</h5>
+                                <p class="text-xs text-slate-600 leading-relaxed">삼대가 함께 하는 믿음을 전수하는 <strong>가정 집회</strong>를 보편적으로 세움</p>
+                            </div>
+                            <div class="p-5 bg-emerald-50 rounded-2xl border border-emerald-100">
+                                <h5 class="font-bold text-emerald-700 mb-2 underline">매일 실행</h5>
+                                <p class="text-xs text-slate-600 leading-relaxed">아침/저녁 잠자리와 식탁에서 갖는 <strong>지속적인 영적 교육</strong> 확립</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-4 italic">※ 필수 조건: 부모들이 자녀들과 <span class="text-emerald-700 font-bold">합당한 관계를 유지</span>하며, <span class="text-emerald-700 font-bold">유쾌한 상태</span>에서 분위기를 이끄는 것이 필수입니다.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-line"></div>
+
+        <!-- III. 번성하고 증가하는 교회생활 -->
+        <div class="mb-6 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <button onclick="toggleAccordion(3)" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
+                <span class="flex items-center font-bold text-slate-800 text-lg">
+                    <span class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center mr-4 font-black">III</span>
+                    번성하고 증가하는 교회생활
+                </span>
+                <i id="icon-3" class="fas fa-chevron-down text-slate-400 chevron text-xl"></i>
+            </button>
+            <div id="content-3" class="accordion-content px-8">
+                <div class="space-y-8">
+                    <section>
+                        <h4 class="font-bold text-orange-800 border-b-2 border-orange-100 pb-2 mb-4">이상과 실행</h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            오늘날 주님의 회복의 실행은 <strong>최고봉의 이상, 하나님-사람의 생활, 우주적인 목양</strong>에 따라 복음을 전파하고 교회를 건축하는 것입니다. 하나님 정하신 길을 위해 우리는 '일'이 아닌 <span class="text-orange-700 font-bold">사람을 관심</span>해야 합니다.
+                        </p>
+                    </section>
+                    
+                    <div class="verse-box">
+                        <p>"그들이 말하였다. “<span class="highlight-bold">주 예수님을 믿으십시오. 그러면 그대와 그대의 집안 식구가 구원을 받을 것입니다.</span>”"</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=1&bibleSelOp=5&bibChapt=16&bibVerse=31" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 사도행전 16:31</a>
+                    </div>
+                    <div class="verse-box">
+                        <p>"우리가 여러분 각 사람에게 어떻게 대했는지는 여러분이 알고 있는 바와 같이, 우리는 <span class="highlight-bold">아버지가 자기 자녀들에게 하듯이</span> 여러분에게 권유하고 위로하고 증언했습니다."</p>
+                        <a href="http://rv.or.kr/read_recovery.php?bibleVer=1&bibleSelOp=13&bibChapt=2&bibVerse=11" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 데살로니가전서 2:11</a>
+                    </div>
+
+                    <section>
+                        <h4 class="font-bold text-orange-800 border-b-2 border-orange-100 pb-2 mb-4">교회생활의 5대 점검 항목</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-600">
+                            <div class="flex items-center p-3 border rounded-xl"><i class="fas fa-check-circle text-orange-400 mr-2"></i> 주님 기념 떡 떼는 집회</div>
+                            <div class="flex items-center p-3 border rounded-xl"><i class="fas fa-check-circle text-orange-400 mr-2"></i> 행정 수행을 위한 기도집회</div>
+                            <div class="flex items-center p-3 border rounded-xl"><i class="fas fa-check-circle text-orange-400 mr-2"></i> 교회 건축을 위한 신언집회</div>
+                            <div class="flex items-center p-3 border rounded-xl"><i class="fas fa-check-circle text-orange-400 mr-2"></i> 다음 세대 온전케 하는 집회</div>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500 italic">"아침부흥으로 매일 살아나며, 동반자와 기도하고, 섞임의 방식으로 나아가야 합니다."</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-line"></div>
+
+        <!-- IV & V. 주님의 노예로서 섬김 및 부록 -->
+        <div class="mb-6 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <button onclick="toggleAccordion(4)" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
+                <span class="flex items-center font-bold text-slate-800 text-lg">
+                    <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mr-4 font-black">IV</span>
+                    섬김의 보상 및 구체적 교육 실행법
+                </span>
+                <i id="icon-4" class="fas fa-chevron-down text-slate-400 chevron text-xl"></i>
+            </button>
+            <div id="content-4" class="accordion-content px-8">
+                <div class="space-y-8">
+                    <section>
+                        <h4 class="font-bold text-purple-800 border-b-2 border-purple-100 pb-2 mb-4">노예의 신실함과 보상</h4>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            우리는 주님의 신부인 동시에 노예입니다. 악한 노예는 이유가 많았으나, 신실한 노예는 <strong>주님의 즐거움에 참여</strong>하며 천년 왕국에서 모든 소유를 맡게 됩니다.
+                        </p>
+                        <div class="verse-box">
+                            <p>"주인이 그에게 ‘잘하였다, 착하고 신실한 노예야. 네가 적은 일에 신실하였으니, 내가 많은 일을 너에게 맡길 것이다. <span class="highlight-bold">네 주인의 기쁨에 참여하여라.</span>’라고 하였습니다."</p>
+                            <a href="http://rv.or.kr/read_recovery.php?bibleVer=1&bibleSelOp=1&bibChapt=25&bibVerse=21" target="_blank" class="bible-link"><i class="fas fa-link mr-2"></i> 마태복음 25:21</a>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4 class="font-bold text-purple-800 border-b-2 border-purple-100 pb-2 mb-4">부록: 말씀 중심 가정교육 5단계</h4>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-xl text-xs font-bold border border-purple-100">1. 들려주기</span>
+                            <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-xl text-xs font-bold border border-purple-100">2. 읽게 하기</span>
+                            <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-xl text-xs font-bold border border-purple-100">3. 쓰게 하기</span>
+                            <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-xl text-xs font-bold border border-purple-100">4. 외우게 하기</span>
+                            <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-xl text-xs font-bold border border-purple-100">5. 말하게 하기</span>
+                        </div>
+                        <h4 class="font-bold text-purple-800 border-b-2 border-purple-100 pb-2 mb-4">신성한 문화로의 전환</h4>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li>• <strong>명절(설/추석):</strong> 가족들에게 생명을 공급하는 기회로 삼음</li>
+                            <li>• <strong>결혼/생일:</strong> 성경적 의미와 거듭남의 의미를 전달하는 집회로 세움</li>
+                            <li>• <strong>장례/추모:</strong> 부활의 의미와 내세의 세계를 가르치는 진리 교육의 장</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 퀴즈 섹션 -->
+    <section class="bg-slate-900 py-24 px-4 text-white">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 myeongjo text-amber-400">✍️ 핵심 요점 테스트</h2>
+            
+            <div id="quiz-container">
+                <!-- 퀴즈 카드 -->
+                <div id="quiz-card" class="bg-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-700">
+                    <div class="flex items-center mb-8">
+                        <span id="quiz-num" class="quiz-badge">1</span>
+                        <h3 id="quiz-question" class="text-xl md:text-2xl font-medium leading-snug"></h3>
+                    </div>
+                    <div id="quiz-options" class="space-y-4">
+                        <!-- 옵션들이 여기에 동적으로 생성됩니다 -->
+                    </div>
+                    <div class="mt-12 flex justify-between items-center text-slate-400 text-sm">
+                        <span id="quiz-progress" class="font-bold">1 / 5</span>
+                        <div class="w-2/3 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-amber-500 transition-all duration-500" style="width: 20%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 결과 카드 -->
+                <div id="result-card" class="hidden bg-white text-slate-900 p-12 rounded-[2.5rem] text-center shadow-2xl animate-bounce-short">
+                    <h3 class="text-3xl font-extrabold mb-6">학습 완료!</h3>
+                    <div class="text-7xl font-black text-blue-600 mb-8" id="final-score">0점</div>
+                    <p id="feedback-text" class="text-lg text-slate-600 mb-10 leading-relaxed"></p>
+                    <button onclick="resetQuiz()" class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-slate-800 transition shadow-lg">다시 도전하기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기도문 섹션 -->
+    <section class="py-32 px-6 bg-white relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <div class="text-slate-200 text-8xl absolute -top-10 -left-10 opacity-50"><i class="fas fa-quote-left"></i></div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 myeongjo text-slate-800">시대 전환을 위한 간구</h2>
+            <div class="prayer-text text-xl md:text-2xl text-slate-600 leading-[2.2] myeongjo italic whitespace-pre-line" id="prayer-content">
+                오 주 예수님,
+                우리의 가정생활이 단지 육신이 거하는 장소가 아니라,
+                하나님의 경륜을 성취하여 시대를 전환하는 
+                믿음 전수의 거룩한 현장이 되게 하소서.
+
+                부모인 우리가 먼저 말씀으로 조성되게 하시어,
+                자녀들과 합당하고 유쾌한 관계 속에 섞이게 하시고,
+                눕고 일어날 때와 식탁에서의 대화를 통해
+                삼일 하나님의 풍성이 끊임없이 흘러가게 하소서.
+
+                교회 안에서는 신실한 노예로서 
+                일이 아닌 사람을 귀히 여기는 마음을 우리에게 부어주소서.
+                시대의 이상을 따라 복음을 전파하고 다음 세대를 온전케 하여,
+                주님 다시 오시는 그날에 주인의 즐거움에 참여하는 
+                이기는 자들이 되게 하여 주시옵소서.
+
+                주 예수님의 이름으로 기도합니다. 아멘.
+            </div>
+            <div class="text-slate-200 text-8xl absolute -bottom-10 -right-10 opacity-50 flex justify-end"><i class="fas fa-quote-right"></i></div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 py-12 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>&copy; 2025 하나님의 경륜 성취를 위한 시대 전환 가이드</p>
+        <p class="mt-2 opacity-50 font-light">본 페이지는 성경적 계시와 지문의 핵심 요점을 바탕으로 구성되었습니다.</p>
+    </footer>
+
+    <script>
+        // 1. 도입부 제어
+        function peelIntro() {
+            document.getElementById('intro-overlay').classList.add('peel');
+            setTimeout(() => {
+                document.getElementById('intro-overlay').style.display = 'none';
+            }, 1200);
+        }
+
+        // 2. 아코디언 제어
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // 다른 아코디언 닫기
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                if(c.id !== `content-${id}`) {
+                    c.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.chevron').forEach(i => {
+                if(i.id !== `icon-${id}`) {
+                    i.classList.remove('active');
+                }
+            });
+
+            // 선택한 항목 토글
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+        // 3. 퀴즈 시스템
+        const quizData = [
+            {
+                q: "구약에서 믿음을 전수하기 위해 하나님께서 아브라함에게 명령하신 방식은 무엇입니까?",
+                options: ["성전의 공식 제사", "구전을 통한 영적인 가정교육", "군사적 정복 활동", "철학적 토론"],
+                correct: 1
+            },
+            {
+                q: "가정에서 영적인 교육이 성공하기 위해 부모가 갖추어야 할 필수적인 상태는?",
+                options: ["엄격한 훈육 분위기", "자녀와의 합당한 관계와 유쾌한 분위기", "경제적 풍요로움", "학구적인 태도"],
+                correct: 1
+            },
+            {
+                q: "지문에서 언급한 '말씀 중심 가정교육 5단계' 중 자녀가 스스로 해야 할 훈련은?",
+                options: ["말씀 들려주기", "말씀 비판하게 하기", "말씀 쓰게 하기", "말씀 무시하게 하기"],
+                correct: 2
+            },
+            {
+                q: "신약 초기에 복음이 확산되어 교회생활이 시작된 주요 장소는 어디입니까?",
+                options: ["공회당", "가정", "회당", "광장"],
+                correct: 1
+            },
+            {
+                q: "신실한 노예가 천년 왕국에서 받게 될 최종적인 보상은 무엇입니까?",
+                options: ["세상의 명예", "주인의 기쁨에 참여함", "고난 없는 삶", "특별한 영적 능력"],
+                correct: 1
+            }
+        ];
+
+        let currentQuiz = 0;
+        let score = 0;
+
+        function renderQuiz() {
+            const quiz = quizData[currentQuiz];
+            document.getElementById('quiz-num').innerText = currentQuiz + 1;
+            document.getElementById('quiz-question').innerText = quiz.q;
+            document.getElementById('quiz-progress').innerText = `${currentQuiz + 1} / ${quizData.length}`;
+            document.getElementById('progress-bar').style.width = `${((currentQuiz + 1) / quizData.length) * 100}%`;
+
+            const optionsDiv = document.getElementById('quiz-options');
+            optionsDiv.innerHTML = '';
+            quiz.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerHTML = `
+                    <span class="quiz-badge" style="background-color: ${currentQuiz === 0 ? '#1e3a8a' : currentQuiz === 1 ? '#059669' : currentQuiz === 2 ? '#ea580c' : '#7c3aed'}">${idx + 1}</span>
+                    <span class="font-medium">${opt}</span>
+                `;
+                btn.onclick = () => selectAnswer(idx);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(idx) {
+            if (idx === quizData[currentQuiz].correct) {
+                score += 20;
+            }
+
+            if (currentQuiz < quizData.length - 1) {
+                currentQuiz++;
+                renderQuiz();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            const resultCard = document.getElementById('result-card');
+            resultCard.classList.remove('hidden');
+            
+            const scoreDisplay = document.getElementById('final-score');
+            scoreDisplay.innerText = `${score}점`;
+            
+            let feedback = "";
+            if(score === 100) feedback = "완벽합니다! 시대를 전환할 준비가 된 신실한 노예이시군요. 가정과 교회에서 이 풍성을 실제로 누리시길 바랍니다.";
+            else if(score >= 60) feedback = "핵심 내용을 잘 파악하셨습니다. 세부적인 실행 항목들을 다시 한 번 살펴보시면 더욱 도움이 될 것입니다.";
+            else feedback = "메시지를 다시 한 번 천천히 읽어보시는 건 어떨까요? 가정과 교회를 하나로 묶는 주님의 경륜이 당신을 통해 성취되길 원합니다.";
+            
+            document.getElementById('feedback-text').innerText = feedback;
+        }
+
+        function resetQuiz() {
+            currentQuiz = 0;
+            score = 0;
+            document.getElementById('quiz-card').classList.remove('hidden');
+            document.getElementById('result-card').classList.add('hidden');
+            renderQuiz();
+        }
+
+        // 초기화
+        window.onload = () => {
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>
