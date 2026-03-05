@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광야에서의 여정 (2) - 어린이 인포그래픽</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bible-blue: #3B82F6;
+            --bible-purple: #8B5CF6;
+            --bible-green: #10B981;
+            --bible-gold: #F59E0B;
+            --bible-red: #EF4444;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F0F9FF;
+            color: #1E293B;
+            transition: font-size 0.3s ease;
+        }
+
+        /* 글자 크기 모드 */
+        .font-small { font-size: 14px; }
+        .font-normal { font-size: 17px; }
+        .font-large { font-size: 21px; }
+
+        /* 도입부 레이어 (레이어 벗기기) */
+        #intro-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000;
+            background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+            cursor: pointer;
+            text-align: center;
+            padding: 20px;
+        }
+        #intro-layer.peeled { transform: translateY(-100%); }
+
+        /* 아코디언 애니메이션 */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 5000px;
+        }
+        .accordion-item.active .chevron {
+            transform: rotate(180deg);
+        }
+
+        /* 퀴즈 옵션 스타일 */
+        .quiz-option {
+            transition: all 0.2s;
+            border: 3px solid #E2E8F0;
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 20px;
+            border-radius: 20px;
+            background: white;
+            margin-bottom: 12px;
+        }
+        .quiz-option:hover {
+            border-color: #6366F1;
+            background-color: #F8FAFC;
+        }
+        .quiz-option.selected {
+            border-color: #4F46E5;
+            background-color: #EEF2FF;
+            font-weight: bold;
+        }
+
+        /* 하이라이트 */
+        .highlight-text {
+            font-weight: 900;
+            color: #1E40AF;
+            background: linear-gradient(transparent 60%, #BFDBFE 40%);
+        }
+
+        /* 여정 경로 선 (Logic Flow Line) */
+        .journey-line {
+            width: 4px;
+            background: repeating-linear-gradient(to bottom, #CBD5E1 0, #CBD5E1 10px, transparent 10px, transparent 20px);
+            position: absolute;
+            left: 28px;
+            top: 60px;
+            bottom: -40px;
+            z-index: 0;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
+    </style>
+</head>
+<body id="main-body" class="font-normal pb-10">
+
+    <!-- 1. 글자 크기 조절기 (상단 고정) -->
+    <div class="fixed top-4 right-4 z-[500] flex bg-white/90 backdrop-blur shadow-lg rounded-full border border-blue-100 p-1">
+        <button onclick="setFontSize('small')" id="btn-small" class="px-3 py-1 rounded-full text-xs font-bold hover:bg-blue-50 transition">작게</button>
+        <button onclick="setFontSize('normal')" id="btn-normal" class="px-3 py-1 rounded-full text-xs bg-blue-600 text-white font-bold transition mx-1 shadow-sm">보통</button>
+        <button onclick="setFontSize('large')" id="btn-large" class="px-3 py-1 rounded-full text-xs font-bold hover:bg-blue-50 transition">크게</button>
+    </div>
+
+    <!-- 2. 도입부 레이어 (레이어 벗기기) -->
+    <div id="intro-layer" onclick="this.classList.add('peeled')">
+        <div class="max-w-xl">
+            <div class="text-7xl mb-6">🎒</div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 font-nanum leading-tight">광야에서의<br>여정 (2)</h1>
+            <p class="text-xl md:text-2xl font-medium mb-10 text-blue-100">
+                우리를 사랑하시는 하나님은<br>
+                약속을 꼭 지키시는 분이에요!
+            </p>
+            <div class="bg-white/20 px-8 py-4 rounded-full border border-white/30 animate-pulse-soft font-bold text-lg">
+                여기를 터치해서 여정을 시작해요! ✨
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-5 pt-12">
+        <!-- 타이틀 섹션 -->
+        <header class="text-center mb-10">
+            <span class="inline-block bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-black mb-3 border border-blue-200">어린이 아침의 만나: 3주차</span>
+            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-4 font-nanum tracking-tight">광야에서의 여정 (2)</h1>
+        </header>
+
+        <!-- 3. [인포그래픽 1] 전체 요약 대시보드 (여정의 지도) -->
+        <section class="bg-white rounded-[40px] shadow-xl border-4 border-blue-400 p-8 mb-12 relative overflow-hidden animate-pulse-soft">
+            <h2 class="text-xl font-black mb-6 text-blue-600 flex items-center justify-center">
+                <span class="mr-2">🗺️</span> 오늘의 여정 지도
+            </h2>
+            <div class="grid grid-cols-3 gap-2 relative">
+                <!-- 연결 화살표 -->
+                <div class="absolute top-1/2 left-1/3 -translate-y-1/2 text-blue-200 hidden md:block">▶</div>
+                <div class="absolute top-1/2 left-2/3 -translate-y-1/2 text-blue-200 hidden md:block">▶</div>
+                
+                <div class="text-center">
+                    <div class="text-3xl mb-2">🤝</div>
+                    <div class="text-xs font-black text-slate-500 mb-1">STEP 1</div>
+                    <div class="text-sm font-black text-slate-800">하나님을<br>믿어요</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-2">🫡</div>
+                    <div class="text-xs font-black text-slate-500 mb-1">STEP 2</div>
+                    <div class="text-sm font-black text-slate-800">권위에<br>순종해요</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-2">💖</div>
+                    <div class="text-xs font-black text-slate-500 mb-1">STEP 3</div>
+                    <div class="text-sm font-black text-slate-800">서로<br>용서해요</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 핵심 요점 아코디언 (논리적 흐름 시각화) -->
+        <div class="space-y-6 mb-16 relative">
+            
+            <!-- 포인트 1 -->
+            <div class="accordion-item bg-white rounded-[32px] shadow-md border border-slate-100 relative z-10 overflow-hidden">
+                <!-- 4. [인포그래픽 2] 여정 경로 연결선 -->
+                <div class="journey-line"></div>
+                
+                <button onclick="toggleAccordion(0)" class="w-full p-6 flex items-center justify-between hover:bg-blue-50 transition-colors text-left relative z-10">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-md">1</div>
+                        <h2 class="font-black text-xl text-slate-800">하나님의 말씀을 굳게 믿음</h2>
+                    </div>
+                    <div class="chevron transition-transform duration-300">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 space-y-8 ml-4">
+                        <!-- 성경 구절 (가장 먼저 표시) -->
+                        <div class="bg-blue-50 rounded-2xl p-6 border-l-8 border-blue-500">
+                            <h4 class="text-blue-700 font-black mb-3 text-lg flex items-center">📖 민수기 14장 9절</h4>
+                            <p class="text-slate-800 font-bold text-lg leading-relaxed">
+                                "... 그 땅의 백성을 두려워하지 마십시오. <span class="highlight-text">그들은 우리의 밥입니다.</span>"
+                            </p>
+                            <p class="text-slate-800 font-bold text-lg mt-2 leading-relaxed">
+                                "그들의 보호자는 그들을 떠났고, <span class="highlight-text">여호와는 우리와 함께 계십니다.</span> 그들을 두려워하지 마십시오."
+                            </p>
+                        </div>
+
+                        <!-- 5. [인포그래픽 3] 믿음의 온도계 -->
+                        <div class="bg-slate-50 rounded-2xl p-6 text-center border border-slate-200">
+                            <p class="text-sm font-black text-slate-500 mb-4">내 마음의 믿음 온도는?</p>
+                            <div class="relative h-8 bg-slate-200 rounded-full overflow-hidden mb-2">
+                                <div class="absolute top-0 left-0 h-full bg-blue-500 w-[100%]"></div>
+                                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white font-black text-xs">여호수아와 갈렙 (100% 믿음!)</div>
+                            </div>
+                            <div class="relative h-8 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="absolute top-0 left-0 h-full bg-slate-400 w-[10%]"></div>
+                                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-slate-600 font-black text-xs">불평하는 사람들 (10% 의심...)</div>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 leading-relaxed px-2 space-y-4">
+                            <p>하나님은 열두 명을 가나안 땅에 보내셨어요. 그 땅은 정말 좋은 땅이었지만, 열 명의 사람들은 <span class="font-bold">악하게 보고</span>하며 무서워했어요.</p>
+                            <p>하지만 <span class="font-black text-blue-600">여호수아와 갈렙</span>은 하나님이 계시니 두려워 말라고 했지요. 하나님은 말씀을 믿는 사람들에게 좋은 땅을 선물로 주셨답니다.</p>
+                            <div class="bg-indigo-50 p-5 rounded-2xl border-2 border-indigo-100 flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <p class="font-bold text-indigo-900 leading-snug">말씀을 들을 때 의심하지 말고 믿음으로 <span class="text-indigo-600 font-black underline">'아멘'</span>이라고 말해 보세요!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포인트 2 -->
+            <div class="accordion-item bg-white rounded-[32px] shadow-md border border-slate-100 relative z-10 overflow-hidden">
+                <div class="journey-line"></div>
+                <button onclick="toggleAccordion(1)" class="w-full p-6 flex items-center justify-between hover:bg-purple-50 transition-colors text-left relative z-10">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-md">2</div>
+                        <h2 class="font-black text-xl text-slate-800">아론의 싹 난 막대기</h2>
+                    </div>
+                    <div class="chevron transition-transform duration-300">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 space-y-8 ml-4">
+                        <div class="bg-purple-50 rounded-2xl p-6 border-l-8 border-purple-500">
+                            <h4 class="text-purple-700 font-black mb-3 text-lg flex items-center">📖 민수기 17장 8절</h4>
+                            <p class="text-slate-800 font-bold text-lg leading-relaxed">
+                                "레위 집안을 위한 <span class="highlight-text">아론의 막대기에 싹이 나고 꽃이 피어 익은 아몬드</span>가 달려 있었다."
+                            </p>
+                        </div>
+
+                        <!-- 6. [인포그래픽 4] 기적의 아몬드 막대기 (생명 성장 과정) -->
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                            <div class="flex justify-between items-center px-2">
+                                <div class="text-center">
+                                    <div class="text-3xl mb-1">🪵</div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Step 1</div>
+                                    <div class="text-xs font-black">마른나무</div>
+                                </div>
+                                <div class="text-purple-300">➜</div>
+                                <div class="text-center">
+                                    <div class="text-3xl mb-1">🌱</div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Step 2</div>
+                                    <div class="text-xs font-black">싹이 남</div>
+                                </div>
+                                <div class="text-purple-300">➜</div>
+                                <div class="text-center">
+                                    <div class="text-3xl mb-1">🌸</div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Step 3</div>
+                                    <div class="text-xs font-black">꽃이 핌</div>
+                                </div>
+                                <div class="text-purple-300">➜</div>
+                                <div class="text-center">
+                                    <div class="text-3xl mb-1">🥜</div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Result</div>
+                                    <div class="text-xs font-black text-purple-600">아몬드!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 leading-relaxed px-2 space-y-4">
+                            <p>고라와 친구들이 모세와 아론에게 "왜 너희만 잘났어?"라고 대들었어요. 하나님은 누가 진짜 하나님이 세운 사람인지 막대기를 통해 보여주셨지요.</p>
+                            <p>오직 <span class="font-black text-purple-600">아론의 막대기</span>에서만 꽃이 피고 맛있는 아몬드 열매가 열렸답니다! 하나님이 아론을 직접 고르셨다는 증거였어요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포인트 3 -->
+            <div class="accordion-item bg-white rounded-[32px] shadow-md border border-slate-100 relative z-10 overflow-hidden">
+                <div class="journey-line"></div>
+                <button onclick="toggleAccordion(2)" class="w-full p-6 flex items-center justify-between hover:bg-emerald-50 transition-colors text-left relative z-10">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-md">3</div>
+                        <h2 class="font-black text-xl text-slate-800">권위에 복종함</h2>
+                    </div>
+                    <div class="chevron transition-transform duration-300">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 space-y-8 ml-4">
+                        <div class="bg-emerald-50 rounded-2xl p-6 border-l-8 border-emerald-500">
+                            <h4 class="text-emerald-700 font-black mb-3 text-lg flex items-center">📖 로마서 13장 1-2절</h4>
+                            <p class="text-slate-800 font-bold text-lg leading-relaxed">
+                                "각 사람은 자기 위에 있는 권위들에게 복종하십시오. 왜냐하면 <span class="highlight-text">하나님에게서 오지 않은 권위가 없으며</span>..."
+                            </p>
+                        </div>
+
+                        <!-- 7. [인포그래픽 5] 권위의 우산 (Obedience Structure) -->
+                        <div class="bg-slate-50 rounded-2xl p-8 text-center border border-slate-200">
+                            <div class="inline-block relative">
+                                <div class="bg-blue-600 text-white p-3 rounded-2xl font-black mb-4">하나님 (Authority)</div>
+                                <div class="text-slate-300 mb-2">▼</div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="bg-emerald-100 p-2 rounded-xl text-xs font-bold">부모님</div>
+                                    <div class="bg-emerald-100 p-2 rounded-xl text-xs font-bold">선생님</div>
+                                    <div class="bg-emerald-100 p-2 rounded-xl text-xs font-bold">교회 어른</div>
+                                    <div class="bg-emerald-100 p-2 rounded-xl text-xs font-bold">나라의 법</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 leading-relaxed px-2 space-y-4">
+                            <p>하나님이 세우신 사람에게 순종하지 않는 것은 하나님께 순종하지 않는 것과 같아요. 우리 주변의 모든 권위는 하나님이 주신 선물이에요.</p>
+                            <p>부모님과 선생님을 존중하고, 학교 규칙과 나라의 법을 잘 지키는 것이 바로 <span class="font-black text-emerald-600">하나님을 사랑하는 어린이가 하는 행동</span>이랍니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포인트 4 -->
+            <div class="accordion-item bg-white rounded-[32px] shadow-md border border-slate-100 relative z-10 overflow-hidden">
+                <div class="journey-line"></div>
+                <button onclick="toggleAccordion(3)" class="w-full p-6 flex items-center justify-between hover:bg-orange-50 transition-colors text-left relative z-10">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-md">4</div>
+                        <h2 class="font-black text-xl text-slate-800">물 때문에 다툰 이스라엘</h2>
+                    </div>
+                    <div class="chevron transition-transform duration-300">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 space-y-8 ml-4">
+                        <div class="bg-orange-50 rounded-2xl p-6 border-l-8 border-orange-500">
+                            <h4 class="text-orange-700 font-black mb-3 text-lg flex items-center">📖 민수기 20장 8절</h4>
+                            <p class="text-slate-800 font-bold text-lg leading-relaxed">
+                                "... 그들의 눈앞에서 저 <span class="highlight-text">반석을 향해 물을 내라고 말하여라.</span>"
+                            </p>
+                        </div>
+
+                        <!-- 8. [인포그래픽 6] 말하기 vs 치기 (Power of Speech) -->
+                        <div class="flex gap-4 justify-center">
+                            <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center flex-1">
+                                <div class="text-3xl mb-1">🔨</div>
+                                <div class="text-xs font-black text-red-600">지팡이로 침</div>
+                                <div class="text-[10px] text-red-400 font-bold">화를 내며 행동</div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 text-center flex-1">
+                                <div class="text-3xl mb-1">💬</div>
+                                <div class="text-xs font-black text-blue-600">반석에게 말함</div>
+                                <div class="text-[10px] text-blue-400 font-bold">하나님 말씀대로</div>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 leading-relaxed px-2 space-y-4">
+                            <p>이스라엘 백성이 목이 마르다고 모세와 싸웠어요. 하나님은 "반석에게 말하라"고 하셨지만, 모세는 너무 화가 나서 지팡이로 반석을 탕탕! 두 번 쳤답니다.</p>
+                            <p>하나님은 물은 주셨지만 모세가 화를 낸 것은 기뻐하지 않으셨어요. 우리는 화를 내기보다 <span class="font-black text-orange-600">서로를 용서하는 법</span>을 배워야 해요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포인트 5 -->
+            <div class="accordion-item bg-white rounded-[32px] shadow-md border border-slate-100 relative z-10 overflow-hidden">
+                <button onclick="toggleAccordion(4)" class="w-full p-6 flex items-center justify-between hover:bg-rose-50 transition-colors text-left relative z-10">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-rose-500 text-white rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-md">5</div>
+                        <h2 class="font-black text-xl text-slate-800">해가 지도록 분을 품지 않음</h2>
+                    </div>
+                    <div class="chevron transition-transform duration-300">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 space-y-8 ml-4">
+                        <div class="bg-rose-50 rounded-2xl p-6 border-l-8 border-rose-500">
+                            <h4 class="text-rose-700 font-black mb-3 text-lg flex items-center">📖 에베소서 4장 26-27절</h4>
+                            <p class="text-slate-800 font-bold text-lg leading-relaxed">
+                                "<span class="highlight-text">화가 나더라도 죄를 짓지 말고, 해가 지도록 분을 품지 말며</span>, 마귀에게 틈을 주지 마십시오."
+                            </p>
+                        </div>
+
+                        <!-- 9. [인포그래픽 7] 선셋 시계 (Sunset Clock) -->
+                        <div class="bg-slate-900 rounded-3xl p-6 text-center text-white border-b-8 border-indigo-900">
+                            <div class="text-4xl mb-2">🌅</div>
+                            <div class="text-lg font-black mb-1">해가 지기 전...</div>
+                            <p class="text-xs text-rose-300 font-bold">미안해, 괜찮아. 사랑해!</p>
+                            <div class="mt-4 flex justify-center gap-2">
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold">화 풀기</span>
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold">용서하기</span>
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold">마귀 쫓기</span>
+                            </div>
+                        </div>
+
+                        <div class="text-slate-700 leading-relaxed px-2 space-y-4">
+                            <p>화를 계속 품고 있으면 미움이 되고, 마귀에게 나쁜 틈을 주게 돼요. 잠자기 전에 우리 마음속의 화를 꼭 떨쳐 버려야 해요.</p>
+                            <div class="bg-indigo-50 p-5 rounded-2xl border-2 border-indigo-100 flex items-start">
+                                <span class="text-2xl mr-3">💡</span>
+                                <p class="font-bold text-indigo-900 leading-snug">"주님, 저의 마음을 부드럽게 해 주시고 용서할 수 있는 은혜를 주세요"라고 기도해 보세요!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 퀴즈 섹션 (가시성 개선) -->
+        <section class="bg-slate-900 rounded-[40px] p-8 shadow-2xl overflow-hidden relative mb-16">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full -mr-16 -mt-16"></div>
+            
+            <div class="text-center mb-10">
+                <div class="text-yellow-400 font-black text-lg uppercase tracking-tighter mb-2">BIBLE QUIZ</div>
+                <h2 class="text-3xl font-black text-white font-nanum">광야 여정 복습 퀴즈!</h2>
+            </div>
+
+            <div id="quiz-container" class="space-y-12">
+                <!-- 퀴즈 1 -->
+                <div class="quiz-item" id="q-1">
+                    <div class="flex items-start mb-6">
+                        <span class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-black mr-4 shrink-0 shadow-lg border-2 border-white/20">1</span>
+                        <h4 class="text-white text-xl font-bold leading-tight pt-1">하나님께서 함께하시니 가나안 땅을 차지할 수 있다고 외친 두 사람은?</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="selectOption(1, 0)" class="quiz-option" id="opt-1-0">① 고라와 다단</button>
+                        <button onclick="selectOption(1, 1)" class="quiz-option" id="opt-1-1">② 여호수아와 갈렙</button>
+                        <button onclick="selectOption(1, 2)" class="quiz-option" id="opt-1-2">③ 모세와 아론</button>
+                        <button onclick="selectOption(1, 3)" class="quiz-option" id="opt-1-3">④ 베드로와 요한</button>
+                    </div>
+                </div>
+
+                <!-- 퀴즈 2 -->
+                <div class="quiz-item" id="q-2">
+                    <div class="flex items-start mb-6">
+                        <span class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-black mr-4 shrink-0 shadow-lg border-2 border-white/20">2</span>
+                        <h4 class="text-white text-xl font-bold leading-tight pt-1">하나님이 선택하신 사람임을 보여주기 위해 꽃이 핀 막대기의 주인은?</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="selectOption(2, 0)" class="quiz-option" id="opt-2-0">① 고라</button>
+                        <button onclick="selectOption(2, 1)" class="quiz-option" id="opt-2-1">② 여호수아</button>
+                        <button onclick="selectOption(2, 2)" class="quiz-option" id="opt-2-2">③ 아론</button>
+                        <button onclick="selectOption(2, 3)" class="quiz-option" id="opt-2-3">④ 다윗</button>
+                    </div>
+                </div>
+
+                <!-- 퀴즈 3 -->
+                <div class="quiz-item" id="q-3">
+                    <div class="flex items-start mb-6">
+                        <span class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-black mr-4 shrink-0 shadow-lg border-2 border-white/20">3</span>
+                        <h4 class="text-white text-xl font-bold leading-tight pt-1">우리 주변의 부모님, 선생님 등 모든 권위는 어디에서 왔나요?</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="selectOption(3, 0)" class="quiz-option" id="opt-3-0">① 하나님</button>
+                        <button onclick="selectOption(3, 1)" class="quiz-option" id="opt-3-1">② 스스로의 힘</button>
+                        <button onclick="selectOption(3, 2)" class="quiz-option" id="opt-3-2">③ 돈과 명예</button>
+                        <button onclick="selectOption(3, 3)" class="quiz-option" id="opt-3-3">④ 우연히 생김</button>
+                    </div>
+                </div>
+
+                <!-- 퀴즈 4 -->
+                <div class="quiz-item" id="q-4">
+                    <div class="flex items-start mb-6">
+                        <span class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-black mr-4 shrink-0 shadow-lg border-2 border-white/20">4</span>
+                        <h4 class="text-white text-xl font-bold leading-tight pt-1">화가 났을 때 마귀에게 틈을 주지 않으려면 언제까지 풀어야 할까요?</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="selectOption(4, 0)" class="quiz-option" id="opt-4-0">① 일주일 뒤</button>
+                        <button onclick="selectOption(4, 1)" class="quiz-option" id="opt-4-1">② 상대방이 빌 때까지</button>
+                        <button onclick="selectOption(4, 2)" class="quiz-option" id="opt-4-2">③ 해가 지도록 (잠들기 전)</button>
+                        <button onclick="selectOption(4, 3)" class="quiz-option" id="opt-4-3">④ 영원히 안 품</button>
+                    </div>
+                </div>
+
+                <!-- 퀴즈 5 -->
+                <div class="quiz-item" id="q-5">
+                    <div class="flex items-start mb-6">
+                        <span class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-black mr-4 shrink-0 shadow-lg border-2 border-white/20">5</span>
+                        <h4 class="text-white text-xl font-bold leading-tight pt-1">하나님의 약속을 누릴 수 있는 사람은 어떤 사람인가요?</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="selectOption(5, 0)" class="quiz-option" id="opt-5-0">① 힘이 아주 센 사람</button>
+                        <button onclick="selectOption(5, 1)" class="quiz-option" id="opt-5-1">② 하나님의 말씀을 믿는 사람</button>
+                        <button onclick="selectOption(5, 2)" class="quiz-option" id="opt-5-2">③ 불평을 잘하는 사람</button>
+                        <button onclick="selectOption(5, 3)" class="quiz-option" id="opt-5-3">④ 장난꾸러기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="showResults()" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-black py-4 px-10 rounded-full text-xl shadow-xl transition-transform transform active:scale-95">
+                    결과 확인하기! 🚀
+                </button>
+            </div>
+
+            <!-- 결과 모달 -->
+            <div id="result-modal" class="hidden mt-10 p-8 bg-white rounded-[40px] text-center border-4 border-yellow-400">
+                <div class="text-5xl mb-4">🎉</div>
+                <h3 id="score-text" class="text-4xl font-black text-indigo-600 mb-2">100점!</h3>
+                <p id="feedback-text" class="text-slate-600 font-bold mb-6">정말 대단해요! 말씀의 박사님이군요!</p>
+                <button onclick="location.reload()" class="bg-slate-100 text-slate-500 font-bold py-2 px-6 rounded-full text-sm">다시 도전하기</button>
+            </div>
+        </section>
+
+        <!-- 기도문 섹션 (지문 그대로 가져옴) -->
+        <section class="bg-white rounded-[40px] border-4 border-indigo-100 p-10 text-center relative shadow-lg">
+            <div class="text-4xl mb-4">🙏</div>
+            <h2 class="text-2xl font-black text-indigo-600 mb-8">함께 기도해요</h2>
+            
+            <div class="space-y-6 font-medium text-slate-700 leading-relaxed font-nanum text-xl md:text-2xl">
+                <p>“주님, 저는 마음속에 화를 품은 상태로 잠들고 싶지 않습니다.</p>
+                <p>저의 마음을 <span class="text-indigo-600 font-black">부드럽게</span> 해 주시고,</p>
+                <p>다른 사람을 <span class="text-indigo-600 font-black">용서</span>할 수 있는 은혜를 주세요.</p>
+                <p>저의 마음을 살피시는 하나님을 사랑합니다.”</p>
+                <div class="text-3xl font-black text-indigo-600 mt-10 tracking-widest uppercase">아멘!</div>
+            </div>
+        </section>
+
+        <footer class="mt-16 text-center text-slate-400 text-xs font-medium pb-10">
+            <p>© 2025 Winter Training - 광야에서의 여정 (2) 어린이 학습 인포그래픽</p>
+        </footer>
+    </div>
+
+    <script>
+        // 글자 크기 조절
+        function setFontSize(size) {
+            const body = document.getElementById('main-body');
+            body.classList.remove('font-small', 'font-normal', 'font-large');
+            body.classList.add('font-' + size);
+
+            // 버튼 스타일 업데이트
+            const sizes = ['small', 'normal', 'large'];
+            sizes.forEach(s => {
+                const btn = document.getElementById('btn-' + s);
+                if (s === size) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('hover:bg-blue-50');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('hover:bg-blue-50');
+                }
+            });
+        }
+
+        // 아코디언 제어
+        function toggleAccordion(index) {
+            const items = document.querySelectorAll('.accordion-item');
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.toggle('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // 퀴즈 제어
+        const correctAnswers = [1, 2, 0, 2, 1]; // 정답 인덱스
+        let userChoices = [null, null, null, null, null];
+
+        function selectOption(qIdx, oIdx) {
+            userChoices[qIdx-1] = oIdx;
+            
+            // 시각적 피드백
+            for(let i=0; i<4; i++) {
+                const opt = document.getElementById(`opt-${qIdx}-${i}`);
+                if (opt) opt.classList.remove('selected');
+            }
+            document.getElementById(`opt-${qIdx}-${oIdx}`).classList.add('selected');
+        }
+
+        function showResults() {
+            if (userChoices.includes(null)) {
+                alert("아직 풀지 않은 문제가 있어요! 끝까지 풀어보세요 😊");
+                return;
+            }
+
+            let score = 0;
+            userChoices.forEach((choice, idx) => {
+                if (choice === correctAnswers[idx]) score += 20;
+            });
+
+            const modal = document.getElementById('result-modal');
+            const scoreText = document.getElementById('score-text');
+            const feedbackText = document.getElementById('feedback-text');
+
+            modal.classList.remove('hidden');
+            scoreText.innerText = score + "점!";
+
+            if (score === 100) feedbackText.innerText = "와! 말씀의 박사님이시네요! 최고예요! 🥳";
+            else if (score >= 60) feedbackText.innerText = "잘했어요! 지문을 다시 읽어보면 100점도 문제없어요! 👍";
+            else feedbackText.innerText = "괜찮아요! 성경 이야기를 다시 한 번 천천히 읽어봐요 😊";
+
+            modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
