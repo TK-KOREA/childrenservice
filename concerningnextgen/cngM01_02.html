@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주 예수님을 통해 본 하나님의 경륜에 따른 유년기의 자녀 양육에 관한 조망</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --base-font-size: 16px;
+        }
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: #f8fafc; 
+            overflow-x: hidden; 
+            color: #334155;
+        }
+        
+        /* 상단 고정 바 (폰트 사이즈 영향 받지 않도록 px 고정) */
+        #top-bar {
+            height: 44px;
+            padding: 0 16px;
+            font-size: 14px;
+        }
+        #top-bar button {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+        }
+
+        /* 레이어 벗기기 애니메이션 */
+        #intro-veil {
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
+        }
+        .peeled { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+        /* 아코디언 애니메이션 */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-out;
+        }
+        .accordion-content.open {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+        
+        /* 성경 구절 하이라이트 & 강조 키워드 */
+        .highlight {
+            background-color: #fef08a; /* yellow-200 */
+            color: #111827; /* gray-900 */
+            font-weight: 700;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.25rem;
+            box-shadow: inset 0 -4px 0 rgba(250, 204, 21, 0.4);
+            transition: all 0.3s ease;
+        }
+        .keyword-focus {
+            color: #4338ca; /* indigo-700 */
+            font-weight: 900;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 60%, rgba(199,210,254,0.5) 60%);
+        }
+
+        /* 퀴즈 스타일링 */
+        .quiz-option-input:checked + div {
+            border-color: #4f46e5;
+            background-color: #e0e7ff;
+            color: #312e81;
+            font-weight: 700;
+        }
+        .quiz-option-input:checked + div .quiz-radio-circle {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .quiz-option-input:checked + div .quiz-radio-circle::after {
+            transform: scale(1);
+        }
+        
+        /* 성경 구절 인용구 왼쪽 테두리 */
+        .verse-quote {
+            border-left: 4px solid #6366f1;
+            background: #f1f5f9;
+        }
+        .verse-pink { border-color: #f472b6; background: #fdf2f8; }
+        .verse-emerald { border-color: #34d399; background: #ecfdf5; }
+        .verse-orange { border-color: #fb923c; background: #fff7ed; }
+        .verse-blue { border-color: #60a5fa; background: #eff6ff; }
+        .verse-teal { border-color: #2dd4bf; background: #f0fdfa; }
+        .verse-purple { border-color: #c084fc; background: #faf5ff; }
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <!-- 슬림 & 콤팩트 상단 고정 바 -->
+    <nav id="top-bar" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-[100] flex items-center justify-between">
+        <div class="font-bold text-gray-800 truncate pr-4" style="line-height: 44px;">주 예수님을 통해 본 자녀 양육</div>
+        <div class="flex items-center space-x-1 shrink-0" style="height: 100%;">
+            <button onclick="adjustFontSize(-1)" class="flex items-center justify-center hover:bg-gray-100 rounded text-gray-600 transition-colors" title="글씨 작게">
+                <i class="fa-solid fa-a" style="font-size: 11px;"></i><i class="fa-solid fa-minus" style="font-size: 9px; margin-left: 1px;"></i>
+            </button>
+            <button onclick="adjustFontSize(0)" class="flex items-center justify-center hover:bg-gray-100 rounded text-gray-800 font-bold transition-colors" title="기본 크기">
+                A
+            </button>
+            <button onclick="adjustFontSize(1)" class="flex items-center justify-center hover:bg-gray-100 rounded text-gray-600 transition-colors" title="글씨 크게">
+                <i class="fa-solid fa-a" style="font-size: 15px;"></i><i class="fa-solid fa-plus" style="font-size: 11px; margin-left: 1px;"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 도입부: 레이어 벗기기 -->
+    <div id="intro-veil" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white w-full h-full">
+        <div class="text-center px-4 max-w-2xl">
+            <i class="fa-solid fa-seedling text-6xl mb-6 text-emerald-400 animate-bounce"></i>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">주 예수님을 통해 본<br><span class="text-yellow-300">하나님의 경륜에 따른 자녀 양육</span></h1>
+            <p class="text-lg md:text-xl text-indigo-200 mb-10 font-light">성경의 계시와 주 예수님의 일생이 보여주는 유년기 양육의 본</p>
+            <button onclick="peelLayer()" class="px-8 py-4 bg-white text-indigo-900 rounded-full font-bold text-lg hover:bg-yellow-300 hover:text-indigo-900 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <i class="fa-solid fa-book-open mr-2"></i> 핵심 조망 열어보기
+            </button>
+        </div>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="max-w-5xl mx-auto px-4 pt-20 pb-20">
+        
+        <!-- 헤더 섹션 -->
+        <header class="text-center mb-10 opacity-0 translate-y-8 transition-all duration-1000 ease-out" id="main-header">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">유년기의 자녀 양육 조망</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg">주 예수님의 일생이 보여주신 본을 통해 하나님의 경륜을 이룰 합당한 인성의 그릇을 예비하는 과정을 살펴봅니다.</p>
+        </header>
+
+        <!-- 핵심 요약 대시보드 -->
+        <section class="mb-16 bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100">
+            <div class="text-center mb-8">
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Summary Dashboard</span>
+                <h3 class="text-2xl font-bold mt-3 text-gray-800">성경적 자녀 양육의 전체 흐름도</h3>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6 items-stretch">
+                <!-- 파트 1 요약 -->
+                <div class="md:w-1/3 bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col justify-center">
+                    <h4 class="font-black text-slate-800 text-lg mb-3 border-b-2 border-indigo-200 pb-2">I. 성경의 관심과 계시</h4>
+                    <ul class="space-y-3 text-sm text-slate-600 font-medium">
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>다음 세대를 향한 하나님의 마음</li>
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>5세 이전 '미래 준비 시기'의 중요성</li>
+                        <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i>타락한 세상 풍조로부터의 보호</li>
+                    </ul>
+                </div>
+                
+                <!-- 화살표 (데스크탑) -->
+                <div class="hidden md:flex items-center justify-center text-slate-300">
+                    <i class="fa-solid fa-arrow-right-long text-3xl"></i>
+                </div>
+
+                <!-- 파트 2 요약 (단계별) -->
+                <div class="md:w-2/3 bg-indigo-50 rounded-2xl p-6 border border-indigo-100">
+                    <h4 class="font-black text-indigo-900 text-lg mb-4 border-b-2 border-indigo-200 pb-2">II. 예수님의 일생에서 배우는 5단계 본</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                        <div class="bg-white p-3 rounded-xl text-center shadow-sm border border-indigo-50 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-pink-400"></div>
+                            <i class="fa-solid fa-baby text-pink-500 text-xl mb-2 mt-1"></i>
+                            <p class="font-bold text-xs text-gray-800">1. 태교/신체</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl text-center shadow-sm border border-indigo-50 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-orange-400"></div>
+                            <i class="fa-solid fa-heart text-orange-500 text-xl mb-2 mt-1"></i>
+                            <p class="font-bold text-xs text-gray-800">2. 정서 안정</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl text-center shadow-sm border border-indigo-50 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-400"></div>
+                            <i class="fa-solid fa-brain text-blue-500 text-xl mb-2 mt-1"></i>
+                            <p class="font-bold text-xs text-gray-800">3. 지성 발달</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl text-center shadow-sm border border-indigo-50 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-teal-400"></div>
+                            <i class="fa-solid fa-users text-teal-500 text-xl mb-2 mt-1"></i>
+                            <p class="font-bold text-xs text-gray-800">4. 사회성</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl text-center shadow-sm border border-indigo-50 col-span-2 md:col-span-1 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-purple-400"></div>
+                            <i class="fa-solid fa-scale-balanced text-purple-500 text-xl mb-2 mt-1"></i>
+                            <p class="font-bold text-xs text-gray-800">5. 도덕성</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             핵심 요점 파트 1 
+             ========================================== -->
+        <div class="mb-4 pl-3 border-l-4 border-slate-500">
+            <h2 class="text-2xl font-black text-slate-800">I. 자녀 교육에 대한 성경의 관심과 계시</h2>
+        </div>
+        <section class="space-y-4 mb-16" id="section-1">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <button onclick="toggleAccordion('acc-1')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xl shrink-0 font-black shadow-inner">1</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">다음 세대를 향한 하나님의 마음과 5년의 준비</h3>
+                    </div>
+                    <i id="icon-acc-1" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-1" class="accordion-content bg-slate-50/50">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <!-- 성경구절 -->
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote p-4 rounded-r-xl">
+                                <span class="block font-bold text-indigo-600 mb-1">[시 84:3]</span>
+                                "...주님의 두 단에서 <span class="highlight">참새도 집을 찾았고 제비도 새끼 칠 둥지를</span> 찾았습니다."
+                            </div>
+                            <div class="verse-quote p-4 rounded-r-xl">
+                                <span class="block font-bold text-indigo-600 mb-1">[레 19:23-25]</span>
+                                "...삼 년 동안 수확할 수 없는 것으로 여겨야 하며... 사 년째의 모든 열매는 거룩하니 여호와에게 바쳐 찬양해야 한다. <span class="highlight">오 년째부터는 너희가 그 열매를 먹을 수 있다.</span>"
+                            </div>
+                            <div class="verse-quote p-4 rounded-r-xl">
+                                <span class="block font-bold text-indigo-600 mb-1">[마 21:2] & [사 28:9]</span>
+                                "...<span class="highlight">나귀와 어린 나귀가 함께 있는 것</span>을 즉시 보게 될 것이니..." / "...젖 뗀 아이들에게 하려는가? 젖가슴에서 떨어진 아이들에게 하려는가?"
+                            </div>
+                        </div>
+                        
+                        <!-- 구체적 설명 박스 묶음 -->
+                        <div class="space-y-4">
+                            <!-- 핵심 의미 -->
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-indigo-500 shadow-sm">
+                                <h4 class="font-bold text-indigo-700 flex items-center mb-2"><i class="fa-solid fa-bullseye mr-2"></i> 핵심 의미</h4>
+                                <p class="text-gray-700 leading-relaxed">비유적인 표현인 <span class="keyword-focus">참새와 제비새끼</span>에서, 그리고 르우벤과 갓 자손에게 성을 건축하라고 한 모세의 명령에서 우리는 <strong>다음 세대에 대한 하나님의 마음과 지극한 관심</strong>을 만질 수 있습니다.</p>
+                            </div>
+                            
+                            <!-- 구체적 적용 -->
+                            <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 shadow-sm">
+                                <h4 class="font-bold text-blue-700 flex items-center mb-3"><i class="fa-regular fa-lightbulb mr-2"></i> 구체적 적용: "5년의 준비 기간"</h4>
+                                <p class="text-gray-700 mb-3">레위기 19장의 규례를 통해 우리는 자녀 양육과 관련된 중요한 시기를 봅니다. 유대인들은 <span class="highlight">다섯 살 전의 이 시기를 ‘미래를 준비하는 시기’</span>라고 봅니다.</p>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-3">
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-seedling mr-1"></i> 영성</div>
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-dumbbell mr-1"></i> 체력</div>
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-heart-circle-check mr-1"></i> 정서안정</div>
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-brain mr-1"></i> 지성</div>
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-house-user mr-1"></i> 생활교육</div>
+                                    <div class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-center border border-blue-200 text-blue-800"><i class="fa-solid fa-scale-balanced mr-1"></i> 도덕성</div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-3">* 이 6가지를 집중적으로 세워준 후, 비로소 다섯 살이 되면 국가의 의무교육 학제에 편입시킵니다.</p>
+                            </div>
+
+                            <!-- 경고 -->
+                            <div class="bg-rose-50 p-5 rounded-xl border border-rose-200 shadow-sm">
+                                <h4 class="font-bold text-rose-700 flex items-center mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i> 주의 및 경고</h4>
+                                <p class="text-gray-700 leading-relaxed">애기들이 <strong>너무 일찍 엄마 품을 떠나는 것</strong>은 오늘날 타락한 세상의 풍조이며, 심지어 <span class="highlight text-rose-900 bg-rose-200">인성을 파괴하려는 마귀의 책략</span>이라는 것을 알아야 합니다. 예수님께서 입성하실 때 <strong>나귀와 나귀 새끼를 떼어 놓지 않으셨음</strong>을 기억해야 합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             핵심 요점 파트 2 
+             ========================================== -->
+        <div class="mb-4 pl-3 border-l-4 border-indigo-600 mt-16">
+            <h2 class="text-2xl font-black text-indigo-900">II. 주 예수님의 일생에서 배우는 자녀 양육의 본</h2>
+        </div>
+        <section class="space-y-4 mb-20" id="section-2">
+            
+            <!-- II-A. 경륜의 이상 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-indigo-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-2')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-indigo-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg shrink-0 font-bold">A</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">자녀 양육을 통제하는 하나님의 경륜의 이상</h3>
+                    </div>
+                    <i id="icon-acc-2" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-2" class="accordion-content bg-indigo-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote p-4 rounded-r-xl border-indigo-500 bg-indigo-50/50">
+                                <span class="block font-bold text-indigo-700 mb-1">[창 1:26]</span>
+                                "...우리가 <span class="highlight">우리의 형상대로 우리의 모양에 따라 사람을 만듭시다.</span>"
+                            </div>
+                            <div class="verse-quote p-4 rounded-r-xl border-indigo-500 bg-indigo-50/50">
+                                <span class="block font-bold text-indigo-700 mb-1">[딤후 2:21]</span>
+                                "자신을 깨끗하게 하면... <span class="highlight">온갖 선한 일을 위하여 예비될 것입니다.</span>"
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-indigo-200 shadow-sm">
+                            <h4 class="font-bold text-indigo-700 flex items-center mb-3"><i class="fa-solid fa-eye mr-2"></i> 지배하는 이상(Vision)</h4>
+                            <p class="text-gray-700 leading-relaxed mb-3">자녀 양육을 지배하는 이상은 세상의 교육철학이 아닌 <strong>하나님의 경륜의 이상</strong>입니다. 하나님의 경륜은 <span class="keyword-focus">신성과 인성의 연합</span>입니다.</p>
+                            <ul class="space-y-2 mt-3">
+                                <li class="flex items-start"><i class="fa-solid fa-check text-indigo-500 mt-1 mr-2"></i> <p class="text-gray-700">생명이신 하나님이 사람 안에 담기려면 <strong>합당한 인성의 그릇</strong>이 예비되어야 합니다.</p></li>
+                                <li class="flex items-start"><i class="fa-solid fa-check text-indigo-500 mt-1 mr-2"></i> <p class="text-gray-700">자녀의 양육은 이 이상으로 철저히 통제받으며, 주 예수님의 일생은 이에 관해 <strong>가장 뛰어난 본</strong>을 제시합니다.</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-B. 태교 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-pink-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-3')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-pink-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-lg shrink-0 font-bold">B</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">태교의 중요성과 영성의 결정</h3>
+                    </div>
+                    <i id="icon-acc-3" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-3" class="accordion-content bg-pink-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-pink p-4 rounded-r-xl">
+                                <span class="block font-bold text-pink-600 mb-1">[눅 11:27]</span>
+                                "...선생님을 <span class="highlight">밴 태와 선생님을 먹인 젖이 복이 있습니다.</span>"
+                            </div>
+                            <div class="verse-quote verse-pink p-4 rounded-r-xl">
+                                <span class="block font-bold text-pink-600 mb-1">[눅 1:15 & 1:41]</span>
+                                "...<span class="highlight">모태에서부터 성령으로 충일</span>할 것이며..." / "마리아의 문안을 받았을 때에 <span class="highlight">태중에 있는 아기가 뛰었으며</span>"
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-pink-500 shadow-sm">
+                                <h4 class="font-bold text-pink-600 flex items-center mb-2"><i class="fa-solid fa-person-pregnant mr-2"></i> 영성의 어떠함이 결정되는 시기</h4>
+                                <p class="text-gray-700 leading-relaxed">주 예수님을 만나 감동을 받은 여인의 말은 <strong>태교의 중요성</strong>을 인식하게 합니다. <span class="keyword-focus">태중에서 이미 영성의 어떠함이 결정된다고 해도 과언이 아닙니다.</span></p>
+                            </div>
+                            <div class="bg-pink-50 p-5 rounded-xl border border-pink-100 shadow-sm">
+                                <h4 class="font-bold text-pink-700 flex items-center mb-2"><i class="fa-solid fa-hands-holding-child mr-2"></i> 구체적 사례 및 어머니의 영향</h4>
+                                <ul class="list-none space-y-3 text-gray-700">
+                                    <li class="pl-4 border-l-2 border-pink-300">침례 요한은 <strong>모태로부터 성령이 충일</strong>했습니다. 태중에서 주 예수님을 만났을 때 기뻐 뛰었던 모든 것은 <span class="highlight text-pink-900 bg-pink-200">어머니의 영향</span>이었습니다.</li>
+                                    <li class="pl-4 border-l-2 border-pink-300">어떤 환경에 있든지 <strong>부모가 하나님을 향하여 갖는 태도</strong>에 의해서 영아의 신앙과 인격이 형성됩니다. (에서와 이삭의 예 등)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-C. 신체 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-4')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-emerald-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0 font-bold">C</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">신체의 건강한 발달 (0~3세)</h3>
+                    </div>
+                    <i id="icon-acc-4" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-4" class="accordion-content bg-emerald-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-emerald p-4 rounded-r-xl">
+                                <span class="block font-bold text-emerald-600 mb-1">[눅 2:7]</span>
+                                "마리아가 첫아들을 낳아 <span class="highlight">포대기에 싸서</span> 구유에 뉘었다."
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-emerald-500 shadow-sm">
+                            <h4 class="font-bold text-emerald-600 flex items-center mb-3"><i class="fa-solid fa-child-reaching mr-2"></i> 정신발달의 기초</h4>
+                            <p class="text-gray-700 leading-relaxed mb-4">아기일 때 가장 중요한 일은 <strong>올바른 식습관과 수면습관을 통해 신체를 건강하게 발달</strong>시키는 것입니다. 신체발달은 정신발달을 위한 기초가 되며, 0세에서 3세까지 급속하게 발달합니다.</p>
+                            
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
+                                <p class="text-sm font-bold text-emerald-800 mb-1"><i class="fa-solid fa-hand-holding-heart mr-1"></i> 생후 1~2개월 핵심 학습:</p>
+                                <p class="text-gray-700">가장 중요한 일은 <strong>어머니와의 접촉</strong>입니다. 예수님을 <span class="keyword-focus">‘강보(포대기)’</span>에 싸는 것과 같은 밀접한 접촉을 통해서 아기의 <strong>오감을 발달시키고 인지 능력을 발달</strong>시킵니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-D. 정서 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-orange-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-5')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-orange-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg shrink-0 font-bold">D</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">엄마와 함께하는 정서 안정과 유대감</h3>
+                    </div>
+                    <i id="icon-acc-5" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-5" class="accordion-content bg-orange-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-orange p-4 rounded-r-xl">
+                                <span class="block font-bold text-orange-600 mb-1">[마 2:11]</span>
+                                "그 아기가 <span class="highlight">어머니 마리아와 함께 있는 것</span>을 보고..."
+                            </div>
+                            <div class="verse-quote verse-orange p-4 rounded-r-xl">
+                                <span class="block font-bold text-orange-600 mb-1">[눅 2:40 & 1:80]</span>
+                                "...자라시면서 <span class="highlight">강하여지시고 지혜가 충만</span>해지셨으며..." / "...자라면서 <span class="highlight">영 안에서 강하여졌고</span>..."
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm">
+                                <h4 class="font-bold text-orange-600 flex items-center mb-2"><i class="fa-solid fa-shield-heart mr-2"></i> 보호와 신뢰의 토대</h4>
+                                <p class="text-gray-700 leading-relaxed">엄마는 아기와 함께하여 <strong>감성적인 기능 발달(정서안정)</strong>에 기여해야 합니다. 엄마가 함께할 때 <span class="keyword-focus">보호받고 있다는 안정감</span>을 얻고 세상과 사람에 대해 신뢰감을 갖습니다.</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
+                                    <p class="font-bold text-orange-800 mb-1"><i class="fa-solid fa-link mr-1"></i> 영 안에서의 강건함</p>
+                                    <p class="text-sm text-gray-700">기본적인 감정(사랑, 분노, 공포)이 생길 때, 엄마와의 유대감에 의하여 아기는 신체의 발달과 더불어 <strong>내적 존재와 영 안에서 강하여집니다.</strong></p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
+                                    <p class="font-bold text-orange-800 mb-1"><i class="fa-regular fa-face-smile mr-1"></i> 표현과 신뢰의 학습</p>
+                                    <p class="text-sm text-gray-700">마음이 안정된 사람은 <strong>자신과 타인에 대하여 신뢰</strong>를 쌓고 생각과 감정의 <strong>표현을 어떻게 해야 할지</strong> 알게 됩니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-E. 지성 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-blue-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-6')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-blue-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg shrink-0 font-bold">E</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">지성의 근본과 순수한 말씀 교육</h3>
+                    </div>
+                    <i id="icon-acc-6" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-6" class="accordion-content bg-blue-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-blue p-4 rounded-r-xl">
+                                <span class="block font-bold text-blue-600 mb-1">[잠 9:10 & 1:7]</span>
+                                "<span class="highlight">여호와를 경외함이 지혜의 시작</span>이며 거룩하신 분을 아는 것이 명철이다."
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-blue-500 shadow-sm">
+                                <h4 class="font-bold text-blue-600 flex items-center mb-2"><i class="fa-solid fa-book-bible mr-2"></i> 참된 지성의 근본</h4>
+                                <p class="text-gray-700 leading-relaxed">엄마가 아기와 맺는 관계를 통해 신체와 감성이 발달한 후, 지성의 발달이 이어집니다. <span class="highlight bg-blue-200">여호와를 아는 것이 지혜와 지식의 근본이며 시작</span>입니다.</p>
+                            </div>
+                            
+                            <div class="bg-rose-50 p-5 rounded-xl border border-rose-200 shadow-sm flex items-start gap-4">
+                                <i class="fa-solid fa-bottle-water text-3xl text-rose-400 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-rose-700 mb-1">경고: 합성 음료의 비유</h4>
+                                    <p class="text-gray-700">유아기에 성경 이외의 다른 (세상적인) 것으로 가르치는 것은 아이에게 순수한 물이 아닌 <strong>합성 음료를 주는 것</strong>일 수도 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-F. 사회성 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-teal-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-7')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-teal-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-lg shrink-0 font-bold">F</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">대인관계와 교회 건축의 기반인 사회성</h3>
+                    </div>
+                    <i id="icon-acc-7" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-7" class="accordion-content bg-teal-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-teal p-4 rounded-r-xl">
+                                <span class="block font-bold text-teal-700 mb-1">[눅 2:52 & 2:46]</span>
+                                "...<span class="highlight">하나님과 사람 앞에서</span> 그분 안에 나타난 은혜가 자라 가셨다." / "...율법 교사들 가운데 앉으셔서 <span class="highlight">그들의 말을 듣기도 하시고 그들에게 묻기도</span> 하시니"
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-teal-500 shadow-sm">
+                                <h4 class="font-bold text-teal-700 flex items-center mb-2"><i class="fa-solid fa-people-arrows mr-2"></i> 교회 건축의 기반</h4>
+                                <p class="text-gray-700 leading-relaxed">성경은 십계명처럼 하나님으로부터 시작하여 사람에게로 나아가는 대인관계, 즉 <strong>사회성을 중시</strong>합니다. 이 부분이 향후 <span class="keyword-focus">교회 건축의 기반</span>이 됩니다.</p>
+                            </div>
+
+                            <div class="bg-teal-50 p-5 rounded-xl border border-teal-100 shadow-sm">
+                                <h4 class="font-bold text-teal-800 mb-2">💡 예수님이 보여주신 본과 부모의 역할</h4>
+                                <ul class="list-none space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-teal-500 mt-1 mr-2"></i> <strong>자신감과 뛰어난 지성:</strong> 12살 때 성전에서 교사들과 묻고 답하는 토론에서 보인 충만한 자존감과 논리력은 모두 <strong>부모의 가정교육의 결과</strong>입니다.</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-teal-500 mt-1 mr-2"></i> <strong>경청하는 부모:</strong> 더 중요한 것은 소년 예수님의 <strong>의견을 경청하고 무시하지 않는 어머니 마리아</strong>가 있었다는 것입니다.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 shadow-sm">
+                                <h4 class="font-bold text-rose-700 flex items-center mb-1"><i class="fa-solid fa-circle-exclamation mr-2"></i> 양육자 변경의 위험성</h4>
+                                <p class="text-sm text-gray-700">너무 어려서 자주 이 사람, 저 사람으로 양육자의 대상을 옮기는 것은 <span class="highlight text-rose-900 bg-rose-200">모방의 대상(본으로 취할 대상)의 결여</span>를 가져와 안정된 인격 형성을 방해합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- II-G. 도덕성 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-purple-100 overflow-hidden">
+                <button onclick="toggleAccordion('acc-8')" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-purple-50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-lg shrink-0 font-bold">G</div>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">부모의 삶의 본으로 형성되는 도덕성</h3>
+                    </div>
+                    <i id="icon-acc-8" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </button>
+                <div id="content-acc-8" class="accordion-content bg-purple-50/30">
+                    <div class="accordion-inner px-6 pb-8 pt-2">
+                        <div class="space-y-3 mb-6">
+                            <div class="verse-quote verse-purple p-4 rounded-r-xl">
+                                <span class="block font-bold text-purple-700 mb-1">[마 1:19] & [눅 2:22-24]</span>
+                                "마리아의 남편 요셉은 <span class="highlight">의로운 사람</span>이므로..." / "<span class="highlight">모세의 율법에 따라... 주님의 율법에서 말씀하신 대로</span>"
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border-l-4 border-purple-500 shadow-sm">
+                                <h4 class="font-bold text-purple-700 flex items-center mb-2"><i class="fa-solid fa-scale-balanced mr-2"></i> 도덕성과 연령별 발달</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">히브리인의 사고에서 ‘의로운 사람’은 도덕적으로 완전한 사람을 뜻합니다. 도덕성은 스스로 생기는 것이 아니라 <strong>사회 규범을 배우며 형성</strong>되며, 부모의 인간적 미덕이 지대한 영향을 미칩니다.</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div class="bg-purple-50 p-3 rounded-lg border border-purple-100">
+                                        <p class="font-bold text-purple-800 mb-1 text-sm"><i class="fa-regular fa-eye mr-1"></i> 0~2세 (영아기)</p>
+                                        <p class="text-xs text-gray-600">이해가 아닌 <strong>복종과 쾌감/불쾌감</strong>에 의해 도덕성 규정. <strong>관찰과 모방</strong>으로 잠재된 도덕성이 길러지므로 부모의 말과 행동이 중요.</p>
+                                    </div>
+                                    <div class="bg-purple-50 p-3 rounded-lg border border-purple-100">
+                                        <p class="font-bold text-purple-800 mb-1 text-sm"><i class="fa-solid fa-list-check mr-1"></i> 3~4세 (유아기)</p>
+                                        <p class="text-xs text-gray-600">관찰한 대로 모방하고 행동하는 시기. 이때 <span class="highlight text-purple-900 bg-purple-200">절대적으로 규범을 세워서(쉐마)</span> 책임 있는 태도를 갖도록 가르쳐야 함.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 p-5 rounded-xl border border-amber-200 shadow-sm text-center">
+                                <h4 class="font-black text-amber-800 mb-2 text-lg">최고의 본: 요셉과 마리아</h4>
+                                <p class="text-gray-700">예수님의 부모님은 <strong>말씀을 가르치기 이전에 <span class="highlight bg-amber-200">그것을 삶에서 지켜낸 이들</span></strong>이었습니다. 로마의 유행을 따르지 않고 오직 하나님의 말씀을 붙들고 살았습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 퀴즈 섹션 -->
+        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.05)] border-2 border-indigo-100 mb-20 text-[1rem]">
+            <div class="text-center mb-10">
+                <span class="bg-indigo-600 text-white text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-3 shadow-md">Quiz</span>
+                <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">핵심 이해도 점검</h3>
+                <p class="text-gray-500">메시지의 요점을 잘 이해했는지 확인해보세요.</p>
+            </div>
+
+            <form id="quiz-form" class="space-y-10 max-w-2xl mx-auto text-gray-800">
+                
+                <!-- 문제 1 -->
+                <div class="quiz-item">
+                    <div class="flex items-start mb-4">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold shrink-0 mt-0.5 mr-3 shadow-md">1</span>
+                        <p class="font-bold text-gray-900 leading-snug">유대인들이 자녀들의 영성, 체력, 지성 등을 집중적으로 세워주는 '미래를 준비하는 시기'는 언제까지인가요?</p>
+                    </div>
+                    <div class="space-y-3 pl-11">
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q1" value="A" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">A. 세 살 전</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q1" value="B" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">B. 다섯 살 전</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q1" value="C" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">C. 일곱 살 전</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 문제 2 -->
+                <div class="quiz-item">
+                    <div class="flex items-start mb-4">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold shrink-0 mt-0.5 mr-3 shadow-md">2</span>
+                        <p class="font-bold text-gray-900 leading-snug">자녀 양육을 지배하고 통제해야 하는 가장 핵심적인 '이상(Vision)'은 무엇인가요?</p>
+                    </div>
+                    <div class="space-y-3 pl-11">
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q2" value="A" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">A. 하나님의 경륜의 이상 (신성과 인성의 연합)</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q2" value="B" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">B. 탁월한 영재 교육의 이상</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q2" value="C" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">C. 사회적으로 성공하는 리더의 이상</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 문제 3 -->
+                <div class="quiz-item">
+                    <div class="flex items-start mb-4">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold shrink-0 mt-0.5 mr-3 shadow-md">3</span>
+                        <p class="font-bold text-gray-900 leading-snug">성경(잠언)에서 지혜와 지식의 근본이며 시작이라고 말하는 것은 무엇인가요?</p>
+                    </div>
+                    <div class="space-y-3 pl-11">
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q3" value="A" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">A. 다양한 언어를 조기에 습득하는 것</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q3" value="B" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">B. 여호와를 아는 것 (경외하는 것)</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q3" value="C" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">C. 폭넓은 독서를 통해 교양을 쌓는 것</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 문제 4 -->
+                <div class="quiz-item">
+                    <div class="flex items-start mb-4">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold shrink-0 mt-0.5 mr-3 shadow-md">4</span>
+                        <p class="font-bold text-gray-900 leading-snug">안정된 인격을 가진 성인으로 자라기 위해 '양육자를 자주 바꾸는 것'을 주의해야 하는 이유는 무엇입니까?</p>
+                    </div>
+                    <div class="space-y-3 pl-11">
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q4" value="A" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">A. 아이가 여러 교육 방식을 비교하느라 혼란스러워하기 때문에</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q4" value="B" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">B. 모방의 대상, 즉 본으로 취할 수 있는 대상이 결여되기 때문에</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q4" value="C" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">C. 부모의 재정적인 부담이 증가하기 때문에</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 문제 5 -->
+                <div class="quiz-item">
+                    <div class="flex items-start mb-4">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold shrink-0 mt-0.5 mr-3 shadow-md">5</span>
+                        <p class="font-bold text-gray-900 leading-snug">자녀의 도덕성 형성과 관련하여 예수님의 부모님(요셉과 마리아)이 보여준 최고의 본은 무엇인가요?</p>
+                    </div>
+                    <div class="space-y-3 pl-11">
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q5" value="A" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">A. 로마의 선진화된 사회 규범을 가르친 것</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q5" value="B" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">B. 칭찬과 보상을 통해 철저한 복종을 유도한 것</span>
+                            </div>
+                        </label>
+                        <label class="relative block cursor-pointer group">
+                            <input type="radio" name="q5" value="C" class="quiz-option-input peer sr-only">
+                            <div class="flex items-center p-4 w-full rounded-xl border-2 border-gray-200 group-hover:bg-slate-50 transition-all duration-200">
+                                <div class="quiz-radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center relative after:content-[''] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:scale-0 after:transition-transform"></div>
+                                <span class="leading-relaxed">C. 말씀을 가르치기 이전에 그것을 삶에서 지켜낸 이들이었다는 것</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-center pt-6">
+                    <button type="button" onclick="submitQuiz()" class="px-10 py-4 bg-indigo-600 text-white rounded-full font-bold text-lg hover:bg-indigo-700 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                        <i class="fa-solid fa-check mr-2"></i> 결과 확인하기
+                    </button>
+                </div>
+            </form>
+
+            <!-- 퀴즈 결과 표시 영역 -->
+            <div id="quiz-result" class="hidden mt-8 max-w-2xl mx-auto p-8 rounded-2xl text-center shadow-inner text-[1rem]">
+                <h4 id="result-score" class="text-4xl font-black mb-3"></h4>
+                <p id="result-feedback" class="font-medium leading-relaxed"></p>
+                <button onclick="document.getElementById('quiz-result').classList.add('hidden')" class="mt-6 text-sm underline opacity-80 hover:opacity-100 font-bold">다시 풀기</button>
+            </div>
+        </section>
+
+        <!-- 마무리 기도문 섹션 -->
+        <section class="max-w-3xl mx-auto text-center mt-12 mb-10">
+            <div class="relative py-12 px-8 bg-slate-800 text-white rounded-3xl shadow-2xl overflow-hidden border border-slate-700">
+                <div class="absolute -top-6 -left-6 text-slate-600 opacity-20 text-8xl">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+                <div class="absolute -bottom-6 -right-6 text-slate-600 opacity-20 text-8xl">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+                <div class="relative z-10 space-y-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-amber-300 mb-8 border-b border-slate-600 pb-4 inline-block">메시지를 관통하는 기도</h3>
+                    <p class="md:text-lg font-light leading-relaxed">
+                        "오, 주 예수님. <br>
+                        주님의 일생을 통해 보여주신 자녀 양육의 본을 보여 주셔서 감사합니다.<br>
+                        우리의 자녀 양육이 타락한 세상의 풍조를 따르지 않게 하시고,<br>
+                        오직 하나님의 경륜의 이상에 의해 지배받게 하십시오.<br>
+                        생명이신 하나님을 담을 수 있는 합당한 그릇으로 우리의 다음 세대가 빚어지도록,<br>
+                        우리 부모들이 먼저 하나님을 향한 올바른 태도를 갖고<br>
+                        아이들에게는 삶 가운데 말씀을 지켜내고 살아내는 본으로 나타낼 수 있는 은혜를 주십시오<br>
+                        아이들의 신체와 정서, 지성과 사회성, 그리고 도덕성이<br>
+                        주님의 은혜와 사랑 안에서 강건하게 자라나<br>
+                        장래에 교회 건축에 유요한 재료들로 준비되게 하십시오. 아멘."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript 로직 -->
+    <script>
+        // 폰트 사이즈 조정 로직
+        let currentZoom = 1;
+        function adjustFontSize(step) {
+            if (step === 0) {
+                currentZoom = 1;
+            } else {
+                currentZoom += step * 0.1;
+                if(currentZoom < 0.8) currentZoom = 0.8;
+                if(currentZoom > 1.4) currentZoom = 1.4;
+            }
+            document.documentElement.style.setProperty('--base-font-size', (16 * currentZoom) + 'px');
+        }
+
+        // 레이어 벗기기 애니메이션
+        function peelLayer() {
+            const veil = document.getElementById('intro-veil');
+            const header = document.getElementById('main-header');
+            
+            veil.classList.add('peeled');
+            
+            setTimeout(() => {
+                veil.style.display = 'none';
+                header.classList.remove('opacity-0', 'translate-y-8');
+            }, 800);
+        }
+
+        // 아코디언 토글 기능
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.classList.remove('rotate-180');
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+                document.querySelectorAll('.fa-chevron-down').forEach(el => el.classList.remove('rotate-180'));
+                
+                content.classList.add('open');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // 퀴즈 채점 로직
+        const correctAnswers = {
+            q1: 'B', q2: 'A', q3: 'B', q4: 'B', q5: 'C'
+        };
+
+        function submitQuiz() {
+            const form = document.getElementById('quiz-form');
+            const resultDiv = document.getElementById('quiz-result');
+            const resultScore = document.getElementById('result-score');
+            const resultFeedback = document.getElementById('result-feedback');
+            
+            let score = 0;
+            let answeredAll = true;
+
+            for (let q in correctAnswers) {
+                const selected = form.querySelector(`input[name="${q}"]:checked`);
+                if (!selected) {
+                    answeredAll = false;
+                    break;
+                }
+                if (selected.value === correctAnswers[q]) {
+                    score += 20; 
+                }
+            }
+
+            if (!answeredAll) {
+                alert("모든 문제를 선택해 주세요.");
+                return;
+            }
+
+            resultDiv.classList.remove('hidden');
+            resultScore.textContent = `${score}점 / 100점`;
+            
+            resultDiv.className = 'mt-8 max-w-2xl mx-auto p-8 rounded-2xl text-center shadow-inner text-white transition-all';
+
+            if (score === 100) {
+                resultDiv.classList.add('bg-emerald-500');
+                resultFeedback.innerHTML = "완벽합니다! 🎉<br>메시지의 세부 요점과 흐름을 정확히 파악하셨습니다.";
+            } else if (score >= 80) {
+                resultDiv.classList.add('bg-blue-500');
+                resultFeedback.innerHTML = "훌륭합니다! 👍<br>자녀 양육에 관한 하나님의 이상을 깊게 이해하고 계십니다.";
+            } else if (score >= 60) {
+                resultDiv.classList.add('bg-orange-500');
+                resultFeedback.innerHTML = "좋습니다! 🙂<br>틀린 부분을 본문에서 다시 한번 확인해보시면 더욱 완벽해질 것입니다.";
+            } else {
+                resultDiv.classList.add('bg-rose-500');
+                resultFeedback.innerHTML = "조금 더 깊은 이해가 필요합니다. 💡<br>본문의 요점과 성경 구절을 한 번 더 정독해보시기를 추천합니다.";
+            }
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
