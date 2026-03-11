@@ -257,24 +257,31 @@
         const WEEK_NAMES = ['주일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
         async function fetchGoogleHolidays() {
-            try {
-                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events?key=${SHEET_API_KEY}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.items) {
-                    data.items.forEach(item => {
-                        if (item.start && item.start.date) {
-                            holidays[item.start.date] = item.summary;
-                        }
-                    });
-                    fastRender();
-                    updateDetail(selectedDate);
-                }
-            } catch (err) {
-                console.warn("⚠️ 구글 캘린더 데이터를 가져오는데 실패했습니다.", err);
-            }
-        }
+            try {
+                // 1. 조회할 날짜 범위 설정 (작년 1월 1일 ~ 내후년 1월 1일)
+                const currentYear = new Date().getFullYear();
+                const timeMin = new Date(currentYear - 1, 0, 1).toISOString(); 
+                const timeMax = new Date(currentYear + 2, 0, 1).toISOString();
+
+                // 2. URL에 timeMin, timeMax, singleEvents, orderBy 파라미터 추가
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events?key=${SHEET_API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.items) {
+                    data.items.forEach(item => {
+                        if (item.start && item.start.date) {
+                            holidays[item.start.date] = item.summary;
+                        }
+                    });
+                    fastRender();
+                    updateDetail(selectedDate);
+                }
+            } catch (err) {
+                console.warn("⚠️ 구글 캘린더 데이터를 가져오는데 실패했습니다.", err);
+            }
+        }
 
         function parseFullRichText(cell) {
             if (!cell || !cell.formattedValue) return "";
