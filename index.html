@@ -613,6 +613,15 @@
 
                 if(indicator) indicator.style.width = '100%';
                 fastRender(); updateDetail(selectedDate);
+
+                // 파라미터로 날짜를 받아온 경우, DOM 업데이트 후 부드럽게 상세내역으로 스크롤
+                if (scrollToDetailOnLoad) {
+                    setTimeout(() => {
+                        document.getElementById('detailRibbonSection')?.scrollIntoView({ behavior: 'smooth' });
+                        scrollToDetailOnLoad = false; // 한 번 이동 후 플래그 초기화
+                    }, 150); // 화면이 그려질 여유 시간(150ms)을 약간 줍니다.
+                }
+                
                 setTimeout(() => { if(indicator) indicator.style.width = '0%'; }, 500);
             } catch (e) { 
                 console.error('Data Load Error:', e);
