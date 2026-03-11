@@ -239,6 +239,20 @@
         todayObj.setHours(0,0,0,0);
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1);
         let selectedDate = new Date(todayObj);
+
+        //일자 바로가기 url parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const dateQuery = urlParams.get('date');
+        
+        if (dateQuery) {
+            // 하단에 선언된 parseAnyDate 함수를 활용해 파라미터를 Date 객체로 변환
+            const parsedDate = parseAnyDate(dateQuery);
+            if (parsedDate) {
+                currentDate = new Date(parsedDate.getFullYear(), parsedDate.getMonth(), 1);
+                selectedDate = new Date(parsedDate);
+            }
+        }
+        
         const WEEK_NAMES = ['주일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
         async function fetchGoogleHolidays() {
