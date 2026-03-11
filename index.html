@@ -250,6 +250,7 @@
             if (parsedDate) {
                 currentDate = new Date(parsedDate.getFullYear(), parsedDate.getMonth(), 1);
                 selectedDate = new Date(parsedDate);
+                scrollToDetailOnLoad = true; // 파라미터가 유효하면 스크롤 이동 플래그 켜기
             }
         }
         
