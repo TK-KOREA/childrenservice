@@ -239,6 +239,7 @@
         todayObj.setHours(0,0,0,0);
         let currentDate = new Date(todayObj.getFullYear(), todayObj.getMonth(), 1);
         let selectedDate = new Date(todayObj);
+        let scrollToDetailOnLoad = false;
 
         //일자 바로가기 url parameter
         const urlParams = new URLSearchParams(window.location.search);
