@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M01_04 믿음을 전수하는 일은 태중에서부터 시작되어야 함(2)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- 루트 폰트 크기 변수 (확대/축소 지원) --- */
+        :root {
+            --zoom: 1;
+        }
+        html {
+            font-size: calc(16px * var(--zoom));
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdfbf7;
+            color: #333;
+            overflow-x: hidden;
+            padding-top: 40px; /* 슬림한 상단바 높이 */
+            line-height: 1.6;
+        }
+
+        /* --- 슬림 & 콤팩트 상단 고정 바 (폰트 크기 영향 안 받음) --- */
+        #top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            z-index: 100;
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+        .nav-btn {
+            font-size: 14px !important;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #4b5563;
+            font-weight: 700;
+            transition: background-color 0.2s;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .nav-btn:hover { background-color: #f3f4f6; }
+        .nav-title {
+            font-size: 15px !important;
+            font-weight: 900;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+
+        /* --- 좌측 사이드바 (폰트 크기 영향 안 받음) --- */
+        #sidebar {
+            position: fixed;
+            top: 40px;
+            left: -300px;
+            width: 280px;
+            height: calc(100vh - 40px);
+            background-color: #ffffff;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+            z-index: 90;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            font-size: 14px !important; 
+        }
+        #sidebar.open { left: 0; }
+        
+        .menu-link {
+            display: block;
+            padding: 14px 20px;
+            color: #374151;
+            text-decoration: none;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 700;
+        }
+        .menu-link:hover { background-color: #f8fafc; color: #4f46e5; }
+        .sub-menu-link {
+            display: block;
+            padding: 10px 20px 10px 44px;
+            color: #6b7280;
+            font-size: 13px !important;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+        .sub-menu-link:hover { background-color: #f8fafb; color: #4f46e5; font-weight: 700; }
+
+        /* --- 레이어 벗기기 --- */
+        #intro-layer {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 40px);
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), border-radius 1.2s ease;
+            transform-origin: top center;
+        }
+        #intro-layer.peeled {
+            transform: translateY(-100%);
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+
+        /* --- 하이라이트 및 성경 구절 --- */
+        .highlight {
+            font-weight: 900;
+            background: linear-gradient(120deg, #fde047 0%, #fde047 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            padding: 0 2px;
+            color: #111827;
+        }
+        
+        .bible-box {
+            background-color: #f8fafc;
+            border-left: 5px solid #4f46e5;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .bible-box::before {
+            content: "\f02e"; /* FontAwesome 북마크 아이콘 */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: -15px;
+            background-color: #4f46e5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .verse-block {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        .verse-block:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .verse-ref {
+            color: #4f46e5;
+            font-weight: 900;
+            margin-bottom: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .verse-text {
+            color: #1e293b;
+            font-weight: 700;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        /* --- 인포그래픽 수직 연결선 --- */
+        .timeline-container {
+            position: relative;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 2rem;
+            bottom: 2rem;
+            left: 2.5rem;
+            width: 4px;
+            background: linear-gradient(to bottom, #e2e8f0, #818cf8, #e2e8f0);
+            z-index: 0;
+        }
+        @media (max-width: 768px) {
+            .timeline-line { left: 1.5rem; }
+        }
+
+        /* 뱃지 */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        .badge-meaning { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .badge-case { background-color: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .badge-action { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+
+        /* --- 퀴즈 스타일 (1rem 통일 및 조작성) --- */
+        #sec-quiz {
+            font-size: 1rem !important; /* 퀴즈 내부 기준 폰트사이즈 통일 */
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #ffffff;
+            color: #334155;
+            width: 100%;
+        }
+        .quiz-option:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .quiz-option input[type="radio"] {
+            display: none;
+        }
+        .quiz-option.selected {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+            font-weight: 900;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
+        }
+        .quiz-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        .quiz-option.selected .quiz-badge {
+            background-color: #4f46e5;
+        }
+        .hint-content {
+            display: none;
+            padding: 1rem;
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 0.75rem;
+            color: #92400e;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        /* --- 키워드 사전 (고정 박스 UI) --- */
+        .keyword-btn {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            color: #475569;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .keyword-btn.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border-color: #4f46e5;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+        #keyword-display-box {
+            display: none;
+            background: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body id="body-content">
+
+    <!-- 슬림 & 콤팩트 상단 고정 바 -->
+    <nav id="top-navbar">
+        <div class="nav-btn border-r border-gray-200" onclick="toggleSidebar()">
+            <i class="fas fa-bars mr-2 text-indigo-600"></i>목차
+        </div>
+        <div class="nav-title">
+            믿음을 전수하는 일은 태중에서부터 시작되어야 함(2)
+        </div>
+        <div class="flex border-l border-gray-200">
+            <div class="nav-btn border-r border-gray-200" onclick="adjustFontSize(-0.05)" title="글자 축소"><i class="fas fa-minus"></i></div>
+            <div class="nav-btn border-r border-gray-200" onclick="resetFontSize()" title="초기화">가</div>
+            <div class="nav-btn" onclick="adjustFontSize(0.05)" title="글자 확대"><i class="fas fa-plus"></i></div>
+        </div>
+    </nav>
+
+    <!-- 좌측 사이드바 -->
+    <aside id="sidebar">
+        <div class="p-3 bg-gray-50 border-b border-gray-200 flex justify-between items-center sticky top-0">
+            <span class="font-black text-indigo-900"><i class="fas fa-compass mr-2 text-indigo-600"></i>바로가기 메뉴</span>
+            <i class="fas fa-times text-gray-400 cursor-pointer p-2 hover:text-gray-800 transition" onclick="closeSidebar()"></i>
+        </div>
+        <a href="#sec-title" class="menu-link" onclick="closeSidebar()">1. 제목</a>
+        <a href="#sec-dashboard" class="menu-link" onclick="closeSidebar()">2. 대시보드</a>
+        <a href="#sec-keywords" class="menu-link" onclick="closeSidebar()">3. 키워드</a>
+        <a href="#sec-points" class="menu-link" onclick="closeSidebar()">4. 핵심 요점</a>
+        <div class="bg-gray-50 border-b border-gray-100 pb-2">
+            <a href="#point-1" class="sub-menu-link" onclick="closeSidebar()">- 이스라엘 백성의 태교 실행</a>
+            <a href="#point-2" class="sub-menu-link" onclick="closeSidebar()">- 생명을 주시는 하나님</a>
+            <a href="#point-3" class="sub-menu-link" onclick="closeSidebar()">- 가장 중요한 인물, 어머니</a>
+            <a href="#point-4" class="sub-menu-link" onclick="closeSidebar()">- 두 번째 중요한 요인, 남편</a>
+            <a href="#point-5" class="sub-menu-link" onclick="closeSidebar()">- 의와 말씀, 분별된 삶</a>
+            <a href="#point-6" class="sub-menu-link" onclick="closeSidebar()">- 출산과 생명 존중</a>
+        </div>
+        <a href="#sec-quiz" class="menu-link" onclick="closeSidebar()">5. 퀴즈</a>
+        <a href="#sec-prayer" class="menu-link" onclick="closeSidebar()">6. 오늘의 기도</a>
+    </aside>
+
+    <!-- 도입부: 레이어 벗기기 -->
+    <div id="intro-layer" class="text-center p-6 shadow-xl cursor-pointer" onclick="peelLayer()">
+        <i class="fas fa-seedling text-6xl text-indigo-500 mb-6 animate-bounce"></i>
+        <h1 class="text-3xl md:text-5xl font-black text-gray-800 mb-4 tracking-tight leading-tight">태중에서부터 시작되는<br>믿음의 전수</h1>
+        <p class="text-lg text-gray-700 mb-8 font-bold">오랜 역사와 전통을 지닌 이스라엘 백성의 태교 원칙</p>
+        <div class="animate-pulse flex flex-col items-center text-indigo-600">
+            <span class="mb-2 font-black text-sm bg-white px-5 py-2 rounded-full shadow-md border border-indigo-100">화면을 탭하거나 스크롤하여 열기</span>
+        </div>
+    </div>
+
+    <!-- 메인 컨테이너 -->
+    <main class="max-w-4xl mx-auto px-4 py-8 md:py-12 opacity-0 transition-opacity duration-1000" id="main-content">
+        
+        <!-- 1. 제목 -->
+        <section id="sec-title" class="text-center mb-12 scroll-mt-16">
+            <span class="inline-block py-1 px-4 rounded-full bg-indigo-100 text-indigo-800 font-black text-sm mb-4 border border-indigo-200">메시지 4</span>
+            <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">믿음을 전수하는 일은<br class="hidden md:block"> 태중에서부터 시작되어야 함(2)</h2>
+            <p class="text-lg md:text-xl text-gray-700 font-bold bg-white inline-block px-8 py-3 rounded-xl border border-gray-200 shadow-sm">
+                오랜 역사와 전통을 지닌 이스라엘 백성을 통해서<br class="md:hidden"> 태교에 관하여 실행적인 면에서 원칙을 취하여 우리에게 적용
+            </p>
+        </section>
+
+        <!-- 2. 대시보드 (핵심 요약 시각화) -->
+        <section id="sec-dashboard" class="bg-white rounded-3xl shadow-lg p-6 md:p-10 mb-20 border-2 border-indigo-50 scroll-mt-16 relative">
+            <h3 class="text-2xl font-black text-center mb-8 text-gray-800 flex justify-center items-center gap-2">
+                <i class="fas fa-project-diagram text-indigo-500"></i> 태아를 위한 영적 생태계 대시보드
+            </h3>
+            
+            <p class="text-center text-gray-600 font-bold mb-8">
+                "태아와 연관된 필수적인 인물들은 생명을 주시는 <span class="text-yellow-600">하나님</span>과 탯줄로 연결된 <span class="text-pink-600">어머니</span>와 공급하는 <span class="text-blue-600">아버지</span>이다."
+            </p>
+
+            <!-- 인포그래픽 시각화 영역 -->
+            <div class="flex flex-col items-center gap-2 relative z-10">
+                <!-- 하나님 -->
+                <div class="w-full max-w-md bg-yellow-50 border border-yellow-200 rounded-2xl p-4 text-center shadow-sm relative">
+                    <i class="fas fa-crown text-3xl text-yellow-500 mb-2"></i>
+                    <h4 class="font-black text-xl text-yellow-900 mb-1">하나님</h4>
+                    <p class="text-yellow-800 font-bold text-sm">모든 역사의 시작과 출발이자 결과</p>
+                    <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-gray-300 text-2xl z-20"><i class="fas fa-arrow-down"></i></div>
+                </div>
+
+                <!-- 부모 연합 -->
+                <div class="w-full max-w-2xl bg-indigo-50 border border-indigo-200 rounded-2xl p-6 mt-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 relative">
+                    <div class="text-center flex-1 w-full bg-white p-4 rounded-xl shadow-sm border border-pink-100">
+                        <i class="fas fa-person-pregnant text-3xl text-pink-500 mb-2"></i>
+                        <h4 class="font-black text-lg text-pink-900 mb-1">임신부 (어머니)</h4>
+                        <p class="text-pink-800 font-bold text-sm">가장 중요한 인물<br>내적인 상태(영·혼·마음) 합당하게 유지</p>
+                    </div>
+                    <div class="text-indigo-400 font-black text-sm flex-col flex items-center bg-indigo-100 px-3 py-1 rounded-full whitespace-nowrap">
+                        <i class="fas fa-link mb-1"></i> 동역
+                    </div>
+                    <div class="text-center flex-1 w-full bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                        <i class="fas fa-person text-3xl text-blue-500 mb-2"></i>
+                        <h4 class="font-black text-lg text-blue-900 mb-1">남편 (아버지)</h4>
+                        <p class="text-blue-800 font-bold text-sm">두 번째 중요한 요인<br>유전적 생명 요소 전달, 말씀 소리내어 읽기</p>
+                    </div>
+                    <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-gray-300 text-2xl z-20"><i class="fas fa-arrow-down"></i></div>
+                </div>
+
+                <!-- 태아/출산 -->
+                <div class="w-full max-w-md bg-green-50 border border-green-200 rounded-2xl p-4 mt-6 text-center shadow-sm">
+                    <i class="fas fa-seedling text-3xl text-green-500 mb-2"></i>
+                    <h4 class="font-black text-xl text-green-900 mb-1">태아 / 훌륭한 자녀</h4>
+                    <p class="text-green-800 font-bold text-sm">생명 존중, 거룩함과 절제력, 자비로운 성품 형성</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 키워드 -->
+        <section id="sec-keywords" class="mb-20 scroll-mt-16">
+            <h3 class="text-2xl font-black text-gray-900 mb-6 flex items-center border-b-2 border-indigo-100 pb-3">
+                <i class="fas fa-tags text-indigo-500 mr-3"></i>핵심 키워드 사전
+                <span class="text-sm font-bold text-gray-500 ml-4">버튼을 클릭하여 의미를 확인하세요.</span>
+            </h3>
+            
+            <div class="flex flex-wrap gap-3">
+                <button class="keyword-btn" onclick="showKeyword(this, '이스라엘 여성들의 태교', '성경에 따르면 아기를 쉽게 잘 낳고 기르기로 유명한 사람들입니다. 태교와 출산에 관한 경험을 선조들로부터 전수해 실행했습니다.')">이스라엘 여성들의 태교</button>
+                <button class="keyword-btn" onclick="showKeyword(this, '합당한 내적인 상태', '가장 중요한 인물인 임신부가 합당한 태교를 위해 가장 먼저 합당하게 유지해야 하는 영적인 상태와 혼의 상태와 마음의 상태입니다.')">합당한 내적인 상태</button>
+                <button class="keyword-btn" onclick="showKeyword(this, '남편의 동역', '태아에게 유전적인 생명의 요소를 전달해 주며, 임신부에게 가장 많은 영향을 끼치는 인물입니다. 예비 아빠가 어떻게 임신부와 동역해야 하는지는 두 번째로 중요한 요인입니다.')">남편의 동역</button>
+                <button class="keyword-btn" onclick="showKeyword(this, '정결한 식생활', '단순한 음식을 넘어, 정결한 식생활을 통하여 거룩함과 절제력과 자비로운 성품을 형성시키는 구체적인 실행입니다.')">정결한 식생활</button>
+            </div>
+            
+            <!-- 클릭 시 나타나는 동일한 설명 박스 -->
+            <div id="keyword-display-box">
+                <h4 id="kw-title" class="text-lg font-black text-indigo-900 mb-2">키워드</h4>
+                <p id="kw-desc" class="text-gray-700 font-bold leading-relaxed">키워드 버튼을 클릭해주세요.</p>
+            </div>
+        </section>
+
+        <!-- 4. 핵심 요점 (개요 기준 구성) -->
+        <section id="sec-points" class="mb-20 scroll-mt-16 timeline-container">
+            <div class="timeline-line"></div>
+            
+            <h3 class="text-3xl font-black text-gray-900 mb-12 flex flex-col items-center relative z-10 bg-fdfbf7 py-2">
+                <span class="text-indigo-600 mb-2"><i class="fas fa-list-ol"></i></span>
+                믿음 전수를 위한 6가지 핵심 원칙
+            </h3>
+
+            <div class="space-y-16 relative z-10">
+                
+                <!-- 요점 1 (IV) -->
+                <div id="point-1" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-700 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        1
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                            <h4 class="text-xl md:text-2xl font-black text-slate-800">IV. 이스라엘 백성의 실행적 태교 원칙</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-slate-400 bg-slate-50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-slate-700">[출 1:19]</span>
+                                    <span class="verse-text">산파들이 파라오에게 대답하였다. "히브리 여자들은 이집트 여자들과는 달리 힘이 좋아서 산파가 도착하기도 전에 아이를 낳아 버립니다."</span>
+                                </div>
+                                <div class="verse-block">
+                                    <span class="verse-ref text-slate-700">[사 66:9]</span>
+                                    <span class="verse-text">“내가 만삭이 되게 하였는데 해산하지 못하게 하겠느냐? / 여호와의 말이다. / 혹여 해산하게 하는 내가 태를 닫겠느냐? / 네 하나님의 말이다."</span>
+                                </div>
+                            </div>
+                            <!-- 2. 의미 및 실행 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-meaning"><i class="fas fa-info-circle mr-1"></i> 의미</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">오랜 역사와 전통을 지닌 이스라엘 백성을 통해서 우리는 태교에 관하여 실행적인 면에서 원칙을 취하여 우리에게 적용할 수 있다.</span> 성경에 따르면 아기를 쉽게 잘 낳고 기르기로 유명한 사람들은 이스라엘 여성들이다.</p>
+                                </div>
+                                <div>
+                                    <span class="badge badge-action"><i class="fas fa-check-circle mr-1"></i> 실행 및 적용</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2">이스라엘 여성들은 <span class="highlight">태교와 출산에 관한 경험을 선조들로부터 전수해 실행했다.</span> 이스라엘 사람들은 대체로 임신 전에 임부가 몸을 정결하게 하고, 임신 후에 아버지가 성경을 읽어주고, 임부가 말씀을 수놓고, 아침마다 자선을 행하고, 늘 하나님께 기도하고, 색종이에 십계명을 써서 바라보고, 하나님을 찬양하며, 분별된 식생활을 함으로서 태교를 실행한다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 요점 2 (V.B) -->
+                <div id="point-2" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        2
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-yellow-50 px-6 py-4 border-b border-yellow-200">
+                            <h4 class="text-xl md:text-2xl font-black text-yellow-900">V. 필수 인물 1: 생명을 주시는 하나님</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-yellow-400 bg-yellow-50/50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-yellow-700">[창 30:2]</span>
+                                    <span class="verse-text">야곱은 라헬에게 화를 내며 말하였다. "당신의 태에 열매를 주시지 않는 분이 하나님이신데, 나더러 하나님을 대신하라는 말이오?"</span>
+                                </div>
+                            </div>
+                            <!-- 2. 의미 및 사례 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-meaning"><i class="fas fa-info-circle mr-1"></i> 의미</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2">태아와 연관된 필수적인 인물들 중 첫 번째는 생명을 주시는 하나님이시다. <span class="highlight">잉태와 관련하여 모든 역사의 시작과 출발이자 결과는 하나님이시다.</span> 그러므로 태교에서 우리는 하나님의 임재, 하나님의 말씀, 하나님의 주권을 존중해야 한다.</p>
+                                </div>
+                                <div>
+                                    <span class="badge badge-case"><i class="fas fa-search mr-1"></i> 구체적 사례</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">하나님은 마노아와 사가랴와 마리아에게 미리 임신 계획을 알려주셔서 아기가 잉태할 환경을 미리 준비시키셨다.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 요점 3 (V.C) -->
+                <div id="point-3" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-pink-500 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        3
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-pink-50 px-6 py-4 border-b border-pink-200">
+                            <h4 class="text-xl md:text-2xl font-black text-pink-900">V. 필수 인물 2: 탯줄로 연결된 어머니</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-pink-400 bg-pink-50/50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-pink-700">[시 139:13]</span>
+                                    <span class="verse-text">참으로 주님은 저의 속부분들을 지으시며 / 제 어머니의 태에서 저를 짜 맞추셨습니다.</span>
+                                </div>
+                            </div>
+                            <!-- 2. 의미 및 실행 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-meaning"><i class="fas fa-info-circle mr-1"></i> 의미</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">잉태와 관련하여 눈에 보이는 모든 일에서 가장 중요한 인물은 임신부이다.</span> 그러므로 태모의 영과 혼과 마음과 몸을 어떻게 다스리며 간수해야 하는지가 결정적인 요소이다.</p>
+                                </div>
+                                <div>
+                                    <span class="badge badge-action"><i class="fas fa-check-circle mr-1"></i> 실행 및 적용</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">합당한 태교는 영적인 상태와 혼의 상태와 마음의 상태, 즉 내적인 상태를 합당하게 유지하는 것이다.</span> 또한 합당한 태교는 건강한 몸을 간직하는 것인데, 이러려면 앞의 세 가지에 더하여 수면과 음식을 주의하는 것이 필수적이다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 요점 4 (V.D) -->
+                <div id="point-4" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        4
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-blue-50 px-6 py-4 border-b border-blue-200">
+                            <h4 class="text-xl md:text-2xl font-black text-blue-900">V. 필수 인물 3: 공급하는 아버지</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-blue-400 bg-blue-50/50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-blue-700">[신 6:6]</span>
+                                    <span class="verse-text">오늘 내가 그대에게 명령하는 이 말씀을 그대의 마음에 간직해야 합니다.</span>
+                                </div>
+                                <div class="verse-block">
+                                    <span class="verse-ref text-blue-700">[신 6:7]</span>
+                                    <span class="verse-text">그대는 자녀에게 이 말씀을 부지런히 가르치고, 그대가 집에 앉아 있을 때나 길을 갈 때나 누울 때나 일어날 때나 이 말씀을 그들에게 말해 주어야 합니다.</span>
+                                </div>
+                            </div>
+                            <!-- 2. 의미 및 실행 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-meaning"><i class="fas fa-info-circle mr-1"></i> 의미</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">잉태와 관련하여 태아에게 유전적인 생명의 요소를 전달해 주며, 잉태 중에 혹은 출산 후에도 임신부에게 가장 많은 영향을 끼치며, 태아에게 직간접적인 영향을 미치는 인물은 임신부의 남편이다.</span> 그러므로 예비 아빠가 어떻게 임신부와 동역해야 하는지는 두 번째로 중요한 요인이다.</p>
+                                </div>
+                                <div>
+                                    <span class="badge badge-action"><i class="fas fa-check-circle mr-1"></i> 실행 및 적용</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2">아버지는 아내에게 어떻게 행동하고 처신하며 무엇을 도와야 하는지를 배우고, 태아에게 무엇을 해 주며 어떻게 처신하는지를 배운다. 특히 <span class="highlight">아버지가 소리 내어 성경을 읽어줌으로 아기의 두뇌발달에 큰 역할을 담당한다.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 요점 5 (IV.C 구체적 실행) -->
+                <div id="point-5" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-purple-500 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        5
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-purple-50 px-6 py-4 border-b border-purple-200">
+                            <h4 class="text-xl md:text-2xl font-black text-purple-900">IV. 의와 말씀, 분별된 태교 실행</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-purple-400 bg-purple-50/50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-purple-700">[미 6:8]</span>
+                                    <span class="verse-text">사람아, 그분은 무엇이 선이며 여호와께서 네게 무엇을 요구하시는지를 이미 네게 선포하셨나니 그것은 오직 네가 정의를 집행하고 긍휼을 사랑하며 네 하나님과 함께 겸손히 행하는 것이 아니냐?</span>
+                                </div>
+                                <div class="verse-block">
+                                    <span class="verse-ref text-purple-700">[출 23:26]</span>
+                                    <span class="verse-text">네 땅에는 유산하거나 임신하지 못하는 여인이 없을 것이다. 나는 네가 너의 날을 다 살게 할 것이다.</span>
+                                </div>
+                                <div class="verse-block">
+                                    <span class="verse-ref text-purple-700">[레 11:44]</span>
+                                    <span class="verse-text">그러니 너희 자신을 거룩하게 분별하여 거룩하여져라. 왜냐하면 내가 거룩하기 때문이다.</span>
+                                </div>
+                            </div>
+                            <!-- 2. 실행 및 적용 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-action"><i class="fas fa-check-circle mr-1"></i> 실행 및 적용</span>
+                                    <ul class="list-disc pl-5 text-gray-800 font-bold text-lg leading-relaxed mt-2 space-y-3">
+                                        <li><span class="highlight">매일 동전 한 닢을 자선하는 저금통에 넣어서 엄마 태에서부터 의를 행하여 축복을 얻는 사람으로 키운다.</span></li>
+                                        <li>임신부가 기도함으로 아이에게 은혜를 끼치게 하고, <span class="highlight">찬양을 통해 아이의 감성이 풍부하도록 돕는다.</span></li>
+                                        <li>엄마가 아기에게 말씀을 수놓은 강보를 선물하고, <span class="highlight">십계명을 색종이에 적어 벽에 붙여 놓고 분만 예정일 10일 전부터 읽음으로써 순산을 돕는다.</span></li>
+                                        <li><span class="highlight">정결한 식생활을 통하여 거룩함과 절제력과 자비로운 성품을 형성시킨다.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 요점 6 (VI) -->
+                <div id="point-6" class="scroll-mt-20 flex gap-4 md:gap-6">
+                    <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-500 text-white flex items-center justify-center font-black text-xl shadow-lg border-4 border-white mt-2 z-10 relative">
+                        6
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex-1">
+                        <div class="bg-green-50 px-6 py-4 border-b border-green-200">
+                            <h4 class="text-xl md:text-2xl font-black text-green-900">VI. 출산과 생명 존중</h4>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <!-- 1. 성경 구절 -->
+                            <div class="bible-box border-green-400 bg-green-50/50">
+                                <div class="verse-block">
+                                    <span class="verse-ref text-green-700">[창 1:28]</span>
+                                    <span class="verse-text">하나님께서 그들에게 복을 주시며 말씀하셨다. "자녀를 많이 낳고 번성하여, 땅을 가득 채우고 땅을 정복하여라. 그리고 바다의 물고기와, 하늘의 새와, 땅 위에서 움직이는 살아 있는 온갖 것을 통치하여라."</span>
+                                </div>
+                                <div class="verse-block">
+                                    <span class="verse-ref text-green-700">[시 71:6]</span>
+                                    <span class="verse-text">주님께서 저를 태어날 때부터 붙들어 주시며 / 어머니의 태에서 이끌어 내셨기에 저는 언제나 주님을 찬양합니다.</span>
+                                </div>
+                            </div>
+                            <!-- 2. 의미 및 실행 -->
+                            <div class="space-y-4 mt-6">
+                                <div>
+                                    <span class="badge badge-meaning"><i class="fas fa-info-circle mr-1"></i> 의미</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2"><span class="highlight">출산은 하나님의 영원한 경륜과 긴밀한 관계가 있다. 태교는 생명을 사랑하고 생명을 존중하라는 하나님의 가르침이다.</span></p>
+                                </div>
+                                <div>
+                                    <span class="badge badge-action"><i class="fas fa-check-circle mr-1"></i> 실행 및 적용</span>
+                                    <p class="text-gray-800 font-bold text-lg leading-relaxed mt-2">죄에 떨어지는 것을 방지하기 위하여 사람은 결혼해 자녀를 낳아야 하며, 이세를 위하여서는 조혼이 바람직하고 경제적인 능력을 고려해야 한다. <span class="highlight">현대 의학은 훌륭한 자녀가 삼대에 걸쳐서 생산된다고 말한다.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. 퀴즈 섹션 (1rem 고정, 가독성, 배지, 힌트 포함) -->
+        <section id="sec-quiz" class="mt-24 bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 shadow-xl scroll-mt-16 relative">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-8 py-3 rounded-full font-black text-lg shadow-md flex items-center gap-2">
+                <i class="fas fa-brain"></i> 내용 확인 퀴즈
+            </div>
+            
+            <div class="mt-6 mb-10 text-center text-slate-600 font-bold">
+                본문의 핵심 내용을 바탕으로 총 5문제가 준비되어 있습니다.<br>
+                선택지를 클릭하여 정답을 고르세요.
+            </div>
+            
+            <form id="quiz-form" class="space-y-10 max-w-3xl mx-auto">
+                <!-- Q1 -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="font-black text-lg text-slate-800 mb-6 leading-relaxed flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-black">1</span>
+                        <span>성경에 따르면 아기를 쉽게 잘 낳고 기르기로 유명하며, 태교와 출산에 관한 경험을 선조들로부터 전수해 실행한 사람들은 누구인가요?</span>
+                    </p>
+                    <div class="space-y-3">
+                        <label class="quiz-option" onclick="selectOption(this, 'q1')">
+                            <input type="radio" name="q1" value="a">
+                            <span class="quiz-badge">A</span>
+                            <span class="font-bold text-base">이집트 여성들</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q1')">
+                            <input type="radio" name="q1" value="b">
+                            <span class="quiz-badge">B</span>
+                            <span class="font-bold text-base">이스라엘 여성들</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q1')">
+                            <input type="radio" name="q1" value="c">
+                            <span class="quiz-badge">C</span>
+                            <span class="font-bold text-base">로마 여성들</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full font-black hover:bg-yellow-200 transition" onclick="toggleHint('hint1')">
+                            <i class="fas fa-lightbulb mr-1"></i>힌트 보기
+                        </button>
+                    </div>
+                    <div id="hint1" class="hint-content">출 1:19 산파들이 파라오에게 대답하였다. "이 여자들은 이집트 여자들과는 달리 힘이 좋아서 산파가 도착하기도 전에 아이를 낳아 버립니다."</div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="font-black text-lg text-slate-800 mb-6 leading-relaxed flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-black">2</span>
+                        <span>가장 중요한 인물인 임신부가 합당한 태교를 위해 가장 먼저 '합당하게 유지'해야 하는 내적인 상태 3가지는 무엇인가요?</span>
+                    </p>
+                    <div class="space-y-3">
+                        <label class="quiz-option" onclick="selectOption(this, 'q2')">
+                            <input type="radio" name="q2" value="a">
+                            <span class="quiz-badge">A</span>
+                            <span class="font-bold text-base">영적인 상태, 혼의 상태, 마음의 상태</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q2')">
+                            <input type="radio" name="q2" value="b">
+                            <span class="quiz-badge">B</span>
+                            <span class="font-bold text-base">지식, 감정, 의지의 상태</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q2')">
+                            <input type="radio" name="q2" value="c">
+                            <span class="quiz-badge">C</span>
+                            <span class="font-bold text-base">수면, 식사, 운동의 상태</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full font-black hover:bg-yellow-200 transition" onclick="toggleHint('hint2')">
+                            <i class="fas fa-lightbulb mr-1"></i>힌트 보기
+                        </button>
+                    </div>
+                    <div id="hint2" class="hint-content">건강한 몸(수면, 음식)을 간직하는 것도 중요하지만, 본문은 눈에 보이지 않는 이 3가지 내적인 상태 유지가 먼저임을 강조합니다.</div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="font-black text-lg text-slate-800 mb-6 leading-relaxed flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-black">3</span>
+                        <span>두 번째로 중요한 요인인 남편(아버지)이 '소리 내어 성경을 읽어줌'으로써 아기의 어떤 발달에 큰 역할을 담당하게 되나요?</span>
+                    </p>
+                    <div class="space-y-3">
+                        <label class="quiz-option" onclick="selectOption(this, 'q3')">
+                            <input type="radio" name="q3" value="a">
+                            <span class="quiz-badge">A</span>
+                            <span class="font-bold text-base">신체발달</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q3')">
+                            <input type="radio" name="q3" value="b">
+                            <span class="quiz-badge">B</span>
+                            <span class="font-bold text-base">두뇌발달</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q3')">
+                            <input type="radio" name="q3" value="c">
+                            <span class="quiz-badge">C</span>
+                            <span class="font-bold text-base">근육발달</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full font-black hover:bg-yellow-200 transition" onclick="toggleHint('hint3')">
+                            <i class="fas fa-lightbulb mr-1"></i>힌트 보기
+                        </button>
+                    </div>
+                    <div id="hint3" class="hint-content">지문에 따르면 이스라엘 사람들은 남편이 이것을 통해 아이의 인지와 지적 능력을 담당하는 '이 기관'의 발달을 돕는다고 믿습니다.</div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="font-black text-lg text-slate-800 mb-6 leading-relaxed flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-black">4</span>
+                        <span>매일 아침 '동전 한 닢을 자선하는 저금통에 넣는 행위'는 엄마 태에서부터 아이를 어떤 사람으로 키우기 위함인가요?</span>
+                    </p>
+                    <div class="space-y-3">
+                        <label class="quiz-option" onclick="selectOption(this, 'q4')">
+                            <input type="radio" name="q4" value="a">
+                            <span class="quiz-badge">A</span>
+                            <span class="font-bold text-base">경제를 잘 아는 부유한 사람</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q4')">
+                            <input type="radio" name="q4" value="b">
+                            <span class="quiz-badge">B</span>
+                            <span class="font-bold text-base">의를 행하여 축복을 얻는 사람</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q4')">
+                            <input type="radio" name="q4" value="c">
+                            <span class="quiz-badge">C</span>
+                            <span class="font-bold text-base">계산이 빠른 사람</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full font-black hover:bg-yellow-200 transition" onclick="toggleHint('hint4')">
+                            <i class="fas fa-lightbulb mr-1"></i>힌트 보기
+                        </button>
+                    </div>
+                    <div id="hint4" class="hint-content">자선을 행하는 것은 이웃을 돕는 행동으로, 하나님의 백성으로서 바른 행실(義)을 나타냅니다.</div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="font-black text-lg text-slate-800 mb-6 leading-relaxed flex items-start gap-3">
+                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-black">5</span>
+                        <span>임신 전에 몸을 정결하게 하고 '정결한 식생활'을 함으로써 태아에게 형성시키고자 하는 성품으로 지문에 <span class="text-red-600 underline decoration-2">없는</span> 것은?</span>
+                    </p>
+                    <div class="space-y-3">
+                        <label class="quiz-option" onclick="selectOption(this, 'q5')">
+                            <input type="radio" name="q5" value="a">
+                            <span class="quiz-badge">A</span>
+                            <span class="font-bold text-base">거룩함과 절제력</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q5')">
+                            <input type="radio" name="q5" value="b">
+                            <span class="quiz-badge">B</span>
+                            <span class="font-bold text-base">자비로운 성품</span>
+                        </label>
+                        <label class="quiz-option" onclick="selectOption(this, 'q5')">
+                            <input type="radio" name="q5" value="c">
+                            <span class="quiz-badge">C</span>
+                            <span class="font-bold text-base">경쟁심과 투지</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" class="text-sm bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full font-black hover:bg-yellow-200 transition" onclick="toggleHint('hint5')">
+                            <i class="fas fa-lightbulb mr-1"></i>힌트 보기
+                        </button>
+                    </div>
+                    <div id="hint5" class="hint-content">지문 C.8 항목은 "정결한 식생활을 통하여 (거룩함)과 (절제력)과 (자비로운 성품)을 형성시킨다."라고 명시하고 있습니다.</div>
+                </div>
+
+                <button type="button" id="submit-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-xl transition duration-300 text-xl shadow-md mt-4">
+                    답안 제출 및 결과 확인
+                </button>
+            </form>
+
+            <!-- 퀴즈 결과 영역 -->
+            <div id="quiz-result" class="hidden mt-8 text-center bg-white p-8 rounded-2xl border-2 border-indigo-200 shadow-md relative overflow-hidden">
+                <div class="text-6xl mb-4 relative z-10" id="score-icon"></div>
+                <h4 class="text-3xl font-black mb-4 text-gray-800 relative z-10">총점: <span id="score-text" class="text-indigo-600"></span> / 5점</h4>
+                <p id="feedback-text" class="text-lg text-gray-700 mt-4 leading-relaxed font-bold relative z-10 break-keep"></p>
+                <button type="button" id="retry-btn" class="mt-8 text-indigo-600 font-black hover:bg-indigo-50 px-6 py-3 border border-indigo-200 rounded-full transition relative z-10">다시 도전하기</button>
+            </div>
+        </section>
+
+        <!-- 6. 기도문 섹션 (원문 텍스트 엮기) -->
+        <section id="sec-prayer" class="mt-24 mb-10 scroll-mt-16">
+            <div class="bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] bg-amber-50 rounded-3xl p-8 md:p-12 shadow-xl text-center border-t-[8px] border-amber-400 relative overflow-hidden">
+                <i class="fas fa-quote-left text-4xl text-amber-200 absolute top-6 left-6"></i>
+                <h3 class="text-2xl font-black text-amber-900 mb-8 tracking-wide border-b border-amber-200 inline-block pb-2">오늘의 기도</h3>
+                
+                <p class="text-lg md:text-xl text-amber-900 leading-[2.0] font-bold px-4 md:px-10 break-keep">
+                    "생명을 주시는 하나님,<br>
+                    잉태와 관련하여 모든 역사의 시작과 출발이자 결과는 하나님이심을 고백합니다.<br>
+                    저희가 늘 하나님의 임재와 하나님의 말씀과 하나님의 주권을 존중하게 하소서.<br>
+                    가장 중요한 인물인 임신부가 영적인 상태와 혼의 상태와 마음의 상태, 즉 내적인 상태를 합당하게 유지하고 다스리게 하소서.<br>
+                    두 번째로 중요한 요인인 남편이 임신부와 동역하여 태아에게 유전적인 생명의 요소를 전달하며, 아버지가 소리 내어 성경을 읽어주게 하소서.<br>
+                    태중에서부터 매일 자선을 행하여 의를 행하여 축복을 얻는 사람으로 키우게 하시고, 늘 기도하며 하나님을 찬양함으로 아이의 감성이 풍부하도록 돕게 하소서.<br>
+                    정결한 식생활을 통하여 거룩함과 절제력과 자비로운 성품이 형성되게 하시고,<br>
+                    출산이 하나님의 영원한 경륜과 긴밀한 관계가 있음을 알아 생명을 사랑하고 생명을 존중하는 은혜를 허락하소서.<br>
+                    아멘."
+                </p>
+                <i class="fas fa-quote-right text-4xl text-amber-200 absolute bottom-6 right-6"></i>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- 폰트 사이즈 제어 (CSS 변수 활용하여 HTML root 폰트 크기 변경) ---
+        let currentZoom = 1.0;
+        function adjustFontSize(delta) {
+            currentZoom += delta;
+            // 0.85배 ~ 1.4배 사이로 제한
+            currentZoom = Math.max(0.85, Math.min(currentZoom, 1.4));
+            document.documentElement.style.setProperty('--zoom', currentZoom);
+        }
+        function resetFontSize() {
+            currentZoom = 1.0;
+            document.documentElement.style.setProperty('--zoom', currentZoom);
+        }
+
+        // --- 사이드바 제어 ---
+        const sidebar = document.getElementById('sidebar');
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+        }
+        
+        // 배경(메인 콘텐츠 영역) 클릭 시 사이드바 닫기
+        document.getElementById('main-content').addEventListener('click', () => {
+            if(sidebar.classList.contains('open')) closeSidebar();
+        });
+
+        // --- 키워드 사전 (하나의 박스에 내용 표시) ---
+        function showKeyword(btnElement, title, desc) {
+            // 버튼 활성화 스타일 변경
+            document.querySelectorAll('.keyword-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // 박스 내용 변경 및 표시
+            const box = document.getElementById('keyword-display-box');
+            document.getElementById('kw-title').innerText = title;
+            document.getElementById('kw-desc').innerText = desc;
+            
+            box.style.display = 'block';
+            
+            // 애니메이션 재시작을 위한 트릭
+            box.style.animation = 'none';
+            box.offsetHeight; /* trigger reflow */
+            box.style.animation = null; 
+        }
+
+        // --- 레이어 벗기기 애니메이션 로직 ---
+        const introLayer = document.getElementById('intro-layer');
+        const mainContent = document.getElementById('main-content');
+        
+        const peelLayer = () => {
+            introLayer.classList.add('peeled');
+            setTimeout(() => {
+                mainContent.classList.remove('opacity-0');
+                introLayer.style.display = 'none';
+            }, 800);
+        };
+
+        // 스크롤 시 레이어 벗겨짐
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10 && !introLayer.classList.contains('peeled')) {
+                peelLayer();
+            }
+        });
+        // 3.5초 후 자동 벗겨짐
+        setTimeout(() => {
+            if (!introLayer.classList.contains('peeled')) {
+                peelLayer();
+            }
+        }, 3500);
+
+        // --- 퀴즈 로직 (옵션 선택, 힌트, 결과) ---
+        function selectOption(labelElement, groupName) {
+            const groupLabels = document.querySelectorAll(`input[name="${groupName}"]`);
+            groupLabels.forEach(input => {
+                input.closest('.quiz-option').classList.remove('selected');
+            });
+            labelElement.querySelector('input').checked = true;
+            labelElement.classList.add('selected');
+        }
+
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if(hint.style.display === 'block') {
+                hint.style.display = 'none';
+            } else {
+                hint.style.display = 'block';
+            }
+        }
+
+        const submitBtn = document.getElementById('submit-btn');
+        const retryBtn = document.getElementById('retry-btn');
+        const form = document.getElementById('quiz-form');
+        const resultDiv = document.getElementById('quiz-result');
+        
+        const answers = {
+            q1: 'b', // 이스라엘 여성들
+            q2: 'a', // 영적인 상태, 혼의 상태, 마음의 상태
+            q3: 'b', // 두뇌발달
+            q4: 'b', // 의를 행하여 축복을 얻는 사람
+            q5: 'c'  // 경쟁심과 투지
+        };
+
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            let allAnswered = true;
+
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                    break;
+                }
+                if (selected.value === answers[q]) {
+                    score++;
+                }
+            }
+
+            if (!allAnswered) {
+                alert('모든 문제의 정답을 선택해주세요!');
+                return;
+            }
+
+            form.classList.add('hidden');
+            resultDiv.classList.remove('hidden');
+            
+            document.getElementById('score-text').textContent = score;
+            
+            const iconMap = document.getElementById('score-icon');
+            const feedbackMap = document.getElementById('feedback-text');
+
+            if (score === 5) {
+                iconMap.innerHTML = '🌟';
+                feedbackMap.innerHTML = "완벽합니다! 지문에 나타난 성경적 태교의 핵심 원칙과 구체적 실행 방법들을 정확히 숙지하셨습니다.";
+            } else if (score >= 3) {
+                iconMap.innerHTML = '👏';
+                feedbackMap.innerHTML = "훌륭합니다! 전반적인 흐름과 메시지를 잘 파악하셨습니다.<br>오답은 힌트와 본문 핵심 요점을 통해 확인해 보세요.";
+            } else {
+                iconMap.innerHTML = '📖';
+                feedbackMap.innerHTML = "좋은 시도입니다! 믿음의 전수는 태중에서부터 시작되는 세밀한 과정입니다.<br>사이드바 메뉴를 열어 요점들을 다시 읽어보시길 권해드립니다.";
+            }
+        });
+
+        retryBtn.addEventListener('click', () => {
+            form.reset();
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.hint-content').forEach(h => h.style.display = 'none');
+            
+            form.classList.remove('hidden');
+            resultDiv.classList.add('hidden');
+            document.getElementById('sec-quiz').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
