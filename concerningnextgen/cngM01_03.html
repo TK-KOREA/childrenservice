@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M01_03 믿음을 전수하는 일은 태중에서부터 시작되어야 함(1)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            /* 본문 영역 전용 폰트 사이즈 변수 */
+            --content-font-size: 16px; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+            padding-top: 40px; /* Slim top bar height */
+        }
+
+        /* 1. Slim & Compact Top Bar (Fixed size, unaffected by scaling) */
+        #top-bar {
+            height: 40px;
+            font-size: 14px !important;
+        }
+        #top-bar button, #top-bar a, #top-bar div {
+            font-size: inherit;
+        }
+
+        /* 2. Side Menu (Fixed size) */
+        #side-menu {
+            font-size: 15px !important;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-open #side-menu {
+            transform: translateX(0);
+        }
+        #menu-overlay {
+            transition: opacity 0.3s;
+        }
+        .menu-open #menu-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 3. Main Content Scaling */
+        #main-content {
+            font-size: var(--content-font-size);
+            transition: font-size 0.2s ease;
+        }
+        /* scale specific em-based elements */
+        #main-content h1 { font-size: 2.5em; }
+        #main-content h2 { font-size: 1.8em; }
+        #main-content h3 { font-size: 1.4em; }
+        #main-content h4 { font-size: 1.1em; }
+        #main-content p, #main-content li, #main-content span { font-size: 1em; }
+        
+        /* 퀴즈는 1rem (기본 16px) 고정 요청 반영 (루트 기준 1rem이 아닌 콘텐츠 내부 기준 1em으로 처리하여 일관성 유지) */
+        .quiz-text { font-size: 1em !important; }
+
+        /* Scroll margin for anchors */
+        section, .scroll-anchor {
+            scroll-margin-top: 60px;
+        }
+
+        /* Accordion Animation */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-out, opacity 0.4s ease-out;
+            opacity: 0;
+        }
+        .accordion-content > div {
+            overflow: hidden;
+        }
+        .accordion-item.active .accordion-content {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Verse Highlight */
+        .verse-highlight {
+            background-color: #fef08a; /* yellow-200 */
+            color: #1e293b;
+            font-weight: 700;
+            padding: 0.1em 0.3em;
+            border-radius: 0.25em;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Quiz Options */
+        .quiz-option-label {
+            transition: all 0.2s;
+        }
+        .quiz-option-label:hover {
+            background-color: #eef2ff;
+            border-color: #c7d2fe;
+        }
+        .quiz-option-input:checked + span {
+            font-weight: 700;
+            color: #4f46e5;
+        }
+        
+        /* Hint Reveal */
+        .hint-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+        .hint-active .hint-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        /* Infographic Connecting Line */
+        .flow-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #34d399, #818cf8);
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+        @media (max-width: 768px) {
+            .flow-line {
+                width: 4px;
+                height: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, #34d399, #818cf8);
+            }
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- 1. Top Sticky Bar (Slim, Compact, White Theme) -->
+    <div id="top-bar" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-[60] flex items-stretch justify-between border-b border-slate-200">
+        <!-- Left: Menu Toggle (Replaced Home) -->
+        <button onclick="toggleMenu()" class="px-3 md:px-4 text-slate-600 hover:bg-slate-50 flex items-center justify-center border-r border-slate-200 transition-colors" title="목차 열기">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <!-- Center: Title -->
+        <div class="flex-1 flex items-center justify-center px-2 overflow-hidden">
+            <h1 class="font-bold text-slate-800 truncate text-center">
+                믿음을 전수하는 일은 태중에서부터 시작되어야 함 (1)
+            </h1>
+        </div>
+        <!-- Right: Font Size Controls -->
+        <div class="flex items-stretch border-l border-slate-200 bg-white">
+            <button onclick="changeFontSize(-1)" class="px-3 md:px-4 text-slate-600 hover:bg-slate-100 font-bold transition-colors" title="글꼴 축소">-</button>
+            <button onclick="changeFontSize(0)" class="px-3 md:px-4 text-slate-600 hover:bg-slate-100 font-bold border-x border-slate-200 transition-colors" title="글꼴 초기화">가</button>
+            <button onclick="changeFontSize(1)" class="px-3 md:px-4 text-slate-600 hover:bg-slate-100 font-bold transition-colors" title="글꼴 확대">+</button>
+        </div>
+    </div>
+
+    <!-- Side Menu Overlay -->
+    <div id="menu-overlay" onclick="toggleMenu()" class="fixed inset-0 bg-slate-900/50 z-[65] opacity-0 pointer-events-none"></div>
+
+    <!-- 2. Side Menu Panel -->
+    <nav id="side-menu" class="fixed inset-y-0 left-0 w-64 md:w-72 bg-white shadow-2xl z-[70] transform -translate-x-full flex flex-col">
+        <div class="h-12 border-b border-indigo-100 flex justify-between items-center bg-indigo-50 px-4 shrink-0">
+            <span class="font-bold text-indigo-800 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                목차 탐색
+            </span>
+            <button onclick="toggleMenu()" class="p-1.5 text-indigo-400 hover:text-indigo-700 rounded-lg hover:bg-indigo-100 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="py-2 flex-1 overflow-y-auto flex flex-col gap-0.5 px-2 text-slate-700">
+            <a href="#section-title" onclick="toggleMenu()" class="block p-3 hover:bg-slate-50 rounded-lg font-bold">1. 제목</a>
+            <a href="#section-dashboard" onclick="toggleMenu()" class="block p-3 hover:bg-slate-50 rounded-lg font-bold">2. 대시보드</a>
+            <a href="#section-keywords" onclick="toggleMenu()" class="block p-3 hover:bg-slate-50 rounded-lg font-bold">3. 키워드</a>
+            
+            <div class="px-3 py-2 mt-2 font-black text-slate-400 text-xs uppercase tracking-wider border-b border-slate-100">4. 핵심요점</div>
+            <div class="pl-2 pr-1 py-1 space-y-1">
+                <a href="#point-intro" onclick="toggleMenu(); openPoint('point-intro')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">서론: 영적 양육의 황금기</a>
+                <a href="#point-1" onclick="toggleMenu(); openPoint('point-1')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">가인과 아벨의 예</a>
+                <a href="#point-2" onclick="toggleMenu(); openPoint('point-2')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">이스마엘의 예</a>
+                <a href="#point-3" onclick="toggleMenu(); openPoint('point-3')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">이삭의 예</a>
+                <a href="#point-4" onclick="toggleMenu(); openPoint('point-4')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">에서와 야곱의 예</a>
+                <a href="#point-5" onclick="toggleMenu(); openPoint('point-5')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">야곱의 아들들의 예</a>
+                <a href="#point-6" onclick="toggleMenu(); openPoint('point-6')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">삼손의 예</a>
+                <a href="#point-7" onclick="toggleMenu(); openPoint('point-7')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">사무엘의 예</a>
+                <a href="#point-8" onclick="toggleMenu(); openPoint('point-8')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">침례자 요한과 예수님의 예</a>
+                <a href="#point-9" onclick="toggleMenu(); openPoint('point-9')" class="block py-2 px-3 hover:bg-indigo-50 rounded-lg text-sm text-slate-600 border-l-2 border-transparent hover:border-indigo-400 font-medium">결론: 바울의 예</a>
+            </div>
+
+            <div class="h-px bg-slate-100 my-2"></div>
+            <a href="#section-quiz" onclick="toggleMenu()" class="block p-3 hover:bg-slate-50 rounded-lg font-bold">5. 퀴즈</a>
+            <a href="#section-prayer" onclick="toggleMenu()" class="block p-3 hover:bg-slate-50 rounded-lg font-bold text-indigo-600">6. 오늘의 기도</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container (Scalable via var(--content-font-size)) -->
+    <main id="main-content" class="max-w-5xl mx-auto px-4 py-8 md:py-12">
+        
+        <!-- 1. Title -->
+        <header id="section-title" class="text-center mb-10 relative pt-4 scroll-anchor">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-800 font-black tracking-widest uppercase mb-4 shadow-sm text-[0.85em]">Message 3</div>
+            <h1 class="font-extrabold text-slate-800 leading-tight tracking-tight break-keep">
+                믿음을 전수하는 일은<br class="hidden md:block"> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-indigo-600 relative inline-block">
+                    태중에서부터
+                    <svg class="absolute w-full h-[0.3em] -bottom-[0.1em] left-0 text-emerald-200" fill="currentColor" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z"></path></svg>
+                </span> 시작되어야 함
+            </h1>
+        </header>
+        
+        <!-- 2. Dashboard (Visual Flow) -->
+        <section id="section-dashboard" class="mb-16 scroll-anchor">
+            <div class="bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 relative overflow-hidden">
+                <h2 class="font-bold text-slate-800 mb-10 text-center relative z-10">대시보드: 영적 인물 조성의 3단계 흐름</h2>
+                
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
+                    <!-- Flow Line Background -->
+                    <div class="flow-line hidden md:block"></div>
+
+                    <!-- Step 1 -->
+                    <div class="relative bg-white p-6 rounded-2xl border-2 border-emerald-100 text-center shadow-md z-10 transform transition hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-[4em] h-[4em] mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-emerald-200">
+                            <svg class="w-[2em] h-[2em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-slate-800 mb-2">1. 시작 (씨앗)</h3>
+                        <p class="text-slate-500 leading-relaxed font-medium">잉태에서부터 합당한 양육 시작.<br>황금기는 잉태부터 12세까지.</p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="relative bg-white p-6 rounded-2xl border-2 border-teal-100 text-center shadow-md z-10 transform transition hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-[4em] h-[4em] mx-auto bg-teal-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-teal-200">
+                            <svg class="w-[2em] h-[2em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-slate-800 mb-2">2. 요인 (토양)</h3>
+                        <p class="text-slate-500 leading-relaxed font-medium">잉태와 그 환경, 무의식적으로 받는 심리적 영향력, 음식과 기도가 성품을 결정함.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative bg-white p-6 rounded-2xl border-2 border-indigo-100 text-center shadow-md z-10 transform transition hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-[4em] h-[4em] mx-auto bg-indigo-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-indigo-200">
+                            <svg class="w-[2em] h-[2em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-slate-800 mb-2">3. 온전케 됨 (열매)</h3>
+                        <p class="text-slate-500 leading-relaxed font-medium">하나님의 대행자로서 경륜을 수행하기에 합당한 자격을 갖춘 사람으로 조성됨.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Keywords -->
+        <section id="section-keywords" class="mb-14 text-center scroll-anchor">
+            <div class="flex flex-wrap justify-center gap-[0.5em]">
+                <span class="px-[1.2em] py-[0.5em] rounded-full bg-slate-100 text-slate-600 font-bold shadow-sm">#황금기 (잉태~12세)</span>
+                <span class="px-[1.2em] py-[0.5em] rounded-full bg-slate-100 text-slate-600 font-bold shadow-sm">#조성의 시작과 요인</span>
+                <span class="px-[1.2em] py-[0.5em] rounded-full bg-slate-100 text-slate-600 font-bold shadow-sm">#어머니의 심리적 영향력</span>
+                <span class="px-[1.2em] py-[0.5em] rounded-full bg-slate-100 text-slate-600 font-bold shadow-sm">#인간의 방법 vs 하나님의 긍휼</span>
+            </div>
+        </section>
+
+        <!-- 4. Core Points (Accordion) -->
+        <section class="space-y-[1em] relative" id="accordion-container">
+            
+            <!-- Point Intro -->
+            <div id="point-intro" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-black">I</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-amber-500 uppercase tracking-wider block mb-[0.2em]">서론</span>
+                            <h3 class="font-bold text-slate-800 m-0">영적 양육의 황금기</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <!-- 성경 구절 -->
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-amber-500 shadow-sm">
+                            <div class="font-bold text-amber-600 mb-[0.5em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                누가복음 2:42
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">예수님께서 <span class="verse-highlight">열두 살이 되셨을 때에도</span>, 그들은 명절의 관례대로 예루살렘에 올라갔다.</p>
+                        </div>
+                        <!-- 요점 해설 (원문 발췌) -->
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-amber-800 bg-amber-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 영적으로 자녀들을 온전케 하는 일에서 황금기는 잉태에서부터 12세까지이다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-amber-800 bg-amber-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 농부들은 한 해의 농사를 씨앗을 뿌리고 싹을 티는 일에서부터 시작한다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-amber-800 bg-amber-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 하나님께 유용한 사람 역시 잉태에서부터 합당한 양육을 시작할 필요가 있다. 성경은 주님 손에 쓰임 받은 모든 사람의 이야기가 잉태로부터 시작된다는 것을 말해준다. 잉태와 그 환경이 그 사람의 조성의 시작이요 요인이기 때문이다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point A -->
+            <div id="point-1" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-black">A</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-red-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 1</span>
+                            <h3 class="font-bold text-slate-800 m-0">가인과 아벨의 예</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-red-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-red-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                창세기 4장 (발췌)
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">5 <span class="verse-highlight">가인과 그의 제물은 받아들이지 않으셨다.</span> 그러자 가인은 몹시 화가 나서 얼굴색이 달라졌다.</p>
+                            <p class="text-slate-700 leading-relaxed font-medium">8 가인이 자기 동생 아벨에게 말하였다. "들로 나가자." 그들이 들에 있을 때, <span class="verse-highlight">가인이 자기 동생 아벨에게 달려들어 그를 죽였다.</span></p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-red-800 bg-red-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 성경에 언급된 인류 최초의 자녀인 가인은 태중에서 바람직한 시간을 보내지 못했을 것이다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-red-800 bg-red-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 그 결과 그는 부모님의 말씀을 순순히 받을 수 없었고, 불순종하는 사람의 길을 가게 된다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-red-800 bg-red-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 반대로 아벨은 가인보다는 좋은 태교를 받았을 것이다. 그것은 그를 다른 사람이 되게 했고, 부모님을 순종함으로 복음의 길을 가는 사람이 되었다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point B -->
+            <div id="point-2" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-black">B</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-orange-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 2</span>
+                            <h3 class="font-bold text-slate-800 m-0">이스마엘의 예 (인간의 방법)</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-orange-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-orange-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                창세기 16:11-12
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">11 여호와의 천사께서 하갈에게 또 말씀하셨다. "네가 이제 임신하였고 아들을 낳을 것이니 그의 이름을 이스마엘이라고 하여라. 왜냐하면 <span class="verse-highlight">여호와께서 너의 고통 소리를 들으셨기 때문이다.</span>"</p>
+                            <p class="text-slate-700 leading-relaxed font-medium">12 "그는 들나귀 같은 사람이 될 것이다. <span class="verse-highlight">그의 손이 모든 사람을 대적할 것이며</span> 모든 사람의 손이 그를 대적할 것이다. 그는 자기의 모든 형제와 대항하며 살게 될 것이다."</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-orange-800 bg-orange-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 아브라함의 여종 하갈이 이스마엘을 잉태했을 때 아브라함의 가정적인 배경과 상황은 태중에 있는 아이에게 결코 좋은 양상은 아니었다. 이스마엘의 태교는 사실 상당히 열악한 상황이었다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-orange-800 bg-orange-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 오랫동안 자녀를 기대했던 사라는 자신의 태가 닫혔다는 것을 깨닫고 자녀를 낳을 가능성이 없다고 생각하게 되고, 결국 하갈을 통해 자녀를 얻으려 했다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-orange-800 bg-orange-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 이러한 상황은 아이에게 좋지 않은 영향을 미쳤을 것이다. 인간의 방법은 늘 불행의 씨앗을 심는다. 현재 그 후예들의 열등감과 증오심과 공격성은 연고 없이 생겨난 것이 아니다. 그러나 하나님은 여전히 긍휼에 풍성하시다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point C -->
+            <div id="point-3" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center font-black">C</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-yellow-600 uppercase tracking-wider block mb-[0.2em]">성경의 예시 3</span>
+                            <h3 class="font-bold text-slate-800 m-0">이삭의 예 (최고의 환경)</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-yellow-500 shadow-sm">
+                            <div class="font-bold text-yellow-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                창세기 21:6
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">사라가 말하였다. "<span class="verse-highlight">하나님께서 나를 웃게 하셨으니</span>, 듣는 사람마다 나와 함께 웃겠구나."</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-yellow-800 bg-yellow-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 사라의 경수가 끊어지고 아브라함까지도 소망이 없어진 때가 되었을 때 하나님은 그에게 나타나셔서 아들을 주시겠다고 약속하셨다. 하나님의 말씀대로 사라가 잉태하였고, 아브라함은 노년에 아들을 얻었다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-yellow-800 bg-yellow-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 잉태한 날부터 아들을 낳을 때까지, 심지어 그 이후에도 이 가정에는 웃음이 떠나지 않았다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-yellow-800 bg-yellow-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 이 좋은 환경은 이삭의 태교에 최고였다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point D -->
+            <div id="point-4" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-black">D</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-blue-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 4</span>
+                            <h3 class="font-bold text-slate-800 m-0">에서와 야곱의 예</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-blue-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-blue-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                창세기 25:22-23
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">22 그런데 <span class="verse-highlight">태 안에 있는 아이들이 서로 다투었다.</span> 리브가는 “왜 나에게 이런 일이 있을까?”라고 하며, 여호와께 문의하러 나아갔다.</p>
+                            <p class="text-slate-700 leading-relaxed font-medium">23 여호와께서 리브가에게 말씀하셨다. "두 민족이 너의 태 안에 있고 두 백성이 너의 태에서 나뉠 것이다. 한 백성이 다른 백성보다 강할 것이고 형이 동생을 섬길 것이다."</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-blue-800 bg-blue-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 같은 태에서, 같은 기간 성장하여, 같은 날 태어난 두 사람은 전혀 다른 성품과 특성을 가진 사람으로 나타난다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-blue-800 bg-blue-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 그들은 태중에서부터 다투고 싸우는 사람들이었고, 태어난 후에도 그들은 다투는 것을 본다. 그것은 아마도 그들의 어머니가 받은 하나님의 약속에 따른 차별 때문이었을 것이다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-blue-800 bg-blue-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 태중에서 그들이 무의식적으로 받은 어머니의 심리적인 영향력은 그들의 기질에 큰 영향을 미친 것처럼 보인다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point E -->
+            <div id="point-5" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center font-black">E</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-purple-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 5</span>
+                            <h3 class="font-bold text-slate-800 m-0">야곱의 아들들의 예</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-purple-500 shadow-sm">
+                            <div class="font-bold text-purple-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                창세기 35:18
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">라헬이 거의 죽게 되어 그녀의 혼이 떠나려 할 때에 <span class="verse-highlight">라헬은 아기의 이름을 베노니라고 하였다.</span> 그러나 그의 아버지는 그를 베냐민이라고 하였다.</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-purple-800 bg-purple-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 야곱은 네 아내가 있는 특별한 상황에 놓이게 되었다. 야곱의 아내들이 자녀를 잉태했을 때의 심리적 상태와 상황이 아이들의 이름에 고스란히 담겨 있다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-purple-800 bg-purple-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 레아는 르우벤(괴로움을 돌아보심), 시므온(사랑받지 못함을 들으셨다). 라헬은 억울함을 풀어주시기를 구하며 단(심판), 납달리(경쟁, 씨름)라 불렀다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-purple-800 bg-purple-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 라헬의 아들에 대한 열망은 결국 결실을 얻어 한 아들을 더 얻지만, 그녀는 그로 인하여 목숨을 잃는다. 그가 베냐민이다. 그의 첫 이름은 베노니, 곧 '슬픔의 아들'이다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point F -->
+            <div id="point-6" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-stone-200 text-stone-700 flex items-center justify-center font-black">F</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-stone-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 6</span>
+                            <h3 class="font-bold text-slate-800 m-0">삼손의 예 (음식과 태교)</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-stone-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-stone-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                사사기 13:4-5
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">4 그러니 이제 <span class="verse-highlight">포도주나 독한 술을 마시지 말고, 어떤 부정한 것도 먹지 않도록 조심하여라.</span></p>
+                            <p class="text-slate-700 leading-relaxed font-medium">5 왜냐하면 네가 임신하여 아들을 낳을 것이기 때문이다. 그의 머리에 삭도를 대서는 안 된다. 왜냐하면 그는 <span class="verse-highlight">태에서부터 하나님께 바쳐진 나실인</span>이 될 것이기 때문이다.</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-stone-800 bg-stone-200 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 삼손의 출생과 관련하여 여호와의 사자는 음식에 관하여 말씀하신다. 음식과 태교는 밀접한 관계가 있다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-stone-800 bg-stone-200 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 아마도 그 가정은 포도주나 독주, 혹은 부정한 음식에 관련된 것을 분별없이 취하는 관습이 있었을 수도 있다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-stone-800 bg-stone-200 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 삼손의 일생을 볼 때, 그의 생활 방식과 여성 편력은 태교와 어떤 관계가 있을 것이다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point G -->
+            <div id="point-7" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center font-black">G</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-cyan-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 7</span>
+                            <h3 class="font-bold text-slate-800 m-0">사무엘의 예 (기도와 헌신)</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-cyan-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-cyan-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                사무엘상 1:11, 20
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">11 한나가 서원하며 말하였다. "오, 만군의 여호와님! ... 이 여종에게 사내아이를 주신다면, <span class="verse-highlight">그 아이의 일생을 여호와께 바치며</span> 그의 머리에 삭도를 대지 않겠습니다."</p>
+                            <p class="text-slate-700 leading-relaxed font-medium">20 때가 되자 한나가 임신하여 아들을 낳고서, “내가 여호와께 그를 구하였다.” 라고 하며 아이의 이름을 사무엘이라 하였다.</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-cyan-800 bg-cyan-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 사무엘의 어머니 한나는 자식이 없는 것으로 인하여 브닌나의 공격을 오랫동안 견뎌왔다. 그녀는 자녀를 위해 기도해왔고, 결국 하나님의 응답으로 자녀를 얻었다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-cyan-800 bg-cyan-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 사무엘이 성전에 올라가는 장면을 볼 때 어린 나이임에도 불구하고 너무도 온화하고 부드러웠다는 것을 본다. 이것 역시 태교와 출생 후의 영적인 교육과 무관하지 않다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-cyan-800 bg-cyan-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 성품에 있어서 사무엘은 온전하였다. 그는 기도의 사람이었으며, 하나님의 대행자로서 하나님의 경륜을 수행하기에 너무도 합당한 자격을 갖춘 하나님의 사람이었다. 태교의 중요성이 여기에 있다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point H -->
+            <div id="point-8" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center font-black">H</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-pink-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 8</span>
+                            <h3 class="font-bold text-slate-800 m-0">침례자 요한과 주 예수님의 예</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-pink-500 shadow-sm space-y-[0.8em]">
+                            <div class="font-bold text-pink-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                누가복음 1장 (발췌)
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">15 그는 주님 앞에서 큰 인물이 될 것이며, 포도주나 독주를 결코 마시지 않을 것이고, <span class="verse-highlight">모태에서부터 성령으로 충일할 것이며</span></p>
+                            <p class="text-slate-700 leading-relaxed font-medium">41 엘리사벳이 마리아의 문안을 받았을 때에 <span class="verse-highlight">태중에 있는 아기가 뛰었으며</span>, 엘리사벳은 성령으로 충일하여</p>
+                            <p class="text-slate-700 leading-relaxed font-medium">42 큰 소리로 외쳐 말하였다. “여인들 가운데 그대가 복이 있으며, <span class="verse-highlight">그대의 태의 열매도 복이 있습니다!</span>”</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-pink-800 bg-pink-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 요한이 태중에 있을 때, 그의 아버지 사가랴의 불신으로 인하여 요한이 태어날 때까지 벙어리로 지내게 되어 긍정적인 음성을 한 번도 듣지 못하고 지냈다. 요한이 태중에서 그러한 상황을 겪은 것이 그의 삶에 영향을 미쳤을 수도 있다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-pink-800 bg-pink-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">구체적 사례</span> 마리아는 늘 긍정적인 사람이었다. 천사의 방문을 받고 잉태에 관한 소식을 접했을 때 즉시 그녀는 그 말씀에 믿음으로 반응했다. 그녀는 또한 정결한 여인이었다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-pink-800 bg-pink-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">실행 및 적용</span> 마리아가 천사의 말에 따라 엘리사벳을 방문했을 때 소리 높여 주님을 찬양했고, 석 달을 함께 보낸 것 역시 태교에 긍정적인 영향을 미쳤을 것이다. 아마도 엘리사벳으로부터 임신과 출산에 관한 많은 것들을 배웠을 것이다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point I -->
+            <div id="point-9" class="accordion-item scroll-anchor bg-white rounded-2xl shadow-sm border border-slate-200 cursor-pointer overflow-hidden hover:shadow-md transition-all">
+                <div class="p-[1.5em] flex items-center justify-between bg-white hover:bg-slate-50" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-[1em]">
+                        <div class="flex-shrink-0 w-[3em] h-[3em] rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black">I</div>
+                        <div>
+                            <span class="text-[0.8em] font-bold text-emerald-500 uppercase tracking-wider block mb-[0.2em]">성경의 예시 9</span>
+                            <h3 class="font-bold text-slate-800 m-0">바울의 예 (결론)</h3>
+                        </div>
+                    </div>
+                    <div class="accordion-icon text-slate-400 shrink-0">
+                        <svg class="w-[1.5em] h-[1.5em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
+                <div class="accordion-content border-t border-slate-100 bg-slate-50/50">
+                    <div class="p-[1.5em] space-y-[1.5em]">
+                        <div class="bg-white p-[1.2em] rounded-xl border-l-4 border-emerald-500 shadow-sm">
+                            <div class="font-bold text-emerald-600 mb-[0.2em] flex items-center gap-[0.5em]">
+                                <svg class="w-[1.2em] h-[1.2em] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>
+                                갈라디아서 1:15
+                            </div>
+                            <p class="text-slate-700 leading-relaxed font-medium">그러나 <span class="verse-highlight">나를 모태에서부터 따로 분별하시고</span> 그분의 은혜로 나를 부르신 하나님께서</p>
+                        </div>
+                        <div class="space-y-[1em]">
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-emerald-800 bg-emerald-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">의미</span> 바울은 자신의 간증에서 하나님과 함께 하는 그의 역사가 어머니의 태중에서 시작되었다는 것을 말했다.</p>
+                            <p class="text-slate-700 leading-relaxed"><span class="inline-block font-bold text-emerald-800 bg-emerald-100 px-[0.6em] py-[0.2em] rounded-md mr-[0.5em] text-[0.9em]">결론 및 적용</span> 잉태 시의 환경과 태교는 어떤 인물의 조성과 성품과 특성에 큰 영향을 미치는 것은 아주 분명하다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 5. Quiz Section -->
+        <section id="section-quiz" class="mt-20 bg-white rounded-[2rem] p-[2.5em] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200 scroll-anchor">
+            <h2 class="font-black text-indigo-900 mb-[0.5em] flex items-center gap-[0.5em]">
+                <span class="flex items-center justify-center w-[1.5em] h-[1.5em] rounded-xl bg-indigo-100 text-indigo-600 shrink-0">
+                    <svg class="w-[1em] h-[1em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </span>
+                학습 점검 퀴즈
+            </h2>
+            <p class="text-indigo-600/80 mb-[2.5em] font-medium quiz-text">선택지를 누르면 문제의 답을 쉽게 고를 수 있습니다.</p>
+
+            <div id="quiz-container" class="space-y-[2.5em]">
+                <!-- Quiz dynamically rendered by JS -->
+            </div>
+            
+            <div id="quiz-results" class="hidden mt-[2.5em] text-center bg-indigo-50 rounded-2xl p-[2.5em] shadow-inner">
+                <h3 class="text-4xl font-black text-indigo-600 mb-[0.5em]" id="score-display"></h3>
+                <p class="text-xl text-slate-700 mb-[1.5em] font-bold" id="feedback-display"></p>
+                <button onclick="resetQuiz()" class="px-[2em] py-[1em] bg-indigo-600 text-white font-bold rounded-full hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200 quiz-text">다시 풀기</button>
+            </div>
+        </section>
+
+        <!-- 6. Prayer Section -->
+        <section id="section-prayer" class="mt-20 text-center scroll-anchor mb-10">
+            <div class="inline-block bg-slate-50 text-slate-800 border border-slate-200 rounded-[2.5rem] p-[3em] shadow-lg relative overflow-hidden max-w-4xl mx-auto w-full">
+                <div class="absolute top-0 right-0 w-[10em] h-[10em] bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 transform translate-x-10 -translate-y-10"></div>
+                
+                <h2 class="font-bold text-indigo-700 mb-[1.5em] flex items-center justify-center gap-[0.5em] relative z-10">
+                    <svg class="w-[1.2em] h-[1.2em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    메시지를 관통하는 기도
+                </h2>
+                <div class="text-[1.1em] font-medium leading-relaxed tracking-wide text-slate-600 relative z-10 space-y-[1.5em]">
+                    <p>
+                        "주님, 믿음을 전수하는 일이 얼마나 일찍 시작되어야 하는지 빛 비춰주심을 감사합니다. 성경에 쓰임 받은 모든 인물이 잉태의 순간부터 조성이 시작되었음을 보았습니다."
+                    </p>
+                    <p>
+                        "이스마엘처럼 불행의 씨앗을 심는 인간의 방법에서 구출하시어, 이삭의 가정처럼 웃음이 떠나지 않는 가장 좋은 환경을 예비하게 하옵소서."
+                    </p>
+                    <p>
+                        "삼손의 부모처럼 부정한 것을 피하게 하시고, 사무엘의 어머니 한나처럼 기도로 아이를 얻어, 장차 하나님의 대행자로서 하나님의 경륜을 수행하기에 합당한 자격을 갖춘 그릇으로 온전케 하옵소서. 아멘."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-10 text-slate-400 text-sm border-t border-slate-200 bg-white">
+        &copy; 믿음의 전수 인포그래픽. 제공된 메시지 지문 기반.
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        // --- Navigation Logic ---
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+        
+        function openPoint(id) {
+            const el = document.getElementById(id);
+            if(el && !el.classList.contains('active')) {
+                toggleAccordion(el.firstElementChild);
+            }
+        }
+
+        // --- Font Size Adjustment (Applies only to --content-font-size) ---
+        let baseFontSize = 16;
+        function changeFontSize(step) {
+            if (step === 0) {
+                baseFontSize = 16;
+            } else {
+                // Limit between 12px and 26px
+                const newSize = baseFontSize + (step * 2);
+                if(newSize >= 12 && newSize <= 26) {
+                    baseFontSize = newSize;
+                }
+            }
+            document.documentElement.style.setProperty('--content-font-size', baseFontSize + 'px');
+        }
+
+        // --- Accordion Logic ---
+        function toggleAccordion(headerElement) {
+            const item = headerElement.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            if (!isActive) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        }
+
+        // --- Quiz Logic (1rem font fixed inside) ---
+        const quizData = [
+            {
+                question: "영적으로 자녀들을 온전케 하는 일에서 '황금기'는 언제부터 언제까지입니까?",
+                options: ["출생 후부터 7세까지", "잉태에서부터 12세까지", "유치원부터 청소년기까지", "잉태에서부터 출생까지"],
+                correct: 1,
+                hint: "농부가 한 해 농사를 언제 시작하는지, 그리고 예수님이 예루살렘 성전에 올라가신 나이를 연결해 보세요."
+            },
+            {
+                question: "이스마엘의 예에서 알 수 있듯, 하나님의 약속을 기다리지 않고 사용한 '인간의 방법'은 자녀에게 어떤 결과를 심습니까?",
+                options: ["탁월한 지혜", "온화한 성품", "불행의 씨앗 (열등감, 증오심)", "풍부한 재물"],
+                correct: 2,
+                hint: "하갈이 이스마엘을 잉태했을 때의 열악한 환경이 후예들의 기질(증오심, 공격성)에 미친 영향을 기억해 보세요."
+            },
+            {
+                question: "이삭의 태교에 최고였던 가장 좋은 가정 환경은 무엇이었습니까?",
+                options: ["철저한 율법 교육", "엄격한 식단 관리", "잉태한 날부터 웃음이 떠나지 않음", "많은 재산과 종들"],
+                correct: 2,
+                hint: "사라가 아들을 낳고 한 고백, '하나님께서 나를 웃게 하셨으니'를 떠올려 보세요."
+            },
+            {
+                question: "야곱의 아내들이 자녀를 잉태했을 때의 심리적 상태가 자녀들에게 반영되었는데, 라헬이 죽어가며 낳은 아들 '베노니'의 뜻은 무엇입니까?",
+                options: ["오른손의 아들", "슬픔의 아들", "기쁨의 아들", "하나님께서 더하심"],
+                correct: 1,
+                hint: "야곱이 베냐민으로 이름을 바꾸기 전, 라헬이 겪은 극심한 해산의 고통과 관련된 이름의 의미입니다."
+            },
+            {
+                question: "삼손의 잉태 소식을 전할 때 천사가 금지한 사항을 통해 알 수 있는 태교와 밀접한 관계가 있는 것은 무엇입니까?",
+                options: ["음식 (포도주나 독주 등)", "의복", "주거지", "직업"],
+                correct: 0,
+                hint: "여호와의 사자가 마노아의 아내에게 수태를 알리며 '부정한 것을 먹지 말라'고 하신 명령과 관련 있습니다."
+            }
+        ];
+
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            quizData.forEach((q, qIndex) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'bg-slate-50 p-[1.5em] rounded-2xl border border-slate-200';
+                
+                // Header with Badge
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'flex gap-[1em] mb-[1.5em] items-start';
+                
+                // Circular Badge
+                const badge = document.createElement('div');
+                badge.className = 'flex-shrink-0 w-[2em] h-[2em] rounded-full bg-indigo-500 text-white font-bold flex items-center justify-center shadow-sm mt-[0.2em] quiz-text';
+                badge.innerText = qIndex + 1;
+                
+                const qTitle = document.createElement('h4');
+                qTitle.className = 'font-bold text-slate-800 leading-relaxed pt-[0.2em] quiz-text';
+                qTitle.innerText = q.question;
+                
+                headerDiv.appendChild(badge);
+                headerDiv.appendChild(qTitle);
+                qDiv.appendChild(headerDiv);
+                
+                // Options (Wider clickable area)
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'space-y-[0.8em] pl-0 md:pl-[3em]';
+                
+                q.options.forEach((opt, oIndex) => {
+                    const label = document.createElement('label');
+                    label.className = 'quiz-option-label flex items-center p-[1em] border border-slate-200 bg-white rounded-xl cursor-pointer w-full';
+                    
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${qIndex}`;
+                    radio.value = oIndex;
+                    radio.className = 'quiz-option-input w-[1.2em] h-[1.2em] text-indigo-600 border-slate-300 focus:ring-indigo-500 shrink-0';
+                    radio.onclick = () => {
+                        userAnswers[qIndex] = oIndex;
+                        checkIfAllAnswered();
+                    };
+                    
+                    const span = document.createElement('span');
+                    span.className = 'ml-[1em] text-slate-700 flex-1 quiz-text';
+                    span.innerText = opt;
+                    
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    optionsDiv.appendChild(label);
+                });
+                
+                qDiv.appendChild(optionsDiv);
+
+                // Hint Button & Area
+                const hintContainer = document.createElement('div');
+                hintContainer.className = 'mt-[1.5em] pl-0 md:pl-[3em]';
+                
+                const hintBtn = document.createElement('button');
+                hintBtn.className = 'font-bold text-indigo-500 hover:text-indigo-700 flex items-center gap-[0.2em] bg-indigo-50 px-[0.8em] py-[0.4em] rounded-full quiz-text transition-colors';
+                hintBtn.innerHTML = '💡 힌트 보기';
+                hintBtn.onclick = () => {
+                    hintContainer.classList.toggle('hint-active');
+                };
+
+                const hintContent = document.createElement('div');
+                hintContent.className = 'hint-content mt-[0.5em] bg-amber-50 p-[1em] rounded-xl border border-amber-100';
+                const hintText = document.createElement('p');
+                hintText.className = 'text-amber-800 quiz-text font-medium';
+                hintText.innerText = q.hint;
+                hintContent.appendChild(hintText);
+
+                hintContainer.appendChild(hintBtn);
+                hintContainer.appendChild(hintContent);
+                qDiv.appendChild(hintContainer);
+                
+                container.appendChild(qDiv);
+            });
+            
+            const submitBtn = document.createElement('button');
+            submitBtn.id = 'submit-quiz-btn';
+            submitBtn.className = 'mt-[2em] w-full py-[1em] bg-slate-200 text-slate-400 font-bold rounded-2xl cursor-not-allowed transition-all duration-300 quiz-text';
+            submitBtn.innerText = '결과 확인하기';
+            submitBtn.disabled = true;
+            submitBtn.onclick = calculateScore;
+            container.appendChild(submitBtn);
+        }
+
+        function checkIfAllAnswered() {
+            const allAnswered = userAnswers.every(ans => ans !== null);
+            const btn = document.getElementById('submit-quiz-btn');
+            if (allAnswered) {
+                btn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
+                btn.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700', 'cursor-pointer', 'shadow-lg', 'shadow-indigo-200', 'hover:-translate-y-1');
+                btn.disabled = false;
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            userAnswers.forEach((ans, index) => {
+                if (ans === quizData[index].correct) {
+                    score++;
+                }
+            });
+            
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resultsDiv = document.getElementById('quiz-results');
+            resultsDiv.classList.remove('hidden');
+            
+            document.getElementById('score-display').innerText = `${score} / ${quizData.length} 점`;
+            
+            let feedback = "";
+            if (score === 5) feedback = "완벽합니다! 태교와 영적 양육의 중요성을 깊이 있게 이해하셨습니다.";
+            else if (score >= 3) feedback = "훌륭합니다! 핵심 흐름을 잘 파악하셨습니다. 성경의 사례들을 다시 한번 확인해 보세요.";
+            else feedback = "조금 더 주의 깊은 읽기가 필요합니다. 위 핵심 요점들을 통해 각 인물의 사례를 다시 살펴보세요.";
+            
+            document.getElementById('feedback-display').innerText = feedback;
+            
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetQuiz() {
+            userAnswers = new Array(quizData.length).fill(null);
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            renderQuiz();
+            
+            document.getElementById('section-quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        window.onload = () => {
+            renderQuiz();
+            const firstPoint = document.getElementById('point-intro');
+            if(firstPoint) {
+                firstPoint.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>
