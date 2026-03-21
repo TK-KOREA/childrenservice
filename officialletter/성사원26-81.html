@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>어린이 소그룹 교재 발간 안내</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9922A;
+    --gold-light: #E8B84B;
+    --gold-pale: #FDF4E3;
+    --navy: #1A2A4A;
+    --navy-mid: #2E4470;
+    --cream: #FEFAF3;
+    --text: #2D2416;
+    --text-mid: #5C4A2A;
+    --accent: #8B3A3A;
+    --green: #3A6B4A;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #F0EBE0;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page {
+    width: 800px;
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    padding: 48px 52px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(201,146,42,0.12);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(201,146,42,0.07);
+  }
+
+  .org-badge {
+    display: inline-block;
+    border: 1.5px solid rgba(201,146,42,0.5);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h1 span {
+    color: var(--gold-light);
+  }
+
+  .header-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .doc-meta {
+    position: absolute;
+    top: 32px; right: 52px;
+    text-align: right;
+    z-index: 1;
+  }
+  .doc-meta p {
+    color: rgba(255,255,255,0.45);
+    font-size: 11.5px;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── GOLD DIVIDER ── */
+  .gold-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  }
+
+  /* ── INTRO BANNER ── */
+  .intro-banner {
+    background: var(--gold-pale);
+    border-left: 5px solid var(--gold);
+    margin: 36px 52px 0;
+    padding: 20px 24px;
+    border-radius: 0 4px 4px 0;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .intro-banner p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .intro-banner strong {
+    color: var(--accent);
+  }
+
+  /* ── BODY ── */
+  .body {
+    padding: 36px 52px 48px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .sec-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .sec-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-title h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── QUOTE BOX ── */
+  .quote-box {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 28px 30px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .quote-box::before {
+    content: '\201C';
+    position: absolute;
+    top: -10px; left: 16px;
+    font-size: 120px;
+    color: rgba(201,146,42,0.2);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-box p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-source {
+    margin-top: 14px;
+    color: var(--gold-light);
+    font-size: 11.5px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  /* ── FEATURE CARDS ── */
+  .cards-title {
+    margin-bottom: 16px;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #EDE4D0;
+    border-radius: 8px;
+    padding: 20px 20px 18px;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  }
+  .card-icon {
+    font-size: 26px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .card p {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.7;
+  }
+  .card-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 0 8px 8px 0;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold));
+    opacity: 0.6;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: flex;
+    gap: 0;
+    background: var(--navy);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .stat-item {
+    flex: 1;
+    padding: 24px 16px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-unit {
+    font-size: 13px;
+    color: var(--gold-light);
+  }
+  .stat-label {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* ── APPLICATION BOX ── */
+  .apply-section {
+    background: linear-gradient(135deg, #1A2A4A 0%, #2E4470 100%);
+    border-radius: 10px;
+    padding: 32px 34px;
+    color: #fff;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .apply-section .sec-title h2 {
+    color: var(--gold-light);
+  }
+  .apply-section .sec-num {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .apply-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 6px;
+  }
+  .apply-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .apply-item-label {
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+  .apply-item-val {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.65;
+  }
+  .apply-item-val strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .deadline-banner {
+    background: var(--gold);
+    border-radius: 6px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    grid-column: 1 / -1;
+  }
+  .deadline-banner .icon { font-size: 22px; }
+  .deadline-banner p { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .deadline-banner span { font-size: 12px; color: var(--navy); opacity: 0.75; }
+
+  /* ── CONTACT ── */
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    background: #fff;
+    border: 1px solid #EDE4D0;
+    border-radius: 8px;
+    animation: fadeUp 0.8s 0.7s ease both;
+  }
+  .contact-icon { font-size: 22px; }
+  .contact-row p { font-size: 13.5px; color: var(--text-mid); }
+  .contact-row strong { color: var(--navy); }
+
+  /* ── ATTACHMENTS ── */
+  .attach-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    animation: fadeUp 0.8s 0.75s ease both;
+  }
+  .attach-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 12.5px;
+    color: var(--text-mid);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    padding: 22px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer p {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.3px;
+  }
+  .footer-logo {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="doc-meta">
+      <p>문서번호: 성사원26-81</p>
+      <p>2026.03.21</p>
+      <p>수신: 각지 교회</p>
+    </div>
+    <div class="org-badge">성경진리사역원 · Bible Truth Ministry</div>
+    <h1>어린이 소그룹 교재<br><span>발간 및 신청 안내</span></h1>
+    <p class="header-sub">전국 다음 세대 추진팀 · 경기도 용인시 기흥구 한보라1로 50</p>
+  </div>
+  <div class="gold-bar"></div>
+
+  <!-- INTRO -->
+  <div class="intro-banner">
+    <p>어린이는 <strong>큰 복음</strong>이며, 어린이 소그룹은 교회의 증가와 확산을 이루는 매우 뛰어난 길입니다.<br>
+    전국 어린이 팀은 올해 어린이 소그룹을 통한 증가와 확산의 일을 추진하기 위해 함께 수고하며 기도로 작업한 <strong>어린이 소그룹 교재</strong>를 발간합니다.</p>
+  </div>
+
+  <div class="body">
+
+    <!-- QUOTE -->
+    <div class="quote-box">
+      <p>"가정에서 하는 모든 어린이 집회는 자주 복음을 전파하고 어린이들의 친척과 이웃 어린이를 초대해야 한다. … 우리가 이 길을 취한다면 이삼 년 내에 타이베이 교회 안에는 만 명의 어린이가 있을 것이다."</p>
+      <p class="quote-source">— 위트니스 리 전집, 1984년 4권, 주님의 회복 안에서의 인도에 관한 중요한 말씀 3권 11장</p>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="sec-title cards-title">
+      <div class="sec-num">4</div>
+      <h2>어린이 소그룹 교재 특징</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-accent"></div>
+        <span class="card-icon">✝️</span>
+        <div class="card-label">Character</div>
+        <h3>인성 함양 & 생활 습관</h3>
+        <p>하나님의 말씀과 윤리와 규범으로 어린이들의 좋은 그릇을 예비하는 데 초점을 맞춘 내용</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <span class="card-icon">📖</span>
+        <div class="card-label">Stories</div>
+        <h3>아름다운 이야기 수록</h3>
+        <p>아름답고 고운 정서가 담긴 흥미로운 이야기들로 어린이들의 마음이 끌리도록 구성</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <span class="card-icon">🌱</span>
+        <div class="card-label">Outreach</div>
+        <h3>교회 밖 어린이도 환영</h3>
+        <p>교회 밖 어린이들과 부모님들이 열린 마음으로 소그룹에 올 수 있도록 기획된 내용</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <span class="card-icon">🎵</span>
+        <div class="card-label">Illustrated</div>
+        <h3>그림 & 노래 수록</h3>
+        <p>매 주차마다 온화하고 정감 있는 그림과 함께 내용에 알맞은 노래를 수록</p>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-num">20</span>
+        <div class="stat-label">성격 항목</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2<span class="stat-unit">주</span></span>
+        <div class="stat-label">항목당 공과</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">40</span>
+        <div class="stat-label">총 주차</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <div class="stat-label">권 (권당 10주)</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">600</span>
+        <div class="stat-label">컬러 페이지</div>
+      </div>
+    </div>
+
+    <!-- APPLICATION -->
+    <div class="apply-section">
+      <div class="sec-title">
+        <div class="sec-num">5</div>
+        <h2>신청 안내</h2>
+      </div>
+      <div class="apply-grid">
+        <div class="apply-item">
+          <div class="apply-item-label">💰 교재 비용</div>
+          <div class="apply-item-val">
+            <strong>2만 8천원</strong> (1세트 4권)<br>
+            학년구분 없음 · 컬러 600p<br>
+            <span style="color:rgba(255,255,255,0.6);font-size:12px;">택배비 5천원 별도</span>
+          </div>
+        </div>
+        <div class="apply-item">
+          <div class="apply-item-label">🏦 입금 계좌</div>
+          <div class="apply-item-val">
+            토스뱅크<br>
+            <strong>1002-2869-8167</strong><br>
+            임주영
+          </div>
+        </div>
+        <div class="apply-item">
+          <div class="apply-item-label">📧 신청 방법</div>
+          <div class="apply-item-val">
+            신청서(첨부1) 작성 후<br>
+            <strong>ngbtm@naver.com</strong><br>
+            으로 이메일 접수
+          </div>
+        </div>
+        <div class="apply-item">
+          <div class="apply-item-label">📞 문의</div>
+          <div class="apply-item-val">
+            이에담 자매<br>
+            <strong>010-4647-4204</strong>
+          </div>
+        </div>
+        <div class="deadline-banner">
+          <span class="icon">⏰</span>
+          <div>
+            <p>신청 마감: 4월 6일 (월) 23:00까지</p>
+            <span>비용 입금 후 신청이 완료됩니다</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTACHMENTS -->
+    <div class="attach-row">
+      <div class="attach-chip">📎 첨부1: 어린이 소그룹 교재 신청서</div>
+      <div class="attach-chip">📎 첨부2: 어린이 소그룹 교재 샘플 일부</div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>경기도 용인시 기흥구 한보라1로 50 · TEL 1544-0031 · FAX 031-286-3194 · ngbtm@naver.com</p>
+    <div class="footer-logo">성경진리사역원</div>
+  </div>
+
+</div>
+</body>
+</html>
