@@ -537,7 +537,7 @@
             const dateKey = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
             const holiday = holidays[dateKey];
 
-            let html = `<div class="flex items-baseline gap-2 mb-4 ribbon-enter"><span class="text-3xl font-black ${date.getDay() === 0 || holiday ? 'text-red-500' : 'text-slate-800'}">${date.getDate()}. ${WEEK_NAMES[date.getDay()]}</span>${holiday ? `<span class="text-red-400 font-bold text-sm ml-1">${holiday}</span>` : ''}</div>`;
+            let html = `<div class="flex items-baseline gap-2 mb-4 ribbon-enter"><span class="text-3xl font-black ${date.getDay() === 0 || holiday ? 'text-red-500' : (date.getDay() === 6 ? 'text-blue-500' : 'text-slate-800')}">${date.getDate()}. ${WEEK_NAMES[date.getDay()]}</span>${holiday ? `<span class="text-red-400 font-bold text-sm ml-1">${holiday}</span>` : ''}</div>`;
             
             html += `<div class="flex flex-col gap-2">`;
             
