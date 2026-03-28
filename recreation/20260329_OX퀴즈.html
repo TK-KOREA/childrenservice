@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>어린이 탐험대: OX 퀴즈 대모험</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --secondary: #FF6B6B;
+            --accent: #4D96FF;
+            --success: #6BCB77;
+            --danger: #FF6B6B;
+            --dark: #2C3E50;
+            --light: #F9F9F9;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nanum Gothic', sans-serif;
+            background-color: #333;
+            color: var(--dark);
+            overflow: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            background-color: white;
+            border: 15px solid var(--primary);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle, #00000005 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        .slide-content {
+            z-index: 1;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, var(--primary), #FFB900);
+            border: none;
+            color: white;
+        }
+
+        .title-slide h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .level-badge {
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+        }
+
+        .quiz-number {
+            font-size: 24px;
+            color: var(--secondary);
+            font-weight: 800;
+        }
+
+        .question-text {
+            font-size: clamp(24px, 5vw, 48px);
+            margin: 50px 0;
+            line-height: 1.4;
+            color: #2c3e50;
+            word-break: keep-all;
+        }
+
+        .ox-options {
+            display: flex;
+            justify-content: center;
+            gap: clamp(40px, 10vw, 100px);
+            margin-top: 30px;
+        }
+
+        .ox-icon {
+            font-size: clamp(60px, 12vw, 120px);
+            opacity: 0.2;
+        }
+
+        .answer-slide {
+            background-color: var(--light);
+            border-color: var(--success);
+        }
+
+        .answer-result {
+            font-size: clamp(30px, 6vw, 60px);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .result-o { color: var(--success); }
+        .result-x { color: var(--danger); }
+
+        .evidence-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: left;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .evidence-text {
+            flex: 1;
+            font-size: clamp(16px, 2.5vw, 22px);
+            line-height: 1.6;
+        }
+
+        .evidence-image {
+            width: 350px;
+            height: 250px;
+            background: #f1f5f9;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 4px solid var(--primary);
+        }
+
+        .evidence-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(44, 62, 80, 0.8);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 8px;
+            background: var(--accent);
+            width: 0%;
+            z-index: 101;
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .evidence-card { flex-direction: column; }
+            .evidence-image { width: 100%; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="presentation-container" id="presentation">
+    
+    <!-- Title Slide -->
+    <div class="slide title-slide">
+        <div class="slide-content">
+            <i class="fa-solid fa-map-marked-alt fa-5x" style="margin-bottom: 30px;"></i>
+            <h1>탐험대 OX 퀴즈</h1>
+            <p>보물상자를 열기 위한 마지막 관문!</p>
+            <div style="margin-top: 50px; font-size: 18px;">키보드 방향키나 버튼을 이용하세요 ↓</div>
+        </div>
+    </div>
+
+    <!-- Quiz 01 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">01</span><span class="level-badge">난이도 ⭐</span></div>
+            <div class="question-text">펭귄은 하늘을 날 수 있는 새다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 펭귄은 하늘을 나는 대신 바닷속에서 수영하는 데 특화되어 있어요. 날개가 지느러미 모양이라 물속에서 아주 빠르답니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMjNfNDEg/MDAxNzM3NjAyNTg4MTIy.kyXUT5MYfOJRjRnKpL_ZfeO94f3-CkgYuWDZmHjqUcEg.9ZCBHgkeHic8Ux8-Yyg3uOAHUpDu6i-XGrzXxvAxXyYg.JPEG/image.JPEG?type=w800" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 02 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">02</span><span class="level-badge">난이도 ⭐</span></div>
+            <div class="question-text">사과는 나무에서 열린다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 사과는 사과나무라는 나무에서 열리는 열매입니다. 봄에 꽃이 피고 나면 그 자리에 맛있는 사과가 자라요.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://i.namu.wiki/i/AUTo2wzlWy4RMVkBHgTkJzsIeKDJtAoWtS5DIQgI-lsgXcU_YY3hoiDAPwngkgP9L7eLm7dHgGOhV2i3yy6B4A.webp" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 03 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">03</span><span class="level-badge">난이도 ⭐</span></div>
+            <div class="question-text">호랑이는 고양이과 동물이다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 호랑이는 사자, 표범 등과 함께 '고양이과'에 속합니다. 덩치는 크지만 고양이와 비슷한 행동 습성이 많답니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://imgnn.seoul.co.kr/img/upload/2020/10/12/SSI_20201012165045.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 04 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">04</span><span class="level-badge">난이도 ⭐</span></div>
+            <div class="question-text">거미의 다리는 6개이다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X (8개)</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 개미나 벌 같은 곤충은 다리가 6개이지만, 거미는 곤충이 아닌 절지동물로 다리가 8개입니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://mblogthumb-phinf.pstatic.net/MjAyMTAzMTZfMjU3/MDAxNjE1ODcyNDMxMzAw.3yIxof9oxkqb7hApmaFRS3RD3nIbaGBxGD0_D2uNgF8g.PtNQhk3HUqI9AbqZc8cjPFL-2eT-c_c6EwB7e1KJk_gg.PNG.ktnok114/2.png?type=w800" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 05 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">05</span><span class="level-badge">난이도 ⭐</span></div>
+            <div class="question-text">눈(Snow)은 따뜻한 날에 내린다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 눈은 하늘의 수증기가 영하의 차가운 기온에서 얼어붙어 떨어지는 것이므로 아주 추운 날에 내립니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://images.unsplash.com/photo-1483354483454-4cd359948304?auto=format&fit=crop&w=400&q=80" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 06 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">06</span><span class="level-badge">난이도 ⭐⭐</span></div>
+            <div class="question-text">고래는 알을 낳아서 번식한다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 고래는 우리 사람처럼 엄마가 새끼를 낳아 젖을 먹여 키우는 '포유류'입니다. 바다에 살지만 물고기가 아니에요!
+                </div>
+                <div class="evidence-image">
+                    <img src="https://imgnn.seoul.co.kr/img/upload/2020/11/07/SSI_20201107130058_V.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 07 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">07</span><span class="level-badge">난이도 ⭐⭐</span></div>
+            <div class="question-text">곤충의 몸은 머리, 가슴, 배 세 부분으로 나뉜다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 곤충은 항상 머리, 가슴, 배로 구분됩니다. 다리는 항상 가슴 부위에 3쌍(6개)이 붙어있는 것이 특징입니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://i.ytimg.com/vi/3sHsY8vIcEY/maxresdefault.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 08 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">08</span><span class="level-badge">난이도 ⭐⭐</span></div>
+            <div class="question-text">북극곰은 남극에 살고 있는 펭귄을 잡아먹는다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 북극곰은 '북극'에만 살고, 펭귄은 주로 '남극'에 살아요. 지구 반대편에 살고 있기 때문에 서로 만날 수 없답니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="data:image/jpeg;base64,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" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 09 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">09</span><span class="level-badge">난이도 ⭐⭐</span></div>
+            <div class="question-text">번개가 친 다음에는 항상 천둥소리가 들린다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 번개는 빛이고 천둥은 소리입니다. 빛이 소리보다 훨씬 빠르기 때문에 번개가 번쩍하고 난 뒤 우르릉 소리가 들리게 됩니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?auto=format&fit=crop&w=400&q=80" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 10 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">10</span><span class="level-badge">난이도 ⭐⭐</span></div>
+            <div class="question-text">세종대왕은 한글을 만드신 왕이다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 세종대왕님은 백성들이 말과 글을 쉽게 사용할 수 있도록 1443년에 우리글 '훈민정음'을 만드셨습니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://i.namu.wiki/i/uhzyvz0UvEmr1SM7A8HJAyDNOdJst-O35bP3vs93CsBcI0LYFU75kZCN4uNDxvwNs7c4hK6iioCjc2KzIk2D-Q.webp" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 11 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">11</span><span class="level-badge">난이도 ⭐⭐⭐</span></div>
+            <div class="question-text">지구가 태양 주위를 도는 것을 '자전'이라고 한다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X (공전)</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 지구가 스스로 도는 것은 '자전', 태양 주위를 크게 도는 것은 '공전'입니다. 공전 한 바퀴는 1년이 걸려요.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=400&q=80" alt="[Image of 지구]">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 12 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">12</span><span class="level-badge">난이도 ⭐⭐⭐</span></div>
+            <div class="question-text">낙타의 혹 안에는 마실 수 있는 물이 가득 들어있다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 낙타의 혹은 물이 아니라 '지방'입니다. 사막에서 먹이를 못 먹을 때 이 지방을 분해해서 에너지로 사용한답니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://scontent-icn2-1.xx.fbcdn.net/v/t1.6435-9/77117528_2655550488000066_8674782800508878848_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=13d280&_nc_aid=0&_nc_ohc=SdqqNR65tf4Q7kNvwG05IZr&_nc_oc=Adrr-ol7_6h-gdk2VDqIgUdkKbCFEAE3j-9wZPA39LzoUy9MkAZBQxaA-5lBkkhXGjs&_nc_zt=23&_nc_ht=scontent-icn2-1.xx&_nc_gid=JQLNZ53dxt4SiwsFWlcaqg&_nc_ss=7a30f&oh=00_AfxGg6JwJV4RH5nfpuPflWwBK4nxINyewJamEe6O82FC8A&oe=69EEEE74" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 13 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">13</span><span class="level-badge">난이도 ⭐⭐⭐</span></div>
+            <div class="question-text">딸기 겉면에 박힌 작은 점들은 사실 씨앗이다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 딸기 표면의 점 하나하나가 사실은 하나의 '열매'이며 그 안에 씨앗이 들어있습니다. 우리가 먹는 빨간 부분은 꽃받침이 변한 거예요.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPrg9XjaGt4eMaqTwPlXCnTUF-REcxKWstQ&s" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 14 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">14</span><span class="level-badge">난이도 ⭐⭐⭐</span></div>
+            <div class="question-text">토끼는 앞다리가 뒷다리보다 더 길다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon"></i>
+                <i class="fa-solid fa-xmark ox-icon" style="opacity: 0.8; color: var(--danger);"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-x">정답 : X</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 토끼는 껑충 잘 뛰기 위해 뒷다리가 앞다리보다 훨씬 길고 튼튼합니다. 그래서 내리막보다 오르막을 훨씬 잘 올라가요.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://images.unsplash.com/photo-1633963580809-08002c6e4093?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz 15 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div class="quiz-header"><span class="quiz-number">15</span><span class="level-badge">난이도 ⭐⭐⭐</span></div>
+            <div class="question-text">세계에서 가장 넓은 나라는 러시아이다.</div>
+            <div class="ox-options">
+                <i class="fa-regular fa-circle ox-icon" style="opacity: 0.8; color: var(--success);"></i>
+                <i class="fa-solid fa-xmark ox-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="slide answer-slide">
+        <div class="slide-content">
+            <div class="answer-result result-o">정답 : O</div>
+            <div class="evidence-card">
+                <div class="evidence-text">
+                    <strong>[해설]</strong> 러시아는 전 세계 육지의 약 $1/9$을 차지할 만큼 넓은 영토를 가지고 있으며, 아시아와 유럽에 걸쳐 있습니다.
+                </div>
+                <div class="evidence-image">
+                    <img src="https://blog.kakaocdn.net/dna/zbS2R/btrvhmMJCPz/AAAAAAAAAAAAAAAAAAAAAKsoaGgF97SY66Z0vJJCNSybRUrEXpXYbZPZ62vR_3kQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1774969199&allow_ip=&allow_referer=&signature=iSRY24yhpP%2Bmwjwes%2BifwytPE6E%3D" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Finish Slide -->
+    <div class="slide title-slide" style="background: linear-gradient(135deg, var(--success), #45a049);">
+        <div class="slide-content">
+            <i class="fa-solid fa-trophy fa-5x" style="margin-bottom: 30px;"></i>
+            <h1>축하합니다!</h1>
+            <p>모든 퀴즈를 완료했습니다.<br>보물상자의 암호를 공개합니다!</p>
+            <div style="font-size: clamp(40px, 10vw, 80px); margin-top: 30px; letter-spacing: 20px;">7 3 0 1</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" disabled><i class="fa-solid fa-chevron-up"></i></button>
+    <button class="nav-btn" id="nextBtn"><i class="fa-solid fa-chevron-down"></i></button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const container = document.getElementById('presentation');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+
+    function updateSlide() {
+        container.style.transform = `translateY(-${currentSlide * 100}vh)`;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+        progressBar.style.width = `${(currentSlide / (slides.length - 1)) * 100}%`;
+    }
+
+    prevBtn.addEventListener('click', () => { if (currentSlide > 0) { currentSlide--; updateSlide(); } });
+    nextBtn.addEventListener('click', () => { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+        else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+    });
+
+    updateSlide();
+</script>
+</body>
+</html>
