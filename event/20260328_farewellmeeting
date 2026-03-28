@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026.03.28 김다솜 자매님 송별 집회</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                        serif: ['Noto Serif KR', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            300: '#e0cec7',
+                            400: '#d2bab0',
+                            500: '#a18072',
+                            600: '#87675a',
+                            700: '#5a4238',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fdfdfc; color: #333; }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <!-- Header Section -->
+    <header class="relative bg-gradient-to-br from-brand-100 to-brand-50 py-20 px-4 overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#a18072 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 fade-in-up">
+            <div class="inline-flex items-center justify-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm text-brand-600 text-sm font-semibold mb-6">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                <span>안양교회 유초등부의 든든한 동역자</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-semibold text-brand-700 mb-4 leading-tight">
+                김다솜 자매님,<br>아름다운 7년의 동행
+            </h1>
+            <p class="text-lg md:text-xl text-brand-600 font-light mt-4 max-w-2xl mx-auto">
+                우리의 자랑스럽고 특별한 존재, 세종교회로의 새로운 발걸음을 온 마음을 다해 축복합니다.
+            </p>
+        </div>
+    </header>
+
+    <!-- Key Stats & Keywords -->
+    <section class="max-w-5xl mx-auto px-4 -mt-10 relative z-20 fade-in-up delay-100">
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center border border-brand-50">
+            <div>
+                <p class="text-brand-400 text-sm font-bold tracking-wider mb-1">봉사 기간</p>
+                <h3 class="text-4xl font-bold text-brand-700 font-serif">7년</h3>
+                <p class="text-gray-500 mt-2 text-sm">낯가리던 3년차에서<br>성숙한 동역자로</p>
+            </div>
+            <div class="border-t md:border-t-0 md:border-l border-brand-100 pt-6 md:pt-0">
+                <p class="text-brand-400 text-sm font-bold tracking-wider mb-1">핵심 사역</p>
+                <h3 class="text-2xl font-bold text-brand-700 font-serif mt-2">유초등부 전시간자</h3>
+                <p class="text-gray-500 mt-2 text-sm">PPT, 찬송, 행정, 진행 보조<br>모든 곳에 미친 묵묵한 손길</p>
+            </div>
+            <div class="border-t md:border-t-0 md:border-l border-brand-100 pt-6 md:pt-0">
+                <p class="text-brand-400 text-sm font-bold tracking-wider mb-1">새로운 부르심</p>
+                <h3 class="text-2xl font-bold text-brand-700 font-serif mt-2">세종교회</h3>
+                <p class="text-gray-500 mt-2 text-sm">주님이 예비하신 곳에서의<br>새로운 건축과 확장</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Word Cloud / Keywords -->
+    <section class="max-w-4xl mx-auto px-4 py-16 text-center fade-in-up delay-200">
+        <h2 class="text-2xl font-serif font-semibold text-brand-700 mb-8">지체들이 기억하는 '다솜 자매'</h2>
+        <div class="flex flex-wrap justify-center gap-3">
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">✨ 안양교회의 오른팔</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">🎧 PPT & 찬송 장인</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">🤍 묵묵한 섬김</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">🍬 솜사탕 같은 한마디</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">☂️ 우리들의 큰 우산</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">🤝 완벽한 코디네이터</span>
+            <span class="px-5 py-2.5 bg-brand-50 text-brand-700 rounded-full text-sm md:text-base font-medium border border-brand-100 shadow-sm transition hover:-translate-y-1">🌱 잘 큰 20살 새봄이</span>
+        </div>
+    </section>
+
+    <!-- Heartfelt Messages (Masonry Grid) -->
+    <section class="bg-brand-50 py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-serif font-semibold text-center text-brand-700 mb-12 fade-in-up delay-200">마음을 담은 롤링페이퍼</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in-up delay-300">
+                <!-- Message 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <div class="absolute top-4 right-4 text-brand-200">
+                        <svg class="w-8 h-8 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "내가 살고 있는 건지 사라지는 건지 알 수 없는 날들 중에, 다솜이는 내게 <strong class="text-brand-600">잘 큰 20살의 새봄이</strong> 같았어. 강박에서 꺼내어 주고 위로가 되어준 특별한 존재야."
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- 우울함을 위로받은 자매님</p>
+                </div>
+
+                <!-- Message 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "저의 <strong class="text-brand-600">오른팔이자 수족과 같은 자매님</strong>. 떠난다고 했을 때 손발이 잘린 느낌이었어요. 빈자리가 너무 크게 느껴지지만, 주님이 기억하시고 보상해 주실 거라 믿습니다."
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- 유초등부 동역 형제님</p>
+                </div>
+
+                <!-- Message 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "뭐든지 빨라요. 필요한 걸 말하기도 전에 <strong class="text-brand-600">이미 다 해놓고 있어요.</strong> 내 마음을 읽었나 싶을 정도로 지체들이 원하는 걸 파악하는 섬세함이 참 고마웠습니다."
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- 곁에서 지켜본 봉사자</p>
+                </div>
+
+                <!-- Message 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "깊어진 하루 속에서도 다시 힘이 나게 해주는 건 <strong class="text-brand-600">솜사탕 같은 너의 한마디</strong>. 안양에서 많이 깎이고 다듬어졌으니 세종에선 더 눈부시게 쓰임 받을 거야!"
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- N행시를 선물한 지체</p>
+                </div>
+
+                <!-- Message 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "누군가 떠날 때 이렇게 큰 사랑으로 환송하는 건 처음 봐요. 보이지 않는 곳에서의 <strong class="text-brand-600">7년간의 헌신과 수고</strong>가 얼마나 귀했는지 증명되는 자리네요."
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- 감동받은 동역자</p>
+                </div>
+
+                <!-- Message 6 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 flex flex-col h-full relative">
+                    <p class="text-gray-700 flex-grow relative z-10 leading-relaxed">
+                        "세종에 가서도 지금처럼 친절하게 섬겨주길 바라요. 그리고 주님이 예비하신 곳에서 <strong class="text-brand-600">좋은 짝(형제님)</strong>을 만나는 축복도 있기를 기대하며 기도합니다! 꽃길만 걸어요."
+                    </p>
+                    <p class="text-sm font-semibold text-brand-500 mt-4 text-right">- 응원하는 안양 지체들</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Blessing & Prayer -->
+    <section class="max-w-3xl mx-auto px-4 py-20 text-center fade-in-up delay-400">
+        <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-100 text-brand-600">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        </div>
+        <h2 class="text-3xl font-serif font-semibold text-brand-700 mb-6">우리의 기도와 축복</h2>
+        <div class="bg-white border-l-4 border-brand-400 p-8 text-left shadow-lg rounded-r-2xl text-gray-700 leading-relaxed italic font-serif">
+            "주님, 지난 7년간 안양교회 유초등부에서 다솜 자매님의 신실한 수고와 헌신을 축복하심에 감사합니다. <br><br>
+            이제 순종하는 마음으로 세종교회로 떠나는 발걸음 위에 주님의 기름 부으심이 넘치게 하소서. 어디에 있든지 살아 있는 이기는 자로 발견되게 하시고, 새로운 곳에서도 몸의 건축을 위해 아름답게 쓰임 받게 하소서. <br><br>
+            건강과 환경을 지켜주시고, 평안 가운데 늘 주님과 친밀히 교통하는 자매가 되기를 예수님의 이름으로 축복합니다. 아멘."
+        </div>
+        
+        <p class="mt-12 text-brand-500 font-medium">
+            언제나 우리의 기도 속에 있을 다솜 자매님,<br>
+            세종에서도 건강하고 행복하게 지내요!
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-700 text-brand-100 py-8 text-center text-sm font-light">
+        <p>2026년 3월 28일 • 안양교회 지체들 일동 드림</p>
+    </footer>
+
+</body>
+</html>
