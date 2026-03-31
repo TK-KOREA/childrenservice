@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>누가복음 7주_예수님께서 팔리시고 잡히심</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Jua&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --primary: #FF6B35;
+  --primary-light: #FFF0E8;
+  --secondary: #4ECDC4;
+  --secondary-light: #E8FBF9;
+  --accent: #FFE66D;
+  --accent2: #FF6B6B;
+  --purple: #A78BFA;
+  --purple-light: #EDE9FE;
+  --blue: #60A5FA;
+  --blue-light: #EFF6FF;
+  --green: #34D399;
+  --green-light: #ECFDF5;
+  --pink: #F472B6;
+  --pink-light: #FDF2F8;
+  --dark: #2D3436;
+  --gray: #636E72;
+  --light: #F8F9FA;
+  --white: #FFFFFF;
+  --font-scale: 1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: linear-gradient(180deg, #FFF8F0 0%, #F0F9FF 30%, #FFF0F5 60%, #F0FFF4 100%);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Sticky Header */
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--accent);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sticky-header .title-mini {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(13px * var(--font-scale));
+  color: var(--primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+.font-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.font-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: var(--white);
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.font-btn:hover { background: var(--primary); color: var(--white); }
+.font-btn:active { transform: scale(0.9); }
+.font-btn.reset { font-size: 12px; border-color: var(--secondary); color: var(--secondary); }
+.font-btn.reset:hover { background: var(--secondary); color: var(--white); }
+
+/* Main Container */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 60px 16px 40px;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, var(--primary) 0%, #FF8C5A 50%, var(--accent) 100%);
+  border-radius: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: heroFloat 3s ease-in-out infinite;
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: -20px;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+.hero-week {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  color: var(--white);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(24px * var(--font-scale));
+  color: var(--white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.hero-sub {
+  font-size: calc(13px * var(--font-scale));
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  z-index: 1;
+}
+.hero-emoji {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 8px;
+  animation: bounce 2s ease infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-10px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Bible Verse Card */
+.verse-card {
+  background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+  border-radius: 20px;
+  padding: 24px 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp 0.6s ease-out;
+}
+.verse-card::before {
+  content: '✦';
+  position: absolute;
+  top: 8px; left: 12px;
+  font-size: 20px;
+  opacity: 0.3;
+  color: white;
+}
+.verse-card::after {
+  content: '✦';
+  position: absolute;
+  bottom: 8px; right: 12px;
+  font-size: 20px;
+  opacity: 0.3;
+  color: white;
+}
+.verse-ref {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: var(--white);
+  padding: 3px 14px;
+  border-radius: 12px;
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.verse-text {
+  font-family: 'Gaegu', cursive;
+  font-size: calc(16px * var(--font-scale));
+  color: var(--white);
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+/* Summary Overview */
+.summary-section {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 2px dashed var(--accent);
+}
+.summary-title {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(16px * var(--font-scale));
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+.summary-item:nth-child(1) { background: var(--secondary-light); animation-delay: 0.1s; }
+.summary-item:nth-child(2) { background: var(--purple-light); animation-delay: 0.2s; }
+.summary-item:nth-child(3) { background: var(--pink-light); animation-delay: 0.3s; }
+.summary-item:nth-child(4) { background: var(--blue-light); animation-delay: 0.4s; }
+.summary-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.summary-item:nth-child(1) .summary-icon { background: var(--secondary); }
+.summary-item:nth-child(2) .summary-icon { background: var(--purple); }
+.summary-item:nth-child(3) .summary-icon { background: var(--pink); }
+.summary-item:nth-child(4) .summary-icon { background: var(--blue); }
+.summary-text {
+  font-size: calc(12.5px * var(--font-scale));
+  color: var(--dark);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Flow connector */
+.flow-connector {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+.flow-arrow {
+  width: 4px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--secondary), var(--primary));
+  border-radius: 4px;
+  position: relative;
+  animation: pulse 2s ease-in-out infinite;
+}
+.flow-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--primary);
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* Story Section */
+.story-section {
+  margin-bottom: 8px;
+}
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: 'Jua', sans-serif;
+  font-size: calc(13px * var(--font-scale));
+  margin-bottom: 12px;
+}
+.section-label.purple { background: var(--purple); }
+
+/* Story Card */
+.story-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+.story-card.highlight-teal { border-left: 5px solid var(--secondary); }
+.story-card.highlight-orange { border-left: 5px solid var(--primary); }
+.story-card.highlight-purple { border-left: 5px solid var(--purple); }
+.story-card.highlight-pink { border-left: 5px solid var(--pink); }
+.story-card.highlight-blue { border-left: 5px solid var(--blue); }
+.story-card.highlight-green { border-left: 5px solid var(--green); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.card-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: calc(15px * var(--font-scale));
+  color: var(--white);
+  flex-shrink: 0;
+}
+.num-teal { background: var(--secondary); }
+.num-orange { background: var(--primary); }
+.num-purple { background: var(--purple); }
+.num-pink { background: var(--pink); }
+.num-blue { background: var(--blue); }
+.num-green { background: var(--green); }
+
+.card-title {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(15px * var(--font-scale));
+  color: var(--dark);
+  line-height: 1.4;
+}
+.card-body {
+  font-size: calc(13px * var(--font-scale));
+  color: #444;
+  line-height: 1.8;
+}
+.card-body p {
+  margin-bottom: 8px;
+}
+.card-body p:last-child { margin-bottom: 0; }
+
+/* Illustration containers */
+.illust {
+  text-align: center;
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 16px;
+  position: relative;
+}
+.illust-scene {
+  font-size: 40px;
+  line-height: 1.4;
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.03); }
+}
+.illust-caption {
+  font-size: calc(11px * var(--font-scale));
+  color: var(--gray);
+  margin-top: 6px;
+  font-style: italic;
+}
+.illust.water { background: linear-gradient(135deg, #E0F7FA, #E8F5E9); }
+.illust.bread { background: linear-gradient(135deg, #FFF8E1, #FFECB3); }
+.illust.money { background: linear-gradient(135deg, #FCE4EC, #F3E5F5); }
+.illust.pray { background: linear-gradient(135deg, #E8EAF6, #E1F5FE); }
+.illust.cross { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+.illust.humble { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+
+/* Keyword highlight */
+.kw {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.kw-teal { background: #D1FAF0; color: #0D7377; }
+.kw-orange { background: #FFE4D6; color: #C4420A; }
+.kw-purple { background: #EDE9FE; color: #6D28D9; }
+.kw-pink { background: #FCE7F3; color: #BE185D; }
+.kw-blue { background: #DBEAFE; color: #1D4ED8; }
+.kw-green { background: #D1FAE5; color: #047857; }
+
+/* Callout box */
+.callout {
+  background: var(--accent);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.callout-icon { font-size: 22px; flex-shrink: 0; }
+.callout-text {
+  font-size: calc(12.5px * var(--font-scale));
+  color: #5D4E00;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Application box */
+.apply-box {
+  background: linear-gradient(135deg, var(--green-light), #D1FAE5);
+  border: 2px solid var(--green);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 12px 0;
+}
+.apply-title {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(13px * var(--font-scale));
+  color: #047857;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.apply-text {
+  font-size: calc(12.5px * var(--font-scale));
+  color: #065F46;
+  line-height: 1.7;
+}
+
+/* Quiz Section */
+.quiz-section {
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%);
+  border-radius: 24px;
+  padding: 24px 16px;
+  margin-bottom: 24px;
+}
+.quiz-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.quiz-header h2 {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(20px * var(--font-scale));
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.quiz-header p {
+  font-size: calc(12px * var(--font-scale));
+  color: rgba(255,255,255,0.7);
+}
+.quiz-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.quiz-question {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+.quiz-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1E1B4B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: calc(14px * var(--font-scale));
+  flex-shrink: 0;
+}
+.quiz-q-text {
+  font-size: calc(13.5px * var(--font-scale));
+  color: #F0F0FF;
+  font-weight: 500;
+  line-height: 1.6;
+  padding-top: 3px;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 40px;
+}
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: all 0.25s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
+}
+.quiz-option:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--accent);
+}
+.quiz-option .opt-marker {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(11px * var(--font-scale));
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+.quiz-option .opt-text {
+  font-size: calc(13px * var(--font-scale));
+  color: #E0E0FF;
+  line-height: 1.5;
+}
+.quiz-option.selected {
+  background: rgba(99,102,241,0.3);
+  border-color: var(--accent);
+}
+.quiz-option.selected .opt-marker {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1E1B4B;
+}
+.quiz-option.correct {
+  background: rgba(52,211,153,0.2) !important;
+  border-color: var(--green) !important;
+}
+.quiz-option.correct .opt-marker {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: white !important;
+}
+.quiz-option.correct .opt-text { color: #A7F3D0 !important; }
+.quiz-option.wrong {
+  background: rgba(248,113,113,0.2) !important;
+  border-color: #F87171 !important;
+}
+.quiz-option.wrong .opt-marker {
+  background: #F87171 !important;
+  border-color: #F87171 !important;
+  color: white !important;
+}
+.quiz-option.wrong .opt-text { color: #FECACA !important; }
+.quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-option.disabled.correct { opacity: 1; }
+
+.quiz-submit {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), #FFC107);
+  color: #1E1B4B;
+  font-family: 'Jua', sans-serif;
+  font-size: calc(16px * var(--font-scale));
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.quiz-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,230,109,0.4); }
+.quiz-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.quiz-result {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 16px;
+}
+.quiz-result.show { display: block; animation: fadeSlideUp 0.5s ease-out; }
+.quiz-result .score-emoji { font-size: 48px; margin-bottom: 8px; }
+.quiz-result .score-text {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(22px * var(--font-scale));
+  margin-bottom: 6px;
+}
+.quiz-result .score-feedback {
+  font-size: calc(13px * var(--font-scale));
+  line-height: 1.6;
+}
+.quiz-result.perfect { background: rgba(52,211,153,0.2); }
+.quiz-result.perfect .score-text { color: #A7F3D0; }
+.quiz-result.perfect .score-feedback { color: #D1FAE5; }
+.quiz-result.great { background: rgba(96,165,250,0.2); }
+.quiz-result.great .score-text { color: #BFDBFE; }
+.quiz-result.great .score-feedback { color: #DBEAFE; }
+.quiz-result.good { background: rgba(251,191,36,0.2); }
+.quiz-result.good .score-text { color: #FDE68A; }
+.quiz-result.good .score-feedback { color: #FEF3C7; }
+.quiz-result.retry { background: rgba(248,113,113,0.15); }
+.quiz-result.retry .score-text { color: #FECACA; }
+.quiz-result.retry .score-feedback { color: #FEE2E2; }
+
+/* Prayer Section */
+.prayer-section {
+  background: linear-gradient(135deg, #FFF7ED, #FFFBEB, #FFF1F2);
+  border-radius: 24px;
+  padding: 24px 20px;
+  margin-bottom: 32px;
+  border: 2px solid #FBBF24;
+  position: relative;
+  overflow: hidden;
+}
+.prayer-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(251,191,36,0.1), transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(244,114,182,0.08), transparent 50%);
+  pointer-events: none;
+}
+.prayer-header {
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+.prayer-header .prayer-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 4px;
+  animation: gentleFloat 3s ease-in-out infinite;
+}
+.prayer-header h2 {
+  font-family: 'Jua', sans-serif;
+  font-size: calc(18px * var(--font-scale));
+  color: var(--primary);
+}
+.prayer-text {
+  font-family: 'Gaegu', cursive;
+  font-size: calc(15px * var(--font-scale));
+  color: #5D4037;
+  line-height: 2;
+  text-align: center;
+  position: relative;
+  font-weight: 700;
+}
+.prayer-amen {
+  font-family: 'Jua', sans-serif;
+  text-align: center;
+  font-size: calc(18px * var(--font-scale));
+  color: var(--primary);
+  margin-top: 12px;
+  position: relative;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: calc(11px * var(--font-scale));
+  color: var(--gray);
+}
+
+/* Animations */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll animations */
+.scroll-anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-anim.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sparkle effect */
+.sparkle {
+  display: inline-block;
+  animation: sparkleAnim 1.5s ease-in-out infinite;
+}
+@keyframes sparkleAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Timeline connector line */
+.timeline-line {
+  position: relative;
+  padding-left: 20px;
+  margin-left: 8px;
+  border-left: 3px dashed var(--secondary);
+}
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--secondary);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.timeline-line.line-purple { border-left-color: var(--purple); }
+.timeline-line.line-purple::before { background: var(--purple); }
+</style>
+</head>
+<body>
+
+<!-- Sticky Header -->
+<div class="sticky-header">
+  <span class="title-mini">📖 누가복음 7주_예수님께서 팔리시고 잡히심</span>
+  <div class="font-controls">
+    <button class="font-btn" onclick="changeFont(-1)" aria-label="글씨 축소">−</button>
+    <button class="font-btn reset" onclick="changeFont(0)" aria-label="글씨 초기화">가</button>
+    <button class="font-btn" onclick="changeFont(1)" aria-label="글씨 확대">+</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero scroll-anim">
+    <span class="hero-week">누가복음 · 7주차 · 어린이 주일공과</span>
+    <h1>예수님께서 팔리시고 잡히심</h1>
+    <p class="hero-sub">예수님은 우리를 위해 겸손히 섬기시고,<br>아버지의 뜻에 죽기까지 순종하셨어요</p>
+  </div>
+
+  <!-- Bible Verse -->
+  <div class="verse-card scroll-anim">
+    <span class="verse-ref">📜 누가복음 22:42</span>
+    <p class="verse-text">
+      "아버지, 아버지께서 원하신다면,<br>
+      이 잔을 나에게서 거두어 주십시오.<br>
+      그러나 <span style="color:#FFE66D">나의 뜻이 아니라</span><br>
+      <span style="color:#FFE66D">아버지의 뜻이 이루어지도록</span> 하십시오."
+    </p>
+  </div>
+
+  <!-- Summary Overview -->
+  <div class="summary-section scroll-anim">
+    <div class="summary-title">🗺️ 오늘의 이야기 한눈에 보기</div>
+    <div class="summary-items">
+      <div class="summary-item">
+        <div class="summary-icon">🦶</div>
+        <div class="summary-text">예수님이 제자들의 <strong>발을 씻겨</strong> 주시며 <strong>섬김의 본</strong>을 보여 주셨어요</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-icon">🍞</div>
+        <div class="summary-text">예수님이 직접 <strong>주님의 상</strong>을 세우시며 기념하라고 명령하셨어요</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-icon">💰</div>
+        <div class="summary-text">돈을 사랑한 <strong>가룟 유다</strong>에 의해 은 삼십 개에 <strong>팔리셨어요</strong></div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-icon">🙏</div>
+        <div class="summary-text">예수님은 아버지의 뜻에 <strong>죽기까지 순종</strong>하셨어요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 첫 번째 이야기 ===== -->
+  <div class="story-section scroll-anim">
+    <div class="section-label">📖 첫 번째 이야기</div>
+  </div>
+
+  <!-- Card 1: 발 씻김 -->
+  <div class="story-card highlight-teal scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-teal">1</div>
+      <div class="card-title">예수님이 제자들의 발을 씻겨 주셨어요</div>
+    </div>
+    <div class="illust water">
+      <div class="illust-scene">🧎‍♂️💧🦶✨</div>
+      <div class="illust-caption">예수님이 무릎을 꿇고 제자들의 발을 씻겨 주시는 모습</div>
+    </div>
+    <div class="card-body">
+      <p>유월절 전에, 예수님께서 제자들과 함께 저녁 식사를 하실 때였어요. 예수님은 자신이 곧 십자가에 못 박히시고, 하나님께로 돌아갈 것을 아셨어요.</p>
+      <p>예수님은 일어나셔서 <span class="kw kw-teal">대야에 물을 부으신 후 제자들의 발을 씻겨 주시고</span>, 허리에 동여매신 수건으로 닦아 주셨어요. 길의 먼지로 인해 더러워졌던 제자들의 발은 깨끗해졌어요.</p>
+    </div>
+    <div class="callout">
+      <span class="callout-icon">💬</span>
+      <span class="callout-text">"여러분도 <strong>서로 발을 씻겨 주어야</strong> 합니다." — 예수님의 당부</span>
+    </div>
+  </div>
+
+  <div class="flow-connector"><div class="flow-arrow"></div></div>
+
+  <!-- Card 2: 주님의 상 -->
+  <div class="story-card highlight-orange scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-orange">2</div>
+      <div class="card-title">예수님이 주님의 상을 세우셨어요</div>
+    </div>
+    <div class="illust bread">
+      <div class="illust-scene">🍞🍷🙏✨</div>
+      <div class="illust-caption">떡을 떼고 잔을 나누시는 예수님</div>
+    </div>
+    <div class="card-body">
+      <p>예수님은 베드로와 요한을 보내시며, 유월절 음식을 준비하라고 말씀하셨어요. 예수님은 제자들과 함께 다락방에 모여, 유월절 음식을 잡수셨어요.</p>
+      <p>그리고 <span class="kw kw-orange">떡을 가지시어 감사드리시고, 그것을 떼시어 제자들에게 주셨어요. 또 같은 방식으로 잔을 나누어 주셨습니다.</span></p>
+      <p>예수님은 십자가에 가시기 전에 직접 그분의 상을 세우셨으며, 제자들에게 이것을 행하여 <span class="kw kw-orange">그분 자신을 기념하라고 명령</span>하셨어요.</p>
+    </div>
+    <div class="callout">
+      <span class="callout-icon">⛪</span>
+      <span class="callout-text">이러한 주님의 명령에 따라 <strong>주님의 상 집회</strong>가 오늘날까지 이어져 오고 있어요. 주일마다 형제자매님들은 함께 모여 주님의 상 집회를 가져요.</span>
+    </div>
+  </div>
+
+  <div class="flow-connector"><div class="flow-arrow"></div></div>
+
+  <!-- Card 3: 발 씻김의 의미 -->
+  <div class="story-card highlight-green scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-green">3</div>
+      <div class="card-title">발을 씻겨 주신 것은 무엇을 의미할까요?</div>
+    </div>
+    <div class="illust humble">
+      <div class="illust-scene">🤲💕👦👧</div>
+      <div class="illust-caption">겸손하게 서로를 섬기는 모습</div>
+    </div>
+    <div class="card-body">
+      <p>다른 사람의 더러운 발을 씻겨 줄 수 있으려면 <span class="kw kw-green">자신을 겸손히 낮추어야</span> 하지요. 예수님은 제자들의 발을 씻겨 주심으로 <span class="kw kw-green">사람을 섬기는 본</span>을 보여 주셨어요.</p>
+      <p>섬기는 사람은 자신을 겸손히 낮추어 다른 사람을 사랑으로 돌봐야 해요. 예수님은 우리의 더러운 발을 씻겨 주실 만큼 <span class="kw kw-green">겸손한 인성</span>을 가지셨어요.</p>
+    </div>
+    <div class="apply-box">
+      <div class="apply-title">🌱 우리도 이렇게 해요!</div>
+      <div class="apply-text">
+        우리도 예수님의 인성을 본받아 겸손한 마음을 가진 사람들이 되어야 해요.<br>
+        ✔ 친구들과 지나치게 <strong>경쟁하지 말아요</strong><br>
+        ✔ 다른 사람들을 <strong>무시하지 말아요</strong><br>
+        ✔ 자신을 <strong>자랑하지 말아요</strong><br>
+        ✔ 소그룹 친구들과 동생들을 <strong>사랑으로 돌봐요</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-connector"><div class="flow-arrow"></div></div>
+
+  <!-- Card 4: 주일의 의미 -->
+  <div class="story-card highlight-blue scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-blue">4</div>
+      <div class="card-title">주일(主日)은 주님의 날이에요</div>
+    </div>
+    <div class="card-body">
+      <p>세상 사람들은 '일요일'이라고 부르는 날을, 주님의 자녀들인 우리는 <span class="kw kw-blue">'주일(主日)'</span>이라고 불러야 해요. '주일(主日)'의 뜻은 <span class="kw kw-blue">'주님의 날'</span>이에요.</p>
+      <p>주님의 날에 우리는 함께 모여 주님을 위한 잔치를 가져야 해요. '주님의 상'은 바로, '주님의 잔치'를 의미해요.</p>
+      <p>주일은 우리 자신의 기쁨과 만족을 위해 시간을 보내는 날이 아니에요. 주일은 <span class="kw kw-blue">모든 형제자매들이 함께 모여 주님을 위해 잔치를 갖고 주님을 기념하는 날</span>이에요.</p>
+    </div>
+  </div>
+
+  <div class="flow-connector"><div class="flow-arrow"></div></div>
+
+  <!-- ===== 두 번째 이야기 ===== -->
+  <div class="story-section scroll-anim">
+    <div class="section-label purple">📖 두 번째 이야기</div>
+  </div>
+
+  <!-- Card 5: 가룟 유다의 배반 -->
+  <div class="story-card highlight-pink scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-pink">5</div>
+      <div class="card-title">예수님이 가룟 유다에 의해 팔리셨어요</div>
+    </div>
+    <div class="illust money">
+      <div class="illust-scene">💰😢⛓️</div>
+      <div class="illust-caption">돈을 사랑한 가룟 유다가 예수님을 팔아 넘겼어요</div>
+    </div>
+    <div class="card-body">
+      <p>주님은 <span class="kw kw-pink">돈을 사랑한 제자, 가룟 유다에 의해 팔리셨어요.</span></p>
+      <p>사람이 세상을 살아가기 위해서 돈은 꼭 필요하고, 생계를 위해서 사람은 마땅히 돈을 벌어야 해요. 하지만 우리는 가룟 유다처럼 <span class="kw kw-pink">돈을 사랑하는 사람</span>이 되어서는 안 돼요.</p>
+    </div>
+    <div class="callout">
+      <span class="callout-icon">📖</span>
+      <span class="callout-text"><strong>마태복음 6:24</strong> — "그 누구도 두 주인을 섬길 수 없습니다. 여러분은 하나님과 마몬을 함께 섬길 수 없습니다."</span>
+    </div>
+    <div class="apply-box">
+      <div class="apply-title">💡 돈을 사랑하지 않으려면?</div>
+      <div class="apply-text">
+        우리는 하나님의 자녀들로서 마몬(돈)을 섬기고 사랑해선 안 돼요. 돈을 사랑하는 것은 하나님 앞에서 죄를 짓는 것이에요.<br><br>
+        <strong>헌금하는 습관</strong>을 세워요! 용돈의 십분의 일을 따로 빼서 주일에 헌금하면, 주님께 감사드리는 마음으로 즐거이 헌금하는 습관을 세울 때, 돈을 사랑하지 않도록 우리의 마음을 지킬 수 있어요.
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-connector"><div class="flow-arrow"></div></div>
+
+  <!-- Card 6: 예수님의 순종 -->
+  <div class="story-card highlight-purple scroll-anim">
+    <div class="card-header">
+      <div class="card-num num-purple">6</div>
+      <div class="card-title">예수님은 아버지의 뜻에 죽기까지 순종하셨어요</div>
+    </div>
+    <div class="illust cross">
+      <div class="illust-scene">✝️🌅🙏💛</div>
+      <div class="illust-caption">아버지의 뜻에 순종하시는 예수님</div>
+    </div>
+    <div class="card-body">
+      <p>예수님은 아버지의 뜻에 순종하셔서 <span class="kw kw-purple">기꺼이 붙잡히시고 십자가에서 죽으셨어요.</span></p>
+      <p>우리도 이러한 예수님의 태도를 본받아, <span class="kw kw-purple">부모님의 말씀과 가르침에 항상 순종하는 사람</span>이 되어야 해요.</p>
+    </div>
+    <div class="apply-box">
+      <div class="apply-title">🌟 오늘의 적용</div>
+      <div class="apply-text">예수님은 죽기까지 아버지의 뜻에 순종하셨어요. 우리도 예수님을 본받아 <strong>부모님의 말씀과 가르침에 순종하는 어린이</strong>가 되어요!</div>
+    </div>
+  </div>
+
+  <!-- ===== 정리 ===== -->
+  <div class="story-card scroll-anim" style="border-left: 5px solid var(--accent); background: linear-gradient(135deg, #FFFBEB, #FFF7ED);">
+    <div class="card-header">
+      <div class="card-num" style="background: var(--accent); color: #92400E;">📝</div>
+      <div class="card-title" style="color: #92400E;">오늘 배운 내용 정리</div>
+    </div>
+    <div class="card-body">
+      <p>예수님은 제자들의 먼지 묻은 발을 씻겨 주심으로, 사람들을 <span class="kw kw-teal">사랑으로 섬기는 본</span>을 보여 주셨어요.</p>
+      <p>우리도 예수님의 인성을 본받아 항상 자신을 <span class="kw kw-green">겸손하게 낮추고</span>, 교회 안의 형제자매들과 소그룹 친구들을 사랑으로 돌봐야 해요.</p>
+      <p>또한 예수님은 돈을 사랑한 제자 가룟 유다에게 배반당하시어 <span class="kw kw-pink">은 삼십 개에 팔리셨어요</span>. 하지만 예수님은 아버지의 뜻에 순종하셔서 기꺼이 붙잡히시고 십자가에서 죽으셨어요.</p>
+      <p>우리도 예수님을 본받아 <span class="kw kw-purple">부모님의 말씀과 가르침에 순종하는 어린이</span>가 되어요.</p>
+    </div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div class="quiz-section scroll-anim" id="quizSection">
+    <div class="quiz-header">
+      <h2>🧩 오늘의 퀴즈</h2>
+      <p>오늘 배운 말씀을 잘 기억하는지 확인해 보아요!</p>
+    </div>
+
+    <div class="quiz-item" data-correct="2">
+      <div class="quiz-question">
+        <div class="quiz-num">1</div>
+        <div class="quiz-q-text">예수님께서 제자들의 발을 씻겨 주신 것은 어떤 의미일까요?</div>
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0"><span class="opt-marker">①</span><span class="opt-text">제자들이 목욕을 못 해서</span></div>
+        <div class="quiz-option" data-idx="1"><span class="opt-marker">②</span><span class="opt-text">예수님이 청소를 좋아해서</span></div>
+        <div class="quiz-option" data-idx="2"><span class="opt-marker">③</span><span class="opt-text">겸손히 낮추어 사람을 섬기는 본을 보여 주시려고</span></div>
+        <div class="quiz-option" data-idx="3"><span class="opt-marker">④</span><span class="opt-text">제자들에게 벌을 주시려고</span></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="1">
+      <div class="quiz-question">
+        <div class="quiz-num">2</div>
+        <div class="quiz-q-text">예수님을 은 삼십 개에 팔아넘긴 제자는 누구인가요?</div>
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0"><span class="opt-marker">①</span><span class="opt-text">베드로</span></div>
+        <div class="quiz-option" data-idx="1"><span class="opt-marker">②</span><span class="opt-text">가룟 유다</span></div>
+        <div class="quiz-option" data-idx="2"><span class="opt-marker">③</span><span class="opt-text">요한</span></div>
+        <div class="quiz-option" data-idx="3"><span class="opt-marker">④</span><span class="opt-text">야고보</span></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="3">
+      <div class="quiz-question">
+        <div class="quiz-num">3</div>
+        <div class="quiz-q-text">'주일(主日)'의 뜻은 무엇인가요?</div>
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0"><span class="opt-marker">①</span><span class="opt-text">쉬는 날</span></div>
+        <div class="quiz-option" data-idx="1"><span class="opt-marker">②</span><span class="opt-text">놀이하는 날</span></div>
+        <div class="quiz-option" data-idx="2"><span class="opt-marker">③</span><span class="opt-text">공부하는 날</span></div>
+        <div class="quiz-option" data-idx="3"><span class="opt-marker">④</span><span class="opt-text">주님의 날</span></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="0">
+      <div class="quiz-question">
+        <div class="quiz-num">4</div>
+        <div class="quiz-q-text">예수님이 떡을 떼고 잔을 나누며 세우신 것은 무엇인가요?</div>
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0"><span class="opt-marker">①</span><span class="opt-text">주님의 상</span></div>
+        <div class="quiz-option" data-idx="1"><span class="opt-marker">②</span><span class="opt-text">생일 파티</span></div>
+        <div class="quiz-option" data-idx="2"><span class="opt-marker">③</span><span class="opt-text">유월절 요리 대회</span></div>
+        <div class="quiz-option" data-idx="3"><span class="opt-marker">④</span><span class="opt-text">졸업 잔치</span></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" data-correct="2">
+      <div class="quiz-question">
+        <div class="quiz-num">5</div>
+        <div class="quiz-q-text">예수님의 순종을 본받아 우리가 해야 할 일은 무엇인가요?</div>
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-idx="0"><span class="opt-marker">①</span><span class="opt-text">친구들과 매일 경쟁하기</span></div>
+        <div class="quiz-option" data-idx="1"><span class="opt-marker">②</span><span class="opt-text">내가 하고 싶은 것만 하기</span></div>
+        <div class="quiz-option" data-idx="2"><span class="opt-marker">③</span><span class="opt-text">부모님의 말씀과 가르침에 순종하기</span></div>
+        <div class="quiz-option" data-idx="3"><span class="opt-marker">④</span><span class="opt-text">자신을 자랑하기</span></div>
+      </div>
+    </div>
+
+    <button class="quiz-submit" id="quizSubmit" onclick="submitQuiz()" disabled>
+      모든 문제를 풀어주세요 ✏️
+    </button>
+
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+
+  <!-- ===== PRAYER ===== -->
+  <div class="prayer-section scroll-anim">
+    <div class="prayer-header">
+      <span class="prayer-icon">🙏</span>
+      <h2>함께 기도해요</h2>
+    </div>
+    <div class="prayer-text">
+      사랑하는 주 예수님!<br>
+      제자들의 발을 씻어 주신 주님처럼<br>
+      저도 겸손하게 낮아져서,<br>
+      소그룹 친구들과 동생들을<br>
+      사랑으로 돌보겠습니다.<br><br>
+      또한 저도 주님처럼<br>
+      부모님께 순종하는 어린이가 되고 싶어요.<br>
+      제가 부모님의 말씀을 잘 새겨 듣고<br>
+      부모님 말씀대로 잘 행동하게 도와 주세요.
+    </div>
+    <div class="prayer-amen">🙏 아멘! 🙏</div>
+  </div>
+
+  <div class="footer">
+    누가복음 7주 · 예수님께서 팔리시고 잡히심 · 어린이 주일공과
+  </div>
+
+</div>
+
+<script>
+// Font size control
+let fontScale = 1;
+function changeFont(dir) {
+  if (dir === 0) { fontScale = 1; }
+  else if (dir === 1) { fontScale = Math.min(fontScale + 0.08, 1.5); }
+  else { fontScale = Math.max(fontScale - 0.08, 0.7); }
+  document.documentElement.style.setProperty('--font-scale', fontScale);
+}
+
+// Scroll animations
+function initScrollAnim() {
+  const els = document.querySelectorAll('.scroll-anim');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
+}
+
+// Quiz logic
+const answers = {};
+const totalQ = 5;
+
+document.querySelectorAll('.quiz-option').forEach(opt => {
+  opt.addEventListener('click', function() {
+    const item = this.closest('.quiz-item');
+    if (item.classList.contains('answered')) return;
+
+    const qIdx = Array.from(document.querySelectorAll('.quiz-item')).indexOf(item);
+    item.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    this.classList.add('selected');
+    answers[qIdx] = parseInt(this.dataset.idx);
+
+    const btn = document.getElementById('quizSubmit');
+    if (Object.keys(answers).length === totalQ) {
+      btn.disabled = false;
+      btn.textContent = '정답 확인하기 🎯';
+    } else {
+      btn.textContent = `${Object.keys(answers).length}/${totalQ} 문제 완료 ✏️`;
+    }
+  });
+});
+
+function submitQuiz() {
+  let score = 0;
+  const items = document.querySelectorAll('.quiz-item');
+
+  items.forEach((item, idx) => {
+    const correct = parseInt(item.dataset.correct);
+    const selected = answers[idx];
+    item.classList.add('answered');
+
+    item.querySelectorAll('.quiz-option').forEach(opt => {
+      const oidx = parseInt(opt.dataset.idx);
+      opt.classList.add('disabled');
+      if (oidx === correct) {
+        opt.classList.add('correct');
+        opt.querySelector('.opt-marker').textContent = '✓';
+      }
+      if (oidx === selected && oidx !== correct) {
+        opt.classList.add('wrong');
+        opt.querySelector('.opt-marker').textContent = '✗';
+      }
+    });
+
+    if (selected === correct) score++;
+  });
+
+  const result = document.getElementById('quizResult');
+  let emoji, cls, feedback;
+  if (score === 5) {
+    emoji = '🎉🏆🌟'; cls = 'perfect';
+    feedback = '완벽해요! 오늘 말씀을 정말 잘 들었구나!';
+  } else if (score >= 4) {
+    emoji = '👏😊'; cls = 'great';
+    feedback = '아주 잘했어요! 거의 다 맞았어요!';
+  } else if (score >= 3) {
+    emoji = '💪😄'; cls = 'good';
+    feedback = '잘했어요! 조금만 더 복습하면 완벽할 거예요!';
+  } else {
+    emoji = '📖🤗'; cls = 'retry';
+    feedback = '괜찮아요! 위의 내용을 다시 한번 읽어보고 도전해 봐요!';
+  }
+
+  result.className = 'quiz-result show ' + cls;
+  result.innerHTML = `
+    <div class="score-emoji">${emoji}</div>
+    <div class="score-text">${score}/${totalQ} 정답!</div>
+    <div class="score-feedback">${feedback}</div>
+  `;
+
+  document.getElementById('quizSubmit').style.display = 'none';
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', initScrollAnim);
+</script>
+</body>
+</html>
