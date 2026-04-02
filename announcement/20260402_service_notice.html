@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교회의 실질적인 필요를 돌보기 위해 자원하는 영으로 봉사함</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f7f6f3;
+        }
+        .quote-font {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+        .word-keep-all {
+            word-break: keep-all;
+        }
+        /* 부드럽고 화려한 체크 애니메이션을 위한 스타일 */
+        .check-stroke path {
+            stroke-dasharray: 24;
+            stroke-dashoffset: 24;
+            transition: stroke-dashoffset 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+        }
+        label:has(input:checked) .check-stroke path {
+            stroke-dashoffset: 0;
+        }
+        @keyframes bounce-scale {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.75); }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        label:has(input:checked) .checkbox-box {
+            animation: bounce-scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .smooth-transition {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        /* 체크 시 퍼져나가는 링 애니메이션 */
+        .ring-burst {
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            opacity: 0;
+            transform: scale(1);
+        }
+        @keyframes ring-explode {
+            0% { transform: scale(1); opacity: 0.8; border-width: 4px; }
+            100% { transform: scale(2.5); opacity: 0; border-width: 0px; }
+        }
+        label:has(input:checked) .ring-burst {
+            animation: ring-explode 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased p-3 sm:p-8 flex items-center justify-center min-h-screen">
+
+    <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-6 sm:p-8 text-center word-keep-all">
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">교회의 실질적인 필요를 돌보기 위해 자원하는 영으로 봉사함</h1>
+            <p class="text-sm sm:text-base text-amber-100 mt-2 font-light">그리스도의 몸을 건축하기 위한 아름다운 수고</p>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="p-5 sm:p-10">
+            
+            <!-- Introduction & Core Message -->
+            <!-- Service Checklist -->
+            <div class="max-w-sm sm:max-w-md mx-auto bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6 mb-8 sm:mb-10 text-left">
+                <h3 class="text-[16px] sm:text-lg font-bold text-gray-800 mb-4 border-b border-gray-100 pb-3 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    봉사 필요 영역
+                </h3>
+                <ul class="space-y-3" id="service-checklist">
+                    <li>
+                        <label class="group relative flex items-center p-2 sm:p-3 rounded-lg border border-transparent cursor-pointer smooth-transition active:scale-[0.98] select-none hover:bg-gray-50 has-[:checked]:bg-emerald-50/50">
+                            <input type="checkbox" class="sr-only" checked>
+                            <div class="checkbox-box relative w-6 h-6 border-2 rounded flex items-center justify-center mr-3 smooth-transition bg-white border-gray-300 group-has-[:checked]:bg-emerald-500 group-has-[:checked]:border-emerald-500 shadow-sm">
+                                <div class="ring-burst text-emerald-400"></div>
+                                <svg class="w-3.5 h-3.5 text-white check-stroke relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <div class="sparkle-container absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+                            </div>
+                            <div class="relative smooth-transition text-gray-700 group-has-[:checked]:text-emerald-800 group-has-[:checked]:font-bold">
+                                <span class="text-[15px] sm:text-base">총괄 - TK</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="group relative flex items-center p-2 sm:p-3 rounded-lg border border-transparent cursor-pointer smooth-transition active:scale-[0.98] select-none hover:bg-gray-50 has-[:checked]:bg-emerald-50/50">
+                            <input type="checkbox" class="sr-only" checked>
+                            <div class="checkbox-box relative w-6 h-6 border-2 rounded flex items-center justify-center mr-3 smooth-transition bg-white border-gray-300 group-has-[:checked]:bg-emerald-500 group-has-[:checked]:border-emerald-500 shadow-sm">
+                                <div class="ring-burst text-emerald-400"></div>
+                                <svg class="w-3.5 h-3.5 text-white check-stroke relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <div class="sparkle-container absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+                            </div>
+                            <div class="relative smooth-transition text-gray-700 group-has-[:checked]:text-emerald-800 group-has-[:checked]:font-bold">
+                                <span class="text-[15px] sm:text-base">총무 - YK</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="group relative flex items-center p-2 sm:p-3 rounded-lg border border-transparent cursor-pointer smooth-transition active:scale-[0.98] select-none hover:bg-gray-50 has-[:checked]:bg-emerald-50/50">
+                            <input type="checkbox" class="sr-only" checked>
+                            <div class="checkbox-box relative w-6 h-6 border-2 rounded flex items-center justify-center mr-3 smooth-transition bg-white border-gray-300 group-has-[:checked]:bg-emerald-500 group-has-[:checked]:border-emerald-500 shadow-sm">
+                                <div class="ring-burst text-emerald-400"></div>
+                                <svg class="w-3.5 h-3.5 text-white check-stroke relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <div class="sparkle-container absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+                            </div>
+                            <div class="relative smooth-transition text-gray-700 group-has-[:checked]:text-emerald-800 group-has-[:checked]:font-bold">
+                                <span class="text-[15px] sm:text-base">재정 - BK</span>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="group relative flex items-center p-3 rounded-lg border cursor-pointer smooth-transition active:scale-[0.98] select-none border-amber-200 bg-amber-50 hover:bg-amber-100 has-[:checked]:bg-amber-100/60 has-[:checked]:border-amber-300">
+                            <input type="checkbox" class="sr-only">
+                            <div class="checkbox-box relative w-6 h-6 border-2 rounded flex items-center justify-center mr-3 smooth-transition bg-white shadow-sm border-amber-400 group-has-[:checked]:bg-amber-500 group-has-[:checked]:border-amber-500">
+                                <div class="ring-burst text-amber-400"></div>
+                                <svg class="w-3.5 h-3.5 text-white check-stroke relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <div class="sparkle-container absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+                            </div>
+                            <div class="relative smooth-transition text-amber-800 font-bold group-has-[:checked]:text-amber-900 group-has-[:checked]:translate-x-1">
+                                <span class="text-[15px] sm:text-base">각종 신청(집회, 교재 등) 봉사</span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex items-center justify-center mb-8">
+                <div class="h-px bg-gray-200 w-1/3"></div>
+                <svg class="w-6 h-6 text-amber-400 mx-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                <div class="h-px bg-gray-200 w-1/3"></div>
+            </div>
+
+            <!-- Ministry Quotes Section -->
+            <div class="space-y-6 mb-8 sm:mb-10">
+                
+                <!-- Quote 1 -->
+                <div class="bg-stone-50 border-l-4 border-amber-500 p-5 sm:p-6 rounded-r-lg relative hover:shadow-md transition-shadow word-keep-all">
+                    <div class="absolute top-4 right-4 text-amber-200 opacity-30 sm:opacity-50 pointer-events-none">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-amber-800 text-[15px] sm:text-base mb-3">위트니스 리 전집 1964년 1권 <br><span class="text-[13px] sm:text-sm font-normal text-gray-500 mt-1 inline-block">주님의 회복을 수행하기 위해 몸 안에서 봉사함 (제6장)</span></h3>
+                    <div class="quote-font text-gray-700 leading-relaxed sm:leading-loose text-[15px] sm:text-base space-y-4 relative z-10">
+                        <p>우리는 또한 교회의 실지적인 봉사에 참여할 필요가 있다. 즉 우리는 교회의 실지적인 일에 대한 책임을 져야 한다. 교회의 실지적인 일에는 의자를 정리하는 것이나 자료를 복사하는 것이나 집회소를 청소하는 것이 포함된다. 교회가 성장하면 할수록 돌보아야 할 더 많은 일이 생긴다. 따라서 우리는 모두 교회가 건축되기 위해서 이 모든 일을 돌보아야 한다.</p>
+                        <p>은행장이었던 한 형제는 매주 한 번 집회소에 와서 유리창을 닦았다. 또 한 자매는 매주 집회소에 와서 청소하고 피아노를 닦았다. 여러분이 집회소에 가보았다면 많은 성도가 실지적인 일들에 참여하고 일하며 기도하는 것을 보았을 것이다. 그들은 봉사하는 동안 함께 기도하고 교통했다. 이러한 종류의 봉사가 중국에 있는 교회들을 건축하는 데 큰 도움이 되었다.</p>
+                        <p class="font-bold text-amber-700 bg-amber-100/50 p-2 sm:p-0 sm:bg-transparent rounded">우리는 또한 교회의 실지적인 봉사의 책임을 짊어지고 그 봉사에 참여하겠다는 결심을 해야 한다. 우리가 이 모든 것을 실행한다면, 교회생활은 살아 있고 기능을 발휘하는 지체들로 가득하고 능력으로 충만할 것이며, 주님은 우리를 통해서 일하실 길을 얻으실 것이다.</p>
+                    </div>
+                </div>
+
+                <!-- Quote 2 -->
+                <div class="bg-slate-50 border-l-4 border-slate-500 p-5 sm:p-6 rounded-r-lg relative hover:shadow-md transition-shadow word-keep-all">
+                    <div class="absolute top-4 right-4 text-slate-200 opacity-30 sm:opacity-50 pointer-events-none">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-slate-700 text-[15px] sm:text-base mb-3">위트니스 리 전집 1967년 1권 <br><span class="text-[13px] sm:text-sm font-normal text-gray-500 mt-1 inline-block">몸의 표현을 위한 교회 안에서의 봉사 (제1장)</span></h3>
+                    <div class="quote-font text-gray-700 leading-relaxed sm:leading-loose text-[15px] sm:text-base space-y-4 relative z-10">
+                        <p>교회의 실지적인 봉사와 관련된 교통에서 우리는 몸의 생활에는 두 방면 혹은 두 측면, 곧 내적이고 영적인 방면과 외적이고 물질적인 방면이 있다는 것을 깨달아야 한다. …</p>
+                        <p>집회에서 그리스도를 공급하는 것과는 별도로 교회의 실지적인 봉사는 최소한 다음의 봉사 분야, 곧 복음을 위한 방문, 성도들을 위한 방문, 어린이 집회, 영유아 봉사, 음악, 안내, 청소와 정리, 정원 관리, 유지 및 보수, 서기 봉사, 도서 판매, 오디오 녹음, 차량 봉사, 접대 등을 포함한다.</p>
+                        <p class="font-bold text-slate-700 bg-slate-200/50 p-2 sm:p-0 sm:bg-transparent rounded">이러한 봉사의 각 분야는 교회생활의 실행을 위해 필수적이다. 서로 사랑하고 합당한 방식으로 주님을 섬기며 서로 협력하기 위해서 우리는 이러한 봉사의 모든 분야를 돌보아야 한다.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Call to Action Section -->
+            <div class="bg-amber-50 rounded-xl p-6 sm:p-8 text-center border border-amber-100 word-keep-all">
+                <p class="text-[16px] sm:text-lg font-medium text-gray-800 mb-3">
+                    자원하실 분이 계시면 주저하지 마시고 알려주시면 감사하겠습니다.
+                </p>
+                <p class="text-amber-700 font-bold text-lg sm:text-xl mb-5">
+                    "우리의 모든 수고와 봉사는 주님께서 온전히 기억하실 것입니다."
+                </p>
+                <p class="text-gray-600 text-[14px] sm:text-[15px] mb-6 sm:mb-8 quote-font leading-relaxed max-w-2xl mx-auto bg-white p-4 sm:p-5 rounded-lg border border-amber-100 shadow-sm text-left sm:text-center">
+                    그러므로 내 사랑하는 형제님들, 여러분은 견고하여 흔들리지 말며, 항상 주님의 일을 더욱 많이 하십시오. 여러분이 아는 대로, 여러분의 수고가 주님 안에서 헛되지 않습니다.
+                    <br><strong class="text-amber-800 block sm:inline mb-1 sm:mb-0"> - 고린도전서 15장 58절</strong> 
+                </p>
+                
+                <!-- 카카오톡 오픈채팅 링크 -->
+                <a href="https://open.kakao.com/o/gQTtksoi" target="_blank" class="w-full sm:w-auto inline-flex bg-[#FEE500] hover:bg-[#FADA0A] text-[#371D1E] font-bold py-3.5 px-6 sm:px-10 rounded-xl sm:rounded-full transition duration-300 shadow-md transform hover:-translate-y-1 items-center justify-center max-w-xs mx-auto text-[15px] sm:text-base">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3c-5.523 0-10 3.582-10 8 0 2.864 1.838 5.373 4.604 6.848-.256.963-.925 3.513-.956 3.65-.04.175.061.171.134.12 0 0 3.036-1.95 4.303-2.784.622.091 1.264.14 1.915.14 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/>
+                    </svg>
+                    카카오톡으로 자원/문의하기
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 체크박스 클릭 시 빤짝이는 애니메이션 효과
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    const container = this.nextElementSibling.querySelector('.sparkle-container');
+                    createSparkles(container);
+                }
+            });
+        });
+
+        function createSparkles(container) {
+            const colors = ['#F59E0B', '#10B981', '#3B82F6', '#F43F5E', '#8B5CF6', '#14B8A6'];
+            const numSparkles = 12; // 파티클 개수 증가
+            
+            for (let i = 0; i < numSparkles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'absolute pointer-events-none z-50 flex items-center justify-center';
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // 별 모양과 동그라미 모양 혼합
+                if (Math.random() > 0.5) {
+                    sparkle.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="${color}"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>`;
+                } else {
+                    sparkle.innerHTML = `<div style="width: 8px; height: 8px; background-color: ${color}; border-radius: 50%;"></div>`;
+                }
+                
+                // 초기 위치 (체크박스 중앙)
+                sparkle.style.left = '50%';
+                sparkle.style.top = '50%';
+                sparkle.style.opacity = '1';
+                sparkle.style.transform = 'translate(-50%, -50%) scale(0)';
+                
+                container.appendChild(sparkle);
+                
+                // 브라우저 렌더링 강제 (애니메이션 시작점 인식을 위해)
+                void sparkle.offsetWidth;
+                
+                // 자연스럽게 퍼지는 물리 계산
+                const angle = (Math.PI * 2 * i) / numSparkles + (Math.random() - 0.5);
+                const distance = 30 + Math.random() * 25; // 퍼지는 거리
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                // 크기, 회전, 투명도 변화 애니메이션 적용 (스프링 텐션 느낌 추가)
+                sparkle.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease-out';
+                sparkle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${0.5 + Math.random() * 0.8}) rotate(${Math.random() * 180}deg)`;
+                sparkle.style.opacity = '0';
+                
+                // DOM에서 정리
+                setTimeout(() => sparkle.remove(), 600);
+            }
+        }
+    </script>
+</body>
+</html>
