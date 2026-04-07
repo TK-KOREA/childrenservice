@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>누가복음 8주_심문받고 재판받으심</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fs: 1;
+  --primary: #FF6B35;
+  --primary-light: #FFF0E8;
+  --secondary: #4ECDC4;
+  --secondary-light: #E8FBF9;
+  --accent: #FFE66D;
+  --dark: #2C3E50;
+  --light: #FFF9F0;
+  --purple: #A78BFA;
+  --purple-light: #F3EEFF;
+  --green: #34D399;
+  --green-light: #ECFDF5;
+  --blue: #60A5FA;
+  --blue-light: #EFF6FF;
+  --pink: #F472B6;
+  --radius: 20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--light);color:var(--dark);padding-top:48px;-webkit-text-size-adjust:100%}
+
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:1000;height:44px;background:rgba(44,62,80,0.95);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:8px}
+.top-bar button{width:36px;height:30px;border:1.5px solid rgba(255,255,255,0.3);border-radius:8px;background:rgba(255,255,255,0.1);color:#fff;font-size:16px;font-family:'Noto Sans KR',sans-serif;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.top-bar button:hover{background:rgba(255,255,255,0.25)}
+.top-bar button:active{transform:scale(.92)}
+
+.page{max-width:480px;margin:0 auto;padding:16px}
+
+.hero{background:linear-gradient(135deg,var(--primary),#FF8F65);border-radius:var(--radius);padding:36px 24px 28px;text-align:center;color:#fff;position:relative;overflow:hidden;margin-bottom:20px}
+.hero::before{content:'✨';position:absolute;top:12px;left:16px;font-size:calc(28px * var(--fs));animation:twinkle 2s infinite}
+.hero::after{content:'🌟';position:absolute;bottom:12px;right:16px;font-size:calc(28px * var(--fs));animation:twinkle 2s infinite .5s}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-icon{font-size:calc(56px * var(--fs));margin-bottom:8px}
+.hero h1{font-family:'Jua',sans-serif;font-size:calc(28px * var(--fs));line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hero-sub{font-size:calc(15px * var(--fs));margin-top:10px;opacity:.92;line-height:1.5}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.25);border-radius:30px;padding:6px 16px;font-size:calc(13px * var(--fs));font-weight:700;margin-top:12px}
+
+.scripture-card{background:var(--accent);border-radius:var(--radius);padding:20px;margin-bottom:20px;text-align:center;border:3px dashed var(--primary)}
+.scripture-card .ref{font-family:'Jua',sans-serif;font-size:calc(14px * var(--fs));color:var(--primary);margin-bottom:8px}
+.scripture-card .verse{font-size:calc(16px * var(--fs));line-height:1.7;font-weight:700;color:var(--dark)}
+
+.summary-banner{background:linear-gradient(135deg,var(--secondary),#38B2AC);border-radius:var(--radius);padding:24px 20px;margin-bottom:20px;color:#fff;text-align:center}
+.summary-banner h2{font-family:'Jua',sans-serif;font-size:calc(20px * var(--fs));margin-bottom:12px}
+.summary-banner p{font-size:calc(15px * var(--fs));line-height:1.7}
+.summary-icon{font-size:calc(36px * var(--fs));margin-bottom:8px}
+
+.flow-connector{display:flex;flex-direction:column;align-items:center;margin:-4px 0}
+.flow-connector .arrow{width:4px;height:28px;background:linear-gradient(to bottom,var(--secondary),var(--primary));border-radius:2px}
+.flow-connector .dot{width:14px;height:14px;border-radius:50%;background:var(--primary);border:3px solid var(--light);box-shadow:0 0 0 2px var(--primary)}
+
+.section-card{border-radius:var(--radius);padding:24px 20px;margin-bottom:6px;position:relative;overflow:hidden}
+.section-card.orange{background:var(--primary-light);border-left:5px solid var(--primary)}
+.section-card.teal{background:var(--secondary-light);border-left:5px solid var(--secondary)}
+.section-card.purple{background:var(--purple-light);border-left:5px solid var(--purple)}
+.section-card.green{background:var(--green-light);border-left:5px solid var(--green)}
+.section-card.blue{background:var(--blue-light);border-left:5px solid var(--blue)}
+.section-card.pink{background:#FFF0F6;border-left:5px solid var(--pink)}
+
+.section-num{display:inline-flex;align-items:center;justify-content:center;width:calc(36px * var(--fs));height:calc(36px * var(--fs));border-radius:50%;color:#fff;font-family:'Jua',sans-serif;font-size:calc(18px * var(--fs));margin-bottom:10px}
+.orange .section-num{background:var(--primary)}
+.teal .section-num{background:var(--secondary)}
+.purple .section-num{background:var(--purple)}
+.green .section-num{background:var(--green)}
+.blue .section-num{background:var(--blue)}
+.pink .section-num{background:var(--pink)}
+
+.section-card h3{font-family:'Jua',sans-serif;font-size:calc(20px * var(--fs));margin-bottom:10px;line-height:1.4}
+.section-card p,.section-card li{font-size:calc(15px * var(--fs));line-height:1.8;color:#444}
+
+.speech{background:#fff;border-radius:16px;padding:14px 16px;margin:10px 0;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.06);font-size:calc(15px * var(--fs));line-height:1.7}
+.speech::after{content:'';position:absolute;bottom:-8px;left:24px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid #fff}
+.speech-label{font-family:'Jua',sans-serif;font-size:calc(13px * var(--fs));color:var(--primary);margin-bottom:4px}
+
+.highlight-box{background:linear-gradient(135deg,var(--accent),#FFD93D);border-radius:14px;padding:14px 16px;margin-top:12px;font-size:calc(15px * var(--fs));line-height:1.7;font-weight:700;color:var(--dark);text-align:center}
+
+.trait-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.trait-badge{background:#fff;border-radius:30px;padding:6px 14px;font-size:calc(14px * var(--fs));font-weight:700;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+
+.quiz-section{background:linear-gradient(135deg,#667EEA,#764BA2);border-radius:var(--radius);padding:28px 20px;margin-bottom:20px;color:#fff}
+.quiz-section h2{font-family:'Jua',sans-serif;font-size:calc(24px * var(--fs));text-align:center;margin-bottom:20px}
+.quiz-q{background:rgba(255,255,255,.15);border-radius:16px;padding:18px 16px;margin-bottom:14px;backdrop-filter:blur(4px)}
+.quiz-q-text{font-size:calc(16px * var(--fs));font-weight:700;margin-bottom:12px;line-height:1.6;color:#fff}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{background:rgba(255,255,255,.92);color:#333;border:2px solid transparent;border-radius:12px;padding:12px 14px;font-size:calc(15px * var(--fs));font-weight:600;cursor:pointer;transition:all .2s;text-align:left;font-family:'Noto Sans KR',sans-serif;line-height:1.5;width:100%}
+.quiz-opt:hover{background:#fff;border-color:var(--accent);transform:scale(1.02)}
+.quiz-opt.correct{background:#D1FAE5!important;border-color:#10B981!important;color:#065F46!important}
+.quiz-opt.wrong{background:#FEE2E2!important;border-color:#EF4444!important;color:#991B1B!important}
+.quiz-opt:disabled{cursor:default;opacity:.85}
+.quiz-opt:disabled:hover{transform:none}
+
+.quiz-result{background:rgba(255,255,255,.95);color:var(--dark);border-radius:16px;padding:24px 20px;text-align:center;margin-top:16px;display:none}
+.quiz-result .score{font-family:'Jua',sans-serif;font-size:calc(48px * var(--fs));color:var(--primary)}
+.quiz-result .feedback{font-size:calc(16px * var(--fs));margin-top:8px;line-height:1.6;font-weight:600}
+.quiz-result .retry-btn{display:inline-block;margin-top:14px;background:linear-gradient(135deg,#667EEA,#764BA2);color:#fff;border:none;border-radius:30px;padding:10px 28px;font-size:calc(16px * var(--fs));font-family:'Jua',sans-serif;cursor:pointer}
+
+.prayer-section{background:linear-gradient(135deg,#FBBF24,#F59E0B);border-radius:var(--radius);padding:28px 20px;margin-bottom:20px;text-align:center}
+.prayer-section h2{font-family:'Jua',sans-serif;font-size:calc(22px * var(--fs));color:var(--dark);margin-bottom:14px}
+.prayer-text{background:rgba(255,255,255,.85);border-radius:16px;padding:20px 18px;font-size:calc(16px * var(--fs));line-height:2;color:#333;text-align:left}
+
+.footer{text-align:center;padding:20px;font-size:calc(13px * var(--fs));color:#999}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.section-card,.scripture-card,.summary-banner,.quiz-section,.prayer-section{animation:fadeUp .6s ease both}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <button onclick="changeFontSize(-0.05)">−</button>
+  <button onclick="resetFontSize()">가</button>
+  <button onclick="changeFontSize(0.05)">+</button>
+</div>
+
+<div class="page" id="page">
+
+<div class="hero">
+  <div class="hero-icon">🐑</div>
+  <h1>예수님께서<br>심문받고 재판받으심</h1>
+  <p class="hero-sub">누가복음 어린이 주일공과 8주</p>
+  <div class="hero-badge">📖 이사야서 53장 7절</div>
+</div>
+
+<div class="scripture-card">
+  <div class="ref">📜 이사야서 53장 7절</div>
+  <div class="verse">억압받고 고통받았지만<br>그는 자기 입을 열지 않았나니<br>도살되려고 끌려가는 어린양처럼<br>털 깎는 사람들 앞에서 잠잠한 양처럼<br>그는 자기 입을 열지 않았다.</div>
+</div>
+
+<div class="summary-banner">
+  <div class="summary-icon">💡</div>
+  <h2>오늘의 핵심 내용</h2>
+  <p>예수님은 반대자들에게 두 차례 심문을 받으셨지만, 아무런 죄가 없으셨어요. 불의한 판결 앞에서도 어린양처럼 잠잠하셨고, 자신을 변호하지 않으셨어요. 우리도 예수님의 높은 인성을 본받아요!</p>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card orange">
+  <div class="section-num">1</div>
+  <h3>🏛️ 첫 번째 재판: 대제사장의 심문</h3>
+  <p>예수님은 십자가에 못 박히시기 전에 두 번의 재판을 받으셨어요. 첫 번째로, 대제사장이 그분을 심문하였어요.</p>
+  <div class="speech">
+    <div class="speech-label">대제사장</div>
+    "그대가 하나님의 아들 그리스도인지를 말하시오."
+  </div>
+  <div class="speech">
+    <div class="speech-label">예수님</div>
+    "대제사장께서 말씀하신 대로입니다."
+  </div>
+  <p style="margin-top:12px">이 말을 들은 대제사장은 자기 옷을 찢으며, 그분이 하나님을 모독하였다고 말하였어요. 사람들은 그분의 얼굴에 침을 뱉으며, 주먹으로 치고, 손바닥으로 뺨을 때리며 조롱하였어요.</p>
+  <div class="highlight-box">⚠️ 대제사장에게는 예수님을 처벌할 권한이 없었기 때문에 그분은 총독 빌라도에게 보내지셨어요.</div>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card teal">
+  <div class="section-num">2</div>
+  <h3>⚖️ 두 번째 재판: 총독 빌라도의 심문</h3>
+  <p>두 번째로, 예수님은 로마 통치자들에게 재판받으셨어요.</p>
+  <div class="speech">
+    <div class="speech-label">총독 빌라도</div>
+    "그대가 유대인의 왕이오?"
+  </div>
+  <div class="speech">
+    <div class="speech-label">예수님</div>
+    "총독께서 말씀하신 대로입니다."
+  </div>
+  <p style="margin-top:12px">빌라도는 그분에게서 아무 죄목도 찾지 못하였어요. 그러던 중 빌라도는 예수님이 갈릴리 사람이라는 것을 알게 되어, 갈릴리를 다스리고 있던 헤롯에게 그분을 보냈어요. 헤롯도 예수님을 심문했으나 그 또한 아무런 죄목을 찾지 못하였답니다.</p>
+  <div class="highlight-box">✅ 빌라도가 말했어요: "나는 이 사람에게서 아무런 죄목도 찾지 못하였소." (눅 23:4)</div>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card purple">
+  <div class="section-num">3</div>
+  <h3>🌟 부당한 심문에서 나타난 예수님의 높은 인성</h3>
+  <p>사람들은 예수님을 거짓으로 고소하였고, 거짓 증언을 하였고, 모욕을 하였으며, 조롱하였어요. 또 예수님을 곤경에 빠뜨리기 위해서 여러 질문들을 했지요.</p>
+  <p style="margin-top:10px"><strong>하지만 이러한 부당한 심문으로 인해, 오히려 예수님의 높은 인성이 더욱 나타났어요.</strong></p>
+  <div class="trait-badges">
+    <div class="trait-badge">🐑 온순함</div>
+    <div class="trait-badge">🧠 지혜로움</div>
+    <div class="trait-badge">💪 담대함</div>
+    <div class="trait-badge">✨ 정직함</div>
+  </div>
+  <p style="margin-top:12px">반대자들의 공격에도 잠잠한 어린양처럼 계셨던 예수님의 모습에서 그분의 온순함이 표현되었어요. 또 사람들의 질문에 대한 예수님의 답변에서 그분의 지혜로움이 표현되었어요.</p>
+  <p style="margin-top:10px">예수님은 죄가 없으신데도 심문을 받으셨고, 총독의 질문에 주눅 들지 않고 정직하게 대답하셨어요. 그분은 어렵고 억울한 상황에 놓이더라도, 정직하고 솔직하셨어요.</p>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card green">
+  <div class="section-num">4</div>
+  <h3>🐑 어린양처럼 잠잠하신 예수님</h3>
+  <p>예수님은 불의한 판결을 받으셨으나 자신을 변호하지 않으셨습니다.</p>
+  <p style="margin-top:10px">예수님은 거짓 증거에 의해 부당하게 고소당하셨지만, 자신을 변호하려는 말씀은 한마디도 하지 않으셨어요. 그분은 사람들 앞에서 다만 침묵을 지키셨어요.</p>
+  <p style="margin-top:10px">우리 주 예수님은 억울하고 불의한 상황에서도 필요가 없다고 느끼실 때는 침묵을 지키셨으며, 꼭 필요한 말씀만 하셨어요. 그분은 자신을 변호하려 하지 않으시고, 한 마리의 온순한 양처럼 잠잠하고 묵묵히 계셨어요.</p>
+  <div class="highlight-box">🐑 인류 역사상 의로운 사람은 오직 한 분, 주 예수님이시란다.</div>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card blue">
+  <div class="section-num">5</div>
+  <h3>📚 우리가 배울 점</h3>
+  <p>우리는 예수님의 인성을 배워야 해요. 우리를 반대하는 사람들 앞에서 우린 많은 말을 할 필요가 없어요. 억울한 상황이 생겼을 때도 우리 자신을 변호하기 위해 빠르게 반응하거나, 많은 말을 하려고 하지 말아야 해요.</p>
+  <p style="margin-top:10px">우리도 모든 상황에서 항상 잠잠하고 담대하게 대처하신 예수님의 높은 인성을 본받아요.</p>
+  <p style="margin-top:10px">여러분도 이러한 주 예수님의 본을 따라, 앞으로 어려운 일, 나아갈 길이 없는 일, 피할 수 없는 일들이 닥칠 때, 사람과 싸우지 않고 오래 참는 것을 배우시기 바랍니다.</p>
+</div>
+
+<div class="flow-connector"><div class="arrow"></div><div class="dot"></div></div>
+<div class="section-card pink">
+  <div class="section-num">6</div>
+  <h3>🙏 주님께 기도해요</h3>
+  <p>더 나아가서, 어려운 일이 닥칠 때 혼자서 오래 참는 것만이 아니라, 주님께 나아가 기도하는 것을 배워보아요. 여러분의 모든 무거운 짐을 주님께 내려놓을 수 있어요.</p>
+  <div class="scripture-card" style="margin-top:12px;border-color:var(--pink)">
+    <div class="ref">📜 마태복음 11장 28절</div>
+    <div class="verse">"수고하며 짐을 진 사람들이여, 다 나에게로 오십시오. 내가 여러분에게 안식을 줄 것입니다."</div>
+  </div>
+  <p style="margin-top:12px">주 예수님은 우리의 작은 기도도 듣고 계세요. 눈을 감고 진심으로 주님께 속에 있는 모든 것을 말씀드려 보세요. 여러분을 사랑하는 주님께서 여러분 속에 있는 무거운 짐을 가져가시고 안식을 주실 거예요.</p>
+</div>
+
+<!-- Quiz -->
+<div class="quiz-section" id="quizSection">
+  <h2>🧩 퀴즈를 풀어보아요!</h2>
+  <div class="quiz-q" data-answer="1">
+    <div class="quiz-q-text">Q1. 예수님은 십자가에 못 박히시기 전에 몇 번의 재판을 받으셨나요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="pick(this,0)">① 1번</button>
+      <button class="quiz-opt" onclick="pick(this,1)">② 2번</button>
+      <button class="quiz-opt" onclick="pick(this,2)">③ 3번</button>
+      <button class="quiz-opt" onclick="pick(this,3)">④ 4번</button>
+    </div>
+  </div>
+  <div class="quiz-q" data-answer="1">
+    <div class="quiz-q-text">Q2. 예수님을 처음 심문한 사람은 누구인가요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="pick(this,0)">① 총독 빌라도</button>
+      <button class="quiz-opt" onclick="pick(this,1)">② 대제사장</button>
+      <button class="quiz-opt" onclick="pick(this,2)">③ 헤롯</button>
+      <button class="quiz-opt" onclick="pick(this,3)">④ 바라바</button>
+    </div>
+  </div>
+  <div class="quiz-q" data-answer="3">
+    <div class="quiz-q-text">Q3. 이사야서 53장 7절에서 예수님은 어떤 동물처럼 묘사되었나요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="pick(this,0)">① 사자</button>
+      <button class="quiz-opt" onclick="pick(this,1)">② 비둘기</button>
+      <button class="quiz-opt" onclick="pick(this,2)">③ 독수리</button>
+      <button class="quiz-opt" onclick="pick(this,3)">④ 어린양</button>
+    </div>
+  </div>
+  <div class="quiz-q" data-answer="0">
+    <div class="quiz-q-text">Q4. 빌라도는 예수님에게서 무엇을 찾지 못했나요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="pick(this,0)">① 아무런 죄목</button>
+      <button class="quiz-opt" onclick="pick(this,1)">② 보물</button>
+      <button class="quiz-opt" onclick="pick(this,2)">③ 가족</button>
+      <button class="quiz-opt" onclick="pick(this,3)">④ 친구</button>
+    </div>
+  </div>
+  <div class="quiz-q" data-answer="2">
+    <div class="quiz-q-text">Q5. 어려운 일이 닥칠 때 우리는 어떻게 해야 할까요?</div>
+    <div class="quiz-opts">
+      <button class="quiz-opt" onclick="pick(this,0)">① 빠르게 반응하고 많은 말을 한다</button>
+      <button class="quiz-opt" onclick="pick(this,1)">② 무조건 참기만 한다</button>
+      <button class="quiz-opt" onclick="pick(this,2)">③ 오래 참고 주님께 기도한다</button>
+      <button class="quiz-opt" onclick="pick(this,3)">④ 나를 반대하는 사람과 싸운다</button>
+    </div>
+  </div>
+  <div class="quiz-result" id="quizResult">
+    <div style="font-size:calc(40px * var(--fs))">🎉</div>
+    <div class="score" id="quizScore"></div>
+    <div class="feedback" id="quizFeedback"></div>
+    <button class="retry-btn" onclick="resetQuiz()">🔄 다시 풀기</button>
+  </div>
+</div>
+
+<!-- Prayer -->
+<div class="prayer-section">
+  <div style="font-size:calc(40px * var(--fs))">🙏</div>
+  <h2>함께 기도해요</h2>
+  <div class="prayer-text">
+    오, 주 예수님!<br>
+    주님은 반대자들에게 많은 공격을 받으셨지만,<br>
+    잠잠하고 담대하게 대처하셨어요.<br>
+    저도 예수님의 높은 인성을 본받고 싶어요.<br>
+    억울한 상황에서도 오래 참으신 예수님처럼<br>
+    저도 사람과 다투지 않고 주님께 기도할 수 있게 도와주세요.<br>
+    제가 주님께 모든 것을 말씀드릴 때,<br>
+    모든 무거운 짐을 가져가시고 저에게 안식을 주세요.<br>
+    <strong>아멘. 🙏</strong>
+  </div>
+</div>
+
+<div class="footer">어린이 주일공과 · 누가복음 8주</div>
+</div>
+
+<script>
+var fontScale=1;
+function changeFontSize(d){fontScale=Math.max(.7,Math.min(1.5,fontScale+d));document.documentElement.style.setProperty('--fs',fontScale)}
+function resetFontSize(){fontScale=1;document.documentElement.style.setProperty('--fs',1)}
+
+var answered=0,correct=0,total=5;
+function pick(btn,idx){
+  var q=btn.closest('.quiz-q');
+  if(q.classList.contains('done'))return;
+  q.classList.add('done');
+  var ci=parseInt(q.dataset.answer);
+  var opts=q.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){o.disabled=true});
+  if(idx===ci){btn.classList.add('correct');correct++}
+  else{btn.classList.add('wrong');opts[ci].classList.add('correct')}
+  answered++;
+  if(answered===total)showResult();
+}
+function showResult(){
+  var r=document.getElementById('quizResult');r.style.display='block';
+  document.getElementById('quizScore').textContent=correct+' / '+total;
+  var fb=document.getElementById('quizFeedback');
+  if(correct===5)fb.textContent='🌟 완벽해요! 오늘 말씀을 정말 잘 들었어요!';
+  else if(correct>=3)fb.textContent='👏 잘했어요! 조금만 더 복습하면 완벽!';
+  else fb.textContent='💪 괜찮아요! 위 내용을 다시 읽고 도전해봐요!';
+}
+function resetQuiz(){
+  answered=0;correct=0;
+  document.getElementById('quizResult').style.display='none';
+  document.querySelectorAll('.quiz-q').forEach(function(q){
+    q.classList.remove('done');
+    q.querySelectorAll('.quiz-opt').forEach(function(o){o.disabled=false;o.classList.remove('correct','wrong')});
+  });
+}
+</script>
+</body>
+</html>
