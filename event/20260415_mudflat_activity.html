@@ -388,21 +388,110 @@ body {
 
 .rule-banner .rule-icon { font-size: 24px; flex-shrink: 0; }
 
-/* ====== CHECKLIST ====== */
+/* ====== ANIMATED CHECKLIST ====== */
 .checklist-section {
   margin: 0 24px; background: white; border-radius: 24px;
   padding: 28px; box-shadow: 0 8px 30px rgba(26,82,118,0.1);
 }
 
-.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.check-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; background: #F8F9FA; border-radius: 12px;
-  font-size: 14px; font-weight: 500; color: var(--dark);
+/* 숨겨진 실제 체크박스 */
+.check-label input {
+  display: none;
 }
 
-.check-item .check-emoji { font-size: 18px; }
+/* 체크리스트 라벨 (버튼 역할) */
+.check-label {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; background: #F8F9FA; border-radius: 14px;
+  font-size: 14px; font-weight: 500; color: var(--dark);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.check-label:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  border-color: #D6EAF8;
+}
+
+/* 커스텀 체크박스 모양 */
+.custom-checkbox {
+  width: 24px; height: 24px;
+  border: 2px solid #BDC3C7;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  background: white;
+}
+
+/* 체크 마크 아이콘 (SVG 대신 가상요소 활용) */
+.custom-checkbox::after {
+  content: '';
+  width: 6px; height: 11px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 2px;
+}
+
+/* 체크리스트 텍스트 영역 */
+.check-content {
+  display: flex; align-items: center; gap: 8px;
+  transition: all 0.3s ease;
+  flex-grow: 1;
+}
+
+/* ====== 체크되었을 때의 애니메이션 상태 ====== */
+
+/* 라벨 전체 배경 및 스케일 변화 */
+.check-label:has(input:checked) {
+  background: #E8F8F5;
+  border-color: #A9DFBF;
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+/* 체크박스 디자인 변경 및 팝 애니메이션 */
+.check-label input:checked + .custom-checkbox {
+  background: var(--seaweed);
+  border-color: var(--seaweed);
+  animation: check-pop 0.4s ease forwards;
+}
+
+/* 체크 마크 나타나기 */
+.check-label input:checked + .custom-checkbox::after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+/* 텍스트 흐려짐 및 취소선 애니메이션 */
+.check-label input:checked ~ .check-content {
+  color: #95A5A6;
+}
+
+.check-label input:checked ~ .check-content span:not(.check-emoji) {
+  text-decoration: line-through;
+  text-decoration-color: #95A5A6;
+  text-decoration-thickness: 2px;
+  opacity: 0.6;
+}
+
+/* 체크박스 팝업 키프레임 */
+@keyframes check-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 
 /* ====== FOOTER ====== */
 .footer {
@@ -439,6 +528,7 @@ body {
   body { background: white; }
   .page { max-width: 100%; }
   .wave-divider { display: none; }
+  .check-label { border: 1px solid #ddd; }
 }
 </style>
 </head>
@@ -704,23 +794,53 @@ body {
   <div class="wave-divider"></div>
   <div class="spacer-sm"></div>
 
-  <!-- ===== CHECKLIST ===== -->
+  <!-- ===== ANIMATED CHECKLIST ===== -->
   <div class="checklist-section">
     <div class="section-title">
       <div class="icon-circle" style="background: #FDEDEC; color: var(--coral);">🎒</div>
       <div>
         <h3>준비물 체크리스트</h3>
-        <span class="subtitle">빠짐없이 챙겨주세요!</span>
+        <span class="subtitle">터치(클릭)해서 빠짐없이 챙겨주세요!</span>
       </div>
     </div>
 
     <div class="checklist-grid">
-      <div class="check-item"><span class="check-emoji">👕</span> 여벌옷 (필수!)</div>
-      <div class="check-item"><span class="check-emoji">🧴</span> 선크림</div>
-      <div class="check-item"><span class="check-emoji">🧢</span> 모자 / 챙 넓은 모자</div>
-      <div class="check-item"><span class="check-emoji">💧</span> 물 / 음료</div>
-      <div class="check-item"><span class="check-emoji">👢</span> 장화 (없으면 대여: 2,000원)</div>
-      <div class="check-item"><span class="check-emoji">🧥</span> 바람막이 (봄바람 쌀쌀)</div>
+      <!-- 인터랙티브 체크 아이템들 -->
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">👕</span> <span>여벌옷 (필수!)</span></div>
+      </label>
+
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">🧴</span> <span>선크림</span></div>
+      </label>
+
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">🧢</span> <span>모자 / 챙 넓은 모자</span></div>
+      </label>
+
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">💧</span> <span>물 / 음료</span></div>
+      </label>
+
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">👢</span> <span>장화 (없으면 대여: 2,000원)</span></div>
+      </label>
+
+      <label class="check-label">
+        <input type="checkbox">
+        <div class="custom-checkbox"></div>
+        <div class="check-content"><span class="check-emoji">🧥</span> <span>바람막이 (봄바람 쌀쌀)</span></div>
+      </label>
     </div>
   </div>
 
