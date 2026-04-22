@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#F5EFE4" />
+<title>2026년 봄 전국 어린이 학부모 목양집회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5EFE4;
+    --cream-deep:#EBE1CC;
+    --paper:#FBF7ED;
+    --ink:#1E2A2E;
+    --ink-1:#2F3E42;
+    --ink-2:#5A6B6E;
+    --ink-3:#8B9598;
+    --wine:#6B1F2A;
+    --gold:#A47A2E;
+    --gold-soft:#D4B678;
+    --rust:#B94E25;
+    --sage:#5F7A5A;
+    --line:#D9CBAF;
+
+    /* fluid type scale – mobile-first */
+    --fs-body:    clamp(15px, 3.9vw, 16px);
+    --fs-sub:     clamp(13px, 3.4vw, 14px);
+    --fs-h2:      clamp(20px, 5.2vw, 26px);
+    --fs-h1:      clamp(28px, 7.4vw, 42px);
+    --fs-display: clamp(46px, 13vw, 78px);
+    --fs-money:   clamp(34px, 8.8vw, 48px);
+    --fs-date:    clamp(30px, 8vw, 48px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Noto Sans KR', sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(164,122,46,0.09), transparent 55%),
+      radial-gradient(ellipse at 95% 100%, rgba(107,31,42,0.06), transparent 55%),
+      var(--cream);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
+    line-height:1.7;
+    padding:clamp(12px, 3vw, 40px) clamp(10px, 2.5vw, 20px);
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+
+  @media (min-width:720px){
+    body::before{
+      content:"";
+      position:fixed;inset:0;pointer-events:none;
+      opacity:0.3;mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0.12 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+  }
+
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    background:var(--paper);
+    padding:clamp(24px, 6vw, 56px) clamp(18px, 5vw, 48px) clamp(40px, 8vw, 72px);
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.04),
+      0 20px 60px -20px rgba(60,40,20,0.22);
+    border:1px solid rgba(164,122,46,0.18);
+    border-radius:2px;
+    position:relative;
+  }
+
+  /* ================= HEADER ================= */
+  .org-strip{
+    text-align:center;
+    padding-bottom:clamp(18px, 4vw, 24px);
+    border-bottom:1px solid var(--line);
+  }
+  .org-strip .kr{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(14px, 3.6vw, 16px);
+    letter-spacing:0.4em;
+    color:var(--wine);
+    padding-left:0.4em;
+  }
+  .org-strip .en{
+    display:block;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(11px, 2.8vw, 12px);
+    letter-spacing:0.18em;
+    color:var(--gold);
+    margin-top:6px;
+  }
+  .doc-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 14px;
+    justify-content:center;
+    margin-top:14px;
+    font-size:clamp(11px, 2.7vw, 12px);
+    color:var(--ink-2);
+    letter-spacing:0.06em;
+  }
+  .doc-meta .dot{color:var(--gold);}
+
+  /* ================= HERO ================= */
+  .hero{
+    text-align:center;
+    padding:clamp(28px, 7vw, 48px) clamp(4px, 1vw, 16px) clamp(16px, 4vw, 28px);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:clamp(13px, 3.4vw, 16px);
+    letter-spacing:0.22em;
+    margin-bottom:16px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:"";width:clamp(22px, 6vw, 40px);height:1px;background:var(--gold);
+  }
+  .hero h1{
+    font-family:'Noto Serif KR', serif;
+    font-weight:900;
+    font-size:var(--fs-h1);
+    line-height:1.3;
+    color:var(--ink);
+    letter-spacing:-0.02em;
+  }
+  .hero h1 .accent{
+    color:var(--wine);
+    display:block;
+    margin-top:4px;
+  }
+  .hero .year{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:var(--fs-display);
+    color:var(--gold-soft);
+    line-height:1;
+    margin:clamp(18px, 4vw, 28px) 0 6px;
+  }
+  .hero .season{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:500;
+    font-size:clamp(11px, 2.8vw, 13px);
+    color:var(--ink-2);
+    letter-spacing:0.5em;
+    padding-left:0.5em;
+  }
+
+  /* ================= SECTION ================= */
+  .sec{margin-top:clamp(36px, 8vw, 56px);}
+  .sec-title{
+    display:flex;align-items:center;gap:clamp(10px, 2.5vw, 16px);
+    margin-bottom:clamp(18px, 4vw, 26px);
+  }
+  .sec-title .num{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(28px, 7vw, 38px);
+    font-weight:500;
+    color:var(--gold);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .sec-title .txt{flex-shrink:0;}
+  .sec-title h2{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:var(--fs-h2);
+    line-height:1.3;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .sec-title .en{
+    display:block;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(11px, 2.7vw, 13px);
+    color:var(--ink-3);
+    letter-spacing:0.22em;
+    margin-top:2px;
+  }
+  .sec-title .flourish{
+    flex:1;height:1px;background:var(--line);
+  }
+
+  /* ================= GREETING ================= */
+  .greeting{
+    margin-top:clamp(26px, 6vw, 36px);
+    background:var(--cream-deep);
+    border-left:3px solid var(--gold);
+    padding:clamp(18px, 4.5vw, 28px) clamp(18px, 4.5vw, 30px);
+    font-family:'Noto Serif KR',serif;
+    font-weight:400;
+    font-size:var(--fs-body);
+    color:var(--ink-1);
+    line-height:1.95;
+  }
+  .greeting strong{color:var(--wine);font-weight:700;}
+
+  /* ================= DATE BANNER ================= */
+  .date-banner{
+    background:var(--wine);
+    color:var(--cream);
+    padding:clamp(22px, 5.5vw, 36px) clamp(18px, 4.5vw, 30px);
+    text-align:center;
+    position:relative;
+    border-radius:2px;
+  }
+  .date-banner::before{
+    content:"";
+    position:absolute;inset:7px;
+    border:1px solid rgba(213,182,120,0.35);
+    pointer-events:none;
+    border-radius:2px;
+  }
+  .date-banner .dl{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    letter-spacing:0.3em;
+    color:var(--gold-soft);
+    font-size:clamp(11px, 2.8vw, 13px);
+    margin-bottom:10px;
+  }
+  .date-banner .date-main{
+    font-family:'Cormorant Garamond','Noto Serif KR',serif;
+    font-weight:600;
+    font-size:var(--fs-date);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  .date-banner .date-main .month{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:0.55em;
+    color:var(--gold-soft);
+    margin-right:0.25em;
+    vertical-align:0.2em;
+    letter-spacing:0.08em;
+  }
+  .date-banner .date-main .d{
+    font-family:'Noto Serif KR',serif;
+    font-weight:500;
+    font-size:0.4em;
+    vertical-align:0.35em;
+    margin-left:0.08em;
+    color:var(--gold-soft);
+    letter-spacing:0.05em;
+  }
+  .date-banner .date-main .sep{color:var(--gold-soft);margin:0 clamp(8px, 2vw, 14px);font-weight:400;}
+  .date-banner .date-sub{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(13px, 3.4vw, 15px);
+    font-weight:500;
+    margin-top:12px;
+    color:#F5EAD4;
+    line-height:1.7;
+  }
+  .date-banner .duration{
+    display:inline-block;
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(11px, 2.8vw, 12px);
+    font-weight:500;
+    letter-spacing:0.35em;
+    padding:6px 18px;
+    border:1px solid rgba(213,182,120,0.55);
+    margin-top:14px;
+    color:var(--gold-soft);
+  }
+
+  /* ================= KEY INFO ================= */
+  .key-grid{
+    margin-top:clamp(14px, 3vw, 18px);
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .key-cell{
+    padding:clamp(18px, 4.5vw, 24px) clamp(18px, 4.5vw, 26px);
+    background:var(--paper);
+  }
+  .key-cell .label{
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:700;
+    font-size:clamp(11px, 2.8vw, 12px);
+    color:var(--gold);
+    letter-spacing:0.3em;
+    margin-bottom:10px;
+  }
+  .key-cell .label .en{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(10px, 2.6vw, 11px);
+    color:var(--ink-3);
+    letter-spacing:0.2em;
+  }
+  .key-cell .value{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(16px, 4.2vw, 18px);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .key-cell .value .big{
+    font-family:'Cormorant Garamond','Noto Serif KR',serif;
+    font-weight:600;
+    font-size:clamp(26px, 7vw, 32px);
+    color:var(--wine);
+    letter-spacing:-0.01em;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:-2px;
+  }
+  .key-cell .sub{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:var(--fs-sub);
+    color:var(--ink-2);
+    margin-top:6px;
+    line-height:1.6;
+    font-weight:400;
+  }
+
+  /* ================= PARTICIPANTS ================= */
+  .parts-row{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+  }
+  .part-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:clamp(16px, 4vw, 22px) clamp(12px, 3vw, 16px);
+    text-align:center;
+    border-radius:2px;
+  }
+  .part-card .icon{
+    width:44px;height:44px;
+    margin:0 auto 10px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    color:var(--wine);
+  }
+  .part-card .icon svg{width:22px;height:22px;}
+  .part-card .name{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(14px, 3.6vw, 15px);
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .part-card .desc{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(11px, 2.8vw, 12px);
+    color:var(--ink-2);
+    margin-top:4px;
+    letter-spacing:0.05em;
+  }
+
+  .notes-list{
+    margin-top:16px;
+    padding:clamp(16px, 4vw, 22px) clamp(18px, 4.5vw, 26px);
+    background:var(--cream-deep);
+    border-left:3px solid var(--sage);
+    border-radius:2px;
+  }
+  .notes-list li{
+    list-style:none;
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:400;
+    font-size:var(--fs-sub);
+    color:var(--ink-1);
+    padding-left:18px;
+    position:relative;
+    margin-bottom:10px;
+    line-height:1.8;
+  }
+  .notes-list li:last-child{margin-bottom:0;}
+  .notes-list li::before{
+    content:"";
+    position:absolute;
+    left:0;top:12px;
+    width:10px;height:1px;
+    background:var(--sage);
+  }
+  .notes-list li strong{color:var(--wine);font-weight:700;}
+
+  /* ================= FEES ================= */
+  .fees{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .fee{
+    padding:clamp(20px, 4.8vw, 30px) clamp(20px, 4.5vw, 26px);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:2px;
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:16px;
+  }
+  .fee.featured{
+    background:var(--ink);
+    color:var(--cream);
+    border-color:var(--ink);
+  }
+  .fee .fee-left{text-align:left;min-width:0;}
+  .fee .type-en{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(11px, 2.8vw, 13px);
+    letter-spacing:0.22em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .fee .type-ko{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(15px, 4vw, 17px);
+    color:var(--ink);
+    letter-spacing:0.05em;
+  }
+  .fee.featured .type-ko{color:var(--cream);}
+  .fee .note{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(11px, 2.8vw, 12px);
+    color:var(--ink-2);
+    margin-top:4px;
+  }
+  .fee.featured .note{color:#D5C9A8;}
+  .fee .fee-right{text-align:right;white-space:nowrap;}
+  .fee .amount{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:var(--fs-money);
+    line-height:1;
+    color:var(--wine);
+    letter-spacing:-0.01em;
+  }
+  .fee.featured .amount{color:var(--gold-soft);}
+  .fee .amount .unit{
+    font-family:'Noto Serif KR',serif;
+    font-weight:500;
+    font-size:clamp(14px, 3.6vw, 16px);
+    color:var(--ink);
+    margin-left:4px;
+    vertical-align:middle;
+  }
+  .fee.featured .amount .unit{color:var(--cream);}
+  .fee .tag{
+    display:inline-block;
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(10px, 2.6vw, 11px);
+    letter-spacing:0.22em;
+    color:var(--ink-2);
+    margin-top:6px;
+  }
+  .fee.featured .tag{color:#C8B78D;}
+  .fee .ribbon{
+    position:absolute;
+    top:-1px;right:clamp(18px, 4vw, 26px);
+    background:var(--gold);
+    color:#fff;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(10px, 2.6vw, 11px);
+    letter-spacing:0.25em;
+    padding:4px 12px;
+    border-radius:0 0 2px 2px;
+  }
+
+  /* ================= REGISTRATION ================= */
+  .reg-block{
+    background:linear-gradient(180deg, var(--cream-deep), var(--paper));
+    padding:clamp(18px, 4.5vw, 30px) clamp(20px, 5vw, 32px);
+    border:1px solid var(--line);
+    border-radius:2px;
+  }
+  .reg-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+    padding:clamp(14px, 3.5vw, 18px) 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .reg-row:first-child{padding-top:0;}
+  .reg-row:last-child{border-bottom:0;padding-bottom:0;}
+
+  .reg-row .label{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(11px, 2.8vw, 12px);
+    color:var(--wine);
+    letter-spacing:0.3em;
+  }
+  .reg-row .label .en{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(10px, 2.6vw, 11px);
+    color:var(--gold);
+    letter-spacing:0.2em;
+    margin-left:6px;
+  }
+
+  .reg-row .val{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:var(--fs-body);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .reg-row .val .mono{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(16px, 4.4vw, 20px);
+    color:var(--wine);
+    font-variant-numeric:tabular-nums;
+    letter-spacing:0.04em;
+    display:block;
+    word-break:break-all;
+  }
+  .reg-row .val .mono.email{font-size:clamp(14px, 4vw, 18px);}
+  .reg-row .val .small{
+    font-size:var(--fs-sub);
+    color:var(--ink-2);
+    display:block;
+    margin-top:4px;
+  }
+
+  .deadline-chip{
+    display:inline-block;
+    background:var(--wine);
+    color:var(--cream);
+    padding:8px 16px;
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(13px, 3.4vw, 15px);
+    letter-spacing:0.08em;
+    border-radius:2px;
+  }
+
+  /* ================= NOTICE ================= */
+  .notice{
+    margin-top:clamp(20px, 5vw, 28px);
+    padding:clamp(18px, 4.5vw, 28px) clamp(18px, 4.5vw, 30px);
+    border:1px dashed var(--rust);
+    background:rgba(185,78,37,0.05);
+    border-radius:2px;
+  }
+  .notice .notice-title{
+    font-family:'Noto Serif KR',serif;
+    font-weight:900;
+    font-size:clamp(13px, 3.4vw, 15px);
+    color:var(--rust);
+    letter-spacing:0.22em;
+    margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .notice .notice-title::before{
+    content:"!";
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;
+    background:var(--rust);
+    color:var(--paper);
+    border-radius:50%;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:13px;
+    flex-shrink:0;
+  }
+  .notice p{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:var(--fs-sub);
+    color:var(--ink-1);
+    line-height:1.9;
+  }
+  .notice p strong{color:var(--wine);font-weight:700;}
+
+  /* ================= CONTACT ================= */
+  .contact-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .contact-card{
+    padding:clamp(16px, 4vw, 22px) clamp(18px, 4.5vw, 22px);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-top:3px solid var(--wine);
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    text-decoration:none;
+    color:inherit;
+    min-height:64px;
+    transition:background .15s;
+  }
+  .contact-card:active{background:var(--cream-deep);}
+  .contact-card .left .role{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(11px, 2.8vw, 12px);
+    letter-spacing:0.3em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:2px;
+  }
+  .contact-card .left .person{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:clamp(16px, 4.2vw, 18px);
+    color:var(--ink);
+    letter-spacing:0.15em;
+  }
+  .contact-card .tel{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:clamp(16px, 4.2vw, 19px);
+    color:var(--wine);
+    font-variant-numeric:tabular-nums;
+    letter-spacing:0.04em;
+    white-space:nowrap;
+  }
+
+  /* ================= ATTACHMENTS ================= */
+  .attachments{
+    margin-top:clamp(28px, 6vw, 40px);
+    padding:clamp(16px, 4vw, 20px) clamp(20px, 5vw, 26px);
+    background:var(--cream-deep);
+    border-left:2px solid var(--gold);
+    border-radius:2px;
+  }
+  .attachments .at-label{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(11px, 2.8vw, 12px);
+    letter-spacing:0.3em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .attachments ul{list-style:none;}
+  .attachments li{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:500;
+    font-size:var(--fs-sub);
+    color:var(--ink-1);
+    padding:4px 0 4px 18px;
+    position:relative;
+    line-height:1.6;
+  }
+  .attachments li::before{
+    content:"◦";
+    color:var(--gold);
+    position:absolute;left:4px;top:4px;
+  }
+
+  /* ================= FOOTER ================= */
+  .footer{
+    margin-top:clamp(40px, 9vw, 60px);
+    padding-top:clamp(24px, 6vw, 32px);
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .footer .seal{
+    width:78px;height:78px;
+    border:2px solid var(--wine);
+    border-radius:50%;
+    color:var(--wine);
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:12px;
+    line-height:1.4;
+    letter-spacing:0.1em;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 18px;
+    padding:6px;
+    transform:rotate(-5deg);
+    background:rgba(107,31,42,0.05);
+  }
+  .footer .end{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    color:var(--gold);
+    letter-spacing:0.4em;
+    font-size:clamp(12px, 3vw, 13px);
+  }
+  .footer .address{
+    margin-top:18px;
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:clamp(11px, 2.8vw, 12px);
+    color:var(--ink-2);
+    line-height:1.9;
+    letter-spacing:0.02em;
+  }
+  .footer .address .sep{color:var(--gold);margin:0 6px;}
+  .footer .address a{color:inherit;text-decoration:none;}
+
+  /* ============= Tablet ============= */
+  @media (min-width:640px){
+    .key-grid{grid-template-columns:1fr 1fr;}
+    .parts-row{grid-template-columns:repeat(4, 1fr);gap:12px;}
+    .contact-row{grid-template-columns:1fr 1fr;gap:14px;}
+    .reg-row{
+      grid-template-columns:140px 1fr;
+      gap:24px;
+      align-items:baseline;
+    }
+  }
+
+  /* ============= Desktop ============= */
+  @media (min-width:820px){
+    .fees{grid-template-columns:1.1fr 1fr 1fr;gap:0;}
+    .fee{
+      grid-template-columns:1fr;
+      text-align:center;
+      gap:14px;
+      border-radius:0;
+      border-right:0;
+    }
+    .fees .fee:first-child{border-top-left-radius:2px;border-bottom-left-radius:2px;}
+    .fees .fee:last-child{border-right:1px solid var(--line);border-top-right-radius:2px;border-bottom-right-radius:2px;}
+    .fee.featured{border-color:var(--ink);}
+    .fee .fee-left{text-align:center;}
+    .fee .fee-right{text-align:center;}
+    .fee .ribbon{right:50%;transform:translateX(50%);}
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+
+    <header class="org-strip">
+      <div class="kr">성 경 진 리 사 역 원</div>
+      <div class="en">Ministry of Biblical Truth · Next Generation Team</div>
+      <div class="doc-meta">
+        <span>문서번호 성사원00-000</span>
+        <span class="dot">·</span>
+        <span>수신 각지 교회</span>
+        <span class="dot">·</span>
+        <span>발신 어린이 봉사 팀</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">Spring Gathering</div>
+      <h1>
+        전국 어린이 학부모
+        <span class="accent">목양 집회</span>
+      </h1>
+      <div class="year">2026</div>
+      <div class="season">S · P · R · I · N · G</div>
+    </section>
+
+    <div class="greeting">
+      그리스도 예수님 안에서 각지 교회 형제자매님들께 문안드립니다. 어린이의 일에서 관건적인 일은 <strong>교회 안의 각 가정을 온전하게 하는 것</strong>이며, 가정에서 영적인 생활을 살아내는 <strong>부모님의 본을 세우는 것</strong>이 무엇보다 중요합니다. 주님께서 부모님들을 목양하심으로 상호 목양이 충만한 집회가 되기를 바랍니다.
+    </div>
+
+    <!-- 01 -->
+    <section class="sec">
+      <div class="sec-title">
+        <span class="num">01</span>
+        <div class="txt">
+          <h2>집회 개요</h2>
+          <span class="en">When &amp; Where</span>
+        </div>
+        <span class="flourish"></span>
+      </div>
+
+      <div class="date-banner">
+        <div class="dl">집 회 일 정</div>
+        <div class="date-main"><span class="month">5월</span><strong>22</strong><span class="sep">—</span><strong>24</strong><span class="d">일</span></div>
+        <div class="date-sub">2026년 5월 22일 (금) 오후 7시<br/>~ 5월 24일 (주일) 점심 식사까지</div>
+        <span class="duration">2박 3일</span>
+      </div>
+
+      <div class="key-grid">
+        <div class="key-cell">
+          <div class="label">장소 <span class="en">Venue</span></div>
+          <div class="value">성경진리사역원
+            <div class="sub">경기 용인시 기흥구 한보라1로 50</div>
+          </div>
+        </div>
+        <div class="key-cell">
+          <div class="label">방식 <span class="en">Format</span></div>
+          <div class="value">현장 + 온라인 ZOOM
+            <div class="sub">어린이 집회는 현장에서만 진행</div>
+          </div>
+        </div>
+        <div class="key-cell">
+          <div class="label">등록 시간 <span class="en">Check-in</span></div>
+          <div class="value">오후 <span class="big">4</span>시 부터
+            <div class="sub">첫날 · 저녁은 도시락 제공</div>
+          </div>
+        </div>
+        <div class="key-cell">
+          <div class="label">숙박 정원 <span class="en">Capacity</span></div>
+          <div class="value"><span class="big">350</span>명 제한
+            <div class="sub">인근 교회는 출퇴근 권장</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="sec">
+      <div class="sec-title">
+        <span class="num">02</span>
+        <div class="txt">
+          <h2>참석 대상</h2>
+          <span class="en">Who is Invited</span>
+        </div>
+        <span class="flourish"></span>
+      </div>
+
+      <div class="parts-row">
+        <div class="part-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4 1 6.5L12 16l-5.5 3.5 1-6.5L3 9l6-1z"/></svg>
+          </div>
+          <div class="name">장로 책임<br/>형제</div>
+          <div class="desc">참여 권장</div>
+        </div>
+        <div class="part-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-3.5 4-3.5s3 1 3 3.5"/></svg>
+          </div>
+          <div class="name">학부모</div>
+          <div class="desc">가정의 본</div>
+        </div>
+        <div class="part-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l1.8 5.5h5.7l-4.6 3.4 1.8 5.6L12 14l-4.7 3.5 1.8-5.6L4.5 8.5h5.7z"/></svg>
+          </div>
+          <div class="name">어린이<br/>봉사자·교사</div>
+          <div class="desc">교사 목양</div>
+        </div>
+        <div class="part-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="7" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg>
+          </div>
+          <div class="name">어린이<br/>(초등학생)</div>
+          <div class="desc">동시 진행</div>
+        </div>
+      </div>
+
+      <ul class="notes-list">
+        <li>학부모 집회와 어린이 집회가 <strong>동시에 진행</strong>됩니다.</li>
+        <li>장로 책임 형제님들의 참여를 권장드립니다.</li>
+        <li>초등학생 미만의 자녀는 별도 프로그램이 없어 <strong>부모님이 직접 돌봐주셔야</strong> 합니다.</li>
+        <li>어린이 돌봄 봉사 병행으로 어린이 인수가 많아지면 신청이 제한될 수 있습니다.</li>
+      </ul>
+    </section>
+
+    <!-- 03 -->
+    <section class="sec">
+      <div class="sec-title">
+        <span class="num">03</span>
+        <div class="txt">
+          <h2>회비 안내</h2>
+          <span class="en">Registration Fees</span>
+        </div>
+        <span class="flourish"></span>
+      </div>
+
+      <div class="fees">
+        <div class="fee featured">
+          <div class="ribbon">RECOMMENDED</div>
+          <div class="fee-left">
+            <div class="type-en">On-site · Stay</div>
+            <div class="type-ko">2박 3일 숙박</div>
+            <div class="note">지방 성도 우선 배려</div>
+          </div>
+          <div class="fee-right">
+            <div class="amount">150,000<span class="unit">원</span></div>
+            <div class="tag">성인 · 어린이 동일</div>
+          </div>
+        </div>
+        <div class="fee">
+          <div class="fee-left">
+            <div class="type-en">On-site · Commute</div>
+            <div class="type-ko">2박 3일 출퇴근</div>
+            <div class="note">인근 교회 권장</div>
+          </div>
+          <div class="fee-right">
+            <div class="amount">90,000<span class="unit">원</span></div>
+            <div class="tag">성인 · 어린이 동일</div>
+          </div>
+        </div>
+        <div class="fee">
+          <div class="fee-left">
+            <div class="type-en">Online ZOOM</div>
+            <div class="type-ko">온라인 참석</div>
+            <div class="note">개요 파일 제공</div>
+          </div>
+          <div class="fee-right">
+            <div class="amount">20,000<span class="unit">원</span></div>
+            <div class="tag">1인당</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="sec">
+      <div class="sec-title">
+        <span class="num">04</span>
+        <div class="txt">
+          <h2>신청 방법</h2>
+          <span class="en">How to Register</span>
+        </div>
+        <span class="flourish"></span>
+      </div>
+
+      <div class="reg-block">
+        <div class="reg-row">
+          <div class="label">입금 계좌<span class="en">Bank</span></div>
+          <div class="val">
+            <span class="mono">하나은행 606-910524-86007</span>
+            <span class="small">예금주 : 임 주 영</span>
+          </div>
+        </div>
+        <div class="reg-row">
+          <div class="label">신청 방법<span class="en">Method</span></div>
+          <div class="val">
+            교회별로 신청서(첨부 2) 작성 → 이메일 접수
+            <span class="small">회비 입금이 확인되어야 신청이 완료됩니다.</span>
+          </div>
+        </div>
+        <div class="reg-row">
+          <div class="label">이 메 일<span class="en">E-mail</span></div>
+          <div class="val"><span class="mono email">ngbtm@naver.com</span></div>
+        </div>
+        <div class="reg-row">
+          <div class="label">신청 마감<span class="en">Deadline</span></div>
+          <div class="val">
+            <span class="deadline-chip">2026년 5월 11일 (월) 밤 10시</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <div class="notice-title">유 의 사 항</div>
+        <p>
+          시설 이용 제한으로 <strong>숙박 인수 350명</strong>으로 제한됩니다. 사역원 인근 교회의 가정들은 <strong>출퇴근을 권장</strong>드리며, 지방 성도들이 많이 숙박하실 수 있도록 배려해주시기 바랍니다. 어린이 돌봄 봉사 병행 특성상 <strong>어린이 인수가 많아질 경우 신청이 제한</strong>될 수 있음을 양해 바랍니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="sec">
+      <div class="sec-title">
+        <span class="num">05</span>
+        <div class="txt">
+          <h2>문 의</h2>
+          <span class="en">Contact</span>
+        </div>
+        <span class="flourish"></span>
+      </div>
+
+      <div class="contact-row">
+        <a class="contact-card" href="tel:01048796335">
+          <div class="left">
+            <div class="role">Staff</div>
+            <div class="person">한 정 민</div>
+          </div>
+          <div class="tel">010-4879-6335</div>
+        </a>
+        <a class="contact-card" href="tel:01094104012">
+          <div class="left">
+            <div class="role">Staff</div>
+            <div class="person">사 공 원</div>
+          </div>
+          <div class="tel">010-9410-4012</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="attachments">
+      <div class="at-label">Attachments · 첨 부</div>
+      <ul>
+        <li>첨부 1. 2026년 봄 전국 학부모 집회 일정표</li>
+        <li>첨부 2. 집회 신청서</li>
+      </ul>
+    </div>
+
+    <footer class="footer">
+      <div class="seal">성경진리<br/>사역원</div>
+      <div class="end">— 끝 —</div>
+      <div class="address">
+        경기 용인시 기흥구 한보라1로 50 · 17080<br/>
+        TEL <a href="tel:15440031">1544-0031</a> <span class="sep">·</span> FAX 031-286-3194<br/>
+        <a href="mailto:ngbtm@naver.com">ngbtm@naver.com</a>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
