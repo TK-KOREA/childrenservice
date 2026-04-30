@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>초등 영어 기도문</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;800&family=Gabarito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --card-bg: #ffffff;
+    --accent: #4a7c59;
+    --accent-light: #e9f2ec;
+    --orange: #e07b3c;
+    --text: #2c2c2c;
+    --text-light: #777;
+    --border: #e2ddd4;
+    --shadow: 0 3px 14px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #4a7c59 0%, #3a6248 100%);
+    color: white;
+    padding: 2.2rem 1.5rem 1.8rem;
+    text-align: center;
+  }
+  .header .emoji-top { font-size: 2rem; margin-bottom: 0.4rem; }
+  .header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.2rem; }
+  .header .subtitle { font-size: 0.82rem; font-weight: 300; opacity: 0.85; }
+  .header .flag-row { margin-top: 0.6rem; font-size: 1.1rem; letter-spacing: 0.2em; }
+
+  .intro {
+    max-width: 600px;
+    margin: 1.3rem auto;
+    padding: 0 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 0.8rem 3rem;
+  }
+
+  .prayer-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.15s ease;
+  }
+  .prayer-card:hover { transform: translateY(-2px); }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.1rem 0;
+  }
+
+  .card-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 30px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-family: 'Gabarito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .card-scene {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .card-body { padding: 0.5rem 1.1rem 1rem; }
+
+  .english {
+    font-family: 'Gabarito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 0.45rem;
+    letter-spacing: 0.01em;
+  }
+
+  .pronunciation {
+    font-size: 0.82rem;
+    color: var(--orange);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+  .pronunciation::before { content: '🔊 '; font-size: 0.72rem; }
+
+  .korean {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 1.8rem 0 1rem;
+    padding: 0 0.3rem;
+  }
+  .section-divider .line { flex: 1; height: 1px; background: var(--border); }
+  .section-divider .label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .scene-desc {
+    background: var(--accent-light);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.8rem;
+    color: #3a6248;
+    line-height: 1.7;
+  }
+
+  .tip-box {
+    background: linear-gradient(135deg, #fff8ee, #fef4e3);
+    border: 1px solid #eedcc0;
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .tip-box h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 0.4rem;
+  }
+  .tip-box p {
+    font-size: 0.82rem;
+    color: #6b5a42;
+    line-height: 1.85;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 1.2rem;
+    font-size: 0.72rem;
+    color: var(--text-light);
+    opacity: 0.5;
+  }
+
+  @media print {
+    body { background: white; }
+    .prayer-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>초등 영어 기도문</h1>
+  <div class="flag-row">🇰🇷 ✈️ 🇹🇼</div>
+</div>
+
+<div class="container">
+
+  <!-- ===== 방문할 때 ===== -->
+  <div class="section-divider">
+    <span class="line"></span>
+    <span class="label">🛬 교회에 도착했을 때</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="scene-desc">
+    ✈️ 대만에 도착해서 교회에 처음 왔을 때, 주님께 사랑과 감사를 표현하는 기도예요.
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">1</span>
+      <span class="card-scene">주님께 사랑을 고백할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Lord Jesus, I love You.</div>
+      <div class="pronunciation">로드 지저스, 아이 러브 유.</div>
+      <div class="korean">주 예수님, 사랑합니다.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">2</span>
+      <span class="card-scene">감사를 표현할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Thank You, Lord Jesus.</div>
+      <div class="pronunciation">땡큐, 로드 지저스.</div>
+      <div class="korean">주 예수님, 감사합니다.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">3</span>
+      <span class="card-scene">오늘 하루에 감사할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Thank You, Lord, for this day.</div>
+      <div class="pronunciation">땡큐, 로드, 포 디스 데이.</div>
+      <div class="korean">주님, 오늘 하루 감사합니다.</div>
+    </div>
+  </div>
+
+  <!-- ===== 접대 받을 때 ===== -->
+  <div class="section-divider">
+    <span class="line"></span>
+    <span class="label">🤝 접대 받을 때</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="scene-desc">
+    🏠 대만 성도들이 따뜻하게 맞아 주고 돌봐 줄 때, 감사하는 마음을 담은 기도예요.
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">4</span>
+      <span class="card-scene">성도들에게 감사할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Thank You for all the saints here.</div>
+      <div class="pronunciation">땡큐 포 올 더 세인츠 히어.</div>
+      <div class="korean">이곳의 모든 성도들을 감사합니다.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">5</span>
+      <span class="card-scene">마음을 열고 싶을 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Open my heart, Lord.</div>
+      <div class="pronunciation">오픈 마이 하트, 로드.</div>
+      <div class="korean">주님, 제 마음을 열어 주세요.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">6</span>
+      <span class="card-scene">성령 충만을 구할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Fill us with Your Spirit.</div>
+      <div class="pronunciation">필 어스 위드 유어 스피릿.</div>
+      <div class="korean">저희를 당신의 영으로 채워 주세요.</div>
+    </div>
+  </div>
+
+  <!-- ===== 함께 모였을 때 ===== -->
+  <div class="section-divider">
+    <span class="line"></span>
+    <span class="label">함께 모여 기도할 때</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="scene-desc">
+    🙏 집회나 소그룹에서 다 같이 기도할 때 쓸 수 있는 문장이에요.
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">7</span>
+      <span class="card-scene">몸 안에서 하나 됨을 위해</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Lord, make us one in Your Body.</div>
+      <div class="pronunciation">로드, 메이크 어스 원 인 유어 바디.</div>
+      <div class="korean">주님, 저희를 주님의 몸 안에서 하나 되게 해 주세요.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">8</span>
+      <span class="card-scene">생명 안에서 자라기를 구할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Help us grow in life and love You more.</div>
+      <div class="pronunciation">헬프 어스 그로우 인 라이프 앤 러브 유 모어.</div>
+      <div class="korean">저희가 생명 안에서 자라고 주님을 더 사랑하게 도와주세요.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">9</span>
+      <span class="card-scene">하나 됨을 위해</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Make us one, Lord Jesus.</div>
+      <div class="pronunciation">메이크 어스 원, 로드 지저스.</div>
+      <div class="korean">주 예수님, 저희를 하나 되게 해 주세요.</div>
+    </div>
+  </div>
+
+  <div class="prayer-card">
+    <div class="card-top">
+      <span class="card-num">10</span>
+      <span class="card-scene">대만 교회를 축복할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Lord, bless the church in Taiwan.</div>
+      <div class="pronunciation">로드, 블레스 더 처치 인 타이완.</div>
+      <div class="korean">주님, 대만의 교회를 축복해 주세요.</div>
+    </div>
+  </div>
+
+  <!-- ===== 마무리 ===== -->
+  <div class="section-divider">
+    <span class="line"></span>
+    <span class="label">✨ 기도를 마칠 때</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="prayer-card" style="border: 2px solid var(--accent); background: #fafff7;">
+    <div class="card-top">
+      <span class="card-num" style="background: var(--orange);">♥</span>
+      <span class="card-scene" style="color: var(--orange);">마지막에 함께 말할 때</span>
+    </div>
+    <div class="card-body">
+      <div class="english">Lord, we love You!</div>
+      <div class="pronunciation">로드, 위 러브 유!</div>
+      <div class="korean">주님, 저희가 주님을 사랑합니다!</div>
+    </div>
+  </div>
+
+  <!-- ===== 팁 ===== -->
+  <div class="tip-box">
+    <h3>💡 연습 꿀팁</h3>
+    <p>
+      ① 하루에 2~3문장만 골라서 5번씩 읽어 보세요.<br>
+      ② 뜻을 생각하면서 천천히 말하면 더 잘 외워져요.<br>
+      ③ 다른 사람이 기도할 때 <strong>"Amen!"</strong> 또는 <strong>"Lord Jesus!"</strong>라고 함께 말해도 좋아요.<br>
+      ④ 틀려도 괜찮아요! 마음이 중요합니다. 😊
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
