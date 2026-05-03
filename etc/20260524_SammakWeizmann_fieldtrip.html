@@ -7,8 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500;700;900&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Gaegu:wght@300;400;700&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
   :root {
     --paper: #f5ecd9;
@@ -830,18 +828,38 @@
   .lm-market { background: #b65232; }
   .lm-pyeongchang { background: #ad8244; font-size: 0.78rem; }
 
-  .leaflet-popup-content-wrapper {
-    border-radius: 0;
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  /* Marker SVG colors (used in JS) */
+  .map-section .legend-marker {
+    /* defined above */
   }
-  .leaflet-popup-tip { background: var(--paper); border: 1px solid var(--ink); }
-  .leaflet-popup-content {
+
+  /* Google InfoWindow customization */
+  .gm-style .gm-style-iw-c {
+    border-radius: 0 !important;
+    background: var(--paper) !important;
+    border: 1px solid var(--ink) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+    padding: 0 !important;
+  }
+  .gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+  .gm-style .gm-style-iw-tc::after {
+    background: var(--paper) !important;
+  }
+  .gm-style .gm-style-iw-chr {
+    height: 0 !important;
+  }
+  .gm-style .gm-style-iw-chr button {
+    width: 24px !important;
+    height: 24px !important;
+    margin: 4px !important;
+  }
+  .popup-content {
+    padding: 0.85rem 1rem 0.9rem;
     font-family: 'IBM Plex Sans KR', sans-serif;
-    margin: 0.8rem 1rem !important;
-    font-size: 0.85rem;
-    line-height: 1.5;
+    min-width: 180px;
   }
   .popup-eyebrow {
     font-family: 'Bodoni Moda', serif;
@@ -858,6 +876,7 @@
     font-size: 1.05rem;
     margin-bottom: 0.2rem;
     color: var(--ink);
+    line-height: 1.2;
   }
   .popup-time {
     font-family: 'IBM Plex Sans KR', sans-serif;
@@ -1360,108 +1379,165 @@
 </div>
 
 <script>
-  // Initialize map - centered between 안양 and 양양/평창
-  var map = L.map('map', { 
-    scrollWheelZoom: false,
-    zoomControl: true
-  }).setView([37.85, 128.0], 8);
+  // ===== Google Maps initialization (called by API script) =====
+  function initMap() {
+    // Custom map style — warm paper / editorial aesthetic
+    const mapStyle = [
+      { elementType: 'geometry', stylers: [{ color: '#ebe0c8' }] },
+      { elementType: 'labels.text.fill', stylers: [{ color: '#3a3f33' }] },
+      { elementType: 'labels.text.stroke', stylers: [{ color: '#f5ecd9' }, { weight: 2 }] },
+      { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#a8c5d5' }] },
+      { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#355a78' }] },
+      { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#e8dcc0' }] },
+      { featureType: 'landscape.natural', elementType: 'geometry', stylers: [{ color: '#dccba0' }] },
+      { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#d8c9a8' }] },
+      { featureType: 'road', elementType: 'labels', stylers: [{ visibility: 'simplified' }] },
+      { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#c4a574' }] },
+      { featureType: 'road.highway', elementType: 'geometry.stroke', stylers: [{ color: '#a08858' }] },
+      { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#d4cba0' }] },
+      { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+      { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+      { featureType: 'administrative.country', elementType: 'geometry.stroke', stylers: [{ color: '#8a7c5e' }, { weight: 1 }] },
+      { featureType: 'administrative.province', elementType: 'geometry.stroke', stylers: [{ color: '#a8997a' }] }
+    ];
 
-  // CartoDB Voyager tiles - clean, editorial look
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
-
-  // Locations
-  var P = {
-    anyang:      { c: [37.4258, 126.9162], cls: 'lm-base',        text: 'A',  size: 32 },
-    pension:     { c: [38.0146, 128.6173], cls: 'lm-base',        text: 'P',  size: 32 },
-    micheongol:  { c: [38.0017, 128.5430], cls: 'lm-stop',        text: '1',  size: 26 },
-    lakeseum:    { c: [38.0143, 128.5473], cls: 'lm-stop',        text: '2',  size: 26 },
-    lunch:       { c: [38.0750, 128.6200], cls: 'lm-stop',        text: '3',  size: 26 },
-    dunchi:      { c: [38.0956, 128.6396], cls: 'lm-stop',        text: '4',  size: 26 },
-    hajodae:     { c: [38.0334, 128.7155], cls: 'lm-stop',        text: '5',  size: 26 },
-    waterpark:   { c: [38.0881, 128.6659], cls: 'lm-waterpark',   text: 'A',  size: 28 },
-    market:      { c: [38.0745, 128.6222], cls: 'lm-market',      text: 'M',  size: 30 },
-    pyeongchang: { c: [37.5602, 128.3463], cls: 'lm-pyeongchang', text: '한', size: 30 }
-  };
-
-  // Day 1 route line: 안양 -> 펜션
-  L.polyline([P.anyang.c, P.pension.c], {
-    color: '#b65232', weight: 3, opacity: 0.85, dashArray: '8, 8'
-  }).addTo(map);
-
-  // Day 3 route line: 펜션 -> 봉평 -> 안양
-  L.polyline([P.pension.c, P.pyeongchang.c, P.anyang.c], {
-    color: '#355a78', weight: 3, opacity: 0.85, dashArray: '8, 8'
-  }).addTo(map);
-
-  // Helper to make custom markers
-  function makeMarker(loc, popupHTML) {
-    var icon = L.divIcon({
-      className: '',
-      html: '<div class="lm ' + loc.cls + '">' + loc.text + '</div>',
-      iconSize: [loc.size, loc.size],
-      iconAnchor: [loc.size/2, loc.size/2],
-      popupAnchor: [0, -loc.size/2]
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.85, lng: 128.0 },
+      zoom: 8,
+      styles: mapStyle,
+      gestureHandling: 'cooperative',
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControl: true
     });
-    L.marker(loc.c, { icon: icon }).addTo(map).bindPopup(popupHTML);
+
+    // ===== Locations =====
+    const P = {
+      anyang:      { pos: { lat: 37.4258, lng: 126.9162 }, color: '#1a1f15', text: 'A',  size: 32, fontSize: 14 },
+      pension:     { pos: { lat: 38.0146, lng: 128.6173 }, color: '#1a1f15', text: 'P',  size: 32, fontSize: 14 },
+      micheongol:  { pos: { lat: 38.0017, lng: 128.5430 }, color: '#5e7458', text: '1',  size: 26, fontSize: 12 },
+      lakeseum:    { pos: { lat: 38.0143, lng: 128.5473 }, color: '#5e7458', text: '2',  size: 26, fontSize: 12 },
+      lunch:       { pos: { lat: 38.0750, lng: 128.6200 }, color: '#5e7458', text: '3',  size: 26, fontSize: 12 },
+      dunchi:      { pos: { lat: 38.0956, lng: 128.6396 }, color: '#5e7458', text: '4',  size: 26, fontSize: 12 },
+      hajodae:     { pos: { lat: 38.0334, lng: 128.7155 }, color: '#5e7458', text: '5',  size: 26, fontSize: 12 },
+      waterpark:   { pos: { lat: 38.0881, lng: 128.6659 }, color: '#355a78', text: 'A',  size: 28, fontSize: 12 },
+      market:      { pos: { lat: 38.0745, lng: 128.6222 }, color: '#b65232', text: 'M',  size: 30, fontSize: 13 },
+      pyeongchang: { pos: { lat: 37.5602, lng: 128.3463 }, color: '#ad8244', text: '한', size: 30, fontSize: 13 }
+    };
+
+    // ===== Custom SVG marker icon generator =====
+    function makeIcon(loc) {
+      const s = loc.size;
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + s + '" height="' + s + '" viewBox="0 0 ' + s + ' ' + s + '">' +
+        '<circle cx="' + (s/2) + '" cy="' + (s/2) + '" r="' + (s/2 - 2) + '" fill="' + loc.color + '" stroke="white" stroke-width="2.5"/>' +
+        '<text x="' + (s/2) + '" y="' + (s/2) + '" text-anchor="middle" dominant-baseline="central" fill="white" ' +
+        'font-family="Bodoni Moda, serif" font-style="italic" font-weight="700" font-size="' + loc.fontSize + '">' + loc.text + '</text>' +
+        '</svg>';
+      return {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+        scaledSize: new google.maps.Size(s, s),
+        anchor: new google.maps.Point(s/2, s/2)
+      };
+    }
+
+    // ===== Dashed polyline helper =====
+    function dashedLine(path, color) {
+      const lineSymbol = {
+        path: 'M 0,-1 0,1',
+        strokeColor: color,
+        strokeOpacity: 1,
+        scale: 3
+      };
+      new google.maps.Polyline({
+        path: path,
+        strokeOpacity: 0,
+        icons: [{ icon: lineSymbol, offset: '0', repeat: '14px' }],
+        map: map
+      });
+    }
+
+    // Day 1: 안양 → 양양 펜션 (red)
+    dashedLine([P.anyang.pos, P.pension.pos], '#b65232');
+    // Day 3: 펜션 → 봉평 → 안양 (blue)
+    dashedLine([P.pension.pos, P.pyeongchang.pos, P.anyang.pos], '#355a78');
+
+    // ===== Markers + InfoWindows =====
+    const infoWindow = new google.maps.InfoWindow({ maxWidth: 260 });
+
+    function addMarker(loc, popupHTML) {
+      const marker = new google.maps.Marker({
+        position: loc.pos,
+        map: map,
+        icon: makeIcon(loc),
+        optimized: false
+      });
+      marker.addListener('click', () => {
+        infoWindow.setContent('<div class="popup-content">' + popupHTML + '</div>');
+        infoWindow.open({ anchor: marker, map: map });
+      });
+      return marker;
+    }
+
+    addMarker(P.anyang,
+      '<div class="popup-eyebrow">Day 1 · 14:00 출발 / Day 3 · 17:00 귀가</div>' +
+      '<div class="popup-name">안양 · 출발/귀가지</div>' +
+      '<div class="popup-time">삼막로96번길 83</div>');
+
+    addMarker(P.pension,
+      '<div class="popup-eyebrow">Base Camp · 2박</div>' +
+      '<div class="popup-name">언덕위에하얀집펜션</div>' +
+      '<div class="popup-time">양양군 서면 버들골길 26</div>');
+
+    addMarker(P.micheongol,
+      '<div class="popup-eyebrow">Day 2 · B팀 09:45</div>' +
+      '<div class="popup-name">미천골 자연휴양림</div>' +
+      '<div class="popup-time">계곡 산책 · 약 1시간</div>');
+
+    addMarker(P.lakeseum,
+      '<div class="popup-eyebrow">Day 2 · B팀 11:15</div>' +
+      '<div class="popup-name">카페 레이크지움</div>' +
+      '<div class="popup-time">호수 뷰 갤러리 카페</div>');
+
+    addMarker(P.lunch,
+      '<div class="popup-eyebrow">Day 2 · B팀 13:00</div>' +
+      '<div class="popup-name">양양 시내 점심</div>' +
+      '<div class="popup-time">송이 / 메밀 / 막국수</div>');
+
+    addMarker(P.dunchi,
+      '<div class="popup-eyebrow">Day 2 · B팀 14:15</div>' +
+      '<div class="popup-name">카페 둔치 + 남대천</div>' +
+      '<div class="popup-time">강변 산책 1km</div>');
+
+    addMarker(P.hajodae,
+      '<div class="popup-eyebrow">Day 2 · B팀 15:55</div>' +
+      '<div class="popup-name">하조대 명승지</div>' +
+      '<div class="popup-time">동해 절벽 · 양양 8경</div>');
+
+    addMarker(P.waterpark,
+      '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
+      '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
+      '<div class="popup-time">아이 동반 워터파크</div>');
+
+    addMarker(P.market,
+      '<div class="popup-eyebrow">Day 2 · 17:00 · A+B 합류</div>' +
+      '<div class="popup-name">양양수산시장</div>' +
+      '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>');
+
+    addMarker(P.pyeongchang,
+      '<div class="popup-eyebrow">Day 3 · 12:00 점심</div>' +
+      '<div class="popup-name">평창한우마을 면온점</div>' +
+      '<div class="popup-time">봉평 · ☎ 033-333-9777</div>');
+
+    // ===== Auto-fit bounds =====
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(P.anyang.pos);
+    bounds.extend(P.pension.pos);
+    bounds.extend(P.pyeongchang.pos);
+    map.fitBounds(bounds, 60);
   }
-
-  makeMarker(P.anyang,
-    '<div class="popup-eyebrow">Day 1 · 14:00 출발 / Day 3 · 17:00 귀가</div>' +
-    '<div class="popup-name">안양 · 출발/귀가지</div>' +
-    '<div class="popup-time">삼막로96번길 83</div>');
-
-  makeMarker(P.pension,
-    '<div class="popup-eyebrow">Base Camp · 2박</div>' +
-    '<div class="popup-name">언덕위에하얀집펜션</div>' +
-    '<div class="popup-time">양양군 서면 버들골길 26</div>');
-
-  makeMarker(P.micheongol,
-    '<div class="popup-eyebrow">Day 2 · B팀 09:45</div>' +
-    '<div class="popup-name">미천골 자연휴양림</div>' +
-    '<div class="popup-time">계곡 산책 · 약 1시간</div>');
-
-  makeMarker(P.lakeseum,
-    '<div class="popup-eyebrow">Day 2 · B팀 11:15</div>' +
-    '<div class="popup-name">카페 레이크지움</div>' +
-    '<div class="popup-time">호수 뷰 갤러리 카페</div>');
-
-  makeMarker(P.lunch,
-    '<div class="popup-eyebrow">Day 2 · B팀 13:00</div>' +
-    '<div class="popup-name">양양 시내 점심</div>' +
-    '<div class="popup-time">송이 / 메밀 / 막국수</div>');
-
-  makeMarker(P.dunchi,
-    '<div class="popup-eyebrow">Day 2 · B팀 14:15</div>' +
-    '<div class="popup-name">카페 둔치 + 남대천</div>' +
-    '<div class="popup-time">강변 산책 1km</div>');
-
-  makeMarker(P.hajodae,
-    '<div class="popup-eyebrow">Day 2 · B팀 15:55</div>' +
-    '<div class="popup-name">하조대 명승지</div>' +
-    '<div class="popup-time">동해 절벽 · 양양 8경</div>');
-
-  makeMarker(P.waterpark,
-    '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
-    '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
-    '<div class="popup-time">아이 동반 워터파크</div>');
-
-  makeMarker(P.market,
-    '<div class="popup-eyebrow">Day 2 · 17:00 · A+B 합류</div>' +
-    '<div class="popup-name">양양수산시장</div>' +
-    '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>');
-
-  makeMarker(P.pyeongchang,
-    '<div class="popup-eyebrow">Day 3 · 12:00 점심</div>' +
-    '<div class="popup-name">평창한우마을 면온점</div>' +
-    '<div class="popup-time">봉평 · ☎ 033-333-9777</div>');
-
-  // Auto-fit to show all key points
-  map.fitBounds([P.anyang.c, P.pension.c, P.pyeongchang.c], { padding: [40, 40] });
 </script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&callback=initMap"></script>
 
 </body>
 </html>
