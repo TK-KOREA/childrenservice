@@ -805,6 +805,49 @@
   .legend-marker.market { background: #b65232; }
   .legend-marker.pyeongchang { background: #ad8244; }
 
+  /* Day filter buttons */
+  .map-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .day-btn {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    padding: 0.55rem 1.15rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 transparent;
+  }
+  .day-btn:hover {
+    background: var(--paper-deep);
+    box-shadow: 3px 3px 0 var(--ink-soft);
+    transform: translate(-1px, -1px);
+  }
+  .day-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 3px 3px 0 var(--terracotta);
+  }
+  .day-btn .sub {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.72rem;
+    margin-left: 0.4rem;
+    opacity: 0.75;
+    letter-spacing: 0;
+  }
+  .legend-line.day2 { color: #5e7458; }
+
   /* Custom Leaflet markers */
   .lm {
     border-radius: 50%;
@@ -938,8 +981,15 @@
     <div class="section-label">Route Map</div>
     <h2 class="map-section-title">3일간의 <em>동선 지도</em></h2>
     <p class="map-section-sub">
-      안양에서 출발해 양양 펜션을 거쳐, 봉평 한우 점심을 지나 다시 안양으로 — 전체 약 660km의 여정. 마커를 클릭하면 각 장소의 시간과 정보가 보여요.
+      안양에서 출발해 양양 펜션을 거쳐, 봉평 한우 점심을 지나 다시 안양으로 — 전체 약 660km의 여정. 아래 버튼으로 일자별 동선만 골라볼 수 있어요. 마커를 클릭하면 시간과 정보가 표시됩니다.
     </p>
+    
+    <div class="map-controls">
+      <button class="day-btn active" data-day="all" onclick="showDay('all')">전체<span class="sub">All</span></button>
+      <button class="day-btn" data-day="1" onclick="showDay(1)">Day 1<span class="sub">안양→양양</span></button>
+      <button class="day-btn" data-day="2" onclick="showDay(2)">Day 2<span class="sub">분리 활동</span></button>
+      <button class="day-btn" data-day="3" onclick="showDay(3)">Day 3<span class="sub">양양→안양</span></button>
+    </div>
     
     <div class="map-container">
       <div id="map"></div>
@@ -949,6 +999,10 @@
       <div class="legend-item">
         <span class="legend-line day1"></span>
         <span><strong>Day 1</strong> · 안양 → 양양</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line day2"></span>
+        <span><strong>Day 2</strong> · B팀 5스탑 코스</span>
       </div>
       <div class="legend-item">
         <span class="legend-line day3"></span>
@@ -1379,6 +1433,10 @@
 </div>
 
 <script>
+  // ===== Module-level so showDay() can access =====
+  let mapInstance;
+  const layers = [];
+
   // ===== Google Maps initialization (called by API script) =====
   function initMap() {
     // Custom map style — warm paper / editorial aesthetic
@@ -1401,7 +1459,7 @@
       { featureType: 'administrative.province', elementType: 'geometry.stroke', stylers: [{ color: '#a8997a' }] }
     ];
 
-    const map = new google.maps.Map(document.getElementById('map'), {
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 37.85, lng: 128.0 },
       zoom: 8,
       styles: mapStyle,
@@ -1441,7 +1499,7 @@
       };
     }
 
-    // ===== Dashed polyline helper =====
+    // ===== Dashed polyline helper (returns the polyline so we can track it) =====
     function dashedLine(path, color) {
       const lineSymbol = {
         path: 'M 0,-1 0,1',
@@ -1449,95 +1507,140 @@
         strokeOpacity: 1,
         scale: 3
       };
-      new google.maps.Polyline({
+      return new google.maps.Polyline({
         path: path,
         strokeOpacity: 0,
         icons: [{ icon: lineSymbol, offset: '0', repeat: '14px' }],
-        map: map
+        map: mapInstance
       });
     }
 
+    // ===== Routes (each tracked with day membership) =====
     // Day 1: 안양 → 양양 펜션 (red)
-    dashedLine([P.anyang.pos, P.pension.pos], '#b65232');
+    layers.push({ obj: dashedLine([P.anyang.pos, P.pension.pos], '#b65232'), days: [1] });
+    // Day 2: B팀 5스탑 코스 (sage green) 펜션 → 미천골 → 레이크지움 → 점심 → 둔치 → 하조대 → 시장
+    layers.push({ obj: dashedLine([P.pension.pos, P.micheongol.pos, P.lakeseum.pos, P.lunch.pos, P.dunchi.pos, P.hajodae.pos, P.market.pos], '#5e7458'), days: [2] });
     // Day 3: 펜션 → 봉평 → 안양 (blue)
-    dashedLine([P.pension.pos, P.pyeongchang.pos, P.anyang.pos], '#355a78');
+    layers.push({ obj: dashedLine([P.pension.pos, P.pyeongchang.pos, P.anyang.pos], '#355a78'), days: [3] });
 
     // ===== Markers + InfoWindows =====
     const infoWindow = new google.maps.InfoWindow({ maxWidth: 260 });
 
-    function addMarker(loc, popupHTML) {
+    function addMarker(loc, popupHTML, days) {
       const marker = new google.maps.Marker({
         position: loc.pos,
-        map: map,
+        map: mapInstance,
         icon: makeIcon(loc),
         optimized: false
       });
       marker.addListener('click', () => {
         infoWindow.setContent('<div class="popup-content">' + popupHTML + '</div>');
-        infoWindow.open({ anchor: marker, map: map });
+        infoWindow.open({ anchor: marker, map: mapInstance });
       });
+      layers.push({ obj: marker, days: days });
       return marker;
     }
 
     addMarker(P.anyang,
       '<div class="popup-eyebrow">Day 1 · 14:00 출발 / Day 3 · 17:00 귀가</div>' +
       '<div class="popup-name">안양 · 출발/귀가지</div>' +
-      '<div class="popup-time">삼막로96번길 83</div>');
+      '<div class="popup-time">삼막로96번길 83</div>',
+      [1, 3]);
 
     addMarker(P.pension,
       '<div class="popup-eyebrow">Base Camp · 2박</div>' +
       '<div class="popup-name">언덕위에하얀집펜션</div>' +
-      '<div class="popup-time">양양군 서면 버들골길 26</div>');
+      '<div class="popup-time">양양군 서면 버들골길 26</div>',
+      [1, 2, 3]);
 
     addMarker(P.micheongol,
       '<div class="popup-eyebrow">Day 2 · B팀 09:45</div>' +
       '<div class="popup-name">미천골 자연휴양림</div>' +
-      '<div class="popup-time">계곡 산책 · 약 1시간</div>');
+      '<div class="popup-time">계곡 산책 · 약 1시간</div>',
+      [2]);
 
     addMarker(P.lakeseum,
       '<div class="popup-eyebrow">Day 2 · B팀 11:15</div>' +
       '<div class="popup-name">카페 레이크지움</div>' +
-      '<div class="popup-time">호수 뷰 갤러리 카페</div>');
+      '<div class="popup-time">호수 뷰 갤러리 카페</div>',
+      [2]);
 
     addMarker(P.lunch,
       '<div class="popup-eyebrow">Day 2 · B팀 13:00</div>' +
       '<div class="popup-name">양양 시내 점심</div>' +
-      '<div class="popup-time">송이 / 메밀 / 막국수</div>');
+      '<div class="popup-time">송이 / 메밀 / 막국수</div>',
+      [2]);
 
     addMarker(P.dunchi,
       '<div class="popup-eyebrow">Day 2 · B팀 14:15</div>' +
       '<div class="popup-name">카페 둔치 + 남대천</div>' +
-      '<div class="popup-time">강변 산책 1km</div>');
+      '<div class="popup-time">강변 산책 1km</div>',
+      [2]);
 
     addMarker(P.hajodae,
       '<div class="popup-eyebrow">Day 2 · B팀 15:55</div>' +
       '<div class="popup-name">하조대 명승지</div>' +
-      '<div class="popup-time">동해 절벽 · 양양 8경</div>');
+      '<div class="popup-time">동해 절벽 · 양양 8경</div>',
+      [2]);
 
     addMarker(P.waterpark,
       '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
       '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
-      '<div class="popup-time">아이 동반 워터파크</div>');
+      '<div class="popup-time">아이 동반 워터파크</div>',
+      [2]);
 
     addMarker(P.market,
       '<div class="popup-eyebrow">Day 2 · 17:00 · A+B 합류</div>' +
       '<div class="popup-name">양양수산시장</div>' +
-      '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>');
+      '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>',
+      [2]);
 
     addMarker(P.pyeongchang,
       '<div class="popup-eyebrow">Day 3 · 12:00 점심</div>' +
       '<div class="popup-name">평창한우마을 면온점</div>' +
-      '<div class="popup-time">봉평 · ☎ 033-333-9777</div>');
+      '<div class="popup-time">봉평 · ☎ 033-333-9777</div>',
+      [3]);
 
-    // ===== Auto-fit bounds =====
-    const bounds = new google.maps.LatLngBounds();
-    bounds.extend(P.anyang.pos);
-    bounds.extend(P.pension.pos);
-    bounds.extend(P.pyeongchang.pos);
-    map.fitBounds(bounds, 60);
+    // ===== Initial: show all =====
+    showDay('all');
   }
+
+  // ===== Day filter (callable from buttons) =====
+  function showDay(d) {
+    if (!mapInstance) return;
+
+    // Update button active state
+    document.querySelectorAll('.day-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.day === String(d));
+    });
+
+    const bounds = new google.maps.LatLngBounds();
+    let hasVisible = false;
+
+    layers.forEach(layer => {
+      const show = (d === 'all') || layer.days.includes(Number(d));
+      layer.obj.setMap(show ? mapInstance : null);
+      if (show) {
+        if (layer.obj.getPosition) {
+          bounds.extend(layer.obj.getPosition());
+          hasVisible = true;
+        } else if (layer.obj.getPath) {
+          layer.obj.getPath().forEach(p => bounds.extend(p));
+          hasVisible = true;
+        }
+      }
+    });
+
+    if (hasVisible) {
+      mapInstance.fitBounds(bounds, 60);
+    }
+  }
+
+  // Expose for inline onclick
+  window.showDay = showDay;
+  window.initMap = initMap;
 </script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&callback=initMap"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&loading=async&callback=initMap"></script>
 
 </body>
 </html>
