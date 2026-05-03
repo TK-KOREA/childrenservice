@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>양양 가족여행 · 2박 3일 전체 일정</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500;700;900&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Gaegu:wght@300;400;700&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root {
+    --paper: #f5ecd9;
+    --paper-deep: #ebe0c8;
+    --paper-soft: #faf3e2;
+    --ink: #1a1f15;
+    --ink-soft: #3a3f33;
+    --ink-mute: #6b6f60;
+    --terracotta: #b65232;
+    --terracotta-deep: #8a3920;
+    --sage: #5e7458;
+    --sage-soft: #8ba287;
+    --ocean: #355a78;
+    --gold: #ad8244;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 15% 25%, rgba(184,82,50,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(94,116,88,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(53,90,120,0.03) 0%, transparent 50%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.05 0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ========== TOP BAR ========== */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--ink);
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .top-bar .issue { font-style: italic; }
+  .top-bar .date { font-weight: 700; }
+
+  /* ========== HERO ========== */
+  .hero {
+    padding: 3rem 0 3.5rem;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.3rem;
+    color: var(--terracotta);
+    letter-spacing: 0.05em;
+    transform: rotate(-1.5deg);
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+  .hero-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8.5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title .accent {
+    color: var(--terracotta);
+    font-style: italic;
+    font-weight: 400;
+    font-family: 'Bodoni Moda', serif;
+  }
+  .hero-subtitle {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    max-width: 620px;
+  }
+
+  .stamp {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    border: 2px solid var(--terracotta);
+    padding: 0.5rem 1rem;
+    color: var(--terracotta);
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    transform: rotate(7deg);
+    text-transform: uppercase;
+    background: var(--paper-soft);
+    z-index: 3;
+  }
+  .stamp::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px dashed var(--terracotta);
+    pointer-events: none;
+  }
+  .stamp .small {
+    display: block;
+    font-size: 0.6rem;
+    margin-top: 2px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== STATS GRID ========== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    margin: 3rem 0 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .stat {
+    padding: 1.25rem 1.25rem;
+    border-right: 1px solid var(--ink-soft);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-label {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+  .stat-value {
+    font-family: 'Hahmlet', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat-value .small {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-left: 0.15em;
+  }
+
+  /* ========== SECTION LABELS ========== */
+  .section-label {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  /* ========== DAY MARKER ========== */
+  .day-marker {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: end;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .day-num {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--terracotta);
+    font-size: 5rem;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+  }
+  .day-info {
+    border-bottom: 1px solid var(--ink-soft);
+    padding-bottom: 0.5rem;
+  }
+  .day-date {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.3rem;
+  }
+  .day-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .day-meta {
+    font-family: 'Gaegu', cursive;
+    font-size: 1rem;
+    color: var(--sage);
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  /* ========== TIMELINE ========== */
+  .timeline {
+    margin: 2rem 0 3rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 90px;
+    top: 0.7rem;
+    bottom: 0.7rem;
+    width: 1px;
+    background: var(--ink-soft);
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 80px 30px 1fr;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    align-items: start;
+  }
+  .tl-time {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    text-align: right;
+    padding-top: 2px;
+  }
+  .tl-dot {
+    width: 11px;
+    height: 11px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    margin-top: 7px;
+    margin-left: 5px;
+    position: relative;
+    z-index: 2;
+  }
+  .tl-dot.major {
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+    margin-left: 3px;
+    background: var(--ink);
+    border: 3px solid var(--terracotta);
+  }
+  .tl-content {
+    padding-top: 2px;
+  }
+  .tl-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .tl-desc {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .tl-route {
+    font-family: 'Gaegu', cursive;
+    font-size: 0.95rem;
+    color: var(--sage);
+    margin-top: 0.3rem;
+  }
+
+  /* ========== HIGHLIGHT BOX ========== */
+  .highlight {
+    background: var(--paper-deep);
+    border-left: 3px solid var(--terracotta);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Gaegu', cursive;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .highlight-label {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  /* ========== DAY 2 SPLIT ========== */
+  .day2-intro {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 1.5rem 0 2.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--ink);
+    max-width: 700px;
+  }
+
+  .split-banner {
+    text-align: center;
+    margin: 2rem 0;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--terracotta);
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+  }
+  .split-banner::before, .split-banner::after {
+    content: '─';
+    margin: 0 0.5em;
+    opacity: 0.5;
+  }
+
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    margin: 1rem 0 2.5rem;
+  }
+  .split-col {
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+  .split-col.team-a {
+    background: var(--paper-soft);
+    border-right: 1px solid var(--ink-soft);
+  }
+  .split-col.team-b {
+    background: var(--paper-deep);
+  }
+  .split-team-label {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.3rem;
+  }
+  .split-team-name {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+  .split-team-count {
+    font-family: 'Gaegu', cursive;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.2rem;
+  }
+  .split-mini {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .split-mini::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 6px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .split-mini strong {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    color: var(--ink);
+    margin-right: 0.4rem;
+  }
+
+  /* ========== B-TEAM STOPS ========== */
+  .stops-detail {
+    margin: 2.5rem 0;
+  }
+  .stops-detail-header {
+    font-family: 'Hahmlet', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .stops-detail-header em {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+  .stops-detail-sub {
+    font-family: 'Gowun Batang', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px dashed var(--ink-soft);
+  }
+  .stop:last-child { border-bottom: none; }
+  .stop-num {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: var(--terracotta);
+    line-height: 0.9;
+  }
+  .stop-time-tag {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.2rem 0.55rem;
+    display: inline-block;
+    margin-bottom: 0.7rem;
+  }
+  .stop-name {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+  .stop-name-en {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.7rem;
+  }
+  .stop-desc {
+    font-family: 'Gowun Batang', serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .stop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .stop-tag {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.55rem;
+    background: var(--paper);
+    border: 1px solid var(--sage);
+    color: var(--sage);
+    border-radius: 100px;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-weight: 500;
+  }
+
+  /* ========== REUNION ========== */
+  .reunion-arrow {
+    text-align: center;
+    margin: 2.5rem 0 1.5rem;
+    position: relative;
+  }
+  .reunion-arrow svg {
+    height: 60px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .reunion {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 2rem;
+    margin: 1rem 0 2rem;
+    position: relative;
+  }
+  .reunion-time {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--terracotta);
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.6rem;
+  }
+  .reunion-title {
+    font-family: 'Hahmlet', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+  .reunion-desc {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    opacity: 0.9;
+    max-width: 620px;
+  }
+
+  /* ========== EVENING ========== */
+  .evening {
+    background: var(--paper-deep);
+    padding: 1.5rem 1.75rem;
+    border: 1px solid var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+  .evening-time {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    color: var(--ocean);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    font-style: italic;
+    margin-bottom: 0.4rem;
+  }
+  .evening-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+  }
+  .evening-desc {
+    font-family: 'Gowun Batang', serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ========== PRACTICAL CARDS ========== */
+  .practical {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--ink);
+  }
+  .practical-title {
+    font-family: 'Hahmlet', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .practical-title em {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+  .practical-sub {
+    font-family: 'Gowun Batang', serif;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+  }
+  
+  .pcards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+  }
+  .pcard {
+    background: var(--paper-deep);
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--ink-soft);
+    position: relative;
+  }
+  .pcard::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background: var(--terracotta);
+    color: var(--paper);
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+  .pcard-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0.9rem 0 0.7rem;
+  }
+  .pcard ul { list-style: none; padding: 0; }
+  .pcard li {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    padding-left: 0.9rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+    color: var(--ink-soft);
+  }
+  .pcard li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta);
+  }
+  .pcard li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .pcard-phone {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    color: var(--terracotta);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero, .stats, .day-marker, .timeline, .split-grid, .stops-detail, .reunion, .evening, .practical {
+    animation: fadeUp 0.7s ease-out backwards;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 700px) {
+    .page { padding: 2rem 1.25rem 4rem; }
+    .hero-title { font-size: 2.6rem; }
+    .day-marker { grid-template-columns: 1fr; gap: 0.5rem; }
+    .day-num { font-size: 3.5rem; }
+    .day-meta { text-align: left; }
+    .day-title { font-size: 1.8rem; }
+    .split-grid { grid-template-columns: 1fr; }
+    .split-col.team-a { border-right: none; border-bottom: 1px solid var(--ink-soft); }
+    .stop { grid-template-columns: 50px 1fr; gap: 1rem; }
+    .stop-num { font-size: 2.2rem; }
+    .stop-name { font-size: 1.15rem; }
+    .timeline::before { left: 75px; }
+    .tl-item { grid-template-columns: 65px 25px 1fr; gap: 0.7rem; }
+    .tl-time { font-size: 0.82rem; }
+    .reunion-title { font-size: 1.5rem; }
+    .stamp { font-size: 0.65rem; padding: 0.3rem 0.6rem; top: 1rem; }
+    .map-container { height: 400px !important; }
+  }
+
+  /* ========== MAP SECTION ========== */
+  .map-section {
+    margin: 4rem 0 2rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--ink);
+  }
+  .map-section-title {
+    font-family: 'Hahmlet', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .map-section-title em {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+  .map-section-sub {
+    font-family: 'Gowun Batang', serif;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    max-width: 640px;
+    line-height: 1.65;
+  }
+  .map-container {
+    width: 100%;
+    height: 540px;
+    border: 1.5px solid var(--ink);
+    position: relative;
+    background: var(--paper-deep);
+    box-shadow: 6px 6px 0 var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  #map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .map-legend {
+    padding: 1.25rem 1.5rem;
+    background: var(--paper-deep);
+    border: 1px solid var(--ink-soft);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.85rem 1.5rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .legend-line {
+    width: 32px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    background-image: linear-gradient(to right, currentColor 60%, transparent 60%);
+    background-size: 8px 3px;
+  }
+  .legend-line.day1 { color: #b65232; }
+  .legend-line.day3 { color: #355a78; }
+  .legend-marker {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.7rem;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .legend-marker.base { background: #1a1f15; }
+  .legend-marker.day2 { background: #5e7458; }
+  .legend-marker.market { background: #b65232; }
+  .legend-marker.pyeongchang { background: #ad8244; }
+
+  /* Custom Leaflet markers */
+  .lm {
+    border-radius: 50%;
+    border: 2.5px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    color: white;
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 0.85rem;
+  }
+  .lm-base { background: #1a1f15; }
+  .lm-stop { background: #5e7458; font-size: 0.78rem; }
+  .lm-waterpark { background: #355a78; font-size: 0.78rem; }
+  .lm-market { background: #b65232; }
+  .lm-pyeongchang { background: #ad8244; font-size: 0.78rem; }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  .leaflet-popup-tip { background: var(--paper); border: 1px solid var(--ink); }
+  .leaflet-popup-content {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    margin: 0.8rem 1rem !important;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .popup-eyebrow {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.25rem;
+  }
+  .popup-name {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+    color: var(--ink);
+  }
+  .popup-time {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="issue">Vol. 1 · Yangyang Family Trip</div>
+    <div class="date">2026 · 05 · 24 — 26</div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="stamp">3 days<span class="small">16 people</span></div>
+    <div class="hero-eyebrow">✦ 가족 16명, 동해를 향하다 ✦</div>
+    <h1 class="hero-title">
+      양양에서 보내는<br>
+      <span class="accent">사흘 낮,</span> <span class="accent">두 밤.</span>
+    </h1>
+    <p class="hero-subtitle">
+      안양에서 출발해 서면 펜션에 머물며,<br>
+      바다와 계곡, 회와 한우를 차례로 만나는 가족 여행기.
+    </p>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">People</div>
+        <div class="stat-value">16<span class="small">명</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Adults / Kids</div>
+        <div class="stat-value">9<span class="small"> + </span>7</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Nights</div>
+        <div class="stat-value">2<span class="small">박 3일</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Total Drive</div>
+        <div class="stat-value">660<span class="small">km</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Base</div>
+        <div class="stat-value" style="font-size:1rem;line-height:1.3;font-weight:500;">언덕위에<br>하얀집펜션</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ROUTE MAP ============================== -->
+  <section class="map-section">
+    <div class="section-label">Route Map</div>
+    <h2 class="map-section-title">3일간의 <em>동선 지도</em></h2>
+    <p class="map-section-sub">
+      안양에서 출발해 양양 펜션을 거쳐, 봉평 한우 점심을 지나 다시 안양으로 — 전체 약 660km의 여정. 마커를 클릭하면 각 장소의 시간과 정보가 보여요.
+    </p>
+    
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+    
+    <div class="map-legend">
+      <div class="legend-item">
+        <span class="legend-line day1"></span>
+        <span><strong>Day 1</strong> · 안양 → 양양</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line day3"></span>
+        <span><strong>Day 3</strong> · 양양 → 봉평 → 안양</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker base">P</span>
+        <span>출발/귀가지 · 펜션</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker day2">B</span>
+        <span>Day 2 · B팀 5스탑</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker market">M</span>
+        <span>Day 2 합류 · 수산시장</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-marker pyeongchang">한</span>
+        <span>Day 3 · 평창 한우</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== DAY 1 ============================== -->
+  <div class="day-marker">
+    <div class="day-num">01</div>
+    <div class="day-info">
+      <div class="day-date">Sunday · May 24 · Day One</div>
+      <div class="day-title">출발 · 도착 · 환영의 BBQ</div>
+    </div>
+    <div class="day-meta">안양 → 양양<br>약 230km</div>
+  </div>
+
+  <div class="section-label">Itinerary</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">14:00</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">안양 출발</div>
+        <div class="tl-desc">삼막로96번길 83 · 13:50까지 차량 집결, 14:00 정시 출발.</div>
+        <div class="tl-route">↳ 서울외곽순환 → 서울양양고속도로 → 양양IC → 서면 (3시간)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">중간 휴게소</div>
+        <div class="tl-desc">가평 또는 인제·홍천 구간에서 화장실 + 간식. 아이들 케어.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:00</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">언덕위에하얀집펜션 도착</div>
+        <div class="tl-desc">체크인, 짐 정리, 방 배정. 펜션 앞 1급수 계곡 산책 가능.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">BBQ 준비</div>
+        <div class="tl-desc">어른: 숯불 피우기, 식자재 세팅 / 아이: 계곡 발 담그기, 자유 놀이.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:30</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">BBQ 저녁 만찬</div>
+        <div class="tl-desc">고기, 쌈, 김치, 마시멜로(아이용), 어른용 술/음료. 약 2시간 식사.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">20:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">가족 레크리에이션</div>
+        <div class="tl-desc">펜션 노래방 활용 + 자기소개 빙고 + 보물찾기. 어린이 상품 16~20개 준비.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">22:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">취침</div>
+        <div class="tl-desc">아이들 먼저 재우고, 어른들은 별 보며 자유 시간.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <span class="highlight-label">Day 1 Highlight</span>
+    펜션 앞 1급수 계곡에서 가재 사는 모습 볼 수 있어요. BBQ 굽는 동안 아이들 풀어두기 좋은 자연 놀이터.
+  </div>
+
+  <!-- ============================== DAY 2 ============================== -->
+  <div class="day-marker">
+    <div class="day-num">02</div>
+    <div class="day-info">
+      <div class="day-date">Monday · May 25 · Day Two</div>
+      <div class="day-title">두 갈래 길, 그리고 회 만찬</div>
+    </div>
+    <div class="day-meta">분리 활동<br>17:00 합류</div>
+  </div>
+
+  <p class="day2-intro">
+    아침을 함께 먹고 두 팀으로 나뉜다. 아이가 있는 집은 워터파크의 환호 속으로, 그렇지 않은 어른들은 카페와 계곡과 절벽을 차례로 만나는 조용한 코스로. 오후 5시, 양양수산시장에서 다시 만난다.
+  </p>
+
+  <div class="section-label">Morning Split</div>
+
+  <!-- A vs B Split -->
+  <div class="split-grid">
+    <div class="split-col team-a">
+      <div class="split-team-label">★ Team A</div>
+      <div class="split-team-name">워터파크 팀</div>
+      <div class="split-team-count">아이 동반 · 약 9명</div>
+      <div class="split-mini"><strong>09:30</strong> 펜션 출발</div>
+      <div class="split-mini"><strong>10:00</strong> 쏠비치 양양 오션플레이 입장</div>
+      <div class="split-mini"><strong>12:30</strong> 워터파크 내 점심</div>
+      <div class="split-mini"><strong>15:00</strong> 물놀이 마무리</div>
+      <div class="split-mini"><strong>15:30</strong> 펜션 복귀 또는 시장 직행</div>
+      <div style="margin-top:1rem;font-family:'Gaegu',cursive;font-size:0.95rem;color:var(--ocean);">
+        ✦ 입장권 사전 예매 30% 할인<br>
+        ✦ 메인풀 1m 수심 · 초등생 안전
+      </div>
+    </div>
+    <div class="split-col team-b">
+      <div class="split-team-label">✦ Team B</div>
+      <div class="split-team-name">힐링 카페 산책 팀</div>
+      <div class="split-team-count">어른 · 약 7명</div>
+      <div class="split-mini"><strong>09:30</strong> 펜션 출발</div>
+      <div class="split-mini"><strong>09:45</strong> 미천골 자연휴양림 산책</div>
+      <div class="split-mini"><strong>11:15</strong> 카페 레이크지움</div>
+      <div class="split-mini"><strong>13:00</strong> 양양 시내 점심 (송이/메밀)</div>
+      <div class="split-mini"><strong>14:15</strong> 카페 둔치 + 남대천 산책</div>
+      <div class="split-mini"><strong>15:55</strong> 하조대 명승지</div>
+      <div style="margin-top:1rem;font-family:'Gaegu',cursive;font-size:0.95rem;color:var(--sage);">
+        ✦ 도보 3.3km · 차량 75분<br>
+        ✦ 다음 페이지 ↓ 자세한 5스탑
+      </div>
+    </div>
+  </div>
+
+  <!-- B-team Detail -->
+  <div class="stops-detail">
+    <h3 class="stops-detail-header">B팀의 <em>five quiet stops</em></h3>
+    <p class="stops-detail-sub">어른 7명을 위한 서두르지 않는 5스탑 코스 — 09:30 출발, 16:45 마무리.</p>
+
+    <div class="stop">
+      <div class="stop-num">01</div>
+      <div>
+        <span class="stop-time-tag">09:45 — 11:00</span>
+        <h4 class="stop-name">미천골 자연휴양림</h4>
+        <div class="stop-name-en">Micheongol Forest · 1시간 계곡 산책</div>
+        <p class="stop-desc">청정 1급수 계곡과 천년 미인송이 어우러진 양양 최고의 산림 휴양지. 잘 정비된 산책로로 가볍게.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">계곡 산책</span>
+          <span class="stop-tag">미인송 군락</span>
+          <span class="stop-tag">선림원지</span>
+          <span class="stop-tag">15분 거리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">02</div>
+      <div>
+        <span class="stop-time-tag">11:15 — 12:30</span>
+        <h4 class="stop-name">카페 레이크지움</h4>
+        <div class="stop-name-en">Lakeseum · 호수 뷰 갤러리 카페</div>
+        <p class="stop-desc">호수와 산을 한꺼번에 품은 갤러리형 카페. 큰 통창 너머 풍경이 작은 미술관처럼 느껴져요.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">모닝 커피</span>
+          <span class="stop-tag">통창 뷰</span>
+          <span class="stop-tag">야외 데크</span>
+          <span class="stop-tag">10분 거리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">03</div>
+      <div>
+        <span class="stop-time-tag">13:00 — 14:00</span>
+        <h4 class="stop-name">양양 송이 점심</h4>
+        <div class="stop-name-en">Songi &amp; Memil Lunch · 양양 시내</div>
+        <p class="stop-desc">양양 송이정식 또는 토속 메밀막국수. 어른 7명 단체석 미리 전화 예약.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">송이전골</span>
+          <span class="stop-tag">메밀막국수</span>
+          <span class="stop-tag">곤드레밥</span>
+          <span class="stop-tag">사전 예약</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">04</div>
+      <div>
+        <span class="stop-time-tag">14:15 — 15:30</span>
+        <h4 class="stop-name">카페 둔치 + 남대천 둑방</h4>
+        <div class="stop-name-en">Cafe Dunchi &amp; Riverside Walk · 평점 4.9</div>
+        <p class="stop-desc">남대천을 한눈에 담는 통창이 시그니처. 카페 픽업 후 강변 둑방 산책 1km.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">강변 산책</span>
+          <span class="stop-tag">통창 뷰</span>
+          <span class="stop-tag">수제 쿠키</span>
+          <span class="stop-tag">사진 명소</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">05</div>
+      <div>
+        <span class="stop-time-tag">15:55 — 16:45</span>
+        <h4 class="stop-name">하조대 명승지</h4>
+        <div class="stop-name-en">Hajodae Pavilion · 양양 8경 · 동해 절벽</div>
+        <p class="stop-desc">절벽 위 정자, 하얀 등대, 출렁다리. 데크 산책 0.8km — B팀 코스 하이라이트.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">동해 절벽</span>
+          <span class="stop-tag">하조대 등대</span>
+          <span class="stop-tag">출렁다리</span>
+          <span class="stop-tag">단체 사진</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reunion arrow -->
+  <div class="reunion-arrow">
+    <svg viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 30 10 Q 100 50 200 50 Q 300 50 370 10" stroke="#5e7458" stroke-width="1.5" fill="none" stroke-dasharray="3,4"/>
+      <path d="M 30 10 L 30 5 M 30 10 L 35 12" stroke="#5e7458" stroke-width="1.5" fill="none"/>
+      <path d="M 370 10 L 370 5 M 370 10 L 365 12" stroke="#5e7458" stroke-width="1.5" fill="none"/>
+      <text x="200" y="40" text-anchor="middle" font-family="Bodoni Moda" font-style="italic" font-size="13" fill="#5e7458" font-weight="700">두 팀, 다시 만나다</text>
+    </svg>
+  </div>
+
+  <!-- Reunion Block -->
+  <div class="reunion">
+    <div class="reunion-time">★ 17:00 — 합류 시간</div>
+    <h3 class="reunion-title">양양수산시장에서<br>두 팀이 만나다.</h3>
+    <p class="reunion-desc">
+      미리 전화로 주문해 둔 회·매운탕거리·새우·강정을 픽업. A팀은 워터파크 무용담을, B팀은 하조대 절벽 사진을 자랑하며 펜션으로 복귀. 16명 분량은 반드시 사전 주문 필수.
+    </p>
+  </div>
+
+  <!-- Evening -->
+  <div class="evening">
+    <div class="evening-time">EVENING · 18:30 — 22:00</div>
+    <div class="evening-title">펜션 회 만찬 · 매운탕 · 자유 시간</div>
+    <div class="evening-desc">하루 동안 모은 이야기를 회와 매운탕에 곁들여 풀어내는 시간. 식후엔 별 보기, 야식, 어른들 술자리, 아이들 카드 게임.</div>
+  </div>
+
+  <!-- ============================== DAY 3 ============================== -->
+  <div class="day-marker">
+    <div class="day-num">03</div>
+    <div class="day-info">
+      <div class="day-date">Tuesday · May 26 · Day Three</div>
+      <div class="day-title">퇴실 · 평창 한우 · 귀가</div>
+    </div>
+    <div class="day-meta">양양 → 봉평 → 안양<br>약 320km</div>
+  </div>
+
+  <div class="section-label">Itinerary</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">아침 식사 + 짐 정리</div>
+        <div class="tl-desc">남은 식자재로 간단히. 차량 정리, 분실물 체크, 쓰레기 분리수거.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">펜션 체크아웃</div>
+        <div class="tl-desc">사장님께 인사, 출발. 봉평까지 약 1시간 10분.</div>
+        <div class="tl-route">↳ 양양 서면 → 한계령 또는 미시령 → 봉평IC</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">평창한우마을 면온점 도착</div>
+        <div class="tl-desc">정육식당 스타일 — 직접 고기 고르고 굽기. 옆 동물 농장 + BBQ 놀이터.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">한우 점심 (16명 단체)</div>
+        <div class="tl-desc">예약 필수 ☎ 033-333-9777. 식후 아이들 동물 농장에서 30분 놀이.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">봉평 출발</div>
+        <div class="tl-desc">안양까지 약 200km, 2시간 30분.</div>
+        <div class="tl-route">↳ 봉평IC → 영동고속도로 → 제2영동/중부내륙 → 외곽순환 → 안양</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">중간 휴게소</div>
+        <div class="tl-desc">덕평 또는 여주 휴게소. 화장실, 커피, 마지막 군것질.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16:30</div>
+      <div class="tl-dot major"></div>
+      <div class="tl-content">
+        <div class="tl-title">안양 도착</div>
+        <div class="tl-desc">삼막로96번길 83. 짐 내리고, 차량별 해산.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:00</div>
+      <div class="tl-dot major" style="background:var(--terracotta);border-color:var(--ink);"></div>
+      <div class="tl-content">
+        <div class="tl-title" style="color:var(--terracotta);">귀가 완료 ✦</div>
+        <div class="tl-desc">2박 3일, 660km, 16명의 무사한 마무리.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <span class="highlight-label">Day 3 Highlight</span>
+    평창한우마을 면온점은 식당 옆에 동물 농장과 놀이터가 있어요. 식후 아이들 30분 풀어두고 어른들 커피 한 잔이 정석 코스. 5/26은 화요일이라 정체도 거의 없습니다.
+  </div>
+
+  <!-- ============================== PRACTICAL ============================== -->
+  <section class="practical">
+    <h2 class="practical-title">출발 전 <em>checklist.</em></h2>
+    <p class="practical-sub">16명 단체 여행에서 빠뜨리면 안 되는 실무 체크리스트.</p>
+
+    <div class="pcards">
+      <div class="pcard" data-num="01">
+        <div class="pcard-title">사전 예약</div>
+        <ul>
+          <li><strong>펜션</strong> 16명 인원 확정 통보</li>
+          <li><strong>쏠비치 오션플레이</strong> 단체 입장권</li>
+          <li><strong>양양수산시장</strong> 가게 사전 주문</li>
+          <li><strong>평창한우마을 면온점</strong> 16명 단체석</li>
+          <li><strong>B팀 점심 식당</strong> 7명 단체석</li>
+        </ul>
+      </div>
+
+      <div class="pcard" data-num="02">
+        <div class="pcard-title">전화번호</div>
+        <ul>
+          <li>펜션 <span class="pcard-phone">033-673-1022</span></li>
+          <li>쏠비치 <span class="pcard-phone">1588-4888</span></li>
+          <li>평창한우 <span class="pcard-phone">033-333-9777</span></li>
+          <li>양양수산시장은 가게별 확인</li>
+        </ul>
+      </div>
+
+      <div class="pcard" data-num="03">
+        <div class="pcard-title">차량 분배</div>
+        <ul>
+          <li>SUV <strong>3~4대</strong> 권장 (16명)</li>
+          <li>어린이 <strong>카시트 7개</strong> 좌석 분배</li>
+          <li>안양 <strong>13:50</strong> 차량 집결</li>
+          <li><strong>14:00</strong> 정시 출발</li>
+          <li>대안: 15인승 카니발 렌트</li>
+        </ul>
+      </div>
+
+      <div class="pcard" data-num="04">
+        <div class="pcard-title">준비물</div>
+        <ul>
+          <li><strong>BBQ</strong>: 고기·쌈채소·김치·마시멜로</li>
+          <li><strong>워터파크</strong>: 수영복·수건·아쿠아슈즈</li>
+          <li><strong>회 운반</strong>: 아이스박스 + 얼음팩</li>
+          <li><strong>레크</strong>: 보드게임·상품 16~20개</li>
+          <li><strong>비상</strong>: 우산·비상약·모기약</li>
+        </ul>
+      </div>
+
+      <div class="pcard" data-num="05">
+        <div class="pcard-title">날씨 대비 (5월 말)</div>
+        <ul>
+          <li>동해안 일교차 큼 — 얇은 점퍼</li>
+          <li>해풍 강함 — 모자 + 선글라스</li>
+          <li>모기 슬슬 출몰 — 모기약</li>
+          <li>5월 말 강수 가능 — 우산</li>
+          <li>일출 5:15 / 일몰 19:25</li>
+        </ul>
+      </div>
+
+      <div class="pcard" data-num="06">
+        <div class="pcard-title">우천 시 대안</div>
+        <ul>
+          <li>미천골 → <strong>낙산사</strong> (실내 가능)</li>
+          <li>하조대 → <strong>양양 송이박물관</strong></li>
+          <li>BBQ → 펜션 실내 그릴 활용</li>
+          <li>레크 시간 늘리기 + 영화 감상</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>YANGYANG · 2026 · MAY 24—26</div>
+    <div>♡ Family of 16 ♡</div>
+    <div>P. 01 / 01</div>
+  </div>
+
+</div>
+
+<script>
+  // Initialize map - centered between 안양 and 양양/평창
+  var map = L.map('map', { 
+    scrollWheelZoom: false,
+    zoomControl: true
+  }).setView([37.85, 128.0], 8);
+
+  // CartoDB Voyager tiles - clean, editorial look
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Locations
+  var P = {
+    anyang:      { c: [37.4258, 126.9162], cls: 'lm-base',        text: 'A',  size: 32 },
+    pension:     { c: [38.0146, 128.6173], cls: 'lm-base',        text: 'P',  size: 32 },
+    micheongol:  { c: [38.0017, 128.5430], cls: 'lm-stop',        text: '1',  size: 26 },
+    lakeseum:    { c: [38.0143, 128.5473], cls: 'lm-stop',        text: '2',  size: 26 },
+    lunch:       { c: [38.0750, 128.6200], cls: 'lm-stop',        text: '3',  size: 26 },
+    dunchi:      { c: [38.0956, 128.6396], cls: 'lm-stop',        text: '4',  size: 26 },
+    hajodae:     { c: [38.0334, 128.7155], cls: 'lm-stop',        text: '5',  size: 26 },
+    waterpark:   { c: [38.0881, 128.6659], cls: 'lm-waterpark',   text: 'A',  size: 28 },
+    market:      { c: [38.0745, 128.6222], cls: 'lm-market',      text: 'M',  size: 30 },
+    pyeongchang: { c: [37.5602, 128.3463], cls: 'lm-pyeongchang', text: '한', size: 30 }
+  };
+
+  // Day 1 route line: 안양 -> 펜션
+  L.polyline([P.anyang.c, P.pension.c], {
+    color: '#b65232', weight: 3, opacity: 0.85, dashArray: '8, 8'
+  }).addTo(map);
+
+  // Day 3 route line: 펜션 -> 봉평 -> 안양
+  L.polyline([P.pension.c, P.pyeongchang.c, P.anyang.c], {
+    color: '#355a78', weight: 3, opacity: 0.85, dashArray: '8, 8'
+  }).addTo(map);
+
+  // Helper to make custom markers
+  function makeMarker(loc, popupHTML) {
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="lm ' + loc.cls + '">' + loc.text + '</div>',
+      iconSize: [loc.size, loc.size],
+      iconAnchor: [loc.size/2, loc.size/2],
+      popupAnchor: [0, -loc.size/2]
+    });
+    L.marker(loc.c, { icon: icon }).addTo(map).bindPopup(popupHTML);
+  }
+
+  makeMarker(P.anyang,
+    '<div class="popup-eyebrow">Day 1 · 14:00 출발 / Day 3 · 17:00 귀가</div>' +
+    '<div class="popup-name">안양 · 출발/귀가지</div>' +
+    '<div class="popup-time">삼막로96번길 83</div>');
+
+  makeMarker(P.pension,
+    '<div class="popup-eyebrow">Base Camp · 2박</div>' +
+    '<div class="popup-name">언덕위에하얀집펜션</div>' +
+    '<div class="popup-time">양양군 서면 버들골길 26</div>');
+
+  makeMarker(P.micheongol,
+    '<div class="popup-eyebrow">Day 2 · B팀 09:45</div>' +
+    '<div class="popup-name">미천골 자연휴양림</div>' +
+    '<div class="popup-time">계곡 산책 · 약 1시간</div>');
+
+  makeMarker(P.lakeseum,
+    '<div class="popup-eyebrow">Day 2 · B팀 11:15</div>' +
+    '<div class="popup-name">카페 레이크지움</div>' +
+    '<div class="popup-time">호수 뷰 갤러리 카페</div>');
+
+  makeMarker(P.lunch,
+    '<div class="popup-eyebrow">Day 2 · B팀 13:00</div>' +
+    '<div class="popup-name">양양 시내 점심</div>' +
+    '<div class="popup-time">송이 / 메밀 / 막국수</div>');
+
+  makeMarker(P.dunchi,
+    '<div class="popup-eyebrow">Day 2 · B팀 14:15</div>' +
+    '<div class="popup-name">카페 둔치 + 남대천</div>' +
+    '<div class="popup-time">강변 산책 1km</div>');
+
+  makeMarker(P.hajodae,
+    '<div class="popup-eyebrow">Day 2 · B팀 15:55</div>' +
+    '<div class="popup-name">하조대 명승지</div>' +
+    '<div class="popup-time">동해 절벽 · 양양 8경</div>');
+
+  makeMarker(P.waterpark,
+    '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
+    '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
+    '<div class="popup-time">아이 동반 워터파크</div>');
+
+  makeMarker(P.market,
+    '<div class="popup-eyebrow">Day 2 · 17:00 · A+B 합류</div>' +
+    '<div class="popup-name">양양수산시장</div>' +
+    '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>');
+
+  makeMarker(P.pyeongchang,
+    '<div class="popup-eyebrow">Day 3 · 12:00 점심</div>' +
+    '<div class="popup-name">평창한우마을 면온점</div>' +
+    '<div class="popup-time">봉평 · ☎ 033-333-9777</div>');
+
+  // Auto-fit to show all key points
+  map.fitBounds([P.anyang.c, P.pension.c, P.pyeongchang.c], { padding: [40, 40] });
+</script>
+
+</body>
+</html>
