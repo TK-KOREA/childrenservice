@@ -1113,6 +1113,62 @@
   }
   .legend-line.day2 { color: #5e7458; }
 
+  /* ========== MAP OVERLAY CONTROLS (buttons inside map) ========== */
+  .map-overlay-controls {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: calc(100% - 20px);
+  }
+  .map-overlay-controls .map-controls,
+  .map-overlay-controls .map-controls-team {
+    margin: 0;
+    background: rgba(245, 236, 217, 0.95);
+    padding: 0.45rem 0.55rem;
+    border: 1.5px solid var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
+    flex-wrap: wrap;
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .map-overlay-controls .map-controls-team {
+    background: rgba(235, 224, 200, 0.95);
+  }
+  .map-overlay-controls .day-btn {
+    padding: 0.45rem 0.8rem !important;
+    font-size: 0.72rem !important;
+    min-height: 36px !important;
+    border-width: 1.5px;
+    flex-direction: row !important;
+    flex: 0 1 auto !important;
+    letter-spacing: 0.05em;
+    background: var(--paper);
+    box-shadow: 2px 2px 0 transparent !important;
+  }
+  .map-overlay-controls .day-btn .sub {
+    display: none !important;
+  }
+  .map-overlay-controls .controls-label {
+    font-size: 0.62rem;
+    margin-right: 0.2rem;
+    letter-spacing: 0.06em;
+  }
+  .map-overlay-controls .day-btn:hover {
+    transform: none;
+    box-shadow: 2px 2px 0 var(--ink-soft) !important;
+  }
+  .map-overlay-controls .day-btn.active {
+    box-shadow: 2px 2px 0 var(--terracotta) !important;
+  }
+  .map-overlay-controls .day-btn-team.team-a.active,
+  .map-overlay-controls .day-btn-team.team-b.active {
+    box-shadow: 2px 2px 0 var(--ink) !important;
+  }
+
   /* Custom Leaflet markers */
   .lm {
     border-radius: 50%;
@@ -1199,7 +1255,7 @@
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="issue">Vol. 1 · Sammak Weizmann Field Trip</div>
+    <div class="issue">Vol. 1 · Yangyang Family Trip</div>
     <div class="date">2026 · 05 · 24 — 26</div>
   </div>
 
@@ -1249,16 +1305,18 @@
       안양에서 출발해 양양 펜션을 거쳐, 봉평 한우 점심을 지나 다시 안양으로 — 전체 약 660km의 여정. 아래 버튼으로 일자별 동선만 골라볼 수 있어요. 마커를 클릭하면 시간과 정보가 표시됩니다.
     </p>
     
-    <div class="map-controls">
-      <button class="day-btn active" data-filter="all" onclick="showFilter('all')">전체<span class="sub">All</span></button>
-      <button class="day-btn" data-filter="1" onclick="showFilter(1)">Day 1<span class="sub">안양→양양</span></button>
-      <button class="day-btn" data-filter="2" onclick="showFilter(2)">Day 2<span class="sub">분리 활동</span></button>
-      <button class="day-btn" data-filter="3" onclick="showFilter(3)">Day 3<span class="sub">양양→안양</span></button>
-    </div>
-    <div class="map-controls map-controls-team">
-      <span class="controls-label">↳ Day 2 팀별</span>
-      <button class="day-btn day-btn-team team-a" data-filter="A" onclick="showFilter('A')">A팀<span class="sub">워터파크</span></button>
-      <button class="day-btn day-btn-team team-b" data-filter="B" onclick="showFilter('B')">B팀<span class="sub">5스탑</span></button>
+    <div id="mapControls" class="map-overlay-controls" style="display:none;">
+      <div class="map-controls">
+        <button class="day-btn active" data-filter="all" onclick="showFilter('all')">전체<span class="sub">All</span></button>
+        <button class="day-btn" data-filter="1" onclick="showFilter(1)">Day 1<span class="sub">안양→양양</span></button>
+        <button class="day-btn" data-filter="2" onclick="showFilter(2)">Day 2<span class="sub">분리 활동</span></button>
+        <button class="day-btn" data-filter="3" onclick="showFilter(3)">Day 3<span class="sub">양양→안양</span></button>
+      </div>
+      <div class="map-controls map-controls-team">
+        <span class="controls-label">↳ Day 2 팀별</span>
+        <button class="day-btn day-btn-team team-a" data-filter="A" onclick="showFilter('A')">A팀<span class="sub">워터파크</span></button>
+        <button class="day-btn day-btn-team team-b" data-filter="B" onclick="showFilter('B')">B팀<span class="sub">5스탑</span></button>
+      </div>
     </div>
     
     <div class="map-container">
@@ -1747,6 +1805,13 @@
       fullscreenControl: true,
       zoomControl: true
     });
+
+    // Move filter controls into the map (top-left overlay)
+    const overlayControls = document.getElementById('mapControls');
+    if (overlayControls) {
+      overlayControls.style.display = 'flex';
+      mapInstance.controls[google.maps.ControlPosition.TOP_LEFT].push(overlayControls);
+    }
 
     // ===== Locations =====
     const P = {
