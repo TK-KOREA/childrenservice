@@ -779,6 +779,16 @@
       gap: 0.4rem;
       margin-bottom: 1rem;
     }
+    .map-controls-team {
+      margin-top: -0.4rem;
+      flex-wrap: wrap;
+    }
+    .controls-label {
+      font-size: 0.7rem;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 0.1rem;
+    }
     .day-btn {
       font-size: 0.75rem;
       padding: 0.55rem 0.7rem;
@@ -794,6 +804,8 @@
     }
     .day-btn:hover { box-shadow: 2px 2px 0 var(--ink-soft); transform: none; }
     .day-btn.active { box-shadow: 2px 2px 0 var(--terracotta); }
+    .day-btn-team.team-a.active,
+    .day-btn-team.team-b.active { box-shadow: 2px 2px 0 var(--ink); }
     .day-btn .sub {
       display: block;
       margin-left: 0;
@@ -1067,6 +1079,38 @@
     opacity: 0.75;
     letter-spacing: 0;
   }
+  
+  /* Team filter row — Day 2 sub-filters */
+  .map-controls-team {
+    margin-top: -0.5rem;
+    align-items: center;
+    padding-left: 0.25rem;
+  }
+  .controls-label {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-right: 0.4rem;
+    white-space: nowrap;
+  }
+  .day-btn-team {
+    border-width: 1.5px;
+  }
+  .day-btn-team.team-a { border-color: #3d7a7e; }
+  .day-btn-team.team-b { border-color: #5e7458; }
+  .day-btn-team.team-a.active { 
+    background: #3d7a7e; 
+    border-color: #3d7a7e;
+    box-shadow: 3px 3px 0 var(--ink); 
+  }
+  .day-btn-team.team-b.active { 
+    background: #5e7458; 
+    border-color: #5e7458;
+    box-shadow: 3px 3px 0 var(--ink); 
+  }
   .legend-line.day2 { color: #5e7458; }
 
   /* Custom Leaflet markers */
@@ -1206,10 +1250,15 @@
     </p>
     
     <div class="map-controls">
-      <button class="day-btn active" data-day="all" onclick="showDay('all')">전체<span class="sub">All</span></button>
-      <button class="day-btn" data-day="1" onclick="showDay(1)">Day 1<span class="sub">안양→양양</span></button>
-      <button class="day-btn" data-day="2" onclick="showDay(2)">Day 2<span class="sub">분리 활동</span></button>
-      <button class="day-btn" data-day="3" onclick="showDay(3)">Day 3<span class="sub">양양→안양</span></button>
+      <button class="day-btn active" data-filter="all" onclick="showFilter('all')">전체<span class="sub">All</span></button>
+      <button class="day-btn" data-filter="1" onclick="showFilter(1)">Day 1<span class="sub">안양→양양</span></button>
+      <button class="day-btn" data-filter="2" onclick="showFilter(2)">Day 2<span class="sub">분리 활동</span></button>
+      <button class="day-btn" data-filter="3" onclick="showFilter(3)">Day 3<span class="sub">양양→안양</span></button>
+    </div>
+    <div class="map-controls map-controls-team">
+      <span class="controls-label">↳ Day 2 팀별</span>
+      <button class="day-btn day-btn-team team-a" data-filter="A" onclick="showFilter('A')">A팀<span class="sub">워터파크</span></button>
+      <button class="day-btn day-btn-team team-b" data-filter="B" onclick="showFilter('B')">B팀<span class="sub">5스탑</span></button>
     </div>
     
     <div class="map-container">
@@ -1662,7 +1711,7 @@
 </div>
 
 <script>
-  // ===== Module-level so showDay() can access =====
+  // ===== Module-level so showFilter() can access =====
   let mapInstance;
   const layers = [];
 
@@ -1748,16 +1797,16 @@
     // Day 1: 안양 → 양양 펜션 (red)
     layers.push({ obj: dashedLine([P.anyang.pos, P.pension.pos], '#b65232'), days: [1] });
     // Day 2 B팀: 5스탑 코스 (sage green) 펜션 → 미천골 → 레이크지움 → 점심 → 둔치 → 하조대 → 시장
-    layers.push({ obj: dashedLine([P.pension.pos, P.micheongol.pos, P.lakeseum.pos, P.lunch.pos, P.dunchi.pos, P.hajodae.pos, P.market.pos], '#5e7458'), days: [2] });
+    layers.push({ obj: dashedLine([P.pension.pos, P.micheongol.pos, P.lakeseum.pos, P.lunch.pos, P.dunchi.pos, P.hajodae.pos, P.market.pos], '#5e7458'), days: [2], team: 'B' });
     // Day 2 A팀: 워터파크 코스 (teal) 펜션 → 워터파크 → 시장
-    layers.push({ obj: dashedLine([P.pension.pos, P.waterpark.pos, P.market.pos], '#3d7a7e'), days: [2] });
+    layers.push({ obj: dashedLine([P.pension.pos, P.waterpark.pos, P.market.pos], '#3d7a7e'), days: [2], team: 'A' });
     // Day 3: 펜션 → 봉평 → 안양 (blue)
     layers.push({ obj: dashedLine([P.pension.pos, P.pyeongchang.pos, P.anyang.pos], '#355a78'), days: [3] });
 
     // ===== Markers + InfoWindows =====
     const infoWindow = new google.maps.InfoWindow({ maxWidth: 260 });
 
-    function addMarker(loc, popupHTML, days) {
+    function addMarker(loc, popupHTML, days, team) {
       const marker = new google.maps.Marker({
         position: loc.pos,
         map: mapInstance,
@@ -1768,7 +1817,7 @@
         infoWindow.setContent('<div class="popup-content">' + popupHTML + '</div>');
         infoWindow.open({ anchor: marker, map: mapInstance });
       });
-      layers.push({ obj: marker, days: days });
+      layers.push({ obj: marker, days: days, team: team });
       return marker;
     }
 
@@ -1782,49 +1831,49 @@
       '<div class="popup-eyebrow">Base Camp · 2박</div>' +
       '<div class="popup-name">언덕위에하얀집펜션</div>' +
       '<div class="popup-time">양양군 서면 버들골길 26</div>',
-      [1, 2, 3]);
+      [1, 2, 3], 'AB');
 
     addMarker(P.micheongol,
       '<div class="popup-eyebrow">Day 2 · B팀 09:45</div>' +
       '<div class="popup-name">미천골 자연휴양림</div>' +
       '<div class="popup-time">계곡 산책 · 약 1시간</div>',
-      [2]);
+      [2], 'B');
 
     addMarker(P.lakeseum,
       '<div class="popup-eyebrow">Day 2 · B팀 11:15</div>' +
       '<div class="popup-name">카페 레이크지움</div>' +
       '<div class="popup-time">호수 뷰 갤러리 카페</div>',
-      [2]);
+      [2], 'B');
 
     addMarker(P.lunch,
       '<div class="popup-eyebrow">Day 2 · B팀 13:00</div>' +
       '<div class="popup-name">양양 시내 점심</div>' +
       '<div class="popup-time">송이 / 메밀 / 막국수</div>',
-      [2]);
+      [2], 'B');
 
     addMarker(P.dunchi,
       '<div class="popup-eyebrow">Day 2 · B팀 14:15</div>' +
       '<div class="popup-name">카페 둔치 + 남대천</div>' +
       '<div class="popup-time">강변 산책 1km</div>',
-      [2]);
+      [2], 'B');
 
     addMarker(P.hajodae,
       '<div class="popup-eyebrow">Day 2 · B팀 15:55</div>' +
       '<div class="popup-name">하조대 명승지</div>' +
       '<div class="popup-time">동해 절벽 · 양양 8경</div>',
-      [2]);
+      [2], 'B');
 
     addMarker(P.waterpark,
       '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
       '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
       '<div class="popup-time">아이 동반 워터파크</div>',
-      [2]);
+      [2], 'A');
 
     addMarker(P.market,
       '<div class="popup-eyebrow">Day 2 · 17:00 · A+B 합류</div>' +
       '<div class="popup-name">양양수산시장</div>' +
       '<div class="popup-time">회 · 매운탕 · 강정 픽업</div>',
-      [2]);
+      [2], 'AB');
 
     addMarker(P.pyeongchang,
       '<div class="popup-eyebrow">Day 3 · 12:00 점심</div>' +
@@ -1833,23 +1882,34 @@
       [3]);
 
     // ===== Initial: show all =====
-    showDay('all');
+    showFilter('all');
   }
 
-  // ===== Day filter (callable from buttons) =====
-  function showDay(d) {
+  // ===== Unified filter (callable from buttons) =====
+  // filter: 'all' | 1 | 2 | 3 | 'A' | 'B'
+  function showFilter(filter) {
     if (!mapInstance) return;
 
     // Update button active state
     document.querySelectorAll('.day-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.day === String(d));
+      b.classList.toggle('active', b.dataset.filter === String(filter));
     });
 
     const bounds = new google.maps.LatLngBounds();
     let hasVisible = false;
 
     layers.forEach(layer => {
-      const show = (d === 'all') || layer.days.includes(Number(d));
+      let show = false;
+      if (filter === 'all') {
+        show = true;
+      } else if (filter === 'A' || filter === 'B') {
+        // Team filter — only Day 2 elements with matching team
+        show = !!(layer.team && layer.team.includes(filter));
+      } else {
+        // Day filter
+        show = layer.days.includes(Number(filter));
+      }
+
       layer.obj.setMap(show ? mapInstance : null);
       if (show) {
         if (layer.obj.getPosition) {
@@ -1868,7 +1928,7 @@
   }
 
   // Expose for inline onclick
-  window.showDay = showDay;
+  window.showFilter = showFilter;
   window.initMap = initMap;
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&loading=async&callback=initMap"></script>
