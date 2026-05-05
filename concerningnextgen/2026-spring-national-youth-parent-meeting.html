@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메시지 1 · 하나님께서 정하신 길은 집을 얻는 것임</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #5B3F8F;
+    --purple-deep: #3D2B66;
+    --purple-soft: #7B5FAF;
+    --lavender: #E8E0F2;
+    --lavender-light: #F4EFFA;
+    --paper: #FAF7F2;
+    --paper-warm: #F2EDE3;
+    --ink: #1A1530;
+    --ink-soft: #3D3854;
+    --gold: #B8893C;
+    --gold-soft: #D4B570;
+    --rule: #C9BFD9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Serif KR', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.75;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+  }
+
+  .container { position: relative; z-index: 2; }
+
+  /* ============================================================
+     HERO — matches PDF cover
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .hero-top {
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .hero-conference {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .hero-theme-banner {
+    background: var(--purple);
+    color: white;
+    padding: 38px 30px;
+    margin: 0 auto 50px;
+    max-width: 900px;
+    box-shadow: 0 4px 0 var(--purple-deep);
+    position: relative;
+  }
+
+  .hero-theme-banner::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+  }
+
+  .hero-theme-text {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .hero-message-tag {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 8px 28px;
+    background: var(--lavender);
+    color: var(--purple-deep);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    font-size: 1rem;
+    border-top: 1px solid var(--purple);
+    border-bottom: 1px solid var(--purple);
+  }
+
+  .hero-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-title {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5.5vw, 4rem);
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 20px;
+    max-width: 1000px;
+  }
+
+  .hero-title .accent {
+    color: var(--purple);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gold-soft);
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  .hero-subtitle-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    margin-bottom: 50px;
+  }
+
+  .hero-verses {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    max-width: 760px;
+    margin: 0 auto 50px;
+    padding: 24px 30px;
+    background: var(--lavender-light);
+    border: 1px dashed var(--purple-soft);
+  }
+
+  .hero-verses .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--purple);
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .hero-verses .verse-ref {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 4px 12px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  .hero-key-verse {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 50px;
+    background: white;
+    border-top: 3px solid var(--purple);
+    border-bottom: 3px solid var(--purple);
+    position: relative;
+  }
+
+  .hero-key-verse::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--purple);
+    opacity: 0.25;
+  }
+
+  .hero-verse-text {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 2;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .hero-verse-text strong {
+    color: var(--purple);
+    font-weight: 700;
+    border-bottom: 1px solid var(--gold-soft);
+  }
+
+  .hero-verse-ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--purple);
+    letter-spacing: 0.2em;
+    text-align: right;
+  }
+
+  .hero-bottom {
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .hero-date {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+  }
+
+  /* ============================================================
+     SECTION COMMON
+     ============================================================ */
+  section.content {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .roman-marker {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .roman-marker .numeral {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.2rem;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .roman-marker .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+
+  .section-title {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 20px;
+    max-width: 900px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--lavender) 60%);
+    padding: 0 4px;
+  }
+
+  .section-refs {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--purple);
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-lead {
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.95;
+    color: var(--ink-soft);
+    max-width: 760px;
+    margin-bottom: 50px;
+    border-left: 3px solid var(--purple);
+    padding-left: 24px;
+    font-weight: 300;
+  }
+
+  /* ============================================================
+     THESIS BLOCK
+     ============================================================ */
+  .thesis {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+    color: white;
+    padding: 90px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thesis::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(212, 181, 112, 0.4);
+    pointer-events: none;
+  }
+
+  .thesis::after {
+    content: '';
+    position: absolute;
+    inset: 38px;
+    border: 1px solid rgba(212, 181, 112, 0.2);
+    pointer-events: none;
+  }
+
+  .thesis-ornament {
+    color: var(--gold-soft);
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    letter-spacing: 1em;
+    padding-left: 1em;
+  }
+
+  .thesis-text {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.4rem, 3vw, 2.3rem);
+    line-height: 1.6;
+    font-weight: 400;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .thesis-text strong {
+    color: var(--gold-soft);
+    font-weight: 700;
+  }
+
+  .thesis-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold-soft);
+    margin: 30px auto;
+    opacity: 0.6;
+  }
+
+  .thesis-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    opacity: 0.85;
+  }
+
+  /* ============================================================
+     COMPARISON: 영원한 생명 vs 구원
+     ============================================================ */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 50px 0 30px;
+    background: white;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .comparison-side {
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .comparison-side.eternal { background: var(--paper-warm); }
+  .comparison-side.salvation { background: var(--lavender-light); }
+
+  .comparison-tag {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 18px;
+    padding: 4px 16px;
+    text-transform: uppercase;
+  }
+
+  .comparison-side.eternal .comparison-tag {
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .comparison-side.salvation .comparison-tag {
+    color: var(--purple);
+    border: 1px solid var(--purple);
+  }
+
+  .comparison-icon {
+    font-family: 'Gowun Batang', serif;
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  .comparison-side.eternal .comparison-icon { color: var(--gold); }
+  .comparison-side.salvation .comparison-icon { color: var(--purple); }
+
+  .comparison-side h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .comparison-side .unit {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+
+  .comparison-side.eternal .unit { color: var(--gold); }
+  .comparison-side.salvation .unit { color: var(--purple); }
+
+  .comparison-side p {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .comparison-divider {
+    width: 1px;
+    background: var(--rule);
+    align-self: stretch;
+    position: relative;
+  }
+
+  .comparison-divider::before {
+    content: 'BUT';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 8px 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ink);
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+    border: 1px solid var(--rule);
+  }
+
+  /* ============================================================
+     SUB-POINTS A B C grid
+     ============================================================ */
+  .subpoints-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .subpoint-card {
+    background: white;
+    padding: 32px 28px;
+    position: relative;
+    border-top: 3px solid var(--purple);
+    box-shadow: 0 1px 0 var(--rule), 4px 4px 0 var(--lavender);
+  }
+
+  .subpoint-letter {
+    position: absolute;
+    top: -16px;
+    right: 24px;
+    background: var(--purple);
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .subpoint-card h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+
+  .subpoint-card p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+
+  .subpoint-card .ref {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--purple);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============================================================
+     ZION QUOTE BOX
+     ============================================================ */
+  .zion-quote {
+    margin: 50px 0;
+    padding: 40px 50px;
+    background: var(--lavender-light);
+    border-left: 5px solid var(--gold);
+    position: relative;
+  }
+
+  .zion-quote-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .zion-quote p {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .zion-quote .source {
+    display: block;
+    margin-top: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--purple);
+    text-align: right;
+  }
+
+  /* ============================================================
+     EXAMPLES SECTION (II)
+     ============================================================ */
+  .examples-section {
+    background: var(--paper-warm);
+    padding: 100px 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .examples-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .testament-block {
+    margin-bottom: 80px;
+  }
+
+  .testament-block:last-child { margin-bottom: 0; }
+
+  .testament-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+    flex-wrap: wrap;
+  }
+
+  .testament-header .testament-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .testament-header h3 {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .testament-header .count {
+    margin-left: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    background: white;
+    padding: 6px 18px;
+    border: 1px solid var(--gold-soft);
+  }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .example-card {
+    background: white;
+    padding: 26px 24px;
+    position: relative;
+    border-left: 3px solid var(--purple-soft);
+    transition: all 0.25s ease;
+  }
+
+  .example-card:hover {
+    border-left-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(91, 63, 143, 0.1);
+  }
+
+  .example-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--purple);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .example-card h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+
+  .example-card .ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--purple);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .example-card p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  /* ============================================================
+     DECLARATION (III)
+     ============================================================ */
+  .declaration {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .declaration::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border: 1px solid var(--gold);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .declaration-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.4em;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  .declaration-quote {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+    line-height: 1.55;
+    margin-bottom: 24px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+  }
+
+  .declaration-quote .gold {
+    color: var(--gold-soft);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .declaration-source {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.3em;
+    font-size: 1rem;
+    margin-bottom: 50px;
+  }
+
+  .declaration-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-soft);
+    margin: 0 auto 40px;
+    opacity: 0.6;
+  }
+
+  /* III sub-points inside declaration */
+  .iii-subpoints {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .iii-card {
+    padding: 32px;
+    background: rgba(212, 181, 112, 0.06);
+    border: 1px solid rgba(212, 181, 112, 0.3);
+    position: relative;
+  }
+
+  .iii-card-letter {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--ink);
+    padding: 0 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+
+  .iii-card h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.05rem;
+    color: var(--gold-soft);
+    margin-top: 8px;
+    margin-bottom: 14px;
+    line-height: 1.55;
+    font-weight: 700;
+  }
+
+  .iii-card p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: rgba(250, 247, 242, 0.85);
+    font-weight: 300;
+  }
+
+  /* ============================================================
+     SECTION IV — Greatest Principle
+     ============================================================ */
+  .principles-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 50px;
+  }
+
+  .principle-item {
+    padding: 36px 32px;
+    background: white;
+    border: 1px solid var(--rule);
+    position: relative;
+    transition: all 0.25s ease;
+  }
+
+  .principle-item:hover {
+    border-color: var(--purple);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(91, 63, 143, 0.08);
+  }
+
+  .principle-item-letter {
+    position: absolute;
+    top: -16px;
+    left: 28px;
+    background: var(--paper);
+    padding: 0 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--purple);
+    font-weight: 600;
+  }
+
+  .principle-item .topic {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+
+  .principle-item h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .principle-item p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .principle-item .ref {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--purple);
+    padding: 2px 10px;
+    background: var(--lavender-light);
+  }
+
+  /* ============================================================
+     BALANCE BLOCK — responsibility + sovereignty
+     ============================================================ */
+  .balance-block {
+    margin-top: 70px;
+    padding: 60px 50px;
+    background: white;
+    border-top: 4px solid var(--purple);
+    border-bottom: 4px solid var(--purple);
+    position: relative;
+  }
+
+  .balance-eyebrow {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--purple);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .balance-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    color: var(--ink);
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .balance-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 30px;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .balance-side {
+    text-align: center;
+    padding: 30px;
+  }
+
+  .balance-side .icon-large {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: var(--purple);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .balance-side h5 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .balance-side p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+
+  .balance-plus {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  .balance-conclusion {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--rule);
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.05rem;
+    color: var(--purple-deep);
+    line-height: 1.85;
+    font-style: italic;
+  }
+
+  /* ============================================================
+     CLOSING
+     ============================================================ */
+  .closing {
+    text-align: center;
+    padding: 120px 40px;
+    border-top: 1px solid var(--rule);
+    background: var(--lavender-light);
+  }
+
+  .closing-ornament {
+    color: var(--gold);
+    font-size: 1.3rem;
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+    margin-bottom: 30px;
+  }
+
+  .closing-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--purple-deep);
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 1.45;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing-text {
+    max-width: 640px;
+    margin: 0 auto 30px;
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--ink-soft);
+  }
+
+  .closing-prayer {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--purple);
+    letter-spacing: 0.15em;
+    margin-top: 40px;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer {
+    padding: 30px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-warm);
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 900px) {
+    .subpoints-grid { grid-template-columns: 1fr; }
+    .principles-row { grid-template-columns: 1fr; }
+    .iii-subpoints { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 40px 24px; }
+    .hero-theme-banner { padding: 28px 20px; }
+    .hero-key-verse { padding: 30px 24px; }
+    section.content { padding: 70px 24px; }
+    .thesis, .declaration, .examples-section { padding: 70px 24px; }
+    .balance-block { padding: 40px 24px; }
+    .balance-grid { grid-template-columns: 1fr; gap: 20px; }
+    .balance-plus { transform: rotate(90deg); }
+    .comparison { grid-template-columns: 1fr; }
+    .comparison-divider { width: 100%; height: 1px; }
+    .comparison-divider::before { padding: 6px 14px; }
+    .testament-header .count { margin-left: 0; }
+    .closing { padding: 80px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-top">
+      <p class="hero-conference">2026 봄 전국 중고등부 학부모 봉사자 집회</p>
+      <div class="hero-theme-banner">
+        <h2 class="hero-theme-text">교회생활을 위해 다음 세대를 양성함</h2>
+      </div>
+      <p class="hero-message-tag">MESSAGE · 1</p>
+    </div>
+
+    <div class="hero-main">
+      <h1 class="hero-title">
+        하나님께서 정하신 길은<br>
+        <span class="accent">집을 얻는 것</span>입니다
+      </h1>
+      <p class="hero-subtitle-en">God's Ordained Way is to Gain the Whole Household</p>
+
+      <div class="hero-verses">
+        <span class="label">성경 · Scripture References</span>
+        <span class="verse-ref">행 2:39</span>
+        <span class="verse-ref">수 24:15</span>
+        <span class="verse-ref">창 7:1</span>
+        <span class="verse-ref">출 12:3</span>
+        <span class="verse-ref">삼하 6:11</span>
+        <span class="verse-ref">눅 19:9</span>
+        <span class="verse-ref">행 16:31</span>
+        <span class="verse-ref">고전 7:14</span>
+        <span class="verse-ref">엡 1:4-5</span>
+      </div>
+
+      <div class="hero-key-verse">
+        <p class="hero-verse-text">
+          여호와의 크고 두려운 날이 이르기 전에 내가 신언자 엘리야를 너희에게 보내리니,
+          그가 <strong>아버지들의 마음을 자녀들에게로</strong> 돌아오게 하고,
+          <strong>자녀들의 마음을 아버지들에게로</strong> 돌아오게 하여
+          내가 와서 저주로 그 땅을 치지 않게 할 것이다.
+        </p>
+        <p class="hero-verse-ref">— 말라기 4 : 5–6 —</p>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-date">2026. 4. 25 (土) — 4. 26 (主日)</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THESIS BLOCK
+       ============================================================ -->
+  <div class="thesis">
+    <div class="thesis-ornament">✦ ✦ ✦</div>
+    <p class="thesis-text">
+      하나님은 다만 여러분과 여러분의 아내만을 얻기 원하시는 것이 아닙니다.<br>
+      <strong>온 집을 얻기 원하십니다.</strong>
+    </p>
+    <div class="thesis-divider"></div>
+    <p class="thesis-sub">THE WHOLE HOUSEHOLD</p>
+  </div>
+
+  <!-- ============================================================
+       ROMAN I — Salvation Unit
+       ============================================================ -->
+  <section class="content">
+    <div class="roman-marker">
+      <span class="numeral">I</span>
+      <span class="label">Salvation Unit</span>
+    </div>
+    <h2 class="section-title">
+      구원의 단위는 개인이 아니라<br>
+      <span class="highlight">한 집(household)</span>입니다
+    </h2>
+    <p class="section-refs">— 행 2:39 · 행 16:31 —</p>
+    <p class="section-lead">
+      하나님께서 우리에게 주신 구원의 약속은 한 집을 단위로 하셨으며 개개인을 단위로 하지 않으셨습니다.
+      복음을 전파할 때 우리는 반드시 그 안에 하나님의 구원의 단위를 포함시켜야 합니다.
+    </p>
+
+    <!-- Comparison: Eternal Life vs Salvation -->
+    <div class="comparison">
+      <div class="comparison-side eternal">
+        <span class="comparison-tag">영원한 생명</span>
+        <div class="comparison-icon">人</div>
+        <h4>개인이 단위</h4>
+        <p class="unit">— Individual —</p>
+        <p>한 사람 한 사람이 거듭나야 합니다. 영원한 생명은 주님을 믿고 영접함으로 개인이 받는 것입니다.</p>
+      </div>
+      <div class="comparison-divider"></div>
+      <div class="comparison-side salvation">
+        <span class="comparison-tag">구  원</span>
+        <div class="comparison-icon">家</div>
+        <h4>집이 단위</h4>
+        <p class="unit">— Household —</p>
+        <p>"주 예수님을 믿으십시오. 그러면 그대와 그대의 집안 식구가 구원을 받을 것입니다." (행 16:31)</p>
+      </div>
+    </div>
+
+    <!-- Sub-points A, B, C -->
+    <div class="subpoints-grid">
+      <div class="subpoint-card">
+        <div class="subpoint-letter">A</div>
+        <h4>영생은 개인 · 구원은 집</h4>
+        <p>
+          삭개오는 한 사람이었지만 구원이 그의 집에 이르렀습니다. 그의 온 집이 거룩하게 되어 주님의 구원을 받을 위치에 서게 된 것입니다.
+        </p>
+        <span class="ref">— 요일 5:12 · 창 7:1 —</span>
+      </div>
+      <div class="subpoint-card">
+        <div class="subpoint-letter">B</div>
+        <h4>육신적으로 태어난 자녀가<br>영적으로도 우리 집에서</h4>
+        <p>
+          나중에 다시 시간을 들여 세상에서 구해내야 하는 일이 없도록, 우리 집에서 태어난 자녀들은 영적으로도 우리 집에서 태어나야 합니다.
+        </p>
+        <span class="ref">— 시 87:5 · 딤후 1:5 —</span>
+      </div>
+      <div class="subpoint-card">
+        <div class="subpoint-letter">C</div>
+        <h4>다음 세대의 길은<br>자녀를 인도함에 달려 있음</h4>
+        <p>
+          만일 우리가 낳은 자녀들을 모두 잃어버린다면 머지않아 다음 세대는 없어질 것입니다. 하나를 낳았으면 그 하나를 거듭나게 해야 합니다.
+        </p>
+        <span class="ref">— 시 127:3-5 · 딤후 1:5 —</span>
+      </div>
+    </div>
+
+    <!-- Zion Quote -->
+    <div class="zion-quote">
+      <p class="zion-quote-label">시편 87편 · Psalm 87</p>
+      <p>
+        시온에 관해서는 이렇게들 말하리라.<br>
+        "이 사람 저 사람이 시온에서 태어났고<br>
+        가장 높으신 분께서 직접 시온을 세우시리라."
+      </p>
+      <span class="source">— 시편 87 : 5 —</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ROMAN II — Examples (OT + NT)
+       ============================================================ -->
+  <div class="examples-section">
+    <div class="examples-inner">
+      <div class="roman-marker">
+        <span class="numeral">II</span>
+        <span class="label">Biblical Pattern</span>
+      </div>
+      <h2 class="section-title">
+        성경 전체의 기본 원칙 — <span class="highlight">한 집을 단위로</span>
+      </h2>
+      <p class="section-lead">
+        하나님께서 한 집을 단위로 사람을 구원하시는 것은 구약과 신약을 관통하는 기본 원칙입니다.
+        성경에는 이를 보여주는 17가지 분명한 예가 있습니다.
+      </p>
+
+      <!-- OLD TESTAMENT -->
+      <div class="testament-block">
+        <div class="testament-header">
+          <span class="testament-label">Old Testament</span>
+          <h3>구약의 일곱 가지 예표</h3>
+          <span class="count">7 EXAMPLES</span>
+        </div>
+
+        <div class="examples-grid">
+          <div class="example-card">
+            <p class="example-num">01</p>
+            <h4>온 집이 방주에 들어감</h4>
+            <p class="ref">창 7:1 · 벧전 3:20</p>
+            <p>노아와 그의 아내, 아들들과 자부들 — 온 집안이 방주 안으로. 우리는 노아의 시대 안에 살고 있으며 교회를 건축해야 합니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">02</p>
+            <h4>온 집이 할례를 받음</h4>
+            <p class="ref">창 17:12-13</p>
+            <p>육체와 자아와 천연적인 사람을 잘라내는 것. 자녀들은 부모가 십자가의 역사 아래 있는 것을 보아야 합니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">03</p>
+            <h4>한 집에 한 마리 유월절 어린양</h4>
+            <p class="ref">출 12:3-7</p>
+            <p>구속은 집에 임합니다. 집안 식구가 양 한 마리에 비해 적으면 이웃과 함께 — 우리의 집은 우리의 믿음만큼 큽니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">04</p>
+            <h4>온 집이 제사장 직분을 받음</h4>
+            <p class="ref">민 18:1, 11</p>
+            <p>아론과 그의 아들들이 제사장이 된 것처럼, 부모는 자녀 앞에서 제사장으로서 주님과 시간을 보내야 합니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">05</p>
+            <h4>창녀 라합의 온 집이 구원받음</h4>
+            <p class="ref">수 2:19 · 6:17</p>
+            <p>여리고가 무너질 때 라합의 집만 무너지지 않았습니다. 그녀는 가족 · 친구 · 이웃 모두를 그 집 안으로 불러 모았습니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">06</p>
+            <h4>온 집이 축복을 얻음</h4>
+            <p class="ref">삼하 6:11</p>
+            <p>언약궤가 오벧에돔의 집에 머물자 그 집이 축복받았습니다. 하나님의 임재를 돌볼 때 가정에 축복이 임합니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">07</p>
+            <h4>온 집이 즐거워함</h4>
+            <p class="ref">신 12:7 · 14:26</p>
+            <p>이스라엘은 1년 3번 예루살렘에서 절기를 지키며 온 집안이 기뻐했습니다. 교회생활은 주님을 절기로 누리는 것입니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW TESTAMENT -->
+      <div class="testament-block">
+        <div class="testament-header">
+          <span class="testament-label">New Testament</span>
+          <h3>신약의 열 가지 예시</h3>
+          <span class="count">10 EXAMPLES</span>
+        </div>
+
+        <div class="examples-grid">
+          <div class="example-card">
+            <p class="example-num">01</p>
+            <h4>삭개오의 집</h4>
+            <p class="ref">눅 19:9</p>
+            <p>주님은 그의 이름을 부르셨습니다. "오늘 내가 그대의 집에 머물러야 하겠습니다." 구원이 그 집에 이르렀습니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">02</p>
+            <h4>한 신하의 온 집</h4>
+            <p class="ref">요 4:53</p>
+            <p>아들이 치료된 그 시각을 안 아버지와 그 온 집안이 함께 믿게 되었습니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">03</p>
+            <h4>고넬료의 온 집</h4>
+            <p class="ref">행 10:2 · 11:14</p>
+            <p>그는 친척들과 가까운 친구들까지 불러 모았습니다 — 우리의 집은 식구를 넘어 친구 · 동료 · 이웃까지 확장됩니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">04</p>
+            <h4>루디아의 집</h4>
+            <p class="ref">행 16:15</p>
+            <p>유럽에서 가장 먼저 구원받은 사람. 그녀와 그 집 사람들이 모두 침례를 받았습니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">05</p>
+            <h4>간수의 집</h4>
+            <p class="ref">행 16:31</p>
+            <p>"주 예수님을 믿으십시오. 그러면 그대와 그대의 집안 식구가 구원을 받을 것입니다." 온 집이 침례 받고 함께 식사한 간증.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">06</p>
+            <h4>그리스보의 온 집</h4>
+            <p class="ref">행 18:8</p>
+            <p>회당장이었던 그리스보가 그 온 집안과 함께 주님을 믿었습니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">07</p>
+            <h4>그 영의 약속은<br>여러분과 자녀에게</h4>
+            <p class="ref">행 2:39</p>
+            <p>오순절 베드로의 선포 — 성령의 약속은 우리뿐 아니라 우리의 자녀에게 주어진 것입니다.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">08</p>
+            <h4>평안이 그 집에 머물 것임</h4>
+            <p class="ref">눅 10:5-6</p>
+            <p>문 두드릴 때 우리는 개인이 아닌 그 집 전체를 만나는 것입니다 — 가정 방문의 원칙.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">09</p>
+            <h4>스데바나의 집</h4>
+            <p class="ref">고전 1:16</p>
+            <p>바울이 침례를 준 스데바나의 온 집안 — 가정 단위의 구원의 또 다른 증거.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-num">10</p>
+            <h4>오네시보로의 집</h4>
+            <p class="ref">딤후 1:16 · 4:19</p>
+            <p>로마 감옥의 바울을 부끄러워하지 않고 자주 방문한 집. 우리는 고통받는 성도들을 돌보아야 합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ROMAN III — Head of Household
+       ============================================================ -->
+  <div class="declaration">
+    <p class="declaration-eyebrow">Roman III · 가장의 책임</p>
+    <p class="declaration-quote">
+      <span class="gold">"오직 나와 내 집은</span><br>
+      여호와를 섬길 것입니다."
+    </p>
+    <p class="declaration-source">— 여호수아 24 : 15 —</p>
+
+    <div class="declaration-divider"></div>
+
+    <div class="iii-subpoints">
+      <div class="iii-card">
+        <div class="iii-card-letter">A</div>
+        <h4>믿음으로 결정을 선포함</h4>
+        <p>
+          우리는 믿음으로 우리의 집을 하나님을 경배하는 집, 주님을 믿는 집으로 결정했음을 선포해야 합니다.
+          권위를 사용하여 인도한다면 자연히 자녀들을 인도하게 될 것입니다.
+        </p>
+      </div>
+      <div class="iii-card">
+        <div class="iii-card-letter">B</div>
+        <h4>이 위치에 함께 서 있을 때</h4>
+        <p>
+          이 집은 우리의 집이며 주님을 섬기는 일은 우리가 결정한 것입니다.
+          엄마와 아빠가 이 문제에 있어서 하나라면 자녀들은 따라옵니다 — 우리는 분열될 수 없습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ROMAN IV — The Greatest Principle
+       ============================================================ -->
+  <section class="content">
+    <div class="roman-marker">
+      <span class="numeral">IV</span>
+      <span class="label">The Greatest Principle</span>
+    </div>
+    <h2 class="section-title">
+      <span class="highlight">온 집이 구원받는 것</span>은<br>
+      성경에서 가장 큰 원칙입니다
+    </h2>
+    <p class="section-refs">— 고전 7:14 · 엡 1:4-5 —</p>
+    <p class="section-lead">
+      당신 한 사람이 항상 하나님 앞에 서 있다면 당신의 집은 하나님 앞에서 변화될 것입니다.
+      믿지 않는 가족도 믿는 자로 말미암아 거룩하게 됩니다 — 위치에 있어서 하나님께로 분별되는 것입니다.
+    </p>
+
+    <div class="principles-row">
+      <div class="principle-item">
+        <div class="principle-item-letter">A</div>
+        <p class="topic">Visit the Home</p>
+        <h4>집을 방문하면 온 집안 식구를 만남</h4>
+        <p>
+          교회 집회로 초대하면 많은 사람들이 자기 혼자만 옵니다.
+          그러나 그들의 집을 방문한다면 온 집안 식구들을 가까이할 수 있습니다.
+        </p>
+        <span class="ref">— 눅 19:5-9 —</span>
+      </div>
+
+      <div class="principle-item">
+        <div class="principle-item-letter">B</div>
+        <p class="topic">Don't Leave Them Alone</p>
+        <h4>다음 세대를 그냥 내버려두지 말 것</h4>
+        <p>
+          개신교의 큰 실패는 집안의 다음 세대를 그냥 내버려두고 그들에게 신앙의 자유를 허용했다는 점입니다.
+          마땅히 가야 할 길을 따라 아이를 훈련시켜야 합니다.
+        </p>
+        <span class="ref">— 잠 22:6 —</span>
+      </div>
+
+      <div class="principle-item">
+        <div class="principle-item-letter">C</div>
+        <p class="topic">Don't Be Selfish</p>
+        <h4>이기적으로 자기 자녀만 위하지 말 것</h4>
+        <p>
+          자녀들을 위해 기도하지 않는 것도 잘못이지만, 이기적으로 자기 자녀만 위해 기도하는 것도 잘못입니다.
+          다른 성도들의 자녀를 위해서도 함께 기도하십시오.
+        </p>
+        <span class="ref">— 잠 11:25 —</span>
+      </div>
+
+      <div class="principle-item">
+        <div class="principle-item-letter">D</div>
+        <p class="topic">Our Duty &amp; God's Sovereignty</p>
+        <h4>우리의 책임과 하나님의 미리 정하심</h4>
+        <p>
+          우리는 주님의 가르침에 따라 자녀를 양육하며 책임을 다해야 합니다.
+          그러나 결국 그들이 구원받고 주님을 찾는 것은 하나님의 영원한 선택과 미리 정하심에 달려 있습니다.
+        </p>
+        <span class="ref">— 엡 1:4-5 —</span>
+      </div>
+    </div>
+
+    <!-- Balance Block -->
+    <div class="balance-block">
+      <p class="balance-eyebrow">A Balanced Word · 균형 잡힌 말씀</p>
+      <h3 class="balance-title">우리의 책임과 하나님의 긍휼</h3>
+
+      <div class="balance-grid">
+        <div class="balance-side">
+          <div class="icon-large">本</div>
+          <h5>본(本)으로서 사는 것</h5>
+          <p>
+            우리는 본으로서 살아야 합니다.<br>
+            우리의 의무를 다해야 합니다.<br>
+            매일 주님께 자신을 열고 그분의 피를 적용해야 합니다.
+          </p>
+        </div>
+
+        <div class="balance-plus">+</div>
+
+        <div class="balance-side">
+          <div class="icon-large">禱</div>
+          <h5>주님의 긍휼을 위해 기도</h5>
+          <p>
+            결과는 하나님의 긍휼에 달려 있습니다.<br>
+            "내가 정말 무릎을 꿇고 빈다." (워치만 니)<br>
+            필사적으로 기도해야 합니다.
+          </p>
+        </div>
+      </div>
+
+      <p class="balance-conclusion">
+        좋은 결과가 있다면 그것은 주님의 긍휼이며,<br>
+        나쁜 결과가 있다면 그 책임은 우리가 감당해야 합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLOSING
+       ============================================================ -->
+  <div class="closing">
+    <p class="closing-ornament">✦ ✦ ✦</p>
+    <h2 class="closing-title">
+      우리는 우리의 길을 고려해야 합니다.<br>
+      주님께서 우리의 온 집을 얻으시기 원합니다.
+    </h2>
+    <p class="closing-text">
+      성경의 가장 큰 원칙 — 온 집이 구원받는 것.<br>
+      구원의 약속은 집에 임합니다.<br>
+      이 하나님의 약속과 기본 원칙이 우리에게 기도할 담대함을 줍니다.
+    </p>
+    <p class="closing-prayer">— Amen. —</p>
+  </div>
+
+  <footer>
+    2026 봄 전국 중고등부 학부모 봉사자 집회 · 메시지 1
+  </footer>
+
+</div>
+
+</body>
+</html>
