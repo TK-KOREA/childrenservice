@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메시지 2 · 가정을 통해 청년들을 교회 생활로 이끎</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #5B3F8F;
+    --purple-deep: #3D2B66;
+    --purple-soft: #7B5FAF;
+    --lavender: #E8E0F2;
+    --lavender-light: #F4EFFA;
+    --paper: #FAF7F2;
+    --paper-warm: #F2EDE3;
+    --ink: #1A1530;
+    --ink-soft: #3D3854;
+    --gold: #B8893C;
+    --gold-soft: #D4B570;
+    --teal: #2E6B5E;
+    --teal-soft: #6FA89A;
+    --rule: #C9BFD9;
+    --warm-rust: #B85C3A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Serif KR', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.75;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+  }
+
+  .container { position: relative; z-index: 2; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .hero-top { text-align: center; padding-top: 40px; }
+
+  .hero-conference {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .hero-theme-banner {
+    background: var(--purple);
+    color: white;
+    padding: 38px 30px;
+    margin: 0 auto 50px;
+    max-width: 900px;
+    box-shadow: 0 4px 0 var(--purple-deep);
+    position: relative;
+  }
+
+  .hero-theme-banner::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+  }
+
+  .hero-theme-text {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .hero-message-tag {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 8px 28px;
+    background: var(--lavender);
+    color: var(--purple-deep);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    font-size: 1rem;
+    border-top: 1px solid var(--purple);
+    border-bottom: 1px solid var(--purple);
+  }
+
+  .hero-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  /* House icon for hero */
+  .hero-house-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    color: var(--purple);
+  }
+
+  .hero-title {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5.5vw, 4rem);
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 20px;
+    max-width: 1000px;
+  }
+
+  .hero-title .accent {
+    color: var(--purple);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gold-soft);
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  .hero-subtitle-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    margin-bottom: 50px;
+  }
+
+  .hero-verses {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    max-width: 760px;
+    margin: 0 auto 50px;
+    padding: 24px 30px;
+    background: var(--lavender-light);
+    border: 1px dashed var(--purple-soft);
+  }
+
+  .hero-verses .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--purple);
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .hero-verses .verse-ref {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 4px 12px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  .hero-key-verse {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 50px;
+    background: white;
+    border-top: 3px solid var(--purple);
+    border-bottom: 3px solid var(--purple);
+    position: relative;
+  }
+
+  .hero-key-verse::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--purple);
+    opacity: 0.25;
+  }
+
+  .hero-verse-text {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    line-height: 2;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  .hero-verse-text strong {
+    color: var(--purple);
+    font-weight: 700;
+    border-bottom: 1px solid var(--gold-soft);
+  }
+
+  .hero-verse-ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--purple);
+    letter-spacing: 0.2em;
+    text-align: right;
+  }
+
+  .hero-bottom { text-align: center; padding-top: 40px; }
+
+  .hero-date {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+  }
+
+  /* ============================================================
+     THE BURDEN — Speaker's Testimony Block
+     ============================================================ */
+  .burden-section {
+    background: var(--paper-warm);
+    padding: 100px 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .burden-inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .burden-eyebrow {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .burden-title {
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--ink);
+    margin-bottom: 50px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .questions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .question-card {
+    background: white;
+    padding: 36px 32px;
+    border-left: 4px solid var(--purple);
+    position: relative;
+  }
+
+  .question-card.alt { border-left-color: var(--gold); }
+
+  .question-card .q-mark {
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 5rem;
+    color: var(--lavender);
+    line-height: 1;
+    z-index: 0;
+  }
+
+  .question-card.alt .q-mark { color: rgba(184, 137, 60, 0.15); }
+
+  .question-card h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+
+  .question-card p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 1;
+  }
+
+  .question-card p strong {
+    color: var(--purple);
+    background: var(--lavender-light);
+    padding: 0 4px;
+  }
+
+  .question-card.alt p strong {
+    color: var(--gold);
+    background: rgba(212, 181, 112, 0.15);
+  }
+
+  .burden-quote {
+    text-align: center;
+    padding: 40px 30px;
+    border-top: 2px solid var(--purple);
+    border-bottom: 2px solid var(--purple);
+    background: white;
+  }
+
+  .burden-quote p {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .burden-quote .niv {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* ============================================================
+     THE DILEMMA — 80 vs 10
+     ============================================================ */
+  .dilemma {
+    background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+    color: white;
+    padding: 100px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dilemma::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(212, 181, 112, 0.4);
+    pointer-events: none;
+  }
+
+  .dilemma-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.4em;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .dilemma-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+    margin-bottom: 50px;
+    font-weight: 700;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .dilemma-numbers {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 30px;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+
+  .number-block {
+    text-align: center;
+  }
+
+  .number-block .label-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .number-block .big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(4rem, 9vw, 7rem);
+    line-height: 1;
+    color: var(--gold-soft);
+    margin-bottom: 12px;
+  }
+
+  .number-block .desc {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+  }
+
+  .vs-divider {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 2rem;
+    color: rgba(212, 181, 112, 0.6);
+    letter-spacing: 0.2em;
+  }
+
+  .dilemma-question {
+    margin-top: 30px;
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    color: var(--gold-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ============================================================
+     SECTION COMMON
+     ============================================================ */
+  section.content {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .roman-marker {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .roman-marker .numeral {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.2rem;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .roman-marker .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+
+  .section-title {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 20px;
+    max-width: 920px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--lavender) 60%);
+    padding: 0 4px;
+  }
+
+  .section-refs {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--purple);
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-lead {
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.95;
+    color: var(--ink-soft);
+    max-width: 800px;
+    margin-bottom: 50px;
+    border-left: 3px solid var(--purple);
+    padding-left: 24px;
+    font-weight: 300;
+  }
+
+  /* ============================================================
+     PENTECOST DIAGRAM (Acts 2:46-47)
+     ============================================================ */
+  .pentecost-diagram {
+    margin: 50px 0;
+    background: white;
+    padding: 50px 40px;
+    border: 1px solid var(--rule);
+  }
+
+  .pentecost-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .pentecost-subtitle {
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--ink);
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+
+  .pentecost-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: stretch;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .meeting-type {
+    padding: 32px 28px;
+    text-align: center;
+    border: 1px solid var(--rule);
+    background: var(--lavender-light);
+    position: relative;
+  }
+
+  .meeting-type.home { background: var(--paper-warm); }
+
+  .meeting-type .icon-block {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    color: var(--purple);
+  }
+
+  .meeting-type.home .icon-block { color: var(--gold); }
+
+  .meeting-type h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .meeting-type .meeting-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--purple);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .meeting-type.home .meeting-en { color: var(--gold); }
+
+  .meeting-type .where {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+  }
+
+  .meeting-type p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    text-align: left;
+  }
+
+  .pentecost-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .pentecost-result {
+    margin-top: 30px;
+    text-align: center;
+    padding: 24px;
+    background: var(--lavender);
+    border-top: 2px solid var(--purple);
+  }
+
+  .pentecost-result .arrow {
+    color: var(--purple);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  .pentecost-result p {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    color: var(--purple-deep);
+    line-height: 1.6;
+  }
+
+  .pentecost-result strong {
+    color: var(--purple);
+    font-size: 1.4rem;
+  }
+
+  /* ============================================================
+     SUB-POINTS GRID (A B C D)
+     ============================================================ */
+  .subpoints-4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .subpoint-card-2 {
+    background: white;
+    padding: 36px 32px;
+    position: relative;
+    border-top: 3px solid var(--purple);
+    box-shadow: 0 1px 0 var(--rule), 4px 4px 0 var(--lavender);
+    transition: all 0.25s ease;
+  }
+
+  .subpoint-card-2:hover { transform: translateY(-3px); }
+
+  .subpoint-card-2 .letter-badge {
+    position: absolute;
+    top: -16px;
+    left: 28px;
+    background: var(--purple);
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .subpoint-card-2 h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-top: 12px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .subpoint-card-2 p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .subpoint-card-2 .ref {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--purple);
+    padding: 2px 10px;
+    background: var(--lavender-light);
+  }
+
+  /* ============================================================
+     BIG QUOTE BLOCK (uniqueness of home meetings)
+     ============================================================ */
+  .big-quote {
+    margin: 60px 0;
+    padding: 50px;
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    position: relative;
+  }
+
+  .big-quote::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(212, 181, 112, 0.4);
+    pointer-events: none;
+  }
+
+  .big-quote-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.4em;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .big-quote p {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    line-height: 1.55;
+    font-weight: 400;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .big-quote .gold {
+    color: var(--gold-soft);
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  /* ============================================================
+     II. PRACTICAL IMPLEMENTATION (A through F)
+     ============================================================ */
+  .practical-section {
+    background: var(--paper-warm);
+    padding: 100px 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .practical-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .practical-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .practical-item {
+    background: white;
+    padding: 36px 36px 36px 100px;
+    position: relative;
+    border-left: 4px solid var(--purple);
+    transition: all 0.25s ease;
+  }
+
+  .practical-item:hover {
+    border-left-color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .practical-letter {
+    position: absolute;
+    left: 28px;
+    top: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .practical-item h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .practical-item p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  .practical-item .sub-list {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  .practical-item .sub-list .sub-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 10px;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .practical-item .sub-list .sub-item:last-child { margin-bottom: 0; }
+
+  .practical-item .sub-list .sub-num {
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+    min-width: 18px;
+  }
+
+  .practical-item .ref {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--purple);
+    padding: 2px 10px;
+    background: var(--lavender-light);
+  }
+
+  /* ============================================================
+     TRANSFORMATION FLOW
+     ============================================================ */
+  .transformation {
+    margin: 60px 0;
+    padding: 50px;
+    background: white;
+    border: 1px dashed var(--purple);
+  }
+
+  .transformation-title {
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    color: var(--purple-deep);
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .flow-step {
+    text-align: center;
+    padding: 24px 18px;
+    background: var(--lavender-light);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .flow-step.final {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color: white;
+    border-color: var(--purple);
+  }
+
+  .flow-step .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--purple);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .flow-step.final .step-num { color: var(--gold-soft); }
+
+  .flow-step h5 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  .flow-step.final h5 { color: white; }
+
+  .flow-step p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .flow-step.final p { color: rgba(255, 255, 255, 0.85); }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+  }
+
+  .transformation-conclusion {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.05rem;
+    color: var(--purple-deep);
+    line-height: 1.85;
+    font-style: italic;
+  }
+
+  .transformation-conclusion strong {
+    color: var(--purple);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ============================================================
+     SIX COMMISSIONS
+     ============================================================ */
+  .commissions-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 120px 40px;
+    position: relative;
+  }
+
+  .commissions-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .commissions-eyebrow {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.4em;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .commissions-title {
+    text-align: center;
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    color: white;
+    margin-bottom: 24px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .commissions-title .gold {
+    color: var(--gold-soft);
+    font-style: italic;
+  }
+
+  .commissions-lead {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(250, 247, 242, 0.75);
+    font-weight: 300;
+  }
+
+  .commissions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .commission-card {
+    padding: 40px 32px 36px;
+    background: rgba(212, 181, 112, 0.06);
+    border: 1px solid rgba(212, 181, 112, 0.3);
+    position: relative;
+    transition: all 0.25s ease;
+  }
+
+  .commission-card:hover {
+    background: rgba(212, 181, 112, 0.1);
+    border-color: var(--gold-soft);
+    transform: translateY(-3px);
+  }
+
+  .commission-num {
+    position: absolute;
+    top: -22px;
+    left: 28px;
+    background: var(--ink);
+    padding: 0 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--gold-soft);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .commission-tag {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    letter-spacing: 0.25em;
+    font-size: 0.78rem;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .commission-card h4 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .commission-card p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: rgba(250, 247, 242, 0.8);
+    font-weight: 300;
+  }
+
+  .commission-card p strong {
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     THREE PROBLEMS BLOCK ("교회에 가다" 관념)
+     ============================================================ */
+  .problems-block {
+    margin: 60px 0;
+    padding: 50px;
+    background: var(--paper-warm);
+    border-left: 5px solid var(--warm-rust);
+  }
+
+  .problems-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--warm-rust);
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .problems-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    color: var(--ink);
+    margin-bottom: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .problems-title .strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--warm-rust);
+    text-decoration-thickness: 2px;
+    color: var(--warm-rust);
+  }
+
+  .problems-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .problem-item {
+    padding: 24px;
+    background: white;
+    border-top: 3px solid var(--warm-rust);
+  }
+
+  .problem-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--warm-rust);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .problem-item h5 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .problem-item p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  /* ============================================================
+     CLOSING
+     ============================================================ */
+  .closing {
+    text-align: center;
+    padding: 120px 40px;
+    border-top: 1px solid var(--rule);
+    background: var(--lavender-light);
+  }
+
+  .closing-ornament {
+    color: var(--gold);
+    font-size: 1.3rem;
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+    margin-bottom: 30px;
+  }
+
+  .closing-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--purple-deep);
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 1.45;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing-text {
+    max-width: 660px;
+    margin: 0 auto 30px;
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--ink-soft);
+  }
+
+  .closing-prayer {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--purple);
+    letter-spacing: 0.15em;
+    margin-top: 40px;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer {
+    padding: 30px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-warm);
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 900px) {
+    .questions-grid { grid-template-columns: 1fr; }
+    .subpoints-4 { grid-template-columns: 1fr; }
+    .commissions-grid { grid-template-columns: 1fr; }
+    .problems-list { grid-template-columns: 1fr; }
+    .pentecost-flow { grid-template-columns: 1fr; }
+    .pentecost-plus { transform: rotate(90deg); padding: 10px 0; }
+    .flow-grid { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); padding: 6px 0; }
+    .dilemma-numbers { grid-template-columns: 1fr; }
+    .vs-divider { transform: rotate(90deg); padding: 10px 0; }
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 40px 24px; }
+    .hero-theme-banner { padding: 28px 20px; }
+    .hero-key-verse { padding: 30px 24px; }
+    section.content { padding: 70px 24px; }
+    .burden-section, .practical-section, .commissions-section { padding: 70px 24px; }
+    .dilemma { padding: 70px 24px; }
+    .pentecost-diagram { padding: 30px 24px; }
+    .practical-item { padding: 30px 24px 30px 24px; }
+    .practical-letter { position: static; margin-bottom: 8px; font-size: 2.4rem; }
+    .big-quote { padding: 40px 24px; }
+    .problems-block { padding: 30px 24px; }
+    .transformation { padding: 30px 20px; }
+    .closing { padding: 80px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-top">
+      <p class="hero-conference">2026 봄 전국 중고등부 학부모 봉사자 집회</p>
+      <div class="hero-theme-banner">
+        <h2 class="hero-theme-text">교회생활을 위해 다음 세대를 양성함</h2>
+      </div>
+      <p class="hero-message-tag">MESSAGE · 2</p>
+    </div>
+
+    <div class="hero-main">
+      <!-- House icon -->
+      <svg class="hero-house-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 40 L40 12 L70 40" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 36 L16 68 L64 68 L64 36" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M32 68 L32 48 L48 48 L48 68" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="40" cy="30" r="2" fill="currentColor"/>
+      </svg>
+
+      <h1 class="hero-title">
+        <span class="accent">가정</span>을 통해 청년들을<br>
+        교회 생활로 이끎
+      </h1>
+      <p class="hero-subtitle-en">Leading Young People into the Church Life Through the Home</p>
+
+      <div class="hero-verses">
+        <span class="label">성경 · Scripture References</span>
+        <span class="verse-ref">행 2:46-47</span>
+        <span class="verse-ref">롬 16:5상</span>
+        <span class="verse-ref">행 20:20</span>
+        <span class="verse-ref">행 9:31</span>
+        <span class="verse-ref">행 5:42</span>
+        <span class="verse-ref">히 10:25</span>
+        <span class="verse-ref">딤후 3:15</span>
+      </div>
+
+      <div class="hero-key-verse">
+        <p class="hero-verse-text">
+          그들이 날마다 한마음 한뜻으로 성전에 모이고
+          <strong>이 집 저 집에서 떡을 떼기를</strong> 꾸준히 계속하고
+          기쁨과 단순한 마음으로 함께 음식을 먹으며 하나님을 찬양하고 모든 사람 앞에서 은혜를 얻었다.
+          그래서 주님께서 <strong>구원받는 사람들을 날마다 더하시어 합치셨다.</strong>
+        </p>
+        <p class="hero-verse-ref">— 사도행전 2 : 46–47 —</p>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-date">2026. 4. 25 (土) — 4. 26 (主日)</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE BURDEN — Two key questions
+       ============================================================ -->
+  <div class="burden-section">
+    <div class="burden-inner">
+      <p class="burden-eyebrow">— The Speaker's Burden · 봉사자의 부담 —</p>
+      <h2 class="burden-title">왜 우리는 여기에 있고,<br>왜 우리의 자녀들은 여기에 있는가?</h2>
+
+      <div class="questions-grid">
+        <div class="question-card">
+          <span class="q-mark">Q.</span>
+          <h4>왜 나는 주님의 회복 안에 있는가?</h4>
+          <p>
+            저는 주님으로부터 그리스도와 교회에 관한 분명한 <strong>이상(vision)</strong>을 보았습니다.
+            한 도시에 한 교회. 이 이상이 18세에 저를 사로잡았고, 큰 대가를 치르고 이 길로 들어왔습니다.
+          </p>
+        </div>
+        <div class="question-card alt">
+          <span class="q-mark">Q.</span>
+          <h4>왜 나의 자녀들은 여기에 있는가?</h4>
+          <p>
+            그들은 이상을 보아서 여기 있는 것이 아닙니다.
+            단지 <strong>엄마 아빠가 여기 있기 때문에</strong> 여기에 있는 것입니다.
+            그들은 부모와 같은 계시를 스스로 가지고 있지 않습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="burden-quote">
+        <p>
+          어떻게 우리의 젊은 세대를 그리스도와 교회에 관한 이 위대한 계시 안으로 이끌 수 있을까?<br>
+          <span class="niv">—</span> 어떻게 그들을 단지 청소년 사역이 아닌 <strong>참된 영구적인 교회 생활</strong>로 이끌 수 있을까?
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       THE DILEMMA — 80 vs 10
+       ============================================================ -->
+  <div class="dilemma">
+    <p class="dilemma-eyebrow">The Dilemma · 어바인에서의 딜레마</p>
+    <h3 class="dilemma-title">
+      80명의 청소년을 누가 일일이 목양할 것인가?
+    </h3>
+
+    <div class="dilemma-numbers">
+      <div class="number-block">
+        <p class="label-en">Youth</p>
+        <p class="big-num">80</p>
+        <p class="desc">목양이 필요한<br>중고등학생들</p>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="number-block">
+        <p class="label-en">Servants</p>
+        <p class="big-num">10</p>
+        <p class="desc">전담 청소년<br>봉사자들</p>
+      </div>
+    </div>
+
+    <p class="dilemma-question">
+      "전담 봉사자 1인이 진심으로 목양할 수 있는 사람은 단 3명.<br>
+      직장 있는 성도, 자녀 있는 어머니는 1명.<br>
+      이것은 우리의 역량을 훨씬 벗어난 일이다."
+    </p>
+  </div>
+
+  <!-- ============================================================
+       ROMAN I — Foundation: Home Meetings
+       ============================================================ -->
+  <section class="content">
+    <div class="roman-marker">
+      <span class="numeral">I</span>
+      <span class="label">The Foundation</span>
+    </div>
+    <h2 class="section-title">
+      교회의 건축은 <span class="highlight">가정 집회</span>에 기초합니다
+    </h2>
+    <p class="section-refs">— 행 2:46-47 · 롬 16:5상 —</p>
+    <p class="section-lead">
+      가정 집회(소그룹 집회)는 하나님께서 그분의 교회를 건축하시고 그분의 목표에 도달하기 위한 <em>유일한 길</em>입니다.
+      주의 날 대집회와 주중 기도 집회만이 교회 생활의 전부가 아닙니다 —
+      소그룹 집회가 바로 하나님께서 정하신 핵심적인 길이며 몸을 건축하기 위한 그분의 생명의 길입니다.
+    </p>
+
+    <!-- Pentecost Diagram -->
+    <div class="pentecost-diagram">
+      <p class="pentecost-title">— Pentecost · 오순절의 두 종류 집회 —</p>
+      <p class="pentecost-subtitle">성령께서 직접 고안하신 교회 건축의 길</p>
+
+      <div class="pentecost-flow">
+        <div class="meeting-type">
+          <svg class="icon-block" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="8" y="20" width="44" height="32" rx="2"/>
+            <path d="M8 28 L52 28"/>
+            <path d="M16 20 L16 12 L44 12 L44 20"/>
+            <circle cx="20" cy="40" r="2" fill="currentColor"/>
+            <circle cx="30" cy="40" r="2" fill="currentColor"/>
+            <circle cx="40" cy="40" r="2" fill="currentColor"/>
+          </svg>
+          <h4>대집회</h4>
+          <p class="meeting-en">— Corporate Meeting —</p>
+          <p class="where">📍 성전에서</p>
+          <p>사도들의 가르침이 강력하게 주어진 곳. 큰 부담을 단체적으로 나누는 시간.</p>
+        </div>
+
+        <div class="pentecost-plus">+</div>
+
+        <div class="meeting-type home">
+          <svg class="icon-block" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 30 L30 12 L52 30"/>
+            <path d="M12 28 L12 50 L48 50 L48 28"/>
+            <path d="M24 50 L24 36 L36 36 L36 50"/>
+            <circle cx="30" cy="22" r="1.5" fill="currentColor"/>
+          </svg>
+          <h4>가정 집회</h4>
+          <p class="meeting-en">— Home Meeting —</p>
+          <p class="where">📍 이 집 저 집에서</p>
+          <p>매일 친밀하게 모임. 사도들의 교통을 나누고 생명으로 건축됨.</p>
+        </div>
+      </div>
+
+      <div class="pentecost-result">
+        <div class="arrow">↓</div>
+        <p>
+          오순절 하루 만에 <strong>3,000명</strong>이 구원받음<br>
+          <span style="font-size:0.95rem; color: var(--ink-soft);">— 한 다락방의 120명에서 시작 → 수많은 가정이 열려야 했음 —</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Sub-points A B C D -->
+    <div class="subpoints-4">
+      <div class="subpoint-card-2">
+        <div class="letter-badge">A</div>
+        <h4>사도들이 신속하게 교회를 건축한 길은 소그룹과 가정 집회</h4>
+        <p>
+          "유대와 갈릴리와 사마리아 전역에 있는 교회는 평안을 누리며 건축되어 갔고 인수가 늘어났다."
+          신약 전반에 가정에 있는 교회들이 등장합니다 — 아굴라와 브리스길라, 빌레몬, 님바.
+        </p>
+        <span class="ref">— 행 9:31 · 롬 16:5 —</span>
+      </div>
+      <div class="subpoint-card-2">
+        <div class="letter-badge">B</div>
+        <h4>가정 집회는 그리스도인의 최고의 길이며 결국 유일한 길</h4>
+        <p>
+          그들은 어디에 있든지 집을 열어서 교회의 실행을 위한 부담을 짊어졌습니다.
+          초기 성도들은 주로 그들의 집에서 모였습니다.
+        </p>
+        <span class="ref">— 롬 16:5 각주 1 —</span>
+      </div>
+      <div class="subpoint-card-2">
+        <div class="letter-badge">C</div>
+        <h4>처음 성령께서 정하신 길 — 두 종류의 집회</h4>
+        <p>
+          하나는 대집회, 다른 하나는 가정 집회.
+          "날마다 성전에서 그리고 이 집 저 집에서 예수님께서 그리스도이시라는 복음을 쉬지 않고 가르치며 전하였다."
+        </p>
+        <span class="ref">— 행 5:42 · 행 20:20 —</span>
+      </div>
+      <div class="subpoint-card-2">
+        <div class="letter-badge">D</div>
+        <h4>가정 집회는 교회의 증가와 건축을 위한 유일한 길</h4>
+        <p>
+          여러분은 매주 가정에서 모이고 있습니까?
+          개인적이고 친밀하며 서로를 돌보아 그리스도의 몸을 실질적으로 건축하는 그러한 생명 방식의 가정 집회를 가지고 있습니까?
+        </p>
+        <span class="ref">— 행 2:46-47 —</span>
+      </div>
+    </div>
+
+    <!-- Big Quote -->
+    <div class="big-quote">
+      <p class="big-quote-label">— Witness Lee's Word —</p>
+      <p>
+        "여러분의 도시의 교회가 참으로 <span class="gold">건축되었다고</span> 자신 있게 말할 수 있습니까?<br>
+        그것은 여러분이 하나님께서 정하신 <span class="gold">건축하는 길</span>을 온전히 취하고 있지 않기 때문입니다."
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ROMAN II — Practical Implementation
+       ============================================================ -->
+  <div class="practical-section">
+    <div class="practical-inner">
+      <div class="roman-marker">
+        <span class="numeral">II</span>
+        <span class="label">The Practice</span>
+      </div>
+      <h2 class="section-title">
+        가정을 통해 청년들을 <span class="highlight">교회 생활로</span> 이끄는 실행
+      </h2>
+      <p class="section-refs">— 행 2:46-47 · 히 10:25 —</p>
+      <p class="section-lead">
+        소그룹은 우리의 실제적인 교회 생활이 되어야 합니다.
+        이 요점들은 이론이 아니라 아주 실제적입니다.
+      </p>
+
+      <div class="practical-list">
+        <div class="practical-item">
+          <span class="practical-letter">A</span>
+          <h4>확실한 지방 교회 안에 있어야 함</h4>
+          <p>
+            교회 생활 안에 있지 않은 사람은 영적으로 돌아갈 집이 없는 고아입니다.
+            참된 교회 생활을 시작한 그날 우리는 비로소 영적인 집으로 돌아왔음을 알게 됩니다.
+            소그룹은 이 큰 교회의 완벽한 축소판입니다.
+          </p>
+        </div>
+
+        <div class="practical-item">
+          <span class="practical-letter">B</span>
+          <h4>집회를 가정으로 가져가는 것이 하나님께서 정하신 길의 심장부</h4>
+          <p>
+            만일 우리가 집회를 가정으로 가져가지 못한다면 주님의 회복 안에 큰 실패가 있을 것입니다.
+          </p>
+          <div class="sub-list">
+            <div class="sub-item">
+              <span class="sub-num">1.</span>
+              <span>아이들은 어려서부터 영적인 분위기에 쌓여 늘 영원한 것들의 실재를 보며 자랍니다 — 거룩한 분위기가 그들을 보호하고 둘러쌉니다.</span>
+            </div>
+            <div class="sub-item">
+              <span class="sub-num">2.</span>
+              <span>가정 집회에서 아이들은 세상 조류에 떠내려가는 것에서 보존되며, 그 결과 온 가정이 영적으로 정상적인 가정이 됩니다.</span>
+            </div>
+          </div>
+          <span class="ref">— 딤후 3:15 —</span>
+        </div>
+
+        <div class="practical-item">
+          <span class="practical-letter">C</span>
+          <h4>대집회 출석이 성공의 기준이라는 종교적 관념을 버려야 함</h4>
+          <p>
+            그가 매주 소그룹 집회에 생명으로 온다면 그것으로 이미 좋은 것입니다.
+            "주의 상 집회에 출석하지 않으면 교회 생활 안에 있는 것이 아니다"라는 율법적 생각을 버리십시오.
+          </p>
+          <div class="sub-list">
+            <div class="sub-item">
+              <span class="sub-num">1.</span>
+              <span><strong>대집회는 사람을 영구히 남게 할 수 없지만</strong> 이 집 저 집의 친밀한 집회는 사람들을 교회의 깊은 층으로 이끕니다 — 하나님의 놀라운 지혜.</span>
+            </div>
+            <div class="sub-item">
+              <span class="sub-num">2.</span>
+              <span><strong>데려오는 것은 쉽지만 남게 하는 것은 쉽지 않음</strong> — 중학교 시기부터 붙들어, 위기의 고등학교를 지나, 가장 중요한 대학교 시기까지 수고해야 영구히 얻을 수 있습니다.</span>
+            </div>
+          </div>
+          <span class="ref">— 행 2:47 · 요 15:16 —</span>
+        </div>
+
+        <div class="practical-item">
+          <span class="practical-letter">D</span>
+          <h4>청년들을 캠퍼스로 — 특별히 18, 19세를 격려</h4>
+          <p>
+            교회 생활 안에 있는 청년들은 모두가 복음에 매우 유용합니다.
+            강력한 캠퍼스 사역도 웅장한 집회소가 아니라 따뜻한 가정에서부터 나갑니다.
+          </p>
+          <div class="sub-list">
+            <div class="sub-item">
+              <span class="sub-num">1.</span>
+              <span>복음은 반드시 대집회가 아닌 일상적인 가정에서 전파되어야 함 — 캠퍼스의 일도 가정에서 시작되어야 합니다.</span>
+            </div>
+            <div class="sub-item">
+              <span class="sub-num">2.</span>
+              <span>교회 안의 청년들은 중년 부부 혹은 젊은 부부의 가정으로 친구들을 초대할 수 있음 — 이 가정들은 집을 활짝 열 준비가 되어 있어야 합니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="practical-item">
+          <span class="practical-letter">E</span>
+          <h4>실제적으로 교회 생활은 그룹 집회에서 완성됨</h4>
+          <p>
+            "어떤 사람들의 습관처럼 우리 자신의 모이기를 폐하지 말고..."
+            오늘 가장 중요한 일은 우리 자신의 확고한 그룹 집회를 갖는 것입니다.
+            교회 생활의 80%가 바로 소그룹에서 밀도 있게 일어납니다 —
+            진리 추구, 눈물의 기도, 담대한 신언이 다 그곳에서 일어납니다.
+          </p>
+          <span class="ref">— 히 10:25 —</span>
+        </div>
+
+        <div class="practical-item">
+          <span class="practical-letter">F</span>
+          <h4>청소년들을 인도하여 함께 떡을 떼게 함</h4>
+          <p>
+            그들에게 떡을 떼는 것이 영적으로 무엇이며, 떡을 떼는 참된 의미가 무엇인지 자상하게 가르쳐 주어야 합니다.
+            왜 매주 상에서 떡을 떼는지, 왜 어른들이 울며 찬양하는지의 영적 의미를 누군가가 부모처럼 곁에서 목양해야 합니다.
+            이것이 대집회가 아닌 소그룹에서 가장 자연스럽게 이루어집니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Transformation Flow -->
+      <div class="transformation">
+        <h3 class="transformation-title">청년들을 일반 소그룹에 통합한 결과</h3>
+
+        <div class="flow-grid">
+          <div class="flow-step">
+            <p class="step-num">01</p>
+            <h5>청소년 전용 집회</h5>
+            <p>봉사자 10명이 80명을 감당하는 한계 상황</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <p class="step-num">02</p>
+            <h5>일반 소그룹으로 통합</h5>
+            <p>모든 연령대의 성도들과 생명으로 섞임</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step final">
+            <p class="step-num">03</p>
+            <h5>대학에 진학할 때</h5>
+            <p>"이곳 소그룹 집회는 어디에 있나요?"</p>
+          </div>
+        </div>
+
+        <p class="transformation-conclusion">
+          이제 그들에게는 10명의 봉사자가 아니라 <strong>100명의 목양자</strong>가 생겼습니다 —<br>
+          영적인 어머니들, 아버지들, 기도의 할아버지·할머니, 어린 동생들이 있는 진정한 대가족.
+        </p>
+      </div>
+
+      <!-- Three problems with "going to church" -->
+      <div class="problems-block">
+        <p class="problems-eyebrow">— Religious Concept to Reject · 부수어야 할 종교적 관념 —</p>
+        <h3 class="problems-title">
+          "<span class="strike">교회에 다닌다(Going to Church)</span>"는 관념의 세 가지 문제
+        </h3>
+
+        <div class="problems-list">
+          <div class="problem-item">
+            <p class="problem-num">①</p>
+            <h5>마치 교회를 고를 선택권이 있는 것처럼 암시함</h5>
+            <p>그리스도의 우주적인 몸 안에서 우리에게는 선택권이 없습니다. 한 지방에는 한 교회뿐.</p>
+          </div>
+          <div class="problem-item">
+            <p class="problem-num">②</p>
+            <h5>교회가 어떤 "건물"이라고 암시함</h5>
+            <p>교회는 길모퉁이 물리적 건물이 아닙니다. 우리가 매일 생명으로 교회가 되어야 합니다.</p>
+          </div>
+          <div class="problem-item">
+            <p class="problem-num">③</p>
+            <h5>주일에 정장 입고 가는 종교적 행위로 만듦</h5>
+            <p>집회소에서는 거룩하지만 집에 가면 무너지는 위선적 격차 — 가정에서 교회를 건축해야 합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SIX COMMISSIONS
+       ============================================================ -->
+  <div class="commissions-section">
+    <div class="commissions-inner">
+      <p class="commissions-eyebrow">— Witness Lee · 위트니스 리 —</p>
+      <h2 class="commissions-title">
+        소그룹 집회의 <span class="gold">여섯 가지 위임</span>
+      </h2>
+      <p class="commissions-lead">
+        이 위임은 가벼운 제안이 아니라 주님의 명령이며, 아주 강한 생명의 명령입니다.
+        소그룹은 단순한 인간적 '방법'이 아니라, 성도 삶의 80%를 차지하는 진정한 교회 생활의 심장부입니다.
+      </p>
+
+      <div class="commissions-grid">
+        <div class="commission-card">
+          <span class="commission-num">1</span>
+          <span class="commission-tag">Change Concepts · 관념의 변화</span>
+          <h4>고정된 관념을 바꿀 것</h4>
+          <p>
+            소그룹 집회는 단순한 인간적 <strong>방법</strong>이 아닙니다.
+            특정 사람들의 <strong>사역</strong>도 아닙니다.
+            영적 가치와 질, 실제적인 교회 생활의 운용 면에서 소그룹은 성도 삶의 <strong>80%</strong>를 차지합니다.
+          </p>
+        </div>
+
+        <div class="commission-card">
+          <span class="commission-num">2</span>
+          <span class="commission-tag">Recover the Lost · 잃은 자의 회복</span>
+          <h4>상처받고 그친 성도들을 회복하는 것</h4>
+          <p>
+            아기 출산, 직장 상실, 사람에게 받은 상처...
+            이 이름과 저 이름을 소그룹 제단에 내어놓고 눈물로 기도하며 따뜻한 손을 내미는 곳이 바로 소그룹입니다.
+            대집회가 아닌 <strong>친밀한 가정</strong>이 그들을 치유합니다.
+          </p>
+        </div>
+
+        <div class="commission-card">
+          <span class="commission-num">3</span>
+          <span class="commission-tag">Preach the Gospel · 복음 전파</span>
+          <h4>기쁨으로 복음을 전파하는 것</h4>
+          <p>
+            친구·친척·이웃·동료의 명단을 펼쳐놓고 간절히 기도합니다.
+            복음은 대집회가 아닌 일상적인 가정에서 전파되어야 합니다 —
+            "올해 여러분의 소그룹에서 <strong>몇 명이 침례를 받았습니까?</strong>"
+          </p>
+        </div>
+
+        <div class="commission-card">
+          <span class="commission-num">4</span>
+          <span class="commission-tag">Preserve · 새 신자 보존</span>
+          <h4>얻은 새 신자를 잃지 말고 보존할 것</h4>
+          <p>
+            소그룹은 그들이 안전하게 보존되는 영적인 <strong>인큐베이터</strong>입니다.
+            그들은 결코 소그룹을 영적으로 '졸업'하지 않습니다 —
+            생명이 넘치는 소그룹이 평생토록 그들을 보존합니다.
+          </p>
+        </div>
+
+        <div class="commission-card">
+          <span class="commission-num">5</span>
+          <span class="commission-tag">Strengthen Riches · 풍성의 강화</span>
+          <h4>영적인 풍성을 매주 강화할 것</h4>
+          <p>
+            의무적으로 모이는 것이 아니라 생명이 풍성하고 즐겁게.
+            영을 해방하는 찬송, 은혜로운 가사 교통, 모든 것을 포함하신 그리스도의 측량할 수 없는 풍성으로 깊이 들어가되 — <strong>모두가 누릴 수 있는 유연한 방식</strong>으로.
+          </p>
+        </div>
+
+        <div class="commission-card">
+          <span class="commission-num">6</span>
+          <span class="commission-tag">Corporate Expression · 단체적 표현</span>
+          <h4>삼일 하나님의 단체적 표현이 될 것</h4>
+          <p>
+            앞선 다섯 위임을 충실히 실행한 영광스러운 결과 —
+            진리로 풍성해지고, 사람을 얻고 열매를 맺으며 살아 계신 그리스도를 온전히 표현하는 곳.
+            <strong>각 지방에서 예수님의 빛나는 증거</strong>를 단체적으로 표현하는 것입니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CLOSING
+       ============================================================ -->
+  <div class="closing">
+    <p class="closing-ornament">✦ ✦ ✦</p>
+    <h2 class="closing-title">
+      따뜻한 가정을 통해<br>
+      청소년들을 영구적인 교회 생활로 이끄시기를
+    </h2>
+    <p class="closing-text">
+      주님께서 율법이 아닌 생명으로 우리의 가정들을 온전히 얻으시고,<br>
+      이 살아있는 교회 생활을 통해 우리의 귀중한 모든 청소년들을<br>
+      사로잡으시고 몸 안에 영원히 보존하시기를 간절히 바랍니다.
+    </p>
+    <p class="closing-prayer">— Amen. —</p>
+  </div>
+
+  <footer>
+    2026 봄 전국 중고등부 학부모 봉사자 집회 · 메시지 2
+  </footer>
+
+</div>
+
+</body>
+</html>
