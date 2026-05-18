@@ -518,6 +518,46 @@
     font-family: 'IBM Plex Sans KR', sans-serif;
     font-weight: 500;
   }
+  .stops-detail-a .stop-num { color: #3d7a7e; }
+  .stops-detail-a .stop-tag {
+    border-color: #3d7a7e;
+    color: #3d7a7e;
+  }
+
+  /* Stop photo (placeholder — replace src with real photo) */
+  .stop-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    margin-bottom: 1.1rem;
+    border: 1px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    filter: saturate(0.94) contrast(1.02);
+    background: var(--paper-deep);
+  }
+  .location-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    filter: saturate(0.94) contrast(1.02);
+    background: var(--paper-deep);
+  }
+  .location-photo-wrap {
+    margin: 1.2rem 0 1.5rem;
+  }
+  .location-photo-caption {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 0.5rem;
+    letter-spacing: 0.08em;
+  }
 
   /* ========== REUNION ========== */
   .reunion-arrow {
@@ -589,6 +629,154 @@
     font-size: 0.95rem;
     color: var(--ink-soft);
     line-height: 1.6;
+  }
+
+  /* ========== MEAL PLAN ========== */
+  .mealplan {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--ink);
+  }
+  .mealplan-title {
+    font-family: 'Hahmlet', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0.4rem 0 0.4rem;
+  }
+  .mealplan-title em {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 400;
+  }
+  .mealplan-sub {
+    font-family: 'Gowun Batang', serif;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+  }
+  .meal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+  .meal-col {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 1.4rem 1.2rem 1.2rem;
+    position: relative;
+  }
+  .meal-col::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; right: -1px;
+    height: 6px;
+    background: var(--terracotta);
+  }
+  .meal-col.mc-d2::before { background: #3d7a7e; }
+  .meal-col.mc-d3::before { background: var(--sage); }
+  .meal-day {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+  .meal-date {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed var(--ink-soft);
+  }
+  .meal-slot {
+    margin-bottom: 0.95rem;
+  }
+  .meal-slot:last-child { margin-bottom: 0; }
+  .meal-when {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.25rem;
+  }
+  .meal-what {
+    font-family: 'Hahmlet', serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .meal-what span {
+    display: block;
+    font-family: 'Gowun Batang', serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-top: 0.15rem;
+  }
+  .meal-what.meal-out {
+    color: var(--ocean);
+  }
+  .meal-what.meal-skip {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+  .meal-shopping {
+    padding: 1.5rem 1.6rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .meal-shopping-title {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--paper);
+    letter-spacing: 0.05em;
+  }
+  .meal-shopping-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+  .meal-shopping-cat-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+  .meal-shopping-cat ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .meal-shopping-cat li {
+    font-family: 'Gowun Batang', serif;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    padding-left: 0.8rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .meal-shopping-cat li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 
   /* ========== PRACTICAL CARDS ========== */
@@ -706,6 +894,14 @@
     .stat-value { font-size: 1.4rem; }
     .stat:nth-child(3n) { border-right: none; }
     .map-container { height: 480px; }
+    .meal-shopping-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .meal-grid { grid-template-columns: 1fr; }
+    .mealplan-title { font-size: 1.7rem; }
+  }
+  @media (max-width: 480px) {
+    .meal-shopping-grid { grid-template-columns: 1fr; }
   }
 
   /* ========== RESPONSIVE: MOBILE ========== */
@@ -1188,7 +1384,6 @@
   }
   .lm-base { background: #1a1f15; }
   .lm-stop { background: #5e7458; font-size: 0.78rem; }
-  .lm-waterpark { background: #355a78; font-size: 0.78rem; }
   .lm-market { background: #b65232; }
   .lm-pyeongchang { background: #ad8244; font-size: 0.78rem; }
 
@@ -1261,8 +1456,8 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="stamp">3 days<span class="small">16 people</span></div>
-    <div class="hero-eyebrow">✦ 가족 16명, 동해를 향하다 ✦</div>
+    <div class="stamp">3 days<span class="small">17 people</span></div>
+    <div class="hero-eyebrow">✦ 가족 17명, 동해를 향하다 ✦</div>
     <h1 class="hero-title">
       양양에서 보내는<br>
       <span class="accent">사흘 낮,</span> <span class="accent">두 밤.</span>
@@ -1276,11 +1471,11 @@
     <div class="stats">
       <div class="stat">
         <div class="stat-label">People</div>
-        <div class="stat-value">16<span class="small">명</span></div>
+        <div class="stat-value">17<span class="small">명</span></div>
       </div>
       <div class="stat">
         <div class="stat-label">Adults / Kids</div>
-        <div class="stat-value">9<span class="small"> + </span>7</div>
+        <div class="stat-value">10<span class="small"> + </span>7</div>
       </div>
       <div class="stat">
         <div class="stat-label">Nights</div>
@@ -1314,7 +1509,7 @@
       </div>
       <div class="map-controls map-controls-team">
         <span class="controls-label">↳ Day 2 팀별</span>
-        <button class="day-btn day-btn-team team-a" data-filter="A" onclick="showFilter('A')">A팀<span class="sub">워터파크</span></button>
+        <button class="day-btn day-btn-team team-a" data-filter="A" onclick="showFilter('A')">A팀<span class="sub">속초 코스</span></button>
         <button class="day-btn day-btn-team team-b" data-filter="B" onclick="showFilter('B')">B팀<span class="sub">5스탑</span></button>
       </div>
     </div>
@@ -1334,7 +1529,7 @@
       </div>
       <div class="legend-item">
         <span class="legend-line day2a"></span>
-        <span><strong>Day 2</strong> A팀 · 워터파크 코스</span>
+        <span><strong>Day 2</strong> A팀 · 속초 가족 4스탑</span>
       </div>
       <div class="legend-item">
         <span class="legend-line day3"></span>
@@ -1350,7 +1545,7 @@
       </div>
       <div class="legend-item">
         <span class="legend-marker aTeam">A</span>
-        <span>Day 2 · A팀 워터파크</span>
+        <span>Day 2 · A팀 속초 4스탑</span>
       </div>
       <div class="legend-item">
         <span class="legend-marker market">M</span>
@@ -1422,7 +1617,7 @@
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-title">가족 레크리에이션</div>
-        <div class="tl-desc">자기소개 빙고 + 보물찾기. 어린이 상품 16~20개 준비.</div>
+        <div class="tl-desc">자기소개 빙고 + 보물찾기. 어린이 상품 17~20개 준비.</div>
       </div>
     </div>
     <div class="tl-item">
@@ -1433,6 +1628,12 @@
         <div class="tl-desc">아이들 먼저 재우고, 어른들은 별 보며 자유 시간.</div>
       </div>
     </div>
+  </div>
+
+  <!-- Pension photo -->
+  <div class="location-photo-wrap">
+    <img class="location-photo" src="https://placehold.co/1200x675/1a1f15/f5ecd9?text=White+House+Pension&font=playfair" alt="언덕위에하얀집펜션" loading="lazy" />
+    <div class="location-photo-caption">언덕위에하얀집펜션 · base camp for 2 nights</div>
   </div>
 
   <div class="highlight">
@@ -1451,7 +1652,7 @@
   </div>
 
   <p class="day2-intro">
-    아침을 함께 먹고 두 팀으로 나뉜다. 아이가 있는 집은 워터파크의 환호 속으로, 그렇지 않은 어른들은 카페와 계곡과 절벽을 차례로 만나는 조용한 코스로. 오후 5시, 양양수산시장에서 다시 만난다.
+    아침을 함께 먹고 두 팀으로 나뉜다. 아이가 있는 집은 속초 미시령 자락의 거대 미로와 산악박물관·노천 족욕으로, 그렇지 않은 어른들은 카페와 계곡과 절벽을 차례로 만나는 조용한 코스로. 오후 5시, 양양수산시장에서 다시 만난다.
   </p>
 
   <div class="section-label">Morning Split</div>
@@ -1460,22 +1661,23 @@
   <div class="split-grid">
     <div class="split-col team-a">
       <div class="split-team-label">★ Team A</div>
-      <div class="split-team-name">워터파크 팀</div>
+      <div class="split-team-name">속초 가족 4스탑 팀</div>
       <div class="split-team-count">아이 동반 · 약 9명</div>
-      <div class="split-mini"><strong>09:30</strong> 펜션 출발</div>
-      <div class="split-mini"><strong>10:00</strong> 쏠비치 양양 오션플레이 입장</div>
-      <div class="split-mini"><strong>12:30</strong> 워터파크 내 점심</div>
-      <div class="split-mini"><strong>15:00</strong> 물놀이 마무리</div>
-      <div class="split-mini"><strong>15:30</strong> 펜션 복귀 또는 시장 직행</div>
+      <div class="split-mini"><strong>09:30</strong> 펜션 출발 → 속초</div>
+      <div class="split-mini"><strong>10:15</strong> 다이나믹 메이즈 속초</div>
+      <div class="split-mini"><strong>12:15</strong> 학사평 순두부 점심</div>
+      <div class="split-mini"><strong>13:30</strong> 국립 산악박물관 (무료)</div>
+      <div class="split-mini"><strong>15:00</strong> 척산 족욕공원 (무료)</div>
+      <div class="split-mini"><strong>16:00</strong> 양양수산시장으로 이동</div>
       <div style="margin-top:1rem;font-family:'Gaegu',cursive;font-size:0.95rem;color:var(--ocean);">
-        ✦ 입장권 사전 예매 30% 할인<br>
-        ✦ 메인풀 1m 수심 · 초등생 안전
+        ✦ 미시령로 한 줄 동선 — 이동 부담 ↓<br>
+        ✦ 다음 페이지 ↓ 자세한 4스탑
       </div>
     </div>
     <div class="split-col team-b">
       <div class="split-team-label">✦ Team B</div>
       <div class="split-team-name">힐링 카페 산책 팀</div>
-      <div class="split-team-count">어른 · 약 7명</div>
+      <div class="split-team-count">어른 · 약 8명</div>
       <div class="split-mini"><strong>09:30</strong> 펜션 출발</div>
       <div class="split-mini"><strong>09:45</strong> 미천골 자연휴양림 산책</div>
       <div class="split-mini"><strong>11:15</strong> 카페 레이크지움</div>
@@ -1489,14 +1691,89 @@
     </div>
   </div>
 
-  <!-- B-team Detail -->
-  <div class="stops-detail">
-    <h3 class="stops-detail-header">B팀의 <em>five quiet stops</em></h3>
-    <p class="stops-detail-sub">어른 7명을 위한 서두르지 않는 5스탑 코스 — 09:30 출발, 16:45 마무리.</p>
+  <!-- A-team Detail -->
+  <div class="stops-detail stops-detail-a">
+    <h3 class="stops-detail-header">A팀의 <em>four playful stops</em></h3>
+    <p class="stops-detail-sub">아이 동반 9명을 위한 속초 미시령로 4스탑 코스 — 09:30 출발, 16:00 시장 이동.</p>
 
     <div class="stop">
       <div class="stop-num">01</div>
       <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/3d7a7e/f5ecd9?text=Dynamic+Maze+Sokcho&font=playfair" alt="다이나믹 메이즈 속초" loading="lazy" />
+        <span class="stop-time-tag">10:15 — 12:00</span>
+        <h4 class="stop-name">다이나믹 메이즈 속초</h4>
+        <div class="stop-name-en">Dynamic Maze Sokcho · 3층 거대 목재 미로</div>
+        <p class="stop-desc">아이 키 두 배 높이의 입체 미로. 곳곳 스탬프 4개를 모아 탈출하는 게임형. 초등생 환호 포인트, 어른도 함께 헤매며 즐길 수 있어요.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">미시령로 2983</span>
+          <span class="stop-tag">실내·우천 OK</span>
+          <span class="stop-tag">스탬프 미션</span>
+          <span class="stop-tag">90~120분</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">02</div>
+      <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/3d7a7e/f5ecd9?text=Haksapyeong+Tofu+Village&font=playfair" alt="학사평 순두부마을" loading="lazy" />
+        <span class="stop-time-tag">12:15 — 13:15</span>
+        <h4 class="stop-name">학사평 순두부 점심</h4>
+        <div class="stop-name-en">Haksapyeong Tofu Village · 메이즈에서 5분</div>
+        <p class="stop-desc">속초 향토 음식의 1번지. 김영애할머니순두부 · 동광식당 등에서 9명 단체석 사전 예약 권장. 두부전골·순두부백반·도토리묵.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">9명 단체석</span>
+          <span class="stop-tag">사전 예약</span>
+          <span class="stop-tag">아이 메뉴 ○</span>
+          <span class="stop-tag">5분 거리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">03</div>
+      <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/3d7a7e/f5ecd9?text=National+Mountain+Museum&font=playfair" alt="국립 산악박물관" loading="lazy" />
+        <span class="stop-time-tag">13:30 — 14:45</span>
+        <h4 class="stop-name">국립 산악박물관</h4>
+        <div class="stop-name-en">National Mountain Museum · 무료 입장</div>
+        <p class="stop-desc">설악산 자락의 산악 전문 박물관. 4D 영상관, 인공 암벽 체험, 야외 마운틴 가든. 초등생이 가장 좋아하는 4D + 등반 시뮬레이터.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">무료 입장</span>
+          <span class="stop-tag">4D 영상관</span>
+          <span class="stop-tag">암벽 체험</span>
+          <span class="stop-tag">7분 거리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-num">04</div>
+      <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/3d7a7e/f5ecd9?text=Cheoksan+Foot+Bath+Park&font=playfair" alt="척산 족욕공원" loading="lazy" />
+        <span class="stop-time-tag">15:00 — 15:45</span>
+        <h4 class="stop-name">척산 족욕공원</h4>
+        <div class="stop-name-en">Cheoksan Foot Bath Park · 무료 노천 온천</div>
+        <p class="stop-desc">속초 천연 온천수를 끌어온 야외 무료 족욕탕. 메이즈와 산악박물관에서 지친 다리를 풀어주는 마무리 코스. 수건만 챙기면 OK.</p>
+        <div class="stop-tags">
+          <span class="stop-tag">무료 노천</span>
+          <span class="stop-tag">수건 지참</span>
+          <span class="stop-tag">5분 거리</span>
+          <span class="stop-tag">A팀 하이라이트</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B-team Detail -->
+  <div class="stops-detail">
+    <h3 class="stops-detail-header">B팀의 <em>five quiet stops</em></h3>
+    <p class="stops-detail-sub">어른 8명을 위한 서두르지 않는 5스탑 코스 — 09:30 출발, 16:45 마무리.</p>
+
+    <div class="stop">
+      <div class="stop-num">01</div>
+      <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/5e7458/f5ecd9?text=Micheongol+Forest&font=playfair" alt="미천골 자연휴양림" loading="lazy" />
         <span class="stop-time-tag">09:45 — 11:00</span>
         <h4 class="stop-name">미천골 자연휴양림</h4>
         <div class="stop-name-en">Micheongol Forest · 1시간 계곡 산책</div>
@@ -1513,6 +1790,7 @@
     <div class="stop">
       <div class="stop-num">02</div>
       <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/5e7458/f5ecd9?text=Lakeseum+Cafe&font=playfair" alt="카페 레이크지움" loading="lazy" />
         <span class="stop-time-tag">11:15 — 12:30</span>
         <h4 class="stop-name">카페 레이크지움</h4>
         <div class="stop-name-en">Lakeseum · 호수 뷰 갤러리 카페</div>
@@ -1529,10 +1807,11 @@
     <div class="stop">
       <div class="stop-num">03</div>
       <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/5e7458/f5ecd9?text=Yangyang+Songi+Lunch&font=playfair" alt="양양 송이 점심" loading="lazy" />
         <span class="stop-time-tag">13:00 — 14:00</span>
         <h4 class="stop-name">양양 송이 점심</h4>
         <div class="stop-name-en">Songi &amp; Memil Lunch · 양양 시내</div>
-        <p class="stop-desc">양양 송이정식 또는 토속 메밀막국수. 어른 7명 단체석 미리 전화 예약.</p>
+        <p class="stop-desc">양양 송이정식 또는 토속 메밀막국수. 어른 8명 단체석 미리 전화 예약.</p>
         <div class="stop-tags">
           <span class="stop-tag">송이전골</span>
           <span class="stop-tag">메밀막국수</span>
@@ -1545,6 +1824,7 @@
     <div class="stop">
       <div class="stop-num">04</div>
       <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/5e7458/f5ecd9?text=Cafe+Dunchi+%26+Namdaecheon&font=playfair" alt="카페 둔치 + 남대천 둑방" loading="lazy" />
         <span class="stop-time-tag">14:15 — 15:30</span>
         <h4 class="stop-name">카페 둔치 + 남대천 둑방</h4>
         <div class="stop-name-en">Cafe Dunchi &amp; Riverside Walk · 평점 4.9</div>
@@ -1561,6 +1841,7 @@
     <div class="stop">
       <div class="stop-num">05</div>
       <div>
+        <img class="stop-photo" src="https://placehold.co/600x400/5e7458/f5ecd9?text=Hajodae+Pavilion&font=playfair" alt="하조대 명승지" loading="lazy" />
         <span class="stop-time-tag">15:55 — 16:45</span>
         <h4 class="stop-name">하조대 명승지</h4>
         <div class="stop-name-en">Hajodae Pavilion · 양양 8경 · 동해 절벽</div>
@@ -1585,12 +1866,18 @@
     </svg>
   </div>
 
+  <!-- Market photo -->
+  <div class="location-photo-wrap">
+    <img class="location-photo" src="https://placehold.co/1200x675/b65232/f5ecd9?text=Yangyang+Seafood+Market&font=playfair" alt="양양수산시장" loading="lazy" />
+    <div class="location-photo-caption">Yangyang Seafood Market · 17:00 reunion</div>
+  </div>
+
   <!-- Reunion Block -->
   <div class="reunion">
     <div class="reunion-time">★ 17:00 — 합류 시간</div>
     <h3 class="reunion-title">양양수산시장에서<br>두 팀이 만나다.</h3>
     <p class="reunion-desc">
-      미리 전화로 주문해 둔 회·매운탕거리·새우·강정을 픽업. A팀은 워터파크 무용담을, B팀은 하조대 절벽 사진을 자랑하며 펜션으로 복귀. 16명 분량은 반드시 사전 주문 필수.
+      미리 전화로 주문해 둔 회·매운탕거리·새우·강정을 픽업. A팀은 다이나믹 메이즈 모험담과 족욕 사진을, B팀은 하조대 절벽 사진을 자랑하며 펜션으로 복귀. 17명 분량은 반드시 사전 주문 필수.
     </p>
   </div>
 
@@ -1643,7 +1930,7 @@
       <div class="tl-time">12:00</div>
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-title">한우 점심 (16명 단체)</div>
+        <div class="tl-title">한우 점심 (17명 단체)</div>
         <div class="tl-desc">예약 필수 ☎ 033-333-9777. 식후 아이들 동물 농장에서 30분 놀이.</div>
       </div>
     </div>
@@ -1677,9 +1964,15 @@
       <div class="tl-dot major" style="background:var(--terracotta);border-color:var(--ink);"></div>
       <div class="tl-content">
         <div class="tl-title" style="color:var(--terracotta);">귀가 완료 ✦</div>
-        <div class="tl-desc">2박 3일, 660km, 16명의 무사한 마무리.</div>
+        <div class="tl-desc">2박 3일, 660km, 17명의 무사한 마무리.</div>
       </div>
     </div>
+  </div>
+
+  <!-- Hanwoo photo -->
+  <div class="location-photo-wrap">
+    <img class="location-photo" src="https://placehold.co/1200x675/ad8244/f5ecd9?text=Pyeongchang+Hanwoo+Village&font=playfair" alt="평창한우마을 면온점" loading="lazy" />
+    <div class="location-photo-caption">Pyeongchang Hanwoo · Day 3 lunch</div>
   </div>
 
   <div class="highlight">
@@ -1687,20 +1980,130 @@
     평창한우마을 면온점은 식당 옆에 동물 농장과 놀이터가 있어요. 식후 아이들 30분 풀어두고 어른들 커피 한 잔이 정석 코스. 5/26은 화요일이라 정체도 거의 없습니다.
   </div>
 
+  <!-- ============================== MEAL PLAN ============================== -->
+  <section class="mealplan">
+    <div class="section-label">Meal Plan</div>
+    <h2 class="mealplan-title">사흘간의 <em>식탁.</em></h2>
+    <p class="mealplan-sub">아침은 펜션에서 함께, 점심은 밖에서 자유롭게, 저녁은 다시 모여서 — 17명이 차리는 식사 캘린더.</p>
+
+    <div class="meal-grid">
+      <!-- Day 1 -->
+      <div class="meal-col mc-d1">
+        <div class="meal-day">Day 1</div>
+        <div class="meal-date">5 · 24 · Sun</div>
+        <div class="meal-slot">
+          <div class="meal-when">Breakfast</div>
+          <div class="meal-what meal-skip">— 출발 전 각자</div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Lunch</div>
+          <div class="meal-what meal-out">밖에서 사 먹기<span>이동 중 휴게소 · 양양 도착 후</span></div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Dinner</div>
+          <div class="meal-what">삼겹살 BBQ<span>쌈 채소 · 밥 · 펜션 데크</span></div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="meal-col mc-d2">
+        <div class="meal-day">Day 2</div>
+        <div class="meal-date">5 · 25 · Mon</div>
+        <div class="meal-slot">
+          <div class="meal-when">Breakfast</div>
+          <div class="meal-what">홍루이젠 샌드위치<span>그릭요거트 + 산딸기 · 구운 계란</span></div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Lunch</div>
+          <div class="meal-what meal-out">밖에서 사 먹기<span>A팀: 학사평 순두부 / B팀: 양양 시내 송이·메밀</span></div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Dinner</div>
+          <div class="meal-what">수산시장 회 만찬<span>회 · 매운탕 · 새우 · 강정 (사전 주문)</span></div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="meal-col mc-d3">
+        <div class="meal-day">Day 3</div>
+        <div class="meal-date">5 · 26 · Tue</div>
+        <div class="meal-slot">
+          <div class="meal-when">Breakfast</div>
+          <div class="meal-what">밥 · 김 · 계란프라이<span>미역국</span></div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Lunch</div>
+          <div class="meal-what meal-out">평창 한우 (이동 중)<span>평창한우마을 면온점 · 17명 단체석</span></div>
+        </div>
+        <div class="meal-slot">
+          <div class="meal-when">Dinner</div>
+          <div class="meal-what meal-skip">— 귀가 후 각자</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shopping list -->
+    <div class="meal-shopping">
+      <div class="meal-shopping-title">✦ 펜션 식사용 사전 준비 식자재</div>
+      <div class="meal-shopping-grid">
+        <div class="meal-shopping-cat">
+          <div class="meal-shopping-cat-title">D1 저녁 — BBQ</div>
+          <ul>
+            <li>삼겹살 17인분 (약 4kg)</li>
+            <li>쌈 채소 (상추·깻잎·쌈무)</li>
+            <li>밥 · 즉석밥 충분히</li>
+            <li>마늘·쌈장·소금·기름장</li>
+            <li>마시멜로 (식후 모닥불용)</li>
+          </ul>
+        </div>
+        <div class="meal-shopping-cat">
+          <div class="meal-shopping-cat-title">D2 아침 — Light</div>
+          <ul>
+            <li>홍루이젠 샌드위치 17개<br>(출발 전 안양에서 픽업)</li>
+            <li>그릭요거트 대용량 + 산딸기</li>
+            <li>계란 1~2판 (구운 계란용)</li>
+            <li>커피·주스</li>
+          </ul>
+        </div>
+        <div class="meal-shopping-cat">
+          <div class="meal-shopping-cat-title">D2 저녁 — 회 만찬</div>
+          <ul>
+            <li>회 17인분 (시장 사전 주문)</li>
+            <li>매운탕 거리 · 새우</li>
+            <li>닭강정 (만석·중앙시장)</li>
+            <li>초장·간장·와사비·당근/오이</li>
+            <li>아이스박스 + 얼음팩 운반</li>
+          </ul>
+        </div>
+        <div class="meal-shopping-cat">
+          <div class="meal-shopping-cat-title">D3 아침 — 든든히</div>
+          <ul>
+            <li>밥 (즉석밥 또는 즉시 취반)</li>
+            <li>김 17~20봉</li>
+            <li>계란 1판 (계란프라이용)</li>
+            <li>미역국 재료 또는 즉석 미역국</li>
+            <li>참기름·간장</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================== PRACTICAL ============================== -->
   <section class="practical">
     <h2 class="practical-title">출발 전 <em>checklist.</em></h2>
-    <p class="practical-sub">16명 단체 여행에서 빠뜨리면 안 되는 실무 체크리스트.</p>
+    <p class="practical-sub">17명 단체 여행에서 빠뜨리면 안 되는 실무 체크리스트.</p>
 
     <div class="pcards">
       <div class="pcard" data-num="01">
         <div class="pcard-title">사전 예약</div>
         <ul>
-          <li><strong>펜션</strong> 16명 인원 확정 통보</li>
-          <li><strong>쏠비치 오션플레이</strong> 단체 입장권</li>
+          <li><strong>펜션</strong> 17명 인원 확정 통보</li>
+          <li><strong>다이나믹 메이즈 속초</strong> 9명 입장권</li>
+          <li><strong>A팀 학사평 순두부</strong> 9명 단체석</li>
           <li><strong>양양수산시장</strong> 가게 사전 주문</li>
-          <li><strong>평창한우마을 면온점</strong> 16명 단체석</li>
-          <li><strong>B팀 점심 식당</strong> 7명 단체석</li>
+          <li><strong>평창한우마을 면온점</strong> 17명 단체석</li>
+          <li><strong>B팀 점심 식당</strong> 8명 단체석</li>
         </ul>
       </div>
 
@@ -1708,7 +2111,8 @@
         <div class="pcard-title">전화번호</div>
         <ul>
           <li>펜션 <span class="pcard-phone">033-673-1022</span></li>
-          <li>쏠비치 <span class="pcard-phone">1588-4888</span></li>
+          <li>다이나믹 메이즈 <span class="pcard-phone">033-636-9907</span></li>
+          <li>국립 산악박물관 <span class="pcard-phone">033-638-4459</span></li>
           <li>평창한우 <span class="pcard-phone">033-333-9777</span></li>
           <li>양양수산시장은 가게별 확인</li>
         </ul>
@@ -1717,7 +2121,7 @@
       <div class="pcard" data-num="03">
         <div class="pcard-title">차량 분배</div>
         <ul>
-          <li>SUV <strong>3~4대</strong> 권장 (16명)</li>
+          <li>SUV <strong>4대</strong> 권장 (17명)</li>
           <li>어린이 <strong>카시트 7개</strong> 좌석 분배</li>
           <li>안양 <strong>13:50</strong> 차량 집결</li>
           <li><strong>14:00</strong> 정시 출발</li>
@@ -1729,9 +2133,9 @@
         <div class="pcard-title">준비물</div>
         <ul>
           <li><strong>BBQ</strong>: 고기·쌈채소·김치·마시멜로</li>
-          <li><strong>워터파크</strong>: 수영복·수건·아쿠아슈즈</li>
+          <li><strong>A팀</strong>: 운동화·여벌양말·족욕용 수건</li>
           <li><strong>회 운반</strong>: 아이스박스 + 얼음팩</li>
-          <li><strong>레크</strong>: 보드게임·상품 16~20개</li>
+          <li><strong>레크</strong>: 보드게임·상품 17~20개</li>
           <li><strong>비상</strong>: 우산·비상약·모기약</li>
         </ul>
       </div>
@@ -1750,10 +2154,11 @@
       <div class="pcard" data-num="06">
         <div class="pcard-title">우천 시 대안</div>
         <ul>
+          <li>A팀 메이즈·박물관 모두 <strong>실내</strong> 우천 OK</li>
+          <li>척산 족욕 → <strong>척산온천 실내탕</strong> 대체</li>
           <li>미천골 → <strong>낙산사</strong> (실내 가능)</li>
           <li>하조대 → <strong>양양 송이박물관</strong></li>
           <li>BBQ → 펜션 실내 그릴 활용</li>
-          <li>레크 시간 늘리기 + 영화 감상</li>
         </ul>
       </div>
     </div>
@@ -1762,7 +2167,7 @@
   <!-- FOOTER -->
   <div class="footer">
     <div>YANGYANG · 2026 · MAY 24—26</div>
-    <div>♡ Family of 16 ♡</div>
+    <div>♡ Family of 17 ♡</div>
     <div>P. 01 / 01</div>
   </div>
 
@@ -1822,7 +2227,10 @@
       lunch:       { pos: { lat: 38.0750, lng: 128.6200 }, color: '#5e7458', text: '3',  size: 26, fontSize: 12 },
       dunchi:      { pos: { lat: 38.0956, lng: 128.6396 }, color: '#5e7458', text: '4',  size: 26, fontSize: 12 },
       hajodae:     { pos: { lat: 38.0334, lng: 128.7155 }, color: '#5e7458', text: '5',  size: 26, fontSize: 12 },
-      waterpark:   { pos: { lat: 38.0881, lng: 128.6659 }, color: '#3d7a7e', text: 'A',  size: 28, fontSize: 12 },
+      maze:        { pos: { lat: 38.1995, lng: 128.5350 }, color: '#3d7a7e', text: '1',  size: 28, fontSize: 12 },
+      haksa:       { pos: { lat: 38.1965, lng: 128.5410 }, color: '#3d7a7e', text: '2',  size: 26, fontSize: 12 },
+      mountainmus: { pos: { lat: 38.2030, lng: 128.5380 }, color: '#3d7a7e', text: '3',  size: 28, fontSize: 12 },
+      cheoksan:    { pos: { lat: 38.2080, lng: 128.5560 }, color: '#3d7a7e', text: '4',  size: 28, fontSize: 12 },
       market:      { pos: { lat: 38.0745, lng: 128.6222 }, color: '#b65232', text: 'M',  size: 30, fontSize: 13 },
       pyeongchang: { pos: { lat: 37.5602, lng: 128.3463 }, color: '#ad8244', text: '한', size: 30, fontSize: 13 }
     };
@@ -1863,8 +2271,8 @@
     layers.push({ obj: dashedLine([P.anyang.pos, P.pension.pos], '#b65232'), days: [1] });
     // Day 2 B팀: 5스탑 코스 (sage green) 펜션 → 미천골 → 레이크지움 → 점심 → 둔치 → 하조대 → 시장
     layers.push({ obj: dashedLine([P.pension.pos, P.micheongol.pos, P.lakeseum.pos, P.lunch.pos, P.dunchi.pos, P.hajodae.pos, P.market.pos], '#5e7458'), days: [2], team: 'B' });
-    // Day 2 A팀: 워터파크 코스 (teal) 펜션 → 워터파크 → 시장
-    layers.push({ obj: dashedLine([P.pension.pos, P.waterpark.pos, P.market.pos], '#3d7a7e'), days: [2], team: 'A' });
+    // Day 2 A팀: 속초 4스탑 코스 (teal) 펜션 → 메이즈 → 학사평 → 산악박물관 → 척산 → 시장
+    layers.push({ obj: dashedLine([P.pension.pos, P.maze.pos, P.haksa.pos, P.mountainmus.pos, P.cheoksan.pos, P.market.pos], '#3d7a7e'), days: [2], team: 'A' });
     // Day 3: 펜션 → 봉평 → 안양 (blue)
     layers.push({ obj: dashedLine([P.pension.pos, P.pyeongchang.pos, P.anyang.pos], '#355a78'), days: [3] });
 
@@ -1928,10 +2336,28 @@
       '<div class="popup-time">동해 절벽 · 양양 8경</div>',
       [2], 'B');
 
-    addMarker(P.waterpark,
-      '<div class="popup-eyebrow">Day 2 · A팀 10:00–15:00</div>' +
-      '<div class="popup-name">쏠비치 양양 오션플레이</div>' +
-      '<div class="popup-time">아이 동반 워터파크</div>',
+    addMarker(P.maze,
+      '<div class="popup-eyebrow">Day 2 · A팀 10:15</div>' +
+      '<div class="popup-name">다이나믹 메이즈 속초</div>' +
+      '<div class="popup-time">3층 거대 목재 미로 · 90~120분</div>',
+      [2], 'A');
+
+    addMarker(P.haksa,
+      '<div class="popup-eyebrow">Day 2 · A팀 12:15</div>' +
+      '<div class="popup-name">학사평 순두부 점심</div>' +
+      '<div class="popup-time">9명 단체석 · 사전 예약</div>',
+      [2], 'A');
+
+    addMarker(P.mountainmus,
+      '<div class="popup-eyebrow">Day 2 · A팀 13:30</div>' +
+      '<div class="popup-name">국립 산악박물관</div>' +
+      '<div class="popup-time">무료 · 4D + 인공암벽</div>',
+      [2], 'A');
+
+    addMarker(P.cheoksan,
+      '<div class="popup-eyebrow">Day 2 · A팀 15:00</div>' +
+      '<div class="popup-name">척산 족욕공원</div>' +
+      '<div class="popup-time">무료 노천 온천 족욕</div>',
       [2], 'A');
 
     addMarker(P.market,
