@@ -861,6 +861,109 @@
     color: var(--terracotta);
   }
 
+  /* ========== ACCORDION ========== */
+  .acc {
+    border-top: 2px solid var(--ink);
+  }
+  .acc:last-of-type {
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 2.5rem;
+  }
+  .acc-summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1.5rem 0.3rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .acc-summary::-webkit-details-marker { display: none; }
+  .acc-summary::marker { display: none; content: ''; }
+  .acc-summary:hover {
+    background: rgba(26, 31, 21, 0.04);
+  }
+  .acc-head {
+    flex: 1;
+    min-width: 0;
+  }
+  .acc-eyebrow {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--terracotta);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .acc-title {
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    color: var(--ink);
+    display: block;
+  }
+  .acc-title em {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+  .acc-sub {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-weight: 500;
+    display: block;
+    margin-top: 0.4rem;
+  }
+  .acc-chevron {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--terracotta);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    width: 28px;
+    text-align: center;
+  }
+  .acc[open] > .acc-summary .acc-chevron {
+    transform: rotate(45deg);
+  }
+  .acc-body {
+    padding: 0.2rem 0 2.5rem;
+    animation: accExpand 0.3s ease;
+  }
+  @keyframes accExpand {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* Remove top padding from sections nested inside accordion */
+  .acc-body > .map-section,
+  .acc-body > .mealplan,
+  .acc-body > .practical {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .acc-body > .day-marker {
+    margin-top: 0;
+  }
+  @media (max-width: 640px) {
+    .acc-summary { padding: 1.1rem 0.2rem; gap: 0.7rem; }
+    .acc-title { font-size: 1.3rem; }
+    .acc-eyebrow { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .acc-sub { font-size: 0.7rem; }
+    .acc-chevron { font-size: 1.5rem; width: 22px; }
+  }
+
   /* ========== FOOTER ========== */
   .footer {
     margin-top: 4rem;
@@ -1493,6 +1596,16 @@
   </section>
 
   <!-- ============================== ROUTE MAP ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 01 · Route Map</span>
+        <span class="acc-title">3일간의 <em>동선 지도</em></span>
+        <span class="acc-sub">안양 → 양양 → 봉평 → 안양 · 약 660km</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <section class="map-section">
     <div class="section-label">Route Map</div>
     <h2 class="map-section-title">3일간의 <em>동선 지도</em></h2>
@@ -1557,8 +1670,20 @@
       </div>
     </div>
   </section>
+    </div>
+  </details>
 
   <!-- ============================== DAY 1 ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 02 · Day 01</span>
+        <span class="acc-title">출발 · 도착 · 환영의 <em>BBQ</em></span>
+        <span class="acc-sub">Sunday · May 24 · 안양 → 양양 · 약 230km</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <div class="day-marker">
     <div class="day-num">01</div>
     <div class="day-info">
@@ -1640,8 +1765,20 @@
     <span class="highlight-label">Day 1 Highlight</span>
     펜션 앞 1급수 계곡에서 가재 사는 모습 볼 수 있어요. BBQ 굽는 동안 아이들 풀어두기 좋은 자연 놀이터.
   </div>
+    </div>
+  </details>
 
   <!-- ============================== DAY 2 ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 03 · Day 02</span>
+        <span class="acc-title">두 갈래 길, 그리고 <em>회 만찬</em></span>
+        <span class="acc-sub">Monday · May 25 · A팀 속초 4스탑 / B팀 양양 5스탑 · 17:00 합류</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <div class="day-marker">
     <div class="day-num">02</div>
     <div class="day-info">
@@ -1699,7 +1836,7 @@
     <div class="stop">
       <div class="stop-num">01</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Wooden_Maze_at_Monash_Adventure_Park_%2830981007577%29.jpg/800px-Wooden_Maze_at_Monash_Adventure_Park_%2830981007577%29.jpg" alt="다이나믹 메이즈 속초 (대표 이미지: 목재 미로)" loading="lazy" />
+        <img class="stop-photo" src="https://www.marinabaysokcho.com/data/file/attractions/3421715644_YNn2I8fd_bffa922897357749a4354b64e0a5a5b555dc1cbc.jpg" alt="다이나믹 메이즈 속초" loading="lazy" />
         <span class="stop-time-tag">10:15 — 12:00</span>
         <h4 class="stop-name">다이나믹 메이즈 속초</h4>
         <div class="stop-name-en">Dynamic Maze Sokcho · 3층 거대 목재 미로</div>
@@ -1716,7 +1853,7 @@
     <div class="stop">
       <div class="stop-num">02</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Korean_stew-Sundubu_jjigae-05.jpg/800px-Korean_stew-Sundubu_jjigae-05.jpg" alt="학사평 순두부마을 (대표 이미지: 순두부찌개)" loading="lazy" />
+        <img class="stop-photo" src="https://tong.visitkorea.or.kr/cms/resource/19/2732919_image2_1.jpg" alt="학사평 순두부마을" loading="lazy" />
         <span class="stop-time-tag">12:15 — 13:15</span>
         <h4 class="stop-name">학사평 순두부 점심</h4>
         <div class="stop-name-en">Haksapyeong Tofu Village · 메이즈에서 5분</div>
@@ -1733,7 +1870,7 @@
     <div class="stop">
       <div class="stop-num">03</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Korea-Sokcho_from_Seoraksan-01.jpg/800px-Korea-Sokcho_from_Seoraksan-01.jpg" alt="국립 산악박물관 (대표 이미지: 설악산에서 본 속초)" loading="lazy" />
+        <img class="stop-photo" src="https://i.namu.wiki/i/WKku-UkP7Y64wxDC-aU173J0zExH801ExgxY8GgTDr71dxc7zAZXeBD8RFSyNZp0L1-ITtaSigxjOuLgkyQuSA.webp" alt="국립 산악박물관" loading="lazy" />
         <span class="stop-time-tag">13:30 — 14:45</span>
         <h4 class="stop-name">국립 산악박물관</h4>
         <div class="stop-name-en">National Mountain Museum · 무료 입장</div>
@@ -1750,7 +1887,7 @@
     <div class="stop">
       <div class="stop-num">04</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sokcho%2C_Pavillon_am_Cheongchoho.jpg/800px-Sokcho%2C_Pavillon_am_Cheongchoho.jpg" alt="척산 족욕공원 (대표 이미지: 속초 청초호 정자)" loading="lazy" />
+        <img class="stop-photo" src="https://image.newdaily.co.kr/site/data/img/2026/03/01/2026030100102_0.jpg" alt="척산 족욕공원" loading="lazy" />
         <span class="stop-time-tag">15:00 — 15:45</span>
         <h4 class="stop-name">척산 족욕공원</h4>
         <div class="stop-name-en">Cheoksan Foot Bath Park · 무료 노천 온천</div>
@@ -1773,7 +1910,7 @@
     <div class="stop">
       <div class="stop-num">01</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Way_Through_Autumn_Forest_%28187194663%29.jpeg/800px-Way_Through_Autumn_Forest_%28187194663%29.jpeg" alt="미천골 자연휴양림 (대표 이미지: 숲길)" loading="lazy" />
+        <img class="stop-photo" src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201705/24/3abc2e92-19de-453d-a05d-301d6a1cde05.jpg" alt="미천골 자연휴양림" loading="lazy" />
         <span class="stop-time-tag">09:45 — 11:00</span>
         <h4 class="stop-name">미천골 자연휴양림</h4>
         <div class="stop-name-en">Micheongol Forest · 1시간 계곡 산책</div>
@@ -1807,7 +1944,7 @@
     <div class="stop">
       <div class="stop-num">03</div>
       <div>
-        <img class="stop-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Korean_cuisine-Songi_sanjeok-Pine_mushrooms_and_beef_brochette-01.jpg/800px-Korean_cuisine-Songi_sanjeok-Pine_mushrooms_and_beef_brochette-01.jpg" alt="양양 송이 점심 (대표 이미지: 송이 산적)" loading="lazy" />
+        <img class="stop-photo" src="https://mblogthumb-phinf.pstatic.net/MjAyNDA4MjZfMTE5/MDAxNzI0NjY1NTc0MjMz.Q_QVSxuduvQu_Iu2d9FYxun4LW6V-K56IPwUrpHKNOMg.Fg-kJawxcQgzsL8nFeGIK20ezRZ9kTkeudVmgvgsN9kg.PNG/SE-33f0a919-f762-4df7-8cdb-41095b45384b.png?type=w800" alt="양양 송이 점심" loading="lazy" />
         <span class="stop-time-tag">13:00 — 14:00</span>
         <h4 class="stop-name">양양 송이 점심</h4>
         <div class="stop-name-en">Songi &amp; Memil Lunch · 양양 시내</div>
@@ -1887,8 +2024,20 @@
     <div class="evening-title">펜션 회 만찬 · 매운탕 · 자유 시간</div>
     <div class="evening-desc">하루 동안 모은 이야기를 회와 매운탕에 곁들여 풀어내는 시간. 식후엔 별 보기, 야식.</div>
   </div>
+    </div>
+  </details>
 
   <!-- ============================== DAY 3 ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 04 · Day 03</span>
+        <span class="acc-title">퇴실 · 평창 한우 · <em>귀가</em></span>
+        <span class="acc-sub">Tuesday · May 26 · 양양 → 봉평 → 안양 · 약 320km</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <div class="day-marker">
     <div class="day-num">03</div>
     <div class="day-info">
@@ -1971,7 +2120,7 @@
 
   <!-- Hanwoo photo -->
   <div class="location-photo-wrap">
-    <img class="location-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Korean_barbecue-Hoenggye_hanu-01.jpg/1280px-Korean_barbecue-Hoenggye_hanu-01.jpg" alt="평창한우마을 면온점 (대표 이미지: 한우 BBQ)" loading="lazy" />
+    <img class="location-photo" src="https://image.mom-mom.net/eyJrZXkiOiJwbGFjZXMvNjhmZjkxMTBiMTMyNzcwZGQ4YzIyZWUwLmpwZWciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjc0Miwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfX19" alt="평창한우마을 면온점" loading="lazy" />
     <div class="location-photo-caption">Pyeongchang Hanwoo · Day 3 lunch</div>
   </div>
 
@@ -1979,8 +2128,20 @@
     <span class="highlight-label">Day 3 Highlight</span>
     평창한우마을 면온점은 식당 옆에 동물 농장과 놀이터가 있어요. 식후 아이들 30분 풀어두고 어른들 커피 한 잔이 정석 코스. 5/26은 화요일이라 정체도 거의 없습니다.
   </div>
+    </div>
+  </details>
 
   <!-- ============================== MEAL PLAN ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 05 · Meal Plan</span>
+        <span class="acc-title">사흘간의 <em>식탁</em></span>
+        <span class="acc-sub">3일 × 3끼 식사 캘린더 + 식자재 사전 준비 리스트</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <section class="mealplan">
     <div class="section-label">Meal Plan</div>
     <h2 class="mealplan-title">사흘간의 <em>식탁.</em></h2>
@@ -2089,7 +2250,20 @@
     </div>
   </section>
 
+    </div>
+  </details>
+
   <!-- ============================== PRACTICAL ============================== -->
+  <details class="acc">
+    <summary class="acc-summary">
+      <div class="acc-head">
+        <span class="acc-eyebrow">Section 06 · Pre-Trip</span>
+        <span class="acc-title">출발 전 <em>checklist</em></span>
+        <span class="acc-sub">사전 예약 · 전화번호 · 차량 분배 · 준비물 · 우천 대안</span>
+      </div>
+      <span class="acc-chevron">+</span>
+    </summary>
+    <div class="acc-body">
   <section class="practical">
     <h2 class="practical-title">출발 전 <em>checklist.</em></h2>
     <p class="practical-sub">17명 단체 여행에서 빠뜨리면 안 되는 실무 체크리스트.</p>
@@ -2163,6 +2337,8 @@
       </div>
     </div>
   </section>
+    </div>
+  </details>
 
   <!-- FOOTER -->
   <div class="footer">
@@ -2374,6 +2550,19 @@
 
     // ===== Initial: show all =====
     showFilter('all');
+
+    // ===== Re-render map when its accordion opens =====
+    document.querySelectorAll('details.acc').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (!d.open) return;
+        const mapEl = d.querySelector('#map');
+        if (mapEl && mapInstance) {
+          google.maps.event.trigger(mapInstance, 'resize');
+          const activeBtn = document.querySelector('.day-btn.active');
+          showFilter(activeBtn ? activeBtn.dataset.filter : 'all');
+        }
+      });
+    });
   }
 
   // ===== Unified filter (callable from buttons) =====
