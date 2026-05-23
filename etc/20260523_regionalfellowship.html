@@ -2,930 +2,800 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-<meta name="theme-color" content="#F4EFE3" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2" />
+<meta name="theme-color" content="#FBF8F0" />
 <title>다음 세대를 향한 마음 · 2026 전국 어린이 학부모 집회</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --cream: #F4EFE3;
     --paper: #FBF8F0;
+    --paper-soft: #F4EFE3;
+    --paper-warm: #EFE7D2;
     --ink: #1E1B16;
     --ink-soft: #4A4339;
+    --ink-mute: #807463;
     --moss: #3F5039;
     --moss-deep: #2A3727;
     --ochre: #B07A2C;
-    --terracotta: #A85638;
-    --line: #D9CFB8;
+    --ochre-soft: #C8A05A;
+    --terra: #A85638;
+    --rule: #E5DBC1;
+    --rule-soft: #EFE7D2;
   }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--cream);
+    font-family: 'Noto Serif KR', 'Gowun Batang', serif;
+    background: var(--paper);
     color: var(--ink);
-    font-family: 'Gowun Batang', serif;
+    font-size: 16.5px;
+    line-height: 1.95;
+    word-break: keep-all;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  .page {
-    width: 100%;
-    max-width: 460px;
-    background: var(--cream);
-    box-shadow: 0 0 80px rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
   }
   em { font-style: italic; }
+  a { color: inherit; }
 
-  /* ── 반복 컴포넌트 ───────────────────────────── */
-  .chapter-mark {
+  /* ── Top progress bar ───────────────── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 248, 240, 0.88);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .topbar-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 12px 22px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
   }
-  .chapter-mark .bar {
-    width: 28px;
-    height: 1px;
+  .topbar .home {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ochre);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+  .topbar .dots {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .topbar .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rule);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topbar .dot:hover { background: var(--ochre-soft); }
+  .topbar .dot.active {
     background: var(--ochre);
+    width: 16px;
+    border-radius: 4px;
   }
-  .chapter-mark .chap {
+
+  /* ── Reader column ──────────────────── */
+  .reader {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── Cover ──────────────────────────── */
+  .cover {
+    padding: 70px 26px 90px;
+  }
+  .cover .eyebrow {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 14px;
-    letter-spacing: 0.08em;
     color: var(--ochre);
+    letter-spacing: 0.22em;
+    margin-bottom: 20px;
   }
-  .chapter-mark .label {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: var(--ink-soft);
-    font-weight: 500;
-  }
-
-  /* ── 등장 애니메이션 ─────────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-                transform 0.7s cubic-bezier(0.16,1,0.3,1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── HERO ────────────────────────────────────── */
-  .hero {
-    padding: 60px 28px 80px;
-    background: linear-gradient(180deg, var(--cream) 0%, var(--paper) 100%);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    color: var(--ochre);
-    margin-bottom: 24px;
-    font-weight: 600;
-  }
-  .hero .divider {
-    width: 44px;
+  .cover .rule {
+    width: 40px;
     height: 1px;
     background: var(--ink);
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
-  .hero h1 {
-    font-family: 'Gowun Batang', serif;
-    font-size: 44px;
-    line-height: 1.2;
-    margin: 0 0 24px;
+  .cover h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(38px, 11vw, 60px);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    margin-bottom: 28px;
+    color: var(--ink);
   }
-  .hero .subtitle {
+  .cover .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 4.6vw, 22px);
+    line-height: 1.6;
+    color: var(--moss);
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+  .cover .lead {
+    font-size: 15.5px;
+    line-height: 2;
+    color: var(--ink-soft);
+    margin-bottom: 0;
+  }
+  .cover .date {
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px dotted var(--rule);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Section common ─────────────────── */
+  .section {
+    padding: 60px 26px 70px;
+    border-top: 1px solid var(--rule-soft);
+    scroll-margin-top: 70px;
+  }
+  .section.warm { background: var(--paper-soft); }
+  .section .ch-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ochre);
+    letter-spacing: 0.2em;
+    margin-bottom: 22px;
+  }
+  .section h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 7.4vw, 38px);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 30px;
+  }
+  .section h2 em {
+    font-style: italic;
+    color: var(--ochre);
+    font-weight: 700;
+  }
+  .section .ch-lead {
+    font-size: 16px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin-bottom: 46px;
+  }
+
+  /* ── Prologue (Q&A) ─────────────────── */
+  .prologue .qa-q, .prologue .qa-a {
+    margin-bottom: 36px;
+  }
+  .prologue .qa-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .prologue .qa-q .qa-mark { color: var(--terra); }
+  .prologue .qa-a .qa-mark { color: var(--moss); }
+  .prologue .qa-q p {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 19px;
+    line-height: 1.65;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .prologue .qa-a p {
+    font-size: 16px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .prologue .qa-pills {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .prologue .pill {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--moss);
+    padding: 6px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+  .prologue .pill .pill-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ochre);
+    margin-right: 5px;
+  }
+
+  /* ── Point ──────────────────────────── */
+  .point {
+    margin: 42px 0;
+  }
+  .point + .point { margin-top: 48px; }
+  .point-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ochre);
+    line-height: 1;
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .point h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.008em;
+  }
+  .point p.summary {
+    font-size: 15.5px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  /* ── Inline expand (replaces modal) ─── */
+  .expand {
+    margin-top: 14px;
+  }
+  .expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--moss);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .expand-toggle::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--moss);
+    transition: background 0.2s ease;
+  }
+  .expand-toggle .icon {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
+    color: var(--ochre);
+  }
+  .expand-toggle .label-close { display: none; }
+  .expand.open .expand-toggle .label-open { display: none; }
+  .expand.open .expand-toggle .label-close { display: inline; }
+  .expand.open .expand-toggle .icon { transform: rotate(45deg); }
+  .expand-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .expand.open .expand-body {
+    grid-template-rows: 1fr;
+  }
+  .expand-body > .inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .expand-text {
+    padding: 18px 0 6px;
+    margin-top: 10px;
+    border-top: 1px dotted var(--rule);
+    font-family: 'Noto Serif KR', 'Gowun Batang', serif;
+    font-size: 15px;
+    line-height: 2.0;
+    color: var(--ink-soft);
+    white-space: pre-line;
+    letter-spacing: -0.003em;
+  }
+  .expand-source {
+    margin-top: 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Callout (quiet boxed quote) ──── */
+  .callout {
+    margin: 40px 0;
+    padding: 24px 0 22px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .callout .callout-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ochre);
+    letter-spacing: 0.18em;
+    margin-bottom: 16px;
+  }
+  .callout p {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .callout p strong {
+    color: var(--ochre);
+    font-weight: 700;
+  }
+  .callout .callout-meta {
+    margin-top: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+
+  /* ── Flow rows (배가, 거점 수학) ────── */
+  .flow {
+    margin: 36px 0;
+    padding: 22px 0 4px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .flow .flow-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ochre);
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .flow-row:last-of-type { border-bottom: none; }
+  .flow-row .flow-left {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .flow-row .flow-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ochre);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .flow-row .flow-right {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── Timeline (1966 → 1984) ─────────── */
+  .timeline {
+    margin: 40px 0;
+    padding: 24px 0 4px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .timeline .timeline-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ochre);
+    letter-spacing: 0.18em;
+    margin-bottom: 20px;
+  }
+  .timeline-stops {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    margin-bottom: 18px;
+  }
+  .timeline-stops::before {
+    content: '';
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: 5px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .timeline-stop {
+    text-align: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-stop .pin {
+    width: 11px;
+    height: 11px;
+    background: var(--ochre);
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+  .timeline-stop .yr {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 19px;
-    line-height: 1.55;
-    color: var(--moss);
-    margin: 0 0 36px;
-  }
-  .hero .lead {
-    font-size: 15px;
-    line-height: 1.85;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-  .hero .scroll-cue {
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--ink-soft);
-    font-size: 12px;
-    letter-spacing: 0.15em;
-  }
-  .sprout-deco {
-    position: absolute;
-    animation: drift 6s ease-in-out infinite;
-  }
-  .sprout-deco.top-right { top: 50px; right: 30px; opacity: 0.5; }
-  .sprout-deco.bottom-left { bottom: 100px; left: 24px; opacity: 0.35; animation-delay: 1s; }
-  @keyframes drift {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(3deg); }
-  }
-  .arrow-bounce {
-    display: inline-block;
-    animation: drift 2s ease-in-out infinite;
-  }
-
-  /* ── 챕터 공통 ─────────────────────────────── */
-  .chapter {
-    padding: 70px 28px 80px;
-    background: var(--cream);
-    position: relative;
-  }
-  .chapter.paper { background: var(--paper); }
-  .chapter .head { margin-bottom: 36px; }
-  .chapter h2 {
-    font-family: 'Gowun Batang', serif;
-    font-size: 32px;
-    line-height: 1.3;
-    color: var(--ink);
-    margin: 20px 0 16px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .chapter h2 .ochre { color: var(--ochre); }
-  .chapter h2 .moss { color: var(--moss); }
-  .chapter h2 .terra { color: var(--terracotta); }
-  .chapter .chapter-lead {
-    font-family: 'Gowun Batang', serif;
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-
-  /* ── 요점 카드 ─────────────────────────────── */
-  .point {
-    margin-bottom: 28px;
-  }
-  .point .row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-  .point .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 30px;
     color: var(--ochre);
-    line-height: 1;
-  }
-  .point h3 {
-    font-family: 'Gowun Batang', serif;
-    font-size: 20px;
-    line-height: 1.35;
-    color: var(--ink);
-    margin: 0;
-    font-weight: 700;
-    flex: 1;
-  }
-  .point p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--ink-soft);
-    margin: 0;
-    font-family: 'Gowun Batang', serif;
-  }
-
-  /* ── 자세히 보기 버튼 ──────────────────────── */
-  .detail-btn {
-    margin-top: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: transparent;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    font-size: 12.5px;
-    letter-spacing: 0.12em;
-    font-family: 'Gowun Batang', serif;
-    cursor: pointer;
-    border-radius: 999px;
-    transition: all 0.25s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .detail-btn:hover,
-  .detail-btn:active {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  .detail-btn .arrow {
-    font-size: 14px;
-    line-height: 1;
-  }
-
-  /* ── 시각화 박스들 ─────────────────────────── */
-  .viz {
-    margin: 20px 0 32px;
-    padding: 26px 22px;
-    background: var(--cream);
-    border-radius: 16px;
-    border: 1px solid var(--line);
-  }
-  .viz.paper-bg { background: var(--paper); }
-  .viz-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--ochre);
-    margin-bottom: 14px;
-  }
-  .viz-eyebrow.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 18px;
-  }
-  .viz-eyebrow .italic {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-soft);
-    letter-spacing: normal;
-  }
-  .viz-caption {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-
-  /* 배가 흐름 (chapter 2) */
-  .multiply-flow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    margin-bottom: 12px;
-  }
-  .multiply-step {
-    text-align: center;
-    flex: 1;
-  }
-  .multiply-step .val {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--moss);
+    margin-bottom: 4px;
     font-weight: 500;
   }
-  .multiply-step .lbl {
-    font-size: 10px;
-    letter-spacing: 0.15em;
+  .timeline-stop .lbl {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 11.5px;
     color: var(--ink-soft);
-    margin-top: 4px;
+    line-height: 1.5;
   }
-  .multiply-arrow {
+  .timeline-quote {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+    padding-top: 4px;
+  }
+  .timeline-quote strong {
     color: var(--ochre);
-    font-size: 14px;
-  }
-
-  /* 가정 거점 수학 (chapter 3) */
-  .math-card {
-    margin: 0 0 36px;
-    padding: 26px 22px;
-    background: var(--moss-deep);
-    border-radius: 16px;
-    color: var(--cream);
-  }
-  .math-card .viz-eyebrow { color: var(--ochre); margin-bottom: 18px; }
-  .math-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(244,239,227,0.2);
-    margin-bottom: 14px;
-  }
-  .math-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-  .math-count {
-    font-family: 'Gowun Batang', serif;
-    font-size: 17px;
     font-weight: 700;
   }
-  .math-arrow {
+
+  /* ── Trait grid (40주 20성격) ─────── */
+  .traits-wrap {
+    margin: 32px 0;
+  }
+  .traits-label {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
+    font-size: 12px;
     color: var(--ochre);
-    font-size: 14px;
+    letter-spacing: 0.18em;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
-  .math-goal {
-    font-size: 14px;
-    color: #E8DFC8;
+  .traits-label .traits-meta {
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    font-size: 13px;
   }
-
-  /* 성격 그리드 (chapter 4) */
-  .trait-grid {
+  .traits {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
   .trait {
-    padding: 10px 4px;
+    padding: 11px 8px;
     background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    font-size: 11.5px;
-    text-align: center;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13.5px;
     color: var(--ink);
-    font-family: 'Gowun Batang', serif;
-    font-weight: 700;
-    line-height: 1.3;
-    white-space: pre-line;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.35;
   }
-  .chip-row {
+  .section.warm .trait { background: #FFFBF1; }
+
+  /* ── Chip row (이야기 구성) ────────── */
+  .chips {
+    margin: 28px 0 36px;
+  }
+  .chips-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ochre);
+    letter-spacing: 0.18em;
+    margin-bottom: 16px;
+  }
+  .chips-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
   }
   .chip {
-    padding: 6px 12px;
+    padding: 6px 13px;
     background: var(--ink);
-    color: var(--cream);
+    color: var(--paper);
     border-radius: 999px;
-    font-size: 12px;
-    font-family: 'Gowun Batang', serif;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12.5px;
+    font-weight: 500;
   }
   .chip-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
     color: var(--ochre);
-    font-size: 12px;
+    font-size: 13px;
   }
 
-  /* 시간 분배 (chapter 5) */
-  .time-bar {
-    display: flex;
-    height: 56px;
-    border-radius: 8px;
-    overflow: hidden;
+  /* ── Time bar (1/5 vs 4/5) ───────── */
+  .timebar {
+    margin: 36px 0;
+  }
+  .timebar-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ochre);
+    letter-spacing: 0.18em;
     margin-bottom: 14px;
   }
-  .time-bar .one-fifth {
+  .timebar-bar {
+    display: flex;
+    height: 42px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .timebar-bar .seg-a {
     width: 20%;
     background: var(--ochre);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cream);
-    font-size: 11px;
+    color: var(--paper);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.05em;
   }
-  .time-bar .four-fifth {
+  .timebar-bar .seg-b {
     width: 80%;
     background: var(--moss);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cream);
-    font-size: 12px;
+    color: var(--paper);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12.5px;
     font-weight: 700;
     letter-spacing: 0.05em;
   }
-  .time-labels {
+  .timebar-legend {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-soft);
-    line-height: 1.5;
   }
-  .time-labels span { flex: 1; }
-  .time-labels span:last-child { text-align: right; }
+  .timebar-legend span:last-child { text-align: right; }
 
-  /* ── 자료 챕터 (dark) ──────────────────────── */
+  /* ── Resources (Chapter 6) ─────────── */
   .resources {
-    padding: 70px 28px 80px;
-    background: var(--moss-deep);
-    color: var(--cream);
-  }
-  .resources h2 {
-    font-family: 'Gowun Batang', serif;
-    font-size: 32px;
-    line-height: 1.3;
-    color: var(--cream);
-    margin: 20px 0 24px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .resources .lead {
-    font-size: 15px;
-    line-height: 1.85;
-    color: #E8DFC8;
-    margin-bottom: 32px;
-    font-family: 'Gowun Batang', serif;
+    margin-top: 16px;
   }
   .res-item {
-    padding: 20px 0;
-    border-top: 1px solid rgba(244,239,227,0.15);
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
   }
-  .res-item:last-of-type {
-    border-bottom: 1px solid rgba(244,239,227,0.15);
-  }
-  .res-row {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 8px;
-  }
-  .res-num {
+  .res-item:last-of-type { border-bottom: 1px solid var(--rule); }
+  .res-item .res-num {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 18px;
-    color: var(--ochre);
-  }
-  .res-title {
-    font-family: 'Gowun Batang', serif;
-    font-size: 17px;
-    margin: 0;
-    font-weight: 700;
-    color: var(--cream);
-    flex: 1;
-  }
-  .res-note {
-    font-size: 13px;
-    color: #C9BFA0;
-    margin-left: 32px;
-    margin-bottom: 4px;
-  }
-  .res-link {
-    font-size: 11.5px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ochre);
-    margin-left: 32px;
-    letter-spacing: 0.05em;
-  }
-  .closing-quote {
-    margin-top: 48px;
-    padding: 28px 22px;
-    background: rgba(244,239,227,0.08);
-    border-radius: 16px;
-    border-left: 3px solid var(--ochre);
-  }
-  .closing-quote p {
-    font-family: 'Gowun Batang', serif;
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--cream);
-    margin: 0;
-    font-style: italic;
-  }
-  .signature {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: #C9BFA0;
-  }
-
-  /* ── 모달 ─────────────────────────────────── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(20,17,12,0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 100;
-    display: none;
-    align-items: flex-end;
-    justify-content: center;
-    animation: fadeIn 0.25s ease;
-  }
-  .modal-overlay.open {
-    display: flex;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  .modal {
-    width: 100%;
-    max-width: 460px;
-    max-height: 88vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: var(--paper);
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    padding: 28px 26px 36px;
-    box-shadow: 0 -20px 60px rgba(0,0,0,0.25);
-    animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1);
-  }
-  .modal-handle {
-    width: 40px;
-    height: 4px;
-    background: var(--line);
-    border-radius: 2px;
-    margin: 0 auto 22px;
-  }
-  .modal-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--ochre);
-    margin-bottom: 8px;
-  }
-  .modal h3 {
-    font-family: 'Gowun Batang', serif;
-    font-size: 22px;
-    line-height: 1.4;
-    color: var(--ink);
-    margin: 0 0 6px;
-    font-weight: 700;
-    word-break: keep-all;
-  }
-  .modal-source {
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-  .modal-rule {
-    height: 1px;
-    background: var(--line);
-    margin-bottom: 20px;
-  }
-  .modal-body {
-    font-family: 'Gowun Batang', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    font-size: 16px;
-    line-height: 1.9;
-    color: var(--ink);
-    white-space: pre-line;
-    letter-spacing: -0.005em;
-    word-break: keep-all;
-    word-wrap: break-word;
-  }
-  .modal-close {
-    margin-top: 28px;
-    width: 100%;
-    padding: 14px;
-    background: var(--ink);
-    color: var(--cream);
-    border: none;
-    border-radius: 12px;
     font-size: 14px;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    font-family: 'Gowun Batang', serif;
+    color: var(--ochre);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
   }
-
-  /* 모달 열렸을 때 본문 스크롤 잠금 */
-  body.modal-open {
-    overflow: hidden;
+  .res-item .res-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 12px;
+    letter-spacing: -0.008em;
   }
-
-  /* ── 모바일: 풀스크린 모달 ────────────────── */
-  @media (max-width: 640px) {
-    .modal-overlay {
-      align-items: stretch;
-    }
-    .modal {
-      width: 100%;
-      max-width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      max-height: 100vh;
-      max-height: 100dvh;
-      border-radius: 0;
-      padding: 22px 22px calc(28px + env(safe-area-inset-bottom)) 22px;
-      padding-top: calc(22px + env(safe-area-inset-top));
-      animation: slideUp 0.32s cubic-bezier(0.16,1,0.3,1);
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-handle {
-      margin-bottom: 18px;
-    }
-    .modal h3 {
-      font-size: 24px;
-      line-height: 1.35;
-      margin-bottom: 8px;
-    }
-    .modal-source {
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-    .modal-rule {
-      margin-bottom: 22px;
-    }
-    .modal-body {
-      flex: 1;
-      font-size: 17px;
-      line-height: 1.95;
-      letter-spacing: -0.005em;
-    }
-    .modal-close {
-      margin-top: 32px;
-      padding: 16px;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-  }
-
-  /* ── Q&A 도입 카드 (Chapter 1) ──────────── */
-  .qa-card {
-    margin: 6px 0 36px;
-    padding: 26px 22px 24px;
-    background: var(--paper);
-    border-radius: 16px;
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--terracotta);
-  }
-  .qa-card .qa-eyebrow {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--terracotta);
-    letter-spacing: 0.18em;
+  .res-item .res-note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
     margin-bottom: 14px;
   }
-  .qa-card .qa-q, .qa-card .qa-a {
-    position: relative;
-    padding-left: 34px;
-  }
-  .qa-card .qa-q::before, .qa-card .qa-a::before {
-    position: absolute;
-    left: 0; top: -4px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 1;
-  }
-  .qa-card .qa-q::before { content: 'Q'; color: var(--terracotta); }
-  .qa-card .qa-a::before { content: 'A'; color: var(--moss); }
-  .qa-card .qa-q p {
-    font-family: 'Gowun Batang', serif;
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--ink);
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: -0.005em;
-  }
-  .qa-card .qa-rule {
-    height: 1px;
-    background: var(--line);
-    margin: 20px 0;
-  }
-  .qa-card .qa-a p {
-    font-family: 'Gowun Batang', serif;
-    font-size: 14.5px;
-    line-height: 1.85;
-    color: var(--ink-soft);
-    margin: 0 0 12px;
-  }
-  .qa-card .qa-a p:last-of-type { margin-bottom: 16px; }
-  .qa-card .qa-summary {
+  .res-item .res-links {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-  .qa-card .qa-tag {
-    padding: 5px 13px;
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 12px;
-    color: var(--moss);
-    font-family: 'Gowun Batang', serif;
-    font-weight: 700;
-  }
-  .qa-card .qa-tag .tag-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ochre);
-    margin-right: 4px;
-  }
-
-  /* ── 1966 → 18년의 증거 (Chapter 2) ───── */
-  .timeline-1966 {
-    margin: 24px 0 32px;
-    padding: 28px 22px 22px;
-    background: linear-gradient(160deg, var(--moss-deep) 0%, var(--moss) 100%);
-    border-radius: 16px;
-    color: var(--cream);
-  }
-  .timeline-1966 .tl-eyebrow {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ochre);
-    letter-spacing: 0.15em;
-    margin-bottom: 22px;
-  }
-  .timeline-1966 .tl-track {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 4px 26px;
+    flex-direction: column;
+    gap: 4px;
     margin-bottom: 16px;
   }
-  .timeline-1966 .tl-track::before {
-    content: '';
-    position: absolute;
-    left: 18%;
-    right: 18%;
-    top: 6px;
-    height: 1px;
-    background: rgba(244,239,227,0.25);
-  }
-  .timeline-1966 .tl-node {
-    position: relative;
-    text-align: center;
-    flex: 1;
-    z-index: 1;
-  }
-  .timeline-1966 .tl-node .dot {
-    width: 14px;
-    height: 14px;
-    background: var(--ochre);
-    border-radius: 50%;
-    margin: 0 auto 14px;
-    box-shadow: 0 0 0 4px rgba(176,122,44,0.20);
-  }
-  .timeline-1966 .tl-node .yr {
+  .res-item .res-link {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 22px;
-    color: var(--ochre);
-    margin-bottom: 6px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-  .timeline-1966 .tl-node .lbl {
-    font-family: 'Gowun Batang', serif;
-    font-size: 11.5px;
-    color: rgba(244,239,227,0.88);
-    line-height: 1.5;
-  }
-  .timeline-1966 .tl-caption {
-    font-family: 'Gowun Batang', serif;
-    font-size: 13.5px;
-    line-height: 1.85;
-    color: #E8DFC8;
-    text-align: center;
-    padding-top: 16px;
-    border-top: 1px solid rgba(244,239,227,0.18);
-    margin: 0;
-  }
-  .timeline-1966 .tl-caption strong {
-    color: var(--ochre);
-    font-weight: 700;
-  }
-
-  /* ── QR 자료 카드 (Chapter 6) ───────────── */
-  .qr-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-bottom: 36px;
-  }
-  .qr-card {
-    background: rgba(244,239,227,0.06);
-    border: 1px solid rgba(244,239,227,0.16);
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .qr-card .qr-img {
-    flex-shrink: 0;
-    width: 84px;
-    height: 84px;
-    background: var(--cream);
-    padding: 6px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .qr-card .qr-img img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .qr-card .qr-info {
-    flex: 1;
-    min-width: 0;
-  }
-  .qr-card .qr-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ochre);
     font-size: 13px;
-    margin-bottom: 4px;
-  }
-  .qr-card .qr-title {
-    font-family: 'Gowun Batang', serif;
-    font-size: 14.5px;
-    color: var(--cream);
-    font-weight: 700;
-    line-height: 1.4;
-    margin-bottom: 6px;
-  }
-  .qr-card .qr-note {
-    font-size: 11.5px;
-    color: #C9BFA0;
-    line-height: 1.55;
-    margin-bottom: 8px;
-  }
-  .qr-card .qr-link {
-    display: block;
-    font-size: 11px;
     color: var(--ochre);
     text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    letter-spacing: 0.04em;
     word-break: break-all;
-    line-height: 1.5;
-    transition: color 0.2s ease;
+    letter-spacing: 0.02em;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
-  .qr-card .qr-link:hover { color: var(--cream); }
-  .qr-card .qr-link + .qr-link { margin-top: 2px; }
-  .qr-card .qr-contact {
-    font-size: 11px;
-    color: #C9BFA0;
-    margin-top: 6px;
-    font-family: 'Gowun Batang', serif;
-    line-height: 1.5;
+  .res-item .res-link::before {
+    content: '→';
+    font-size: 13px;
+    color: var(--ink-mute);
   }
-  .qr-card .qr-contact strong {
-    color: #E8DFC8;
+  .res-item .res-link:active,
+  .res-item .res-link:hover {
+    color: var(--terra);
+    border-bottom-color: var(--ochre);
+  }
+  .res-item .res-qr {
+    width: 108px;
+    height: 108px;
+    padding: 6px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .res-item .res-qr img { width: 100%; height: 100%; display: block; }
+  .res-item .res-contact {
+    padding: 12px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .res-item .res-contact strong {
+    color: var(--ink);
     font-weight: 700;
   }
+  .res-item .res-contact .contact-label {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11.5px;
+    color: var(--ochre);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
 
-  /* ── Footer ──────────────────────────── */
+  /* ── Closing ────────────────────────── */
+  .closing {
+    padding: 70px 26px 60px;
+    border-top: 1px solid var(--rule-soft);
+    background: var(--paper-soft);
+    text-align: center;
+  }
+  .closing .quote-glyph {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 68px;
+    line-height: 0.4;
+    color: var(--ochre);
+    margin-bottom: 24px;
+    opacity: 0.85;
+  }
+  .closing p {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16.5px;
+    line-height: 2.0;
+    color: var(--ink);
+    font-style: italic;
+    max-width: 480px;
+    margin: 0 auto 14px;
+  }
+  .closing .signature {
+    margin-top: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.22em;
+  }
+
+  /* ── Footer ────────────────────────── */
   footer.page-footer {
-    padding: 34px 28px;
+    padding: 34px 26px;
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 12.5px;
-    color: var(--ink-soft);
+    color: var(--ink-mute);
     letter-spacing: 0.2em;
-    border-top: 1px solid var(--line);
     background: var(--paper);
+    border-top: 1px solid var(--rule-soft);
   }
-  footer.page-footer .mark {
+  footer.page-footer .dot-sep {
     color: var(--ochre);
-    margin: 0 10px;
+    margin: 0 12px;
+  }
+
+  /* ── Wider screens ──────────────────── */
+  @media (min-width: 720px) {
+    body { font-size: 17.5px; }
+    .cover { padding: 100px 40px 110px; }
+    .section { padding: 80px 40px 90px; }
+    .closing { padding: 90px 40px 70px; }
   }
 
   /* ============================================================
-     BIBLE VERSE TOOLTIP — adapted to cream/moss/ochre palette
+     BIBLE VERSE TOOLTIP — paper/ochre minimal styling
      XML: https://tk-korea.github.io/recoverybible/recovery_bible_ko.xml
      ============================================================ */
   .vref-link {
     color: inherit;
     font: inherit;
-    border-bottom: 1px dotted currentColor;
+    border-bottom: 1px dotted var(--ochre);
     cursor: help;
     padding: 0 1px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     transition: color .15s ease, background-color .15s ease;
   }
-  .vref-link:hover { color: var(--moss); background: rgba(176,122,44,0.12); }
-  .vref-link:active { color: var(--moss); background: rgba(176,122,44,0.18); }
-  .vref-link:focus { outline: none; }
+  .vref-link:hover { color: var(--moss); background: rgba(176,122,44,0.08); }
+  .vref-link:active { color: var(--moss); background: rgba(176,122,44,0.14); }
   .vref-link:focus-visible { outline: 1px dashed var(--ochre); outline-offset: 2px; }
 
   #vref-tt-backdrop {
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(20,17,12,0.55);
+    background: rgba(20,17,12,0.45);
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     opacity: 0;
@@ -944,17 +814,17 @@
     position: absolute;
     top: 0; left: 0;
     z-index: 201;
-    max-width: 420px;
-    min-width: 280px;
-    padding: 26px 30px 22px;
-    background: var(--moss-deep);
-    border-top: 1px solid rgba(176,122,44,0.70);
+    max-width: 380px;
+    min-width: 260px;
+    padding: 24px 26px 20px;
+    background: var(--paper);
+    border-top: 2px solid var(--ochre);
+    border-radius: 4px;
     box-shadow:
-      0 2px 0 rgba(0,0,0,0.4),
-      0 18px 44px rgba(0,0,0,0.50),
-      0 4px 14px rgba(0,0,0,0.22);
-    font-family: 'Gowun Batang', serif;
-    color: #E8DFC8;
+      0 18px 44px rgba(42, 55, 39, 0.18),
+      0 4px 14px rgba(42, 55, 39, 0.10);
+    font-family: 'Noto Serif KR', serif;
+    color: var(--ink);
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
@@ -969,20 +839,21 @@
   .vref-tt-handle { display: none; }
   .vref-tt-close { display: none; }
   .vref-tt-book {
-    font-family: 'Gowun Batang', serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
     font-weight: 500;
-    font-size: .86rem;
+    font-size: .88rem;
     letter-spacing: 0.04em;
-    color: #C9BFA0;
+    color: var(--ochre);
     margin-bottom: 14px;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(176,122,44,0.25);
+    border-bottom: 1px solid var(--rule);
   }
   .vref-tt-body {
-    font-family: 'Gowun Batang', serif;
-    font-size: 1.02rem;
-    line-height: 2.0;
-    color: #E8DFC8;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--ink);
   }
   .vref-tt-verse { margin-bottom: 8px; }
   .vref-tt-verse:last-child { margin-bottom: 0; }
@@ -991,16 +862,15 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 600;
-    font-size: 0.85em;
+    font-size: 0.82em;
     color: var(--ochre);
-    margin-right: 8px;
+    margin-right: 7px;
   }
   .vref-tt-empty {
     display: block;
-    color: var(--ochre);
+    color: var(--ink-mute);
     font-style: italic;
     font-size: .9rem;
-    opacity: 0.75;
   }
 
   @media (max-width: 768px) {
@@ -1014,18 +884,17 @@
       width: 100%;
       max-width: 100%;
       min-width: 0;
-      padding: 14px 22px calc(28px + env(safe-area-inset-bottom, 0px));
+      padding: 14px 24px calc(28px + env(safe-area-inset-bottom, 0px));
       border-top: none;
       border-radius: 22px 22px 0 0;
-      box-shadow:
-        0 -2px 0 rgba(176,122,44,0.40),
-        0 -16px 44px rgba(0,0,0,0.55);
-      max-height: 75vh;
+      box-shadow: 0 -16px 44px rgba(20,17,12,0.22);
+      max-height: 72vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       transform: translateY(100%);
       pointer-events: auto;
       transition: transform .28s cubic-bezier(0.32, 0.72, 0, 1), opacity .2s ease;
+      background: var(--paper);
     }
     #vref-tooltip[data-show="1"] { transform: translateY(0); }
     .vref-tt-handle {
@@ -1033,8 +902,8 @@
       width: 44px;
       height: 4px;
       border-radius: 2px;
-      background: rgba(232,223,200,0.30);
-      margin: 0 auto 18px;
+      background: var(--rule);
+      margin: 0 auto 16px;
     }
     .vref-tt-close {
       display: flex;
@@ -1045,8 +914,8 @@
       height: 36px;
       align-items: center;
       justify-content: center;
-      background: rgba(232,223,200,0.06);
-      border: 1px solid rgba(176,122,44,0.25);
+      background: var(--paper-soft);
+      border: 1px solid var(--rule);
       border-radius: 50%;
       color: var(--ochre);
       font-family: 'Cormorant Garamond', serif;
@@ -1056,136 +925,31 @@
       cursor: pointer;
       z-index: 2;
     }
-    .vref-tt-close:active { background: rgba(176,122,44,0.20); }
     .vref-tt-book {
       font-size: 0.92rem;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
       padding-right: 48px;
     }
-    .vref-tt-body {
-      font-size: 1.06rem;
-      line-height: 2.0;
-    }
-    .vref-tt-verse { margin-bottom: 12px; }
-  }
-
-  /* ── 모바일: 새 컴포넌트 반응형 ───────────── */
-  @media (max-width: 640px) {
-    /* QR 카드: 가로 분할 → 세로 스택. QR 이미지는 중앙에 크게. */
-    .qr-card {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 16px;
-      padding: 20px 18px;
-    }
-    .qr-card .qr-img {
-      width: 132px;
-      height: 132px;
-      align-self: center;
-      padding: 8px;
-    }
-    .qr-card .qr-info {
-      width: 100%;
-    }
-    .qr-card .qr-num {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    .qr-card .qr-title {
-      font-size: 15.5px;
-      line-height: 1.45;
-      margin-bottom: 8px;
-    }
-    .qr-card .qr-note {
-      font-size: 12.5px;
-      line-height: 1.65;
-      margin-bottom: 10px;
-    }
-    .qr-card .qr-link {
-      font-size: 12px;
-      line-height: 1.6;
-    }
-    .qr-card .qr-contact {
-      font-size: 12px;
-      line-height: 1.65;
-      padding-top: 12px;
-      margin-top: 10px;
-      border-top: 1px solid rgba(244,239,227,0.15);
-    }
-
-    /* 1966 타임라인: 컴팩트하게 + 텍스트 키움 */
-    .timeline-1966 {
-      padding: 24px 18px 20px;
-    }
-    .timeline-1966 .tl-eyebrow {
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-    .timeline-1966 .tl-track {
-      padding: 0 0 22px;
-    }
-    .timeline-1966 .tl-node .yr {
-      font-size: 18px;
-    }
-    .timeline-1966 .tl-node .lbl {
-      font-size: 11px;
-      line-height: 1.45;
-    }
-    .timeline-1966 .tl-caption {
-      font-size: 13px;
-      line-height: 1.85;
-      text-align: left;
-    }
-
-    /* Q&A 카드: 패딩 조정 + Q/A 마커 크기 미세 조정 */
-    .qa-card {
-      padding: 22px 18px 20px;
-    }
-    .qa-card .qa-q, .qa-card .qa-a {
-      padding-left: 30px;
-    }
-    .qa-card .qa-q::before, .qa-card .qa-a::before {
-      font-size: 26px;
-    }
-    .qa-card .qa-q p {
-      font-size: 15px;
-      line-height: 1.7;
-    }
-    .qa-card .qa-a p {
-      font-size: 14px;
-      line-height: 1.85;
-    }
-    .qa-card .qa-tag {
-      font-size: 11.5px;
-      padding: 5px 11px;
-    }
+    .vref-tt-body { font-size: 15.5px; line-height: 1.95; }
+    .vref-tt-verse { margin-bottom: 11px; }
   }
 </style>
 </head>
 <body>
 
-<div class="page">
+<!-- ── Top sticky progress bar ────────── -->
+<nav class="topbar" aria-label="섹션 네비게이션">
+  <div class="topbar-inner">
+    <a href="#top" class="home">다음 세대를 향한 마음</a>
+    <div class="dots" id="topbar-dots"></div>
+  </div>
+</nav>
 
-  <!-- ── HERO ───────────────────────────────── -->
-  <section class="hero">
-    <div class="sprout-deco top-right">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-        <path d="M12 21V11" stroke="#3F5039" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M12 11C12 7 9 5 5 5C5 9 7 12 12 12" stroke="#3F5039" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 12C12 8 15 6 19 6C19 10 17 13 12 13" stroke="#3F5039" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="sprout-deco bottom-left">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M12 21V11" stroke="#B07A2C" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M12 11C12 7 9 5 5 5C5 9 7 12 12 12" stroke="#B07A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 12C12 8 15 6 19 6C19 10 17 13 12 13" stroke="#B07A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+<main class="reader" id="top">
 
+  <!-- ── Cover ────────────────────────── -->
+  <section class="cover">
     <div class="eyebrow">2026 · 전국 어린이 학부모 집회</div>
-    <div class="divider"></div>
+    <div class="rule"></div>
     <h1>다음 세대를<br />향한 마음</h1>
     <p class="subtitle">한 어린이에서 시작되어<br />만 명의 열매로</p>
     <p class="lead">
@@ -1193,254 +957,335 @@
       어머니가 자유롭게 집회에 참석할 수 있게 하는 — 우리 모두에게
       맡겨진 다음 세대의 부담을 한 호흡으로 살펴봅니다.
     </p>
-    <div class="scroll-cue">
-      아래로 스크롤 <span class="arrow-bounce">↓</span>
+    <p class="date">Spring 2026 · National Children's Parents Fellowship</p>
+  </section>
+
+  <!-- ── Prologue · Q&A 도입 ──────────── -->
+  <section class="section prologue" id="prologue" data-section-label="도입">
+    <div class="ch-mark">Prologue · 출발의 질문</div>
+    <div class="qa-q">
+      <span class="qa-mark">Q.</span>
+      <p>제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?</p>
+    </div>
+    <div class="qa-a">
+      <span class="qa-mark">A.</span>
+      <p>부모가 되기는 매우 어렵습니다. 부부에게 자녀가 없을 때에는 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 자녀를 주시지만, 그 자녀가 심한 말썽꾸러기가 되기도 합니다.</p>
+      <p>실패하지 않는 단 하나의 방법은 없지만, 다음 세 가지 공과는 우리 모두가 배워야 합니다.</p>
+      <div class="qa-pills">
+        <span class="pill"><span class="pill-num">01</span>합당한 사람</span>
+        <span class="pill"><span class="pill-num">02</span>지혜 사용</span>
+        <span class="pill"><span class="pill-num">03</span>주님의 긍휼</span>
+      </div>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">전체 답변 펼치기</span>
+          <span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">질문: 제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?
+
+답변: 부모가 되기는 매우 어렵습니다. 부모가 되는 것에 관한 가르침은 아무리 많아도 부족합니다. 부부에게 자녀가 없을 때에는 아들을 위해 기도한 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 한 자녀를 주시지만, 이 자녀는 심한 말썽꾸러기가 됩니다.
+
+부모가 되는 것에 대한 유일한 방법, 실패하지 않는 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다 — 합당한 사람이 되라, 지혜를 사용하라, 주님의 긍휼을 의지하라.
+
+부모들은 교만하여 자기의 능력으로 가장 좋은 자녀들을 만들 수 있다고 생각해서는 결코 안 됩니다. 좋은 자녀가 나올 수 있게 하는 여러 가지 많은 요인들이 있지만, 종국에는 주님의 긍휼에 달려 있습니다.</div>
+          <div class="expand-source">출처 · 1. 자녀 양육에 관한 사역의 말씀 · 도입</div>
+        </div></div>
+      </div>
     </div>
   </section>
 
-  <!-- ── CHAPTER 1 · 부모의 마음 ─────────────── -->
-  <section class="chapter">
-    <div class="head reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 01</span>
-        <span class="label">부모의 마음</span>
+  <!-- ── Chapter 01 · 부모의 마음 ──────── -->
+  <section class="section" id="c1" data-section-label="부모의 마음">
+    <div class="ch-mark">Chapter 01 · 부모의 마음</div>
+    <h2>합당한 사람이 되고,<br />지혜를 사용하며,<br /><em>긍휼을 의지하라</em></h2>
+    <p class="ch-lead">부모가 되기는 매우 어렵습니다. 실패하지 않는 단 하나의 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다.</p>
+
+    <div class="point">
+      <div class="point-num">01</div>
+      <h3>합당한 사람이 되라</h3>
+      <p class="summary">자녀들은 결코 속일 수 없습니다. 우리의 행동과 생활 방식은 그 누구보다 자녀에게 가장 많은 영향을 줍니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">자녀들이 주님을 사랑하고 교회 집회에 규칙적으로 오도록 양육하려면 우리가 합당한 사람이 되어야 합니다. 우리는 반드시 주님 앞에서 합당한 생활을 해야 합니다.
+
+우리가 어떤 생활을 하는지를 가장 잘 아는 사람은 주님 다음으로는 자녀들입니다. 자신이 어떤 사람인지에 대해 다른 사람은 속일 수 있을지 모르지만 자녀들은 결코 속일 수 없습니다.
+
+그러므로 우리는 진실해야 합니다. 자녀에게 거짓말을 하지 말라고 하면서 배우자에게 거짓말을 한다면 자녀들은 그것을 볼 것입니다. 우리가 배우자에게 단 한 번만 거짓말을 해도 우리의 자녀는 그것을 일생 동안 기억할 것이기 때문입니다.
+
+우리의 행동과 생활 방식은 그 누구보다 자녀에게 가장 많은 영향을 줍니다. 이것은 일반적인 영적 원칙입니다.</div>
+          <div class="expand-source">출처 · 1. 자녀 양육에 관한 사역의 말씀</div>
+        </div></div>
       </div>
-      <h2>합당한 사람이 되고,<br />지혜를 사용하며,<br /><em class="ochre">긍휼을 의지하라</em></h2>
-      <p class="chapter-lead">부모가 되기는 매우 어렵습니다. 실패하지 않는 단 하나의 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다.</p>
     </div>
 
-    <div class="qa-card reveal">
-      <div class="qa-eyebrow">출발의 질문</div>
-      <div class="qa-q">
-        <p>제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?</p>
-      </div>
-      <div class="qa-rule"></div>
-      <div class="qa-a">
-        <p>부모가 되기는 매우 어렵습니다. 부부에게 자녀가 없을 때에는 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 자녀를 주시지만, 그 자녀가 심한 말썽꾸러기가 되기도 합니다.</p>
-        <p>실패하지 않는 단 하나의 방법은 없지만, 다음 세 가지 공과는 우리 모두가 배워야 합니다.</p>
-        <div class="qa-summary">
-          <span class="qa-tag"><span class="tag-num">01</span>합당한 사람</span>
-          <span class="qa-tag"><span class="tag-num">02</span>지혜 사용</span>
-          <span class="qa-tag"><span class="tag-num">03</span>주님의 긍휼</span>
-        </div>
-        <button class="detail-btn" data-detail="qaIntro" style="margin-top:14px">전체 답변 보기 <span class="arrow">→</span></button>
+    <div class="point">
+      <div class="point-num">02</div>
+      <h3>지혜를 사용하라</h3>
+      <p class="summary">사랑을 하기는 쉽지만 지혜를 갖기는 쉽지 않습니다. 자녀의 상태에 비추어 합당한 때에 합당한 방식으로 말해야 합니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">합당한 사람이 되는 것 외에도, 부모는 지혜를 사용해야 합니다. 이것은 대부분의 부모에게 부족한 방면입니다. 부모는 사랑을 하기는 쉽지만 지혜를 갖기는 쉽지 않습니다.
+
+부모는 반드시 지혜를 사용하여, 자기 자녀들에게 교회 집회에 가라고 강권해야 할지 하지 말아야 할지를 분별해야 합니다.
+
+자기 자녀에게 집회에 가라고 해야 할지 말아야 할지를 묻는 것은, 나갈 때 우산을 가지고 가야 할지 말아야 할지를 묻는 것에 비유해볼 수 있습니다. 그러한 상황에서 우리는 상황을 분별하기 위해 지혜를 사용해야 합니다.
+
+같은 부모라도 지혜가 없이 열성적이면 그들의 열성이 자녀의 마음을 상하게 합니다. 그들이 자녀에게 집회에 오라고 하면 할수록 아이들은 마음이 더 상하여 강한 반응을 합니다.</div>
+          <div class="expand-source">출처 · 1. 자녀 양육에 관한 사역의 말씀</div>
+        </div></div>
       </div>
     </div>
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">01</span>
-        <h3>합당한 사람이 되라</h3>
-      </div>
-      <p>자녀들은 결코 속일 수 없습니다. 우리의 행동과 생활 방식은 그 누구보다 자녀에게 가장 많은 영향을 줍니다.</p>
-      <button class="detail-btn" data-detail="worthy">자세히 보기 <span class="arrow">→</span></button>
-    </div>
+    <div class="point">
+      <div class="point-num">03</div>
+      <h3>주님의 긍휼을 의지하라</h3>
+      <p class="summary">우리는 우리의 의무를 다해야 하지만, 종국에는 모든 것이 주님의 긍휼에 달려 있습니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">부모는 주님의 긍휼을 의지해야 합니다. 로마서 9장 16절은 "그러므로 이것은 원하는 사람에게 속한 것도 아니고, 달음질하는 사람에게 속한 것도 아니고, 오직 긍휼히 여기시는 하나님께 속한 것입니다."라고 말합니다.
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">02</span>
-        <h3>지혜를 사용하라</h3>
-      </div>
-      <p>사랑을 하기는 쉽지만 지혜를 갖기는 쉽지 않습니다. 자녀의 상태에 비추어 합당한 때에 합당한 방식으로 말해야 합니다.</p>
-      <button class="detail-btn" data-detail="wisdom">자세히 보기 <span class="arrow">→</span></button>
-    </div>
+나는 많은 영적인 부모들에게 좋지 않은 자녀들이 있는 것을 보았습니다. 또한 자기 자녀의 영성에 대해 절대적으로 무관심한 세상적이고 뒤로 물러난 부모들에게 좋고 영적인 자녀들이 있는 것도 보았습니다.
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">03</span>
-        <h3>주님의 긍휼을 의지하라</h3>
+부모로서 우리의 의무는 합당한 사람이 되고, 지혜를 사용하여 자녀에게 언제 어떻게 말할지를 분별하는 것입니다. 우리는 우리의 의무를 다해야 하지만, 우리가 하는 어떤 것을 의지해서는 안 됩니다.
+
+"주님, 모든 것이 주님의 긍휼에 달려 있습니다."</div>
+          <div class="expand-source">출처 · 1. 자녀 양육에 관한 사역의 말씀</div>
+        </div></div>
       </div>
-      <p>우리는 우리의 의무를 다해야 하지만, 종국에는 모든 것이 주님의 긍휼에 달려 있습니다.</p>
-      <button class="detail-btn" data-detail="mercy">자세히 보기 <span class="arrow">→</span></button>
     </div>
   </section>
 
-  <!-- ── CHAPTER 2 · 어린이라는 큰 복음 ──────── -->
-  <section class="chapter paper">
-    <div class="head reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 02</span>
-        <span class="label">비전</span>
+  <!-- ── Chapter 02 · 어린이라는 큰 복음 ── -->
+  <section class="section warm" id="c2" data-section-label="큰 복음">
+    <div class="ch-mark">Chapter 02 · 비전</div>
+    <h2>어린이는 곧<br /><em style="color:var(--terra)">큰 복음입니다</em></h2>
+    <p class="ch-lead">복음을 전하는 것만을 관심했을 뿐, 어린이도 복음의 열매라는 사실을 간과했습니다.</p>
+
+    <div class="point">
+      <div class="point-num">01</div>
+      <h3>어린이는 큰 복음의 열매</h3>
+      <p class="summary">만 명의 어린이를 접촉하면, 최소한 팔십 퍼센트인 팔천 명이 구원받을 수 있습니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">하나님은 사람이 생육하고 번성하여 땅에 충만하도록 정하셨다(창 1:28).
+
+수년 전에는 어린이가 큰 복음이라는 사실을 우리가 깨닫지 못했다. 우리는 복음을 전하는 것만을 관심했을 뿐 어린이도 복음의 열매라는 사실을 간과했다.
+
+만일 당시 우리가 그렇게 만 명의 어린이를 접촉하는 실행을 했다면, 비록 모든 어린이 한 사람 한 사람이 다 구원받았을 것이라는 보장은 할 수 없지만, 최소한 팔십 퍼센트의 어린이들이 구원받는다 해도 팔천 명이 아닌가?</div>
+          <div class="expand-source">출처 · 2. 어린이 복음의 일 — 어린이 소그룹</div>
+        </div></div>
       </div>
-      <h2>어린이는 곧<br /><em class="terra">큰 복음입니다</em></h2>
-      <p class="chapter-lead">복음을 전하는 것만을 관심했을 뿐, 어린이도 복음의 열매라는 사실을 간과했습니다.</p>
     </div>
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">01</span>
-        <h3>어린이는 큰 복음의 열매</h3>
+    <div class="flow">
+      <div class="flow-label">배가의 흐름</div>
+      <div class="flow-row">
+        <span class="flow-left">한 어린이</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">구원받음 · 초등 단계</span>
       </div>
-      <p>만 명의 어린이를 접촉하면, 최소한 팔십 퍼센트인 팔천 명이 구원받을 수 있습니다.</p>
-      <button class="detail-btn" data-detail="gospel">자세히 보기 <span class="arrow">→</span></button>
+      <div class="flow-row">
+        <span class="flow-left">중학교</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">복음의 씨가 됨</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-left">고등학교 3학년</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">세 배의 사람들을 인도</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-left">대학교</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">캠퍼스의 복음의 씨</span>
+      </div>
     </div>
 
-    <div class="viz reveal">
-      <div class="viz-eyebrow">배가의 흐름</div>
-      <div class="multiply-flow">
-        <div class="multiply-step">
-          <div class="val">1</div>
-          <div class="lbl">초등</div>
-        </div>
-        <span class="multiply-arrow">→</span>
-        <div class="multiply-step">
-          <div class="val">씨</div>
-          <div class="lbl">중등</div>
-        </div>
-        <span class="multiply-arrow">→</span>
-        <div class="multiply-step">
-          <div class="val">×3</div>
-          <div class="lbl">고3</div>
-        </div>
-        <span class="multiply-arrow">→</span>
-        <div class="multiply-step">
-          <div class="val">씨</div>
-          <div class="lbl">대학</div>
-        </div>
+    <div class="point">
+      <div class="point-num">02</div>
+      <h3>한 명에서 시작되는 배가</h3>
+      <p class="summary">만 명의 어린이가 십팔 년 뒤 만 명의 청년이 되고, 최소 육천 명이 구원받게 됩니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">어린이들이 구원받으면 그들은 우리 가운데 청소년 형제자매들이 된다. 그들이 초등학교를 졸업하고 중학교에 들어가면 중학교에서 복음의 씨가 될 것이다.
+
+고등학교 삼 학년이 되면 다시 세 배의 사람들을 인도하여 구원받게 할 것이다. 이 형제자매들이 졸업하여 대학교에 진학하게 되면 그들은 대학교에서 복음의 씨들이 될 것이다.
+
+이런 방식으로 끊임없이 배로 증가한다면 실로 놀라운 일이 일어날 것이다.
+
+만일 그때 우리의 어린이 인수가 만 명에 이르렀다면, 올해 우리는 만 명의 청년 형제자매들을 볼 것이다. 이만 명이 모두 구원받지는 않았겠지만 최소한 육천 명은 구원받았을 것이다.</div>
+          <div class="expand-source">출처 · 2. 어린이 복음의 일 — 어린이 소그룹</div>
+        </div></div>
       </div>
-      <p class="viz-caption">한 명이 구원받으면 청소년이, 청소년이 복음의 씨가 되고, 다시 세 배의 사람들을 인도합니다. 이런 방식으로 끊임없이 배로 증가합니다.</p>
     </div>
 
-    <div class="timeline-1966 reveal">
-      <div class="tl-eyebrow">18년의 증거 · 1966 → 1984</div>
-      <div class="tl-track">
-        <div class="tl-node">
-          <div class="dot"></div>
+    <div class="timeline">
+      <div class="timeline-label">18년의 증거 · 1966 → 1984</div>
+      <div class="timeline-stops">
+        <div class="timeline-stop">
+          <div class="pin"></div>
           <div class="yr">1966</div>
           <div class="lbl">어린이 12세<br />교통이 시작됨</div>
         </div>
-        <div class="tl-node">
-          <div class="dot"></div>
-          <div class="yr">+ 18yrs</div>
+        <div class="timeline-stop">
+          <div class="pin"></div>
+          <div class="yr">+18yrs</div>
           <div class="lbl">청년 30세<br />복음의 씨가 됨</div>
         </div>
-        <div class="tl-node">
-          <div class="dot"></div>
+        <div class="timeline-stop">
+          <div class="pin"></div>
           <div class="yr">6,000</div>
           <div class="lbl">최소 구원받은<br />청년 형제자매</div>
         </div>
       </div>
-      <p class="tl-caption">
+      <p class="timeline-quote">
         "만일 그때 우리의 어린이 인수가 <strong>만 명</strong>에 이르렀다면, 올해 우리는 <strong>만 명의 청년 형제자매</strong>를 볼 것이다. 이만 명이 모두 구원받지는 않았겠지만 <strong>최소한 육천 명</strong>은 구원받았을 것이다."
       </p>
     </div>
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">02</span>
-        <h3>한 명에서 시작되는 배가</h3>
-      </div>
-      <p>만 명의 어린이가 십팔 년 뒤 만 명의 청년이 되고, 최소 육천 명이 구원받게 됩니다.</p>
-      <button class="detail-btn" data-detail="multiply">자세히 보기 <span class="arrow">→</span></button>
-    </div>
+    <div class="point">
+      <div class="point-num">03</div>
+      <h3>어린이를 통해 가정을 얻음</h3>
+      <p class="summary">우리의 목적은 어린이에게만 있는 것이 아니라, 어린이를 통해 그들의 부모와 가족을 얻는 데 있습니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">우리가 어린이의 일을 할 때 한 가지 부수적인 기능이 있는데, 그것은 어린이의 가족들을 얻는 것이다.
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">03</span>
-        <h3>어린이를 통해 가정을 얻음</h3>
-      </div>
-      <p>우리의 목적은 어린이에게만 있는 것이 아니라, 어린이를 통해 그들의 부모와 가족을 얻는 데 있습니다.</p>
-      <button class="detail-btn" data-detail="family">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-  </section>
+우리는 어린이들이 친구를 사귀는 것을 좋아하며, 특별히 육 세부터 십이 세까지의 아이들은 늘 무리지어 노는 것을 좋아한다는 것을 알고 있다. 그들은 부모의 말은 듣지 않더라도 친구들의 말은 듣는다.
 
-  <!-- ── CHAPTER 3 · 가정으로 흩어지는 일 ────── -->
-  <section class="chapter">
-    <div class="head reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 03</span>
-        <span class="label">실행</span>
-      </div>
-      <h2>집회소가 아닌<br /><em class="moss">가정으로</em></h2>
-      <p class="chapter-lead">대량으로 어린이의 일을 하려면 반드시 가정으로 분산시켜야 합니다.</p>
-    </div>
+어린이들은 아주 쉽게 그들의 친구들을 데리고 올 수 있으며, 그들이 함께 찬송을 부를 때 그 찬송에는 복음의 기능이 있을 뿐 아니라 동시에 복음을 다른 어린이에게 전할 수 있게 해 준다.
 
-    <div class="math-card reveal">
-      <div class="viz-eyebrow">가정 거점의 수학</div>
-      <div class="math-row">
-        <span class="math-count">50개 반</span>
-        <span class="math-arrow">→</span>
-        <span class="math-goal">1,000명의 어린이</span>
+우리의 목적은 어린이에게 있을 뿐 아니라 어린이들을 통하여 그들의 부모와 형제자매들을 얻는 데 있다.</div>
+          <div class="expand-source">출처 · 2. 어린이 복음의 일 — 어린이 소그룹</div>
+        </div></div>
       </div>
-      <div class="math-row">
-        <span class="math-count">200개 반</span>
-        <span class="math-arrow">→</span>
-        <span class="math-goal">4,000명의 어린이</span>
-      </div>
-      <div class="math-row">
-        <span class="math-count">1,000 가정</span>
-        <span class="math-arrow">→</span>
-        <span class="math-goal">10,000명의 어린이</span>
-      </div>
-    </div>
-
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">01</span>
-        <h3>가정을 거점으로</h3>
-      </div>
-      <p>거실이 넓은 가정은 이십 명, 좁은 집은 소규모 반으로. 청소년 형제자매들도 함께 동역할 수 있습니다.</p>
-      <button class="detail-btn" data-detail="home">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">02</span>
-        <h3>이웃의 친구를 초대함</h3>
-      </div>
-      <p>토요일 오후나 방과 후, 어린이들이 친구들을 집으로 데려와 비디오와 찬송, 이야기를 나눕니다.</p>
-      <button class="detail-btn" data-detail="neighbor">자세히 보기 <span class="arrow">→</span></button>
     </div>
   </section>
 
-  <!-- ── CHAPTER 4 · 양육 ──────────────────── -->
-  <section class="chapter paper">
-    <div class="head reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 04</span>
-        <span class="label">양육</span>
+  <!-- ── Chapter 03 · 가정으로 흩어지는 일 ─ -->
+  <section class="section" id="c3" data-section-label="가정으로">
+    <div class="ch-mark">Chapter 03 · 실행</div>
+    <h2>집회소가 아닌<br /><em style="color:var(--moss)">가정으로</em></h2>
+    <p class="ch-lead">대량으로 어린이의 일을 하려면 반드시 가정으로 분산시켜야 합니다.</p>
+
+    <div class="flow">
+      <div class="flow-label">가정 거점의 수학</div>
+      <div class="flow-row">
+        <span class="flow-left">50개 반</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">1,000명의 어린이</span>
       </div>
-      <h2>인성을 세우는<br /><em class="ochre">40주의 여정</em></h2>
-      <p class="chapter-lead">어린이들이 합당한 인성을 함양하고, 하나님을 향해 올바른 가치관을 갖도록 돕습니다.</p>
+      <div class="flow-row">
+        <span class="flow-left">200개 반</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">4,000명의 어린이</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-left">1,000 가정</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-right">10,000명의 어린이</span>
+      </div>
     </div>
 
-    <div class="viz reveal">
-      <div class="viz-eyebrow row">
+    <div class="point">
+      <div class="point-num">01</div>
+      <h3>가정을 거점으로</h3>
+      <p class="summary">거실이 넓은 가정은 이십 명, 좁은 집은 소규모 반으로. 청소년 형제자매들도 함께 동역할 수 있습니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">대량으로 어린이의 일을 하려면 절대로 집회소에 의지해서는 안 되며, 반드시 가정으로 분산시켜야 한다.
+
+어떤 사람의 가정은 거실이 넓어서 이십 명의 어린이가 앉을 수 있는데, 그럴 때 이십 명이 한 반이 된다. 어떤 집은 약간 좁아서 인수가 조금 적다. 어린이들을 가르칠 인원이 부족하다면 청소년 형제자매들이 함께 동역할 수 있다.
+
+우리가 천 명의 어린이들을 얻으려면 최소한 오십 개의 반이 준비되어야 한다. 인수가 사천 명으로 증가되면 이백 개의 반이 필요하다.
+
+어떤 부모는 자신은 집회에 오지 않을지라도 자녀들이 어린이 집회에 가는 것을 좋아한다. 이것은 우리에게 어린이들을 통하여 부모들을 얻을 수 있는 기회를 준다.</div>
+          <div class="expand-source">출처 · 2. 어린이 복음의 일 — 어린이 소그룹</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="point-num">02</div>
+      <h3>이웃의 친구를 초대함</h3>
+      <p class="summary">토요일 오후나 방과 후, 어린이들이 친구들을 집으로 데려와 비디오와 찬송, 이야기를 나눕니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">매주 한두 차례 가정을 열고 토요일 오후나 어린이들의 방과 후 시간 또는 노는 시간을 이용하여 그들을 초대하여 가정에서 어린이 집회를 할 수 있다.
+
+자연스럽게 어린이들의 부모와 접촉하여 그들의 가족들에게 복음을 전할 수 있으며, 좀 더 확대하여 그들의 친척에게도 복음을 전할 수 있다.
+
+집에 어린이가 있는 가정은 적극적으로 집을 열어서 자신의 아이들에게 이웃에 사는 친구들을 집으로 초대하도록 할 수 있다. 그들에게 어린이 집회 비디오를 보여 주거나 어린이 찬송을 부르거나 이야기를 해 줄 수 있다.
+
+매주 한 번씩 이렇게 한다면 어린이 집회가 세워질 것이다.</div>
+          <div class="expand-source">출처 · 2. 어린이 복음의 일 — 어린이 소그룹</div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Chapter 04 · 양육 ─────────────── -->
+  <section class="section warm" id="c4" data-section-label="40주 여정">
+    <div class="ch-mark">Chapter 04 · 양육</div>
+    <h2>인성을 세우는<br /><em>40주의 여정</em></h2>
+    <p class="ch-lead">어린이들이 합당한 인성을 함양하고, 하나님을 향해 올바른 가치관을 갖도록 돕습니다.</p>
+
+    <div class="traits-wrap">
+      <div class="traits-label">
         <span>20가지 성격 항목</span>
-        <span class="italic">2주 × 20 = 40주</span>
+        <span class="traits-meta">2주 × 20 = 40주</span>
       </div>
-      <div class="trait-grid">
-        <div class="trait">진실</div>
-        <div class="trait">정확</div>
-        <div class="trait">엄격</div>
-        <div class="trait">부지런함</div>
-        <div class="trait">넓음</div>
-        <div class="trait">견고</div>
-        <div class="trait">인내</div>
-        <div class="trait">순수</div>
-        <div class="trait">공정</div>
-        <div class="trait">좋은 양심</div>
-        <div class="trait">침착</div>
-        <div class="trait">친절</div>
-        <div class="trait">동정</div>
-        <div class="trait">용서</div>
-        <div class="trait">질투
-하지않음</div>
-        <div class="trait">온유</div>
-        <div class="trait">순종</div>
-        <div class="trait">겸손</div>
-        <div class="trait">감사</div>
-        <div class="trait">책임감</div>
+      <div class="traits">
+        <div class="trait">진실</div><div class="trait">정확</div>
+        <div class="trait">엄격</div><div class="trait">부지런함</div>
+        <div class="trait">넓음</div><div class="trait">견고</div>
+        <div class="trait">인내</div><div class="trait">순수</div>
+        <div class="trait">공정</div><div class="trait">좋은 양심</div>
+        <div class="trait">침착</div><div class="trait">친절</div>
+        <div class="trait">동정</div><div class="trait">용서</div>
+        <div class="trait">질투하지 않음</div><div class="trait">온유</div>
+        <div class="trait">순종</div><div class="trait">겸손</div>
+        <div class="trait">감사</div><div class="trait">책임감</div>
       </div>
     </div>
 
-    <div class="viz reveal" style="margin-bottom:32px;">
-      <div class="viz-eyebrow">각 이야기의 구성</div>
-      <div class="chip-row">
+    <div class="chips">
+      <div class="chips-label">각 이야기의 구성</div>
+      <div class="chips-row">
         <span class="chip">성경 말씀</span>
         <span class="chip-arrow">→</span>
         <span class="chip">이야기</span>
@@ -1453,363 +1298,247 @@
       </div>
     </div>
 
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">01</span>
-        <h3>총 4권 · 40주 과정</h3>
-      </div>
-      <p>각 항목은 2주에 걸쳐 구성되며, 4권 × 10주의 공과로 한 해를 채워갑니다.</p>
-      <button class="detail-btn" data-detail="curriculum">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-  </section>
-
-  <!-- ── CHAPTER 5 · 주일집회 ──────────────── -->
-  <section class="chapter">
-    <div class="head reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 05</span>
-        <span class="label">주일집회</span>
-      </div>
-      <h2>어머니를<br /><em class="terra">자유롭게 하는</em><br />어린이 집회</h2>
-      <p class="chapter-lead">어린이 집회의 목표는 어머니들이 자유롭게 집회에 참석할 수 있도록 어린이를 돌보는 것입니다.</p>
-    </div>
-
-    <div class="viz reveal" style="margin-bottom:32px;">
-      <div class="viz-eyebrow">집회 시간의 5분의 1 / 5분의 4</div>
-      <div class="time-bar">
-        <div class="one-fifth">1/5</div>
-        <div class="four-fifth">4/5</div>
-      </div>
-      <div class="time-labels">
-        <span>약간의 영적 지식</span>
-        <span>인성을 세우는 시간</span>
-      </div>
-    </div>
-
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">01</span>
-        <h3>어머니들이 자유롭게 집회에</h3>
-      </div>
-      <p>아이를 돌보아야 해서 집회에 참석할 수 없는 부모가 없도록, 그들을 자유롭게 합니다.</p>
-      <button class="detail-btn" data-detail="freeMothers">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">02</span>
-        <h3>인성을 세우는 데 시간을 들임</h3>
-      </div>
-      <p>때 이른 영적 지식은 자녀의 입맛을 망칠 수 있습니다. 어떻게 합당한 사람이 되는지에 집중합니다.</p>
-      <button class="detail-btn" data-detail="character">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-
-    <div class="point reveal">
-      <div class="row">
-        <span class="num">03</span>
-        <h3>어머니 각자의 책임</h3>
-      </div>
-      <p>그 어떤 사람도, 그 어떤 집회도 자녀를 세워줄 수 없습니다. 어머니 각자가 부담을 가져야 합니다.</p>
-      <button class="detail-btn" data-detail="motherDuty">자세히 보기 <span class="arrow">→</span></button>
-    </div>
-  </section>
-
-  <!-- ── CHAPTER 6 · 자료 ──────────────────── -->
-  <section class="resources">
-    <div class="reveal">
-      <div class="chapter-mark">
-        <div class="bar"></div>
-        <span class="chap">Chapter 06</span>
-        <span class="label">함께 걷는 길</span>
-      </div>
-      <h2>교재와 자료</h2>
-      <p class="lead">아래의 자료들이 우리의 발걸음을 도울 것입니다.</p>
-    </div>
-
-    <div class="qr-grid reveal">
-      <div class="qr-card">
-        <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmall.kgbr.co.kr%2Fgoods_search.php%3Fgs_type%3DB%26keyword%3D%25EB%258B%25A4%25EC%259D%258C%2520%25EC%2584%25B8%25EB%258C%2580%2520%25EC%2584%25B1%25EA%25B2%25BD" alt="다음 세대 성경 QR" loading="lazy" />
-        </div>
-        <div class="qr-info">
-          <div class="qr-num">01</div>
-          <div class="qr-title">다음 세대 성경 (초급)</div>
-          <div class="qr-note">한국복음서원에서 상시 판매</div>
-          <a class="qr-link" href="https://mall.kgbr.co.kr/" target="_blank" rel="noopener">mall.kgbr.co.kr</a>
-        </div>
-      </div>
-
-      <div class="qr-card">
-        <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Flessons" alt="주일 공과 PPT QR" loading="lazy" />
-        </div>
-        <div class="qr-info">
-          <div class="qr-num">02</div>
-          <div class="qr-title">주일 공과 PPT</div>
-          <div class="qr-note">더 패런 / BTMK 사이트 다운로드<br />(BTMK: 그리스도의 편지 → 다음 세대, 자료실)</div>
-          <a class="qr-link" href="https://www.thepattern.co.kr/lessons" target="_blank" rel="noopener">thepattern.co.kr/lessons</a>
-          <a class="qr-link" href="https://www.btmk.org/" target="_blank" rel="noopener">btmk.org</a>
-        </div>
-      </div>
-
-      <div class="qr-card">
-        <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fmaterials" alt="어린이 집회 교재 QR" loading="lazy" />
-        </div>
-        <div class="qr-info">
-          <div class="qr-num">03</div>
-          <div class="qr-title">어린이 집회 교재 · 소그룹 성격 이야기 책</div>
-          <div class="qr-note">PDF 다운로드 또는 실물 책자 구매</div>
-          <a class="qr-link" href="https://www.thepattern.co.kr/materials" target="_blank" rel="noopener">thepattern.co.kr/materials</a>
-          <div class="qr-contact">
-            <strong>책자 구매 문의</strong><br />
-            어린이 집회 · 임주영 010-7737-2049<br />
-            성격 이야기 책 · 이예담 010-4647-4204
-          </div>
-        </div>
-      </div>
-
-      <div class="qr-card">
-        <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fhymns" alt="어린이 찬송 자료 QR" loading="lazy" />
-        </div>
-        <div class="qr-info">
-          <div class="qr-num">04</div>
-          <div class="qr-title">어린이 찬송 악보 · 음원</div>
-          <div class="qr-note">더 패런 사이트 · 사운드클라우드 스트리밍</div>
-          <a class="qr-link" href="https://www.thepattern.co.kr/hymns" target="_blank" rel="noopener">thepattern.co.kr/hymns</a>
-          <a class="qr-link" href="https://soundcloud.com/firstfruitforgod" target="_blank" rel="noopener">soundcloud.com/firstfruitforgod</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="closing-quote reveal">
-      <p>"주님, 모든 것이 주님의 긍휼에 달려 있습니다.
-저는 좋은 본이 되어 자녀들을 실족시키지 않고
-합당한 사람이 되며, 지혜를 사용하여
-부모로서의 저의 의무를 이행합니다.
-그러나 저는 당신을 의지합니다, 주님."</p>
-    </div>
-
-    <div class="signature">2026 · 전국 어린이 학부모 집회</div>
-  </section>
-
-</div>
-
-<!-- ── 모달 ─────────────────────────────────── -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-handle"></div>
-    <div class="modal-eyebrow">원문 인용</div>
-    <h3 id="modal-title"></h3>
-    <div class="modal-source" id="modal-source"></div>
-    <div class="modal-rule"></div>
-    <div class="modal-body" id="modal-body"></div>
-    <button class="modal-close" id="modal-close">닫기</button>
-  </div>
-</div>
-
-<script>
-  // ── 원문 인용 데이터 ─────────────────────────────
-  const DETAILS = {
-    qaIntro: {
-      title: "부모가 되기는 매우 어렵습니다",
-      source: "1. 자녀 양육에 관한 사역의 말씀 · 도입",
-      body: `질문: 제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?
-
-답변: 부모가 되기는 매우 어렵습니다. 부모가 되는 것에 관한 가르침은 아무리 많아도 부족합니다. 부부에게 자녀가 없을 때에는 아들을 위해 기도한 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 한 자녀를 주시지만, 이 자녀는 심한 말썽꾸러기가 됩니다.
-
-부모가 되는 것에 대한 유일한 방법, 실패하지 않는 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다 — ① 합당한 사람이 되라, ② 지혜를 사용하라, ③ 주님의 긍휼을 의지하라.
-
-부모들은 교만하여 자기의 능력으로 가장 좋은 자녀들을 만들 수 있다고 생각해서는 결코 안 됩니다. 좋은 자녀가 나올 수 있게 하는 여러 가지 많은 요인들이 있지만, 종국에는 주님의 긍휼에 달려 있습니다.`
-    },
-    worthy: {
-      title: "합당한 사람이 되라",
-      source: "1. 자녀 양육에 관한 사역의 말씀",
-      body: `자녀들이 주님을 사랑하고 교회 집회에 규칙적으로 오도록 양육하려면 우리가 합당한 사람이 되어야 합니다. 우리는 반드시 주님 앞에서 합당한 생활을 해야 합니다.
-
-우리가 어떤 생활을 하는지를 가장 잘 아는 사람은 주님 다음으로는 자녀들입니다. 자신이 어떤 사람인지에 대해 다른 사람은 속일 수 있을지 모르지만 자녀들은 결코 속일 수 없습니다.
-
-그러므로 우리는 진실해야 합니다. 자녀에게 거짓말을 하지 말라고 하면서 배우자에게 거짓말을 한다면 자녀들은 그것을 볼 것입니다. 우리가 배우자에게 단 한 번만 거짓말을 해도 우리의 자녀는 그것을 일생 동안 기억할 것이기 때문입니다.
-
-우리의 행동과 생활 방식은 그 누구보다 자녀에게 가장 많은 영향을 줍니다. 이것은 일반적인 영적 원칙입니다.`
-    },
-    wisdom: {
-      title: "지혜를 사용하라",
-      source: "1. 자녀 양육에 관한 사역의 말씀",
-      body: `합당한 사람이 되는 것 외에도, 부모는 지혜를 사용해야 합니다. 이것은 대부분의 부모에게 부족한 방면입니다. 부모는 사랑을 하기는 쉽지만 지혜를 갖기는 쉽지 않습니다.
-
-부모는 반드시 지혜를 사용하여, 자기 자녀들에게 교회 집회에 가라고 강권해야 할지 하지 말아야 할지를 분별해야 합니다.
-
-자기 자녀에게 집회에 가라고 해야 할지 말아야 할지를 묻는 것은, 나갈 때 우산을 가지고 가야 할지 말아야 할지를 묻는 것에 비유해볼 수 있습니다. 그러한 상황에서 우리는 상황을 분별하기 위해 지혜를 사용해야 합니다.
-
-같은 부모라도 지혜가 없이 열성적이면 그들의 열성이 자녀의 마음을 상하게 합니다. 그들이 자녀에게 집회에 오라고 하면 할수록 아이들은 마음이 더 상하여 강한 반응을 합니다.`
-    },
-    mercy: {
-      title: "주님의 긍휼을 의지하라",
-      source: "1. 자녀 양육에 관한 사역의 말씀",
-      body: `부모는 주님의 긍휼을 의지해야 합니다. 로마서 9장 16절은 "그러므로 이것은 원하는 사람에게 속한 것도 아니고, 달음질하는 사람에게 속한 것도 아니고, 오직 긍휼히 여기시는 하나님께 속한 것입니다."라고 말합니다.
-
-나는 많은 영적인 부모들에게 좋지 않은 자녀들이 있는 것을 보았습니다. 또한 자기 자녀의 영성에 대해 절대적으로 무관심한 세상적이고 뒤로 물러난 부모들에게 좋고 영적인 자녀들이 있는 것도 보았습니다.
-
-부모로서 우리의 의무는 합당한 사람이 되고, 지혜를 사용하여 자녀에게 언제 어떻게 말할지를 분별하는 것입니다. 우리는 우리의 의무를 다해야 하지만, 우리가 하는 어떤 것을 의지해서는 안 됩니다.
-
-"주님, 모든 것이 주님의 긍휼에 달려 있습니다."`
-    },
-    gospel: {
-      title: "어린이는 곧 큰 복음입니다",
-      source: "2. 어린이 복음의 일 — 어린이 소그룹",
-      body: `하나님은 사람이 생육하고 번성하여 땅에 충만하도록 정하셨다(창 1:28).
-
-수년 전에는 어린이가 큰 복음이라는 사실을 우리가 깨닫지 못했다. 우리는 복음을 전하는 것만을 관심했을 뿐 어린이도 복음의 열매라는 사실을 간과했다.
-
-만일 당시 우리가 그렇게 만 명의 어린이를 접촉하는 실행을 했다면, 비록 모든 어린이 한 사람 한 사람이 다 구원받았을 것이라는 보장은 할 수 없지만, 최소한 팔십 퍼센트의 어린이들이 구원받는다 해도 팔천 명이 아닌가?`
-    },
-    multiply: {
-      title: "한 명에서 시작되는 배가의 비전",
-      source: "2. 어린이 복음의 일 — 어린이 소그룹",
-      body: `어린이들이 구원받으면 그들은 우리 가운데 청소년 형제자매들이 된다. 그들이 초등학교를 졸업하고 중학교에 들어가면 중학교에서 복음의 씨가 될 것이다.
-
-고등학교 삼 학년이 되면 다시 세 배의 사람들을 인도하여 구원받게 할 것이다. 이 형제자매들이 졸업하여 대학교에 진학하게 되면 그들은 대학교에서 복음의 씨들이 될 것이다.
-
-이런 방식으로 끊임없이 배로 증가한다면 실로 놀라운 일이 일어날 것이다.
-
-만일 그때 우리의 어린이 인수가 만 명에 이르렀다면, 올해 우리는 만 명의 청년 형제자매들을 볼 것이다. 이만 명이 모두 구원받지는 않았겠지만 최소한 육천 명은 구원받았을 것이다.`
-    },
-    family: {
-      title: "어린이를 통해 가정을 얻음",
-      source: "2. 어린이 복음의 일 — 어린이 소그룹",
-      body: `우리가 어린이의 일을 할 때 한 가지 부수적인 기능이 있는데, 그것은 어린이의 가족들을 얻는 것이다.
-
-우리는 어린이들이 친구를 사귀는 것을 좋아하며, 특별히 육 세부터 십이 세까지의 아이들은 늘 무리지어 노는 것을 좋아한다는 것을 알고 있다. 그들은 부모의 말은 듣지 않더라도 친구들의 말은 듣는다.
-
-어린이들은 아주 쉽게 그들의 친구들을 데리고 올 수 있으며, 그들이 함께 찬송을 부를 때 그 찬송에는 복음의 기능이 있을 뿐 아니라 동시에 복음을 다른 어린이에게 전할 수 있게 해 준다.
-
-우리의 목적은 어린이에게 있을 뿐 아니라 어린이들을 통하여 그들의 부모와 형제자매들을 얻는 데 있다.`
-    },
-    home: {
-      title: "집회소가 아닌 가정으로",
-      source: "2. 어린이 복음의 일 — 어린이 소그룹",
-      body: `대량으로 어린이의 일을 하려면 절대로 집회소에 의지해서는 안 되며, 반드시 가정으로 분산시켜야 한다.
-
-어떤 사람의 가정은 거실이 넓어서 이십 명의 어린이가 앉을 수 있는데, 그럴 때 이십 명이 한 반이 된다. 어떤 집은 약간 좁아서 인수가 조금 적다. 어린이들을 가르칠 인원이 부족하다면 청소년 형제자매들이 함께 동역할 수 있다.
-
-우리가 천 명의 어린이들을 얻으려면 최소한 오십 개의 반이 준비되어야 한다. 인수가 사천 명으로 증가되면 이백 개의 반이 필요하다.
-
-어떤 부모는 자신은 집회에 오지 않을지라도 자녀들이 어린이 집회에 가는 것을 좋아한다. 이것은 우리에게 어린이들을 통하여 부모들을 얻을 수 있는 기회를 준다.`
-    },
-    neighbor: {
-      title: "이웃을 위해 기도하고 초대함",
-      source: "2. 어린이 복음의 일 — 어린이 소그룹",
-      body: `매주 한두 차례 가정을 열고 토요일 오후나 어린이들의 방과 후 시간 또는 노는 시간을 이용하여 그들을 초대하여 가정에서 어린이 집회를 할 수 있다.
-
-자연스럽게 어린이들의 부모와 접촉하여 그들의 가족들에게 복음을 전할 수 있으며, 좀 더 확대하여 그들의 친척에게도 복음을 전할 수 있다.
-
-집에 어린이가 있는 가정은 적극적으로 집을 열어서 자신의 아이들에게 이웃에 사는 친구들을 집으로 초대하도록 할 수 있다. 그들에게 어린이 집회 비디오를 보여 주거나 어린이 찬송을 부르거나 이야기를 해 줄 수 있다.
-
-매주 한 번씩 이렇게 한다면 어린이 집회가 세워질 것이다.`
-    },
-    curriculum: {
-      title: "20가지 성격, 40주의 양육",
-      source: "3. 어린이 소그룹 교재 활용법",
-      body: `어린이 소그룹 교재는 어린이들이 합당한 인성을 함양하고 좋은 습관을 세워, 하나님을 향해 올바른 가치관을 갖도록 돕기 위해 제작되었습니다.
+    <div class="point">
+      <div class="point-num">01</div>
+      <h3>총 4권 · 40주 과정</h3>
+      <p class="summary">각 항목은 2주에 걸쳐 구성되며, 4권 × 10주의 공과로 한 해를 채워갑니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">어린이 소그룹 교재는 어린이들이 합당한 인성을 함양하고 좋은 습관을 세워, 하나님을 향해 올바른 가치관을 갖도록 돕기 위해 제작되었습니다.
 
 총 20가지 성격 항목(진실, 정확, 엄격, 부지런함, 넓음, 견고, 인내, 순수, 공정, 좋은 양심, 침착, 친절, 동정, 용서, 질투하지 않음, 온유, 순종, 겸손, 감사, 책임감)으로 구성되어 있습니다.
 
 각 항목은 2주에 걸쳐 구성되어 있으며, 총 40주 과정입니다. 또한 각 권은 4권으로 구성되어 있으며 권별 10주 과정의 공과를 포함하고 있습니다.
 
-각 이야기는 성경 말씀, 이야기, 질문, 활동 놀이, 활동지침으로 구성되어 있습니다. 제일 마지막에는 각 성격 항목에 해당하는 찬송을 모아 수록하여, 어린이들이 말씀과 성격의 내용을 찬송을 통해 더욱 풍성하게 누릴 수 있도록 하였습니다.`
-    },
-    freeMothers: {
-      title: "어머니들이 자유롭게 집회에",
-      source: "4. 어린이 주일집회",
-      body: `어린이 집회를 세우는 데에 있어서, 우리의 목표는 교회의 집회 시간 동안에 어린이들을 돌보는 가장 좋은 길을 찾아, 어머니들이 자유롭게 집회에 참석하게끔 하는 것이다.
+각 이야기는 성경 말씀, 이야기, 질문, 활동 놀이, 활동지침으로 구성되어 있습니다. 제일 마지막에는 각 성격 항목에 해당하는 찬송을 모아 수록하여, 어린이들이 말씀과 성격의 내용을 찬송을 통해 더욱 풍성하게 누릴 수 있도록 하였습니다.</div>
+          <div class="expand-source">출처 · 3. 어린이 소그룹 교재 활용법</div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Chapter 05 · 주일집회 ────────── -->
+  <section class="section" id="c5" data-section-label="주일집회">
+    <div class="ch-mark">Chapter 05 · 주일집회</div>
+    <h2>어머니를<br /><em style="color:var(--terra)">자유롭게 하는</em><br />어린이 집회</h2>
+    <p class="ch-lead">어린이 집회의 목표는 어머니들이 자유롭게 집회에 참석할 수 있도록 어린이를 돌보는 것입니다.</p>
+
+    <div class="timebar">
+      <div class="timebar-label">집회 시간의 5분의 1 / 5분의 4</div>
+      <div class="timebar-bar">
+        <div class="seg-a">1/5</div>
+        <div class="seg-b">4/5</div>
+      </div>
+      <div class="timebar-legend">
+        <span>약간의 영적 지식</span>
+        <span>인성을 세우는 시간</span>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="point-num">01</div>
+      <h3>어머니들이 자유롭게 집회에</h3>
+      <p class="summary">아이를 돌보아야 해서 집회에 참석할 수 없는 부모가 없도록, 그들을 자유롭게 합니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">어린이 집회를 세우는 데에 있어서, 우리의 목표는 교회의 집회 시간 동안에 어린이들을 돌보는 가장 좋은 길을 찾아, 어머니들이 자유롭게 집회에 참석하게끔 하는 것이다.
 
 그렇게 하지 않으면 많은 부모들이 그들의 자녀를 돌보아야 하기 때문에 집회에 참석할 수 없을 것이다.
 
 부정적인 방면에서, 우리는 주일 학교의 방식을 취하기를 원하지 않고, 부모들이 아이들의 원함과는 반대로 아이들을 전체 집회에 데려오는 것도 원하지 않는다.
 
-긍정적인 방면에서, 우리는 더 많은 어머니들이 자유롭게 교회 집회에 참석할 수 있도록 아이들을 돌보기 위해 어린이 집회를 하기 원한다.`
-    },
-    character: {
-      title: "인성을 세우는 데 시간을 들임",
-      source: "4. 어린이 주일집회",
-      body: `어린이 집회와 관련된 이차적인 관심사는 그러한 집회에서 기회를 잡아 어린이들이 인성 면에서 합당하게 건축될 수 있도록 그들에게 도움을 주는 것이다.
+긍정적인 방면에서, 우리는 더 많은 어머니들이 자유롭게 교회 집회에 참석할 수 있도록 아이들을 돌보기 위해 어린이 집회를 하기 원한다.</div>
+          <div class="expand-source">출처 · 4. 어린이 주일집회</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="point-num">02</div>
+      <h3>인성을 세우는 데 시간을 들임</h3>
+      <p class="summary">때 이른 영적 지식은 자녀의 입맛을 망칠 수 있습니다. 어떻게 합당한 사람이 되는지에 집중합니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">어린이 집회와 관련된 이차적인 관심사는 그러한 집회에서 기회를 잡아 어린이들이 인성 면에서 합당하게 건축될 수 있도록 그들에게 도움을 주는 것이다.
 
 집회를 하는 동안 어린이들을 돌볼 때, 종교적이거나 영적인 지식을 지나치게 많이 전하지 않도록 반드시 주의해야 한다. 그러한 종류의 지식은 어린이들이 자랐을 때, 영적인 것들에 대한 입맛을 망쳐 놓는, 때 이른 지식이 될 것이다.
 
 어린이 집회에서 우리는 성경, 하나님, 주 예수님, 사람의 타락, 주님의 구속, 주님의 구원에 관해서 약간의 지식만 제시해야 한다. 우리는 어떻게 합당한 사람이 되는지에 대해 그들에게 인상을 주는 데 대부분의 시간을 사용해야 한다.
 
-성경, 하나님, 그리스도, 사람의 타락, 죄, 주님의 구원에 관해 말해 주는 데에는 어린이 집회 시간의 오분의 일만 사용해야 한다. 나머지 시간은 어린이들의 인성을 세워 주는 데 써야 한다.`
-    },
-    motherDuty: {
-      title: "어머니 각자의 책임",
-      source: "4. 어린이 주일집회",
-      body: `성도들 중 그 누구도 자기 자녀들을 세우는 데 있어서 다른 사람들을 의지해서는 안 된다. 어머니 각자가 반드시 자기 자녀를 세워 주어야 한다.
+성경, 하나님, 그리스도, 사람의 타락, 죄, 주님의 구원에 관해 말해 주는 데에는 어린이 집회 시간의 오분의 일만 사용해야 한다. 나머지 시간은 어린이들의 인성을 세워 주는 데 써야 한다.</div>
+          <div class="expand-source">출처 · 4. 어린이 주일집회</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="point-num">03</div>
+      <h3>어머니 각자의 책임</h3>
+      <p class="summary">그 어떤 사람도, 그 어떤 집회도 자녀를 세워줄 수 없습니다. 어머니 각자가 부담을 가져야 합니다.</p>
+      <div class="expand">
+        <button class="expand-toggle" type="button">
+          <span class="label-open">원문 펼치기</span><span class="label-close">접기</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="expand-body"><div class="inner">
+          <div class="expand-text">성도들 중 그 누구도 자기 자녀들을 세우는 데 있어서 다른 사람들을 의지해서는 안 된다. 어머니 각자가 반드시 자기 자녀를 세워 주어야 한다.
 
 합당한 어머니는 자기 자녀를 세우는 책임을 결코 다른 사람들에게 넘기지 않을 것이다. 우리는 모든 어머니들이 자녀를 돌보는 법을 배우고, 심지어 스스로 훈련하기를 격려한다.
 
 그 어떤 사람도, 그 어떤 집회도, 그 어떤 일도 우리의 자녀들을 세워줄 수 없다. 모든 어머니들이 반드시 자기 자녀들을 세울 부담을 가져야 한다.
 
-교회 쪽에서는 우리가 집회 시간에 어린이들을 돌보고 있는 동안, 그들을 세우도록 도울 기회를 갖는다. 그렇지만 부모 쪽에서는 어머니 각자가 반드시 자기 자녀들을 세우는 책임을 져야 한다.`
-    }
-  };
+교회 쪽에서는 우리가 집회 시간에 어린이들을 돌보고 있는 동안, 그들을 세우도록 도울 기회를 갖는다. 그렇지만 부모 쪽에서는 어머니 각자가 반드시 자기 자녀들을 세우는 책임을 져야 한다.</div>
+          <div class="expand-source">출처 · 4. 어린이 주일집회</div>
+        </div></div>
+      </div>
+    </div>
+  </section>
 
-  // ── 등장 애니메이션 (IntersectionObserver) ──
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => observer.observe(el));
+  <!-- ── Chapter 06 · 자료 ─────────────── -->
+  <section class="section" id="c6" data-section-label="자료">
+    <div class="ch-mark">Chapter 06 · 함께 걷는 길</div>
+    <h2>교재와 자료</h2>
+    <p class="ch-lead">아래의 자료들이 우리의 발걸음을 도울 것입니다.</p>
 
-  // ── 모달 로직 ────────────────────────────────
-  const overlay = document.getElementById('modal-overlay');
-  const titleEl = document.getElementById('modal-title');
-  const sourceEl = document.getElementById('modal-source');
-  const bodyEl = document.getElementById('modal-body');
-  const closeBtn = document.getElementById('modal-close');
+    <div class="resources">
+      <div class="res-item">
+        <div class="res-num">01</div>
+        <h3 class="res-title">다음 세대 성경 (초급)</h3>
+        <p class="res-note">한국복음서원에서 상시 판매됩니다.</p>
+        <a class="res-qr" href="https://mall.kgbr.co.kr/" target="_blank" rel="noopener" aria-label="다음 세대 성경 QR">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=https%3A%2F%2Fmall.kgbr.co.kr%2F" alt="QR" loading="lazy" />
+        </a>
+        <div class="res-links">
+          <a class="res-link" href="https://mall.kgbr.co.kr/" target="_blank" rel="noopener">mall.kgbr.co.kr</a>
+        </div>
+      </div>
 
-  function openModal(key) {
-    const data = DETAILS[key];
-    if (!data) return;
-    titleEl.textContent = data.title;
-    sourceEl.textContent = '출처 · ' + data.source;
-    bodyEl.textContent = data.body;
-    if (typeof window.vrefProcess === 'function') window.vrefProcess(bodyEl);
-    overlay.classList.add('open');
-    document.body.classList.add('modal-open');
-  }
+      <div class="res-item">
+        <div class="res-num">02</div>
+        <h3 class="res-title">주일 공과 PPT</h3>
+        <p class="res-note">더 패런 사이트 또는 BTMK 사이트에서 다운로드할 수 있습니다. BTMK는 '그리스도의 편지 → 다음 세대, 자료실' 경로로 진입.</p>
+        <a class="res-qr" href="https://www.thepattern.co.kr/lessons" target="_blank" rel="noopener" aria-label="주일 공과 QR">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Flessons" alt="QR" loading="lazy" />
+        </a>
+        <div class="res-links">
+          <a class="res-link" href="https://www.thepattern.co.kr/lessons" target="_blank" rel="noopener">thepattern.co.kr/lessons</a>
+          <a class="res-link" href="https://www.btmk.org/" target="_blank" rel="noopener">btmk.org</a>
+        </div>
+      </div>
 
-  function closeModal() {
-    overlay.classList.remove('open');
-    document.body.classList.remove('modal-open');
-  }
+      <div class="res-item">
+        <div class="res-num">03</div>
+        <h3 class="res-title">어린이 집회 교재 · 소그룹 성격 이야기 책</h3>
+        <p class="res-note">PDF 다운로드 또는 실물 책자 구매가 가능합니다.</p>
+        <a class="res-qr" href="https://www.thepattern.co.kr/materials" target="_blank" rel="noopener" aria-label="어린이 집회 교재 QR">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fmaterials" alt="QR" loading="lazy" />
+        </a>
+        <div class="res-links">
+          <a class="res-link" href="https://www.thepattern.co.kr/materials" target="_blank" rel="noopener">thepattern.co.kr/materials</a>
+        </div>
+        <div class="res-contact">
+          <span class="contact-label">책자 구매 문의</span>
+          어린이 집회 · <strong>임주영</strong> 010-7737-2049<br />
+          성격 이야기 책 · <strong>이예담</strong> 010-4647-4204
+        </div>
+      </div>
 
-  document.querySelectorAll('.detail-btn').forEach(btn => {
-    btn.addEventListener('click', () => openModal(btn.dataset.detail));
-  });
+      <div class="res-item">
+        <div class="res-num">04</div>
+        <h3 class="res-title">어린이 찬송 악보 · 음원</h3>
+        <p class="res-note">더 패런 사이트에서 다운로드, 사운드클라우드에서 스트리밍할 수 있습니다.</p>
+        <a class="res-qr" href="https://www.thepattern.co.kr/hymns" target="_blank" rel="noopener" aria-label="어린이 찬송 QR">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fhymns" alt="QR" loading="lazy" />
+        </a>
+        <div class="res-links">
+          <a class="res-link" href="https://www.thepattern.co.kr/hymns" target="_blank" rel="noopener">thepattern.co.kr/hymns</a>
+          <a class="res-link" href="https://soundcloud.com/firstfruitforgod" target="_blank" rel="noopener">soundcloud.com/firstfruitforgod</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-</script>
+  <!-- ── Closing ──────────────────────── -->
+  <section class="closing" id="closing" data-section-label="기도">
+    <div class="quote-glyph">"</div>
+    <p>주님, 모든 것이 주님의 긍휼에 달려 있습니다.<br />
+    저는 좋은 본이 되어 자녀들을 실족시키지 않고<br />
+    합당한 사람이 되며, 지혜를 사용하여<br />
+    부모로서의 저의 의무를 이행합니다.<br />
+    그러나 저는 당신을 의지합니다, 주님."</p>
+    <div class="signature">2026 · 다음 세대를 향한 마음</div>
+  </section>
+
+</main>
 
 <footer class="page-footer">
-  2026<span class="mark">·</span>전국 어린이 학부모 집회<span class="mark">·</span>다음 세대를 향한 마음
+  2026<span class="dot-sep">·</span>전국 어린이 학부모 집회<span class="dot-sep">·</span>다음 세대를 향한 마음
 </footer>
 
 <!-- ============================================================
-     BIBLE VERSE TOOLTIP — XML loader + popover/bottom sheet
+     SCRIPTS — Inline expand, scroll spy, Bible verse tooltip
+     ============================================================ -->
+<script>
+  /* ── Inline expand toggles ───────── */
+  document.querySelectorAll('.expand-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var expand = btn.closest('.expand');
+      if (!expand) return;
+      var isOpen = expand.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  /* ── Top bar dots + scroll spy ──── */
+  (function(){
+    var sections = document.querySelectorAll('.section, .closing');
+    var dotsHost = document.getElementById('topbar-dots');
+    if (!dotsHost || !sections.length) return;
+
+    var dots = [];
+    sections.forEach(function(sec){
+      var label = sec.dataset.sectionLabel || '';
+      var btn = document.createElement('button');
+      btn.className = 'dot';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+      btn.addEventListener('click', function(){
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      dotsHost.appendChild(btn);
+      dots.push({ sec: sec, dot: btn });
+    });
+
+    function update(){
+      var offset = 100;
+      var activeIdx = 0;
+      for (var i = 0; i < dots.length; i++) {
+        if (dots[i].sec.getBoundingClientRect().top - offset < 0) activeIdx = i;
+      }
+      dots.forEach(function(d, i){
+        d.dot.classList.toggle('active', i === activeIdx);
+      });
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>
+
+<!-- ============================================================
+     BIBLE VERSE TOOLTIP — XML loader + paper popover/bottom sheet
      XML: https://tk-korea.github.io/recoverybible/recovery_bible_ko.xml
      ============================================================ -->
 <script>
@@ -1837,13 +1566,11 @@
     {n:'베드로후서',a:'벧후'},{n:'요한일서',a:'요일'},{n:'요한이서',a:'요이'},{n:'요한삼서',a:'요삼'},
     {n:'유다서',a:'유'},{n:'요한계시록',a:'계'}
   ];
-
   var BOOK_META = {};
   for (var i = 0; i < BOOKS.length; i++) {
     BOOK_META[BOOKS[i].a] = BOOKS[i];
     BOOK_META[BOOKS[i].n] = BOOKS[i];
   }
-
   var bookKeys = Object.keys(BOOK_META).sort(function(a,b){ return b.length - a.length; });
   function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
   var bookAlt = bookKeys.map(escRe).join('|');
@@ -1865,8 +1592,8 @@
     return out;
   }
 
-  // Static page selectors — modal-body is processed dynamically via window.vrefProcess
-  var REF_SELECTOR = '.qa-card, .timeline-1966, .viz-caption, .closing-quote, .chapter-lead';
+  // Process all relevant text containers (including expand bodies which contain refs)
+  var REF_SELECTOR = '.ch-lead, .prologue, .point .summary, .expand-text, .callout, .timeline-quote, .closing';
 
   function processElement(root) {
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
@@ -1975,7 +1702,6 @@
   function isMobileView() {
     return window.matchMedia('(max-width: 768px)').matches;
   }
-
   function ensureTooltip() {
     if (tooltipEl) return tooltipEl;
     tooltipEl = document.createElement('div');
@@ -1983,7 +1709,6 @@
     document.body.appendChild(tooltipEl);
     return tooltipEl;
   }
-
   function ensureBackdrop() {
     if (backdropEl) return backdropEl;
     backdropEl = document.createElement('div');
@@ -1992,7 +1717,6 @@
     document.body.appendChild(backdropEl);
     return backdropEl;
   }
-
   function escHtml(s) {
     return String(s).replace(/[&<>"']/g, function(c){
       return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
@@ -2149,7 +1873,6 @@
     var refs = document.querySelectorAll(REF_SELECTOR);
     for (var i = 0; i < refs.length; i++) processElement(refs[i]);
     bind();
-    // Expose for dynamic content (modal body)
     window.vrefProcess = processElement;
     if (typeof window.requestIdleCallback === 'function') {
       requestIdleCallback(loadBible, { timeout: 2000 });
