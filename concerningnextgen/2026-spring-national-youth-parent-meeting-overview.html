@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#3D2B66" />
+<title>[개요] 2026 봄 전국 중고등부 학부모 봉사자 집회 · 교회생활을 위해 다음 세대를 양성함</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --purple: #5B3F8F;
+    --purple-deep: #3D2B66;
+    --purple-soft: #7B5FAF;
+    --lavender: #E8E0F2;
+    --lavender-light: #F4EFFA;
+    --paper: #FAF7F2;
+    --paper-warm: #F2EDE3;
+    --ink: #1A1530;
+    --ink-soft: #3D3854;
+    --ink-mute: #6B6480;
+    --gold: #B8893C;
+    --gold-soft: #D4B570;
+    --gold-deep: #8B6420;
+    --rule: #D6CDE3;
+    --rule-soft: #E8E2F0;
+    --bg: #FBF9F5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
+  em { font-style: italic; }
+  sup { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); }
+
+  /* ── Hero ─────────────────────────────── */
+  .hero {
+    background: linear-gradient(165deg, var(--purple-deep) 0%, var(--purple) 70%, var(--purple-soft) 100%);
+    color: #fff;
+    padding: 60px 28px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,181,112,0.25), transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -180px; left: -100px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,95,175,0.45), transparent 70%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .hero .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    color: var(--gold-soft);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: clamp(34px, 6vw, 58px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent { color: var(--gold-soft); }
+  .hero .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 36px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 30px;
+  }
+  .hero .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero .meta-item .dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .hero .lead {
+    font-size: 16.5px;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.92);
+    max-width: 680px;
+    font-weight: 300;
+  }
+
+  /* ── Tabs ──────────────────────────────── */
+  .tabs-wrap {
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 0 var(--rule-soft), 0 4px 20px rgba(61,43,102,0.04);
+  }
+  .tabs {
+    display: flex;
+    max-width: 1080px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 1;
+    min-width: 200px;
+    padding: 18px 22px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: all 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab .tab-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .tab .tab-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    line-height: 1.4;
+    transition: color 0.25s ease;
+  }
+  .tab:hover .tab-title { color: var(--ink); }
+  .tab.active {
+    border-bottom-color: var(--purple);
+    background: linear-gradient(180deg, transparent, var(--lavender-light));
+  }
+  .tab.active .tab-title { color: var(--purple-deep); font-weight: 700; }
+
+  /* ── Layout: TOC + Main ────────────────── */
+  .layout {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 50px;
+    padding: 50px 28px 80px;
+  }
+  .toc {
+    position: sticky;
+    top: 92px;
+    align-self: start;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  .toc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .toc-list {
+    list-style: none;
+    border-left: 1px solid var(--rule);
+  }
+  .toc-list li { line-height: 1.4; }
+  .toc-list a {
+    display: block;
+    padding: 9px 14px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13.5px;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .toc-list a:hover {
+    color: var(--purple-deep);
+    border-left-color: var(--purple-soft);
+  }
+  .toc-list a.active {
+    color: var(--purple-deep);
+    font-weight: 700;
+    border-left-color: var(--purple);
+  }
+  .toc-list .roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    margin-right: 6px;
+  }
+
+  /* ── Message panel ─────────────────────── */
+  .message { display: none; }
+  .message.active { display: block; }
+
+  .msg-head {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .msg-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .msg-head h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.28;
+    letter-spacing: -0.015em;
+    color: var(--purple-deep);
+    margin-bottom: 18px;
+  }
+  .msg-scripture {
+    font-size: 13.5px;
+    color: var(--ink-mute);
+    line-height: 1.7;
+    padding: 14px 18px;
+    background: var(--lavender-light);
+    border-left: 3px solid var(--gold-soft);
+    border-radius: 0 8px 8px 0;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .msg-scripture .label {
+    color: var(--purple);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  /* ── Sections (I, II, III, IV) ────────── */
+  .section {
+    margin-bottom: 70px;
+    scroll-margin-top: 80px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 44px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 500;
+  }
+  .section-head h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.4;
+    color: var(--purple-deep);
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .section-head h3 .moss { color: var(--gold-deep); }
+  .section-ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+
+  /* ── Visualization cards ───────────────── */
+  .viz {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(61,43,102,0.05);
+  }
+  .viz-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+  }
+  .viz-title {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .viz-caption {
+    font-size: 13.5px;
+    color: var(--ink-mute);
+    line-height: 1.7;
+    margin-top: 16px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  /* M1: 개인 vs 집 비교 */
+  .unit-compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .unit-card {
+    padding: 22px 20px;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .unit-card.individual {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+  }
+  .unit-card.household {
+    background: linear-gradient(160deg, var(--purple), var(--purple-deep));
+    color: #fff;
+  }
+  .unit-card .unit-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: var(--gold);
+  }
+  .unit-card.household .unit-icon { color: var(--gold-soft); }
+  .unit-card .unit-label {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+  .unit-card.household .unit-label { color: var(--gold-soft); }
+  .unit-card .unit-value {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .unit-card .unit-sub {
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+  .unit-card.household .unit-sub { color: rgba(255,255,255,0.85); }
+  .unit-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  /* M1: 17 examples grid */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .ex-card {
+    padding: 14px 12px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+  .ex-card:hover {
+    border-color: var(--purple-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(91,63,143,0.1);
+  }
+  .ex-card .ex-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .ex-card .ex-name {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .ex-card .ex-ref {
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .ex-group-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--purple);
+    letter-spacing: 0.06em;
+    margin: 22px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ex-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .ex-group-label:first-of-type { margin-top: 0; }
+
+  /* M1: 가장의 결단 */
+  .patriarch {
+    background: linear-gradient(160deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    border: none;
+  }
+  .patriarch .viz-eyebrow { color: var(--gold-soft); }
+  .patriarch-quote {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.6;
+    text-align: center;
+    padding: 24px 12px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    margin: 18px 0;
+    letter-spacing: -0.005em;
+  }
+  .patriarch-quote .accent { color: var(--gold-soft); font-weight: 700; }
+  .patriarch-ref {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 14px;
+  }
+  .patriarch-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .patriarch-step {
+    text-align: center;
+    padding: 16px 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  .patriarch-step .pstep-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .patriarch-step .pstep-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.92);
+  }
+
+  /* M2: 두 바퀴 — 대집회 + 가정집회 */
+  .two-wheels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .wheel {
+    padding: 24px 20px;
+    border-radius: 14px;
+    position: relative;
+  }
+  .wheel.big {
+    background: var(--lavender-light);
+    border: 1px dashed var(--purple-soft);
+  }
+  .wheel.home {
+    background: linear-gradient(160deg, var(--purple), var(--purple-deep));
+    color: #fff;
+  }
+  .wheel .wheel-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .wheel.home .wheel-icon { color: var(--gold-soft); }
+  .wheel-label {
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .wheel.home .wheel-label { color: var(--gold-soft); }
+  .wheel-title {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+  .wheel-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-mute);
+  }
+  .wheel.home .wheel-desc { color: rgba(255,255,255,0.85); }
+  .wheel-tag {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 3px 10px;
+    background: var(--gold);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  /* M2: 연령 흐름 */
+  .age-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 18px;
+    align-items: stretch;
+  }
+  .age-step {
+    text-align: center;
+    padding: 18px 8px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    position: relative;
+  }
+  .age-step.final {
+    background: linear-gradient(160deg, var(--gold), var(--gold-deep));
+    color: #fff;
+    border-color: var(--gold);
+  }
+  .age-step .age-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--purple);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .age-step.final .age-num { color: #fff; }
+  .age-step .age-label {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .age-step.final .age-label { color: #fff; }
+  .age-step .age-sub {
+    font-size: 11px;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+  .age-step.final .age-sub { color: rgba(255,255,255,0.9); }
+
+  /* M3: 성막 널빤지 단면 */
+  .plank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+  }
+  .plank-diagram {
+    position: relative;
+    width: 200px;
+    height: 240px;
+    margin: 12px 0 18px;
+  }
+  .plank-outer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold), var(--gold-deep));
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(184,137,60,0.3);
+  }
+  .plank-inner {
+    position: absolute;
+    inset: 18px;
+    background: linear-gradient(180deg, #8B6F47, #6B5235);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-soft);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.3;
+    padding: 12px;
+  }
+  .plank-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .plank-label {
+    text-align: center;
+    padding: 14px 12px;
+    border-radius: 10px;
+  }
+  .plank-label.wood {
+    background: rgba(139,111,71,0.1);
+    border: 1px solid #8B6F47;
+  }
+  .plank-label.gold {
+    background: rgba(212,181,112,0.15);
+    border: 1px solid var(--gold);
+  }
+  .plank-label .pl-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .plank-label .pl-name {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .plank-label.wood .pl-name { color: #6B5235; }
+  .plank-label.gold .pl-name { color: var(--gold-deep); }
+  .plank-label .pl-meaning {
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* M3: 사탄의 3가지 공격 */
+  .attacks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .attack {
+    padding: 20px 16px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-top: 3px solid #B84A4A;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .attack .att-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #B84A4A;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .attack .att-name {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .attack .att-desc {
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    line-height: 1.55;
+  }
+
+  /* M3: 5가지 누림 중점 */
+  .essentials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .essential {
+    padding: 18px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    text-align: left;
+  }
+  .essential .ess-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .essential .ess-name {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--purple-deep);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .essential .ess-ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* ── Outline body (full text) ─────────── */
+  .outline {
+    margin-top: 18px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15.5px;
+    line-height: 1.95;
+    color: var(--ink);
+  }
+  .outline .level-A {
+    margin: 18px 0 14px;
+    padding-left: 22px;
+    position: relative;
+  }
+  .outline .level-A > .marker {
+    position: absolute;
+    left: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--purple);
+    font-weight: 700;
+  }
+  .outline .level-A > .text {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .outline .level-1 {
+    margin: 10px 0 10px 22px;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+  .outline .level-1 > .marker {
+    position: absolute;
+    left: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .outline .level-a {
+    margin: 8px 0 8px 22px;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ink-mute);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .outline .level-a > .marker {
+    position: absolute;
+    left: 0;
+    font-style: italic;
+    color: var(--gold-deep);
+    font-size: 12.5px;
+  }
+  .scripture-ref {
+    display: inline;
+    color: var(--purple);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.92em;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── Closing ──────────────────────────── */
+  .closing {
+    margin-top: 80px;
+    padding: 40px 32px;
+    background: linear-gradient(160deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .closing .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 60px;
+    line-height: 0.6;
+    color: var(--gold-soft);
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .closing p {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.95);
+    font-weight: 300;
+    max-width: 620px;
+    margin: 0 auto 14px;
+  }
+  .closing cite {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Mobile ───────────────────────────── */
+  @media (max-width: 880px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 30px 22px 60px;
+    }
+    .toc {
+      position: sticky;
+      top: 76px;
+      max-height: none;
+      padding-right: 0;
+      background: var(--bg);
+      padding: 14px 0 12px;
+      margin: -30px -22px 0;
+      padding-left: 22px;
+      padding-right: 22px;
+      z-index: 40;
+      border-bottom: 1px solid var(--rule);
+    }
+    .toc-title { display: none; }
+    .toc-list {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      border-left: none;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .toc-list::-webkit-scrollbar { display: none; }
+    .toc-list li { flex-shrink: 0; }
+    .toc-list a {
+      padding: 6px 14px;
+      border-left: none;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 12.5px;
+      white-space: nowrap;
+      background: #fff;
+    }
+    .toc-list a.active {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .toc-list a.active .roman { color: var(--gold-soft); }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 44px 22px 60px; }
+    .hero .meta { gap: 10px 20px; font-size: 13px; }
+    .tab {
+      min-width: 150px;
+      padding: 14px 16px 12px;
+    }
+    .tab .tab-num { font-size: 12px; }
+    .tab .tab-title { font-size: 13px; }
+    .viz { padding: 22px 18px; border-radius: 16px; }
+    .unit-compare {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .unit-divider {
+      font-size: 16px;
+      transform: rotate(90deg);
+    }
+    .two-wheels { grid-template-columns: 1fr; }
+    .age-flow { grid-template-columns: 1fr 1fr; }
+    .attacks { grid-template-columns: 1fr; }
+    .patriarch-flow { grid-template-columns: 1fr; }
+    .patriarch-quote { font-size: 17px; padding: 18px 8px; }
+    .section-roman { font-size: 36px; }
+    .outline { font-size: 14.5px; }
+    .outline .level-1 { font-size: 13.5px; }
+    .outline .level-a { font-size: 13px; }
+    .closing { padding: 32px 22px; margin: 50px -10px 0; border-radius: 16px; }
+    .closing p { font-size: 15.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ───────────────────────────── -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">2026 Spring · Korea</div>
+    <h1>교회생활을 위해<br /><span class="accent">다음 세대를 양성함</span></h1>
+    <div class="meta">
+      <div class="meta-item"><span class="dot"></span>2026년 4월 25일(토) ~ 4월 26일(주일)</div>
+      <div class="meta-item"><span class="dot"></span>전국 중고등부 학부모 봉사자 집회</div>
+      <div class="meta-item"><span class="dot"></span>개요 · 3개의 메시지</div>
+    </div>
+    <p class="lead">
+      하나님께서 정하신 길은 한 집을 단위로 사람을 구원하시는 것입니다.
+      가정 집회를 통해 다음 세대를 교회생활로 이끌고, 예수님의 인성으로
+      이 시대의 조류를 거슬러 견고히 서는 청년들을 양성하는 — 세 메시지의 한 호흡을
+      따라갑니다.
+    </p>
+  </div>
+</header>
+
+<!-- ── Tabs ──────────────────────────── -->
+<nav class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" data-msg="m1">
+      <span class="tab-num">Message 01</span>
+      <span class="tab-title">하나님께서 정하신 길은<br />집을 얻는 것임</span>
+    </button>
+    <button class="tab" data-msg="m2">
+      <span class="tab-num">Message 02</span>
+      <span class="tab-title">가정을 통해 청년들을<br />교회생활로 이끎</span>
+    </button>
+    <button class="tab" data-msg="m3">
+      <span class="tab-num">Message 03</span>
+      <span class="tab-title">청년들에게<br />예수님의 인성이 필요함</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Layout ───────────────────────── -->
+<div class="layout">
+
+  <!-- ── TOC (dynamic) ─────────────── -->
+  <aside class="toc">
+    <div class="toc-title">Outline</div>
+    <ul class="toc-list" id="toc-list"></ul>
+  </aside>
+
+  <main>
+
+    <!-- ════════ Message 1 ════════ -->
+    <article class="message active" id="m1">
+      <header class="msg-head">
+        <div class="msg-eyebrow">Message 01</div>
+        <h2>하나님께서 정하신 길은<br />집을 얻는 것임</h2>
+        <div class="msg-scripture">
+          <span class="label">성경</span>행 2:39, 수 24:15, 창 7:1, 출 12:3, 삼하 6:11, 눅 19:9, 행 16:31, 고전 7:14, 엡 1:4-5
+        </div>
+      </header>
+
+      <!-- I. 구원의 단위 -->
+      <section class="section" id="m1-1">
+        <div class="section-head">
+          <span class="section-roman">Ⅰ</span>
+          <div>
+            <h3>복음 전파의 길에는 반드시 <span class="moss">하나님의 구원의 단위</span>가 포함되어야 한다</h3>
+            <div class="section-ref">행 2:39, 16:31</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Key Distinction · 영생 vs 구원</div>
+          <div class="unit-compare">
+            <div class="unit-card individual">
+              <div class="unit-icon">i</div>
+              <div class="unit-label">INDIVIDUAL</div>
+              <div class="unit-value">영원한 생명</div>
+              <div class="unit-sub">개인을 단위로 함<br /><span style="font-family:'Cormorant Garamond',serif;font-style:italic">요일 5:12</span></div>
+            </div>
+            <div class="unit-divider">vs</div>
+            <div class="unit-card household">
+              <div class="unit-icon">⌂</div>
+              <div class="unit-label">HOUSEHOLD</div>
+              <div class="unit-value">구원</div>
+              <div class="unit-sub">집을 단위로 함<br /><span style="font-family:'Cormorant Garamond',serif;font-style:italic">창 7:1 · 행 16:31</span></div>
+            </div>
+          </div>
+          <p class="viz-caption">
+            "하나님께서 우리에게 주신 구원의 약속은 한 집을 그 단위로 하셨으며, 개개인을 그 단위로 하지 않으셨다."
+            우리 가운데에서 태어난 자녀들을 영적으로도 우리 집에서 거듭나게 해야 합니다.
+          </p>
+        </div>
+
+        <div class="outline">
+          <div class="level-A">
+            <span class="marker">A.</span>
+            <span class="text">성경에서 영원한 생명에 대해 말할 때에는 집을 단위로 하지 않고 개인을 단위로 한다. 그러나 구원에 대해 말할 때에는 확실히 집을 단위로 한다 <span class="scripture-ref">— 요일 5:12, 창 7:1</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">우리는 우리 가운데서 태어난 자녀들을 장래에 다시 시간을 들여 구원하고, 세상에서부터 다시 구해내야 하지 않기를 바란다. 육신적으로 우리의 집에서 태어난 우리의 자녀들은 영적으로도 우리의 집에서 태어나야 한다 <span class="scripture-ref">— 시 87:5, 딤후 1:5</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">C.</span>
+            <span class="text">교회의 다음 세대에게 길이 있는지의 여부는 우리 가운데에서 태어난 자녀들을 주님께로 이끌었는지의 여부에 달려 있다. 만일 우리가 낳은 자녀들을 모두 잃어버린다면 아마도 얼마 지나지 않아 다음 세대는 없어질 것이다 <span class="scripture-ref">— 시 127:3-5</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 만일 한 세대 한 세대가 지날수록 우리가 낳은 자녀들이 굳게 서고 밖에서 또 몇 명이 더해진다면 인수는 증가할 것이고 교회는 강화될 것이다 <span class="scripture-ref">— 딤후 1:5</span>.</div>
+            <div class="level-1"><span class="marker">2.</span> 결코 하나를 낳고서 그 하나를 잃어버리는 일을 하지 말아야 한다. 하나를 낳았으면 그 하나를 거듭나게 해야 한다 <span class="scripture-ref">— 시 127:3</span>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- II. 17 examples -->
+      <section class="section" id="m1-2">
+        <div class="section-head">
+          <span class="section-roman">Ⅱ</span>
+          <div>
+            <h3>성경의 기본 원칙: <span class="moss">한 집을 단위로 삼아</span> 사람을 구원하심</h3>
+            <div class="section-ref">17 examples · Old Testament 7 + New Testament 10</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Examples · 한 집 구원의 성경적 증거</div>
+
+          <div class="ex-group-label">구약 — Old Testament</div>
+          <div class="examples-grid">
+            <div class="ex-card"><div class="ex-num">01</div><div class="ex-name">방주에 들어감</div><div class="ex-ref">창 7:1 · 벧전 3:20</div></div>
+            <div class="ex-card"><div class="ex-num">02</div><div class="ex-name">할례를 받음</div><div class="ex-ref">창 17:12–13</div></div>
+            <div class="ex-card"><div class="ex-num">03</div><div class="ex-name">유월절 어린양</div><div class="ex-ref">출 12:3-7</div></div>
+            <div class="ex-card"><div class="ex-num">04</div><div class="ex-name">제사장 직분</div><div class="ex-ref">민 18:1, 11</div></div>
+            <div class="ex-card"><div class="ex-num">05</div><div class="ex-name">라합의 집</div><div class="ex-ref">수 2:19, 6:17</div></div>
+            <div class="ex-card"><div class="ex-num">06</div><div class="ex-name">축복을 얻음</div><div class="ex-ref">삼하 6:11</div></div>
+            <div class="ex-card"><div class="ex-num">07</div><div class="ex-name">즐거워함</div><div class="ex-ref">신 12:7, 14:26</div></div>
+          </div>
+
+          <div class="ex-group-label">신약 — New Testament</div>
+          <div class="examples-grid">
+            <div class="ex-card"><div class="ex-num">08</div><div class="ex-name">삭개오의 집</div><div class="ex-ref">눅 19:9</div></div>
+            <div class="ex-card"><div class="ex-num">09</div><div class="ex-name">신하의 온 집</div><div class="ex-ref">요 4:53</div></div>
+            <div class="ex-card"><div class="ex-num">10</div><div class="ex-name">고넬료의 온 집</div><div class="ex-ref">행 10:2, 11:14</div></div>
+            <div class="ex-card"><div class="ex-num">11</div><div class="ex-name">루디아의 집</div><div class="ex-ref">행 16:15</div></div>
+            <div class="ex-card"><div class="ex-num">12</div><div class="ex-name">간수의 집</div><div class="ex-ref">행 16:31</div></div>
+            <div class="ex-card"><div class="ex-num">13</div><div class="ex-name">그리스보의 온 집</div><div class="ex-ref">행 18:8</div></div>
+            <div class="ex-card"><div class="ex-num">14</div><div class="ex-name">영의 약속</div><div class="ex-ref">행 2:39</div></div>
+            <div class="ex-card"><div class="ex-num">15</div><div class="ex-name">평안이 머묾</div><div class="ex-ref">눅 10:5-6</div></div>
+            <div class="ex-card"><div class="ex-num">16</div><div class="ex-name">스데바나의 집</div><div class="ex-ref">고전 1:16</div></div>
+            <div class="ex-card"><div class="ex-num">17</div><div class="ex-name">오네시보로의 집</div><div class="ex-ref">딤후 4:19, 1:16</div></div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text"><strong>구약의 예</strong> — 온 집이 방주에 들어감 / 온 집이 할례를 받음 / 한 집에 한 마리의 유월절 어린양 / 온 집이 제사장 직분을 받음 / 창녀 라합의 온 집이 구원을 받음 / 온 집이 축복을 얻음 / 온 집이 즐거워함.</span></div>
+          <div class="level-A"><span class="marker">B.</span><span class="text"><strong>신약의 예</strong> — 삭개오의 집, 한 신하의 온 집, 고넬료의 온 집, 루디아의 집, 간수의 집, 그리스보의 온 집, 그 영의 약속은 여러분과 여러분의 자녀에게 한 것임, 평안이 그 집에 머물 것임, 스데바나의 집, 오네시보로의 집.</span></div>
+        </div>
+      </section>
+
+      <!-- III. 가장의 책임 -->
+      <section class="section" id="m1-3">
+        <div class="section-head">
+          <span class="section-roman">Ⅲ</span>
+          <div>
+            <h3>가장은 자신의 <span class="moss">온 집을 대신해 결단을 내릴 수 있다</span></h3>
+            <div class="section-ref">수 24:15</div>
+          </div>
+        </div>
+
+        <div class="viz patriarch">
+          <div class="viz-eyebrow">Patriarchal Decision</div>
+          <div class="patriarch-quote">
+            "오직 나와 <span class="accent">내 집</span>은<br />여호와를 섬기겠노라"
+          </div>
+          <div class="patriarch-ref">— Joshua 24:15</div>
+
+          <div class="patriarch-flow">
+            <div class="patriarch-step">
+              <div class="pstep-num">01 Declare</div>
+              <div class="pstep-text">믿음으로 우리 집을<br />하나님을 경배하는 집으로 선포</div>
+            </div>
+            <div class="patriarch-step">
+              <div class="pstep-num">02 Lead</div>
+              <div class="pstep-text">권위를 사용하여<br />자녀들을 인도함</div>
+            </div>
+            <div class="patriarch-step">
+              <div class="pstep-num">03 Stand</div>
+              <div class="pstep-text">이 위치에 서면<br />수하 사람들이 따라옴</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A">
+            <span class="marker">A.</span>
+            <span class="text">우리는 믿음으로 우리의 집을 하나님을 경배하는 집, 주님을 믿는 집으로 결정했음을 선포해야 한다. 우리가 권위를 사용하여 인도한다면 자연히 자녀들을 인도하게 될 것이다 <span class="scripture-ref">— 고후 4:13, 2:4-5</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">이 집은 우리의 집이며 주님을 섬기는 이 일은 우리가 결정한 것이다. 우리가 이 위치에 서 있을 때 우리 수하에 있는 사람들이 다 따라올 것이고 그들은 도망갈 수 없을 것이다 <span class="scripture-ref">— 고전 11:3</span>.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- IV. 온 집 구원의 원칙 -->
+      <section class="section" id="m1-4">
+        <div class="section-head">
+          <span class="section-roman">Ⅳ</span>
+          <div>
+            <h3>온 집이 구원받는 것은 <span class="moss">성경에서 가장 큰 원칙</span>이다</h3>
+            <div class="section-ref">고전 7:14</div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A">
+            <span class="marker">A.</span>
+            <span class="text">우리가 사람들을 교회 집회에 오도록 초대할 때 많은 사람들이 자기 혼자만 온다. 만일 우리가 그들의 집을 방문한다면 그들의 온 집안 식구들을 가까이할 수 있다 <span class="scripture-ref">— 눅 19:5–9</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">개신교의 큰 실패는 집안의 다음 세대를 그냥 내버려두고 그들에게 신앙의 자유를 허용했다는 점이다 <span class="scripture-ref">— 잠 22:6</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">C.</span>
+            <span class="text">우리는 자녀들이 구원받기를 기도할 때에 이기적일 수 있다. 우리의 자녀들을 위해 기도하지 않는 것은 잘못이지만, 이기적으로 온통 그들만을 위해 기도하는 것도 잘못된 것이다. 그러므로 자녀들의 구원과 그들의 영적인 복에 대한 문제는 우리에게 시험이 된다 <span class="scripture-ref">— 잠 11:25</span>.</span>
+          </div>
+          <div class="level-A">
+            <span class="marker">D.</span>
+            <span class="text">우리는 반드시 주님의 가르침에 따라 자녀들을 양육함으로써 우리의 책임을 다해야 한다. 그러나 결국 그들이 구원받고 주님을 찾는 것은 전적으로 하나님의 영원한 선택과 미리 정하심에 달려 있다 <span class="scripture-ref">— 엡 1:4-5</span>.</span>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- ════════ Message 2 ════════ -->
+    <article class="message" id="m2">
+      <header class="msg-head">
+        <div class="msg-eyebrow">Message 02</div>
+        <h2>가정을 통해 청년들을<br />교회생활로 이끎</h2>
+        <div class="msg-scripture">
+          <span class="label">성경</span>행 2:46-47, 롬 16:5상, 행 20:20, 히 10:25
+        </div>
+      </header>
+
+      <!-- I. 두 종류 집회 -->
+      <section class="section" id="m2-1">
+        <div class="section-head">
+          <span class="section-roman">Ⅰ</span>
+          <div>
+            <h3>교회의 건축은 <span class="moss">가정 집회에 기초</span>한다</h3>
+            <div class="section-ref">행 2:46-47, 롬 16:5상</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">God's Ordained Way · 두 종류의 집회</div>
+          <div class="two-wheels">
+            <div class="wheel big">
+              <div class="wheel-icon">◯</div>
+              <div class="wheel-label">FIRST WHEEL</div>
+              <div class="wheel-title">대집회</div>
+              <div class="wheel-desc">진리의 가르침과 단체적 누림의 자리.</div>
+              <span class="wheel-tag">함께</span>
+            </div>
+            <div class="wheel home">
+              <div class="wheel-icon">⌂</div>
+              <div class="wheel-label">SECOND WHEEL · 유일한 길</div>
+              <div class="wheel-title">가정 집회</div>
+              <div class="wheel-desc">교회의 증가와 건축을 위한 유일한 길. 사람들을 교회의 기층으로 이끌어 옴.</div>
+              <span class="wheel-tag" style="background:var(--gold-soft);color:var(--purple-deep)">핵심</span>
+            </div>
+          </div>
+          <p class="viz-caption">
+            "처음 성령께서 창시하시고 하나님께서 정하신 길은 바로 두 종류의 집회 방식이었다.
+            하나는 대집회이고 다른 하나는 가정 집회였다" <em>(행 20:20).</em>
+            대집회는 사람을 남아 있게 할 수 없지만, 이 집 저 집에서 하는 집회는 사람들을 교회의 기층으로 이끕니다.
+          </p>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">교회생활의 초기에 사도들은 매우 신속하게 교회를 건축했다. 그러나 건축의 길은 바로 소그룹과 가정 집회였다 <span class="scripture-ref">— 행 9:31</span>.</span></div>
+          <div class="level-A"><span class="marker">B.</span><span class="text">가정 집회는 그리스도인 집회의 최고의 길이요 뛰어난 길일 뿐 아니라 결국 유일한 길이기도 하다 <span class="scripture-ref">— 롬 16:5상 및 각주 1</span>.</span></div>
+          <div class="level-A"><span class="marker">C.</span><span class="text">처음 성령께서 창시하시고 하나님께서 정하신 길은 바로 두 종류의 집회 방식이었다. 하나는 대집회이고 다른 하나는 가정 집회였다 <span class="scripture-ref">— 행 20:20</span>.</span></div>
+          <div class="level-A"><span class="marker">D.</span><span class="text">가정 집회는 교회의 증가와 건축을 위한 유일한 길이다.</span></div>
+        </div>
+      </section>
+
+      <!-- II. 청년 양성 실행 -->
+      <section class="section" id="m2-2">
+        <div class="section-head">
+          <span class="section-roman">Ⅱ</span>
+          <div>
+            <h3>가정을 통해 청년들을 <span class="moss">교회생활로 들어오게 함</span></h3>
+            <div class="section-ref">소그룹 = 실지적 교회생활</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Age Flow · 청년을 붙드는 호흡</div>
+          <div class="age-flow">
+            <div class="age-step">
+              <div class="age-num">중</div>
+              <div class="age-label">중학교</div>
+              <div class="age-sub">남아 있도록<br />붙들어 줌</div>
+            </div>
+            <div class="age-step">
+              <div class="age-num">고</div>
+              <div class="age-label">고등학교</div>
+              <div class="age-sub">지나가며<br />수고함</div>
+            </div>
+            <div class="age-step">
+              <div class="age-num">대</div>
+              <div class="age-label">대학교</div>
+              <div class="age-sub">수고하여<br />얻음</div>
+            </div>
+            <div class="age-step final">
+              <div class="age-num">↑</div>
+              <div class="age-label">견고함</div>
+              <div class="age-sub">안전하고<br />견고하게 됨</div>
+            </div>
+          </div>
+          <p class="viz-caption">
+            "청년들을 데리고 오는 것은 쉽지만 그들을 남아 있게 하는 것은 쉽지 않다.
+            중학교 시기부터 그들을 남아 있도록 붙들어 주어야 하고, 그런 후에 고등학교 시기를 지나
+            최종적으로 대학교 시기에 수고하여 그들을 얻을 수 있다. 그 후에야 그들은 안전하고도 견고해질 것이다."
+          </p>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">우리는 이곳이 우리의 지방 교회라고 말할 수 있는 그런 확실한 지방 교회 안에 있어야 한다. 교회생활 안에 있지 않은 사람은 돌아갈 집이 없는 고아이다. 교회생활을 시작한 그날 우리는 집으로 돌아왔음을 알게 된다.</span></div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">집회를 가정으로 가져가는 것이 바로 하나님께서 정하신 길의 심장부이다. 만일 우리가 집회를 가정으로 가져가지 못한다면 주님의 회복 안에 큰 실패가 있을 것이다.</span>
+            <div class="level-1"><span class="marker">1.</span> 가정 집회는 성도들의 가정에 가장 큰 도움이 된다. 아이들은 어려서부터 영적인 분위기에 싸여 늘 영원한 것들의 실재를 보며 자랄 것이다 <span class="scripture-ref">— 딤후 3:15</span>.</div>
+            <div class="level-1"><span class="marker">2.</span> 가정 집회에서 아이들은 조류에 휩쓸려 떠내려가는 것에서 보존될 것이며, 그 결과 온 가정이 정상적인 가정이 될 것이다.</div>
+          </div>
+          <div class="level-A">
+            <span class="marker">C.</span>
+            <span class="text">현재의 상황을 가지고 말하자면 당신은 어떤 사람이 회복되었을 때 그 사람을 반드시 대집회에 데리고 가야만 성공할 수 있다고 생각하지 말아야 한다. 그가 매주 소그룹 집회에 온다면 그것으로 이미 좋은 것이다 <span class="scripture-ref">— 행 2:47, 요 15:16</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 대집회는 사람을 남아 있게 할 수 없지만 이 집 저 집에서 하는 집회는 사람들을 교회의 기층으로 이끌어 온다. 어떤 이는 가정 집회에 참석하고 나서 즉시 교회생활에 붙잡힌다. 이것이 바로 하나님의 지혜이다.</div>
+            <div class="level-1"><span class="marker">2.</span> 청년들을 데리고 오는 것은 쉽지만 그들을 남아 있게 하는 것은 쉽지 않다. 중학교 시기부터 그들을 남아 있도록 붙들어 주어야 하고 그런 후에 고등학교 시기를 지나 최종적으로 대학교 시기에 수고하여 그들을 얻을 수 있다. 그 후에야 그들은 안전하고도 견고해질 것이다.</div>
+          </div>
+          <div class="level-A">
+            <span class="marker">D.</span>
+            <span class="text">우리는 청년들이 캠퍼스로 가게 해야 하며 특별히 십팔, 십구 세의 청년들이 그렇게 하도록 해야 한다. 교회생활 안에 있는 청년들은 모두가 유용한 이들이다. 이것이 우리가 반드시 중학생들에게 수고해야 하는 이유이다.</span>
+            <div class="level-1"><span class="marker">1.</span> 복음은 반드시 가정에서부터 나가야 한다. 심지어 캠퍼스의 일 또한 가정에서부터 시작되어야 한다. 교회가 강하려면 반드시 가정 집회를 세워야 한다.</div>
+            <div class="level-1"><span class="marker">2.</span> 교회 안의 청년들은 중년 부부 혹은 젊은 부부의 가정으로 사람들을 초대할 수 있다. 이들 가정들은 반드시 집을 열어 청년들을 접대할 준비가 되어 있어야 한다.</div>
+          </div>
+          <div class="level-A"><span class="marker">E.</span><span class="text">실지적으로 교회생활은 그룹 집회 가운데서 완성된다. 오늘 가장 중요한 일은 바로 우리 자신의 그룹 집회를 갖는 것이다. 이것은 우리 자신의 집회로 볼 수 있다.</span></div>
+          <div class="level-A"><span class="marker">F.</span><span class="text">우리는 청소년들을 인도하여 함께 떡을 떼게 하며 그들에게 떡을 떼는 것이 무엇이며 떡을 떼는 것의 의미가 무엇인지를 가르쳐 주어야 한다. 이것은 그들의 교회생활의 일부분이다.</span></div>
+        </div>
+      </section>
+    </article>
+
+    <!-- ════════ Message 3 ════════ -->
+    <article class="message" id="m3">
+      <header class="msg-head">
+        <div class="msg-eyebrow">Message 03</div>
+        <h2>교회생활을 위하여 청년들에게<br />예수님의 인성이 필요함</h2>
+        <div class="msg-scripture">
+          <span class="label">성경</span>출 25:10-11, 26:15, 19, 딤전 3:15-16, 살전 4:3-4, 빌 4:8, 2:5-8, 딤후 2:22, 3:16, 1:7, 4:22
+        </div>
+      </header>
+
+      <!-- I. 성막 널빤지 -->
+      <section class="section" id="m3-1">
+        <div class="section-head">
+          <span class="section-roman">Ⅰ</span>
+          <div>
+            <h3>성막의 예표 — <span class="moss">조각목을 금으로 싼</span> 널빤지</h3>
+            <div class="section-ref">출 25:10-11, 26:15, 19</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Tabernacle Plank · 인성 + 신성</div>
+          <div class="plank">
+            <div class="plank-diagram">
+              <div class="plank-outer"></div>
+              <div class="plank-inner">조각목<br />Acacia Wood</div>
+            </div>
+            <div class="plank-labels">
+              <div class="plank-label wood">
+                <div class="pl-mark">Core</div>
+                <div class="pl-name">조각목</div>
+                <div class="pl-meaning">예수님의 인성</div>
+              </div>
+              <div class="plank-label gold">
+                <div class="pl-mark">Covering</div>
+                <div class="pl-name">정금</div>
+                <div class="pl-meaning">하나님의 신성</div>
+              </div>
+            </div>
+          </div>
+          <p class="viz-caption">
+            "금은 귀하고 무거우며 빛을 발하지만 금 그 자체로는 세우기에 부적합하다.
+            성막의 널빤지가 세워지기 위해서는 반드시 조각목이 필요했다."
+            교회를 서 있게 하는 것은 바로 교회 안에 있는 <strong>인성</strong>을 통해서입니다 (딤전 3:15-16).
+          </p>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">언약궤와 성막은 그리스도와 교회를 표징하는데 언약궤는 그리스도이고 성막은 언약궤의 확대이다. 성막이 언약궤의 확대인 것처럼 교회 역시 그리스도의 증가와 확대이다 <span class="scripture-ref">— 출 25:10–11</span>.</span></div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">성막의 널빤지들은 언약궤와 동일한 재료로 만들어졌으며 동일하게 조각목을 금으로 싸는 방식으로 만들어졌다 <span class="scripture-ref">— 출 26:15, 29</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 성막의 널빤지는 세워져야 했다. 금은 귀하고 무거우며 빛을 발하지만 금 그 자체로는 세우기에 부적합하다. 성막의 널빤지가 세워지기 위해서는 반드시 조각목이 필요했다 <span class="scripture-ref">— 출 26:15</span>.</div>
+            <div class="level-1"><span class="marker">2.</span> 우리에게 인성이 필요하고 신성도 필요하지만, 교회를 서 있게 하는 것은 바로 교회 안에 있는 인성을 통해서이다 <span class="scripture-ref">— 딤전 3:15-16</span>.</div>
+            <div class="level-1"><span class="marker">3.</span> 교회는 살아 계신 하나님의 교회이다. 교회는 반드시 하나님께서 그 안에 살고 계셔야 하며, 이 살아 계신 하나님의 교회가 바로 진리(실재)의 기둥과 기반이다.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- II. 사탄의 3가지 공격 -->
+      <section class="section" id="m3-2">
+        <div class="section-head">
+          <span class="section-roman">Ⅱ</span>
+          <div>
+            <h3>오늘 사탄의 주된 표적은 <span class="moss">청년들이다</span></h3>
+            <div class="section-ref">롬 12:2, 고후 10:4-5, 엡 4:17-24</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Three Attacks · 미성숙한 마음에 주입된 사탄의 사상</div>
+          <div class="attacks">
+            <div class="attack">
+              <div class="att-num">01</div>
+              <div class="att-name">음행</div>
+              <div class="att-desc">자기 몸에 죄를 짓는 것.<br /><em style="font-family:'Cormorant Garamond',serif">고전 6:18, 살전 4:3-5</em></div>
+            </div>
+            <div class="attack">
+              <div class="att-num">02</div>
+              <div class="att-name">자살</div>
+              <div class="att-desc">사탄이 젊은 사람들의<br />생각 속에 집어넣은 계략.</div>
+            </div>
+            <div class="attack">
+              <div class="att-num">03</div>
+              <div class="att-name">정신적 질병</div>
+              <div class="att-desc">마음속의 어떤 부분이<br />올바르지 않다는 표지.<br /><em style="font-family:'Cormorant Garamond',serif">딤후 1:7, 골 2:1-2</em></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">교회생활 안에 있는 모든 청년 형제자매들은 반드시 사탄이 모든 파괴적인 생각의 근원임을 분명히 알아야 한다. 교회 안에 있는 청년들은 반드시 그들이 과거에 붙잡았던 관념들을 거절해야 한다.</span></div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">이러한 생각이 주는 첫 번째 파괴적인 표현은 바로 <strong>음행</strong>이다 <span class="scripture-ref">— 고전 6:9-11</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 음행처럼 심하게 인류를 파괴시키는 것은 없다. 사람이 범하는 죄마다 몸 밖에 있으나 음행하는 사람은 자기 몸에다 죄를 짓는 것이다 <span class="scripture-ref">— 고전 6:18</span>.</div>
+            <div class="level-1">
+              <span class="marker">2.</span> 교회생활은 집회 생활이며 단체적인 생활이다. 이 때문에 우리는 다른 사람들과 상당히 많은 접촉을 갖는다 <span class="scripture-ref">— 살전 4:3-5, 7, 13:4</span>.
+              <div class="level-a"><span class="marker">a.</span> 거룩하게 됨과 존귀하게 됨으로써 자신의 그릇을 나쁜 정욕에 빠지지 않게 하여, 그릇을 지키는 것이 음행을 범하지 않는 안전장치이다 <span class="scripture-ref">— 살전 4:3-5</span>.</div>
+              <div class="level-a"><span class="marker">b.</span> 하나님의 뜻은 바로 그분께서 구속하신 사람들인 그리스도 안의 믿는 이들이 그분의 거룩한 본성에 따라 거룩한 생활, 곧 하나님 이외의 모든 것으로부터 완전히 하나님께로 분별되는 생활을 사는 것이다. 이를 위하여 하나님은 우리를 완전히 거룩하게 하고 계신다 <span class="scripture-ref">— 살전 5:23</span>.</div>
+              <div class="level-a"><span class="marker">c.</span> 주님의 이름과 교회의 증거와 당신의 보호를 위해서뿐만 아니라 당신의 몸의 존귀하게 됨을 위해서 당신은 반드시 단독으로 이성과 함께 있어서는 안 된다는 원칙을 지켜야만 한다 <span class="scripture-ref">— 창 49:3-4, 히 12:16 각주 1</span>.</div>
+            </div>
+          </div>
+          <div class="level-A">
+            <span class="marker">C.</span>
+            <span class="text">청년들의 생각 속으로 주입된 악한 사상의 두 번째 표현은 <strong>자살</strong>이다.</span>
+            <div class="level-1"><span class="marker">1.</span> 사탄은 자살하고 싶다는 생각을 젊은 사람들의 생각 속에 집어넣었다. 우리 모두는 기도하며 일어서서 원수의 그러한 계략에 맞서야 한다.</div>
+            <div class="level-1"><span class="marker">2.</span> 사탄의 모든 목적은 바로 하나님께서 그분의 목적을 위해 쓰실 수 없도록 사람을 손상시키려는 것이다.</div>
+          </div>
+          <div class="level-A">
+            <span class="marker">D.</span>
+            <span class="text">사람의 마음속으로 주입된 악한 사상의 세 번째 표현은 <strong>정신적으로 병든 상태</strong>이다.</span>
+            <div class="level-1"><span class="marker">1.</span> 바울은 하나님께서 우리에게 주신 것은 맑은 생각의 영이라고 말했다. 우리의 사상과 관념과 견해는 모두 반드시 매우 건전해야 한다. 우리에게는 건전한 생각이 있어야 한다 <span class="scripture-ref">— 딤후 1:7</span>.</div>
+            <div class="level-1"><span class="marker">2.</span> 마음속에 있는 문제들은 언제나 정신적인 질병의 원인이 된다. 어떤 사람의 생각이 원수의 공격을 받고 있다면 이것은 그의 마음속의 어떤 부분이 올바르지 않다는 것을 가리킨다 <span class="scripture-ref">— 골 2:1-2</span>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- III. 시대의 처방 -->
+      <section class="section" id="m3-3">
+        <div class="section-head">
+          <span class="section-roman">Ⅲ</span>
+          <div>
+            <h3>이 시대의 처방은 <span class="moss">예수님에게서 나온 인성</span>이다</h3>
+            <div class="section-ref">살전 4:3-4, 빌 4:8-9, 2:5-8</div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">우리는 반드시 오늘 주님의 회복을 위하여 예수님의 인성이 필요하다는 것을 알아야 한다. 반드시 이 시대의 조류에 대항하여 일어나는 한 무리의 사람들이 있어야 한다 <span class="scripture-ref">— 딤후 3:1-5</span>.</span></div>
+          <div class="level-A">
+            <span class="marker">B.</span>
+            <span class="text">이 시대를 위한 적절한 치료제와 이 세대의 증상에 맞는 처방은 바로 사람이신 예수님에게서 나온 인성이다. 올바른 인성만이 오늘날 이 세대를 치료할 수 있는 유일한 능력이다 <span class="scripture-ref">— 마 5:13-16</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 주님께서는 교회를 사용하시어 구부러지고 비뚤어진 이 세대를 치료하신다. 이 세대를 치료할 수 있는 처방은 바로 합당한 인성을 가진 교회이다 <span class="scripture-ref">— 행 2:40, 빌 2:15</span>.</div>
+            <div class="level-1"><span class="marker">2.</span> 만일 교회 안의 청년들이 예수님의 인성을 받아들인다면 그들은 이 시대의 치료제가 될 것이다.</div>
+          </div>
+          <div class="level-A"><span class="marker">C.</span><span class="text">오늘 교회생활 안에서 주님께서는 그분의 인성을 회복하고 계신다. 우리는 그분의 능력이 필요할 뿐 아니라 더욱 그분의 인성이 필요하다. 우리는 그분께서 무언가를 하시는 것이 필요한 것이 아니라 그분의 존재 자체가 필요하다.</span></div>
+          <div class="level-A"><span class="marker">D.</span><span class="text">청년 형제자매들의 합당한 인성이 빛을 발한다면 그것은 이 시대에서 힘 있는 증거가 되고 이 시대를 치료할 것이다. 그뿐 아니라 이 인성은 우리가 가장 강력한 교회생활을 하도록 만들 것이다.</span></div>
+          <div class="level-A">
+            <span class="marker">E.</span>
+            <span class="text">이 타락한 시대에 주님의 회복을 위하여 우리는 강하고 적절하며 올바른 인성이 필요한데 이것은 너무나 명백한 사실이다 <span class="scripture-ref">— 빌 4:8-9, 2:5-8</span>.</span>
+            <div class="level-1"><span class="marker">1.</span> 이 타락한 시대에 견고하게 서 있기 위하여 우리에게 필요한 것은 하나님의 기적적인 능력이 아니라 바로 예수님의 인성이다. 이것은 조각목의 세우는 능력이다.</div>
+            <div class="level-1"><span class="marker">2.</span> 만일 우리가 이 시대의 조류를 따라 돌고 돈다면 뼈가 없는 해파리와 같이 해류를 따라 아무 곳으로나 흘러갈 것이다. 해파리는 다만 흘러갈 수 있을 뿐이다.</div>
+            <div class="level-1"><span class="marker">3.</span> 주님의 회복을 위하여 우리는 이러한 시대적인 조류에 대항하여 맞설 수 있는 강한 척추가 필요하며 이 척추는 오직 예수님의 인성에서만 나올 수 있다.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IV. 다섯 가지 중점 -->
+      <section class="section" id="m3-4">
+        <div class="section-head">
+          <span class="section-roman">Ⅳ</span>
+          <div>
+            <h3>예수님의 인성을 받아들이는 <span class="moss">다섯 가지 중점</span></h3>
+            <div class="section-ref">딤후 2:22, 3:16, 1:7, 4:22</div>
+          </div>
+        </div>
+
+        <div class="viz">
+          <div class="viz-eyebrow">Five Essentials · 인성을 받아들이는 길</div>
+          <div class="essentials">
+            <div class="essential">
+              <div class="ess-num">01</div>
+              <div class="ess-name">순수한 마음으로<br />주님을 부름</div>
+              <div class="ess-ref">딤후 2:22</div>
+            </div>
+            <div class="essential">
+              <div class="ess-num">02</div>
+              <div class="ess-name">말씀을<br />호흡으로 들이마심</div>
+              <div class="ess-ref">딤후 3:16</div>
+            </div>
+            <div class="essential">
+              <div class="ess-num">03</div>
+              <div class="ess-name">단체적인<br />몸의 생활</div>
+              <div class="ess-ref">딤후 2:22</div>
+            </div>
+            <div class="essential">
+              <div class="ess-num">04</div>
+              <div class="ess-name">영을<br />훈련함</div>
+              <div class="ess-ref">딤후 1:7</div>
+            </div>
+            <div class="essential">
+              <div class="ess-num">05</div>
+              <div class="ess-name">우리 영 안에<br />계신 주님</div>
+              <div class="ess-ref">딤후 4:22</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="outline">
+          <div class="level-A"><span class="marker">A.</span><span class="text">첫째는 순수한 마음으로 주님을 불러야 한다. 우리가 주님의 이름을 부를 때 우리는 실지로 그분의 인성을 우리 안으로 받아들일 수 있다 <span class="scripture-ref">— 딤후 2:22</span>.</span></div>
+          <div class="level-A"><span class="marker">B.</span><span class="text">우리는 주님의 이름을 불러야 할 뿐만 아니라 성경의 한 글자 한 글자를 호흡으로 들이마셔야 한다. 이것은 주님의 말씀을 기도로 읽는 것이다 <span class="scripture-ref">— 딤후 3:16</span>.</span></div>
+          <div class="level-A"><span class="marker">C.</span><span class="text">셋째는 몸의 생활이다. 바울은 우리가 혼자서 주님의 이름을 부르라고 한 것이 아니라 다른 사람들과 함께해야 한다고 말했는데, 이것은 일종의 단체적인 생활이다. 우리가 주님의 인성을 누리기 위해서는 순수한 마음으로 주님의 이름을 부르는 이들과 함께 누려야 한다 <span class="scripture-ref">— 딤후 2:22</span>.</span></div>
+          <div class="level-A"><span class="marker">D.</span><span class="text">넷째로 바울은 우리에게 영을 훈련하라고 했다 <span class="scripture-ref">— 딤후 1:7</span>.</span></div>
+          <div class="level-A"><span class="marker">E.</span><span class="text">다섯째는 놀라운 한 분의 인격이 우리의 영 안에 있다는 것이다. "주님께서 그대의 영과 함께 계시기를 바랍니다." <span class="scripture-ref">— 딤후 4:22</span>.</span></div>
+        </div>
+
+        <div class="closing">
+          <div class="quote-mark">"</div>
+          <p>우리는 각 지방에 있는 교회들 안에 있는 모든 형제자매들이 예수님의 인성에 대한 충만한 누림을 갖도록, 주님의 회복의 전체적인 상황을 위하여 기도해야 한다. 그럴 때 우리는 악한 이 시대의 흐름을 거슬러서 견고하게 서 있는 아카시아 나무 널빤지들이 될 것이다. 이것은 우리의 분명한 증거가 될 것이고, 모든 주요 도시들에 지방적인 교회생활의 회복을 가져다줄 것이다.</p>
+          <cite>— 실재이신 그리스도, 16장</cite>
+        </div>
+      </section>
+    </article>
+
+  </main>
+</div>
+
+<script>
+  // ── 메시지별 TOC 데이터 ─────────────
+  const TOC = {
+    m1: [
+      { id: 'm1-1', roman: 'Ⅰ', label: '구원의 단위는 한 집' },
+      { id: 'm1-2', roman: 'Ⅱ', label: '17가지 성경 예' },
+      { id: 'm1-3', roman: 'Ⅲ', label: '가장의 결단' },
+      { id: 'm1-4', roman: 'Ⅳ', label: '온 집 구원의 원칙' },
+    ],
+    m2: [
+      { id: 'm2-1', roman: 'Ⅰ', label: '두 종류의 집회' },
+      { id: 'm2-2', roman: 'Ⅱ', label: '청년 양성의 실행' },
+    ],
+    m3: [
+      { id: 'm3-1', roman: 'Ⅰ', label: '성막 널빤지의 예표' },
+      { id: 'm3-2', roman: 'Ⅱ', label: '사탄의 세 가지 공격' },
+      { id: 'm3-3', roman: 'Ⅲ', label: '시대의 처방 · 인성' },
+      { id: 'm3-4', roman: 'Ⅳ', label: '다섯 가지 중점' },
+    ],
+  };
+
+  const tabs = document.querySelectorAll('.tab');
+  const messages = document.querySelectorAll('.message');
+  const tocList = document.getElementById('toc-list');
+
+  function renderTOC(msgKey) {
+    tocList.innerHTML = TOC[msgKey].map(item =>
+      `<li><a href="#${item.id}" data-target="${item.id}"><span class="roman">${item.roman}</span>${item.label}</a></li>`
+    ).join('');
+  }
+
+  function switchTab(msgKey) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.msg === msgKey));
+    messages.forEach(m => m.classList.toggle('active', m.id === msgKey));
+    renderTOC(msgKey);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.msg));
+  });
+
+  // 초기 TOC
+  renderTOC('m1');
+
+  // ── Scrollspy ─────────────────────
+  const sections = () => document.querySelectorAll('.message.active .section');
+  function updateActiveSection() {
+    const offset = 140;
+    let activeId = null;
+    sections().forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top - offset < 0) activeId = sec.id;
+    });
+    document.querySelectorAll('.toc-list a').forEach(a => {
+      a.classList.toggle('active', a.dataset.target === activeId);
+    });
+  }
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+
+  // Smooth scroll for TOC links
+  tocList.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    const el = document.getElementById(link.dataset.target);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+</body>
+</html>

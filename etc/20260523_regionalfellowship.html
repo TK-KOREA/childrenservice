@@ -531,6 +531,7 @@
     max-width: 460px;
     max-height: 88vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background: var(--paper);
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
@@ -558,6 +559,7 @@
     color: var(--ink);
     margin: 0 0 6px;
     font-weight: 700;
+    word-break: keep-all;
   }
   .modal-source {
     font-size: 12px;
@@ -571,11 +573,14 @@
     margin-bottom: 20px;
   }
   .modal-body {
-    font-family: 'Gowun Batang', serif;
-    font-size: 15.5px;
-    line-height: 1.85;
+    font-family: 'Gowun Batang', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    line-height: 1.9;
     color: var(--ink);
     white-space: pre-line;
+    letter-spacing: -0.005em;
+    word-break: keep-all;
+    word-wrap: break-word;
   }
   .modal-close {
     margin-top: 28px;
@@ -594,6 +599,54 @@
   /* 모달 열렸을 때 본문 스크롤 잠금 */
   body.modal-open {
     overflow: hidden;
+  }
+
+  /* ── 모바일: 풀스크린 모달 ────────────────── */
+  @media (max-width: 640px) {
+    .modal-overlay {
+      align-items: stretch;
+    }
+    .modal {
+      width: 100%;
+      max-width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
+      border-radius: 0;
+      padding: 22px 22px calc(28px + env(safe-area-inset-bottom)) 22px;
+      padding-top: calc(22px + env(safe-area-inset-top));
+      animation: slideUp 0.32s cubic-bezier(0.16,1,0.3,1);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-handle {
+      margin-bottom: 18px;
+    }
+    .modal h3 {
+      font-size: 24px;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .modal-source {
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    .modal-rule {
+      margin-bottom: 22px;
+    }
+    .modal-body {
+      flex: 1;
+      font-size: 17px;
+      line-height: 1.95;
+      letter-spacing: -0.005em;
+    }
+    .modal-close {
+      margin-top: 32px;
+      padding: 16px;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
   }
 </style>
 </head>
