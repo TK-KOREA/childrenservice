@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주님의 발자국 소리 — 이기는 자를 부르시는 음성</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4ede1;
+    --bg-warm: #ebe0cc;
+    --paper: #fbf6ec;
+    --ink: #1f1a14;
+    --ink-soft: #3d342a;
+    --muted: #7a6b58;
+    --accent: #8b2f1e;
+    --accent-soft: #c46b4a;
+    --olive: #5b6342;
+    --gold: #b08a3e;
+    --rule: #c9bba2;
+    --topbar-h: 44px;
+    --font-scale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: calc(16px * var(--font-scale)); }
+  body {
+    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.85;
+    font-size: 1rem;
+    padding-top: var(--topbar-h);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(139, 47, 30, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(91, 99, 66, 0.05) 0%, transparent 45%);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* ─── Masthead ─── */
+  .masthead {
+    border-top: 3px double var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 0 14px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+  }
+  .masthead .pub { font-weight: 600; }
+  .masthead .meta { font-style: italic; }
+  .masthead .meta .dot {
+    color: var(--accent);
+    margin: 0 8px;
+    font-size: 0.5rem;
+    vertical-align: middle;
+  }
+  .masthead .date { letter-spacing: 0.1em; }
+  @media (max-width: 760px) {
+    .masthead { font-size: 0.7rem; }
+    .masthead .meta .dot { margin: 0 5px; }
+  }
+
+  /* ─── Title ─── */
+  .title-block {
+    text-align: center;
+    padding: 30px 0 60px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 60px;
+  }
+  .kicker {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  h1.main-title {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.18;
+    margin-bottom: 22px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  h1.main-title em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .subtitle {
+    font-family: 'Gowun Dodum', sans-serif;
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 40px 0 70px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0;
+  }
+  .meta-strip > div { padding: 0 22px; border-right: 1px solid var(--rule); }
+  .meta-strip > div:last-child { border-right: none; }
+  .meta-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .meta-value {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  @media (max-width: 720px) {
+    .meta-strip { grid-template-columns: repeat(2, 1fr); }
+    .meta-strip > div { padding: 12px; border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+
+  /* ─── Section ─── */
+  section {
+    margin-bottom: 80px;
+    position: relative;
+    scroll-margin-top: calc(var(--topbar-h) + 16px);
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 4rem;
+    color: var(--accent);
+    line-height: 1;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .section-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 800;
+    font-size: 2.1rem;
+    line-height: 1.28;
+    margin-bottom: 30px;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 32px 0 14px;
+    color: var(--ink);
+  }
+  p { margin-bottom: 16px; color: var(--ink-soft); }
+
+  .lead {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.18rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 30px;
+    border-left: 3px solid var(--accent);
+    padding-left: 24px;
+  }
+
+  /* ─── Pull quote ─── */
+  .pull-quote {
+    margin: 50px 0;
+    padding: 40px 50px;
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    position: relative;
+  }
+  .pull-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    color: var(--accent);
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .pull-quote blockquote {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+  .pull-quote cite {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 720px) {
+    .pull-quote { padding: 30px 28px; }
+    .pull-quote blockquote { font-size: 1.1rem; }
+  }
+
+  /* ─── Voice quote ─── */
+  .voice-quote {
+    margin: 22px 0;
+    padding: 18px 26px 18px 32px;
+    background: linear-gradient(90deg, rgba(176, 138, 62, 0.06) 0%, rgba(251, 246, 236, 0) 100%);
+    border-left: 3px solid var(--gold);
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.02rem;
+    line-height: 1.78;
+    color: var(--ink);
+    position: relative;
+  }
+  .voice-quote::before {
+    content: '\201C';
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.55;
+  }
+  .voice-quote p {
+    margin: 0;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .voice-quote p strong {
+    font-style: normal;
+    color: var(--ink);
+    background: rgba(176, 138, 62, 0.15);
+    padding: 0 3px;
+  }
+  .voice-quote .attr {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+  .voice-quote .attr::before {
+    content: '— ';
+    color: var(--accent);
+  }
+
+  /* ─── Cards ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin: 30px 0;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 26px 26px;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .card h4 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.12rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .card.olive::before { background: var(--olive); }
+  .card.gold::before { background: var(--gold); }
+
+  /* ─── Tension (left vs right) ─── */
+  .tension-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin: 30px 0;
+    align-items: stretch;
+  }
+  @media (max-width: 720px) {
+    .tension-grid { grid-template-columns: 1fr; }
+    .tension-vs { padding: 12px !important; }
+  }
+  .tension-side {
+    background: var(--paper);
+    padding: 28px;
+    border: 1px solid var(--rule);
+  }
+  .tension-side .stage {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .tension-side h4 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .tension-side p {
+    font-size: 0.95rem;
+    margin: 0;
+    color: var(--ink-soft);
+    line-height: 1.72;
+  }
+  .tension-side.left { border-right: none; border-top: 4px solid var(--accent); }
+  .tension-side.right { border-left: none; border-top: 4px solid var(--olive); }
+  .tension-side.right .stage { color: var(--olive); }
+  .tension-vs {
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── Rapture sequence timeline ─── */
+  .rapture-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 32px 0;
+    position: relative;
+  }
+  @media (max-width: 720px) {
+    .rapture-flow { grid-template-columns: 1fr; }
+    .rapture-step::after { display: none !important; }
+  }
+  .rapture-step {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 20px 18px 22px;
+    position: relative;
+  }
+  .rapture-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .rapture-step .seq {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .rapture-step h5 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .rapture-step p {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .rapture-step.cur::before { background: var(--gold); height: 5px; }
+  .rapture-step.cur .seq { color: var(--gold); }
+
+  /* ─── Talent vs Children box ─── */
+  .talent-box {
+    margin: 30px 0;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .talent-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 28px;
+    padding: 22px 26px;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .talent-row:last-child { border-bottom: none; }
+  .talent-label {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+  .talent-label .en {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .talent-value {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .talent-value strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    .talent-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 20px; }
+  }
+
+  /* ─── Hannah prayer flow ─── */
+  .hannah-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 8px;
+    margin: 32px 0 18px;
+    align-items: stretch;
+  }
+  @media (max-width: 760px) {
+    .hannah-flow { grid-template-columns: 1fr; }
+    .hannah-arrow { display: none !important; }
+  }
+  .hannah-step {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--olive);
+    padding: 18px 18px 18px 20px;
+  }
+  .hannah-step .stage {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.74rem;
+    color: var(--olive);
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .hannah-step h5 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 0.98rem;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .hannah-step p {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .hannah-step.final {
+    border-left-color: var(--accent);
+    background: linear-gradient(180deg, rgba(139, 47, 30, 0.06) 0%, var(--paper) 100%);
+  }
+  .hannah-step.final .stage { color: var(--accent); }
+
+  /* ─── Insight list ─── */
+  .insight-list {
+    counter-reset: insight;
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+  }
+  .insight-list > li {
+    counter-increment: insight;
+    padding: 26px 0 26px 80px;
+    position: relative;
+    border-bottom: 1px solid var(--rule);
+  }
+  .insight-list > li:last-child { border-bottom: none; }
+  .insight-list > li::before {
+    content: counter(insight, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .insight-list > li h4 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .insight-list > li p {
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ─── Quote panel (scripture / reference box) ─── */
+  .scripture-box {
+    margin: 24px 0;
+    padding: 20px 26px;
+    background: rgba(91, 99, 66, 0.08);
+    border-left: 3px solid var(--olive);
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 0.98rem;
+    line-height: 1.78;
+    color: var(--ink-soft);
+  }
+  .scripture-box .ref {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--olive);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 3px double var(--ink);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── Responsive base ─── */
+  @media (max-width: 720px) {
+    .container { padding: 30px 22px; }
+    h2 { font-size: 1.65rem; }
+  }
+
+  /* ─── Topbar + Side Panel + Font Scale ─── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--topbar-h);
+    background: rgba(31, 26, 20, 0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid rgba(176, 138, 62, 0.32);
+    display: flex; align-items: center;
+    padding: 0 10px; z-index: 1000; gap: 4px;
+  }
+  .topbar-btn {
+    flex-shrink: 0; width: 34px; height: 34px;
+    border: none; background: none; border-radius: 4px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--paper); opacity: 0.85;
+    transition: background .15s, opacity .15s, color .15s;
+  }
+  .topbar-btn:hover { background: rgba(176, 138, 62, 0.16); opacity: 1; color: var(--gold); }
+  .topbar-title {
+    flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.12em;
+    color: var(--gold); scrollbar-width: none; -ms-overflow-style: none;
+    padding: 0 6px; text-transform: uppercase;
+  }
+  .topbar-title::-webkit-scrollbar { display: none; }
+  .font-controls {
+    display: flex; align-items: center; gap: 2px;
+    border: 1px solid rgba(176, 138, 62, 0.3);
+    border-radius: 4px; padding: 2px; margin-left: 4px;
+  }
+  .font-ctrl-btn {
+    width: 26px; height: 26px; border: none; background: transparent;
+    color: var(--paper); font-size: 14px; cursor: pointer; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nanum Myeongjo', serif;
+    transition: background .15s, color .15s;
+  }
+  .font-ctrl-btn:hover { background: rgba(176, 138, 62, 0.2); color: var(--gold); }
+
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(31, 26, 20, 0.55);
+    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+    z-index: 1001; opacity: 0; pointer-events: none;
+    transition: opacity .25s;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+
+  .sidepanel {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: 300px; max-width: 82vw;
+    background: linear-gradient(180deg, #2a2218 0%, #1a1611 100%);
+    z-index: 1002; transform: translateX(-100%);
+    transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+    overflow-y: auto; padding: 20px 0;
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.45);
+    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+    border-right: 1px solid rgba(176, 138, 62, 0.28);
+  }
+  .sidepanel.open { transform: translateX(0); }
+  .sidepanel-header {
+    padding: 0 22px 16px;
+    border-bottom: 1px solid rgba(176, 138, 62, 0.22);
+    margin-bottom: 8px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sidepanel-close {
+    margin-left: auto; width: 28px; height: 28px;
+    border: none; background: transparent; border-radius: 3px;
+    cursor: pointer; font-size: 14px; color: var(--paper);
+    opacity: 0.7; display: flex; align-items: center; justify-content: center;
+    transition: background .15s, color .15s, opacity .15s;
+  }
+  .sidepanel-close:hover { background: rgba(176, 138, 62, 0.2); color: var(--gold); opacity: 1; }
+  .nav-section-head {
+    padding: 14px 22px 8px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 10.5px; color: var(--gold);
+    letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.85;
+  }
+  .nav-item {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 11px 22px;
+    font-size: 13px;
+    color: var(--paper); text-decoration: none; cursor: pointer;
+    transition: background .15s, color .15s, opacity .15s;
+    font-weight: 400; letter-spacing: -0.005em; opacity: 0.88;
+    font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
+  }
+  .nav-item:hover { background: rgba(176, 138, 62, 0.1); color: var(--gold); opacity: 1; }
+  .nav-item .nav-num {
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 11px; color: var(--accent-soft);
+    letter-spacing: 0.15em;
+    min-width: 22px;
+  }
+  .nav-divider { height: 1px; background: rgba(176, 138, 62, 0.18); margin: 10px 22px; }
+
+  @media (max-width: 540px) {
+    .topbar { padding: 0 6px; gap: 2px; }
+    .topbar-title { font-size: 12px; letter-spacing: 0.08em; padding: 0 4px; }
+    .topbar-btn { width: 32px; height: 32px; }
+    .font-ctrl-btn { width: 24px; height: 24px; font-size: 13px; }
+    .font-controls { padding: 1px; }
+  }
+  @media (max-width: 380px) {
+    .topbar-title { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═════════ Topbar ═════════ -->
+<div class="topbar" id="topbar">
+  <button class="topbar-btn" onclick="togglePanel()" aria-label="목차">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+  <div class="topbar-title">Message 04 · 주님의 발자국 소리</div>
+  <div class="font-controls" role="group" aria-label="글자 크기 조절">
+    <button class="font-ctrl-btn" onclick="adjustFont(-1)" aria-label="작게">−</button>
+    <button class="font-ctrl-btn" onclick="adjustFont(0)" style="font-size:12px;" aria-label="기본">가</button>
+    <button class="font-ctrl-btn" onclick="adjustFont(1)" aria-label="크게">+</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="togglePanel()"></div>
+
+<!-- ═════════ Side Panel ═════════ -->
+<div class="sidepanel" id="sidepanel">
+  <div class="sidepanel-header">목차<button class="sidepanel-close" onclick="togglePanel()" aria-label="닫기">✕</button></div>
+  <div class="nav-section-head">Field Report</div>
+  <a class="nav-item" onclick="goTo('sec-01')"><span class="nav-num">01</span><span>발자국 소리 — 시대의 끝자락</span></a>
+  <a class="nav-item" onclick="goTo('sec-02')"><span class="nav-num">02</span><span>두 개의 완결</span></a>
+  <a class="nav-item" onclick="goTo('sec-03')"><span class="nav-num">03</span><span>사내아이 + 첫 열매</span></a>
+  <a class="nav-item" onclick="goTo('sec-04')"><span class="nav-num">04</span><span>첫 열매의 네 증거</span></a>
+  <a class="nav-item" onclick="goTo('sec-05')"><span class="nav-num">05</span><span>자녀 = 여호와의 기업</span></a>
+  <a class="nav-item" onclick="goTo('sec-06')"><span class="nav-num">06</span><span>이기는 부모, 이기는 아이</span></a>
+  <a class="nav-item" onclick="goTo('sec-07')"><span class="nav-num">07</span><span>목양의 세 기둥</span></a>
+  <a class="nav-item" onclick="goTo('sec-08')"><span class="nav-num">08</span><span>본이 되는 세 가지</span></a>
+  <a class="nav-item" onclick="goTo('sec-09')"><span class="nav-num">09</span><span>한나의 기도</span></a>
+  <a class="nav-item" onclick="goTo('sec-10')"><span class="nav-num">10</span><span>응답의 목소리들</span></a>
+  <a class="nav-item" onclick="goTo('sec-11')"><span class="nav-num">11</span><span>마무리 — 포개진 두 손</span></a>
+  <div class="nav-divider"></div>
+  <a class="nav-item" onclick="goTo('top')"><span class="nav-num">↑</span><span>맨 위로</span></a>
+</div>
+
+<div id="top"></div>
+<div class="container">
+
+  <!-- ═══════════════ Masthead ═══════════════ -->
+  <div class="masthead">
+    <span class="pub">Ministry Notes · 학부모 집회</span>
+    <span class="meta">메시지 4번<span class="dot">●</span>목양 · 기도<span class="dot">●</span>응답 시간</span>
+    <span class="date">2026.05.23 (토)</span>
+  </div>
+
+  <!-- ═══════════════ Title ═══════════════ -->
+  <div class="title-block">
+    <div class="kicker">A Field Report — Message 04</div>
+    <h1 class="main-title">주님의 <em>발자국 소리</em>가<br>가까이 들려온다</h1>
+    <p class="subtitle">
+      이기는 자를 부르시는 음성에 응답하기 위하여 —<br>
+      메시지 4번 본문과 학부모 집회의 목양·기도 교통, 그리고 응답 시간의 기록.
+    </p>
+  </div>
+
+  <!-- ═══════════════ Meta Strip ═══════════════ -->
+  <div class="meta-strip">
+    <div>
+      <div class="meta-label">Topic</div>
+      <div class="meta-value">첫 열매 · 목양</div>
+    </div>
+    <div>
+      <div class="meta-label">Message</div>
+      <div class="meta-value">주님의 만족을 위해 다음 세대를 첫 열매로 산출함</div>
+    </div>
+    <div>
+      <div class="meta-label">Format</div>
+      <div class="meta-value">본문 + 교통 + 응답</div>
+    </div>
+    <div>
+      <div class="meta-label">Core Question</div>
+      <div class="meta-value">어떻게 들여질 것인가</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SECTION 01: 발자국 소리 ═══════════════ -->
+  <section id="sec-01">
+    <div class="section-num">01</div>
+    <div class="section-tag">The Footsteps of the Lord</div>
+    <h2>발자국 소리 — 시대의 끝자락에서 들려오는 음성</h2>
+
+    <p class="lead">
+      "주님의 발자국 소리가 가까이 들려온다." 이 발자국 소리는 오늘 우리에게
+      어떤 음성으로 들려야 하는가 — <strong>이기는 자를 부르시는 그분의 음성</strong>이다.
+      마지막 메시지의 가장 중점적인 한 단어는 <em>"첫 열매"</em>이며,
+      신부는 결국 모든 이기는 자들로 구성된다는 것이 지난 메시지의 결론이었다.
+    </p>
+
+    <h3>마지막 광경의 시간표</h3>
+    <p>
+      대환란 전, 이스라엘과 유럽의 7년 평화 조약이 3년 반을 지나는 시점에서
+      어떤 일이 일어난다. 역대 순교한 믿는 이들이 하나님의 보좌로 휴거하고,
+      이어서 살아 있는 믿는 이들 가운데 이기는 자들이 시온으로 휴거한다.
+    </p>
+
+    <div class="rapture-flow">
+      <div class="rapture-step">
+        <div class="seq">PHASE 01</div>
+        <h5>역대 순교자들</h5>
+        <p>이미 준비된 자들. 그들의 굴부지짐과 함께 하늘의 보좌 앞으로 휴거.</p>
+      </div>
+      <div class="rapture-step cur">
+        <div class="seq">PHASE 02 · NOW</div>
+        <h5>살아 있는 이기는 자</h5>
+        <p>아직 준비 중. 첫 열매로서 시온으로 휴거. <strong>주님의 다시 오심과 직결.</strong></p>
+      </div>
+      <div class="rapture-step">
+        <div class="seq">PHASE 03</div>
+        <h5>빌라델비아 · 마 24장</h5>
+        <p>이 땅에 남아 있는 빌라델비아와 마태복음 24장의 믿는 이들.</p>
+      </div>
+      <div class="rapture-step">
+        <div class="seq">PHASE 04</div>
+        <h5>대환란 후 · 두 증인</h5>
+        <p>대환란 중 순교한 후기 이기는 자와 두 증인의 휴거.</p>
+      </div>
+    </div>
+
+    <div class="voice-quote">
+      <p>세계 정세를 통한 하나님의 준비하심은 다가오심으로 우리에게 오지만, <strong>그분의 또 하나의 완벽한 다가오심은 우리 첫 열매들의 어떠함에 매달려 있다</strong>.</p>
+      <span class="attr">참석자 1 · 메시지 본문 강해</span>
+    </div>
+
+    <h3>저의 세대와 다음 세대 — 이 시대의 끝</h3>
+    <p>
+      이 시대를 분별하는 것은 시대적 정세와 함께 하나님의 움직이심을 보는 것이며,
+      내면적으로는 우리 모두를 이기는 자로 살아 있는 채로 만나기를 원하시는
+      그분의 갈망에 응답하는 것이다. <strong>저의 세대와 바로 다음 세대가 이 시대의 끝이 아닐까</strong>
+      하는 느낌이 모두에게 동일하다.
+    </p>
+
+    <div class="voice-quote">
+      <p>해가 떠오름은 우리로 하여금 새로운 부흥을 얻기 위한 하나님의 자연 법칙이다. <strong>매일 아침 그날 우리의 마음은 이기는 자의 외침이라는 하나님의 음성으로 느껴져야 한다.</strong></p>
+      <span class="attr">참석자 1 · 시대를 향한 응답</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 02: 두 개의 완결 ═══════════════ -->
+  <section id="sec-02">
+    <div class="section-num">02</div>
+    <div class="section-tag">Initial vs Consummate</div>
+    <h2>두 개의 완결 — 천년왕국과 새 하늘 새 땅</h2>
+
+    <p>
+      왕국 시대는 초기의 완결과 충만한 완결로 구분된다.
+      초기의 완결은 천년왕국 안의 <strong>초기 새 예루살렘</strong>이고,
+      충만한 완결은 새 하늘 새 땅에서의 <strong>새 예루살렘</strong>이다.
+      이 두 완결 사이에서 그리스도의 몸을 건축하는 이기는 이들이 산출된다.
+    </p>
+
+    <div class="tension-grid">
+      <div class="tension-side left">
+        <div class="stage">Phase A — Initial</div>
+        <h4>천년왕국 · 초기의 새 예루살렘</h4>
+        <p>
+          이기는 자들의 분깃. <strong>생명나무는 이기는 자에게만 주어진다</strong>(계 2:7).
+          여기서 그리스도의 몸이 시대적 도구로 그분의 권익을 가져온다.
+          빌라델비아 이기는 자에게는 "하나님 성전의 기둥"이 약속된다 — 건축자로서의 상급.
+        </p>
+      </div>
+      <div class="tension-vs"><span>→</span></div>
+      <div class="tension-side right">
+        <div class="stage">Phase B — Consummate</div>
+        <h4>새 하늘 새 땅 · 충만한 새 예루살렘</h4>
+        <p>
+          모든 믿는 이들에게 해당하는 영원한 완결. 그러나
+          초기 새 예루살렘의 생명나무 분깃은 <strong>이기는 자의 몫</strong>이며,
+          새 하늘 새 땅에서 그 생명나무는 모든 믿는 이들에게 열린다.
+        </p>
+      </div>
+    </div>
+
+    <div class="scripture-box">
+      <span class="ref">현재형 — Overcoming, not Overcame</span>
+      영어 본문에서 "이기는 자"는 <em>To him who overcomes</em> — 현재형이다.
+      이미 이긴 자가 아니라, <strong>지금 이기는 자</strong>이다.
+      이긴 자는 이미 준비되어 있다. 그러나 현재 우리가 이기는 자로 서 있느냐는 다른 문제다.
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>
+        "신성한 경륜을 완결하는 시대적인 도구인 이기는 이들을
+        하나님은 <strong>반드시 얻으셔야 한다</strong>. 그분의 간절한 원함과 갈망과
+        외침이 들리는가?"
+      </blockquote>
+      <cite>— 메시지 본문 강해 (참석자 1)</cite>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 03: 사내아이 + 첫 열매 ═══════════════ -->
+  <section id="sec-03">
+    <div class="section-num">03</div>
+    <div class="section-tag">Two Faces of God's Satisfaction</div>
+    <h2>사내아이 + 첫 열매 — 그분의 만족의 두 얼굴</h2>
+
+    <p>
+      이기는 자들이 휴거되는 그 순간, 하늘 공중에서 새로운 광경이 펼쳐진다.
+      한면에서는 <strong>전쟁의 도구</strong>이고, 또 다른 한면에서는 <strong>만족의 대상</strong>이다.
+    </p>
+
+    <div class="tension-grid">
+      <div class="tension-side left">
+        <div class="stage">Revelation 12</div>
+        <h4>사내아이 — 원수를 패배시키는 도구</h4>
+        <p>
+          미가엘과 그의 천사들과 함께 큰 용, 옛 뱀과 전쟁을 일으켜
+          그들을 공중 하늘로부터 쫓겨나게 한다.
+          역대 순교한 믿는 이들과 이기는 자들을 포함한 사내아이의 몫이다.
+        </p>
+      </div>
+      <div class="tension-vs"><span>&amp;</span></div>
+      <div class="tension-side right">
+        <div class="stage">Revelation 14</div>
+        <h4>첫 열매 — 그분의 만족의 대상</h4>
+        <p>
+          싸움으로 원수를 패배시키지만, 또 다른 한면에서는
+          그분의 궁극적인 갈망의 만족과 채워짐이 곧 첫 열매다.
+          <strong>살아있는 이기는 자가 완성되어야 그분의 만족이 이루어진다.</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>
+        "이 땅의 모든 농부는 <strong>첫 열매를 곡간으로 보내지 않는다</strong>.
+        첫 열매는 다 그 가정으로 들어가고, 가정 안에서 주인이 그 첫 열매를 누린다.
+        마찬가지로 하나님도 첫 열매를 그렇게 누리신다 — 곡간이 아니라 성전으로."
+      </blockquote>
+      <cite>— 농부의 비유 (참석자 1)</cite>
+    </div>
+
+    <p>
+      그래서 이 첫 열매는 미리 맛봄(foretaste)이다. 앞으로 나올 모든 열매들을
+      앞서서 나타낸 <strong>성숙된 상태</strong>다. 성장과 충만 — 변화의 극치까지
+      도달한 자들이며, 우리가 매일의 생활 안에서 이 "성숙"을 살아내기 원한다.
+    </p>
+  </section>
+
+  <!-- ═══════════════ SECTION 04: 첫 열매의 네 증거 ═══════════════ -->
+  <section id="sec-04">
+    <div class="section-num">04</div>
+    <div class="section-tag">Four Marks of Firstfruits</div>
+    <h2>첫 열매의 네 증거 — Marks of the Firstfruits</h2>
+
+    <p class="lead">
+      "첫 열매가 되려면 <strong>하나님을 기쁘시게 해드렸다는 증거</strong>를 지녀야 한다."
+      이 증거는 추상적인 자기 확신이 아니라, 다음 네 가지 구체적인 흔적으로 나타난다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="num">EVIDENCE 01</div>
+        <h4>계시와 인도에 따라 일함</h4>
+        <p>
+          일상생활에 하나님의 계시가 있는지 — 내 안에서 떠오르는 샛별,
+          말씀 안의 새로움, 환경 속의 깨달음, 사람들에게서 그분의 음성,
+          내가 대하는 일에서 그분의 인재, 지체들 안의 공급, 신앙할 때 생명의 흐름.
+        </p>
+      </div>
+      <div class="card olive">
+        <div class="num">EVIDENCE 02</div>
+        <h4>믿음으로 행함</h4>
+        <p>
+          이 믿음은 <strong>과거형</strong>이다 — 이미 이루어진 것을 누리는 것.
+          "해 주십시오"가 아니라 "주님 감사합니다." 권위의 기도는
+          명령의 기도다 — <em>산아 움직여라.</em>
+        </p>
+      </div>
+      <div class="card gold">
+        <div class="num">EVIDENCE 03</div>
+        <h4>양식을 신실하게 공급함</h4>
+        <p>
+          하나님의 집안 식구들에게 그분을 양식으로 나눠 주라고 하신
+          주님의 위임 — 그 신실함 자체가 증거가 된다.
+          신선하신 그리스도를 누리고 체험하고 소화한 후에 가족에게 공급하는가.
+        </p>
+      </div>
+      <div class="card">
+        <div class="num">EVIDENCE 04</div>
+        <h4>말씀을 기도로 묵상하며 누림</h4>
+        <p>
+          기도하는 모습 · 묵상하는 모습 · 말씀을 누리는 모습.
+          아버지와 어머니가 매일 자녀를 위해 축복하는 기도의 음성,
+          음식물을 대할 때 자녀를 향한 그분의 마음을 표현하는 그 말들.
+        </p>
+      </div>
+    </div>
+
+    <div class="voice-quote">
+      <p>자녀들은 어떤 모습에 매혹될까. 부모님이 <strong>기도하는 모습, 묵상하는 모습, 말씀을 누리는 모습</strong> — 이것이 그들에게 새겨진다. 자기의 일에 매몰되어 일하는 모습이 매력적이듯이.</p>
+      <span class="attr">참석자 1 · 자녀를 향한 본의 의미</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 05: 자녀 = 여호와의 기업 ═══════════════ -->
+  <section id="sec-05">
+    <div class="section-num">05</div>
+    <div class="section-tag">A Reset of Perspective</div>
+    <h2>자녀 = 여호와의 기업 — A Reset of Perspective</h2>
+
+    <div class="scripture-box">
+      <span class="ref">시편 127:3</span>
+      "보라 자식들은 <strong>여호와의 기업</strong>이요, 태의 열매는 <strong>그분의 상급</strong>이로다."
+      자녀들은요 — <strong>저의 것이 아니었다</strong>. 여호와의 기업이다.
+    </div>
+
+    <p>
+      마태복음 25장이 천국을 비유한다. 어떤 주인이 타국으로 떠날 때
+      노예들을 불러 그들의 재능에 따라 다섯 달란트, 두 달란트, 한 달란트를 맡긴다.
+      한 달란트도 작은 것이 아니다 — 그 자체로 엄청나게 큰 돈이다.
+      그런데 자녀는 그 달란트하고 비교가 안 된다.
+    </p>
+
+    <div class="talent-box">
+      <div class="talent-row">
+        <div class="talent-label">
+          한 달란트
+          <span class="en">One Talent</span>
+        </div>
+        <div class="talent-value">금 한 달란트 ≈ <strong>27~35 kg</strong>, 오늘 가치로 환산하면 <strong>15~25억 원</strong>. 그 자체로 엄청난 자산이다.</div>
+      </div>
+      <div class="talent-row">
+        <div class="talent-label">
+          자녀
+          <span class="en">A Child</span>
+        </div>
+        <div class="talent-value">여호와의 <strong>기업</strong>, 그분의 <strong>상급</strong>. 한 달란트와 <strong>비교할 수 없는 자산</strong>. 시간 안에 있는 우리 가정에 맡겨진 영원한 책임.</div>
+      </div>
+      <div class="talent-row">
+        <div class="talent-label">
+          심판의 질문
+          <span class="en">The Question</span>
+        </div>
+        <div class="talent-value">주님이 다시 오실 때 "내가 맡긴 것을 어떻게 했느냐"라고 물으실 것이다. <strong>"열심히 공부시켰습니다"와 "하나님의 이상 안에서 살아냈습니다"는 차원이 다르다.</strong></div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>
+        "우리는 <strong>무엇을 했다</strong>가 아니고 <strong>어떻게 살았느냐</strong>를 중시한다.
+        무엇을 얻었다기보다는 어떤 방향으로 내 마음을 쏟았는지를 본다."
+      </blockquote>
+      <cite>— 참석자 1 · DNA의 상속이라는 표현</cite>
+    </div>
+
+    <p>
+      자녀들을 향한 우리의 진정한 DNA의 유전 상속은 — 하나님이 우리에게 맡기신 그분의 기업을
+      <strong>하나님이 원하시는 방향으로</strong> 다음 세대를 첫 열매들로 부모와 함께
+      그분을 맞이하는 것이다.
+    </p>
+  </section>
+
+  <!-- ═══════════════ SECTION 06: 이기는 부모, 이기는 아이 ═══════════════ -->
+  <section id="sec-06">
+    <div class="section-num">06</div>
+    <div class="section-tag">Continuity of Life</div>
+    <h2>이기는 부모가 이기는 아이를 산출한다</h2>
+
+    <p class="lead">
+      옆에 계신 분을 빤히 쳐다보세요. 그냥 보면 안 됩니다.
+      어떻게 이기는 이가 될 것 같습니까? — 이 농담스러운 진단 뒤에 진지한 명제가 있다.
+      <strong>이기는 부모가 이기는 아이를 산출합니다.</strong>
+    </p>
+
+    <h3>생명의 연속성 — 인풋이 아웃풋을 다스린다</h3>
+    <p>
+      생명은 연속성이 있다. 생명은 돌연변이가 없다. 생명은 월반도 없다.
+      심지어 생명은 <strong>과학</strong>이다. 과학은 인풋으로 아웃풋을 다스리는 것이다.
+      심은 대로 거둔다. 우리가 자녀에게 이기는 분위기 · 이기는 본성 · 이기는 상태를
+      계속 심어 준다면, 아이들은 점점 더 이기는 이가 되고 마침내 첫 열매로 발견된다.
+    </p>
+
+    <div class="pull-quote">
+      <blockquote>
+        "우리 아이들이 어느 지점에 도달할 것인가는 <strong>부모에게 달린 것</strong>이다.
+        하나님께서는 아이들의 영과 혼과 몸과 장래와 미래를 부모에게 맡기셨다.
+        우리 아이들의 운명은 <em>우리의 손 위에</em> 있다."
+      </blockquote>
+      <cite>— 워치만 니, 인용</cite>
+    </div>
+
+    <p>
+      그런데 아이들이 놓여 있는 이 손을 <strong>하나님의 손 위에 포개 놓는 것</strong>이 필요하다.
+      이것을 우리는 "하나님을 따라 목양한다"고 말한다.
+      우리가 하나님을 따라 목양한다면, 아이들은 시대적 도구가 되고 첫 열매가 될 수 있다.
+      이것이 우리 목양의 방향성이자 목표가 되어야 한다.
+    </p>
+  </section>
+
+  <!-- ═══════════════ SECTION 07: 목양의 세 기둥 ═══════════════ -->
+  <section id="sec-07">
+    <div class="section-num">07</div>
+    <div class="section-tag">Three Pillars of Shepherding</div>
+    <h2>목양의 세 기둥 — Good Enough Parents</h2>
+
+    <p class="lead">
+      영어에 <em>Good Enough Parents</em>라는 말이 있다 — "그만하면 괜찮은 부모".
+      완벽한 부모는 우리 안의 옛 창조 때문에 일어나지 않는다.
+      그러나 몇 가지 원칙만 잘 지킨다면 그만하면 괜찮은 부모는 될 수 있다.
+      목양은 <strong>완벽을 추구하는 것이 아니라, 부족함을 인정하면서 시작</strong>된다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="num">PILLAR 01</div>
+        <h4>대화 — 목양의 시작·과정·종결</h4>
+        <p>
+          대화는 용건 전달이 아니다. 부모의 뜻을 관철하기 위한 설득의 과정도 아니다.
+          전적으로 <strong>상호 교류</strong>가 있어야 한다.
+          한 형제님이 "하루 1시간 이상 아이와 대화한다"고 즐거워했지만,
+          며칠 후 아이는 말했다 — "나는 단 한 번도 아빠와 대화한 적이 없어요."
+        </p>
+      </div>
+      <div class="card olive">
+        <div class="num">PILLAR 02</div>
+        <h4>사랑 — 영 안에서 제한받고 통제받는 사랑</h4>
+        <p>
+          사랑이 다 사랑이 아니다. 합당한 사랑이 있고 건강하지 못한 사랑이 있다.
+          대부분의 부모는 두 사랑을 동시에 한다 — <strong>쓴물과 단물이 한꺼번에 나오는 것</strong>.
+          아이는 혼란스러워한다. 영 안에서 통제받을 때 비로소 젖 먹이는 어미가 된다.
+        </p>
+      </div>
+      <div class="card gold">
+        <div class="num">PILLAR 03</div>
+        <h4>훈계 — 세베트, 방향을 잡아주는 막대기</h4>
+        <p>
+          훈계의 중점은 일벌백계가 아니다. 따끔하게 일침을 가하는 것도 아니다.
+          히브리어 <strong>세베트(שֵׁבֶט)</strong>는 양들을 후려치는 도구가 아니라,
+          길을 잃었을 때 톡톡 쳐서 <strong>방향을 잡아주는</strong> 막대기다.
+          이럴 때 우리는 "권면하는 아버지"가 된다.
+        </p>
+      </div>
+    </div>
+
+    <div class="voice-quote">
+      <p>가정 안에서 아이를 접촉할 때는 자동적으로 별다른 분별 없이 자신을 통해 접촉한다. <strong>자신의 선호, 자신의 목적, 자신의 취향, 자신의 습관, 심지어 자신의 감정을 따라 아이를 접촉한다 — 이것은 반칙, 직권 남용이다.</strong> 하나님 눈에서 개수되지 않는다.</p>
+      <span class="attr">참석자 3 · 하나님을 따라 목양</span>
+    </div>
+
+    <p>
+      그러므로 우리가 아이들의 얼굴을 볼 때, "이 화상아"라고 생각하면 안 된다.
+      얼굴을 보는 그 순간이 <strong>영으로 돌이키는 순간</strong>이 되어야 한다.
+    </p>
+  </section>
+
+  <!-- ═══════════════ SECTION 08: 본이 되는 세 가지 ═══════════════ -->
+  <section id="sec-08">
+    <div class="section-num">08</div>
+    <div class="section-tag">Three Marks of an Example</div>
+    <h2>본이 되는 세 가지 — Living the Example</h2>
+
+    <p>
+      아이들은 사실 <strong>본을 먹고 산다</strong>. 본은 존재의 문제이고 일생이 소요되는 문제다.
+      어린이 12년은 우리의 불안정한 상태 속에서 훌쩍 지나간다.
+      그래도 우리는 본이 되어야 한다 — 완전한 분은 아닐지라도, 최소한 세 가지에서.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="num">EXAMPLE 01</div>
+        <h4>하나님을 사랑하는 본</h4>
+        <p>
+          하나님을 사랑하는 분이 <strong>최상의 본</strong>이다.
+          한 형제님 말씀 — "하나님을 사랑하는 것을 회복하기 전에,
+          먼저 <strong>하나님을 사랑한다고 말하는 것</strong>을 회복해야 한다."
+          자녀와 함께 수시로 선포한다 — "주님 사랑합니다."
+        </p>
+      </div>
+      <div class="card olive">
+        <div class="num">EXAMPLE 02</div>
+        <h4>교회 생활을 우선시하는 본</h4>
+        <p>
+          하나님만 사랑하는 것으로 충분하지 않다.
+          아이들이 <strong>교회 안에서 발견되도록</strong> 해줘야 한다.
+          교회를 우선시하는 본이 필요하다 — 우리가 회복 안에 있다는 사실의
+          소중함을 자녀와 함께 누리도록.
+        </p>
+      </div>
+      <div class="card gold">
+        <div class="num">EXAMPLE 03</div>
+        <h4>실패했을 때 돌이키는 본</h4>
+        <p>
+          우리는 다 실패한다. 실패는 은폐할 수 없고, 무효화시킬 수 없으며, 연기할 수도 없다.
+          그러나 <strong>돌이킬 수 있다</strong>. 사실 실패가 없는 것보다,
+          실패한 상태에서 돌이키는 것이 훨씬 더 영적이며 많은 배움이 있다.
+          주님은 실패할 때 옐로카드를 가지고 오지 않는다 — <strong>목양하러 오신다</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="voice-quote">
+      <p>형제 자매님들 — 우리 아이들의 가장 큰 특징은 <strong>실수하는 것</strong>이죠. 그러면 우리 어른들의 가장 큰 특징은 무엇입니까? 우리의 가장 큰 특징은 <strong>실패하는 것</strong>입니다. 같은 실(失)자 돌림 — 도토리 키재기입니다. 그래서 우리는 자녀와 함께 다만 주님께 돌이키는 것이 필요합니다.</p>
+      <span class="attr">참석자 3 · 같은 실자 돌림</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 09: 한나의 기도 ═══════════════ -->
+  <section id="sec-09">
+    <div class="section-num">09</div>
+    <div class="section-tag">A Prayer That Turned an Era</div>
+    <h2>한나의 기도 — 시대를 바꾼 한 어머니</h2>
+
+    <p>
+      존 칼빈은 말했다 — "기도하지 않는 것은 숨을 쉬지 않으면서 살아 있다고 말하는 것이다."
+      그런데 지금까지 우리는 자녀를 위해 어떤 기도를 해왔는가? 장래 · 취업 · 학업 · 인성 ·
+      심지어 어릴 때부터 배우자를 위해 기도하는 부모도 있다.
+      이제 우리의 기도는 <strong>하나님의 경륜을 위한 기도</strong>, 자녀를 첫 열매와
+      시대적 도구로 산출하는 기도여야 한다.
+    </p>
+
+    <div class="hannah-flow">
+      <div class="hannah-step">
+        <div class="stage">Phase 01</div>
+        <h5>인간적 필요</h5>
+        <p>한나에게는 아들이 없었다. 아들을 얻어야만 했다.</p>
+      </div>
+      <div class="hannah-step">
+        <div class="stage">Phase 02</div>
+        <h5>시대적 이상</h5>
+        <p>패역하고 타락한 사사 시대가 끝나야 한다는 것을 알았다. 새 시대를 위해 나실인이 필요하다는 것도.</p>
+      </div>
+      <div class="hannah-step">
+        <div class="stage">Phase 03</div>
+        <h5>필요 + 이상 연결</h5>
+        <p>자신의 피로(疲勞)와 하나님의 피로를 <strong>하나로 연결</strong>시켰다.</p>
+      </div>
+      <div class="hannah-step final">
+        <div class="stage">Result</div>
+        <h5>사무엘 · 시대 전환</h5>
+        <p>나실인으로 들여진 아들을 통해 새 시대가 열렸다. <strong>한 어머니의 기도가 시대를 바꿨다.</strong></p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>
+        "이 기도는 마치 이런 기도와 같다 — '주님, 나에게 100억을 벌게 해 주십시오.
+        그러면 1년 있다가 <strong>100억을 고스란히 그대로 다 돌려드리겠습니다</strong>.'
+        한나는 다만 생명의 통로, 하나님 경륜의 통로였다."
+      </blockquote>
+      <cite>— 참석자 3 · 한나의 서원에 대한 비유</cite>
+    </div>
+
+    <h3>우리 부모들의 씨름</h3>
+    <p>
+      여기에 우리 부모들의 씨름이 있다. 우리는 이 씨름에서 <strong>전적으로 주님께 패배당해야 한다</strong>.
+      우리 아이들의 가장 큰 용도는 첫 열매로 발견되는 것이다. 그래서 우리는 이렇게 말할 수 있어야 한다 —
+      "주님, 저는 우리 아이를 <strong>나실인으로 주님께 드리겠습니다</strong>."
+      이것이 부모로서의 최고의 영광이다.
+    </p>
+
+    <div class="voice-quote">
+      <p>저희 지역에 한 자매님이 계셨어요. 아이가 굉장히 큰 말썽을 피웠습니다. 그런데 학부모 집회에 와서 이 말을 듣고 <strong>과감하게 나실인으로 헌신</strong>했습니다. 말썽부린 청년이 조금씩 변해 나가더니 전시간 훈련을 갔다 왔고, 지역에서 신실하게 풀타이머로 봉사하고 있습니다.</p>
+      <span class="attr">참석자 3 · 한 자매의 헌신 후일담</span>
+    </div>
+
+    <div class="voice-quote">
+      <p>옛날에는 성격 훈련을 할 때 아이들을 단상에 다 올렸어요. 다 무릎을 꿇고 "내 일생을 주님께 헌신하고 드리겠습니다." <strong>6살, 7살, 9살, 10살, 12살 먹은 아이들이 다 그렇게 했습니다.</strong> 지나고 보니까, 그 아이들이 너무나 잘 자라고 있다고 들었습니다. 하나님은 이 헌신을 무시하지 않습니다.</p>
+      <span class="attr">참석자 3 · 성격 훈련 단상의 아이들</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 10: 응답의 목소리들 ═══════════════ -->
+  <section id="sec-10">
+    <div class="section-num">10</div>
+    <div class="section-tag">Voices of Response</div>
+    <h2>응답의 목소리들 — 일곱 개의 간증</h2>
+
+    <p>
+      메시지가 끝나고 마이크 앞으로 사람들이 나왔다.
+      서로 다른 자리에서, 서로 다른 무게로 — 그러나 같은 음성을 들었던 응답들.
+    </p>
+
+    <ol class="insight-list">
+      <li>
+        <h4>아이가 나를 먹였다 — 한 우울증 어머니</h4>
+        <p>
+          20대부터 20년 동안 우울증과 싸워온 자매. 죽음이 항상 가까이 있던 그녀에게
+          8년 전 아이가 태어났다. "엄마 없는 아이가 어떻게 지낼 수 있을까."
+          하루를 버티는 문제 앞에서, 아이가 자신을 어떻게 기억할지 매일 생각했다.
+        </p>
+        <div class="voice-quote">
+          <p>정말 감사하게도 저에게 <strong>목양할 아이가 있었기 때문에 저는 매일 살아야 했고, 정말 주님의 긍휼로 지금 이 자리에 있습니다. 아이가 저를 먹였고, 목양할 사람이 있다는 것이 저를 살렸습니다.</strong></p>
+          <span class="attr">참석자 8 · 우울증과 함께 8년</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>"엄마 직장 좀 잘되게 해주세요" — 채윤이 엄마</h4>
+        <p>
+          8살 딸 채윤이 — "하나님의 경륜을 추구하면서 살라"는 의미로 지은 이름.
+          매일 자기 전에 함께 기도하는 자매. 그러나 아이의 기도는
+          "엄마 직장 좀 잘되게 해주세요"였다. 이 기도가 잘못된 줄도 모르고
+          그렇게 살아온 자기 모습이 부끄러웠다.
+        </p>
+        <div class="voice-quote">
+          <p>20년 전 회복에 처음 들어왔을 때 세계 정세와 그 이면에 움직이는 하나님의 움직이심을 듣고 "하나님이 진짜 살아 있구나" 생각했었습니다. <strong>그것을 알고 있었던 사람이 다시 눈이 감기고 생활 속에서 떠내려갔다가, 신랑이 오실 때가 다 됐는데 그 앞에서 졸고 있던 처녀였는데 — 정말 뒤통수를 한번 세게 맞은 것 같습니다.</strong></p>
+          <span class="attr">참석자 9 · 채윤이 엄마</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>새벽 · 색깔 — 자녀 이름에 담은 그분의 다시 오심</h4>
+        <p>
+          만 3세 · 만 1세 두 자녀의 어머니. 자녀의 이름이 "새벽"과 "색깔"이다.
+          주님의 다시 오심을 사모하며 지은 이름 — 가장 어두울 때 나타나는 별이 색깔이고,
+          그 다음 오는 것이 새벽이기 때문에. 수면 의식으로 매일 기도한다 —
+          "주님의 다시 오심을 앞당겨 오는 넉넉히 이기는 이들이 되게 해주십시오."
+        </p>
+        <div class="voice-quote">
+          <p>이 기도가 너무 진짜 말 그대로 <strong>수면 의식이 되더라고요</strong>. 종교 의식처럼 자기 전에 일반적으로 하는 기도가 어느 순간 됐어요. 이것에 대해서 다시 한 번, 정말 첫 열매들이 되도록 기도하고 있습니다.</p>
+          <span class="attr">참석자 10 · 새벽·색깔의 엄마</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>왜 자꾸 핸드폰을 만지려고 할까 — 7살 아이의 거울</h4>
+        <p>
+          한 어머니의 돌이킴. 7살 아이가 왜 자꾸 자기 핸드폰을 만지려고 할까 — 이유는 단순했다.
+          엄마가 집에 가서 핸드폰을 보는 모습을 너무 많이 보여줬기 때문이다.
+          합당한 본이 아니었던 것이 보였다.
+        </p>
+        <div class="voice-quote">
+          <p>제가 어렸을 때 새벽에 깨더라도 <strong>문이 이렇게 열려 있고 작은 틈으로 빛이 들어오는데, 새벽 5시 이럴 때도 두 분이 항상 말씀을 읽고 기도하는 모습</strong>을 보고 다시 잠들었습니다. 그 인상이 저에게 깊었습니다. 저도 그러한 아이들에게 정말 생활의 본이 되는 부모가 되길 원합니다.</p>
+          <span class="attr">참석자 13 · 새벽 5시의 문틈 사이로</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>"한 달란트가 27 kg" — 다시 환산해 본 자녀의 무게</h4>
+        <p>
+          집회 후 형제가 다시 찾아본 단위 — 금 한 달란트가 27~35 kg, 가치로 환산하면 15~25억 원이다.
+          그런데 우리 자녀들이 여호와의 기업이라는 것이다. 이 한 달란트보다 훨씬 더 가치 있고
+          비교할 수 없을 만큼 소중한 자산. 주님이 오실 때 우리 자녀들을 어떤 방향으로 이끌었는가 —
+          이것이 그분의 판단 항목이다.
+        </p>
+        <div class="voice-quote">
+          <p>주 예수님 — 우리가 어떤 말을 했는가는 자연스럽게 기억합니다. 그러나 <strong>우리 자녀들은 우리가 어떤 방향으로 살았는가를 더 많이 기억한다</strong>고 했습니다. 정말 주님 앞에 설 때 자녀들 앞에서도 부끄러움 없는 부모로 발견되길 원합니다.</p>
+          <span class="attr">참석자 15 · 달란트의 환산</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>나의 소유가 아니다 — 4년 반 만에 얻은 아들</h4>
+        <p>
+          4년 반 만에 얻은 자녀를 위해 정말 많이 기도해온 아버지의 돌이킴.
+          그러나 자녀가 형편없고 무섭고 못된 자기 모습을 자녀만이 본다 —
+          교회 형제자매가 보지 못하는 모습. 자녀에게 그런 모습을 보여온
+          자신을 직면하며 돌이켰다.
+        </p>
+        <div class="voice-quote">
+          <p>이 아이는 <strong>나의 소유가 아닙니다. 주님의 소유입니다.</strong> 정말 이 상을 더 밝게 해 주시고, 우리 아이들이 다 첫 열매들로 발견될 수 있도록 — 정말 형편없는 자이지만 주님께 더 의뢰하고 의지하여 키우기 원합니다.</p>
+          <span class="attr">참석자 17 · 4년 반 만의 아들</span>
+        </div>
+      </li>
+
+      <li>
+        <h4>매일 새로 짓는 밥 — 그러나 무엇이 가장 좋은 것이었나</h4>
+        <p>
+          한참 지나서야 알게 된 자매의 마음 — 매일 매끼마다 밥을 새로 지어서 주는 이유는
+          자녀에게 매일 새로운 밥을 주기 원해서였다. 그런데 자녀들이 중·고등학생이 되어
+          인생의 문제 앞에서 주님이 아닌 세상적인 방식을 찾을 때, 깊은 탄식이 있었다 —
+          가장 좋은 것을 주려 했지만 정작 무엇이 가장 좋은 것이었는가.
+        </p>
+        <div class="voice-quote">
+          <p>매일 매끼마다 신선하고 새로운 밥이 아니라, <strong>신선하신 그리스도 — 내가 누리고 체험하고 소화한 그 그리스도, 가장 따뜻한 그 그리스도를 우리 자녀들에게 공급했는가.</strong> 자녀들이 그들 자신의 하나님을 만났는가. 그러지 못했다는 느낌을 받았을 때 너무나 돌이켜졌습니다.</p>
+          <span class="attr">참석자 6 · 매끼마다 새로 짓는 밥</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ═══════════════ SECTION 11: 마무리 ═══════════════ -->
+  <section id="sec-11">
+    <div class="section-num">11</div>
+    <div class="section-tag">Closing Reflection</div>
+    <h2>마무리 — 포개진 두 손</h2>
+
+    <p>
+      두 손이 있다. 하나는 부모의 손 — 워치만 형제가 말한 그 손. "우리 아이들의 운명은
+      우리의 손 위에 있다." 또 하나는 하나님의 손. 그리고 이 자리에서 듣는 메시지의 핵심은,
+      <strong>그 두 손이 포개져야 한다는 것</strong>이다.
+    </p>
+
+    <div class="pull-quote">
+      <blockquote>
+        "아이들이 놓여 있는 이 손을 <strong>하나님의 손 위에 포개 놓는 것</strong>이 필요하다.
+        이것을 우리는 '하나님을 따라 목양한다'고 말한다."
+      </blockquote>
+      <cite>— 참석자 3</cite>
+    </div>
+
+    <h3>1939에서 2026까지 — 90년의 산수</h3>
+    <p>
+      워치만 형제가 『영광스러운 교회』에서 말씀하셨다 — "하나님은 교회가 실패했기 때문에,
+      그분의 눈은 이제 왕국을 향해 있다." 그때가 1939년. 벌써 90여 년이 흘렀다.
+      그때보다 지금 주님의 가까이 오심이 <strong>더 가까워졌다</strong>.
+    </p>
+
+    <div class="voice-quote">
+      <p>오늘 우리의 피로(疲勞)는 그분의 피로를 채우는 것이어야 합니다. 우리는 정말 <strong>하나님의 권익</strong>을 관심해야 합니다. 우리가 아니라면 누구도 하나님의 권익을 관심하지 않습니다. 우리는 세상 사람들과 같지 않습니다.</p>
+      <span class="attr">참석자 7 · 마지막 정리 교통</span>
+    </div>
+
+    <h3>본이 본을 낳는 것</h3>
+    <p>
+      목양은 어떤 수단과 방법, 무언가를 "하는" 것이 아니다.
+      목양은 <strong>하나님을 사는 것</strong>이며, <strong>본을 보이는 것</strong>이다.
+      회복은 본을 산출하는 것이고, <em>본이 본을 낳는 것</em>이 회복이다.
+      오늘 우리 모두는 이러한 본이 될 필요가 있다.
+    </p>
+
+    <div class="pull-quote" style="margin-top: 50px;">
+      <blockquote>
+        "마지막 릴레이의 주자는 바로 <strong>내 자녀들과 손잡고 뛰는 우리</strong>가
+        아닐까 생각합니다."
+      </blockquote>
+      <cite>— 참석자 1 · 메시지 마무리</cite>
+    </div>
+
+    <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); margin-top: 40px;">
+      이 발자국 소리에 응답하는 데서, 다음 한 걸음이 시작된다.
+    </p>
+  </section>
+
+  <!-- ═══════════════ Footer ═══════════════ -->
+  <footer>
+    <div>Ministry Notes · 학부모 집회 교통 정리</div>
+    <div style="margin-top: 6px;">— End of Report —</div>
+  </footer>
+
+</div>
+
+<script>
+/* ─── Topbar + Side Panel + Font Scale ─── */
+let fontScale = 1;
+function adjustFont(dir) {
+  if (dir === 0) fontScale = 1;
+  else if (dir === 1 && fontScale < 1.4) fontScale = Math.round((fontScale + 0.05) * 100) / 100;
+  else if (dir === -1 && fontScale > 0.7) fontScale = Math.round((fontScale - 0.05) * 100) / 100;
+  document.documentElement.style.setProperty('--font-scale', fontScale);
+}
+function togglePanel() {
+  document.getElementById('sidepanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function goTo(id) {
+  togglePanel();
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 280);
+}
+</script>
+
+</body>
+</html>
