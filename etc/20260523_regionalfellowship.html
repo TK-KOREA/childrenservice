@@ -648,6 +648,427 @@
       flex-shrink: 0;
     }
   }
+
+  /* ── Q&A 도입 카드 (Chapter 1) ──────────── */
+  .qa-card {
+    margin: 6px 0 36px;
+    padding: 26px 22px 24px;
+    background: var(--paper);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--terracotta);
+  }
+  .qa-card .qa-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--terracotta);
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+  }
+  .qa-card .qa-q, .qa-card .qa-a {
+    position: relative;
+    padding-left: 34px;
+  }
+  .qa-card .qa-q::before, .qa-card .qa-a::before {
+    position: absolute;
+    left: 0; top: -4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .qa-card .qa-q::before { content: 'Q'; color: var(--terracotta); }
+  .qa-card .qa-a::before { content: 'A'; color: var(--moss); }
+  .qa-card .qa-q p {
+    font-family: 'Gowun Batang', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .qa-card .qa-rule {
+    height: 1px;
+    background: var(--line);
+    margin: 20px 0;
+  }
+  .qa-card .qa-a p {
+    font-family: 'Gowun Batang', serif;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+  .qa-card .qa-a p:last-of-type { margin-bottom: 16px; }
+  .qa-card .qa-summary {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .qa-card .qa-tag {
+    padding: 5px 13px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--moss);
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+  }
+  .qa-card .qa-tag .tag-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ochre);
+    margin-right: 4px;
+  }
+
+  /* ── 1966 → 18년의 증거 (Chapter 2) ───── */
+  .timeline-1966 {
+    margin: 24px 0 32px;
+    padding: 28px 22px 22px;
+    background: linear-gradient(160deg, var(--moss-deep) 0%, var(--moss) 100%);
+    border-radius: 16px;
+    color: var(--cream);
+  }
+  .timeline-1966 .tl-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ochre);
+    letter-spacing: 0.15em;
+    margin-bottom: 22px;
+  }
+  .timeline-1966 .tl-track {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px 26px;
+    margin-bottom: 16px;
+  }
+  .timeline-1966 .tl-track::before {
+    content: '';
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    top: 6px;
+    height: 1px;
+    background: rgba(244,239,227,0.25);
+  }
+  .timeline-1966 .tl-node {
+    position: relative;
+    text-align: center;
+    flex: 1;
+    z-index: 1;
+  }
+  .timeline-1966 .tl-node .dot {
+    width: 14px;
+    height: 14px;
+    background: var(--ochre);
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 0 4px rgba(176,122,44,0.20);
+  }
+  .timeline-1966 .tl-node .yr {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ochre);
+    margin-bottom: 6px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .timeline-1966 .tl-node .lbl {
+    font-family: 'Gowun Batang', serif;
+    font-size: 11.5px;
+    color: rgba(244,239,227,0.88);
+    line-height: 1.5;
+  }
+  .timeline-1966 .tl-caption {
+    font-family: 'Gowun Batang', serif;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: #E8DFC8;
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(244,239,227,0.18);
+    margin: 0;
+  }
+  .timeline-1966 .tl-caption strong {
+    color: var(--ochre);
+    font-weight: 700;
+  }
+
+  /* ── QR 자료 카드 (Chapter 6) ───────────── */
+  .qr-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .qr-card {
+    background: rgba(244,239,227,0.06);
+    border: 1px solid rgba(244,239,227,0.16);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .qr-card .qr-img {
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    background: var(--cream);
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-card .qr-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .qr-card .qr-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .qr-card .qr-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ochre);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .qr-card .qr-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: 14.5px;
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .qr-card .qr-note {
+    font-size: 11.5px;
+    color: #C9BFA0;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .qr-card .qr-link {
+    display: block;
+    font-size: 11px;
+    color: var(--ochre);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    word-break: break-all;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+  }
+  .qr-card .qr-link:hover { color: var(--cream); }
+  .qr-card .qr-link + .qr-link { margin-top: 2px; }
+  .qr-card .qr-contact {
+    font-size: 11px;
+    color: #C9BFA0;
+    margin-top: 6px;
+    font-family: 'Gowun Batang', serif;
+    line-height: 1.5;
+  }
+  .qr-card .qr-contact strong {
+    color: #E8DFC8;
+    font-weight: 700;
+  }
+
+  /* ── Footer ──────────────────────────── */
+  footer.page-footer {
+    padding: 34px 28px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  footer.page-footer .mark {
+    color: var(--ochre);
+    margin: 0 10px;
+  }
+
+  /* ============================================================
+     BIBLE VERSE TOOLTIP — adapted to cream/moss/ochre palette
+     XML: https://tk-korea.github.io/recoverybible/recovery_bible_ko.xml
+     ============================================================ */
+  .vref-link {
+    color: inherit;
+    font: inherit;
+    border-bottom: 1px dotted currentColor;
+    cursor: help;
+    padding: 0 1px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: color .15s ease, background-color .15s ease;
+  }
+  .vref-link:hover { color: var(--moss); background: rgba(176,122,44,0.12); }
+  .vref-link:active { color: var(--moss); background: rgba(176,122,44,0.18); }
+  .vref-link:focus { outline: none; }
+  .vref-link:focus-visible { outline: 1px dashed var(--ochre); outline-offset: 2px; }
+
+  #vref-tt-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(20,17,12,0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .25s ease;
+    display: none;
+  }
+  #vref-tt-backdrop[data-show="1"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  #vref-tooltip {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 201;
+    max-width: 420px;
+    min-width: 280px;
+    padding: 26px 30px 22px;
+    background: var(--moss-deep);
+    border-top: 1px solid rgba(176,122,44,0.70);
+    box-shadow:
+      0 2px 0 rgba(0,0,0,0.4),
+      0 18px 44px rgba(0,0,0,0.50),
+      0 4px 14px rgba(0,0,0,0.22);
+    font-family: 'Gowun Batang', serif;
+    color: #E8DFC8;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  #vref-tooltip[data-show="1"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .vref-tt-handle { display: none; }
+  .vref-tt-close { display: none; }
+  .vref-tt-book {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 500;
+    font-size: .86rem;
+    letter-spacing: 0.04em;
+    color: #C9BFA0;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(176,122,44,0.25);
+  }
+  .vref-tt-body {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.02rem;
+    line-height: 2.0;
+    color: #E8DFC8;
+  }
+  .vref-tt-verse { margin-bottom: 8px; }
+  .vref-tt-verse:last-child { margin-bottom: 0; }
+  .vref-tt-body .vref-tt-vnum {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: var(--ochre);
+    margin-right: 8px;
+  }
+  .vref-tt-empty {
+    display: block;
+    color: var(--ochre);
+    font-style: italic;
+    font-size: .9rem;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 768px) {
+    #vref-tt-backdrop { display: block; }
+    #vref-tooltip {
+      position: fixed !important;
+      top: auto !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 14px 22px calc(28px + env(safe-area-inset-bottom, 0px));
+      border-top: none;
+      border-radius: 22px 22px 0 0;
+      box-shadow:
+        0 -2px 0 rgba(176,122,44,0.40),
+        0 -16px 44px rgba(0,0,0,0.55);
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      transform: translateY(100%);
+      pointer-events: auto;
+      transition: transform .28s cubic-bezier(0.32, 0.72, 0, 1), opacity .2s ease;
+    }
+    #vref-tooltip[data-show="1"] { transform: translateY(0); }
+    .vref-tt-handle {
+      display: block;
+      width: 44px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(232,223,200,0.30);
+      margin: 0 auto 18px;
+    }
+    .vref-tt-close {
+      display: flex;
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(232,223,200,0.06);
+      border: 1px solid rgba(176,122,44,0.25);
+      border-radius: 50%;
+      color: var(--ochre);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      line-height: 1;
+      padding: 0 0 2px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .vref-tt-close:active { background: rgba(176,122,44,0.20); }
+    .vref-tt-book {
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      padding-right: 48px;
+    }
+    .vref-tt-body {
+      font-size: 1.06rem;
+      line-height: 2.0;
+    }
+    .vref-tt-verse { margin-bottom: 12px; }
+  }
 </style>
 </head>
 <body>
@@ -695,6 +1116,24 @@
       </div>
       <h2>합당한 사람이 되고,<br />지혜를 사용하며,<br /><em class="ochre">긍휼을 의지하라</em></h2>
       <p class="chapter-lead">부모가 되기는 매우 어렵습니다. 실패하지 않는 단 하나의 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다.</p>
+    </div>
+
+    <div class="qa-card reveal">
+      <div class="qa-eyebrow">출발의 질문</div>
+      <div class="qa-q">
+        <p>제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?</p>
+      </div>
+      <div class="qa-rule"></div>
+      <div class="qa-a">
+        <p>부모가 되기는 매우 어렵습니다. 부부에게 자녀가 없을 때에는 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 자녀를 주시지만, 그 자녀가 심한 말썽꾸러기가 되기도 합니다.</p>
+        <p>실패하지 않는 단 하나의 방법은 없지만, 다음 세 가지 공과는 우리 모두가 배워야 합니다.</p>
+        <div class="qa-summary">
+          <span class="qa-tag"><span class="tag-num">01</span>합당한 사람</span>
+          <span class="qa-tag"><span class="tag-num">02</span>지혜 사용</span>
+          <span class="qa-tag"><span class="tag-num">03</span>주님의 긍휼</span>
+        </div>
+        <button class="detail-btn" data-detail="qaIntro" style="margin-top:14px">전체 답변 보기 <span class="arrow">→</span></button>
+      </div>
     </div>
 
     <div class="point reveal">
@@ -770,6 +1209,30 @@
         </div>
       </div>
       <p class="viz-caption">한 명이 구원받으면 청소년이, 청소년이 복음의 씨가 되고, 다시 세 배의 사람들을 인도합니다. 이런 방식으로 끊임없이 배로 증가합니다.</p>
+    </div>
+
+    <div class="timeline-1966 reveal">
+      <div class="tl-eyebrow">18년의 증거 · 1966 → 1984</div>
+      <div class="tl-track">
+        <div class="tl-node">
+          <div class="dot"></div>
+          <div class="yr">1966</div>
+          <div class="lbl">어린이 12세<br />교통이 시작됨</div>
+        </div>
+        <div class="tl-node">
+          <div class="dot"></div>
+          <div class="yr">+ 18yrs</div>
+          <div class="lbl">청년 30세<br />복음의 씨가 됨</div>
+        </div>
+        <div class="tl-node">
+          <div class="dot"></div>
+          <div class="yr">6,000</div>
+          <div class="lbl">최소 구원받은<br />청년 형제자매</div>
+        </div>
+      </div>
+      <p class="tl-caption">
+        "만일 그때 우리의 어린이 인수가 <strong>만 명</strong>에 이르렀다면, 올해 우리는 <strong>만 명의 청년 형제자매</strong>를 볼 것이다. 이만 명이 모두 구원받지는 않았겠지만 <strong>최소한 육천 명</strong>은 구원받았을 것이다."
+      </p>
     </div>
 
     <div class="point reveal">
@@ -972,40 +1435,61 @@
       <p class="lead">아래의 자료들이 우리의 발걸음을 도울 것입니다.</p>
     </div>
 
-    <div class="res-item reveal">
-      <div class="res-row">
-        <span class="res-num">01</span>
-        <h3 class="res-title">다음 세대 성경 (초급)</h3>
+    <div class="qr-grid reveal">
+      <div class="qr-card">
+        <div class="qr-img">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fmall.kgbr.co.kr%2Fgoods_search.php%3Fgs_type%3DB%26keyword%3D%25EB%258B%25A4%25EC%259D%258C%2520%25EC%2584%25B8%25EB%258C%2580%2520%25EC%2584%25B1%25EA%25B2%25BD" alt="다음 세대 성경 QR" loading="lazy" />
+        </div>
+        <div class="qr-info">
+          <div class="qr-num">01</div>
+          <div class="qr-title">다음 세대 성경 (초급)</div>
+          <div class="qr-note">한국복음서원에서 상시 판매</div>
+          <a class="qr-link" href="https://mall.kgbr.co.kr/" target="_blank" rel="noopener">mall.kgbr.co.kr</a>
+        </div>
       </div>
-      <div class="res-note">한국복음서원에서 상시 판매</div>
-      <div class="res-link">mall.kgbr.co.kr</div>
-    </div>
 
-    <div class="res-item reveal">
-      <div class="res-row">
-        <span class="res-num">02</span>
-        <h3 class="res-title">주일 공과 PPT</h3>
+      <div class="qr-card">
+        <div class="qr-img">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Flessons" alt="주일 공과 PPT QR" loading="lazy" />
+        </div>
+        <div class="qr-info">
+          <div class="qr-num">02</div>
+          <div class="qr-title">주일 공과 PPT</div>
+          <div class="qr-note">더 패런 / BTMK 사이트 다운로드<br />(BTMK: 그리스도의 편지 → 다음 세대, 자료실)</div>
+          <a class="qr-link" href="https://www.thepattern.co.kr/lessons" target="_blank" rel="noopener">thepattern.co.kr/lessons</a>
+          <a class="qr-link" href="https://www.btmk.org/" target="_blank" rel="noopener">btmk.org</a>
+        </div>
       </div>
-      <div class="res-note">더 패런 사이트 · BTMK 사이트</div>
-      <div class="res-link">thepattern.co.kr / btmk.org</div>
-    </div>
 
-    <div class="res-item reveal">
-      <div class="res-row">
-        <span class="res-num">03</span>
-        <h3 class="res-title">어린이 집회 교재 · 소그룹 성격 이야기 책</h3>
+      <div class="qr-card">
+        <div class="qr-img">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fmaterials" alt="어린이 집회 교재 QR" loading="lazy" />
+        </div>
+        <div class="qr-info">
+          <div class="qr-num">03</div>
+          <div class="qr-title">어린이 집회 교재 · 소그룹 성격 이야기 책</div>
+          <div class="qr-note">PDF 다운로드 또는 실물 책자 구매</div>
+          <a class="qr-link" href="https://www.thepattern.co.kr/materials" target="_blank" rel="noopener">thepattern.co.kr/materials</a>
+          <div class="qr-contact">
+            <strong>책자 구매 문의</strong><br />
+            어린이 집회 · 임주영 010-7737-2049<br />
+            성격 이야기 책 · 이예담 010-4647-4204
+          </div>
+        </div>
       </div>
-      <div class="res-note">PDF 다운로드 또는 실물 책자 구매</div>
-      <div class="res-link">thepattern.co.kr/materials</div>
-    </div>
 
-    <div class="res-item reveal">
-      <div class="res-row">
-        <span class="res-num">04</span>
-        <h3 class="res-title">어린이 찬송 악보 · 음원</h3>
+      <div class="qr-card">
+        <div class="qr-img">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fwww.thepattern.co.kr%2Fhymns" alt="어린이 찬송 자료 QR" loading="lazy" />
+        </div>
+        <div class="qr-info">
+          <div class="qr-num">04</div>
+          <div class="qr-title">어린이 찬송 악보 · 음원</div>
+          <div class="qr-note">더 패런 사이트 · 사운드클라우드 스트리밍</div>
+          <a class="qr-link" href="https://www.thepattern.co.kr/hymns" target="_blank" rel="noopener">thepattern.co.kr/hymns</a>
+          <a class="qr-link" href="https://soundcloud.com/firstfruitforgod" target="_blank" rel="noopener">soundcloud.com/firstfruitforgod</a>
+        </div>
       </div>
-      <div class="res-note">더 패런 사이트 · 사운드클라우드</div>
-      <div class="res-link">thepattern.co.kr/hymns</div>
     </div>
 
     <div class="closing-quote reveal">
@@ -1037,6 +1521,17 @@
 <script>
   // ── 원문 인용 데이터 ─────────────────────────────
   const DETAILS = {
+    qaIntro: {
+      title: "부모가 되기는 매우 어렵습니다",
+      source: "1. 자녀 양육에 관한 사역의 말씀 · 도입",
+      body: `질문: 제 자녀들은 구원받았지만, 저는 항상 그들을 집회에 오도록 설득할 수 없습니다. 그들을 돌보는 가장 좋은 길은 무엇입니까?
+
+답변: 부모가 되기는 매우 어렵습니다. 부모가 되는 것에 관한 가르침은 아무리 많아도 부족합니다. 부부에게 자녀가 없을 때에는 아들을 위해 기도한 사무엘의 어머니 한나(삼상 1:10-11)처럼 기도합니다. 주님은 그들의 기도를 들으시고 한 자녀를 주시지만, 이 자녀는 심한 말썽꾸러기가 됩니다.
+
+부모가 되는 것에 대한 유일한 방법, 실패하지 않는 방법은 없지만, 우리가 배울 수 있는 몇 가지 공과는 있습니다 — ① 합당한 사람이 되라, ② 지혜를 사용하라, ③ 주님의 긍휼을 의지하라.
+
+부모들은 교만하여 자기의 능력으로 가장 좋은 자녀들을 만들 수 있다고 생각해서는 결코 안 됩니다. 좋은 자녀가 나올 수 있게 하는 여러 가지 많은 요인들이 있지만, 종국에는 주님의 긍휼에 달려 있습니다.`
+    },
     worthy: {
       title: "합당한 사람이 되라",
       source: "1. 자녀 양육에 관한 사역의 말씀",
@@ -1194,6 +1689,7 @@
     titleEl.textContent = data.title;
     sourceEl.textContent = '출처 · ' + data.source;
     bodyEl.textContent = data.body;
+    if (typeof window.vrefProcess === 'function') window.vrefProcess(bodyEl);
     overlay.classList.add('open');
     document.body.classList.add('modal-open');
   }
@@ -1214,6 +1710,368 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
+</script>
+
+<footer class="page-footer">
+  2026<span class="mark">·</span>전국 어린이 학부모 집회<span class="mark">·</span>다음 세대를 향한 마음
+</footer>
+
+<!-- ============================================================
+     BIBLE VERSE TOOLTIP — XML loader + popover/bottom sheet
+     XML: https://tk-korea.github.io/recoverybible/recovery_bible_ko.xml
+     ============================================================ -->
+<script>
+(function(){
+  'use strict';
+
+  var XML_URL = 'https://tk-korea.github.io/recoverybible/recovery_bible_ko.xml';
+
+  var BOOKS = [
+    {n:'창세기',a:'창'},{n:'출애굽기',a:'출'},{n:'레위기',a:'레'},{n:'민수기',a:'민'},
+    {n:'신명기',a:'신'},{n:'여호수아',a:'수'},{n:'사사기',a:'삿'},{n:'룻기',a:'룻'},
+    {n:'사무엘상',a:'삼상'},{n:'사무엘하',a:'삼하'},{n:'열왕기상',a:'왕상'},{n:'열왕기하',a:'왕하'},
+    {n:'역대상',a:'대상'},{n:'역대하',a:'대하'},{n:'에스라',a:'스'},{n:'느헤미야',a:'느'},
+    {n:'에스더',a:'에'},{n:'욥기',a:'욥'},{n:'시편',a:'시'},{n:'잠언',a:'잠'},
+    {n:'전도서',a:'전'},{n:'아가',a:'아'},{n:'이사야',a:'사'},{n:'예레미야',a:'렘'},
+    {n:'예레미야애가',a:'애'},{n:'에스겔',a:'겔'},{n:'다니엘',a:'단'},{n:'호세아',a:'호'},
+    {n:'요엘',a:'욜'},{n:'아모스',a:'암'},{n:'오바댜',a:'옵'},{n:'요나',a:'욘'},
+    {n:'미가',a:'미'},{n:'나훔',a:'나'},{n:'하박국',a:'합'},{n:'스바냐',a:'습'},
+    {n:'학개',a:'학'},{n:'스가랴',a:'슥'},{n:'말라기',a:'말'},{n:'마태복음',a:'마'},
+    {n:'마가복음',a:'막'},{n:'누가복음',a:'눅'},{n:'요한복음',a:'요'},{n:'사도행전',a:'행'},
+    {n:'로마서',a:'롬'},{n:'고린도전서',a:'고전'},{n:'고린도후서',a:'고후'},{n:'갈라디아서',a:'갈'},
+    {n:'에베소서',a:'엡'},{n:'빌립보서',a:'빌'},{n:'골로새서',a:'골'},{n:'데살로니가전서',a:'살전'},
+    {n:'데살로니가후서',a:'살후'},{n:'디모데전서',a:'딤전'},{n:'디모데후서',a:'딤후'},{n:'디도서',a:'딛'},
+    {n:'빌레몬서',a:'몬'},{n:'히브리서',a:'히'},{n:'야고보서',a:'약'},{n:'베드로전서',a:'벧전'},
+    {n:'베드로후서',a:'벧후'},{n:'요한일서',a:'요일'},{n:'요한이서',a:'요이'},{n:'요한삼서',a:'요삼'},
+    {n:'유다서',a:'유'},{n:'요한계시록',a:'계'}
+  ];
+
+  var BOOK_META = {};
+  for (var i = 0; i < BOOKS.length; i++) {
+    BOOK_META[BOOKS[i].a] = BOOKS[i];
+    BOOK_META[BOOKS[i].n] = BOOKS[i];
+  }
+
+  var bookKeys = Object.keys(BOOK_META).sort(function(a,b){ return b.length - a.length; });
+  function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  var bookAlt = bookKeys.map(escRe).join('|');
+  var verseSpec = '\\d+(?:\\s*[\\-\\u2013]\\s*\\d+)?(?:상|하)?(?:\\s*,\\s*\\d+(?:\\s*[\\-\\u2013]\\s*\\d+)?(?:상|하)?)*';
+  var combinedRe = new RegExp('(?:(' + bookAlt + ')\\s*)?(\\d+)\\s*[:\\uFF1A]\\s*(' + verseSpec + ')', 'g');
+
+  function parseVerseSpec(spec) {
+    var parts = spec.split(/\s*,\s*/);
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var m = parts[i].match(/^(\d+)(?:\s*[\-–]\s*(\d+))?(상|하)?$/);
+      if (!m) continue;
+      out.push({
+        start: parseInt(m[1], 10),
+        end: m[2] ? parseInt(m[2], 10) : parseInt(m[1], 10),
+        suffix: m[3] || ''
+      });
+    }
+    return out;
+  }
+
+  // Static page selectors — modal-body is processed dynamically via window.vrefProcess
+  var REF_SELECTOR = '.qa-card, .timeline-1966, .viz-caption, .closing-quote, .chapter-lead';
+
+  function processElement(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    var n;
+    while ((n = walker.nextNode())) {
+      if (!n.nodeValue || !/\d/.test(n.nodeValue)) continue;
+      var inLink = false;
+      var p = n.parentNode;
+      while (p && p !== root.parentNode) {
+        if (p.nodeType === 1 && p.classList && p.classList.contains('vref-link')) { inLink = true; break; }
+        p = p.parentNode;
+      }
+      if (!inLink) nodes.push(n);
+    }
+    for (var ni = 0; ni < nodes.length; ni++) wrapTextNode(nodes[ni]);
+  }
+
+  function wrapTextNode(textNode) {
+    var text = textNode.nodeValue;
+    combinedRe.lastIndex = 0;
+    var matches = [];
+    var lastBook = null;
+    var m;
+    while ((m = combinedRe.exec(text)) !== null) {
+      var book = m[1];
+      var chapter = m[2];
+      var versesStr = m[3];
+      if (!book && !lastBook) continue;
+      matches.push({
+        index: m.index,
+        length: m[0].length,
+        book: book || lastBook,
+        chapter: parseInt(chapter, 10),
+        verses: versesStr
+      });
+      if (book) lastBook = book;
+    }
+    if (!matches.length) return;
+    var frag = document.createDocumentFragment();
+    var cursor = 0;
+    for (var i = 0; i < matches.length; i++) {
+      var mt = matches[i];
+      if (mt.index > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, mt.index)));
+      var span = document.createElement('span');
+      span.className = 'vref-link';
+      span.tabIndex = 0;
+      span.textContent = text.slice(mt.index, mt.index + mt.length);
+      span.dataset.book = mt.book;
+      span.dataset.chapter = String(mt.chapter);
+      span.dataset.verses = mt.verses;
+      frag.appendChild(span);
+      cursor = mt.index + mt.length;
+    }
+    if (cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+    textNode.parentNode.replaceChild(frag, textNode);
+  }
+
+  var bibleData = null;
+  var biblePromise = null;
+  function loadBible() {
+    if (bibleData) return Promise.resolve(bibleData);
+    if (biblePromise) return biblePromise;
+    biblePromise = fetch(XML_URL).then(function(r){
+      if (!r.ok) throw new Error('XML fetch ' + r.status);
+      return r.text();
+    }).then(function(xml){
+      var doc = new DOMParser().parseFromString(xml, 'text/xml');
+      var data = {};
+      var books = doc.getElementsByTagName('Book');
+      for (var i = 0; i < books.length; i++) {
+        var b = books[i];
+        var abbrev = b.getAttribute('abbrevKo');
+        var nameKo = b.getAttribute('nameKo');
+        var chapters = {};
+        var chs = b.getElementsByTagName('Chapter');
+        for (var j = 0; j < chs.length; j++) {
+          var ch = chs[j];
+          var num = ch.getAttribute('num');
+          var verses = {};
+          var vs = ch.getElementsByTagName('Verse');
+          for (var k = 0; k < vs.length; k++) {
+            verses[vs[k].getAttribute('num')] = vs[k].textContent;
+          }
+          chapters[num] = verses;
+        }
+        var entry = { abbrevKo: abbrev, nameKo: nameKo, chapters: chapters };
+        data[abbrev] = entry;
+        data[nameKo] = entry;
+      }
+      bibleData = data;
+      return data;
+    }).catch(function(e){
+      console.warn('[vref] Bible XML 로드 실패:', e);
+      bibleData = {};
+      return bibleData;
+    });
+    return biblePromise;
+  }
+
+  var tooltipEl = null;
+  var backdropEl = null;
+  var activeLink = null;
+  var hideTimer = null;
+
+  function isMobileView() {
+    return window.matchMedia('(max-width: 768px)').matches;
+  }
+
+  function ensureTooltip() {
+    if (tooltipEl) return tooltipEl;
+    tooltipEl = document.createElement('div');
+    tooltipEl.id = 'vref-tooltip';
+    document.body.appendChild(tooltipEl);
+    return tooltipEl;
+  }
+
+  function ensureBackdrop() {
+    if (backdropEl) return backdropEl;
+    backdropEl = document.createElement('div');
+    backdropEl.id = 'vref-tt-backdrop';
+    backdropEl.addEventListener('click', hideTooltip);
+    document.body.appendChild(backdropEl);
+    return backdropEl;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function buildContent(bookKey, chapter, versesStr) {
+    var meta = BOOK_META[bookKey];
+    var koLabel = (meta ? meta.n : bookKey) + ' ' + chapter + '장 ' + versesStr + '절';
+    var html = '';
+    if (!bibleData || !Object.keys(bibleData).length) {
+      html = '<span class="vref-tt-empty">— 불러오는 중… —</span>';
+    } else {
+      var entry = bibleData[bookKey];
+      if (!entry) {
+        html = '<span class="vref-tt-empty">— 책을 찾을 수 없음 —</span>';
+      } else {
+        var ch = entry.chapters[String(chapter)];
+        if (!ch) {
+          html = '<span class="vref-tt-empty">— ' + chapter + '장을 찾을 수 없음 —</span>';
+        } else {
+          var groups = parseVerseSpec(versesStr);
+          var pieces = [];
+          for (var gi = 0; gi < groups.length; gi++) {
+            var g = groups[gi];
+            for (var v = g.start; v <= g.end; v++) {
+              var t = ch[String(v)];
+              if (typeof t === 'undefined') continue;
+              pieces.push('<div class="vref-tt-verse"><span class="vref-tt-vnum">[' + v + ']</span>' + escHtml(t) + '</div>');
+            }
+          }
+          html = pieces.join('');
+          if (!html) html = '<span class="vref-tt-empty">— 해당 절을 찾을 수 없음 —</span>';
+        }
+      }
+    }
+    return (
+      '<div class="vref-tt-book">' + escHtml(koLabel) + '</div>' +
+      '<div class="vref-tt-body">' + html + '</div>'
+    );
+  }
+
+  function positionTooltip(linkEl) {
+    var rect = linkEl.getBoundingClientRect();
+    var ttRect = tooltipEl.getBoundingClientRect();
+    var docY = window.scrollY || window.pageYOffset;
+    var docX = window.scrollX || window.pageXOffset;
+    var margin = 12;
+    var top = rect.bottom + docY + 10;
+    var left = rect.left + docX + (rect.width / 2) - (ttRect.width / 2);
+    if (left < docX + margin) left = docX + margin;
+    if (left + ttRect.width > docX + window.innerWidth - margin) {
+      left = docX + window.innerWidth - margin - ttRect.width;
+    }
+    if (rect.bottom + ttRect.height + 10 > window.innerHeight && rect.top - ttRect.height - 10 > 0) {
+      top = rect.top + docY - ttRect.height - 10;
+    }
+    tooltipEl.style.top = top + 'px';
+    tooltipEl.style.left = left + 'px';
+  }
+
+  function renderTooltipInner(html, mobile) {
+    if (mobile) {
+      tooltipEl.innerHTML =
+        '<div class="vref-tt-handle"></div>' +
+        '<button class="vref-tt-close" type="button" aria-label="닫기">&times;</button>' +
+        html;
+      var btn = tooltipEl.querySelector('.vref-tt-close');
+      if (btn) btn.addEventListener('click', function(e){ e.stopPropagation(); hideTooltip(); });
+    } else {
+      tooltipEl.innerHTML = html;
+    }
+  }
+
+  function showTooltip(linkEl) {
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    activeLink = linkEl;
+    ensureTooltip();
+    var mobile = isMobileView();
+    if (mobile) ensureBackdrop();
+    var b = linkEl.dataset.book;
+    var c = linkEl.dataset.chapter;
+    var v = linkEl.dataset.verses;
+    renderTooltipInner(buildContent(b, parseInt(c, 10), v), mobile);
+    if (mobile) {
+      tooltipEl.style.top = '';
+      tooltipEl.style.left = '';
+      tooltipEl.scrollTop = 0;
+      backdropEl.dataset.show = '1';
+    } else {
+      positionTooltip(linkEl);
+    }
+    tooltipEl.dataset.show = '1';
+    if (!bibleData) {
+      loadBible().then(function(){
+        if (activeLink !== linkEl) return;
+        renderTooltipInner(buildContent(b, parseInt(c, 10), v), mobile);
+        if (!mobile) positionTooltip(linkEl);
+      });
+    }
+  }
+
+  function hideTooltip() {
+    activeLink = null;
+    if (tooltipEl) tooltipEl.dataset.show = '0';
+    if (backdropEl) backdropEl.dataset.show = '0';
+  }
+
+  function bind() {
+    document.addEventListener('mouseover', function(e){
+      if (isMobileView()) return;
+      var link = e.target && e.target.closest && e.target.closest('.vref-link');
+      if (link) showTooltip(link);
+    });
+    document.addEventListener('mouseout', function(e){
+      if (isMobileView()) return;
+      var link = e.target && e.target.closest && e.target.closest('.vref-link');
+      if (!link) return;
+      var to = e.relatedTarget;
+      if (to && to.closest && to.closest('.vref-link') === link) return;
+      if (hideTimer) clearTimeout(hideTimer);
+      hideTimer = setTimeout(hideTooltip, 100);
+    });
+    document.addEventListener('click', function(e){
+      if (!isMobileView()) return;
+      var link = e.target && e.target.closest && e.target.closest('.vref-link');
+      if (link) {
+        e.preventDefault();
+        if (activeLink === link) hideTooltip();
+        else showTooltip(link);
+      }
+    });
+    document.addEventListener('focusin', function(e){
+      if (isMobileView()) return;
+      var link = e.target && e.target.closest && e.target.closest('.vref-link');
+      if (link) showTooltip(link);
+    });
+    document.addEventListener('focusout', function(e){
+      if (isMobileView()) return;
+      var link = e.target && e.target.closest && e.target.closest('.vref-link');
+      if (link) hideTooltip();
+    });
+    window.addEventListener('scroll', function(){
+      if (isMobileView()) return;
+      hideTooltip();
+    }, true);
+    window.addEventListener('resize', hideTooltip);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') hideTooltip();
+    });
+  }
+
+  function init() {
+    var refs = document.querySelectorAll(REF_SELECTOR);
+    for (var i = 0; i < refs.length; i++) processElement(refs[i]);
+    bind();
+    // Expose for dynamic content (modal body)
+    window.vrefProcess = processElement;
+    if (typeof window.requestIdleCallback === 'function') {
+      requestIdleCallback(loadBible, { timeout: 2000 });
+    } else {
+      setTimeout(loadBible, 800);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 
 </body>
