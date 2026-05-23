@@ -20,18 +20,15 @@
     --olive: #5b6342;
     --gold: #b08a3e;
     --rule: #c9bba2;
-    --topbar-h: 44px;
-    --font-scale: 1;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; font-size: calc(16px * var(--font-scale)); }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
     background: var(--bg);
     color: var(--ink);
     line-height: 1.85;
-    font-size: 1rem;
-    padding-top: var(--topbar-h);
+    font-size: 16px;
     background-image:
       radial-gradient(circle at 15% 10%, rgba(139, 47, 30, 0.04) 0%, transparent 40%),
       radial-gradient(circle at 85% 80%, rgba(91, 99, 66, 0.05) 0%, transparent 45%);
@@ -147,7 +144,6 @@
   section {
     margin-bottom: 80px;
     position: relative;
-    scroll-margin-top: calc(var(--topbar-h) + 16px);
   }
   .section-num {
     font-family: 'Cormorant Garamond', serif;
@@ -362,129 +358,6 @@
     height: auto;
   }
 
-  /* ─── Relationship diagram — mobile alt layout ─────────────── */
-  .rel-mobile { display: none; }
-  @media (max-width: 640px) {
-    .relationship-svg { display: none; }
-    .rel-mobile { display: block; margin: 10px 0 4px; }
-  }
-  .rel-hub {
-    width: 168px; height: 168px; margin: 0 auto;
-    background: radial-gradient(circle at 35% 30%, #c46b4a 0%, #8b2f1e 70%);
-    border-radius: 50%;
-    box-shadow: 0 8px 22px rgba(139, 47, 30, 0.28), inset 0 -4px 12px rgba(0,0,0,0.15);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    color: var(--paper);
-    text-align: center;
-    position: relative;
-  }
-  .rel-hub::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border: 1px dashed rgba(196, 107, 74, 0.5);
-    border-radius: 50%;
-  }
-  .rel-hub .hub-kicker {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    opacity: 0.78;
-    margin-bottom: 4px;
-  }
-  .rel-hub .hub-name {
-    font-family: 'Nanum Myeongjo', serif;
-    font-weight: 800;
-    font-size: 2rem;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .rel-hub .hub-sub {
-    font-family: 'Gowun Dodum', sans-serif;
-    font-size: 0.78rem;
-    opacity: 0.92;
-  }
-
-  .rel-connector {
-    width: 0;
-    height: 38px;
-    margin: 8px auto 0;
-    border-left: 2px dashed var(--olive);
-    position: relative;
-  }
-  .rel-connector::after {
-    content: '';
-    position: absolute;
-    bottom: -1px; left: 50%;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 9px solid var(--olive);
-  }
-
-  .rel-list {
-    list-style: none;
-    padding: 0;
-    margin: 14px 0 0;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-  }
-  .rel-list li {
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: 14px;
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--rule);
-    border-left: 3px solid var(--olive);
-    align-items: center;
-  }
-  .rel-list li:last-child { border-bottom: none; }
-  .rel-list .rm-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.7rem;
-    color: var(--accent);
-    text-align: center;
-    line-height: 1;
-  }
-  .rel-list .rm-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .rel-list .rm-text strong {
-    font-family: 'Nanum Myeongjo', serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    line-height: 1.3;
-  }
-  .rel-list .rm-text em {
-    font-family: 'Gowun Dodum', sans-serif;
-    font-style: normal;
-    font-size: 0.82rem;
-    color: var(--muted);
-  }
-  .rel-caption {
-    margin-top: 16px;
-    padding: 14px 16px;
-    background: rgba(176, 138, 62, 0.08);
-    border-left: 3px solid var(--gold);
-    font-family: 'Nanum Myeongjo', serif;
-    font-style: italic;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    text-align: center;
-  }
-
   /* ─── Comparison Table ─────────────────────────────── */
   .compare-wrap {
     overflow-x: auto;
@@ -525,73 +398,6 @@
   }
   table.compare tr:last-child td { border-bottom: none; }
 
-  /* ─── Mobile comparison cards (replaces table ≤820px) ────────── */
-  .compare-cards { display: none; margin: 30px 0; }
-  .cc-item {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    margin-bottom: 18px;
-    overflow: hidden;
-  }
-  .cc-head {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 13px 18px;
-    font-family: 'Nanum Myeongjo', serif;
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-  .cc-item:first-child .cc-head { background: var(--accent); }
-  .cc-head .cc-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.82rem;
-    opacity: 0.7;
-    letter-spacing: 0.15em;
-  }
-  .cc-row {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 14px;
-    padding: 13px 18px;
-    border-bottom: 1px dashed var(--rule);
-    align-items: start;
-  }
-  .cc-row:last-child { border-bottom: none; }
-  .cc-church {
-    font-family: 'Nanum Myeongjo', serif;
-    font-weight: 700;
-    font-size: 0.92rem;
-    color: var(--ink);
-    position: relative;
-    padding-left: 12px;
-  }
-  .cc-church::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 4px;
-    width: 4px;
-    height: 16px;
-    background: var(--accent);
-  }
-  .cc-row.c-anyang  .cc-church::before { background: var(--olive); }
-  .cc-row.c-daejeon .cc-church::before { background: var(--gold); }
-  .cc-row.c-cheonan .cc-church::before { background: var(--accent-soft); }
-  .cc-value {
-    font-size: 0.93rem;
-    color: var(--ink-soft);
-    line-height: 1.65;
-  }
-  @media (max-width: 820px) {
-    .compare-wrap { display: none; }
-    .compare-cards { display: block; }
-  }
-
   /* ─── 1/5 ratio chart ─────────────────────────────── */
   .ratio-container {
     display: grid;
@@ -627,151 +433,6 @@
     color: var(--accent);
     font-size: 0.7rem;
   }
-
-  /* ─── 1/5 ratio visualization (donut + blocks + legend) ──────── */
-  .ratio-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-  .donut-chart {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    display: block;
-  }
-  .donut-chart .dn-kicker {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 11px;
-    fill: var(--muted);
-    letter-spacing: 0.28em;
-  }
-  .donut-chart .dn-ratio {
-    font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
-    font-weight: 800;
-    font-size: 42px;
-    fill: var(--ink);
-    letter-spacing: 0.04em;
-  }
-  .donut-chart .dn-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 10.5px;
-    fill: var(--muted);
-    letter-spacing: 0.18em;
-  }
-  .donut-chart .dn-pct-red {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-style: italic;
-    font-size: 17px;
-    fill: var(--paper);
-    letter-spacing: 0.04em;
-  }
-  .donut-chart .dn-pct-olive {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-style: italic;
-    font-size: 22px;
-    fill: var(--paper);
-    letter-spacing: 0.04em;
-  }
-
-  .ratio-blocks {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    width: 100%;
-    max-width: 280px;
-  }
-  .rb {
-    aspect-ratio: 1 / 1.15;
-    border: 1.5px solid var(--ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.4rem;
-    line-height: 1;
-    position: relative;
-  }
-  .rb-spiritual {
-    background: var(--accent);
-    color: var(--paper);
-  }
-  .rb-character {
-    background: var(--olive);
-    color: var(--paper);
-    opacity: 0.92;
-  }
-  .rb-spiritual::after {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 7px solid var(--accent);
-  }
-  .ratio-blocks-cap {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.85rem;
-    color: var(--muted);
-    text-align: center;
-    letter-spacing: 0.04em;
-    margin-top: -8px;
-  }
-  .ratio-blocks-cap strong {
-    color: var(--accent);
-    font-weight: 600;
-    font-style: normal;
-    font-family: 'Nanum Myeongjo', serif;
-  }
-
-  .ratio-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 280px;
-    padding-top: 16px;
-    border-top: 1px solid var(--rule);
-  }
-  .rl-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .rl-sw {
-    width: 30px;
-    height: 16px;
-    flex-shrink: 0;
-    border: 1px solid var(--ink);
-  }
-  .rl-sw-red { background: var(--accent); }
-  .rl-sw-olive { background: var(--olive); }
-  .rl-text {
-    font-family: 'Nanum Myeongjo', serif;
-    font-size: 0.95rem;
-    color: var(--ink);
-    flex: 1;
-  }
-  .rl-text em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-left: 8px;
-  }
-  .rl-item.is-red .rl-text em { color: var(--accent); }
-  .rl-item.is-olive .rl-text em { color: var(--olive); }
 
   /* ─── Lifecycle timeline ─────────────────────────────── */
   .timeline {
@@ -977,160 +638,9 @@
     .pull-quote blockquote { font-size: 1.1rem; }
     h2 { font-size: 1.7rem; }
   }
-
-  /* ─── Topbar + Side Panel + Font Scale (ported from M1D4) ─── */
-  .topbar {
-    position: fixed; top: 0; left: 0; right: 0;
-    height: var(--topbar-h);
-    background: rgba(31, 26, 20, 0.92);
-    backdrop-filter: saturate(140%) blur(10px);
-    -webkit-backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid rgba(176, 138, 62, 0.32);
-    display: flex; align-items: center;
-    padding: 0 10px; z-index: 1000; gap: 4px;
-  }
-  .topbar-btn {
-    flex-shrink: 0; width: 34px; height: 34px;
-    border: none; background: none; border-radius: 4px;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    color: var(--paper); opacity: 0.85;
-    transition: background .15s, opacity .15s, color .15s;
-  }
-  .topbar-btn:hover { background: rgba(176, 138, 62, 0.16); opacity: 1; color: var(--gold); }
-  .topbar-title {
-    flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 13px; font-weight: 500; letter-spacing: 0.12em;
-    color: var(--gold); scrollbar-width: none; -ms-overflow-style: none;
-    padding: 0 6px; text-transform: uppercase;
-  }
-  .topbar-title::-webkit-scrollbar { display: none; }
-  .font-controls {
-    display: flex; align-items: center; gap: 2px;
-    border: 1px solid rgba(176, 138, 62, 0.3);
-    border-radius: 4px; padding: 2px; margin-left: 4px;
-  }
-  .font-ctrl-btn {
-    width: 26px; height: 26px; border: none; background: transparent;
-    color: var(--paper); font-size: 14px; cursor: pointer; border-radius: 3px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Nanum Myeongjo', serif;
-    transition: background .15s, color .15s;
-  }
-  .font-ctrl-btn:hover { background: rgba(176, 138, 62, 0.2); color: var(--gold); }
-
-  .overlay {
-    position: fixed; inset: 0;
-    background: rgba(31, 26, 20, 0.55);
-    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-    z-index: 1001; opacity: 0; pointer-events: none;
-    transition: opacity .25s;
-  }
-  .overlay.open { opacity: 1; pointer-events: auto; }
-
-  .sidepanel {
-    position: fixed; top: 0; left: 0; bottom: 0;
-    width: 300px; max-width: 82vw;
-    background: linear-gradient(180deg, #2a2218 0%, #1a1611 100%);
-    z-index: 1002; transform: translateX(-100%);
-    transition: transform .3s cubic-bezier(.4, 0, .2, 1);
-    overflow-y: auto; padding: 20px 0;
-    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.45);
-    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
-    border-right: 1px solid rgba(176, 138, 62, 0.28);
-  }
-  .sidepanel.open { transform: translateX(0); }
-  .sidepanel-header {
-    padding: 0 22px 16px;
-    border-bottom: 1px solid rgba(176, 138, 62, 0.22);
-    margin-bottom: 8px;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 13px; font-weight: 500; letter-spacing: 0.28em;
-    text-transform: uppercase; color: var(--gold);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .sidepanel-close {
-    margin-left: auto; width: 28px; height: 28px;
-    border: none; background: transparent; border-radius: 3px;
-    cursor: pointer; font-size: 14px; color: var(--paper);
-    opacity: 0.7; display: flex; align-items: center; justify-content: center;
-    transition: background .15s, color .15s, opacity .15s;
-  }
-  .sidepanel-close:hover { background: rgba(176, 138, 62, 0.2); color: var(--gold); opacity: 1; }
-  .nav-section-head {
-    padding: 14px 22px 8px;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 10.5px; color: var(--gold);
-    letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.85;
-  }
-  .nav-item {
-    display: flex; align-items: baseline; gap: 12px;
-    padding: 11px 22px;
-    font-size: 13px;
-    color: var(--paper); text-decoration: none; cursor: pointer;
-    transition: background .15s, color .15s, opacity .15s;
-    font-weight: 400; letter-spacing: -0.005em; opacity: 0.88;
-    font-family: 'Nanum Myeongjo', 'Gowun Batang', serif;
-  }
-  .nav-item:hover { background: rgba(176, 138, 62, 0.1); color: var(--gold); opacity: 1; }
-  .nav-item .nav-num {
-    flex-shrink: 0;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 11px; color: var(--accent-soft);
-    letter-spacing: 0.15em;
-    min-width: 22px;
-  }
-  .nav-divider { height: 1px; background: rgba(176, 138, 62, 0.18); margin: 10px 22px; }
-
-  @media (max-width: 540px) {
-    .topbar { padding: 0 6px; gap: 2px; }
-    .topbar-title { font-size: 12px; letter-spacing: 0.08em; padding: 0 4px; }
-    .topbar-btn { width: 32px; height: 32px; }
-    .font-ctrl-btn { width: 24px; height: 24px; font-size: 13px; }
-    .font-controls { padding: 1px; }
-  }
-  @media (max-width: 380px) {
-    .topbar-title { font-size: 11px; }
-  }
 </style>
 </head>
 <body>
-
-<!-- ═════════ Topbar ═════════ -->
-<div class="topbar" id="topbar">
-  <button class="topbar-btn" onclick="togglePanel()" aria-label="목차">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
-  <div class="topbar-title">Ministry Notes · 어린이 양육 교통</div>
-  <div class="font-controls" role="group" aria-label="글자 크기 조절">
-    <button class="font-ctrl-btn" onclick="adjustFont(-1)" aria-label="작게">−</button>
-    <button class="font-ctrl-btn" onclick="adjustFont(0)" style="font-size:12px;" aria-label="기본 크기">가</button>
-    <button class="font-ctrl-btn" onclick="adjustFont(1)" aria-label="크게">+</button>
-  </div>
-</div>
-
-<div class="overlay" id="overlay" onclick="togglePanel()"></div>
-
-<!-- ═════════ Side Panel ═════════ -->
-<div class="sidepanel" id="sidepanel">
-  <div class="sidepanel-header">목차<button class="sidepanel-close" onclick="togglePanel()" aria-label="닫기">✕</button></div>
-  <div class="nav-section-head">Report Sections</div>
-  <a class="nav-item" onclick="goTo('sec-01')"><span class="nav-num">01</span><span>한 자리에 펼쳐진 여섯 결</span></a>
-  <a class="nav-item" onclick="goTo('sec-02')"><span class="nav-num">02</span><span>의미 있는 관계 5명</span></a>
-  <a class="nav-item" onclick="goTo('sec-03')"><span class="nav-num">03</span><span>지역별 어린이 소그룹 비교</span></a>
-  <a class="nav-item" onclick="goTo('sec-04')"><span class="nav-num">04</span><span>1/5 원칙</span></a>
-  <a class="nav-item" onclick="goTo('sec-05')"><span class="nav-num">05</span><span>부모의 책임 vs 교회의 동역</span></a>
-  <a class="nav-item" onclick="goTo('sec-06')"><span class="nav-num">06</span><span>어린이 복음의 누적 효과</span></a>
-  <a class="nav-item" onclick="goTo('sec-07')"><span class="nav-num">07</span><span>일곱 가지 인사이트</span></a>
-  <a class="nav-item" onclick="goTo('sec-08')"><span class="nav-num">08</span><span>실천 권고</span></a>
-  <a class="nav-item" onclick="goTo('sec-09')"><span class="nav-num">09</span><span>마무리</span></a>
-  <div class="nav-divider"></div>
-  <a class="nav-item" onclick="goTo('top')"><span class="nav-num">↑</span><span>맨 위로</span></a>
-</div>
-
-<div id="top"></div>
 <div class="container">
 
   <!-- ═══════════════ Masthead ═══════════════ -->
@@ -1171,7 +681,7 @@
   </div>
 
   <!-- ═══════════════ SECTION 1: 대화의 전체 흐름 ═══════════════ -->
-  <section id="sec-01">
+  <section>
     <div class="section-num">01</div>
     <div class="section-tag">Conversation Map</div>
     <h2>한 자리에 펼쳐진 여섯 결</h2>
@@ -1233,7 +743,7 @@
   </div>
 
   <!-- ═══════════════ SECTION 3: 5 Meaningful Relationships ═══════════════ -->
-  <section id="sec-02">
+  <section>
     <div class="section-num">02</div>
     <div class="section-tag">Core Framework</div>
     <h2>의미 있는 관계 5명 — 아이를 지키는 울타리</h2>
@@ -1321,24 +831,6 @@
           “이 5명 정도만 있어도 아이는 울타리 속에서 빗나가지 않고 보존된다.”
         </text>
       </svg>
-
-      <!-- Mobile-friendly alternative layout (≤640px) -->
-      <div class="rel-mobile">
-        <div class="rel-hub">
-          <div class="hub-kicker">Center</div>
-          <div class="hub-name">아이</div>
-          <div class="hub-sub">한 명의 어린이</div>
-        </div>
-        <div class="rel-connector" aria-hidden="true"></div>
-        <ul class="rel-list">
-          <li><span class="rm-num">01</span><span class="rm-text"><strong>또래 · 형 누나</strong><em>소그룹 친구</em></span></li>
-          <li><span class="rm-num">02</span><span class="rm-text"><strong>봉사 형제자매</strong><em>교사 · 돌봄</em></span></li>
-          <li><span class="rm-num">03</span><span class="rm-text"><strong>청년 봉사자</strong><em>대학 · 청년부</em></span></li>
-          <li><span class="rm-num">04</span><span class="rm-text"><strong>돌볼 동생</strong><em>유치부 · 후배</em></span></li>
-          <li><span class="rm-num">05</span><span class="rm-text"><strong>연장 지체</strong><em>연장 형제자매</em></span></li>
-        </ul>
-        <div class="rel-caption">"이 5명 정도만 있어도 아이는 울타리 속에서 빗나가지 않고 보존된다."</div>
-      </div>
     </div>
 
     <h3>“의미 있는”이라는 말의 무게</h3>
@@ -1350,7 +842,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 4: Church Comparison ═══════════════ -->
-  <section id="sec-03">
+  <section>
     <div class="section-num">03</div>
     <div class="section-tag">Field Comparison</div>
     <h2>지역별 어린이 소그룹 운영 비교</h2>
@@ -1432,79 +924,10 @@
         </tbody>
       </table>
     </div>
-
-    <!-- Mobile-only card layout (same data, comfortable vertical reading) -->
-    <div class="compare-cards" aria-hidden="false">
-
-      <div class="cc-item">
-        <div class="cc-head"><span>주요 연령</span><span class="cc-num">01</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">고학년 + 어린아이 혼재</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">유치~초등 다수</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">유치 + 초등</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">유치·미취학 다수</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>장소</span><span class="cc-num">02</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">가정(1층) 중심 + 집회소</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">집회소(개방형, 방방장 2개)</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">학생센터 + 가정</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">가정 중심</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>모임 주기</span><span class="cc-num">03</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">토요일 + 가정/야외 순환</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">매주, 한 달 두 번은 가정</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">토요 점심 후, 격주 3가정 순환</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">토요일 오전(어린이)·오후</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>주일 집회 구성</span><span class="cc-num">04</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">다음세대 성경 본문 사용</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">찬송 30분 → 말씀 20분 → 암송 → 신원 → 분반</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">다음세대 성경 활용</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">창조 → 분반(유치/초등 분리)</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>교사 운영</span><span class="cc-num">05</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">당번제 + 자매님 봉사</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">12명 순환(부모 외 청년 포함)</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">학부모 + 봉사자</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">학부모 + 연장 자매님 돌봄</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>특이점</span><span class="cc-num">06</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">코로나 이후 가정 모임 부활, 사진 공유로 인식 확산</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">방방장·바베큐 공간, 놀이터와 같은 집회소 인프라</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">5층 건물 활용, 어른 소그룹과 병행 회복</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">대학생 홈미팅에 자녀 동행, 연장자 사랑</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>강점</span><span class="cc-num">07</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">가정 모임 정착 단계</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">환경(시설) 최적, 즐거움 중심</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">공간 여유 + 격주 부담 분산</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">세대 간 친밀, 사랑의 흐름</div></div>
-      </div>
-
-      <div class="cc-item">
-        <div class="cc-head"><span>고민거리</span><span class="cc-num">08</span></div>
-        <div class="cc-row c-sejong"><div class="cc-church">세종</div><div class="cc-value">중고등부 부재 → 다음 단계 공백</div></div>
-        <div class="cc-row c-anyang"><div class="cc-church">안양</div><div class="cc-value">대학·청년부 적음(외지로 이동)</div></div>
-        <div class="cc-row c-daejeon"><div class="cc-church">대전</div><div class="cc-value">주중 기도집회 회복 미완</div></div>
-        <div class="cc-row c-cheonan"><div class="cc-church">천안</div><div class="cc-value">대학생 중심에 아이가 끼는 부담</div></div>
-      </div>
-
-    </div>
   </section>
 
   <!-- ═══════════════ SECTION 5: 1/5 Rule ═══════════════ -->
-  <section id="sec-04">
+  <section>
     <div class="section-num">04</div>
     <div class="section-tag">A Counterintuitive Principle</div>
     <h2>1/5 원칙 — 영적 지식은 적게, 인성은 많이</h2>
@@ -1522,63 +945,20 @@
       </div>
 
       <div class="ratio-container">
-        <div class="ratio-visual">
-
-          <!-- ▼ Donut Chart (stroke-dasharray based — math-safe) -->
-          <svg class="donut-chart" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="영적 지식 20%, 인성·관계 80%">
-            <defs>
-              <filter id="donutShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                <feOffset dx="0" dy="2"/>
-                <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
-                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-
-            <g filter="url(#donutShadow)">
-              <!-- Olive base ring (full circle = 인성·관계 baseline) -->
-              <circle cx="140" cy="140" r="100" fill="none" stroke="#5b6342" stroke-width="46"/>
-              <!-- Red 20% arc (72° from top) — circumference 628.318, 20% = 125.664 -->
-              <circle cx="140" cy="140" r="100" fill="none" stroke="#8b2f1e" stroke-width="46"
-                      stroke-dasharray="125.664 502.654"
-                      transform="rotate(-90 140 140)"/>
-            </g>
-
-            <!-- In-slice percentage labels (positioned at arc midpoints) -->
-            <!-- Red arc midpoint = 36° from top → (140 + 100·sin36°, 140 − 100·cos36°) ≈ (199, 59) -->
-            <text x="199" y="64" text-anchor="middle" class="dn-pct-red">20%</text>
-            <!-- Olive arc midpoint = 216° from top → (140 + 100·sin216°, 140 − 100·cos216°) ≈ (81, 221) -->
-            <text x="81" y="228" text-anchor="middle" class="dn-pct-olive">80%</text>
-
-            <!-- Center disc -->
-            <circle cx="140" cy="140" r="62" fill="#fbf6ec" stroke="#c9bba2" stroke-width="1"/>
-            <text x="140" y="124" text-anchor="middle" class="dn-kicker">RATIO</text>
-            <text x="140" y="160" text-anchor="middle" class="dn-ratio">1 : 4</text>
-            <text x="140" y="178" text-anchor="middle" class="dn-sub">SPIRIT · CHARACTER</text>
+        <div>
+          <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 240px; display: block; margin: 0 auto;">
+            <!-- 4/5 인성 -->
+            <circle cx="120" cy="120" r="100" fill="#5b6342" stroke="#1f1a14" stroke-width="2"/>
+            <!-- 1/5 영적 지식 (72 degrees = 1/5 of circle, start from top) -->
+            <path d="M 120 120 L 120 20 A 100 100 0 0 1 215.106 151.756 Z" fill="#8b2f1e" stroke="#1f1a14" stroke-width="2"/>
+            <!-- Center label area -->
+            <circle cx="120" cy="120" r="44" fill="#fbf6ec" stroke="#1f1a14" stroke-width="2"/>
+            <text x="120" y="115" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="13" fill="#7a6b58">RATIO</text>
+            <text x="120" y="135" text-anchor="middle" font-family="Nanum Myeongjo" font-weight="800" font-size="18" fill="#1f1a14">1 : 4</text>
+            <!-- Labels -->
+            <text x="170" y="55" font-family="Nanum Myeongjo" font-weight="700" font-size="12" fill="#8b2f1e">영적 지식 20%</text>
+            <text x="35" y="195" font-family="Nanum Myeongjo" font-weight="700" font-size="12" fill="#5b6342">인성·관계 80%</text>
           </svg>
-
-          <!-- ▼ "1 out of 5" block reinforcement -->
-          <div class="ratio-blocks" aria-hidden="true">
-            <div class="rb rb-spiritual">1</div>
-            <div class="rb rb-character">2</div>
-            <div class="rb rb-character">3</div>
-            <div class="rb rb-character">4</div>
-            <div class="rb rb-character">5</div>
-          </div>
-          <div class="ratio-blocks-cap">다섯 중 <strong>하나</strong>만 영적 지식 · 나머지 넷은 인성과 관계</div>
-
-          <!-- ▼ Legend -->
-          <div class="ratio-legend">
-            <div class="rl-item is-red">
-              <span class="rl-sw rl-sw-red"></span>
-              <span class="rl-text">영적 지식 <em>20%</em></span>
-            </div>
-            <div class="rl-item is-olive">
-              <span class="rl-sw rl-sw-olive"></span>
-              <span class="rl-text">인성 · 관계 <em>80%</em></span>
-            </div>
-          </div>
-
         </div>
 
         <div class="ratio-explainer">
@@ -1614,7 +994,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 6: 핵심 긴장 ═══════════════ -->
-  <section id="sec-05">
+  <section>
     <div class="section-num">05</div>
     <div class="section-tag">A Productive Tension</div>
     <h2>풀어야 할 긴장 — 부모의 책임 vs 교회의 동역</h2>
@@ -1657,7 +1037,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 7: 어린이 복음의 누적 효과 ═══════════════ -->
-  <section id="sec-06">
+  <section>
     <div class="section-num">06</div>
     <div class="section-tag">The Long Game</div>
     <h2>어린이 복음의 누적 효과 — 18년의 산수</h2>
@@ -1719,7 +1099,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 8: 핵심 인사이트 ═══════════════ -->
-  <section id="sec-07">
+  <section>
     <div class="section-num">07</div>
     <div class="section-tag">Key Insights</div>
     <h2>일곱 가지 인사이트</h2>
@@ -1794,7 +1174,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 9: Recommendations ═══════════════ -->
-  <section id="sec-08">
+  <section>
     <div class="section-num">08</div>
     <div class="section-tag">Action Frame</div>
     <h2>실천 권고 — 다음 한 달, 다음 한 해</h2>
@@ -1865,7 +1245,7 @@
   </section>
 
   <!-- ═══════════════ SECTION 10: Closing ═══════════════ -->
-  <section id="sec-09">
+  <section>
     <div class="section-num">09</div>
     <div class="section-tag">Closing Reflection</div>
     <h2>마무리 — 두 개의 그림</h2>
@@ -1902,28 +1282,5 @@
   </footer>
 
 </div>
-
-<script>
-/* ─── Topbar + Side Panel + Font Scale ─── */
-let fontScale = 1;
-function adjustFont(dir) {
-  if (dir === 0) fontScale = 1;
-  else if (dir === 1 && fontScale < 1.4) fontScale = Math.round((fontScale + 0.05) * 100) / 100;
-  else if (dir === -1 && fontScale > 0.7) fontScale = Math.round((fontScale - 0.05) * 100) / 100;
-  document.documentElement.style.setProperty('--font-scale', fontScale);
-}
-function togglePanel() {
-  document.getElementById('sidepanel').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('open');
-}
-function goTo(id) {
-  togglePanel();
-  setTimeout(() => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 280);
-}
-</script>
-
 </body>
 </html>
