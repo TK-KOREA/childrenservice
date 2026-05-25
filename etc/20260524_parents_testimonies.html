@@ -402,12 +402,236 @@
   .corner-flower.tl{ top:14px; left:14px; transform:rotate(-20deg); }
   .corner-flower.br{ bottom:14px; right:14px; transform:rotate(160deg); }
 
+  /* ---- Cassette Tape Player ---- */
+  .cassette{
+    margin:46px auto 6px;
+    width:100%;
+    max-width:340px;
+    background:
+      linear-gradient(180deg, #f4d7a0 0%, #e8b97a 45%, #c9924d 100%);
+    border-radius:10px;
+    padding:14px 16px 16px;
+    position:relative;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.55) inset,
+      0 -2px 0 rgba(80,40,10,0.18) inset,
+      0 10px 24px -10px rgba(60,30,5,0.55),
+      0 3px 6px rgba(60,30,5,0.25);
+    transform:rotate(-1deg);
+  }
+  .cassette::before{
+    content:'';
+    position:absolute;
+    inset:6px;
+    border:1px dashed rgba(80,40,10,0.25);
+    border-radius:7px;
+    pointer-events:none;
+  }
+  /* screw dots in corners */
+  .cassette .screw{
+    position:absolute;
+    width:6px; height:6px;
+    background:radial-gradient(circle at 35% 35%, #6b4a22, #2e1d0a);
+    border-radius:50%;
+    box-shadow:0 1px 1px rgba(255,255,255,0.4);
+  }
+  .cassette .screw.tl{ top:4px; left:5px; }
+  .cassette .screw.tr{ top:4px; right:5px; }
+  .cassette .screw.bl{ bottom:4px; left:5px; }
+  .cassette .screw.br{ bottom:4px; right:5px; }
+
+  .cassette .window{
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.1) 100%),
+      #efe2c2;
+    border-radius:6px;
+    padding:14px 14px 12px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 -1px 0 rgba(80,40,10,0.18) inset,
+      0 2px 4px rgba(60,30,5,0.18) inset;
+    position:relative;
+  }
+
+  .cassette .reels{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    padding:0 6px;
+  }
+  .reel{
+    width:46px; height:46px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at center, #fff 0 6px, transparent 6.5px),
+      radial-gradient(circle at center, #efe2c2 7px, #c2a36b 8px, #8a6839 60%, #4a3418 100%);
+    position:relative;
+    box-shadow:
+      0 0 0 2px rgba(80,40,10,0.25),
+      0 2px 4px rgba(60,30,5,0.25) inset;
+    flex-shrink:0;
+  }
+  .reel::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:
+      conic-gradient(from 0deg,
+        transparent 0deg 8deg, rgba(255,255,255,0.35) 8deg 12deg,
+        transparent 12deg 98deg, rgba(255,255,255,0.35) 98deg 102deg,
+        transparent 102deg 188deg, rgba(255,255,255,0.35) 188deg 192deg,
+        transparent 192deg 278deg, rgba(255,255,255,0.35) 278deg 282deg,
+        transparent 282deg 360deg);
+    mask:radial-gradient(circle, transparent 7px, #000 7.5px, #000 18px, transparent 19px);
+    -webkit-mask:radial-gradient(circle, transparent 7px, #000 7.5px, #000 18px, transparent 19px);
+  }
+  .reel.spin{ animation:reel-spin 2.4s linear infinite; }
+  @keyframes reel-spin{ to{ transform:rotate(360deg); } }
+
+  .tape-line{
+    position:absolute;
+    top:50%;
+    left:8px; right:8px;
+    height:3px;
+    background:linear-gradient(180deg, #5a3a18 0%, #2e1d0a 50%, #5a3a18 100%);
+    border-radius:2px;
+    transform:translateY(-50%);
+    z-index:-1;
+    opacity:0.55;
+  }
+
+  .cassette .label{
+    margin-top:12px;
+    padding:8px 10px 6px;
+    background:
+      linear-gradient(180deg, #fff 0%, #f7eed2 100%);
+    border:1px solid rgba(80,40,10,0.18);
+    border-radius:3px;
+    text-align:center;
+    box-shadow:0 1px 2px rgba(60,30,5,0.12);
+  }
+  .cassette .label .side{
+    font-family:'Gaegu', cursive;
+    font-size:11px;
+    color:var(--rose);
+    letter-spacing:3px;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .cassette .label .title{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:22px;
+    color:var(--ink);
+    line-height:1.1;
+    letter-spacing:0.5px;
+  }
+  .cassette .label .meta{
+    font-family:'Gaegu', cursive;
+    font-size:12px;
+    color:var(--ink-faded);
+    margin-top:2px;
+    letter-spacing:1px;
+  }
+
+  /* Controls under cassette */
+  .cassette .controls{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:14px;
+    padding:0 4px;
+  }
+  .cassette .play-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    border:none;
+    background:
+      radial-gradient(circle at 35% 30%, #fff 0%, rgba(255,255,255,0.3) 30%, transparent 50%),
+      radial-gradient(circle at center, var(--rose) 0%, #8a4234 100%);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    box-shadow:
+      0 2px 6px rgba(60,20,10,0.4),
+      0 1px 0 rgba(255,255,255,0.4) inset;
+    transition:transform 0.15s ease;
+    padding:0;
+  }
+  .cassette .play-btn:active{ transform:scale(0.94); }
+  .cassette .play-btn svg{ width:14px; height:14px; }
+  .cassette .play-btn .icon-pause{ display:none; }
+  .cassette.playing .play-btn .icon-play{ display:none; }
+  .cassette.playing .play-btn .icon-pause{ display:block; }
+
+  .cassette .progress-wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:0;
+  }
+  .cassette .progress{
+    height:4px;
+    background:rgba(80,40,10,0.25);
+    border-radius:2px;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 1px 1px rgba(60,30,5,0.15) inset;
+  }
+  .cassette .progress-fill{
+    position:absolute;
+    top:0; left:0; bottom:0;
+    width:0%;
+    background:linear-gradient(90deg, var(--rose) 0%, var(--gold) 100%);
+    border-radius:2px;
+  }
+  .cassette .progress-thumb{
+    position:absolute;
+    top:50%;
+    left:0%;
+    width:10px; height:10px;
+    background:var(--paper);
+    border:1.5px solid var(--rose);
+    border-radius:50%;
+    transform:translate(-50%, -50%);
+    box-shadow:0 1px 2px rgba(0,0,0,0.2);
+  }
+  .cassette .time{
+    font-family:'Gaegu', cursive;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:0.5px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .cassette-caption{
+    text-align:center;
+    font-family:'Nanum Pen Script', cursive;
+    font-size:20px;
+    color:var(--ink-faded);
+    margin:14px 0 -8px;
+    letter-spacing:0.5px;
+  }
+  .cassette-caption::before, .cassette-caption::after{
+    content:'~';
+    margin:0 8px;
+    opacity:0.6;
+  }
+
   /* keep-together breaks on narrow screens */
   @media (max-width:380px){
     .page{ padding:54px 24px 50px; }
     h2{ font-size:39px; }
     .quote .text{ font-size:27px; }
     .cover h1{ font-size:56px; }
+    .cassette{ max-width:300px; }
+    .reel{ width:40px; height:40px; }
   }
 </style>
 </head>
@@ -457,6 +681,38 @@
           <path d="M68,12 Q64,9 60,12 Q64,15 68,12 Z" fill="currentColor" fill-opacity="0.3"/>
         </g>
       </svg>
+    </div>
+
+    <div class="cassette-caption">들으면서 읽어 보세요</div>
+    <div class="cassette" id="cassette">
+      <span class="screw tl"></span><span class="screw tr"></span>
+      <span class="screw bl"></span><span class="screw br"></span>
+      <div class="window">
+        <div class="reels">
+          <div class="reel" id="reel-left"></div>
+          <div class="tape-line"></div>
+          <div class="reel" id="reel-right"></div>
+        </div>
+        <div class="label">
+          <div class="side">SIDE · A</div>
+          <div class="title">봄, 사역원에서 온 편지</div>
+          <div class="meta">학부모 간증 노트 · 낭독</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" id="play-btn" aria-label="재생/일시정지">
+          <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2 L4 14 L13 8 Z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor"><rect x="3.5" y="2.5" width="3.5" height="11" rx="0.5"/><rect x="9" y="2.5" width="3.5" height="11" rx="0.5"/></svg>
+        </button>
+        <div class="progress-wrap">
+          <div class="progress" id="progress">
+            <div class="progress-fill" id="progress-fill"></div>
+            <div class="progress-thumb" id="progress-thumb"></div>
+          </div>
+          <div class="time"><span id="time-cur">0:00</span><span id="time-dur">--:--</span></div>
+        </div>
+      </div>
+      <audio id="audio" preload="metadata" src="20260524_parents_testimonies.m4a"></audio>
     </div>
 
     <div class="toc">
@@ -885,6 +1141,66 @@
   </section>
 
 </main>
+
+<script>
+(function(){
+  var audio   = document.getElementById('audio');
+  var cassette= document.getElementById('cassette');
+  var btn     = document.getElementById('play-btn');
+  var reelL   = document.getElementById('reel-left');
+  var reelR   = document.getElementById('reel-right');
+  var progress= document.getElementById('progress');
+  var fill    = document.getElementById('progress-fill');
+  var thumb   = document.getElementById('progress-thumb');
+  var tCur    = document.getElementById('time-cur');
+  var tDur    = document.getElementById('time-dur');
+
+  function fmt(s){
+    if(!isFinite(s)) return '--:--';
+    s = Math.floor(s);
+    var m = Math.floor(s/60), r = s%60;
+    return m + ':' + (r<10?'0':'') + r;
+  }
+
+  btn.addEventListener('click', function(){
+    if(audio.paused) audio.play(); else audio.pause();
+  });
+
+  audio.addEventListener('play', function(){
+    cassette.classList.add('playing');
+    reelL.classList.add('spin');
+    reelR.classList.add('spin');
+  });
+  audio.addEventListener('pause', function(){
+    cassette.classList.remove('playing');
+    reelL.classList.remove('spin');
+    reelR.classList.remove('spin');
+  });
+  audio.addEventListener('loadedmetadata', function(){
+    tDur.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('timeupdate', function(){
+    var pct = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
+    fill.style.width = pct + '%';
+    thumb.style.left = pct + '%';
+    tCur.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('ended', function(){
+    cassette.classList.remove('playing');
+    reelL.classList.remove('spin');
+    reelR.classList.remove('spin');
+  });
+
+  function seek(e){
+    var rect = progress.getBoundingClientRect();
+    var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    var pct = Math.max(0, Math.min(1, x/rect.width));
+    if(audio.duration) audio.currentTime = pct * audio.duration;
+  }
+  progress.addEventListener('click', seek);
+  progress.addEventListener('touchstart', seek, {passive:true});
+})();
+</script>
 
 </body>
 </html>
