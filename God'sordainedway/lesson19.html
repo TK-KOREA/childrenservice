@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>신언의 실행 — 제19과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF5E9;
+    --bg2:#F3E7CF;
+    --bg3:#EFDFC0;
+    --ink:#2B2838;
+    --ink-soft:#6A6173;
+    --ink-faint:#9A8F8A;
+    --gold:#BE8722;
+    --gold-deep:#9C6C12;
+    --gold-light:#E6BB5E;
+    --gold-wash:rgba(190,135,34,.10);
+    --sky:#3E8295;
+    --sky-light:#7CB2C0;
+    --sky-wash:rgba(62,130,149,.10);
+    --rose:#BC6E5C;
+    --line:rgba(43,40,56,.14);
+    --card:#FFFDF7;
+    --shadow:0 1.2rem 2.5rem -1.2rem rgba(80,55,20,.28);
+    --shadow-sm:0 .5rem 1.2rem -.6rem rgba(80,55,20,.30);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{font-size:16px;-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'IBM Plex Sans KR',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    font-size:1rem;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+
+  .wrap{
+    position:relative;z-index:1;
+    max-width:30rem;margin:0 auto;
+    padding:0 1.25rem 4rem;
+  }
+
+  .scene{padding:3.4rem 0 1.2rem;}
+  .scene + .scene{border-top:1px solid var(--line);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(1.6rem);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+  .reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+  .reveal.d5{transition-delay:.40s}.reveal.d6{transition-delay:.48s}
+
+  /* ---------- typographic system ---------- */
+  .scene-no{
+    font-family:'Black Han Sans',sans-serif;
+    font-size:2.6rem;line-height:1;color:var(--gold-light);
+    letter-spacing:.02em;
+  }
+  .kicker{
+    font-size:.78rem;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gold-deep);margin-bottom:.5rem;
+  }
+  .stitle{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:1.7rem;line-height:1.35;letter-spacing:-.01em;margin:.35rem 0 .8rem;
+  }
+  .lead{font-size:1rem;color:var(--ink-soft);margin-bottom:1.3rem;}
+  .verse{
+    font-family:'Nanum Myeongjo',serif;font-style:normal;
+    color:var(--gold-deep);font-size:1.02rem;line-height:1.6;
+    border-left:3px solid var(--gold-light);padding:.1rem 0 .1rem .9rem;
+    margin:1rem 0;
+  }
+  .verse span{display:block;font-family:'IBM Plex Sans KR';font-size:.78rem;color:var(--ink-faint);margin-top:.35rem;letter-spacing:.04em;}
+  .note{font-size:.95rem;color:var(--ink-soft);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;text-align:center;
+    padding:5.5rem 0 4.2rem;min-height:88vh;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .hero::before{
+    content:"";position:absolute;top:-12%;left:50%;transform:translateX(-50%);
+    width:140%;height:60%;z-index:-1;
+    background:radial-gradient(ellipse at 50% 30%,rgba(230,187,94,.55),rgba(230,187,94,.12) 45%,transparent 68%);
+    filter:blur(2px);
+  }
+  .hero .kicker{color:var(--gold-deep);}
+  .hero h1{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:3.6rem;line-height:1.05;letter-spacing:-.02em;
+    margin:.4rem 0 1.1rem;
+  }
+  .hero .thesis{
+    font-size:1.05rem;color:var(--ink-soft);max-width:22rem;margin:0 auto 2.2rem;
+    line-height:1.75;
+  }
+  .refrain{
+    font-family:'Nanum Myeongjo',serif;font-weight:700;
+    font-size:1.45rem;color:var(--gold-deep);line-height:1.5;
+    position:relative;padding:1.4rem 0;
+  }
+  .refrain::before,.refrain::after{
+    content:"";display:block;width:2.6rem;height:1px;background:var(--gold-light);margin:0 auto;
+  }
+  .refrain::before{margin-bottom:1.2rem}.refrain::after{margin-top:1.2rem}
+  .refrain small{display:block;font-family:'IBM Plex Sans KR';font-size:.8rem;font-weight:500;color:var(--ink-faint);letter-spacing:.06em;margin-top:.5rem;}
+  .scrollcue{margin-top:2.6rem;font-size:.75rem;letter-spacing:.2em;color:var(--ink-faint);}
+  .scrollcue::after{content:"";display:block;width:1px;height:2.2rem;margin:.7rem auto 0;background:linear-gradient(var(--gold-light),transparent);animation:drop 1.8s ease-in-out infinite;}
+  @keyframes drop{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- big numbers ---------- */
+  .bn-row{display:flex;gap:.7rem;margin:1.2rem 0;}
+  .bn{flex:1;background:var(--card);border:1px solid var(--line);border-radius:1rem;
+      padding:1.1rem .6rem;text-align:center;box-shadow:var(--shadow-sm);}
+  .bn b{font-family:'Black Han Sans',sans-serif;font-weight:400;
+        font-size:2.3rem;line-height:1;color:var(--gold);display:block;}
+  .bn b .u{font-size:1.05rem;color:var(--gold-deep);}
+  .bn em{font-style:normal;font-size:.78rem;color:var(--ink-soft);display:block;margin-top:.5rem;line-height:1.4;}
+  .bn-solo{display:block;text-align:center;margin:1.6rem 0;}
+  .bn-solo b{font-family:'Black Han Sans',sans-serif;font-weight:400;font-size:clamp(4rem,26vw,6rem);line-height:.95;color:var(--gold);display:block;letter-spacing:.01em;}
+  .bn-solo b .u{font-size:1.6rem;color:var(--gold-deep);}
+  .bn-solo em{font-style:normal;font-size:.9rem;color:var(--ink-soft);display:block;margin-top:.4rem;}
+
+  /* ---------- timeline (Ⅰ) ---------- */
+  .timeline{position:relative;margin:1.4rem 0 .6rem;padding-left:1.6rem;}
+  .timeline::before{content:"";position:absolute;left:.42rem;top:.4rem;bottom:.4rem;width:2px;
+    background:linear-gradient(var(--gold-light),var(--gold) 60%,var(--sky));}
+  .tl{position:relative;padding:.55rem 0 .85rem;}
+  .tl::before{content:"";position:absolute;left:-1.45rem;top:.6rem;width:.7rem;height:.7rem;border-radius:50%;
+    background:var(--gold);box-shadow:0 0 0 .26rem var(--gold-wash);}
+  .tl b{font-weight:600;font-size:.95rem;}
+  .tl span{color:var(--ink-soft);font-size:.88rem;}
+
+  /* ---------- funnel (Ⅰ-C) ---------- */
+  .funnel{margin:1.3rem 0;}
+  .morns{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;}
+  .morn{flex:0 0 calc(33.3% - .4rem);background:var(--card);border:1px solid var(--line);
+    border-radius:.7rem;padding:.5rem .3rem;text-align:center;font-size:.8rem;color:var(--ink-soft);box-shadow:var(--shadow-sm);}
+  .morn b{display:block;color:var(--gold-deep);font-weight:600;font-size:.85rem;}
+  .arrowdown{text-align:center;color:var(--gold);font-size:1.4rem;line-height:1;margin:.5rem 0;}
+  .merge{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#fff;
+    border-radius:1rem;padding:1.1rem;text-align:center;box-shadow:var(--shadow);}
+  .merge b{font-family:'Nanum Myeongjo',serif;font-size:1.3rem;display:block;}
+  .merge em{font-style:normal;font-size:.82rem;opacity:.92;}
+
+  .gauge{margin:1.2rem 0 .4rem;background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.1rem;box-shadow:var(--shadow-sm);}
+  .gauge p{font-size:.86rem;color:var(--ink-soft);margin-bottom:.6rem;}
+  .gtrack{height:.7rem;border-radius:1rem;background:linear-gradient(90deg,var(--sky-light),var(--gold-light),var(--rose));position:relative;}
+  .gtrack::after{content:"3분";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    background:#fff;color:var(--gold-deep);font-weight:700;font-size:.72rem;padding:.05rem .5rem;border-radius:1rem;box-shadow:var(--shadow-sm);}
+  .glabels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--ink-faint);margin-top:.5rem;}
+
+  /* ---------- PSRP steps (Ⅱ) ---------- */
+  .psrp{margin:1.3rem 0;}
+  .step{display:flex;gap:.85rem;align-items:flex-start;position:relative;padding-bottom:1.1rem;}
+  .step:not(:last-child)::before{content:"";position:absolute;left:1.05rem;top:2.4rem;bottom:.1rem;width:2px;background:var(--line);}
+  .badge{flex:0 0 2.1rem;height:2.1rem;border-radius:.7rem;display:grid;place-items:center;
+    font-family:'Black Han Sans',sans-serif;font-size:1.1rem;color:#fff;box-shadow:var(--shadow-sm);}
+  .b-p{background:var(--sky);}.b-s{background:#5C9A6B;}.b-r{background:var(--gold);}.b-pp{background:var(--rose);}
+  .step .t b{display:block;font-weight:600;font-size:.98rem;}
+  .step .t span{font-size:.86rem;color:var(--ink-soft);}
+  .chain{background:var(--sky-wash);border:1px dashed var(--sky-light);border-radius:.9rem;
+    padding:.85rem 1rem;font-size:.86rem;color:var(--ink);margin:.4rem 0 1.1rem;text-align:center;line-height:1.7;}
+  .chain b{color:var(--sky);font-weight:700;}
+
+  .callout{display:flex;gap:.8rem;align-items:center;background:var(--card);border:1px solid var(--line);
+    border-radius:1rem;padding:.95rem 1.05rem;margin:1.1rem 0;box-shadow:var(--shadow-sm);}
+  .callout svg{flex:0 0 1.9rem;}
+  .callout p{font-size:.88rem;color:var(--ink-soft);line-height:1.55;}
+  .callout p b{color:var(--ink);font-weight:600;}
+
+  .vs{display:flex;align-items:stretch;gap:.5rem;margin:1.1rem 0;}
+  .vs .col{flex:1;border-radius:1rem;padding:.9rem .8rem;text-align:center;}
+  .vs .neg{background:rgba(43,40,56,.05);border:1px solid var(--line);color:var(--ink-soft);}
+  .vs .pos{background:var(--gold-wash);border:1px solid var(--gold-light);}
+  .vs .col h4{font-size:.82rem;letter-spacing:.04em;margin-bottom:.4rem;}
+  .vs .neg h4{color:var(--ink-faint);}.vs .pos h4{color:var(--gold-deep);}
+  .vs .col p{font-size:.82rem;line-height:1.5;}
+  .vs .mid{flex:0 0 1.6rem;display:grid;place-items:center;color:var(--ink-faint);font-size:.9rem;}
+
+  /* ---------- bridge (Ⅲ) ---------- */
+  .bridge{display:flex;align-items:center;gap:.6rem;margin:1.3rem 0;}
+  .bcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1rem;text-align:center;box-shadow:var(--shadow-sm);}
+  .bcard svg{margin-bottom:.4rem;}
+  .bcard b{display:block;font-size:.95rem;font-weight:600;}
+  .bcard span{font-size:.78rem;color:var(--ink-soft);}
+  .barrow{flex:0 0 1.4rem;text-align:center;color:var(--gold);font-size:1.4rem;}
+
+  /* ---------- VENN (Ⅳ climax) ---------- */
+  .climax{background:linear-gradient(180deg,var(--bg),#FFF9EC 55%,var(--bg));border-radius:1.4rem;margin:0 -.25rem;padding:0 .25rem;}
+  .venn{position:relative;width:100%;max-width:21rem;margin:1.4rem auto 1rem;aspect-ratio:1/.94;}
+  .venn .c{position:absolute;width:60%;aspect-ratio:1;border-radius:50%;mix-blend-mode:multiply;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-size:.74rem;font-weight:600;line-height:1.3;padding:1.2rem;}
+  .venn .c1{top:0;left:50%;transform:translateX(-50%);background:rgba(230,187,94,.7);color:#6B4E0F;}
+  .venn .c2{bottom:0;left:0;background:rgba(124,178,192,.7);color:#1F5662;}
+  .venn .c3{bottom:0;right:0;background:rgba(188,110,92,.62);color:#6E2C1E;}
+  .venn .core{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);
+    z-index:3;font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:1.5rem;color:#fff;
+    text-shadow:0 .15rem .6rem rgba(120,80,10,.55);animation:glow 3s ease-in-out infinite;}
+  @keyframes glow{0%,100%{text-shadow:0 .15rem .6rem rgba(120,80,10,.5)}50%{text-shadow:0 .15rem 1.1rem rgba(230,187,94,.95)}}
+  .vlegend{font-size:.78rem;color:var(--ink-soft);text-align:center;line-height:1.7;}
+  .vlegend b{color:var(--ink);font-weight:600;}
+
+  .paradox{display:flex;align-items:stretch;margin:1.6rem 0 .6rem;border-radius:1.1rem;overflow:hidden;box-shadow:var(--shadow);}
+  .paradox .side{flex:1;padding:1.1rem .9rem;text-align:center;}
+  .paradox .normal{background:#EFE7D6;color:var(--ink);}
+  .paradox .miracle{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#fff;}
+  .paradox h4{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.45rem;opacity:.85;}
+  .paradox b{font-family:'Nanum Myeongjo',serif;font-size:1.15rem;display:block;margin-bottom:.4rem;}
+  .paradox p{font-size:.78rem;line-height:1.5;}
+  .paradox .plus{flex:0 0 2rem;display:grid;place-items:center;background:#fff;font-family:'Black Han Sans';font-size:1.3rem;color:var(--gold);}
+  .pcaption{text-align:center;font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:1.25rem;color:var(--gold-deep);margin:.4rem 0 .2rem;}
+
+  /* ---------- daily-life icons (Ⅴ) ---------- */
+  .targets{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.3rem 0;}
+  .tg{text-align:center;}
+  .tg .ic{width:3.1rem;height:3.1rem;margin:0 auto .35rem;border-radius:50%;background:var(--card);
+    border:1px solid var(--line);display:grid;place-items:center;box-shadow:var(--shadow-sm);}
+  .tg span{font-size:.74rem;color:var(--ink-soft);}
+  .tg.special .ic{background:var(--gold-wash);border-color:var(--gold-light);}
+
+  .metas{display:flex;gap:.6rem;margin:1.1rem 0;}
+  .meta{flex:1;background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:.9rem;box-shadow:var(--shadow-sm);}
+  .meta b{display:block;font-family:'Nanum Myeongjo',serif;font-size:1rem;color:var(--sky);margin-bottom:.3rem;}
+  .meta p{font-size:.8rem;color:var(--ink-soft);line-height:1.5;}
+
+  /* ---------- 22 + 22 (Ⅵ) ---------- */
+  .twin{display:flex;gap:.6rem;margin:1.4rem 0 1rem;}
+  .twin .h{flex:1;border-radius:1rem;padding:1rem .7rem;text-align:center;color:#fff;box-shadow:var(--shadow-sm);}
+  .twin .truth{background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));}
+  .twin .exp{background:linear-gradient(135deg,var(--sky-light),var(--sky));}
+  .twin .h b{font-family:'Black Han Sans';font-size:2.6rem;line-height:1;display:block;}
+  .twin .h em{font-style:normal;font-size:.86rem;display:block;margin-top:.3rem;font-weight:500;}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:1rem;margin-bottom:.7rem;overflow:hidden;box-shadow:var(--shadow-sm);}
+  summary{list-style:none;cursor:pointer;padding:.95rem 1.1rem;font-weight:600;font-size:.95rem;display:flex;align-items:center;justify-content:space-between;}
+  summary::-webkit-details-marker{display:none;}
+  summary .dot{width:.65rem;height:.65rem;border-radius:50%;margin-right:.6rem;flex:0 0 auto;}
+  .dot.g{background:var(--gold);}.dot.s{background:var(--sky);}
+  summary .lab{flex:1;display:flex;align-items:center;}
+  summary .chev{transition:transform .3s;color:var(--ink-faint);}
+  details[open] summary .chev{transform:rotate(90deg);}
+  .phase{padding:0 1.1rem 1rem;}
+  .phase h5{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin:.9rem 0 .45rem;border-top:1px dashed var(--line);padding-top:.7rem;}
+  .phase.s h5{color:var(--sky);}
+  .phase ol{list-style:none;counter-reset:i;}
+  .phase ol li{counter-increment:i;position:relative;padding:.22rem 0 .22rem 1.7rem;font-size:.86rem;color:var(--ink-soft);line-height:1.45;}
+  .phase ol li::before{content:counter(i);position:absolute;left:0;top:.28rem;width:1.25rem;height:1.25rem;border-radius:.4rem;
+    background:var(--gold-wash);color:var(--gold-deep);font-size:.7rem;font-weight:700;display:grid;place-items:center;}
+  .phase.s ol li::before{background:var(--sky-wash);color:var(--sky);}
+
+  /* ---------- 5 trainings (Ⅶ) ---------- */
+  .trains{margin:1.4rem 0;}
+  .train{display:flex;gap:.95rem;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+    border-radius:1rem;padding:1rem 1.05rem;margin-bottom:.7rem;box-shadow:var(--shadow-sm);}
+  .train .ic{flex:0 0 2.6rem;height:2.6rem;border-radius:.8rem;display:grid;place-items:center;background:var(--gold-wash);}
+  .train .num{position:absolute;}
+  .train .t b{display:block;font-weight:600;font-size:1rem;}
+  .train .t span{font-size:.85rem;color:var(--ink-soft);line-height:1.5;}
+
+  /* ---------- closing ---------- */
+  .closing{text-align:center;padding:4rem 0 2rem;}
+  .mountain{margin:1rem auto 1.6rem;display:block;}
+  .closing .big{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:1.6rem;line-height:1.5;margin-bottom:1rem;}
+  .closing .big em{font-style:normal;color:var(--gold-deep);}
+  .closing .sub{font-size:.95rem;color:var(--ink-soft);max-width:21rem;margin:0 auto 2rem;line-height:1.75;}
+  .end-refrain{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:1.3rem;color:var(--gold-deep);padding-top:1.6rem;border-top:1px solid var(--gold-light);}
+  .end-refrain small{display:block;font-family:'IBM Plex Sans KR';font-size:.78rem;color:var(--ink-faint);font-weight:500;margin-top:.5rem;letter-spacing:.06em;}
+
+  .footer{text-align:center;font-size:.72rem;color:var(--ink-faint);margin-top:2.6rem;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="kicker reveal in">제19과 · 신언 (2)</div>
+    <h1 class="reveal in d1">신언의<br>실행</h1>
+    <p class="thesis reveal in d2">평범한 한 사람이 어떻게 일어서서<br>하나님을 위해 말하게 되는가 —<br>그 여정에 관한 이야기.</p>
+    <div class="refrain reveal in d3">
+      “각 사람이 … 가지고 있고”
+      <small>고린도전서 14:26</small>
+    </div>
+    <div class="scrollcue reveal in d4">아침에서 시작합니다</div>
+  </header>
+
+  <!-- ===== 01 씨앗 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">01</div>
+    <div class="kicker reveal d1">개요 Ⅰ · 매일 아침</div>
+    <h2 class="stitle reveal d1">씨앗 — 매일 아침의 누림</h2>
+    <p class="lead reveal d2">신언은 거창한 데서 시작하지 않습니다. 매일 아침, 한 부분의 말씀으로 주님을 접촉하고 누리는 작은 한 걸음에서 시작됩니다.</p>
+    <div class="verse reveal d2">이것들이 아침마다 새로우니, 주의 성실하심이 크시도소이다.<span>예레미야애가 3:22–23</span></div>
+
+    <div class="bn-row reveal d3">
+      <div class="bn"><b>10<span class="u">구절↓</span></b><em>하루에 다루는 분량</em></div>
+      <div class="bn"><b>2~3<span class="u">구절</span></b><em>특별히 누리며 집중</em></div>
+    </div>
+
+    <div class="timeline reveal d4">
+      <div class="tl"><b>① 기도로 읽기</b> <span>— 한 장을 다 삼키려 말고, 적은 분량으로</span></div>
+      <div class="tl"><b>② 집중하여 누리기</b> <span>— 마음에 와닿는 두세 구절에 머물기</span></div>
+      <div class="tl"><b>③ 짧게 기록하기</b> <span>— 받은 감동·빛 비춤을 한 줄로 적어 두기</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 02 수확 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">02</div>
+    <div class="kicker reveal d1">개요 Ⅰ · 한 주의 끝</div>
+    <h2 class="stitle reveal d1">수확 — 여섯 아침이 하나로</h2>
+    <p class="lead reveal d2">한 주의 마지막 날, 흩어져 있던 여섯 번의 아침을 함께 거둡니다. 작은 영감들이 모여 하나의 ‘총체적 영감’이 되고, 그것이 신언의 초안이 됩니다.</p>
+
+    <div class="funnel reveal d3">
+      <div class="morns">
+        <div class="morn"><b>월</b>영감</div>
+        <div class="morn"><b>화</b>영감</div>
+        <div class="morn"><b>수</b>영감</div>
+        <div class="morn"><b>목</b>영감</div>
+        <div class="morn"><b>금</b>영감</div>
+        <div class="morn"><b>토</b>영감</div>
+      </div>
+      <div class="arrowdown">▼</div>
+      <div class="merge"><b>총체적 영감</b><em>여섯 아침을 함께 기도로 읽고 수확</em></div>
+    </div>
+
+    <div class="bn-solo reveal d4">
+      <b>3<span class="u">분</span></b>
+      <em>주일 집회에서 말할 신언 한 편</em>
+    </div>
+
+    <div class="gauge reveal d5">
+      <p>‘지도 교사·조력자’가 합당한 길이로 다듬어 줍니다.</p>
+      <div class="gtrack"></div>
+      <div class="glabels"><span>너무 짧으면 → 늘리고</span><span>너무 길면 → 줄이고</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 03 방법 PSRP ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">03</div>
+    <div class="kicker reveal d1">개요 Ⅱ · 월요일–토요일</div>
+    <h2 class="stitle reveal d1">방법 — P·S·R·P</h2>
+    <p class="lead reveal d2">날마다 이 네 단계를 실행하면, 주일 집회에서 틀림없이 신언하게 됩니다. 최근 해방된 풍성을 ‘요리하여 누리는’ 길입니다.</p>
+
+    <div class="psrp reveal d3">
+      <div class="step"><div class="badge b-p">P</div><div class="t"><b>Pray-read · 기도로 읽기</b><span>말씀을 기도로 천천히 마신다</span></div></div>
+      <div class="step"><div class="badge b-s">S</div><div class="t"><b>Study · 연구하기</b><span>단어별·용어별·문구별로 깊이 파고든다</span></div></div>
+      <div class="step"><div class="badge b-r">R</div><div class="t"><b>Recite · 암송하기</b><span>연구한 것을 자연스럽게 암송한다</span></div></div>
+      <div class="step"><div class="badge b-pp">P</div><div class="t"><b>Prophesy · 신언하기</b><span>암송한 것으로 주님을 말한다</span></div></div>
+    </div>
+
+    <div class="chain reveal d4">
+      신언은 <b>암송</b>에서 ← 암송은 <b>연구</b>에서 ← 연구는 <b>기도로 읽음</b>에서<br>
+      <span style="font-size:.8rem;color:var(--ink-faint)">하나라도 빠지면 말할 것이 없습니다.</span>
+    </div>
+
+    <div class="callout reveal d5">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3E8295" stroke-width="1.7" stroke-linecap="round"><path d="M4 5h12M4 9h9M4 13h12M4 17h7"/><path d="M17 14l3 3 3-5"/></svg>
+      <p><b>사도행전 8장 ·</b> 에티오피아 내시는 이사야서를 읽었지만 “지도해 주는 사람이 없으니 어떻게 이해하겠는가” 했습니다. 우리에게는 <b>해석된 말씀</b>이 필요합니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 04 준비 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">04</div>
+    <div class="kicker reveal d1">개요 Ⅲ · 집에서</div>
+    <h2 class="stitle reveal d1">준비 — 집에서 말해 본다</h2>
+    <p class="lead reveal d2">글로 적어 준비한 신언을 집에서 미리 말해 봅니다. 그러면 주일에 ‘가지고 있는’ 사람으로 집회에 들어갑니다.</p>
+
+    <div class="bridge reveal d3">
+      <div class="bcard">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/><path d="M10 19v-5h4v5"/></svg>
+        <b>집 · 준비</b><span>적고, 연습하고, 다듬기</span>
+      </div>
+      <div class="barrow">→</div>
+      <div class="bcard">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3E8295" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="2.4"/><circle cx="16" cy="9" r="2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M14.5 19c.2-2 1.7-3.5 4-3.5s2 .2 2 .2"/></svg>
+        <b>집회 · 기능</b><span>가지고 와서 내놓기</span>
+      </div>
+    </div>
+
+    <div class="callout reveal d4">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M6 9v6M9 9v6M12 9v6M15 9v6M18 9v6"/></svg>
+      <p><b>피아노 연습처럼.</b> 부부가 서로 말하고 평가해 주며 연습할수록 더 노련해집니다. 연습하지 않을수록 진보하기 어렵습니다.</p>
+    </div>
+    <p class="note reveal d5" style="text-align:center;font-family:'Nanum Myeongjo',serif;color:var(--gold-deep);font-size:1.1rem;margin-top:1rem;">“각 사람이 … 가지고 있고”</p>
+  </section>
+
+  <!-- ===== 05 핵심 (클라이맥스) ===== -->
+  <section class="scene climax">
+    <div class="scene-no reveal">05</div>
+    <div class="kicker reveal d1">개요 Ⅳ · 신언이란 무엇인가</div>
+    <h2 class="stitle reveal d1">핵심 — 신언의 세 요소</h2>
+    <p class="lead reveal d2">신언은 세 가지가 하나로 만날 때 일어납니다. 살아 있는 말씀, 그 영의 즉각적 영감, 그리고 신성한 빛으로 보는 조망.</p>
+    <div class="verse reveal d2">성전 안에 서서 이 모든 생명의 말씀을 백성에게 전하십시오.<span>사도행전 5:20</span></div>
+
+    <div class="venn reveal d3">
+      <div class="c c1">살아 있는<br>생명의 말씀</div>
+      <div class="c c2">그 영의<br>즉각적 영감</div>
+      <div class="c c3">신성한 빛의<br>조망</div>
+      <div class="core">신언</div>
+    </div>
+    <p class="vlegend reveal d4"><b>말씀</b>에 익숙해지고 · <b>영</b>의 영감을 받으며 · <b>맑은 하늘</b> 아래서 본 것을 말합니다.</p>
+
+    <div class="paradox reveal d5">
+      <div class="side normal">
+        <h4>정상</h4>
+        <b>배우고 훈련함</b>
+        <p>말씀을 배우고 말하기를 훈련하기에 — 누구나 할 수 있는 정상적인 일</p>
+      </div>
+      <div class="plus">＋</div>
+      <div class="side miracle">
+        <h4>기적</h4>
+        <b>신성한 요소</b>
+        <p>신성한 요소·빛·성령의 영감으로 말하기에 — 기적적인 일</p>
+      </div>
+    </div>
+    <p class="pcaption reveal d5">＝ “기적적인 정상”</p>
+
+    <div class="bn-solo reveal d6">
+      <b>624<span class="u">구절</span></b>
+      <em>하루 2구절 × 6일 × 1년 — 말씀에 흠뻑 적셔짐</em>
+    </div>
+  </section>
+
+  <!-- ===== 06 습관 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">06</div>
+    <div class="kicker reveal d1">개요 Ⅴ · 일상생활</div>
+    <h2 class="stitle reveal d1">습관 — 일상에서 말하기</h2>
+    <p class="lead reveal d2">집회에서의 신언은 일상의 습관에서 자랍니다. 거룩한 말씀을 말하는 유일한 길은 그 영을 따라 사는 것입니다.</p>
+
+    <div class="vs reveal d3">
+      <div class="col neg"><h4>육체의 정욕</h4><p>세속적이고 공허한 말<br>(전화기를 붙들면 한참…)</p></div>
+      <div class="mid">↔</div>
+      <div class="col pos"><h4>영을 따라</h4><p>주님의 말씀을 말함<br>(기도로 이끌림)</p></div>
+    </div>
+
+    <p class="note reveal d4">말할 상대가 없어도 멈추지 않습니다 — 주변의 사물에게도 그리스도를 말합니다.</p>
+    <div class="targets reveal d4">
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-4 3.2-6 7-6s7 2 7 6"/></svg></div><span>사람들</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6" stroke-linecap="round"><path d="M7 4v8h10V4"/><path d="M7 12v6M17 12v6M7 16h10"/></svg></div><span>의자</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6"><circle cx="12" cy="8" r="2.6"/><path d="M12 8c0-3-2-5-4-3s0 5 4 3M12 8c0-3 2-5 4-3s0 5-4 3M12 11v9"/></svg></div><span>꽃</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8"/></svg></div><span>나무</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6"><circle cx="7" cy="9" r="1.6"/><circle cx="11" cy="7" r="1.6"/><circle cx="15" cy="9" r="1.6"/><path d="M7 15c0-2.5 2-4 4-4s4 1.5 4 4-1.5 3-4 3-4-.5-4-3z"/></svg></div><span>동물</span></div>
+      <div class="tg special"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9h16M7 6.4h0M10 6.4h0"/><rect x="7" y="12" width="10" height="5" rx="1"/></svg></div><span>오븐</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 9c2 0 3 1 3 3M19 9c-2 0-3 1-3 3"/><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/></svg></div><span>가족</span></div>
+      <div class="tg"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6A6173" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h16v9H8l-3 3z"/><path d="M8 10h8M8 12.5h5"/></svg></div><span>이웃</span></div>
+    </div>
+
+    <div class="metas reveal d5">
+      <div class="meta"><b>U턴</b><p>온종일 세상말을 하면 주일에 ‘유턴’하기 어렵습니다.</p></div>
+      <div class="meta"><b>산 오르기</b><p>높은 집회는 산을 오르듯, 언덕을 굴러내리긴 쉽습니다.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== 07 장비 22+22 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">07</div>
+    <div class="kicker reveal d1">개요 Ⅵ · 필요한 배움</div>
+    <h2 class="stitle reveal d1">장비 — 진리와 체험</h2>
+    <p class="lead reveal d2">신언이 풍성해지려면 배움이 필요합니다. 객관적인 진리와 주관적인 체험, 두 가지 큰 줄기입니다.</p>
+
+    <div class="twin reveal d3">
+      <div class="h truth"><b>22</b><em>진리의 주요 항목</em></div>
+      <div class="h exp"><b>22</b><em>생명 체험의 항목</em></div>
+    </div>
+
+    <details class="reveal d4">
+      <summary><span class="lab"><span class="dot g"></span>진리 22항목 — 펼쳐 보기</span><span class="chev">›</span></summary>
+      <div class="phase">
+        <h5>하나님과 창조</h5>
+        <ol><li>하나님의 인격 (삼일 하나님)</li><li>사람이 중심인 하나님의 창조</li></ol>
+        <h5>타락에서 구속으로</h5>
+        <ol start="3"><li>사람의 타락</li><li>하나님의 구속</li><li>그리스도</li><li>그리스도의 구속</li></ol>
+        <h5>그 영의 적용</h5>
+        <ol start="7"><li>성령의 거룩하게 하심</li><li>죄들의 용서</li><li>그리스도 안에서 의롭게 하심</li><li>하나님과 화목하게 됨</li><li>그 영의 거듭나게 하심</li><li>완전한 구원</li><li>거룩·새롭게·변화시키심</li></ol>
+        <h5>영광과 교회·경륜</h5>
+        <ol start="14"><li>그리스도의 형상·영광스럽게 됨</li><li>교회 (몸·새사람·집·왕국)</li><li>하나님의 경륜과 신성한 분배</li></ol>
+        <h5>완성을 향하여</h5>
+        <ol start="17"><li>휴거·대환난·재림</li><li>심판대와 상벌</li><li>왕국·천년왕국·복원의 시대</li><li>새 예루살렘, 새 하늘과 새 땅</li><li>성경의 원칙들</li><li>진리의 말씀을 곧게 자르는 법</li></ol>
+      </div>
+    </details>
+
+    <details class="reveal d5">
+      <summary><span class="lab"><span class="dot s"></span>생명 체험 22항목 — 펼쳐 보기</span><span class="chev">›</span></summary>
+      <div class="phase s">
+        <h5>구원의 시작</h5>
+        <ol><li>그 영의 거룩하게 하심으로 회개</li><li>회개하고 죄를 자백함</li><li>용서받고 씻음 받음</li><li>구속을 통해 의롭게 됨</li><li>의롭게 됨으로 화목하게 됨</li></ol>
+        <h5>거듭남과 구원</h5>
+        <ol start="6"><li>그 영의 거듭나게 하심</li><li>그리스도 안의 완전한 구원</li><li>구원의 확신과 과거 청산</li></ol>
+        <h5>그 영의 일하심</h5>
+        <ol start="9"><li>위치적·기질적 거룩하게 됨</li><li>새롭게·변화·형상 이룸</li><li>죄·세상·육체·자아·타고난 힘 처리</li><li>죽음의 죽임과 부활의 분배</li><li>거함·교통·그 영의 인도</li><li>영의 충만과 쏟아부어짐</li><li>영에 의해, 영을 따라 살고 행함</li></ol>
+        <h5>주님과 동행</h5>
+        <ol start="16"><li>기도와 중보 기도</li><li>성경을 읽고 빛 비춤 받음</li><li>순종·복종과 겉사람의 파쇄</li><li>그리스도의 몸을 알고 체험함</li></ol>
+        <h5>교회생활과 완성</h5>
+        <ol start="20"><li>한 지방에서의 교회생활</li><li>정하신 길의 네 단계 실행</li><li>깨어 휴거를 예비하며 주님을 기다림</li></ol>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===== 08 훈련 ===== -->
+  <section class="scene">
+    <div class="scene-no reveal">08</div>
+    <div class="kicker reveal d1">개요 Ⅶ · 하기를 훈련함</div>
+    <h2 class="stitle reveal d1">훈련 — 다섯 가지</h2>
+    <p class="lead reveal d2">마지막으로, 말하는 것 자체를 훈련합니다. 안다고 끝이 아니라, 몸으로 익혀야 비로소 ‘말하게’ 됩니다.</p>
+
+    <div class="trains reveal d3">
+      <div class="train">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M12 3c2 3-1 4 0 7 1 2 3 2 3 5a3 3 0 0 1-6 0c0-3 2-3 3-5"/><path d="M9 9c-1 1.5-1 3 0 4"/></svg></div>
+        <div class="t"><b>1 · 영</b><span>가장 깊은 속 존재를 사용해 말하기 (눅 1:47)</span></div>
+      </div>
+      <div class="train">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M5 9c3-3 11-3 14 0"/><path d="M7 13c2 2.5 8 2.5 10 0"/><path d="M10 16c1 1 3 1 4 0"/></svg></div>
+        <div class="t"><b>2 · 입(혀)과 목소리</b><span>전체 회중에게 들리도록, 분명하고 크게 (시 108:1)</span></div>
+      </div>
+      <div class="train">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.4"/><path d="M4 14a8 8 0 0 1 16 0"/></svg></div>
+        <div class="t"><b>3 · 속도</b><span>너무 빠르거나 느리지 않게, 좋은 리듬으로</span></div>
+      </div>
+      <div class="train">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V5a1.5 1.5 0 0 1 3 0v5M11 9V4a1.5 1.5 0 0 1 3 0v6M14 9.5V6a1.4 1.4 0 0 1 2.8 0v6c0 3.5-2 6-5.3 6S7 16 6 13l-1.3-3a1.4 1.4 0 0 1 2.5-1.2L8 11"/></svg></div>
+        <div class="t"><b>4 · 동작 (제스처)</b><span>아주 자연스럽게 — 너무 많지도 적지도 않게</span></div>
+      </div>
+      <div class="train">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M3 12h2l2-5 3 12 3-16 3 11 2-2h3"/></svg></div>
+        <div class="t"><b>5 · 억양</b><span>핵심 중점에 강세를 — 때론 느리게 주의를 모으며</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING ===== -->
+  <footer class="closing">
+    <svg class="mountain" width="120" height="70" viewBox="0 0 120 70" fill="none">
+      <circle cx="92" cy="16" r="11" fill="#E6BB5E" opacity=".85"/>
+      <path d="M2 66L34 22l16 20 18-30 26 36 22 18z" fill="none" stroke="#BE8722" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M84 28l8 12 8-12" fill="none" stroke="#3E8295" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <p class="big reveal">산을 오르듯,<br>한 걸음씩 <em>모든 지체가</em><br>주님을 위해 말합니다.</p>
+    <p class="sub reveal d1">아침의 작은 누림이 한 주의 영감으로 모이고, 방법과 준비와 훈련을 거쳐 — 평범한 한 사람이 ‘기적적인 정상’으로 신언하게 됩니다.</p>
+    <div class="end-refrain reveal d2">
+      “각 사람이 … 가지고 있고”
+      <small>고린도전서 14:26</small>
+    </div>
+    <p class="footer reveal d3">제19과 · 신언(2) 신언의 실행 — 메시지 요점 인포그래픽</p>
+  </footer>
+
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
