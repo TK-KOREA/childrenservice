@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>26년 봄, 사역원에서 — 학부모 간증 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Batang:wght@400;700&family=Gaegu:wght@400;700&family=Single+Day&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3e6c8;
+    --paper-soft:#ede0bb;
+    --paper-deep:#e2d09f;
+    --paper-edge:#c9b378;
+    --ink:#3a2817;
+    --ink-soft:#5e4226;
+    --ink-faded:#8a6e4a;
+    --rose:#b25c4a;
+    --rose-soft:#d39885;
+    --sage:#788a5e;
+    --sage-soft:#a8b48a;
+    --gold:#c89a3a;
+    --peach:#f2dba5;
+    --highlight:#f5d488;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+  html,body{
+    background:
+      radial-gradient(ellipse at top, #c4ad77 0%, #9d8755 70%, #7d6a40 100%);
+    min-height:100vh;
+    font-family:'Gowun Batang', 'Noto Serif KR', serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---- The Letter ---- */
+  .letter{
+    max-width:440px;
+    margin:0 auto;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(178,92,74,0.05) 0%, transparent 35%),
+      radial-gradient(circle at 82% 68%, rgba(120,138,94,0.06) 0%, transparent 42%),
+      radial-gradient(circle at 50% 100%, rgba(58,40,23,0.08) 0%, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.16  0 0 0 0 0.08  0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    box-shadow:
+      0 0 0 1px rgba(58,40,23,0.06),
+      0 30px 80px -20px rgba(0,0,0,0.45),
+      0 8px 24px -8px rgba(0,0,0,0.3);
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* paper edge wear */
+  .letter::before{
+    content:'';
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(120,90,40,0.18) 0%, transparent 4%, transparent 96%, rgba(120,90,40,0.18) 100%),
+      linear-gradient(90deg, rgba(120,90,40,0.12) 0%, transparent 4%, transparent 96%, rgba(120,90,40,0.12) 100%);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  .page{
+    padding:60px 32px 56px;
+    position:relative;
+    z-index:2;
+  }
+  .page + .page{
+    border-top:1px dashed rgba(120,90,50,0.22);
+  }
+
+  /* ---- Page numbers ---- */
+  .pagenum{
+    position:absolute;
+    top:18px;
+    right:24px;
+    font-family:'Nanum Pen Script', cursive;
+    font-size:21px;
+    color:var(--ink-faded);
+    letter-spacing:1px;
+  }
+  .pagenum::before{content:'— '}
+  .pagenum::after{content:' —'}
+
+  /* ---- Cover ---- */
+  .cover{
+    padding:80px 32px 56px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+  }
+  .cover .stamp{
+    display:inline-block;
+    border:1.5px solid var(--rose);
+    color:var(--rose);
+    padding:6px 14px 4px;
+    font-family:'Gaegu', cursive;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:2px;
+    border-radius:2px;
+    transform:rotate(-4deg);
+    margin-bottom:30px;
+    opacity:0.78;
+  }
+  .cover h1{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:63px;
+    line-height:1.1;
+    color:var(--ink);
+    margin:0 0 6px;
+    letter-spacing:-1px;
+  }
+  .cover h1 .accent{ color:var(--rose); }
+  .cover .sub{
+    font-family:'Gowun Batang', serif;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-top:18px;
+    letter-spacing:0.5px;
+  }
+  .cover .place{
+    font-family:'Gaegu', cursive;
+    font-size:17px;
+    color:var(--ink-faded);
+    margin-top:36px;
+  }
+  .cover .place span{
+    display:inline-block;
+    border-bottom:1px solid var(--ink-faded);
+    padding-bottom:2px;
+  }
+
+  /* ---- Section header ---- */
+  .chapter{
+    font-family:'Gaegu', cursive;
+    font-size:15px;
+    letter-spacing:4px;
+    color:var(--rose);
+    text-transform:uppercase;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  h2{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:44px;
+    line-height:1.15;
+    color:var(--ink);
+    margin-bottom:24px;
+    font-weight:normal;
+    letter-spacing:-0.5px;
+  }
+  h2 .under{
+    background:linear-gradient(180deg, transparent 60%, var(--highlight) 60%, var(--highlight) 92%, transparent 92%);
+    padding:0 2px;
+  }
+
+  /* ---- Body text ---- */
+  p.body{
+    font-family:'Gowun Batang', serif;
+    font-size:18px;
+    line-height:1.95;
+    color:var(--ink);
+    margin-bottom:18px;
+    word-break:keep-all;
+  }
+  p.body.italic{ font-style:italic; color:var(--ink-soft); }
+
+  /* ---- Quote cards ---- */
+  .quote{
+    position:relative;
+    margin:22px -4px;
+    padding:22px 22px 22px 24px;
+    background:var(--paper-soft);
+    border-radius:2px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.5) inset,
+      0 6px 14px -6px rgba(80,55,25,0.35),
+      0 1px 2px rgba(80,55,25,0.18);
+  }
+  .quote.tilt-l{ transform:rotate(-1.2deg); }
+  .quote.tilt-r{ transform:rotate(1deg); }
+  .quote .qmark{
+    position:absolute;
+    top:-6px;
+    left:14px;
+    font-family:'Nanum Pen Script', cursive;
+    font-size:51px;
+    color:var(--rose);
+    line-height:1;
+    opacity:0.6;
+  }
+  .quote .text{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:29px;
+    line-height:1.5;
+    color:var(--ink);
+    letter-spacing:0.3px;
+    word-break:keep-all;
+  }
+  .quote .text em{
+    background:linear-gradient(180deg, transparent 65%, rgba(245,212,136,0.85) 65%, rgba(245,212,136,0.85) 92%, transparent 92%);
+    font-style:normal;
+    padding:0 2px;
+  }
+  .quote .who{
+    margin-top:14px;
+    font-family:'Gaegu', cursive;
+    font-size:16px;
+    color:var(--ink-faded);
+    text-align:right;
+    letter-spacing:0.5px;
+  }
+  .quote .who::before{content:'— '}
+
+  /* washi tape */
+  .tape{
+    position:absolute;
+    width:80px;
+    height:22px;
+    top:-11px;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    background:
+      repeating-linear-gradient(90deg,
+        rgba(178,92,74,0.55) 0px,
+        rgba(178,92,74,0.55) 4px,
+        rgba(178,92,74,0.4) 4px,
+        rgba(178,92,74,0.4) 8px);
+    opacity:0.7;
+    border-radius:1px;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+  }
+  .tape.sage{
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(120,138,94,0.55) 0px,
+        rgba(120,138,94,0.55) 5px,
+        rgba(168,180,138,0.4) 5px,
+        rgba(168,180,138,0.4) 10px);
+  }
+  .tape.dots{
+    background:
+      radial-gradient(circle, rgba(178,92,74,0.6) 1.2px, transparent 1.6px),
+      rgba(242,219,165,0.85);
+    background-size:8px 8px;
+  }
+
+  /* ---- Floral dividers (SVG inline) ---- */
+  .divider{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:34px 0 28px;
+    color:var(--sage);
+    opacity:0.75;
+  }
+  .divider svg{ width:90px; height:auto; }
+
+  /* ---- Small note (margin) ---- */
+  .note{
+    font-family:'Gaegu', cursive;
+    font-size:17px;
+    color:var(--rose);
+    margin:18px 0 14px;
+    padding-left:18px;
+    border-left:2px solid var(--rose-soft);
+    line-height:1.55;
+    word-break:keep-all;
+  }
+
+  /* ---- Big handwritten emphasis ---- */
+  .emph{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:39px;
+    color:var(--rose);
+    text-align:center;
+    line-height:1.3;
+    margin:24px 0 12px;
+    word-break:keep-all;
+  }
+
+  /* ---- Scripture box ---- */
+  .scripture{
+    margin:24px 0;
+    padding:20px 22px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 100%),
+      var(--paper-deep);
+    border-top:2px solid var(--gold);
+    border-bottom:2px solid var(--gold);
+    position:relative;
+  }
+  .scripture .ref{
+    font-family:'Gaegu', cursive;
+    font-size:15px;
+    color:var(--gold);
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .scripture .verse{
+    font-family:'Gowun Batang', serif;
+    font-size:19px;
+    line-height:1.85;
+    color:var(--ink);
+    font-style:italic;
+    word-break:keep-all;
+  }
+
+  /* ---- Closing ---- */
+  .closing{
+    text-align:center;
+    padding:50px 32px 70px;
+    position:relative;
+    z-index:2;
+    border-top:1px dashed rgba(120,90,50,0.22);
+  }
+  .closing .seal{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--rose) 0%, #8a4234 100%);
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--paper);
+    font-family:'Nanum Pen Script', cursive;
+    font-size:35px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2), inset 2px 2px 6px rgba(255,255,255,0.2);
+    transform:rotate(-8deg);
+  }
+  .closing .signoff{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:35px;
+    color:var(--ink);
+    line-height:1.35;
+    margin-bottom:8px;
+  }
+  .closing .date{
+    font-family:'Gaegu', cursive;
+    font-size:16px;
+    color:var(--ink-faded);
+    margin-top:14px;
+  }
+
+  /* ---- TOC / Pages opening ---- */
+  .toc{
+    margin:18px 0 6px;
+    padding:18px 20px;
+    border:1px dashed rgba(120,90,50,0.4);
+    border-radius:3px;
+  }
+  .toc .toc-title{
+    font-family:'Gaegu', cursive;
+    font-size:16px;
+    color:var(--ink-faded);
+    letter-spacing:3px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .toc ol{
+    list-style:none;
+    counter-reset:toc;
+  }
+  .toc li{
+    counter-increment:toc;
+    font-family:'Gowun Batang', serif;
+    font-size:17px;
+    line-height:2;
+    color:var(--ink);
+    position:relative;
+    padding-left:22px;
+  }
+  .toc li::before{
+    content:counter(toc, decimal-leading-zero);
+    position:absolute;
+    left:0;
+    top:0;
+    font-family:'Gaegu', cursive;
+    color:var(--rose);
+    font-size:15px;
+    font-weight:700;
+  }
+
+  /* pressed flower in corners */
+  .corner-flower{
+    position:absolute;
+    width:55px;
+    opacity:0.5;
+    pointer-events:none;
+    z-index:1;
+  }
+  .corner-flower.tl{ top:14px; left:14px; transform:rotate(-20deg); }
+  .corner-flower.br{ bottom:14px; right:14px; transform:rotate(160deg); }
+
+  /* ---- Cassette Tape Player ---- */
+  .cassette{
+    margin:46px auto 6px;
+    width:100%;
+    max-width:340px;
+    background:
+      linear-gradient(180deg, #f4d7a0 0%, #e8b97a 45%, #c9924d 100%);
+    border-radius:10px;
+    padding:14px 16px 16px;
+    position:relative;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.55) inset,
+      0 -2px 0 rgba(80,40,10,0.18) inset,
+      0 10px 24px -10px rgba(60,30,5,0.55),
+      0 3px 6px rgba(60,30,5,0.25);
+    transform:rotate(-1deg);
+  }
+  .cassette::before{
+    content:'';
+    position:absolute;
+    inset:6px;
+    border:1px dashed rgba(80,40,10,0.25);
+    border-radius:7px;
+    pointer-events:none;
+  }
+  /* screw dots in corners */
+  .cassette .screw{
+    position:absolute;
+    width:6px; height:6px;
+    background:radial-gradient(circle at 35% 35%, #6b4a22, #2e1d0a);
+    border-radius:50%;
+    box-shadow:0 1px 1px rgba(255,255,255,0.4);
+  }
+  .cassette .screw.tl{ top:4px; left:5px; }
+  .cassette .screw.tr{ top:4px; right:5px; }
+  .cassette .screw.bl{ bottom:4px; left:5px; }
+  .cassette .screw.br{ bottom:4px; right:5px; }
+
+  .cassette .window{
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.1) 100%),
+      #efe2c2;
+    border-radius:6px;
+    padding:14px 14px 12px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 -1px 0 rgba(80,40,10,0.18) inset,
+      0 2px 4px rgba(60,30,5,0.18) inset;
+    position:relative;
+  }
+
+  .cassette .reels{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    padding:0 6px;
+  }
+  .reel{
+    width:46px; height:46px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at center, #fff 0 6px, transparent 6.5px),
+      radial-gradient(circle at center, #efe2c2 7px, #c2a36b 8px, #8a6839 60%, #4a3418 100%);
+    position:relative;
+    box-shadow:
+      0 0 0 2px rgba(80,40,10,0.25),
+      0 2px 4px rgba(60,30,5,0.25) inset;
+    flex-shrink:0;
+  }
+  .reel::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:
+      conic-gradient(from 0deg,
+        transparent 0deg 8deg, rgba(255,255,255,0.35) 8deg 12deg,
+        transparent 12deg 98deg, rgba(255,255,255,0.35) 98deg 102deg,
+        transparent 102deg 188deg, rgba(255,255,255,0.35) 188deg 192deg,
+        transparent 192deg 278deg, rgba(255,255,255,0.35) 278deg 282deg,
+        transparent 282deg 360deg);
+    mask:radial-gradient(circle, transparent 7px, #000 7.5px, #000 18px, transparent 19px);
+    -webkit-mask:radial-gradient(circle, transparent 7px, #000 7.5px, #000 18px, transparent 19px);
+  }
+  .reel.spin{ animation:reel-spin 2.4s linear infinite; }
+  @keyframes reel-spin{ to{ transform:rotate(360deg); } }
+
+  .tape-line{
+    position:absolute;
+    top:50%;
+    left:8px; right:8px;
+    height:3px;
+    background:linear-gradient(180deg, #5a3a18 0%, #2e1d0a 50%, #5a3a18 100%);
+    border-radius:2px;
+    transform:translateY(-50%);
+    z-index:-1;
+    opacity:0.55;
+  }
+
+  .cassette .label{
+    margin-top:12px;
+    padding:8px 10px 6px;
+    background:
+      linear-gradient(180deg, #fff 0%, #f7eed2 100%);
+    border:1px solid rgba(80,40,10,0.18);
+    border-radius:3px;
+    text-align:center;
+    box-shadow:0 1px 2px rgba(60,30,5,0.12);
+  }
+  .cassette .label .side{
+    font-family:'Gaegu', cursive;
+    font-size:11px;
+    color:var(--rose);
+    letter-spacing:3px;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .cassette .label .title{
+    font-family:'Nanum Pen Script', cursive;
+    font-size:22px;
+    color:var(--ink);
+    line-height:1.1;
+    letter-spacing:0.5px;
+  }
+  .cassette .label .meta{
+    font-family:'Gaegu', cursive;
+    font-size:12px;
+    color:var(--ink-faded);
+    margin-top:2px;
+    letter-spacing:1px;
+  }
+
+  /* Controls under cassette */
+  .cassette .controls{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:14px;
+    padding:0 4px;
+  }
+  .cassette .play-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    border:none;
+    background:
+      radial-gradient(circle at 35% 30%, #fff 0%, rgba(255,255,255,0.3) 30%, transparent 50%),
+      radial-gradient(circle at center, var(--rose) 0%, #8a4234 100%);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    box-shadow:
+      0 2px 6px rgba(60,20,10,0.4),
+      0 1px 0 rgba(255,255,255,0.4) inset;
+    transition:transform 0.15s ease;
+    padding:0;
+  }
+  .cassette .play-btn:active{ transform:scale(0.94); }
+  .cassette .play-btn svg{ width:14px; height:14px; }
+  .cassette .play-btn .icon-pause{ display:none; }
+  .cassette.playing .play-btn .icon-play{ display:none; }
+  .cassette.playing .play-btn .icon-pause{ display:block; }
+
+  .cassette .progress-wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:0;
+  }
+  .cassette .progress{
+    height:4px;
+    background:rgba(80,40,10,0.25);
+    border-radius:2px;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 1px 1px rgba(60,30,5,0.15) inset;
+  }
+  .cassette .progress-fill{
+    position:absolute;
+    top:0; left:0; bottom:0;
+    width:0%;
+    background:linear-gradient(90deg, var(--rose) 0%, var(--gold) 100%);
+    border-radius:2px;
+  }
+  .cassette .progress-thumb{
+    position:absolute;
+    top:50%;
+    left:0%;
+    width:10px; height:10px;
+    background:var(--paper);
+    border:1.5px solid var(--rose);
+    border-radius:50%;
+    transform:translate(-50%, -50%);
+    box-shadow:0 1px 2px rgba(0,0,0,0.2);
+  }
+  .cassette .time{
+    font-family:'Gaegu', cursive;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:0.5px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .cassette-caption{
+    text-align:center;
+    font-family:'Nanum Pen Script', cursive;
+    font-size:20px;
+    color:var(--ink-faded);
+    margin:14px 0 -8px;
+    letter-spacing:0.5px;
+  }
+  .cassette-caption::before, .cassette-caption::after{
+    content:'~';
+    margin:0 8px;
+    opacity:0.6;
+  }
+
+  /* keep-together breaks on narrow screens */
+  @media (max-width:380px){
+    .page{ padding:54px 24px 50px; }
+    h2{ font-size:39px; }
+    .quote .text{ font-size:27px; }
+    .cover h1{ font-size:56px; }
+    .cassette{ max-width:300px; }
+    .reel{ width:40px; height:40px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="letter">
+
+  <!-- =================== COVER =================== -->
+  <section class="cover">
+    <!-- pressed flower corners -->
+    <svg class="corner-flower tl" viewBox="0 0 80 80">
+      <g fill="none" stroke="#b25c4a" stroke-width="1.2" stroke-linecap="round">
+        <path d="M40,15 C30,25 30,40 40,50 C50,40 50,25 40,15 Z" fill="#d39885" fill-opacity="0.3"/>
+        <path d="M40,50 Q42,60 38,70"/>
+        <path d="M38,60 Q30,58 25,65"/>
+        <path d="M40,62 Q48,60 52,68"/>
+        <circle cx="40" cy="32" r="3" fill="#b25c4a"/>
+      </g>
+    </svg>
+    <svg class="corner-flower br" viewBox="0 0 80 80">
+      <g fill="none" stroke="#788a5e" stroke-width="1.2" stroke-linecap="round">
+        <path d="M40,20 Q25,30 30,50"/>
+        <path d="M40,20 Q55,30 50,50"/>
+        <ellipse cx="30" cy="35" rx="6" ry="3" fill="#a8b48a" fill-opacity="0.4" transform="rotate(-30 30 35)"/>
+        <ellipse cx="50" cy="35" rx="6" ry="3" fill="#a8b48a" fill-opacity="0.4" transform="rotate(30 50 35)"/>
+        <ellipse cx="40" cy="55" rx="5" ry="3" fill="#a8b48a" fill-opacity="0.4"/>
+      </g>
+    </svg>
+
+    <div class="stamp">SPRING · 2026</div>
+    <h1>봄,<br><span class="accent">사역원</span>에서<br>온 편지</h1>
+    <div class="sub">26년 봄 학부모 목양 집회 · 간증 노트</div>
+    <div class="place" style="margin-top:40px;">
+      <span>지친 부모들이 다시 빛을 본 사흘의 기록</span>
+    </div>
+
+    <!-- floral divider -->
+    <div class="divider" style="margin-top:46px;">
+      <svg viewBox="0 0 120 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <path d="M5,12 Q30,12 50,12"/>
+          <path d="M70,12 Q90,12 115,12"/>
+          <circle cx="60" cy="12" r="3.2" fill="currentColor" fill-opacity="0.4"/>
+          <path d="M60,4 Q57,8 60,12 Q63,8 60,4 Z" fill="currentColor" fill-opacity="0.3"/>
+          <path d="M60,20 Q57,16 60,12 Q63,16 60,20 Z" fill="currentColor" fill-opacity="0.3"/>
+          <path d="M52,12 Q56,9 60,12 Q56,15 52,12 Z" fill="currentColor" fill-opacity="0.3"/>
+          <path d="M68,12 Q64,9 60,12 Q64,15 68,12 Z" fill="currentColor" fill-opacity="0.3"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cassette-caption">들으면서 읽어 보세요</div>
+    <div class="cassette" id="cassette">
+      <span class="screw tl"></span><span class="screw tr"></span>
+      <span class="screw bl"></span><span class="screw br"></span>
+      <div class="window">
+        <div class="reels">
+          <div class="reel" id="reel-left"></div>
+          <div class="tape-line"></div>
+          <div class="reel" id="reel-right"></div>
+        </div>
+        <div class="label">
+          <div class="side">SIDE · A</div>
+          <div class="title">봄, 사역원에서 온 편지</div>
+          <div class="meta">학부모 간증 노트 · 낭독</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" id="play-btn" aria-label="재생/일시정지">
+          <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2 L4 14 L13 8 Z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor"><rect x="3.5" y="2.5" width="3.5" height="11" rx="0.5"/><rect x="9" y="2.5" width="3.5" height="11" rx="0.5"/></svg>
+        </button>
+        <div class="progress-wrap">
+          <div class="progress" id="progress">
+            <div class="progress-fill" id="progress-fill"></div>
+            <div class="progress-thumb" id="progress-thumb"></div>
+          </div>
+          <div class="time"><span id="time-cur">0:00</span><span id="time-dur">--:--</span></div>
+        </div>
+      </div>
+      <audio id="audio" preload="metadata" src="20260524_parents_testimonies.m4a"></audio>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">CHAPTERS</div>
+      <ol>
+        <li>지쳐서 도착한 사람들</li>
+        <li>다시, 이상을 보다</li>
+        <li>가장 부끄러운 고백</li>
+        <li>자녀는 누구의 것인가</li>
+        <li>잊었던 첫사랑</li>
+        <li>아침마다, 새롭게</li>
+        <li>함께, 첫 열매로</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 1 =================== -->
+  <section class="page">
+    <span class="pagenum">01</span>
+    <div class="chapter">CH. 01</div>
+    <h2><span class="under">지쳐서</span> 도착한<br>사람들</h2>
+
+    <p class="body">
+      이번 봄, 사역원에 모인 형제 자매들의 첫인상은 한결같았습니다.
+      얼굴엔 피곤이 짙고, 어깨엔 그동안의 무게가 얹혀 있었습니다.
+      직장과 육아, 봉사와 일상에 치이며 어느새 주님과 멀어진 자신을 발견한 사람들.
+      많은 이들이 이 한 주를 그저 <em>“쉬러 가는 날”</em>이라 여기며 짐을 챙겨 왔습니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        사실 3, 4월 직장 생활이 바쁘면서 굉장히 <em>지쳐 있는 상태</em>였고,
+        주님과의 관계도 많이 멀어져 있었고, 정말 세상에 너무나 속한 자였습니다.
+      </div>
+      <div class="who">집회에 도착한 한 자매</div>
+    </div>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        다 지쳐 있고, 말 그대로 <em>혼과 몸이 털린 상태</em>에서
+        이날만 기다리면서 오신 분들이 많더라고요.
+      </div>
+      <div class="who">한 형제의 관찰</div>
+    </div>
+
+    <p class="body italic">
+      한 자매는 자신의 모습을 두더지에 비유했습니다.
+      매일의 일상에 파묻혀, 하늘을 한 번 올려다본 적이 언제였는지 기억나지 않는다고.
+    </p>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <path d="M10,20 Q25,5 40,20 Q55,35 70,20 Q85,5 100,20" stroke-dasharray="2 3"/>
+          <circle cx="60" cy="15" r="1.5" fill="currentColor"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 2 =================== -->
+  <section class="page">
+    <span class="pagenum">02</span>
+    <div class="chapter">CH. 02</div>
+    <h2>다시,<br><span class="under">이상을</span> 보다</h2>
+
+    <p class="body">
+      그런데 첫 집회의 개요를 받아 든 순간, 모두 놀랐습니다.
+      자녀 교육의 지침이나 가정생활의 비결이 아니었습니다.
+      <em>거대한 인간 정부</em>, <em>하나님의 경륜</em>, <em>신부와 첫 열매</em>—
+      마치 하늘에서 내려온 청사진을 다시 펼쳐 본 듯한 시간이었습니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape sage"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        이런 많은 말씀들이 근본적으로 우리를 바꾸지 못한다는 거예요.
+        사람을 참되게 변화시키고 내재적으로 변형시키는 것은
+        <em>이상을 보는 것</em>이라고 했습니다.
+      </div>
+      <div class="who">말씀을 전한 한 형제</div>
+    </div>
+
+    <p class="body">
+      어떤 자매는 어제 부른 찬송 한 줄에 자신도 모르게 눈물을 흘렸다고 했습니다.
+      그 줄이 가슴에 닿는 순간, 잊고 있던 진실이 또렷이 떠올랐기 때문입니다.
+    </p>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        주님, <em>주님은 결국 사랑이셨습니다.</em><br>
+        제가 알든 모르든 지금까지 저를 이끌어 오신 것은
+        사랑이었군요.
+      </div>
+      <div class="who">찬송 중에 발견한 한 자매</div>
+    </div>
+
+    <div class="note">
+      “신부를 원하시는 그분의 마음의 갈망” —<br>
+      어린이 봉사를 배우러 왔다가, 신랑의 외침을 들었다는 어느 형제의 고백.
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <path d="M20,15 Q35,5 50,15 T80,15 T110,15"/>
+          <circle cx="35" cy="12" r="1.3" fill="currentColor"/>
+          <circle cx="65" cy="12" r="1.3" fill="currentColor"/>
+          <circle cx="95" cy="12" r="1.3" fill="currentColor"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 3 =================== -->
+  <section class="page">
+    <span class="pagenum">03</span>
+    <div class="chapter">CH. 03</div>
+    <h2>가장 부끄러운<br><span class="under">고백</span></h2>
+
+    <p class="body">
+      이상을 보자, 거꾸로 자신의 모습이 너무나 선명히 드러났습니다.
+      “본”이 되어야 한다는 부담 앞에서 누구도 떳떳하지 못했습니다.
+      특히 아이 앞에서의 자신은—
+      가장 가까운 사람만 아는 가장 어두운 모습이었습니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape dots"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        다른 지체들은 아무도 나의 그런 모습을 모르지만,
+        <em>나의 가장 악한 모습은 내 아이밖에 모른다.</em>
+      </div>
+      <div class="who">한 자매의 고백</div>
+    </div>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        부모로서의 본이… 형제님들이 어떻게 하고 계시는지 모르겠지만,
+        저는 <em>너무 못하고 있다</em>고 생각이 듭니다.
+        집에 들어가면 유튜브, 핸드폰… 그것만 애들한테 보여주고 있지 않나.
+      </div>
+      <div class="who">한 형제의 솔직한 토로</div>
+    </div>
+
+    <p class="body italic">
+      그러나 이 부끄러움은 절망이 아니었습니다.
+      한 자매가 이렇게 말했을 때 모두의 안에서 빛이 한 줄기 들어왔습니다—
+    </p>
+
+    <div class="emph">
+      “주님께서 저를 목양해 주시지 않으면,<br>
+      저는 저희 자녀들을 목양할 수가 없습니다.”
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <path d="M40,15 L80,15"/>
+          <path d="M55,8 L65,22 M55,22 L65,8"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 4 =================== -->
+  <section class="page">
+    <span class="pagenum">04</span>
+    <div class="chapter">CH. 04</div>
+    <h2>자녀는<br><span class="under">누구의 것</span>인가</h2>
+
+    <p class="body">
+      한 자매가 어렵게 일어나 입을 열었습니다.
+      매일 아이를 키우며 가장 힘든 건 아이의 말 안 들음이 아니라,
+      그 순간 자신 속에서 솟아오르는 추악한 본성이라고.
+      그러다 어느 날 깨달았다고 했습니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape sage"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        이 자녀가 나의 소유이기 때문에 함부로 대하고 있더라고요.<br>
+        그러나 <em>이 자녀는 나의 소유가 아니라 주님의 소유입니다.</em>
+      </div>
+      <div class="who">두 아이의 엄마</div>
+    </div>
+
+    <p class="body">
+      또 한 형제는 셋째 아이가 코로나 시절 태어나자마자 폐렴으로
+      인큐베이터에 있던 그날을 떠올렸습니다.
+      그때 자신이 무어라 기도했는지를—
+    </p>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        이 아이를 <em>살려만 주시면</em><br>
+        주님께 드리겠다고.<br>
+        그것을 까먹고 있었는데… 주님이 물으시더라고요.<br>
+        “지금 네가 그렇게 얘기하지 않았느냐.”
+      </div>
+      <div class="who">헌신을 까먹고 있었던 한 형제</div>
+    </div>
+
+    <div class="note">
+      자녀는 빼앗긴 것이 아니라, 처음부터 주님께 속한 것.<br>
+      우리는 다만 잠시 맡은 청지기일 뿐.
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <ellipse cx="60" cy="15" rx="20" ry="6" fill="none"/>
+          <path d="M60,9 Q60,4 64,3"/>
+          <ellipse cx="50" cy="13" rx="2" ry="1" fill="currentColor" fill-opacity="0.4"/>
+          <ellipse cx="60" cy="16" rx="2" ry="1" fill="currentColor" fill-opacity="0.4"/>
+          <ellipse cx="70" cy="13" rx="2" ry="1" fill="currentColor" fill-opacity="0.4"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 5 =================== -->
+  <section class="page">
+    <span class="pagenum">05</span>
+    <div class="chapter">CH. 05</div>
+    <h2>잊었던<br><span class="under">첫사랑</span></h2>
+
+    <p class="body">
+      한 형제가 천천히 일어났습니다.
+      24년의 결혼 생활 동안 자매가 요즘 가장 예뻐졌다고,
+      그 이유를 곰곰이 생각해 보니 한 가지였다고 합니다.
+      —자매가 다시 나를 사랑하기 시작했기 때문이었다고 했습니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        신부가 언제 아름답냐면<br>
+        <em>신랑을 사랑할 때 아름답습니다.</em>
+      </div>
+      <div class="who">최근 다시 신혼을 누리고 있는 한 형제님</div>
+    </div>
+
+    <p class="body">
+      그러자 한 자매가 말했습니다.
+      해야 할 것이 너무 많다고 느꼈는데,
+      형제님이 말해 준 그 한 문장이 모든 무거움을 단순하게 만들었다고—
+    </p>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        많은 해야 할 것들이 있지만<br>
+        단 한 가지만 하면 된다.<br>
+        <em>주님을 사랑하는 것입니다.</em>
+      </div>
+      <div class="who">집회에서 들은 말씀</div>
+    </div>
+
+    <div class="emph">
+      그 사랑이 어떻게 변하니—<br>
+      <span style="font-size:28px;color:var(--ink-soft);">우리도 한때는 주님을 사랑했습니다.</span>
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <path d="M50,18 Q60,8 70,18 Q75,23 60,23 Q45,23 50,18 Z" fill="currentColor" fill-opacity="0.2"/>
+          <path d="M30,15 L48,15"/>
+          <path d="M72,15 L90,15"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 6 =================== -->
+  <section class="page">
+    <span class="pagenum">06</span>
+    <div class="chapter">CH. 06</div>
+    <h2>아침마다,<br><span class="under">새롭게</span></h2>
+
+    <p class="body">
+      그렇다면 어떻게 다시 사랑할 수 있을까.
+      어떻게 매일 새로워질 수 있을까.
+      대답은 멀지 않았습니다. 매일의 아침,
+      그분의 이름을 부르고 그분의 말씀을 씹어 먹는 일—
+      그 작은 일이 일생을 바꿉니다.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape dots"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        이기는 자는 이겼었던 사람이 아니고<br>
+        <em>오늘 이기고 있는 사람</em>이라는 것입니다.
+      </div>
+      <div class="who">집회 중 받은 말씀</div>
+    </div>
+
+    <div class="scripture">
+      <div class="ref">예레미야 애가 3:22–23</div>
+      <div class="verse">
+        “여호와의 자애로 우리가 진멸되지 아니하니<br>
+        그분의 자비는 무궁하다네.<br>
+        <strong style="color:var(--rose);font-style:normal;">이것들이 아침마다 새로우니</strong>,<br>
+        주님의 신실은 크기도 하십니다.”
+      </div>
+    </div>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        어떤 환경 가운데 있든지 간에 말씀 한 구절 한 구절을
+        <em>진물이 나오도록 꼭꼭 씹어 먹어야겠다</em>는
+        그런 생각이 다시 한 번 들었습니다.
+      </div>
+      <div class="who">직장에 다니는 한 자매</div>
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 30">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <circle cx="60" cy="15" r="5" fill="none"/>
+          <path d="M60,4 L60,8 M60,22 L60,26 M49,15 L53,15 M67,15 L71,15"/>
+          <path d="M52,7 L55,10 M65,20 L68,23 M68,7 L65,10 M55,20 L52,23"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== PAGE 7 =================== -->
+  <section class="page">
+    <span class="pagenum">07</span>
+    <div class="chapter">CH. 07 · 마지막 장</div>
+    <h2>함께,<br><span class="under">첫 열매로</span></h2>
+
+    <p class="body">
+      마지막 간증의 자리에 선 한 형제는 책임감을 말했습니다.
+      이 길은 혼자 가는 길이 아니라고.
+      먼저 부모가 본이 되고, 자녀가 그 본을 먹고 자라며,
+      함께 같은 몸으로 건축되어 가는 길이라고.
+    </p>
+
+    <div class="quote tilt-l">
+      <span class="tape sage"></span>
+      <span class="qmark">“</span>
+      <div class="text">
+        우리가 자녀와 <em>함께 건축된다</em>는<br>
+        이 사실에 상당히 감동을 받았습니다.<br>
+        이 길을 함께 간다는 것에 대해서<br>
+        강한 책임감을 가지고 전진하길 원합니다.
+      </div>
+      <div class="who">한 책임 형제</div>
+    </div>
+
+    <p class="body">
+      또 한 자매는 가장 단순한 진리를 다시 적었습니다—
+      <em>아이들은 본을 먹고 자란다.</em>
+      그러므로 우리는 먼저 하나님을 사랑하는 본,
+      교회 생활을 소중히 여기는 본,
+      실패해도 돌이키는 본이 되어야 한다고.
+    </p>
+
+    <div class="quote tilt-r">
+      <span class="qmark">“</span>
+      <div class="text">
+        우리 아이들도 정말 주님을 사랑하는 아이들로,<br>
+        그리고 단순히 부모와 자식이 아니라<br>
+        <em>함께 첫 열매를 꿈꾸는 지체</em>로서<br>
+        가정 안에서 함께 건축될 것입니다.
+      </div>
+      <div class="who">두 아이의 엄마</div>
+    </div>
+
+    <div class="emph" style="margin-top:30px;">
+      이상을 보았습니다.<br>
+      <span style="color:var(--ink);">이제 우리의 생활로 들어가서 실행합시다.</span>
+    </div>
+
+    <div class="divider" style="margin-top:34px;">
+      <svg viewBox="0 0 140 30">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <path d="M10,15 Q35,5 60,15 T110,15 L130,15"/>
+          <circle cx="35" cy="10" r="1.5" fill="currentColor"/>
+          <circle cx="60" cy="15" r="2" fill="currentColor" fill-opacity="0.5"/>
+          <circle cx="85" cy="20" r="1.5" fill="currentColor"/>
+          <path d="M70,15 L72,12 M70,15 L72,18" />
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- =================== CLOSING =================== -->
+  <section class="closing">
+    <div class="seal">愛</div>
+    <div class="signoff">
+      우리는<br>
+      다른 것들보다<br>
+      주님을 더 사랑하기로 했습니다.<br>
+      오 주 예수님<br>
+      당신을 사랑합니다!
+    </div>
+    <div class="date">2026. 봄 · 사역원에서</div>
+
+    <div class="divider" style="margin-top:30px;opacity:0.5;">
+      <svg viewBox="0 0 120 24">
+        <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+          <path d="M20,12 L100,12" stroke-dasharray="1 4"/>
+        </g>
+      </svg>
+    </div>
+
+    <p style="font-family:'Gaegu',cursive;font-size:15px;color:var(--ink-faded);margin-top:10px;letter-spacing:1px;">
+      — 학부모 간증 노트 끝 —
+    </p>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var audio   = document.getElementById('audio');
+  var cassette= document.getElementById('cassette');
+  var btn     = document.getElementById('play-btn');
+  var reelL   = document.getElementById('reel-left');
+  var reelR   = document.getElementById('reel-right');
+  var progress= document.getElementById('progress');
+  var fill    = document.getElementById('progress-fill');
+  var thumb   = document.getElementById('progress-thumb');
+  var tCur    = document.getElementById('time-cur');
+  var tDur    = document.getElementById('time-dur');
+
+  function fmt(s){
+    if(!isFinite(s)) return '--:--';
+    s = Math.floor(s);
+    var m = Math.floor(s/60), r = s%60;
+    return m + ':' + (r<10?'0':'') + r;
+  }
+
+  btn.addEventListener('click', function(){
+    if(audio.paused) audio.play(); else audio.pause();
+  });
+
+  audio.addEventListener('play', function(){
+    cassette.classList.add('playing');
+    reelL.classList.add('spin');
+    reelR.classList.add('spin');
+  });
+  audio.addEventListener('pause', function(){
+    cassette.classList.remove('playing');
+    reelL.classList.remove('spin');
+    reelR.classList.remove('spin');
+  });
+  audio.addEventListener('loadedmetadata', function(){
+    tDur.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('timeupdate', function(){
+    var pct = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
+    fill.style.width = pct + '%';
+    thumb.style.left = pct + '%';
+    tCur.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('ended', function(){
+    cassette.classList.remove('playing');
+    reelL.classList.remove('spin');
+    reelR.classList.remove('spin');
+  });
+
+  function seek(e){
+    var rect = progress.getBoundingClientRect();
+    var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    var pct = Math.max(0, Math.min(1, x/rect.width));
+    if(audio.duration) audio.currentTime = pct * audio.duration;
+  }
+  progress.addEventListener('click', seek);
+  progress.addEventListener('touchstart', seek, {passive:true});
+})();
+</script>
+
+</body>
+</html>

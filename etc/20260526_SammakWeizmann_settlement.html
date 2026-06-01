@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#F4EFE6">
+<title>삼막와이즈만 수학여행 정산</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4EFE6;
+    --paper: #FBF8F2;
+    --paper-warm: #F7EFE0;
+    --ink: #1F1B16;
+    --ink-soft: #3C342B;
+    --muted: #8A7A65;
+    --hair: #D9CDB8;
+    --hair-soft: #EAE0CC;
+    --forest: #2D4A3E;
+    --forest-deep: #1F3329;
+    --rust: #B8512A;
+    --gold: #A88340;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 10% 5%, rgba(184, 81, 42, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 90% 95%, rgba(45, 74, 62, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 60px rgba(31, 27, 22, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--forest) 0%, var(--gold) 50%, var(--rust) 100%);
+    z-index: 10;
+  }
+
+  .header {
+    padding: 48px 28px 36px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .ornament {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0.5em;
+    margin-bottom: 16px;
+  }
+
+  .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  h1 .accent { color: var(--forest); }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .subtitle .dot { margin: 0 8px; color: var(--gold); }
+
+  .hero {
+    padding: 44px 28px 40px;
+    background: linear-gradient(140deg, #FBF8F2 0%, #F4EBD9 60%, #EFE0C5 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184, 81, 42, 0.12) 0%, transparent 70%);
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -80px; left: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45, 74, 62, 0.1) 0%, transparent 70%);
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--rust);
+    letter-spacing: 0.25em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .hero-label-ko {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-amount {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 64px;
+    color: var(--forest-deep);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  .hero-amount .won {
+    font-size: 28px;
+    color: var(--gold);
+    margin-right: 4px;
+    font-weight: 400;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-divider .line { width: 30px; height: 1px; background: var(--gold); }
+  .hero-divider .diamond { color: var(--gold); font-size: 8px; }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-top: 14px;
+  }
+
+  .families-section { padding: 36px 24px 8px; }
+
+  .section-label { text-align: center; margin-bottom: 24px; }
+
+  .section-label-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .section-label-ko {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .families {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .family {
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 20px 14px 18px;
+    text-align: center;
+    position: relative;
+    border-radius: 2px;
+  }
+
+  .family::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    width: 36px; height: 2px;
+    background: var(--rust);
+  }
+
+  .family-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .family-name {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .family-divider {
+    width: 20px;
+    height: 1px;
+    background: var(--hair);
+    margin: 0 auto 10px;
+  }
+
+  .family-amount {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--forest);
+    letter-spacing: -0.01em;
+  }
+
+  .family-amount .won {
+    font-size: 12px;
+    color: var(--gold);
+    margin-right: 2px;
+  }
+
+  .summary {
+    margin-top: 36px;
+    padding: 28px 24px;
+    background: var(--paper-warm);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  .summary-cell { text-align: center; position: relative; padding: 0 6px; }
+
+  .summary-cell + .summary-cell::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 10%;
+    height: 80%;
+    width: 1px;
+    background: var(--hair);
+  }
+
+  .summary-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .summary-label-ko {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .summary-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .summary-value.negative { color: var(--rust); }
+  .summary-value.positive { color: var(--forest); }
+
+  .summary-unit {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 1px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .summary-formula {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dotted var(--hair);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .summary-formula .num {
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .income { padding: 32px 24px 8px; }
+
+  .income-panel {
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 20px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2px;
+  }
+
+  .income-panel-left .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .income-panel-left .name {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 15px;
+  }
+
+  .income-panel-amount {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--forest);
+    letter-spacing: -0.01em;
+  }
+
+  .income-panel-amount .won {
+    color: var(--gold);
+    font-size: 14px;
+    margin-right: 1px;
+  }
+
+  .expenses { padding: 32px 24px 24px; }
+
+  .expenses-intro {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+
+  .category { margin-bottom: 24px; }
+  .category:last-child { margin-bottom: 8px; }
+
+  .category-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .category-name {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--forest);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .category-name::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--rust);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .category-subtotal {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 11px 4px;
+    border-bottom: 1px dotted var(--hair-soft);
+    gap: 12px;
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-left { flex: 1; min-width: 0; }
+
+  .item-name {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+
+  .item-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .item-amount {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--ink);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  .grand-total {
+    margin-top: 28px;
+    padding: 18px 4px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 3px double var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .grand-total-label {
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .grand-total-amount {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .footer {
+    padding: 40px 28px 48px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+    border-top: 1px solid var(--hair);
+  }
+
+  .footer-mark {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    letter-spacing: 0.5em;
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+
+  .footer-message {
+    font-family: 'Gowun Batang', serif;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  .footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 360px) {
+    .header { padding: 40px 22px 30px; }
+    h1 { font-size: 24px; }
+    .hero { padding: 36px 22px 32px; }
+    .hero-amount { font-size: 54px; }
+    .hero-amount .won { font-size: 24px; }
+    .families-section, .income, .expenses { padding-left: 18px; padding-right: 18px; }
+    .summary { padding: 24px 18px; }
+    .summary-value { font-size: 16px; }
+    .family { padding: 18px 10px 16px; }
+    .family-amount { font-size: 15px; }
+  }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="ornament">✦  ·  ✦  ·  ✦</div>
+    <div class="eyebrow">Settlement Report</div>
+    <h1>삼막와이즈만<br><span class="accent">수학여행 정산</span></h1>
+    <div class="subtitle">
+      양양<span class="dot">·</span>속초<span class="dot">·</span>2박 3일
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">Per Family</div>
+      <div class="hero-label-ko">한 가정당 부담 금액</div>
+      <div class="hero-amount"><span class="won">₩</span>364,700</div>
+      <div class="hero-divider">
+        <span class="line"></span>
+        <span class="diamond">◆</span>
+        <span class="line"></span>
+      </div>
+      <div class="hero-sub">부족분 1,458,800원을 네 가정이 균등 분담</div>
+    </div>
+  </section>
+
+  <section class="families-section">
+    <div class="section-label">
+      <div class="section-label-en">Four Families</div>
+      <div class="section-label-ko">가정별 분담금</div>
+    </div>
+    <div class="families">
+      <div class="family">
+        <div class="family-num">No. 01</div>
+        <div class="family-name">삼형제네</div>
+        <div class="family-divider"></div>
+        <div class="family-amount"><span class="won">₩</span>364,700</div>
+      </div>
+      <div class="family">
+        <div class="family-num">No. 02</div>
+        <div class="family-name">삼남매네</div>
+        <div class="family-divider"></div>
+        <div class="family-amount"><span class="won">₩</span>364,700</div>
+      </div>
+      <div class="family">
+        <div class="family-num">No. 03</div>
+        <div class="family-name">규원이네</div>
+        <div class="family-divider"></div>
+        <div class="family-amount"><span class="won">₩</span>364,700</div>
+      </div>
+      <div class="family">
+        <div class="family-num">No. 04</div>
+        <div class="family-name">신최강네</div>
+        <div class="family-divider"></div>
+        <div class="family-amount"><span class="won">₩</span>364,700</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-cell">
+        <div class="summary-label">Income</div>
+        <div class="summary-label-ko">수입</div>
+        <div class="summary-value positive">1,800,000<span class="summary-unit">원</span></div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-label">Expense</div>
+        <div class="summary-label-ko">지출</div>
+        <div class="summary-value">3,258,800<span class="summary-unit">원</span></div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-label">Short</div>
+        <div class="summary-label-ko">부족분</div>
+        <div class="summary-value negative">1,458,800<span class="summary-unit">원</span></div>
+      </div>
+    </div>
+    <div class="summary-formula">
+      <span class="num">1,458,800</span> ÷ 4 가정 = <span class="num">364,700원</span>
+    </div>
+  </section>
+
+  <section class="income">
+    <div class="income-panel">
+      <div class="income-panel-left">
+        <div class="label">Income</div>
+        <div class="name">찬조 및 헌금</div>
+      </div>
+      <div class="income-panel-amount"><span class="won">₩</span>1,800,000</div>
+    </div>
+  </section>
+
+  <section class="expenses">
+    <div class="section-label" style="margin-bottom: 8px;">
+      <div class="section-label-en">Expense Breakdown</div>
+      <div class="section-label-ko">지출 상세</div>
+    </div>
+    <div class="expenses-intro">총 18건 · 6개 항목</div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">숙박</div>
+        <div class="category-subtotal">1,200,000원</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">펜션</div>
+          <div class="item-note">2박 3일</div>
+        </div>
+        <div class="item-amount">1,200,000</div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">식사</div>
+        <div class="category-subtotal">1,082,190원</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">평창한우마을 (고기)</div></div>
+        <div class="item-amount">757,190</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">평창한우마을 (후식)</div></div>
+        <div class="item-amount">165,000</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">회</div></div>
+        <div class="item-amount">160,000</div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">식재료 &amp; 물품</div>
+        <div class="category-subtotal">589,450원</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">코스트코</div></div>
+        <div class="item-amount">387,600</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">삼겹살</div>
+          <div class="item-note">5kg</div>
+        </div>
+        <div class="item-amount">120,000</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">프리마트</div></div>
+        <div class="item-amount">56,210</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="item-name">고구마</div>
+          <div class="item-note">6kg</div>
+        </div>
+        <div class="item-amount">25,640</div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">간식 &amp; 음료</div>
+        <div class="category-subtotal">183,760원</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">새우튀김 및 오징어 순대</div></div>
+        <div class="item-amount">75,000</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">만석닭강정</div></div>
+        <div class="item-amount">40,000</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">우유</div></div>
+        <div class="item-amount">33,980</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">식혜</div></div>
+        <div class="item-amount">13,980</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">아메리카노</div></div>
+        <div class="item-amount">13,800</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">마시멜로우</div></div>
+        <div class="item-amount">7,000</div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">체험</div>
+        <div class="category-subtotal">165,000원</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">정동진 레일바이크</div></div>
+        <div class="item-amount">165,000</div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-head">
+        <div class="category-name">캠프파이어</div>
+        <div class="category-subtotal">38,400원</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">숯</div></div>
+        <div class="item-amount">23,650</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">장작</div></div>
+        <div class="item-amount">8,900</div>
+      </div>
+      <div class="item">
+        <div class="item-left"><div class="item-name">캠프파이어 가루</div></div>
+        <div class="item-amount">5,850</div>
+      </div>
+    </div>
+
+    <div class="grand-total">
+      <div class="grand-total-label">지출 총계</div>
+      <div class="grand-total-amount">3,258,800원</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-mark">✦  ·  ✦  ·  ✦</div>
+    <div class="footer-message">
+      함께한 모든 시간에 감사드립니다.<br>
+      이번 여행이 따뜻한 기억으로 남기를.
+    </div>
+    <div class="footer-sub">Samak Weizmann</div>
+  </footer>
+
+</div>
+</body>
+</html>
