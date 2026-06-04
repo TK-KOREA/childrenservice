@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>신언의 실행 — 제19과</title>
+<title>하나님께서 정하신 길 제19과 - 신언의 실행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -23,13 +23,14 @@
     --sky-light:#7CB2C0;
     --sky-wash:rgba(62,130,149,.10);
     --rose:#BC6E5C;
+    --correct:#5C9A6B;
     --line:rgba(43,40,56,.14);
     --card:#FFFDF7;
     --shadow:0 1.2rem 2.5rem -1.2rem rgba(80,55,20,.28);
     --shadow-sm:0 .5rem 1.2rem -.6rem rgba(80,55,20,.30);
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{font-size:16px;-webkit-text-size-adjust:100%;}
+  html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
   body{
     font-family:'IBM Plex Sans KR',sans-serif;
     background:var(--bg);
@@ -50,7 +51,7 @@
     padding:0 1.25rem 4rem;
   }
 
-  .scene{padding:3.4rem 0 1.2rem;}
+  .scene{padding:3.4rem 0 1.2rem;scroll-margin-top:1rem;}
   .scene + .scene{border-top:1px solid var(--line);}
 
   /* ---------- reveal ---------- */
@@ -83,6 +84,13 @@
   }
   .verse span{display:block;font-family:'IBM Plex Sans KR';font-size:.78rem;color:var(--ink-faint);margin-top:.35rem;letter-spacing:.04em;}
   .note{font-size:.95rem;color:var(--ink-soft);}
+  .lead b{color:var(--gold-deep);font-weight:600;}
+  .ref{display:inline-block;font-size:.66rem;font-weight:600;letter-spacing:.01em;color:var(--gold-deep);
+    background:var(--gold-wash);border:1px solid var(--gold-light);border-radius:1rem;padding:.05rem .5rem;
+    line-height:1.65;white-space:nowrap;vertical-align:middle;}
+  .ref.sky{color:var(--sky);background:var(--sky-wash);border-color:var(--sky-light);}
+  .refs{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.7rem;}
+  .refs.center{justify-content:center;}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -119,6 +127,19 @@
   .scrollcue{margin-top:2.6rem;font-size:.75rem;letter-spacing:.2em;color:var(--ink-faint);}
   .scrollcue::after{content:"";display:block;width:1px;height:2.2rem;margin:.7rem auto 0;background:linear-gradient(var(--gold-light),transparent);animation:drop 1.8s ease-in-out infinite;}
   @keyframes drop{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- overview (at a glance) ---------- */
+  .ovwrap{background:var(--card);border:1px solid var(--line);border-radius:1.1rem;
+    padding:.2rem 1.15rem;margin:1.5rem 0 .4rem;box-shadow:var(--shadow-sm);}
+  .ovwrap ol{list-style:none;}
+  .ovwrap li{display:flex;gap:.9rem;align-items:flex-start;padding:.95rem 0;border-top:1px solid var(--line);}
+  .ovwrap li:first-child{border-top:none;}
+  .ovrn{flex:0 0 1.7rem;text-align:center;line-height:1.5;
+    font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:1.4rem;color:var(--gold);}
+  .ovtext{flex:1;font-size:.92rem;line-height:1.72;color:var(--ink-soft);}
+  .ovtext b{font-weight:600;color:var(--gold-deep);}
+  .ovtext .key{font-family:'Nanum Myeongjo',serif;font-weight:700;color:var(--ink);}
+  .ovcite{font-size:.8rem;font-weight:600;color:var(--gold);white-space:nowrap;}
 
   /* ---------- big numbers ---------- */
   .bn-row{display:flex;gap:.7rem;margin:1.2rem 0;}
@@ -281,6 +302,59 @@
   .end-refrain small{display:block;font-family:'IBM Plex Sans KR';font-size:.78rem;color:var(--ink-faint);font-weight:500;margin-top:.5rem;letter-spacing:.06em;}
 
   .footer{text-align:center;font-size:.72rem;color:var(--ink-faint);margin-top:2.6rem;line-height:1.7;}
+
+  /* ---------- quiz (09 self-check) ---------- */
+  .quizscene{background:linear-gradient(180deg,var(--bg),#FBF3E2 50%,var(--bg));border-radius:1.4rem;margin:0 -.25rem;padding:3.4rem .25rem 1.4rem;}
+  .quizscene.scene + .scene{border-top:none;}
+  .quizmeta{position:sticky;top:.5rem;z-index:5;display:flex;align-items:center;gap:.85rem;margin:1.1rem 0 1.5rem;
+    background:rgba(255,253,247,.92);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:1rem;
+    padding:.7rem .85rem;box-shadow:var(--shadow-sm);}
+  .quizmeta .ring{position:relative;flex:0 0 3rem;width:3rem;height:3rem;}
+  .quizmeta .ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'Black Han Sans',sans-serif;font-size:.95rem;color:var(--gold-deep);}
+  .quizmeta .qprog{flex:1;min-width:0;}
+  .quizmeta .qprog b{font-family:'Nanum Myeongjo',serif;font-size:1rem;color:var(--ink);display:block;line-height:1.3;}
+  .quizmeta .qprog span{font-size:.78rem;color:var(--ink-soft);}
+
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:1.1rem;padding:1.1rem 1.05rem 1rem;margin-bottom:.9rem;box-shadow:var(--shadow-sm);}
+  .qhead{display:flex;gap:.7rem;align-items:flex-start;margin-bottom:.85rem;}
+  .qnum{flex:0 0 1.8rem;height:1.8rem;border-radius:.55rem;background:var(--gold-wash);color:var(--gold-deep);
+    font-family:'Black Han Sans',sans-serif;font-size:1rem;display:grid;place-items:center;}
+  .qtext{font-weight:600;font-size:.95rem;line-height:1.55;color:var(--ink);padding-top:.1rem;}
+  .qopts{display:flex;flex-direction:column;gap:.45rem;}
+  .qopt{display:flex;gap:.6rem;align-items:flex-start;width:100%;text-align:left;background:var(--bg);
+    border:1px solid var(--line);border-radius:.7rem;padding:.6rem .7rem;font-family:inherit;font-size:.86rem;
+    color:var(--ink);line-height:1.45;cursor:pointer;transition:border-color .2s,background .2s,transform .1s,opacity .2s;}
+  .qopt:hover:not(:disabled){border-color:var(--gold-light);background:var(--gold-wash);}
+  .qopt:active:not(:disabled){transform:scale(.99);}
+  .qopt .lt{flex:0 0 1.35rem;height:1.35rem;border-radius:.4rem;border:1px solid var(--line);display:grid;
+    place-items:center;font-size:.74rem;font-weight:700;color:var(--ink-soft);transition:inherit;}
+  .qopt .ot{flex:1;}
+  .qopt:disabled{cursor:default;}
+  .qopt.correct{border-color:var(--correct);background:rgba(92,154,107,.12);}
+  .qopt.correct .lt{background:var(--correct);border-color:var(--correct);color:#fff;}
+  .qopt.wrong{border-color:var(--rose);background:rgba(188,110,92,.12);}
+  .qopt.wrong .lt{background:var(--rose);border-color:var(--rose);color:#fff;}
+  .qopt.dim{opacity:.5;}
+  .qwhy{display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;
+    transition:grid-template-rows .35s ease,opacity .3s ease,margin .35s ease;}
+  .qwhy.show{grid-template-rows:1fr;opacity:1;margin-top:.75rem;}
+  .qwhy .inner{overflow:hidden;min-height:0;}
+  .qwhy .box{display:flex;gap:.55rem;align-items:flex-start;background:var(--sky-wash);border:1px dashed var(--sky-light);
+    border-radius:.7rem;padding:.65rem .75rem;font-size:.82rem;color:var(--ink-soft);line-height:1.55;}
+  .qwhy .box b{color:var(--sky);font-weight:700;}
+  .qverdict{font-weight:700;}
+  .qverdict.ok{color:var(--correct);}
+  .qverdict.no{color:var(--rose);}
+
+  .quizdone{text-align:center;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#fff;
+    border-radius:1.2rem;padding:1.7rem 1.2rem;box-shadow:var(--shadow);margin-top:1.1rem;}
+  .quizdone.hidden{display:none;}
+  .quizdone .score{font-family:'Black Han Sans',sans-serif;font-size:3.1rem;line-height:1;}
+  .quizdone .score small{font-size:1.2rem;opacity:.82;}
+  .quizdone p{font-size:.92rem;margin-top:.5rem;opacity:.96;line-height:1.6;}
+  .quizdone .retry{margin-top:1.1rem;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);
+    color:#fff;font-family:inherit;font-weight:600;font-size:.85rem;padding:.55rem 1.5rem;border-radius:2rem;cursor:pointer;transition:background .2s;}
+  .quizdone .retry:hover{background:rgba(255,255,255,.34);}
 </style>
 </head>
 <body>
@@ -288,22 +362,40 @@
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <div class="kicker reveal in">제19과 · 신언 (2)</div>
+    <div class="kicker reveal in">하나님께서 정하신 길 제19과 · 신언 (2)</div>
     <h1 class="reveal in d1">신언의<br>실행</h1>
-    <p class="thesis reveal in d2">평범한 한 사람이 어떻게 일어서서<br>하나님을 위해 말하게 되는가 —<br>그 여정에 관한 이야기.</p>
+    <p class="thesis reveal in d2">평범한 한 사람이 어떻게 일어서서<br>하나님을 위해 말하게 되는가</p>
     <div class="refrain reveal in d3">
       “각 사람이 … 가지고 있고”
       <small>고린도전서 14:26</small>
     </div>
-    <div class="scrollcue reveal in d4">아침에서 시작합니다</div>
+    <div class="scrollcue reveal in d4">개요를 펼칩니다</div>
   </header>
 
+  <!-- ===== 개요 (한눈에) ===== -->
+  <section class="scene" id="contents">
+    <div class="kicker reveal">개요 · AT A GLANCE</div>
+    <h2 class="stitle reveal d1">한눈에 보는 신언의 실행</h2>
+    <p class="lead reveal d2">평범한 한 사람이 일어서서 신언하기까지, 일곱 단계의 길입니다.</p>
+    <div class="ovwrap reveal d3">
+      <ol>
+        <li><span class="ovrn">Ⅰ</span><p class="ovtext">주중에 하나님의 말씀에서 얻은 <b>계시</b>와 <b>삼일 하나님을 체험</b>한 것을 <b>삼 분 이내</b>로 말할 <span class="key">신언을 작성한다</span> <span class="ovcite">― 고전 14:26</span></p></li>
+        <li><span class="ovrn">Ⅱ</span><p class="ovtext">월요일부터 토요일까지 날마다 <b>PSR</b>(말씀을 기도로 읽기, 연구하기, 암송하기)을 실행한다면, 틀림없이 교회의 <span class="key">주일 집회에서 신언할 것이다</span>.</p></li>
+        <li><span class="ovrn">Ⅲ</span><p class="ovtext"><span class="key">집에서 준비한 신언을 말하는 것</span>을 실행한다 <span class="ovcite">― 고전 14:26</span></p></li>
+        <li><span class="ovrn">Ⅳ</span><p class="ovtext"><span class="key">신언을 구성하는 요소들</span>을 가지고 말한다 ― <b>살아 있는 생명의 말씀</b>을 가지고, <b>성령의 영감</b>을 받아, 그분의 <b>빛 비춤</b>과 함께 우리가 본 것을 말한다 <span class="ovcite">― 행 5:20</span></p></li>
+        <li><span class="ovrn">Ⅴ</span><p class="ovtext">주님의 말씀을 말하는 <span class="key">습관을 세운다</span> <span class="ovcite">― 눅 1:45-46</span></p></li>
+        <li><span class="ovrn">Ⅵ</span><p class="ovtext">신언을 실행하는 데 필요한 <span class="key">배움</span> <span class="ovcite">― 고전 14:1, 딤전 4:13-16</span></p></li>
+        <li><span class="ovrn">Ⅶ</span><p class="ovtext"><span class="key">하기를 훈련한다</span> <span class="ovcite">― 눅 1:47, 시 16:9</span></p></li>
+      </ol>
+    </div>
+  </section>
+
   <!-- ===== 01 씨앗 ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-1">
     <div class="scene-no reveal">01</div>
     <div class="kicker reveal d1">개요 Ⅰ · 매일 아침</div>
     <h2 class="stitle reveal d1">씨앗 — 매일 아침의 누림</h2>
-    <p class="lead reveal d2">신언은 거창한 데서 시작하지 않습니다. 매일 아침, 한 부분의 말씀으로 주님을 접촉하고 누리는 작은 한 걸음에서 시작됩니다.</p>
+    <p class="lead reveal d2">신언은 거창한 데서 시작하지 않습니다. 매일 아침, 한 부분의 말씀으로 주님을 접촉하고 누리는 작은 한 걸음 — 거기서 얻은 <b>계시</b>와 <b>삼일 하나님 체험</b>이 그대로 신언의 재료가 됩니다. <span class="ref">고전 14:26</span></p>
     <div class="verse reveal d2">이것들이 아침마다 새로우니, 주의 성실하심이 크시도소이다.<span>예레미야애가 3:22–23</span></div>
 
     <div class="bn-row reveal d3">
@@ -312,9 +404,9 @@
     </div>
 
     <div class="timeline reveal d4">
-      <div class="tl"><b>① 기도로 읽기</b> <span>— 한 장을 다 삼키려 말고, 적은 분량으로</span></div>
-      <div class="tl"><b>② 집중하여 누리기</b> <span>— 마음에 와닿는 두세 구절에 머물기</span></div>
-      <div class="tl"><b>③ 짧게 기록하기</b> <span>— 받은 감동·빛 비춤을 한 줄로 적어 두기</span></div>
+      <div class="tl"><b>① 기도로 읽기</b> <span>— 한 장을 다 삼키려 말고, 하루 열 구절 이하로</span></div>
+      <div class="tl"><b>② 집중하여 누리기</b> <span>— 마음에 와닿는 두세 구절에 머물기 <span class="ref">렘 15:16</span></span></div>
+      <div class="tl"><b>③ 짧게 기록하기</b> <span>— 받은 것을 상기하도록, 감동·빛 비춤·누림을 한 줄로 <span class="ref">시 119:147–148</span> <span class="ref">참조 레 11:3</span></span></div>
     </div>
   </section>
 
@@ -344,18 +436,18 @@
     </div>
 
     <div class="gauge reveal d5">
-      <p>‘지도 교사·조력자’가 합당한 길이로 다듬어 줍니다.</p>
+      <p>‘지도 교사·조력자’가 합당한 길이·형식·내용의 신언을 짓도록 가르치고 다듬어 줍니다. <span class="ref">고전 14:29</span></p>
       <div class="gtrack"></div>
       <div class="glabels"><span>너무 짧으면 → 늘리고</span><span>너무 길면 → 줄이고</span></div>
     </div>
   </section>
 
   <!-- ===== 03 방법 PSRP ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-2">
     <div class="scene-no reveal">03</div>
     <div class="kicker reveal d1">개요 Ⅱ · 월요일–토요일</div>
     <h2 class="stitle reveal d1">방법 — P·S·R·P</h2>
-    <p class="lead reveal d2">날마다 이 네 단계를 실행하면, 주일 집회에서 틀림없이 신언하게 됩니다. 최근 해방된 풍성을 ‘요리하여 누리는’ 길입니다.</p>
+    <p class="lead reveal d2">날마다 이 네 단계를 실행하면, 주일 집회에서 틀림없이 신언하게 됩니다. 최근 몇 년간 해방된 풍성을 ‘요리하여 누리는’ 길입니다.</p>
 
     <div class="psrp reveal d3">
       <div class="step"><div class="badge b-p">P</div><div class="t"><b>Pray-read · 기도로 읽기</b><span>말씀을 기도로 천천히 마신다</span></div></div>
@@ -371,12 +463,16 @@
 
     <div class="callout reveal d5">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3E8295" stroke-width="1.7" stroke-linecap="round"><path d="M4 5h12M4 9h9M4 13h12M4 17h7"/><path d="M17 14l3 3 3-5"/></svg>
-      <p><b>사도행전 8장 ·</b> 에티오피아 내시는 이사야서를 읽었지만 “지도해 주는 사람이 없으니 어떻게 이해하겠는가” 했습니다. 우리에게는 <b>해석된 말씀</b>이 필요합니다.</p>
+      <p><b>사도행전 8장 ·</b> 에티오피아 내시는 이사야서를 읽었지만 “지도해 주는 사람이 없으니 어떻게 이해하겠는가” 했습니다. 우리에게는 <b>해석된 말씀</b>이 필요합니다. <span class="ref">행 8:30–31</span></p>
+    </div>
+
+    <div class="chain reveal d6" style="background:var(--gold-wash);border-color:var(--gold-light);color:var(--ink);">
+      이 방법을 취하면 <b style="color:var(--gold-deep)">그리스도의 측량할 수 없는 풍성</b>으로 장비되어, 사람들을 <b style="color:var(--gold-deep)">보양</b>하게 됩니다.
     </div>
   </section>
 
   <!-- ===== 04 준비 ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-3">
     <div class="scene-no reveal">04</div>
     <div class="kicker reveal d1">개요 Ⅲ · 집에서</div>
     <h2 class="stitle reveal d1">준비 — 집에서 말해 본다</h2>
@@ -398,11 +494,11 @@
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M6 9v6M9 9v6M12 9v6M15 9v6M18 9v6"/></svg>
       <p><b>피아노 연습처럼.</b> 부부가 서로 말하고 평가해 주며 연습할수록 더 노련해집니다. 연습하지 않을수록 진보하기 어렵습니다.</p>
     </div>
-    <p class="note reveal d5" style="text-align:center;font-family:'Nanum Myeongjo',serif;color:var(--gold-deep);font-size:1.1rem;margin-top:1rem;">“각 사람이 … 가지고 있고”</p>
+    <p class="note reveal d5" style="text-align:center;font-family:'Nanum Myeongjo',serif;color:var(--gold-deep);font-size:1.1rem;margin-top:1rem;">“각 사람이 … 가지고 있고” <span class="ref">고전 14:26</span></p>
   </section>
 
   <!-- ===== 05 핵심 (클라이맥스) ===== -->
-  <section class="scene climax">
+  <section class="scene climax" id="sec-4">
     <div class="scene-no reveal">05</div>
     <div class="kicker reveal d1">개요 Ⅳ · 신언이란 무엇인가</div>
     <h2 class="stitle reveal d1">핵심 — 신언의 세 요소</h2>
@@ -416,6 +512,12 @@
       <div class="core">신언</div>
     </div>
     <p class="vlegend reveal d4"><b>말씀</b>에 익숙해지고 · <b>영</b>의 영감을 받으며 · <b>맑은 하늘</b> 아래서 본 것을 말합니다.</p>
+    <div class="refs center reveal d4"><span class="ref">고전 14:31</span><span class="ref">고전 2:11–16</span></div>
+
+    <div class="callout reveal d4" style="margin-top:1.1rem;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l1.4 1.4M16.6 16.6 18 18M18 6l-1.4 1.4M7.4 16.6 6 18"/><circle cx="12" cy="12" r="3.4"/></svg>
+      <p>신언한다는 것은 곧 <b>하나님의 신탁의 말씀</b> — 신성한 계시를 전달하는 하나님의 발언 — 을 갖는 것입니다. <span class="ref">벧전 4:11</span> <span class="ref">참조 고전 14:24–25</span></p>
+    </div>
 
     <div class="paradox reveal d5">
       <div class="side normal">
@@ -439,11 +541,11 @@
   </section>
 
   <!-- ===== 06 습관 ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-5">
     <div class="scene-no reveal">06</div>
     <div class="kicker reveal d1">개요 Ⅴ · 일상생활</div>
     <h2 class="stitle reveal d1">습관 — 일상에서 말하기</h2>
-    <p class="lead reveal d2">집회에서의 신언은 일상의 습관에서 자랍니다. 거룩한 말씀을 말하는 유일한 길은 그 영을 따라 사는 것입니다.</p>
+    <p class="lead reveal d2">집회에서의 신언은 일상의 습관에서 자랍니다. 거룩한 말씀을 말하는 유일한 길은 그 영을 따라 사는 것입니다. <span class="ref">눅 1:45–46</span></p>
 
     <div class="vs reveal d3">
       <div class="col neg"><h4>육체의 정욕</h4><p>세속적이고 공허한 말<br>(전화기를 붙들면 한참…)</p></div>
@@ -470,11 +572,11 @@
   </section>
 
   <!-- ===== 07 장비 22+22 ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-6">
     <div class="scene-no reveal">07</div>
     <div class="kicker reveal d1">개요 Ⅵ · 필요한 배움</div>
     <h2 class="stitle reveal d1">장비 — 진리와 체험</h2>
-    <p class="lead reveal d2">신언이 풍성해지려면 배움이 필요합니다. 객관적인 진리와 주관적인 체험, 두 가지 큰 줄기입니다.</p>
+    <p class="lead reveal d2">신언이 풍성해지려면 배움이 필요합니다. 객관적인 진리와 주관적인 체험, 두 가지 큰 줄기입니다. <span class="ref">고전 14:1</span> <span class="ref">딤전 4:13–16</span></p>
 
     <div class="twin reveal d3">
       <div class="h truth"><b>22</b><em>진리의 주요 항목</em></div>
@@ -515,7 +617,7 @@
   </section>
 
   <!-- ===== 08 훈련 ===== -->
-  <section class="scene">
+  <section class="scene" id="sec-7">
     <div class="scene-no reveal">08</div>
     <div class="kicker reveal d1">개요 Ⅶ · 하기를 훈련함</div>
     <h2 class="stitle reveal d1">훈련 — 다섯 가지</h2>
@@ -524,11 +626,11 @@
     <div class="trains reveal d3">
       <div class="train">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M12 3c2 3-1 4 0 7 1 2 3 2 3 5a3 3 0 0 1-6 0c0-3 2-3 3-5"/><path d="M9 9c-1 1.5-1 3 0 4"/></svg></div>
-        <div class="t"><b>1 · 영</b><span>가장 깊은 속 존재를 사용해 말하기 (눅 1:47)</span></div>
+        <div class="t"><b>1 · 영</b><span>가장 깊은 속 존재를 사용해 말하기 <span class="ref">눅 1:47</span> <span class="ref">시 16:9</span></span></div>
       </div>
       <div class="train">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M5 9c3-3 11-3 14 0"/><path d="M7 13c2 2.5 8 2.5 10 0"/><path d="M10 16c1 1 3 1 4 0"/></svg></div>
-        <div class="t"><b>2 · 입(혀)과 목소리</b><span>전체 회중에게 들리도록, 분명하고 크게 (시 108:1)</span></div>
+        <div class="t"><b>2 · 입(혀)과 목소리</b><span>전체 회중에게 들리도록, 분명하고 크게 <span class="ref">시 108:1</span> <span class="ref">행 2:26</span> <span class="ref">고전 14:7–11</span></span></div>
       </div>
       <div class="train">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.6" stroke-linecap="round"><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.4"/><path d="M4 14a8 8 0 0 1 16 0"/></svg></div>
@@ -561,9 +663,148 @@
     <p class="footer reveal d3">제19과 · 신언(2) 신언의 실행 — 메시지 요점 인포그래픽</p>
   </footer>
 
+  <!-- ===== 09 점검 퀴즈 ===== -->
+  <section class="scene quizscene" id="quizSection">
+    <div class="scene-no reveal">09</div>
+    <div class="kicker reveal d1">스스로 점검 · SELF-CHECK</div>
+    <h2 class="stitle reveal d1">퀴즈 — 얼마나 이해했나요?</h2>
+    <p class="lead reveal d2">열 개의 질문으로 ‘신언의 실행’을 점검해 봅니다. 보기를 누르면 곧바로 정답과 짧은 해설이 나타납니다.</p>
+
+    <div class="quizmeta reveal d2">
+      <div class="ring">
+        <svg width="48" height="48" viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(43,40,56,.12)" stroke-width="5"/>
+          <circle id="qRing" cx="24" cy="24" r="20" fill="none" stroke="#BE8722" stroke-width="5" stroke-linecap="round"
+            stroke-dasharray="125.6" stroke-dashoffset="125.6" transform="rotate(-90 24 24)"/>
+        </svg>
+        <span class="pct" id="qPct">0</span>
+      </div>
+      <div class="qprog">
+        <b id="qProgText">0 / 10 문항 완료</b>
+        <span id="qScoreText">보기를 눌러 시작하세요</span>
+      </div>
+    </div>
+
+    <div id="quizList" class="reveal d3"></div>
+
+    <div class="quizdone hidden" id="quizDone">
+      <div class="score"><span id="qFinal">0</span><small> / 10</small></div>
+      <p id="qMsg"></p>
+      <button class="retry" id="qRetry" type="button">다시 풀기</button>
+    </div>
+  </section>
+
 </div>
 
 <script>
+  /* ===== 점검 퀴즈 ===== */
+  const QUIZ=[
+    {q:"매일 아침 말씀을 접촉할 때, 한 주에 말씀 한 장을 다루면서 하루에 선택하기 가장 적합한 말씀의 분량은 어느 정도입니까?",
+     o:{A:"정해진 분량 없이 마음에 닿는 대로 읽는다.",B:"최소 스무 구절 이상을 연구한다.",C:"열 구절 이하의 말씀을 선택한다.",D:"한 장 전체를 기도로 읽는다."},
+     a:"C",w:"한 장을 다 삼키려 하지 말고 하루에 <b>열 구절 이하</b>를 다루며, 그중 두세 구절을 특별히 누립니다."},
+    {q:"주일 집회에서 신언을 하기 위해 주중에 기록한 영감들을 수확하여 최종적으로 신언을 작성하는 가장 적합한 시기는 언제입니까?",
+     o:{A:"월요일 아침 일찍",B:"한 주의 마지막 날(토요일)",C:"매일 아침 영감을 얻은 직후",D:"주일 아침 집회 직전"},
+     a:"B",w:"<b>한 주의 마지막 날(토요일)</b>에 월~토 여섯 아침의 영감을 함께 수확하여 ‘총체적 영감’으로 신언의 초안을 만듭니다."},
+    {q:"교회 집회에서 성도들이 신언할 때 권장되는 적절한 시간 제한은 몇 분입니까?",
+     o:{A:"5분 이내",B:"시간 제한 없음",C:"3분 이내",D:"1분 이내"},
+     a:"C",w:"주일 집회의 신언 한 편은 약 <b>3분</b>이 합당하며, 지도 교사가 길이를 알맞게 다듬어 줍니다."},
+    {q:"성경 말씀을 요리하고 누리는 방법으로 제시된 'PSRP'에서 각 철자가 의미하는 순서로 옳은 것은 무엇입니까?",
+     o:{A:"기도로 읽기 - 연구하기 - 암송하기 - 신언하기",B:"찬송하기 - 성경읽기 - 보양하기 - 전파하기",C:"기록하기 - 묵상하기 - 선포하기 - 봉사하기",D:"회개하기 - 간구하기 - 감사하기 - 간증하기"},
+     a:"A",w:"<b>P</b>ray-read(기도로 읽기) → <b>S</b>tudy(연구) → <b>R</b>ecite(암송) → <b>P</b>rophesy(신언) 순서입니다."},
+    {q:"신언을 구성하는 세 가지 필수 요소로 언급되지 않은 것은 무엇입니까?",
+     o:{A:"성령의 즉각적인 영감",B:"청중을 감동시키는 수사학적 기교",C:"신성한 빛 비춤을 통한 조망",D:"하나님의 살아 있는 생명의 말씀"},
+     a:"B",w:"세 요소는 살아 있는 생명의 말씀·그 영의 즉각적 영감·신성한 빛의 조망입니다. <b>수사학적 기교</b>는 해당하지 않습니다."},
+    {q:"사도행전 8장에서 빌립과 에티오피아 내시의 사례가 보여주는 '신언의 실행'과 관련된 중요한 원칙은 무엇입니까?",
+     o:{A:"해석된 말씀의 필요성",B:"성경 암송의 효과",C:"노방 전도의 시급성",D:"침례의 중요성"},
+     a:"A",w:"내시는 읽어도 ‘지도해 주는 사람’이 없어 이해하지 못했습니다 — 우리에게는 <b>해석된 말씀</b>이 필요합니다."},
+    {q:"일상생활에서 주님의 말씀을 말하는 습관을 세우기 위해, 말할 상대방이 없을 때 권장되는 방법은 무엇입니까?",
+     o:{A:"주변의 사물(가구, 꽃, 나무 등)에게 말한다.",B:"조용히 마음속으로 묵상하며 말을 아낀다.",C:"전화로 세상적인 대화를 나누며 입을 푼다.",D:"다른 사람이 올 때까지 기다린다."},
+     a:"A",w:"말할 상대가 없어도 멈추지 말고 의자·꽃·나무 등 <b>주변의 사물</b>에게도 그리스도를 말합니다."},
+    {q:"신언을 실행할 때 영을 해방하는 원리를 설명하기 위해 본문에서 사용한 '부정적이지만 이해하기 쉬운' 예시는 무엇입니까?",
+     o:{A:"화를 내며 말하는 것",B:"겁에 질려 비명을 지르는 것",C:"운동 경기에서 환호하는 것",D:"슬퍼서 통곡하는 것"},
+     a:"B",w:"<b>겁에 질려 비명을 지르듯</b> 온 존재가 풀려나오는 것처럼, 영을 해방하여 말하는 것을 보여 줍니다."},
+    {q:"신언을 훈련할 때 '억양(Accent)'을 조절하는 합당한 방법은 무엇입니까?",
+     o:{A:"최대한 빠르게 말하여 많은 내용을 전달한다.",B:"감정을 배제하고 단조로운 톤을 유지한다.",C:"시종일관 가장 큰 목소리로 외친다.",D:"핵심 중점을 말할 때 속도를 늦추거나 강세를 준다."},
+     a:"D",w:"핵심 중점에서 <b>속도를 늦추거나 강세를 주어</b> 회중의 주의를 모읍니다."},
+    {q:"고린도전서 14장 26절의 '각 사람이 가지고 있고'에 대한 설명 중, '다른 언어'와 '통역'에 적용되는 의미는 무엇입니까?",
+     o:{A:"성경 지식을 많이 암기함",B:"어떤 일을 하는 방법이나 능력이 있음",C:"어떤 것을 붙잡거나 소유함",D:"누리기 위해 간직함"},
+     a:"B",w:"‘다른 언어’와 ‘통역’에 적용될 때 ‘가지고 있다’는 그 일을 <b>하는 방법·능력이 있음</b>을 뜻합니다."}
+  ];
+  (function(){
+    const list=document.getElementById('quizList');
+    if(!list) return;
+    const total=QUIZ.length, CIRC=125.6;
+    const answered=new Array(total).fill(false);
+    let correct=0, done=0;
+
+    QUIZ.forEach((item,i)=>{
+      const opts=Object.entries(item.o).map(([k,v])=>
+        '<button type="button" class="qopt" data-q="'+i+'" data-k="'+k+'"><span class="lt">'+k+'</span><span class="ot">'+v+'</span></button>').join('');
+      const card=document.createElement('div');
+      card.className='qcard';
+      card.innerHTML=
+        '<div class="qhead"><div class="qnum">'+(i+1)+'</div><div class="qtext">'+item.q+'</div></div>'+
+        '<div class="qopts">'+opts+'</div>'+
+        '<div class="qwhy" id="why-'+i+'"><div class="inner"><div class="box"><span>💡</span><div><span class="qverdict" id="vd-'+i+'"></span> '+item.w+'</div></div></div></div>';
+      list.appendChild(card);
+    });
+
+    function meta(){
+      const pct=Math.round(done/total*100);
+      document.getElementById('qPct').textContent=pct;
+      document.getElementById('qRing').style.strokeDashoffset=String(CIRC-CIRC*done/total);
+      document.getElementById('qProgText').textContent=done+' / '+total+' 문항 완료';
+      document.getElementById('qScoreText').textContent=done? ('현재 정답 '+correct+'개'):'보기를 눌러 시작하세요';
+    }
+
+    function finish(){
+      document.getElementById('qFinal').textContent=correct;
+      let msg;
+      if(correct===total) msg='완벽합니다! 신언의 실행을 온전히 붙드셨네요.';
+      else if(correct>=8) msg='훌륭합니다! 핵심을 잘 이해하고 있어요.';
+      else if(correct>=5) msg='좋아요. 위로 올라가 본문을 한 번 더 누리면 더 분명해집니다.';
+      else msg='괜찮아요. 위로 올라가 본문을 다시 천천히 누려 보세요.';
+      document.getElementById('qMsg').textContent=msg;
+      const d=document.getElementById('quizDone');
+      d.classList.remove('hidden');
+      d.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+
+    list.addEventListener('click',function(e){
+      const btn=e.target.closest('.qopt');
+      if(!btn) return;
+      const qi=+btn.dataset.q;
+      if(answered[qi]) return;
+      answered[qi]=true; done++;
+      const chosen=btn.dataset.k, ans=QUIZ[qi].a, ok=chosen===ans;
+      if(ok) correct++;
+      btn.closest('.qcard').querySelectorAll('.qopt').forEach(function(b){
+        b.disabled=true;
+        const k=b.dataset.k;
+        if(k===ans) b.classList.add('correct');
+        else if(k===chosen) b.classList.add('wrong');
+        else b.classList.add('dim');
+      });
+      const vd=document.getElementById('vd-'+qi);
+      vd.textContent=ok?'정답!':'아쉬워요 —';
+      vd.className='qverdict '+(ok?'ok':'no');
+      document.getElementById('why-'+qi).classList.add('show');
+      meta();
+      if(done===total) finish();
+    });
+
+    document.getElementById('qRetry').addEventListener('click',function(){
+      answered.fill(false); correct=0; done=0;
+      list.querySelectorAll('.qopt').forEach(function(b){b.disabled=false;b.className='qopt';});
+      list.querySelectorAll('.qwhy').forEach(function(w){w.classList.remove('show');});
+      document.getElementById('quizDone').classList.add('hidden');
+      meta();
+      document.getElementById('quizSection').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+
+    meta();
+  })();
+
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
