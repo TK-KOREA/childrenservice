@@ -32,7 +32,7 @@
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
   body{
-    font-family:'IBM Plex Sans KR',sans-serif;
+    font-family:'IBM Plex Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
     background:var(--bg);
     color:var(--ink);
     line-height:1.7;
@@ -274,10 +274,10 @@
   summary .lab{flex:1;display:flex;align-items:center;}
   summary .chev{transition:transform .3s;color:var(--ink-faint);}
   details[open] summary .chev{transform:rotate(90deg);}
-  .phase{padding:0 1.1rem 1rem;}
+  .phase{padding:0 1.1rem 1rem;counter-reset:i;}
   .phase h5{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin:.9rem 0 .45rem;border-top:1px dashed var(--line);padding-top:.7rem;}
   .phase.s h5{color:var(--sky);}
-  .phase ol{list-style:none;counter-reset:i;}
+  .phase ol{list-style:none;}
   .phase ol li{counter-increment:i;position:relative;padding:.22rem 0 .22rem 1.7rem;font-size:.86rem;color:var(--ink-soft);line-height:1.45;}
   .phase ol li::before{content:counter(i);position:absolute;left:0;top:.28rem;width:1.25rem;height:1.25rem;border-radius:.4rem;
     background:var(--gold-wash);color:var(--gold-deep);font-size:.7rem;font-weight:700;display:grid;place-items:center;}
@@ -355,13 +355,107 @@
   .quizdone .retry{margin-top:1.1rem;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);
     color:#fff;font-family:inherit;font-weight:600;font-size:.85rem;padding:.55rem 1.5rem;border-radius:2rem;cursor:pointer;transition:background .2s;}
   .quizdone .retry:hover{background:rgba(255,255,255,.34);}
+
+  /* ---------- EPIGRAPH (시작 인용) ---------- */
+  .epigraph{
+    position:relative;margin:0 auto 2.8rem;max-width:23rem;
+    padding:2.6rem 1.5rem 1.6rem;text-align:center;
+    background:linear-gradient(165deg,var(--card),var(--gold-wash));
+    border:1px solid var(--gold-light);border-radius:1.1rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .epigraph::before{
+    content:"\201C";position:absolute;top:-1.35rem;left:50%;transform:translateX(-50%);
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:3.2rem;line-height:1;height:1.9rem;overflow:hidden;
+    color:var(--gold-light);background:transparent;
+  }
+  .epigraph-text{
+    font-family:'Nanum Myeongjo',serif;font-weight:800;
+    font-size:1.18rem;line-height:1.65;letter-spacing:-.01em;
+    color:var(--gold-deep);
+  }
+  .epigraph-text b{color:var(--rose);}
+  .epigraph-cite{
+    margin-top:.9rem;font-size:.72rem;font-weight:600;letter-spacing:.05em;
+    color:var(--ink-faint);
+  }
+  .epigraph-cite::before{content:"";display:block;width:1.6rem;height:1px;
+    background:var(--gold-light);margin:0 auto .55rem;}
+
+  /* ===================================================================
+     PRESENTATION MODE · 발표 모드 (온라인 화면공유 최적화)
+     - body.present 클래스 토글로 발표 화면 활성화 (자가학습 모드는 그대로 보존)
+     =================================================================== */
+
+  /* 상단 진행바 */
+  #prog{position:fixed;top:0;left:0;height:4px;width:0;z-index:99;
+    background:linear-gradient(90deg,var(--gold-light),var(--gold-deep));transition:width .15s ease;}
+
+  /* 발표 모드 토글 버튼 */
+  #presentToggle{position:fixed;right:.8rem;bottom:.8rem;z-index:100;
+    font-family:'IBM Plex Sans KR',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.02em;
+    color:var(--gold-deep);background:rgba(255,253,247,.92);border:1px solid var(--gold-light);
+    border-radius:2rem;padding:.45rem .95rem;cursor:pointer;box-shadow:var(--shadow-sm);
+    backdrop-filter:blur(6px);transition:background .2s,color .2s;}
+  #presentToggle:hover{background:var(--gold-wash);}
+  body.present #presentToggle{background:var(--gold-deep);color:#fff;border-color:var(--gold-deep);}
+
+  /* 섹션 점프 네비 (오른쪽 가장자리 · JS로 항목 생성) */
+  #jump{position:fixed;right:.55rem;top:50%;transform:translateY(-50%);z-index:60;
+    display:flex;flex-direction:column;gap:.28rem;align-items:flex-end;}
+  #jump a{font-size:.62rem;font-weight:700;letter-spacing:.02em;color:var(--ink-faint);
+    text-decoration:none;background:rgba(255,253,247,.8);border:1px solid var(--line);
+    border-radius:1rem;min-width:1.55rem;height:1.55rem;padding:0 .4rem;
+    display:flex;align-items:center;justify-content:center;transition:all .18s;backdrop-filter:blur(4px);}
+  #jump a:hover,#jump a.active{color:#fff;background:var(--gold);border-color:var(--gold);}
+  @media(max-width:640px){#jump{display:none;}}
+
+  /* 모션 최소화 — 영상 압축 시 페이드/슬라이드가 끊겨 보임 */
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+    .scrollcue::after,.venn .core{animation:none!important;}
+  }
+
+  /* --- 발표 모드 본체 --- */
+  body.present{
+    --ink:#1F1C29;--ink-soft:#4E465A;--ink-faint:#655C70;   /* 보조 텍스트 대비 강화 */
+    --gold:#9C6C12;--gold-deep:#7A5208;                      /* 골드 텍스트 진하게(압축 대비) */
+    /* 전체 확대는 JS가 <html> 폰트 크기(rem 기준)를 키워서 처리 */
+  }
+  body.present .wrap{max-width:54rem;}
+  body.present .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+  body.present .scrollcue::after,
+  body.present .venn .core{animation:none!important;}
+  body.present::before{display:none!important;}             /* 노이즈 텍스처 제거 */
+  body.present .bn-solo b{font-size:7rem;}                   /* vw 의존 제거(광폭 오버플로 방지) */
+  body.present .bn b{font-size:3rem;}
+  body.present .lead{font-size:1.12rem;}
+  body.present .ovtext{font-size:1.05rem;}
+  body.present .ref{color:#7A5208;background:#fff;border-color:var(--gold);}
+  /* Venn 확대 + 블렌드 해제(색 뭉개짐 방지) + 원 외곽선 */
+  body.present .venn{max-width:34rem;}
+  body.present .venn .c{mix-blend-mode:normal;font-size:1.05rem;box-shadow:inset 0 0 0 2px rgba(255,255,255,.65);}
+  body.present .venn .c1{background:rgba(230,187,94,.86);}
+  body.present .venn .c2{background:rgba(124,178,192,.86);}
+  body.present .venn .c3{background:rgba(188,110,92,.82);}
+  body.present .venn .core{font-size:1.9rem;}
+  /* 키보드/접근성 포커스 가시성 */
+  body.present .qopt:focus-visible{outline:2px solid var(--sky);outline-offset:2px;}
 </style>
 </head>
 <body>
+<div id="prog" aria-hidden="true"></div>
+<nav id="jump" aria-label="섹션 이동"></nav>
+<button id="presentToggle" type="button" title="발표 모드 켜기/끄기 (단축키 P)" aria-pressed="false">▶ 발표</button>
 <div class="wrap">
 
   <!-- ===== HERO ===== -->
   <header class="hero">
+    <blockquote class="epigraph reveal in">
+      <p class="epigraph-text">교회 건축을 위하여 <b>사랑</b>은 가장 탁월한 길이고,<br><b>신언</b>하는 것은 뛰어난 은사이다</p>
+      <p class="epigraph-cite">― 고린도전서 결정연구 中</p>
+    </blockquote>
     <div class="kicker reveal in">하나님께서 정하신 길 제19과 · 신언 (2)</div>
     <h1 class="reveal in d1">신언의<br>실행</h1>
     <p class="thesis reveal in d2">평범한 한 사람이 어떻게 일어서서<br>하나님을 위해 말하게 되는가</p>
@@ -376,11 +470,21 @@
   <section class="scene" id="contents">
     <div class="kicker reveal">개요 · AT A GLANCE</div>
     <h2 class="stitle reveal d1">한눈에 보는 신언의 실행</h2>
-    <p class="lead reveal d2">평범한 한 사람이 일어서서 신언하기까지, 일곱 단계의 길입니다.</p>
+    <p class="lead reveal d2">평범한 한 사람이 일어서서 신언하기까지, 일곱 단계의 길입니다. <span style="color:var(--ink-faint);font-size:.92em;">(첫 단계는 ‘씨앗·수확’ 두 장면으로 나누어, 모두 여덟 장면으로 풀어 갑니다.)</span></p>
+
+    <div class="callout reveal d2" style="border-color:var(--gold-light);background:var(--gold-wash);align-items:flex-start;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#BE8722" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 1 4 10.5c-.7.6-1 1-1 2H9c0-1-.3-1.4-1-2A6 6 0 0 1 12 3z"/></svg>
+      <div style="flex:1;">
+        <p style="font-size:1rem;color:var(--ink);font-weight:600;margin-bottom:.4rem;">신언 <span style="color:var(--gold-deep);font-weight:500;font-size:.84rem;letter-spacing:.02em;">申言 · prophecy · προφητεία</span></p>
+        <p>신언은 <b>하나님을 위해 말하고, 하나님을 말하고, 하나님을 사람들 안으로 말해 내는 것</b> — 즉 말씀과 생활 가운데서 누린 <b>그리스도를 사람들에게 공급</b>하는 것입니다.</p>
+        <p style="margin-top:.55rem;padding-top:.55rem;border-top:1px dashed var(--gold-light);font-size:.84rem;"><b style="color:var(--gold-deep);">헬라어 προφητεία</b>(프로페테이아) = <b>προ</b>(프로 · 앞으로·밖으로, <i>forth</i>) + <b>φημί</b>(페미 · 말하다, <i>speak</i>). 곧 <b>‘말씀을 밖으로 말해 냄’</b>이라는 뜻으로 — ① 하나님을 위해 말함, ② 하나님을 말해 냄, ③ (부차적으로) 미리 말함(예언).</span></p>
+      </div>
+    </div>
+
     <div class="ovwrap reveal d3">
       <ol>
         <li><span class="ovrn">Ⅰ</span><p class="ovtext">주중에 하나님의 말씀에서 얻은 <b>계시</b>와 <b>삼일 하나님을 체험</b>한 것을 <b>삼 분 이내</b>로 말할 <span class="key">신언을 작성한다</span> <span class="ovcite">― 고전 14:26</span></p></li>
-        <li><span class="ovrn">Ⅱ</span><p class="ovtext">월요일부터 토요일까지 날마다 <b>PSR</b>(말씀을 기도로 읽기, 연구하기, 암송하기)을 실행한다면, 틀림없이 교회의 <span class="key">주일 집회에서 신언할 것이다</span>.</p></li>
+        <li><span class="ovrn">Ⅱ</span><p class="ovtext">월요일부터 토요일까지 날마다 <b>PSR</b>(기도로 읽기·연구·암송 — <b>PSRP</b>의 앞 세 단계)을 실행한다면, 틀림없이 교회의 <span class="key">주일 집회에서 신언(P)할 것이다</span>.</p></li>
         <li><span class="ovrn">Ⅲ</span><p class="ovtext"><span class="key">집에서 준비한 신언을 말하는 것</span>을 실행한다 <span class="ovcite">― 고전 14:26</span></p></li>
         <li><span class="ovrn">Ⅳ</span><p class="ovtext"><span class="key">신언을 구성하는 요소들</span>을 가지고 말한다 ― <b>살아 있는 생명의 말씀</b>을 가지고, <b>성령의 영감</b>을 받아, 그분의 <b>빛 비춤</b>과 함께 우리가 본 것을 말한다 <span class="ovcite">― 행 5:20</span></p></li>
         <li><span class="ovrn">Ⅴ</span><p class="ovtext">주님의 말씀을 말하는 <span class="key">습관을 세운다</span> <span class="ovcite">― 눅 1:45-46</span></p></li>
@@ -393,7 +497,7 @@
   <!-- ===== 01 씨앗 ===== -->
   <section class="scene" id="sec-1">
     <div class="scene-no reveal">01</div>
-    <div class="kicker reveal d1">개요 Ⅰ · 매일 아침</div>
+    <div class="kicker reveal d1">개요 Ⅰ-A · 매일 아침</div>
     <h2 class="stitle reveal d1">씨앗 — 매일 아침의 누림</h2>
     <p class="lead reveal d2">신언은 거창한 데서 시작하지 않습니다. 매일 아침, 한 부분의 말씀으로 주님을 접촉하고 누리는 작은 한 걸음 — 거기서 얻은 <b>계시</b>와 <b>삼일 하나님 체험</b>이 그대로 신언의 재료가 됩니다. <span class="ref">고전 14:26</span></p>
     <div class="verse reveal d2">이것들이 아침마다 새로우니, 주의 성실하심이 크시도소이다.<span>예레미야애가 3:22–23</span></div>
@@ -413,7 +517,7 @@
   <!-- ===== 02 수확 ===== -->
   <section class="scene">
     <div class="scene-no reveal">02</div>
-    <div class="kicker reveal d1">개요 Ⅰ · 한 주의 끝</div>
+    <div class="kicker reveal d1">개요 Ⅰ-B · 한 주의 끝</div>
     <h2 class="stitle reveal d1">수확 — 여섯 아침이 하나로</h2>
     <p class="lead reveal d2">한 주의 마지막 날, 흩어져 있던 여섯 번의 아침을 함께 거둡니다. 작은 영감들이 모여 하나의 ‘총체적 영감’이 되고, 그것이 신언의 초안이 됩니다.</p>
 
@@ -536,7 +640,7 @@
 
     <div class="bn-solo reveal d6">
       <b>624<span class="u">구절</span></b>
-      <em>하루 2구절 × 6일 × 1년 — 말씀에 흠뻑 적셔짐</em>
+      <em>하루 2구절 × 6일 × 52주(1년) — 말씀에 흠뻑 적셔짐</em>
     </div>
   </section>
 
@@ -586,15 +690,15 @@
     <details class="reveal d4">
       <summary><span class="lab"><span class="dot g"></span>진리 22항목 — 펼쳐 보기</span><span class="chev">›</span></summary>
       <div class="phase">
-        <h5>하나님과 창조</h5>
+        <h5>삼일 하나님과 그분의 창조</h5>
         <ol><li>하나님의 인격 (삼일 하나님)</li><li>사람이 중심인 하나님의 창조</li></ol>
-        <h5>타락에서 구속으로</h5>
+        <h5>타락한 사람과 그리스도의 인격·구속</h5>
         <ol start="3"><li>사람의 타락</li><li>하나님의 구속</li><li>그리스도</li><li>그리스도의 구속</li></ol>
-        <h5>그 영의 적용</h5>
+        <h5>유기적인 구원</h5>
         <ol start="7"><li>성령의 거룩하게 하심</li><li>죄들의 용서</li><li>그리스도 안에서 의롭게 하심</li><li>하나님과 화목하게 됨</li><li>그 영의 거듭나게 하심</li><li>완전한 구원</li><li>거룩·새롭게·변화시키심</li></ol>
-        <h5>영광과 교회·경륜</h5>
+        <h5>형상을 이룸·영광스럽게 됨·그리스도의 몸·신성한 분배</h5>
         <ol start="14"><li>그리스도의 형상·영광스럽게 됨</li><li>교회 (몸·새사람·집·왕국)</li><li>하나님의 경륜과 신성한 분배</li></ol>
-        <h5>완성을 향하여</h5>
+        <h5>하나님 경륜의 궁극적인 완성</h5>
         <ol start="17"><li>휴거·대환난·재림</li><li>심판대와 상벌</li><li>왕국·천년왕국·복원의 시대</li><li>새 예루살렘, 새 하늘과 새 땅</li><li>성경의 원칙들</li><li>진리의 말씀을 곧게 자르는 법</li></ol>
       </div>
     </details>
@@ -604,13 +708,13 @@
       <div class="phase s">
         <h5>구원의 시작</h5>
         <ol><li>그 영의 거룩하게 하심으로 회개</li><li>회개하고 죄를 자백함</li><li>용서받고 씻음 받음</li><li>구속을 통해 의롭게 됨</li><li>의롭게 됨으로 화목하게 됨</li></ol>
-        <h5>거듭남과 구원</h5>
+        <h5>거듭나게 하심과 구원의 확신</h5>
         <ol start="6"><li>그 영의 거듭나게 하심</li><li>그리스도 안의 완전한 구원</li><li>구원의 확신과 과거 청산</li></ol>
-        <h5>그 영의 일하심</h5>
+        <h5>생명 안에서의 자람과 변화</h5>
         <ol start="9"><li>위치적·기질적 거룩하게 됨</li><li>새롭게·변화·형상 이룸</li><li>죄·세상·육체·자아·타고난 힘 처리</li><li>죽음의 죽임과 부활의 분배</li><li>거함·교통·그 영의 인도</li><li>영의 충만과 쏟아부어짐</li><li>영에 의해, 영을 따라 살고 행함</li></ol>
-        <h5>주님과 동행</h5>
+        <h5>겉사람의 파쇄와 그리스도의 몸의 체험</h5>
         <ol start="16"><li>기도와 중보 기도</li><li>성경을 읽고 빛 비춤 받음</li><li>순종·복종과 겉사람의 파쇄</li><li>그리스도의 몸을 알고 체험함</li></ol>
-        <h5>교회생활과 완성</h5>
+        <h5>교회생활의 실행과 휴거를 예비하며 주님의 다시오심을 깨어 기다림</h5>
         <ol start="20"><li>한 지방에서의 교회생활</li><li>정하신 길의 네 단계 실행</li><li>깨어 휴거를 예비하며 주님을 기다림</li></ol>
       </div>
     </details>
@@ -666,8 +770,7 @@
   <!-- ===== 09 점검 퀴즈 ===== -->
   <section class="scene quizscene" id="quizSection">
     <div class="scene-no reveal">09</div>
-    <div class="kicker reveal d1">스스로 점검 · SELF-CHECK</div>
-    <h2 class="stitle reveal d1">퀴즈 — 얼마나 이해했나요?</h2>
+    <h2 class="stitle reveal d1">퀴즈 — 확인 및 점검</h2>
     <p class="lead reveal d2">열 개의 질문으로 ‘신언의 실행’을 점검해 봅니다. 보기를 누르면 곧바로 정답과 짧은 해설이 나타납니다.</p>
 
     <div class="quizmeta reveal d2">
@@ -767,7 +870,7 @@
       document.getElementById('qMsg').textContent=msg;
       const d=document.getElementById('quizDone');
       d.classList.remove('hidden');
-      d.scrollIntoView({behavior:'smooth',block:'center'});
+      if(!document.body.classList.contains('present')) d.scrollIntoView({behavior:'smooth',block:'center'});
     }
 
     list.addEventListener('click',function(e){
@@ -799,7 +902,7 @@
       list.querySelectorAll('.qwhy').forEach(function(w){w.classList.remove('show');});
       document.getElementById('quizDone').classList.add('hidden');
       meta();
-      document.getElementById('quizSection').scrollIntoView({behavior:'smooth',block:'start'});
+      if(!document.body.classList.contains('present')) document.getElementById('quizSection').scrollIntoView({behavior:'smooth',block:'start'});
     });
 
     meta();
@@ -809,6 +912,77 @@
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+  /* ===== 발표 모드 · 네비게이션 · 진행바 ===== */
+  (function(){
+    const body=document.body;
+    const sections=[...document.querySelectorAll('.hero,.scene,.closing')];
+    const prog=document.getElementById('prog');
+    const jump=document.getElementById('jump');
+    const btn=document.getElementById('presentToggle');
+    const navLinks=[];
+    let idx=0;
+
+    /* 점프 네비 동적 생성 (섹션 번호/이름 자동 라벨) */
+    sections.forEach((s,i)=>{
+      if(!s.id) s.id='sec-auto-'+i;
+      let label='•';
+      if(s.classList.contains('hero')) label='홈';
+      else if(s.id==='contents') label='개요';
+      else if(s.classList.contains('closing')) label='끝맺음';
+      else if(s.id==='quizSection') label='퀴즈';
+      else { const n=s.querySelector('.scene-no'); label=n?n.textContent.trim():'•'; }
+      const a=document.createElement('a');
+      a.href='#'+s.id; a.textContent=label; a.title=label;
+      a.addEventListener('click',()=>{ idx=i; });
+      jump.appendChild(a); navLinks.push(a);
+    });
+
+    function go(d){
+      idx=Math.max(0,Math.min(sections.length-1,idx+d));
+      sections[idx].scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function onScroll(){
+      const h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+      prog.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+      let cur=0;
+      sections.forEach((s,i)=>{ if(s.getBoundingClientRect().top<=h.clientHeight*0.4) cur=i; });
+      navLinks.forEach(a=>a.classList.remove('active'));
+      if(navLinks[cur]) navLinks[cur].classList.add('active');
+      idx=cur;
+    }
+
+    function togglePresent(){
+      const on=body.classList.toggle('present');
+      btn.setAttribute('aria-pressed',on);
+      btn.innerHTML=on?'■ 발표 종료':'▶ 발표';
+      /* rem은 <html> 기준 → 루트 폰트 크기를 키워 전체를 1.25배 확대 */
+      document.documentElement.style.fontSize=on?'20px':'';
+      if(on){
+        document.querySelectorAll('details').forEach(d=>d.open=true);     /* 22+22 항목 자동 펼침 */
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      }
+      onScroll();
+    }
+    btn.addEventListener('click',togglePresent);
+
+    /* 키보드: P=발표모드 토글 / (발표모드에서) ←→·Space·PageUp/Down·Home·End=섹션 이동 */
+    addEventListener('keydown',e=>{
+      if(e.target.closest('input,textarea,select,[contenteditable]')) return;
+      if(e.key==='p'||e.key==='P'){ togglePresent(); e.preventDefault(); return; }
+      if(!body.classList.contains('present')) return;
+      if(e.target.closest('button,a') && e.key===' ') return;   /* 퀴즈 보기 스페이스 클릭 보존 */
+      if(['ArrowRight','PageDown'].includes(e.key)||(e.key===' '&&!e.shiftKey)){ go(1); e.preventDefault(); }
+      else if(['ArrowLeft','PageUp'].includes(e.key)||(e.key===' '&&e.shiftKey)){ go(-1); e.preventDefault(); }
+      else if(e.key==='Home'){ idx=0; sections[0].scrollIntoView({behavior:'smooth',block:'start'}); e.preventDefault(); }
+      else if(e.key==='End'){ idx=sections.length-1; sections[idx].scrollIntoView({behavior:'smooth',block:'start'}); e.preventDefault(); }
+    });
+
+    addEventListener('scroll',onScroll,{passive:true});
+    addEventListener('resize',onScroll,{passive:true});
+    onScroll();
+  })();
 </script>
 </body>
 </html>
