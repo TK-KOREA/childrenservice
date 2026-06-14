@@ -111,6 +111,37 @@
       #google-map{height:520px}
     }
 
+    /* 일차별 동선 지도 */
+    .day-map-shell{
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid #dbeafe;
+      background:#f8fbff;
+      margin-bottom:16px;
+      box-shadow:0 8px 25px rgba(15,23,42,.06);
+    }
+    .day-map{
+      width:100%;
+      height:380px;
+    }
+    .day-map-legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+      align-items:center;
+      padding:12px 15px;
+      background:#fff;
+      border-top:1px solid #e5e7eb;
+    }
+    .day-map-route{
+      color:#475569;
+      font-weight:700;
+      font-size:.85rem;
+    }
+    @media (max-width: 640px){
+      .day-map{height:320px}
+    }
+
   </style>
 </head>
 <body>
@@ -143,14 +174,14 @@
         </div><div class="map-note"><strong>지도 보는 법:</strong> 실제 Google Maps 위에 주요 장소를 표시했습니다. 하이브리지 호텔에서 출발해, 1일차는 자연사박물관과 타임스퀘어, 2일차는 미드타운에서 첼시 방향, 3일차는 다운타운 크루즈 후 다시 호텔로 돌아와 몬트리올로 출발하는 흐름입니다.</div><div class="map-actions">
       <a href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">🏨 Highbridge Hotel<span>숙소 / Base</span></a><a href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">🦖 AMNH<span>자연사박물관</span></a><a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">🌃 Times Square<span>타임스퀘어</span></a><a href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">🍜 Urban Hawker<span>저녁 추천</span></a><a href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">🏙️ SUMMIT<span>전망대</span></a><a href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">🌿 High Line<span>산책 코스</span></a><a href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">🍽️ Chelsea Market<span>구경 + 저녁</span></a><a href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">🥗 Brookfield Place<span>3일차 점심</span></a>
       </div></div></section>
-    <section id="day1" class="section"><div class="day-card"><div class="day-top blue"><h3>DAY 1 · 자연사박물관 + 타임스퀘어 <span class="bilingual">AMNH + Times Square</span></h3><p>오후부터 시작하는 가벼운 첫날 일정입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👨‍👩‍👧‍👦</div><div><strong>가족여행 포인트:</strong> 첫날은 이동 피로가 있을 수 있으니, 박물관 핵심 전시만 보고 타임스퀘어는 사진과 분위기 위주로 가볍게 보는 것이 좋습니다.</div></div><div class="timeline">
+    <section id="day1" class="section"><div class="day-card"><div class="day-top blue"><h3>DAY 1 · 자연사박물관 + 타임스퀘어 <span class="bilingual">AMNH + Times Square</span></h3><p>오후부터 시작하는 가벼운 첫날 일정입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👨‍👩‍👧‍👦</div><div><strong>가족여행 포인트:</strong> 첫날은 이동 피로가 있을 수 있으니, 박물관 핵심 전시만 보고 타임스퀘어는 사진과 분위기 위주로 가볍게 보는 것이 좋습니다.</div></div><div class="day-map-shell"><div id="map-day1" class="day-map" aria-label="DAY 1 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot blue"></span> DAY 1 동선</div><div class="day-map-route">🏨 호텔 → 🦖 자연사박물관 → 🌃 타임스퀘어 → 🍜 어반 호커 → 🏨 호텔</div></div></div><div class="timeline">
       <div class="tl"><div class="tl-time">14:00<small>2:00 PM</small></div><div><h4>호텔 출발 <span class="bilingual">Leave hotel</span></h4><p>하이브리지 호텔에서 맨해튼 방향으로 이동합니다.</p></div></div>
       <div class="tl"><div class="tl-time">15:00–17:30<small>3:00–5:30 PM</small></div><div><h4>미국 자연사박물관 관람 <span class="bilingual">American Museum of Natural History</span></h4><p>공룡, 해양생물, 우주 관련 전시 위주로 보면 아이와 함께 보기 좋습니다.</p></div></div>
       <div class="tl"><div class="tl-time">18:00<small>6:00 PM</small></div><div><h4>타임스퀘어 산책 · 사진 <span class="bilingual">Times Square walk & photos</span></h4><p>전광판, 캐릭터, 주변 상점 구경. 사람이 많으니 아이 손을 꼭 잡고 이동하세요.</p></div></div>
       <div class="tl"><div class="tl-time">19:30<small>7:30 PM</small></div><div><h4>저녁 식사 <span class="bilingual">Dinner</span></h4><p>Urban Hawker를 1순위로 추천합니다. 한식이 필요하면 Food Gallery 32도 좋습니다.</p></div></div>
       <div class="tl"><div class="tl-time">21:00<small>9:00 PM</small></div><div><h4>호텔 복귀 <span class="bilingual">Return to hotel</span></h4><p>첫날은 일찍 쉬고 다음 날 일정을 준비합니다.</p></div></div>
       </div><div class="meal-grid"><div class="meal"><div class="pill orange">🍽️ No-tip friendly</div><h4>저녁 추천</h4><ul><li><strong>Urban Hawker</strong> — 푸드홀, 가장 추천</li><li><strong>Food Gallery 32</strong> — 한식·아시안 푸드코트</li><li><strong>Cook Eatery</strong> — 간단한 델리/빠른 식사</li></ul></div><div class="meal"><div class="pill blue">🚇 Subway tip</div><h4>이동 팁</h4><ul><li>뉴욕 지하철은 색보다 <strong>라인 번호/문자</strong> 확인</li><li>호텔 복귀 시 <strong>Uptown/Bronx 방향</strong> 확인</li><li>아이 동반이면 환승 적은 경로 우선</li></ul></div></div></div></div></section>
-    <section id="day2" class="section"><div class="day-card"><div class="day-top green"><h3>DAY 2 · SUMMIT + 하이라인 + 첼시마켓 <span class="bilingual">SUMMIT + High Line + Chelsea Market</span></h3><p>전망대, 산책, 실내 마켓을 한 번에 즐기는 뉴욕 핵심 코스입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👟</div><div><strong>가족여행 포인트:</strong> 이날은 걷는 양이 많습니다. 편한 신발을 신고, 하이라인 산책 중간에 쉬는 시간을 넣으면 좋습니다.</div></div><div class="timeline">
+    <section id="day2" class="section"><div class="day-card"><div class="day-top green"><h3>DAY 2 · SUMMIT + 하이라인 + 첼시마켓 <span class="bilingual">SUMMIT + High Line + Chelsea Market</span></h3><p>전망대, 산책, 실내 마켓을 한 번에 즐기는 뉴욕 핵심 코스입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👟</div><div><strong>가족여행 포인트:</strong> 이날은 걷는 양이 많습니다. 편한 신발을 신고, 하이라인 산책 중간에 쉬는 시간을 넣으면 좋습니다.</div></div><div class="day-map-shell"><div id="map-day2" class="day-map" aria-label="DAY 2 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot green"></span> DAY 2 동선</div><div class="day-map-route">🏨 호텔 → 🏙️ SUMMIT → 🥗 밴더빌트 마켓 → 🌿 하이라인 → 🍽️ 첼시마켓 → 🏨 호텔</div></div></div><div class="timeline">
       <div class="tl"><div class="tl-time">08:00<small>8:00 AM</small></div><div><h4>호텔 조식 <span class="bilingual">Hotel breakfast</span></h4><p>아침은 호텔에서 편하게 먹고 출발합니다.</p></div></div>
       <div class="tl"><div class="tl-time">09:30–11:15<small>9:30–11:15 AM</small></div><div><h4>SUMMIT One Vanderbilt <span class="bilingual">Observation deck</span></h4><p>사진 명소가 많습니다. 어린이는 거울 공간에서 뛰지 않도록 주의하세요.</p></div></div>
       <div class="tl"><div class="tl-time">11:30<small>11:30 AM</small></div><div><h4>점심 식사 <span class="bilingual">Lunch</span></h4><p>Vanderbilt Market 또는 Grand Central Dining Concourse 추천.</p></div></div>
@@ -159,7 +190,7 @@
       <div class="tl"><div class="tl-time">17:00–18:30<small>5:00–6:30 PM</small></div><div><h4>저녁 식사 <span class="bilingual">Dinner</span></h4><p>첼시마켓 내부에서 Very Fresh Noodles, Miznon, Lobster Place 중 선택.</p></div></div>
       <div class="tl"><div class="tl-time">19:30<small>7:30 PM</small></div><div><h4>호텔 복귀 <span class="bilingual">Return to hotel</span></h4><p>걷는 일정이 많으니 너무 늦게까지 끌지 않는 것이 좋습니다.</p></div></div>
       </div><div class="meal-grid"><div class="meal"><div class="pill green">🥗 Lunch</div><h4>점심 추천</h4><ul><li><strong>Vanderbilt Market</strong> — SUMMIT 후 동선 좋음</li><li><strong>Grand Central Dining Concourse</strong> — 찾기 쉬운 실내 식사</li></ul></div><div class="meal"><div class="pill orange">🍽️ Dinner</div><h4>저녁 추천</h4><ul><li><strong>Very Fresh Noodles</strong> — 면류</li><li><strong>Miznon</strong> — 피타/샌드위치류</li><li><strong>Lobster Place</strong> — 해산물/랍스터롤</li></ul></div></div></div></div></section>
-    <section id="day3" class="section"><div class="day-card"><div class="day-top purple"><h3>DAY 3 · 자유의 여신상 크루즈 + 몬트리올 출발 <span class="bilingual">Statue Cruise + Drive to Montréal</span></h3><p>마지막 날은 오전 크루즈 후 여유 있게 출발 준비합니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">🚗</div><div><strong>가족여행 포인트:</strong> 오후에 장거리 운전이 있으므로 마지막 날은 크루즈와 점심만 넣고, 무리한 추가 관광은 피하는 것이 좋습니다.</div></div><div class="timeline">
+    <section id="day3" class="section"><div class="day-card"><div class="day-top purple"><h3>DAY 3 · 자유의 여신상 크루즈 + 몬트리올 출발 <span class="bilingual">Statue Cruise + Drive to Montréal</span></h3><p>마지막 날은 오전 크루즈 후 여유 있게 출발 준비합니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">🚗</div><div><strong>가족여행 포인트:</strong> 오후에 장거리 운전이 있으므로 마지막 날은 크루즈와 점심만 넣고, 무리한 추가 관광은 피하는 것이 좋습니다.</div></div><div class="day-map-shell"><div id="map-day3" class="day-map" aria-label="DAY 3 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot purple"></span> DAY 3 동선</div><div class="day-map-route">🏨 호텔 → ⛴️ 배터리 파크 → 🥗 허드슨 이츠 → 🏨 호텔</div></div></div><div class="timeline">
       <div class="tl"><div class="tl-time">08:00<small>8:00 AM</small></div><div><h4>호텔 조식 · 짐 정리 <span class="bilingual">Breakfast & packing</span></h4><p>차에 실을 짐과 필요한 물건을 미리 나눠두면 편합니다.</p></div></div>
       <div class="tl"><div class="tl-time">09:30–11:30<small>9:30–11:30 AM</small></div><div><h4>자유의 여신상 크루즈 <span class="bilingual">Statue of Liberty Cruise</span></h4><p>섬에 내리는 일정은 시간이 길어질 수 있으니, 당일 출발이면 뷰 크루즈가 더 안전합니다.</p></div></div>
       <div class="tl"><div class="tl-time">12:00<small>12:00 PM</small></div><div><h4>점심 식사 <span class="bilingual">Lunch</span></h4><p>Hudson Eats at Brookfield Place 추천. 실내 좌석이 있어 가족 식사에 편합니다.</p></div></div>
@@ -287,23 +318,12 @@
         }
       ];
 
-      const map = new google.maps.Map(document.getElementById("google-map"), {
-        center: { lat: 40.7665, lng: -73.9850 },
-        zoom: 11,
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: true,
-        clickableIcons: true,
-        styles: [
-          { featureType: "poi.business", stylers: [{ visibility: "on" }] },
-          { featureType: "transit", stylers: [{ visibility: "on" }] },
-          { featureType: "water", elementType: "geometry", stylers: [{ color: "#dbeafe" }] },
-          { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f8fafc" }] }
-        ]
-      });
-
-      const bounds = new google.maps.LatLngBounds();
-      const info = new google.maps.InfoWindow();
+      const baseStyles = [
+        { featureType: "poi.business", stylers: [{ visibility: "on" }] },
+        { featureType: "transit", stylers: [{ visibility: "on" }] },
+        { featureType: "water", elementType: "geometry", stylers: [{ color: "#dbeafe" }] },
+        { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f8fafc" }] }
+      ];
 
       const makeMarkerIcon = (color) => ({
         path: google.maps.SymbolPath.CIRCLE,
@@ -314,61 +334,88 @@
         scale: 9
       });
 
-      places.forEach((p, index) => {
-        bounds.extend(p.pos);
-        const marker = new google.maps.Marker({
-          position: p.pos,
-          map,
-          title: `${p.title} · ${p.titleEn}`,
-          label: {
-            text: String(index + 1),
-            color: "#ffffff",
-            fontWeight: "900",
-            fontSize: "12px"
-          },
-          icon: makeMarkerIcon(p.color)
+      const findPlaces = (keys) =>
+        keys.map(k => places.find(p => p.key === k)).filter(Boolean);
+
+      // 컨테이너 하나에 마커 + 동선(폴리라인)을 그려주는 재사용 함수
+      function buildMap(containerId, markerKeys, routes) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+
+        const map = new google.maps.Map(el, {
+          center: { lat: 40.7665, lng: -73.9850 },
+          zoom: 11,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          clickableIcons: true,
+          styles: baseStyles
         });
 
-        marker.addListener("click", () => {
-          info.setContent(`
-            <div class="gm-info">
-              <strong>${index + 1}. ${p.title}</strong>
-              <span>${p.titleEn}<br>${p.note}</span>
-              <a href="${p.url}" target="_blank" rel="noopener">Google Maps에서 열기 →</a>
-            </div>
-          `);
-          info.open(map, marker);
-        });
-      });
+        const bounds = new google.maps.LatLngBounds();
+        const info = new google.maps.InfoWindow();
 
-      const route = (keys, color) => {
-        const path = keys
-          .map(k => places.find(p => p.key === k))
-          .filter(Boolean)
-          .map(p => p.pos);
-        new google.maps.Polyline({
-          path,
-          geodesic: true,
-          strokeColor: color,
-          strokeOpacity: 0.85,
-          strokeWeight: 5,
-          icons: [{
-            icon: {
-              path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-              scale: 3,
-              strokeColor: color
+        findPlaces(markerKeys).forEach((p, index) => {
+          bounds.extend(p.pos);
+          const marker = new google.maps.Marker({
+            position: p.pos,
+            map,
+            title: `${p.title} · ${p.titleEn}`,
+            label: {
+              text: String(index + 1),
+              color: "#ffffff",
+              fontWeight: "900",
+              fontSize: "12px"
             },
-            offset: "55%"
-          }],
-          map
+            icon: makeMarkerIcon(p.color)
+          });
+
+          marker.addListener("click", () => {
+            info.setContent(`
+              <div class="gm-info">
+                <strong>${index + 1}. ${p.title}</strong>
+                <span>${p.titleEn}<br>${p.note}</span>
+                <a href="${p.url}" target="_blank" rel="noopener">Google Maps에서 열기 →</a>
+              </div>
+            `);
+            info.open(map, marker);
+          });
         });
-      };
 
-      route(["hotel", "amnh", "times", "urban", "hotel"], "#2563eb");
-      route(["hotel", "summit", "vanderbilt", "highline", "chelsea", "hotel"], "#059669");
-      route(["hotel", "battery", "brookfield", "hotel"], "#7c3aed");
+        routes.forEach(({ keys, color }) => {
+          const path = findPlaces(keys).map(p => p.pos);
+          new google.maps.Polyline({
+            path,
+            geodesic: true,
+            strokeColor: color,
+            strokeOpacity: 0.85,
+            strokeWeight: 5,
+            icons: [{
+              icon: {
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                scale: 3,
+                strokeColor: color
+              },
+              offset: "55%"
+            }],
+            map
+          });
+        });
 
-      map.fitBounds(bounds, 58);
+        map.fitBounds(bounds, 58);
+      }
+
+      const day1Route = { keys: ["hotel", "amnh", "times", "urban", "hotel"], color: "#2563eb" };
+      const day2Route = { keys: ["hotel", "summit", "vanderbilt", "highline", "chelsea", "hotel"], color: "#059669" };
+      const day3Route = { keys: ["hotel", "battery", "brookfield", "hotel"], color: "#7c3aed" };
+
+      // 전체 보기 지도: 3일 동선 모두 표시
+      buildMap("google-map", places.map(p => p.key), [day1Route, day2Route, day3Route]);
+
+      // 일차별 지도: 해당 날짜 동선만 표시
+      buildMap("map-day1", ["hotel", "amnh", "times", "urban"], [day1Route]);
+      buildMap("map-day2", ["hotel", "summit", "vanderbilt", "highline", "chelsea"], [day2Route]);
+      buildMap("map-day3", ["hotel", "battery", "brookfield"], [day3Route]);
     }
 
     window.initMap = initMap;
