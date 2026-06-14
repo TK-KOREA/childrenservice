@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>교회의 건축 · 제1장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    font-size: 1rem;
+    --ink:#0a141f;
+    --ink-2:#0f1d2b;
+    --ink-3:#15293b;
+    --parch:#f1e7d4;
+    --parch-dim: rgba(241,231,212,.62);
+    --parch-faint: rgba(241,231,212,.34);
+    --gold:#cba258;
+    --gold-bright:#e6c684;
+    --gold-deep:#9c7838;
+    --slate:#7f93a6;
+    --line: rgba(241,231,212,.12);
+    --serif:"Hahmlet", serif;
+    --sans:"IBM Plex Sans KR", sans-serif;
+    --maxw: 34rem;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{ -webkit-text-size-adjust:100%; }
+
+  body{
+    font-family:var(--sans);
+    font-size:1rem;
+    line-height:1.85;
+    color:var(--parch);
+    background:
+      radial-gradient(120% 60% at 50% -5%, rgba(203,162,88,.10), transparent 60%),
+      linear-gradient(180deg, #0c1722 0%, var(--ink) 30%, #081019 100%);
+    background-attachment: fixed;
+    overflow-x:hidden;
+    letter-spacing:-0.003em;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* grain overlay */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  /* scroll progress */
+  .progress{
+    position:fixed; top:0; left:0; height:2px; width:100%;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));
+    transform:scaleX(0); transform-origin:0 50%;
+    z-index:50;
+    box-shadow:0 0 10px rgba(203,162,88,.6);
+  }
+
+  .wrap{
+    position:relative; z-index:2;
+    max-width:var(--maxw);
+    margin-inline:auto;
+    padding-inline:1.5rem;
+  }
+
+  /* ---------- shared scene anatomy ---------- */
+  .scene{
+    position:relative;
+    padding-block:5.5rem;
+    border-top:1px solid var(--line);
+  }
+  .scene:first-of-type{border-top:none;}
+
+  .scene-index{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(3rem,18vw,5rem);
+    line-height:.8;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(203,162,88,.30);
+    letter-spacing:.02em;
+    margin-bottom:1.1rem;
+  }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.65rem;
+    font-size:.72rem; font-weight:600;
+    letter-spacing:.22em;
+    color:var(--gold);
+    margin-bottom:1rem;
+  }
+  .eyebrow::before{
+    content:""; width:1.7rem; height:1px;
+    background:var(--gold); opacity:.55;
+  }
+  .eyebrow.en{ text-transform:uppercase; letter-spacing:.3em; }
+
+  .title{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(1.7rem,7.5vw,2.5rem);
+    line-height:1.28;
+    letter-spacing:-0.01em;
+    margin-bottom:1.15rem;
+  }
+  .title .em{ color:var(--gold-bright); }
+
+  .lead{
+    font-size:1.02rem;
+    line-height:1.95;
+    color:var(--parch-dim);
+    max-width:30rem;
+  }
+
+  .refs{
+    margin-top:2.2rem;
+    font-size:.78rem;
+    letter-spacing:.04em;
+    color:var(--parch-faint);
+    display:flex; flex-wrap:wrap; gap:.35rem .85rem;
+  }
+  .refs span{ white-space:nowrap; }
+  .refs::before{
+    content:"성구"; color:var(--gold); opacity:.7;
+    font-weight:600; margin-right:.3rem; letter-spacing:.12em;
+  }
+
+  /* reveal */
+  .reveal{
+    opacity:0; transform:translateY(22px);
+    transition:opacity .95s cubic-bezier(.16,.7,.3,1),
+               transform .95s cubic-bezier(.16,.7,.3,1);
+    transition-delay:calc(var(--d,0) * 95ms);
+  }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-block:6rem 4rem;
+    border-top:none;
+    position:relative;
+  }
+  .hero .spire{
+    width:1px; height:5.5rem;
+    margin-bottom:2.2rem;
+    background:linear-gradient(180deg, transparent, var(--gold));
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:800;
+    font-size:clamp(3.4rem,22vw,6rem);
+    line-height:.96;
+    letter-spacing:-0.02em;
+    margin-bottom:1.6rem;
+  }
+  .hero h1 .l2{ display:block; color:var(--gold-bright); }
+  .hero .sub{
+    font-family:var(--serif);
+    font-size:1.05rem; font-weight:400;
+    color:var(--parch-dim);
+    letter-spacing:.02em;
+    max-width:24rem;
+    line-height:1.8;
+  }
+  .hero .chapter{
+    font-size:.78rem; letter-spacing:.32em; color:var(--gold);
+    font-weight:600; margin-bottom:1.4rem;
+  }
+  .hero .backbone{
+    margin-top:2.6rem;
+    font-size:.74rem; letter-spacing:.05em;
+    color:var(--parch-faint);
+    line-height:2;
+    max-width:26rem;
+  }
+  .scrollhint{
+    position:absolute; left:1.5rem; bottom:2rem;
+    font-size:.68rem; letter-spacing:.22em; color:var(--parch-faint);
+    display:flex; align-items:center; gap:.55rem;
+  }
+  .scrollhint .dot{
+    width:1px; height:2.2rem; position:relative; overflow:hidden;
+    background:var(--line);
+  }
+  .scrollhint .dot::after{
+    content:""; position:absolute; top:-50%; left:0; width:1px; height:50%;
+    background:var(--gold);
+    animation:slide 2.2s cubic-bezier(.6,0,.4,1) infinite;
+  }
+  @keyframes slide{ 0%{top:-50%} 60%{top:100%} 100%{top:100%} }
+
+  /* ---------- comparison bars (scene 1) ---------- */
+  .numblock{ margin-top:2.8rem; }
+  .bignum{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(4rem,26vw,6.5rem);
+    line-height:.9;
+    color:var(--gold-bright);
+    letter-spacing:-0.02em;
+  }
+  .bignum .u{ font-size:.32em; color:var(--parch-dim); letter-spacing:0; margin-left:.15em;}
+  .bignum-cap{
+    font-size:.92rem; color:var(--parch-dim); margin-top:.7rem;
+  }
+
+  .bars{ margin-top:2.6rem; display:flex; flex-direction:column; gap:1.5rem; }
+  .bar-row .bar-label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:.86rem; margin-bottom:.5rem; color:var(--parch);
+  }
+  .bar-row .bar-label .q{ color:var(--parch-faint); font-size:.78rem; }
+  .bar-track{ height:.55rem; background:var(--ink-3); border-radius:99px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:99px; width:0; transition:width 1.3s cubic-bezier(.16,.7,.3,1) .2s; }
+  .bar-fill.full{ background:linear-gradient(90deg,var(--slate),#9fb0c0); }
+  .bar-fill.gold{ background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright)); }
+  .in .bar-fill[data-w]{ width:var(--w); }
+
+  .footnote{
+    margin-top:1.6rem; font-size:.82rem; line-height:1.75;
+    color:var(--parch-faint); padding-left:.95rem;
+    border-left:2px solid rgba(203,162,88,.4);
+  }
+
+  /* ---------- equation stack (scene 2) ---------- */
+  .equation{ margin-top:2.4rem; display:flex; flex-direction:column; align-items:stretch; }
+  .eq-card{
+    background:linear-gradient(180deg, var(--ink-2), rgba(15,29,43,.4));
+    border:1px solid var(--line);
+    border-radius:.85rem;
+    padding:1.05rem 1.2rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .eq-card .ko{ font-family:var(--serif); font-size:1.45rem; font-weight:600; color:var(--gold-bright); flex:0 0 auto; min-width:3.4rem; }
+  .eq-card .meta{ display:flex; flex-direction:column; }
+  .eq-card .meta .role{ font-size:.92rem; color:var(--parch); }
+  .eq-card .meta .ref{ font-size:.72rem; color:var(--parch-faint); margin-top:.15rem; letter-spacing:.03em; }
+  .eq-eq{ align-self:center; color:var(--gold); font-family:var(--serif); font-size:1.2rem; padding-block:.45rem; opacity:.8; }
+  .eq-result{
+    margin-top:.55rem;
+    text-align:center;
+    background:rgba(203,162,88,.12);
+    border:1px solid rgba(203,162,88,.45);
+    border-radius:.85rem; padding:1rem;
+  }
+  .eq-result .ko{ font-family:var(--serif); font-size:1.7rem; font-weight:700; color:var(--gold-bright); }
+  .eq-result .cap{ font-size:.82rem; color:var(--parch-dim); margin-top:.2rem; }
+
+  .vs{
+    margin-top:2.2rem; display:grid; grid-template-columns:1fr auto 1fr; gap:.6rem; align-items:stretch;
+  }
+  .vs .col{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:.8rem;
+    padding:1rem .9rem; text-align:center;
+  }
+  .vs .col .k{ font-size:.74rem; letter-spacing:.16em; color:var(--gold); margin-bottom:.45rem; }
+  .vs .col .v{ font-family:var(--serif); font-size:1.2rem; font-weight:600; }
+  .vs .col .v small{ display:block; font-family:var(--sans); font-size:.76rem; font-weight:400; color:var(--parch-faint); margin-top:.25rem; letter-spacing:0;}
+  .vs .mid{ align-self:center; color:var(--parch-faint); font-family:var(--serif); font-size:1rem; }
+
+  /* ---------- convergence (scene 3) ---------- */
+  .conv-chips{ margin-top:2.4rem; display:flex; flex-wrap:wrap; gap:.6rem; }
+  .chip{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:.7rem;
+    padding:.7rem .85rem; flex:1 1 8.5rem; min-width:8.5rem;
+  }
+  .chip .ref{ font-size:.72rem; color:var(--gold); font-weight:600; letter-spacing:.04em; }
+  .chip .txt{ font-size:.86rem; color:var(--parch-dim); margin-top:.25rem; line-height:1.55; }
+  .funnel{ display:flex; flex-direction:column; align-items:center; margin-top:1.4rem; }
+  .funnel .ln{ height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:.32rem 0; }
+  .funnel .ln:nth-child(1){ width:70%; }
+  .funnel .ln:nth-child(2){ width:46%; }
+  .funnel .ln:nth-child(3){ width:24%; }
+  .focal{
+    margin-top:1.1rem; text-align:center;
+    font-family:var(--serif); font-weight:800;
+    font-size:clamp(2.8rem,16vw,4rem); color:var(--gold-bright);
+    letter-spacing:.04em;
+    text-shadow:0 0 28px rgba(203,162,88,.35);
+  }
+
+  /* ---------- expansion (scene 4) ---------- */
+  .cosmos{ position:relative; }
+  .cosmos .glow{
+    position:absolute; inset:-2rem -3rem auto -3rem; height:18rem;
+    background:radial-gradient(60% 70% at 70% 40%, rgba(203,162,88,.16), transparent 70%);
+    pointer-events:none; z-index:0;
+  }
+  .expand{
+    position:relative; z-index:1;
+    margin-top:2.4rem; display:flex; align-items:center; justify-content:center; gap:1.1rem;
+  }
+  .gridcell{ display:flex; flex-direction:column; align-items:center; gap:.6rem; }
+  .box{
+    border:1.5px solid var(--gold); border-radius:.7rem;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:700; color:var(--gold-bright);
+    background:rgba(203,162,88,.06);
+  }
+  .box.sm{ width:4.2rem; height:4.2rem; font-size:1.3rem; }
+  .box.lg{ width:8.4rem; height:8.4rem; font-size:2.4rem; box-shadow:0 0 40px rgba(203,162,88,.2) inset; }
+  .gridcell .cap{ font-size:.74rem; color:var(--parch-faint); }
+  .expand .arrow{ color:var(--gold); font-size:1.6rem; }
+  .expand-cap{ text-align:center; margin-top:1.5rem; font-size:.88rem; color:var(--parch-dim); line-height:1.7; }
+
+  .correct{
+    margin-top:2rem; display:flex; flex-direction:column; gap:.6rem;
+  }
+  .correct .r{ display:flex; align-items:center; gap:.7rem; font-size:.95rem; }
+  .correct .mk{ font-family:var(--serif); font-weight:700; width:1.5rem; text-align:center; flex:0 0 auto; }
+  .correct .x .mk{ color:var(--slate); }
+  .correct .o .mk{ color:var(--gold-bright); }
+  .correct .x{ color:var(--parch-faint); }
+
+  .merge{ margin-top:1.8rem; display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap; font-size:.9rem; }
+  .merge .pair{ color:var(--parch-dim); }
+  .merge .pair b{ color:var(--parch); font-weight:600; }
+  .merge .to{ color:var(--gold); }
+  .merge .one{ font-family:var(--serif); color:var(--gold-bright); font-weight:700; font-size:1.1rem; }
+
+  /* ---------- center (scene 5) ---------- */
+  .notlist{ margin-top:2.4rem; display:flex; flex-direction:column; gap:.7rem; }
+  .notlist .n{ display:flex; align-items:center; gap:.8rem; font-size:1rem; color:var(--parch-dim); }
+  .notlist .n .x{ color:var(--slate); font-family:var(--serif); font-weight:700; flex:0 0 1.2rem; text-align:center; text-decoration:none; }
+  .notlist .n s{ text-decoration:line-through; text-decoration-color:rgba(127,147,166,.6); }
+
+  .center-conv{ margin-top:2.2rem; text-align:center; }
+  .center-conv .src{ display:flex; flex-direction:column; gap:.45rem; align-items:center; }
+  .center-conv .src span{ font-size:.92rem; color:var(--parch); }
+  .center-conv .down{ color:var(--gold); margin:.7rem 0; font-size:1.3rem; }
+  .statement{
+    text-align:center; margin-top:.4rem;
+    background:rgba(203,162,88,.1); border:1px solid rgba(203,162,88,.4);
+    border-radius:1rem; padding:1.6rem 1rem;
+  }
+  .statement .s1{ font-size:.8rem; letter-spacing:.2em; color:var(--gold); margin-bottom:.5rem; }
+  .statement .s2{ font-family:var(--serif); font-weight:800; font-size:clamp(2.2rem,12vw,3.2rem); color:var(--gold-bright); letter-spacing:.04em; }
+
+  /* ---------- pillars (scene 6) ---------- */
+  .temple{ margin-top:2.6rem; }
+  .beam{
+    background:linear-gradient(180deg, rgba(203,162,88,.18), rgba(203,162,88,.06));
+    border:1px solid rgba(203,162,88,.4); border-radius:.7rem;
+    text-align:center; padding:.85rem; margin-bottom:.55rem;
+    font-family:var(--serif); font-weight:700; font-size:1.15rem; color:var(--gold-bright);
+  }
+  .pillars{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  .pillar{
+    background:linear-gradient(180deg,var(--ink-2),rgba(15,29,43,.35));
+    border:1px solid var(--line); border-top:2px solid rgba(203,162,88,.5);
+    border-radius:.5rem .5rem .8rem .8rem;
+    padding:1.15rem .9rem; min-height:9.5rem;
+    display:flex; flex-direction:column;
+  }
+  .pillar .pk{ font-size:.72rem; letter-spacing:.14em; color:var(--gold); margin-bottom:.5rem; }
+  .pillar .pt{ font-family:var(--serif); font-size:1.2rem; font-weight:700; line-height:1.4; margin-bottom:.7rem; }
+  .pillar .pd{ font-size:.84rem; color:var(--parch-dim); line-height:1.65; margin-top:auto; }
+  .pillar .pd b{ color:var(--parch); font-weight:600; }
+
+  .tier{ margin-top:1.6rem; display:flex; flex-direction:column; gap:.5rem; align-items:center; }
+  .tier .t1, .tier .t2{ width:100%; text-align:center; border-radius:.6rem; padding:.7rem; font-size:.88rem; }
+  .tier .t1{ background:rgba(203,162,88,.12); border:1px solid rgba(203,162,88,.35); color:var(--gold-bright); font-weight:600; }
+  .tier .t2{ background:var(--ink-2); border:1px solid var(--line); color:var(--parch-dim); width:82%; }
+  .tier .ar{ color:var(--gold); font-size:1rem; }
+
+  /* ---------- foundation (scene 7) ---------- */
+  .foundation{ margin-top:2.6rem; display:flex; flex-direction:column; align-items:center; gap:.55rem; }
+  .fblock{
+    border:1px solid var(--line); border-radius:.7rem;
+    padding:1rem; text-align:center; background:var(--ink-2);
+    display:flex; flex-direction:column; gap:.2rem;
+  }
+  .fblock .fk{ font-size:.74rem; letter-spacing:.12em; color:var(--gold); }
+  .fblock .ft{ font-family:var(--serif); font-size:1.15rem; font-weight:600; }
+  .fblock.l1{ width:64%; }
+  .fblock.l2{ width:82%; }
+  .fblock.base{
+    width:100%;
+    background:linear-gradient(180deg, rgba(203,162,88,.2), rgba(203,162,88,.08));
+    border:1px solid rgba(203,162,88,.5);
+  }
+  .fblock.base .ft{ color:var(--gold-bright); font-weight:800; font-size:1.4rem; }
+  .fdep{ font-size:.72rem; color:var(--parch-faint); margin:.1rem 0; letter-spacing:.05em; }
+
+  .keyline{
+    margin-top:2.2rem; text-align:center;
+    font-family:var(--serif); font-size:1.35rem; font-weight:600; line-height:1.6;
+  }
+  .keyline em{ color:var(--gold-bright); font-style:normal; }
+
+  /* ---------- finale (scene 8) ---------- */
+  .flow{ margin-top:2.6rem; display:flex; flex-direction:column; align-items:center; gap:.2rem; }
+  .fstep{
+    width:100%; text-align:center;
+    background:var(--ink-2); border:1px solid var(--line); border-radius:.7rem;
+    padding:.95rem; font-family:var(--serif); font-size:1.15rem; font-weight:600;
+  }
+  .fstep.final{ background:rgba(203,162,88,.14); border:1px solid rgba(203,162,88,.5); color:var(--gold-bright); font-weight:800; font-size:1.3rem; }
+  .fdown{ color:var(--gold); font-size:1.3rem; line-height:1.2; }
+
+  .miniline{ margin-top:2.6rem; }
+  .miniline .head{ font-size:.8rem; letter-spacing:.14em; color:var(--gold); margin-bottom:1rem; }
+  .tl{ display:flex; align-items:center; gap:.5rem; }
+  .tl .pt{ display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+  .tl .pt .yr{ font-family:var(--serif); font-size:1.05rem; color:var(--parch); }
+  .tl .pt .nd{ width:.7rem; height:.7rem; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(203,162,88,.6); }
+  .tl .seg{ flex:1; height:1px; background:linear-gradient(90deg,var(--gold-deep),var(--gold)); position:relative; }
+  .tl .seg .badge{
+    position:absolute; top:-1.5rem; left:50%; transform:translateX(-50%);
+    font-family:var(--serif); font-size:1.05rem; color:var(--gold-bright); white-space:nowrap; font-weight:700;
+  }
+  .miniline .mcap{ margin-top:1.3rem; font-size:.84rem; color:var(--parch-faint); text-align:center; line-height:1.7; }
+
+  .closing{
+    border-top:none;
+    padding-block:7rem 8rem;
+    text-align:center;
+  }
+  .closing .hr{ width:1px; height:4rem; background:linear-gradient(180deg,var(--gold),transparent); margin:0 auto 2.5rem; }
+  .closing .call{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(1.5rem,7vw,2rem); line-height:1.75; color:var(--parch);
+    letter-spacing:-0.01em;
+  }
+  .closing .call .g{ color:var(--gold-bright); }
+  .closing .coda{
+    margin-top:4rem; font-size:.86rem; letter-spacing:.08em; color:var(--parch-faint);
+  }
+  .closing .coda b{ color:var(--gold); font-weight:600; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-block:2.4rem 3.2rem;
+    font-size:.72rem; color:var(--parch-faint); line-height:1.7;
+    text-align:center;
+  }
+
+  @media (max-width:340px){
+    .pillars{ grid-template-columns:1fr; }
+    .pillar{ min-height:auto; }
+    .chip{ flex-basis:100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .bar-fill[data-w]{ transition:none; }
+    .scrollhint .dot::after{ animation:none; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="spire reveal"></div>
+      <div class="chapter reveal" style="--d:1">제 1 장</div>
+      <h1 class="reveal" style="--d:2">교회의<span class="l2">건축</span></h1>
+      <p class="sub reveal" style="--d:3">하나님의 마음의 갈망 —<br>오래 잃어버렸던 한 가지를 회복하는 것.</p>
+      <p class="backbone reveal" style="--d:4">마 16:18 · 엡 4:16 · 엡 2:20 · 벧전 2:5 · 고전 3:9 · 고전 14:26 · 히 11:10</p>
+    </div>
+    <div class="scrollhint reveal" style="--d:5"><span class="dot"></span> 스크롤</div>
+  </section>
+
+  <!-- ===== 1. 서막 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅰ</div>
+      <div class="eyebrow en reveal" style="--d:1">Prologue</div>
+      <h2 class="title reveal" style="--d:2">잃어버린 한 가지</h2>
+      <p class="lead reveal" style="--d:3">지난 2천 년 교회사에서 ‘건축’은 거의 주목받지 못했습니다. 많은 것이 회복되었지만, 건축의 회복은 좀처럼 전진하지 못했습니다. 최근에야 하나님은 사람들의 시선을 이 한 가지로 돌리실 수 있었습니다.</p>
+
+      <div class="reveal numblock" style="--d:4">
+        <div class="bignum">2000<span class="u">년</span></div>
+        <div class="bignum-cap">거의 비어 있던 회복의 자리</div>
+      </div>
+
+      <div class="bars reveal" style="--d:5">
+        <div class="bar-row">
+          <div class="bar-label"><span>온전하게 함</span><span class="q">관심이 컸다</span></div>
+          <div class="bar-track"><div class="bar-fill full" data-w style="--w:88%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>건축</span><span class="q">거의 다뤄지지 않았다</span></div>
+          <div class="bar-track"><div class="bar-fill gold" data-w style="--w:13%"></div></div>
+        </div>
+      </div>
+
+      <p class="footnote reveal" style="--d:6">성경 번역에서조차, ‘건축’으로 옮겨야 할 말이 ‘온전하게 함’으로 번역되곤 했습니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 2. 몸=집=성전 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅱ</div>
+      <div class="eyebrow reveal" style="--d:1">무엇이 건축인가</div>
+      <h2 class="title reveal" style="--d:2">몸 · 집 · 성전 —<br><span class="em">하나의 실재</span></h2>
+      <p class="lead reveal" style="--d:3">헬라어에서 ‘건축하다’와 ‘집’은 한 어원에서 나왔습니다. 건축이란 모든 성도를 한 집으로 짓는 것, 곧 한 몸으로 함께 세워지는 것입니다.</p>
+
+      <div class="equation">
+        <div class="eq-card reveal" style="--d:3">
+          <div class="ko">몸</div>
+          <div class="meta"><div class="role">그리스도의 몸</div><div class="ref">엡 4:12</div></div>
+        </div>
+        <div class="eq-eq reveal" style="--d:4">=</div>
+        <div class="eq-card reveal" style="--d:4">
+          <div class="ko">집</div>
+          <div class="meta"><div class="role">하나님의 거처</div><div class="ref">엡 2:22</div></div>
+        </div>
+        <div class="eq-eq reveal" style="--d:5">=</div>
+        <div class="eq-card reveal" style="--d:5">
+          <div class="ko">성전</div>
+          <div class="meta"><div class="role">성령이 거하시는 전</div><div class="ref">고전 6:19 · 요 2:19</div></div>
+        </div>
+        <div class="eq-result reveal" style="--d:6">
+          <div class="ko">교회</div>
+          <div class="cap">한 실재의 여러 표현 — 그래서 ‘몸’도 건축이 필요합니다</div>
+        </div>
+      </div>
+
+      <div class="vs reveal" style="--d:7">
+        <div class="col"><div class="k">개인</div><div class="v">온전하게 됨<small>나 한 사람의 체험</small></div></div>
+        <div class="mid">↔</div>
+        <div class="col"><div class="k">단체</div><div class="v">함께 건축됨<small>한 몸·한 집으로</small></div></div>
+      </div>
+
+      <div class="refs reveal" style="--d:8"><span>엡 2:20–22</span><span>엡 4:12</span><span>벧전 2:5</span><span>고전 6:19</span><span>요 2:19</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 3. 성경이 외치는 건축 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅲ</div>
+      <div class="eyebrow reveal" style="--d:1">성경의 증언</div>
+      <h2 class="title reveal" style="--d:2">곳곳이 가리키는<br>한 단어</h2>
+      <p class="lead reveal" style="--d:3">신약은 여러 갈래에서 같은 한 가지를 향합니다. 이 시대 하나님의 일은 그분의 집, 곧 그리스도의 몸을 짓는 것입니다.</p>
+
+      <div class="conv-chips">
+        <div class="chip reveal" style="--d:3"><div class="ref">마 16:18</div><div class="txt">내 교회를 건축하리라</div></div>
+        <div class="chip reveal" style="--d:4"><div class="ref">엡 4:11–12</div><div class="txt">은사는 몸을 건축하기 위함</div></div>
+        <div class="chip reveal" style="--d:4"><div class="ref">엡 2:22</div><div class="txt">함께 건축되어 하나님의 거처로</div></div>
+        <div class="chip reveal" style="--d:5"><div class="ref">벧전 2:5</div><div class="txt">산 돌로 영적인 집을 이룸</div></div>
+        <div class="chip reveal" style="--d:5"><div class="ref">고전 3:10–12</div><div class="txt">금·은·보석으로 건축하라</div></div>
+        <div class="chip reveal" style="--d:6"><div class="ref">고전 14:12</div><div class="txt">교회를 건축하는 데 뛰어나라</div></div>
+      </div>
+
+      <div class="funnel reveal" style="--d:7">
+        <div class="ln"></div><div class="ln"></div><div class="ln"></div>
+      </div>
+      <div class="focal reveal" style="--d:7">건축</div>
+    </div>
+  </section>
+
+  <!-- ===== 4. 교회 = 새 예루살렘 ===== -->
+  <section class="scene cosmos">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅳ</div>
+      <div class="eyebrow reveal" style="--d:1">우주적 비전</div>
+      <h2 class="title reveal" style="--d:2">교회 = <span class="em">새 예루살렘</span></h2>
+      <p class="lead reveal" style="--d:3">교회를 짓는 일은 곧 새 예루살렘을 짓는 일입니다. 땅의 교회와 하늘의 성은 둘이 아니라 하나입니다.</p>
+
+      <div class="expand reveal" style="--d:4">
+        <div class="gridcell"><div class="box sm">집</div><div class="cap">초기</div></div>
+        <div class="arrow">→</div>
+        <div class="gridcell"><div class="box lg">성</div><div class="cap">성숙</div></div>
+      </div>
+      <p class="expand-cap reveal" style="--d:5">성전이 성으로 확대됩니다 — 그래서 새 예루살렘엔 따로 성전이 없습니다 <span style="color:var(--parch-faint)">(계 21:22)</span></p>
+
+      <div class="correct">
+        <div class="r x reveal" style="--d:6"><span class="mk">✕</span> 땅과 하늘, 두 개의 건축</div>
+        <div class="r o reveal" style="--d:6"><span class="mk">○</span> 한 가지 일의 두 방면</div>
+      </div>
+
+      <div class="merge reveal" style="--d:7">
+        <span class="pair"><b>땅</b> ↔ <b>하늘</b></span>
+        <span class="pair"><b>시간</b> ↔ <b>영원</b></span>
+        <span class="to">→</span>
+        <span class="one">하나로</span>
+      </div>
+
+      <div class="refs reveal" style="--d:8"><span>히 11:10</span><span>계 21:3</span><span>계 21:22</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 5. 모든 것의 중심 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅴ</div>
+      <div class="eyebrow reveal" style="--d:1">모든 것의 중심</div>
+      <h2 class="title reveal" style="--d:2">건축, 그 하나의<br>중심</h2>
+      <p class="lead reveal" style="--d:3">건축은 교리도, 영혼 구원도, 성도를 온전케 함도 그 자체가 목적이 아닙니다. 오히려 그 모든 수고가 한 중심을 향합니다.</p>
+
+      <div class="notlist">
+        <div class="n reveal" style="--d:3"><span class="x">✕</span><s>교리적 이해의 문제</s></div>
+        <div class="n reveal" style="--d:4"><span class="x">✕</span><s>죄인의 영혼을 구원하는 일</s></div>
+        <div class="n reveal" style="--d:5"><span class="x">✕</span><s>성도를 온전케 하는 일</s></div>
+      </div>
+      <p class="footnote reveal" style="--d:6">이것들을 소홀히 하라는 뜻이 아니라, 그 모두가 향하는 중심을 보라는 뜻입니다.</p>
+
+      <div class="center-conv reveal" style="--d:7">
+        <div class="src">
+          <span>죄인 구원</span>
+          <span style="color:var(--parch-faint)">＋</span>
+          <span>성도를 온전케 함</span>
+        </div>
+        <div class="down">↓</div>
+        <div class="statement">
+          <div class="s1">중심은 하나</div>
+          <div class="s2">하나님의 집을 건축</div>
+        </div>
+      </div>
+      <p class="footnote reveal" style="--d:8">이 중심을 붙들면 복음 전파도 더 효력 있고, 성도를 온전케 함도 어렵지 않습니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 6. 두 개의 열쇠 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅵ</div>
+      <div class="eyebrow reveal" style="--d:1">두 개의 열쇠</div>
+      <h2 class="title reveal" style="--d:2">행정과<br>말씀의 사역</h2>
+      <p class="lead reveal" style="--d:3">교회를 짓는 가장 중요한 두 가지입니다. 이 둘이 약하면, 그곳에 건축을 기대할 수 없습니다.</p>
+
+      <div class="temple">
+        <div class="beam reveal" style="--d:3">교회의 건축</div>
+        <div class="pillars">
+          <div class="pillar reveal" style="--d:4">
+            <div class="pk">직분의 방면</div>
+            <div class="pt">교회의<br>행정</div>
+            <div class="pd"><b>장로</b>가 세우고 다스림</div>
+          </div>
+          <div class="pillar reveal" style="--d:5">
+            <div class="pk">은사의 방면</div>
+            <div class="pt">말씀의<br>사역</div>
+            <div class="pd"><b>신언자</b>가 말씀을 전함</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="t1 reveal" style="--d:6">주 건축자 — 장로 · 말씀 사역자</div>
+        <div class="ar reveal" style="--d:6">↓</div>
+        <div class="t2 reveal" style="--d:7">보조 건축자 — 함께 동역하는 모든 형제자매</div>
+      </div>
+
+      <p class="footnote reveal" style="--d:8">평상시엔 말씀이 앞서고, 교회가 황폐할 땐 행정과 말씀이 나란히 함께 갑니다.</p>
+      <div class="refs reveal" style="--d:8"><span>고전 14:1</span><span>고전 14:12</span><span>딤후 2:2</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 7. 가장 깊은 비밀 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅶ</div>
+      <div class="eyebrow reveal" style="--d:1">가장 깊은 비밀</div>
+      <h2 class="title reveal" style="--d:2">결국, <span class="em">사람</span></h2>
+      <p class="lead reveal" style="--d:3">행정도 말씀도, 끝내 ‘어떤 사람인가’에 달려 있습니다. 당신이 짓는 것은 곧 당신이라는 존재입니다.</p>
+
+      <div class="foundation">
+        <div class="fblock l1 reveal" style="--d:3"><div class="fk">열매</div><div class="ft">그리스도의 몸 건축</div></div>
+        <div class="fdep reveal" style="--d:4">▲ ~에 달려 있다</div>
+        <div class="fblock l2 reveal" style="--d:4"><div class="fk">두 열쇠</div><div class="ft">행정 + 말씀의 사역</div></div>
+        <div class="fdep reveal" style="--d:5">▲ ~에 달려 있다</div>
+        <div class="fblock base reveal" style="--d:5"><div class="fk">기초</div><div class="ft">사람 — 우리 자신</div></div>
+      </div>
+
+      <p class="keyline reveal" style="--d:6">당신이 건축하는 것은<br><em>당신이라는 존재</em>입니다.</p>
+
+      <div class="vs reveal" style="--d:7">
+        <div class="col"><div class="k">겉</div><div class="v">방법<small>밖에서 배우는 것</small></div></div>
+        <div class="mid">↔</div>
+        <div class="col"><div class="k">속</div><div class="v">사람 자신<small>처리받은 우리 안에</small></div></div>
+      </div>
+      <p class="footnote reveal" style="--d:8">외국인이 지으면 외국식, 중국인이 지으면 중국식 — 존재가 곧 양식이 됩니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== 8. 종막 ===== -->
+  <section class="scene">
+    <div class="wrap">
+      <div class="scene-index reveal">Ⅷ</div>
+      <div class="eyebrow en reveal" style="--d:1">Finale</div>
+      <h2 class="title reveal" style="--d:2">다루심, 그리고<br>부르심</h2>
+      <p class="lead reveal" style="--d:3">그래서 흩어졌던 모든 것이 한 줄로 모입니다.</p>
+
+      <div class="flow">
+        <div class="fstep reveal" style="--d:3">처리받은 사람</div>
+        <div class="fdown reveal" style="--d:4">↓</div>
+        <div class="fstep reveal" style="--d:4">행정 + 말씀의 사역</div>
+        <div class="fdown reveal" style="--d:5">↓</div>
+        <div class="fstep reveal" style="--d:5">교회의 건축</div>
+        <div class="fdown reveal" style="--d:6">↓</div>
+        <div class="fstep final reveal" style="--d:6">새 예루살렘</div>
+      </div>
+
+      <div class="miniline reveal" style="--d:7">
+        <div class="head">지금이 결정적 시기</div>
+        <div class="tl">
+          <div class="pt"><span class="yr">1949</span><span class="nd"></span></div>
+          <div class="seg"><span class="badge">8년</span></div>
+          <div class="pt"><span class="yr">1957</span><span class="nd"></span></div>
+        </div>
+        <p class="mcap">구태대로 제자리걸음을 한다면, 앞으로 더할 것이 없습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING ===== -->
+  <section class="closing">
+    <div class="wrap">
+      <div class="hr reveal"></div>
+      <p class="call reveal" style="--d:1">주님 앞에 조용히 나아가,<br>그분의 <span class="g">빛 비춤과 말씀하심</span>을<br>얻으십시오.</p>
+      <p class="coda reveal" style="--d:3">오늘 하나님께서 관심하시는 것은 — <b>건축</b>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">본 인포그래픽은 메시지 「교회의 건축」(제1장)의<br>요점과 흐름을 시각적으로 정리한 것입니다.</div>
+  </footer>
+
+</main>
+
+<script>
+  // staggered reveal on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -7% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // scroll progress bar
+  const bar = document.querySelector('.progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const p = max > 0 ? h.scrollTop / max : 0;
+    bar.style.transform = 'scaleX(' + p + ')';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>
