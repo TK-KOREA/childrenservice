@@ -4,338 +4,556 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>뉴욕 3일 가족여행 가이드 | NYC 3-Day Family Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
+    /* ============ DESIGN TOKENS ============ */
     :root{
-      --bg:#f6f8fc; --paper:#ffffff; --ink:#172033; --muted:#667085; --line:#e5e7eb;
-      --blue:#2563eb; --blue2:#dbeafe; --green:#059669; --green2:#d1fae5;
-      --purple:#7c3aed; --purple2:#ede9fe; --orange:#ea580c; --orange2:#ffedd5;
-      --pink:#db2777; --pink2:#fce7f3; --yellow:#f59e0b; --yellow2:#fef3c7;
-      --shadow:0 18px 45px rgba(15,23,42,.10); --softshadow:0 8px 25px rgba(15,23,42,.07);
-      --radius:24px;
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 12% 4%,rgba(96,165,250,.22),transparent 28%),radial-gradient(circle at 85% 6%,rgba(167,139,250,.22),transparent 26%),linear-gradient(180deg,#eef6ff 0%,#f8fafc 22%,#f6f8fc 100%);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
-    .wrap{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:22px 0 70px}
-    .hero{position:relative;overflow:hidden;border-radius:32px;padding:34px 28px;color:white;background:linear-gradient(135deg,rgba(15,23,42,.95) 0%,rgba(30,64,175,.94) 46%,rgba(14,165,233,.82) 100%);box-shadow:var(--shadow)}
-    .hero::after{content:"";position:absolute;right:-90px;top:-100px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.12)}
-    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.20);font-weight:800;font-size:.92rem;letter-spacing:.01em}
-    h1{margin:16px 0 10px;font-size:clamp(2rem,5.2vw,4.2rem);line-height:1.08;letter-spacing:-.045em}
-    .hero .sub{max-width:820px;margin:0;font-size:clamp(1rem,2.1vw,1.22rem);color:rgba(255,255,255,.93)}
-    .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px;position:relative;z-index:1}
-    .hero-chip{min-height:86px;padding:14px;border-radius:20px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px)}
-    .hero-chip strong{display:block;font-size:1.02rem}.hero-chip span{display:block;margin-top:2px;font-size:.87rem;color:rgba(255,255,255,.82)}
-    .nav{position:sticky;top:0;z-index:10;margin:18px 0 24px;padding:10px;border-radius:18px;background:rgba(255,255,255,.88);border:1px solid rgba(229,231,235,.9);backdrop-filter:blur(9px);box-shadow:var(--softshadow)}
-    .nav-inner{display:flex;flex-wrap:wrap;gap:9px}.nav a{text-decoration:none;color:#1e3a8a;background:#eff6ff;border:1px solid #dbeafe;padding:9px 13px;border-radius:999px;font-weight:800;font-size:.92rem;white-space:nowrap}
-    .section{margin-top:30px}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:14px}.section-head h2{margin:0;font-size:clamp(1.35rem,3.5vw,2rem);letter-spacing:-.02em}.section-head p{margin:0;color:var(--muted);font-size:.96rem}
-    .overview{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.overview-card{position:relative;overflow:hidden;padding:20px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);box-shadow:var(--softshadow)}
-    .overview-card::after{content:"";position:absolute;right:-46px;bottom:-46px;width:130px;height:130px;border-radius:50%;opacity:.55}.overview-card.blue::after{background:var(--blue2)}.overview-card.green::after{background:var(--green2)}.overview-card.purple::after{background:var(--purple2)}
-    .day-label{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:.82rem;font-weight:900;margin-bottom:10px}.blue .day-label{background:var(--blue2);color:var(--blue)}.green .day-label{background:var(--green2);color:var(--green)}.purple .day-label{background:var(--purple2);color:var(--purple)}
-    .overview-card h3{position:relative;z-index:1;margin:0 0 8px;font-size:1.18rem}.overview-card p{position:relative;z-index:1;margin:0;color:var(--muted);font-size:.95rem}.bilingual{display:block;color:#94a3b8;font-size:.82rem;font-weight:650;margin-top:2px;letter-spacing:.01em}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}.big-map{padding:20px;border-radius:30px}.map-shell{border-radius:24px;overflow:hidden;border:1px solid #dbeafe;background:#f8fbff}
-    .map-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.map-actions a{display:block;text-decoration:none;color:#1e3a8a;background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:12px 13px;font-weight:850;font-size:.92rem}.map-actions span{display:block;color:#64748b;font-size:.78rem;font-weight:650;margin-top:2px}
-    .map-note{margin-top:14px;padding:14px 16px;border-radius:18px;background:#f8fafc;border-left:5px solid var(--blue);color:#334155}.map-note strong{color:#0f172a}
-    .day-card{overflow:hidden;border-radius:28px;border:1px solid var(--line);background:white;box-shadow:var(--shadow);margin-top:18px}.day-top{padding:22px;color:white}.day-top.blue{background:linear-gradient(135deg,#1d4ed8,#60a5fa)}.day-top.green{background:linear-gradient(135deg,#047857,#34d399)}.day-top.purple{background:linear-gradient(135deg,#6d28d9,#a78bfa)}.day-top h3{margin:0 0 6px;font-size:1.45rem;letter-spacing:-.02em}.day-top p{margin:0;color:rgba(255,255,255,.92)}.day-content{padding:20px}
-    .family-note{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;margin-bottom:16px}.family-note .icon{width:42px;height:42px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;font-size:1.35rem;box-shadow:0 4px 13px rgba(154,52,18,.10)}
-    .timeline{display:grid;gap:12px}.tl{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:14px;border-radius:20px;background:#f8fafc;border:1px solid #edf2f7}.tl-time{text-align:center;padding:10px 8px;border-radius:15px;background:white;border:1px solid var(--line);font-weight:950;color:#0f172a;line-height:1.25}.tl-time small{display:block;color:#64748b;font-size:.73rem;font-weight:700;margin-top:3px}.tl h4{margin:0 0 4px;font-size:1.05rem}.tl p{margin:0;color:var(--muted);font-size:.95rem}
-    .meal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}.meal{padding:16px;border-radius:20px;border:1px solid var(--line);background:white;box-shadow:0 7px 20px rgba(15,23,42,.04)}.meal h4{margin:0 0 8px;font-size:1.02rem}.meal ul{margin:0;padding-left:18px;color:#3f4a5f}.meal li+li{margin-top:5px}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:900;margin-bottom:8px}.pill.orange{background:var(--orange2);color:var(--orange)}.pill.green{background:var(--green2);color:var(--green)}.pill.blue{background:var(--blue2);color:var(--blue)}.pill.purple{background:var(--purple2);color:var(--purple)}.pill.pink{background:var(--pink2);color:var(--pink)}
-    .places{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.place{padding:18px;border-radius:22px;border:1px solid var(--line);background:white;box-shadow:var(--softshadow)}.place h3{margin:0 0 4px;font-size:1.1rem}.place p{margin:4px 0;color:var(--muted);font-size:.93rem}.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.btn{display:inline-flex;text-decoration:none;border-radius:13px;padding:9px 12px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;font-weight:850;font-size:.9rem}
-    .tips{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.tip{padding:18px;border-radius:22px;border:1px solid var(--line);background:white;box-shadow:var(--softshadow)}.tip h4{margin:0 0 7px;font-size:1rem}.tip p{margin:0;color:var(--muted);font-size:.93rem}.print-note{margin-top:18px;padding:16px 18px;border-radius:20px;background:#fefce8;border:1px solid #fde68a;color:#854d0e}footer{margin-top:34px;padding:18px 0 0;text-align:center;color:#7b8497;font-size:.9rem}
-    @media (max-width:900px){.hero-grid,.overview,.map-actions,.meal-grid,.places,.tips{grid-template-columns:1fr 1fr}}
-    @media (max-width:640px){.wrap{width:min(100% - 20px,1180px);padding-top:12px}.hero{border-radius:24px;padding:26px 20px}.hero-grid,.overview,.map-actions,.meal-grid,.places,.tips{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:4px}.tl{grid-template-columns:1fr}.tl-time{text-align:left}.nav-inner{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}.nav a{font-size:.86rem}}
-    @media print{body{background:white}.nav,.btns,.map-actions{display:none}.wrap{width:100%;padding:0}.hero,.card,.day-card,.overview-card,.place,.tip{box-shadow:none}.section{break-inside:avoid}}
-  
-    /* Google Maps interactive map */
-    #google-map{
-      width:100%;
-      height:620px;
-      min-height:520px;
-      border-radius:24px;
-    }
-    .gm-map-caption{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      padding:14px;
-      background:#ffffff;
-      border-top:1px solid #e5e7eb;
-    }
-    .gm-legend{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:.9rem;
-      color:#475569;
-      font-weight:800;
-    }
-    .gm-dot{
-      width:13px;
-      height:13px;
-      border-radius:50%;
-      display:inline-block;
-    }
-    .gm-dot.blue{background:#2563eb}
-    .gm-dot.orange{background:#ea580c}
-    .gm-dot.green{background:#059669}
-    .gm-dot.purple{background:#7c3aed}
-    .gm-info{
-      max-width:260px;
-      font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
-      color:#172033;
-      line-height:1.45;
-    }
-    .gm-info strong{
-      display:block;
-      font-size:15px;
-      margin-bottom:3px;
-    }
-    .gm-info span{
-      display:block;
-      color:#64748b;
-      font-size:13px;
-      margin-bottom:8px;
-    }
-    .gm-info a{
-      display:inline-block;
-      color:#1d4ed8;
-      font-weight:800;
-      text-decoration:none;
-      font-size:13px;
-    }
-    @media (max-width: 900px){
-      .gm-map-caption{grid-template-columns:1fr 1fr}
-      #google-map{height:560px}
-    }
-    @media (max-width: 640px){
-      .gm-map-caption{grid-template-columns:1fr}
-      #google-map{height:520px}
+      /* surfaces / neutrals (warm sand) */
+      --bg:#FBF6EF; --bg-2:#F4ECE0; --surface:#FFFFFF; --surface-2:#FBF6EF;
+      --ink:#2A2320; --ink-2:#574E48; --muted:#635C52;
+      --line:#ECE2D5; --line-strong:#E0D3C2;
+      /* action / brand */
+      --coral:#E8643C; --coral-ink:#B23F1E; --coral-tint:#FDEDE6;
+      --gold:#9A7B4F;
+      /* day accents */
+      --d1:#2D8FA8; --d1-ink:#1C6678; --d1-tint:#E2F1F4; --d1-grad:linear-gradient(135deg,#16566A 0%,#2D8FA8 100%);
+      --d2:#4F9D5B; --d2-ink:#2F7440; --d2-tint:#E6F2E5; --d2-grad:linear-gradient(135deg,#286A37 0%,#4F9D5B 100%);
+      --d3:#8A5BBF; --d3-ink:#6A3E9E; --d3-tint:#EFE7F6; --d3-grad:linear-gradient(135deg,#5A3690 0%,#8A5BBF 100%);
+      /* support accents */
+      --eat:#8E441F; --eat-tint:#F3E7DE; --rose:#A0305A; --rose-tint:#FBE6EE;
+      /* shadows */
+      --sh-1:0 1px 2px rgba(74,52,38,.05),0 1px 3px rgba(74,52,38,.07);
+      --sh-2:0 8px 22px rgba(74,52,38,.08);
+      --sh-3:0 16px 38px rgba(74,52,38,.12);
+      --ring:0 0 0 3px #FFFFFF,0 0 0 6px var(--coral);
+      /* spacing */
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:40px; --s9:56px;
+      /* radius */
+      --r-sm:14px; --r-md:18px; --r-lg:22px; --r-xl:28px; --r-pill:999px;
+      /* fonts */
+      --font-display:"Baloo 2","Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+      --font-sans:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+      --font-num:var(--font-display);
+      /* type scale */
+      --t-hero:clamp(2rem,7.5vw,3.4rem); --t-hero-en:clamp(.95rem,3.4vw,1.25rem);
+      --t-h2:clamp(1.4rem,5vw,2rem); --t-h3:1.18rem; --t-card-h:1.06rem;
+      --t-body:1rem; --t-body-sm:.9rem; --t-label:.8rem; --t-en:.84rem;
+      --t-time:clamp(1.1rem,4.5vw,1.45rem); --t-time-sub:.72rem; --t-folio:clamp(2rem,7vw,2.6rem);
+      /* sticky stack */
+      --bar:52px; --switch:56px; --stack:110px; --dock:64px;
     }
 
-    /* 일차별 동선 지도 */
-    .day-map-shell{
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid #dbeafe;
-      background:#f8fbff;
-      margin-bottom:16px;
-      box-shadow:0 8px 25px rgba(15,23,42,.06);
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:106.25%}
+    body{
+      margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);
+      line-height:1.62;font-size:var(--t-body);
+      padding-bottom:calc(var(--dock) + env(safe-area-inset-bottom) + 16px);
+      -webkit-text-size-adjust:100%;
     }
-    .day-map{
-      width:100%;
-      height:380px;
+    a{color:inherit}
+    .wrap{width:min(720px,100% - 32px);margin:0 auto}
+    section[id]{scroll-margin-top:calc(var(--stack) + 12px)}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .skip-link{position:fixed;left:50%;top:-60px;transform:translateX(-50%);z-index:60;background:var(--coral);color:#fff;padding:10px 16px;border-radius:var(--r-pill);font-weight:800;text-decoration:none;box-shadow:var(--sh-3);transition:top .2s}
+    .skip-link:focus{top:8px}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:none;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 5px var(--coral-ink)}
+
+    /* ============ TOP BARS ============ */
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(251,246,239,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);box-shadow:var(--sh-1)}
+    @supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.topbar{background:var(--bg)}}
+    .topbar .bar-inner{width:min(720px,100% - 32px);margin:0 auto}
+    .app-bar{height:var(--bar);display:flex;align-items:center;justify-content:space-between;gap:10px;transition:height .18s ease}
+    .topbar.shrink .app-bar{height:48px}
+    .app-title{font-weight:800;font-size:1rem;letter-spacing:-.02em;white-space:nowrap;transition:font-size .18s ease}
+    .topbar.shrink .app-title{font-size:.92rem}
+    .app-title b{color:var(--coral-ink)}
+    .today-badge{display:inline-flex;align-items:center;gap:6px;text-decoration:none;background:var(--coral-tint);color:var(--coral-ink);font-weight:800;font-size:.82rem;padding:8px 13px;min-height:44px;border-radius:var(--r-pill);border:1px solid #f6d6c8;white-space:nowrap}
+    .today-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 0 rgba(232,100,60,.5);animation:pulse 2s ease-out infinite}
+    .progress{height:2px;background:transparent}
+    .topbar.shrink .progress::before{content:"";display:block;height:2px;background:var(--coral);width:calc(var(--progress,0) * 100%)}
+
+    /* segmented day switcher */
+    .switcher{position:relative}
+    .switcher::before,.switcher::after{content:"";position:absolute;top:0;bottom:0;width:18px;z-index:2;pointer-events:none}
+    .switcher::before{left:0;background:linear-gradient(90deg,rgba(251,246,239,.95),transparent)}
+    .switcher::after{right:0;background:linear-gradient(270deg,rgba(251,246,239,.95),transparent)}
+    .seg-track{display:flex;gap:8px;height:var(--switch);align-items:center;overflow-x:auto;scrollbar-width:none;padding:0 2px;-webkit-overflow-scrolling:touch}
+    .seg-track::-webkit-scrollbar{display:none}
+    .seg{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:var(--r-pill);text-decoration:none;font-weight:800;font-size:.92rem;white-space:nowrap;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);transition:background .2s,color .2s,transform .09s}
+    .seg:active{transform:scale(.96)}
+    .seg.day{font-size:.95rem}
+    .seg.is-active{color:#fff;font-weight:900}
+    .seg[data-k="overview"].is-active{background:var(--coral-ink);border-color:var(--coral-ink)}
+    .seg[data-k="d1"].is-active{background:var(--d1-ink);border-color:var(--d1-ink)}
+    .seg[data-k="d2"].is-active{background:var(--d2-ink);border-color:var(--d2-ink)}
+    .seg[data-k="d3"].is-active{background:var(--d3-ink);border-color:var(--d3-ink)}
+    .seg[data-k="map"].is-active,.seg[data-k="places"].is-active,.seg[data-k="tips"].is-active{background:var(--bg-2);color:var(--coral-ink);border-color:var(--line-strong)}
+
+    /* ============ HERO ============ */
+    .hero{position:relative;overflow:hidden;border-radius:var(--r-xl);margin-top:18px;padding:26px 22px 40px;color:#fff;background:linear-gradient(150deg,#173E48 0%,#235C68 45%,#3E8392 100%);box-shadow:var(--sh-2)}
+    .hero .sun{position:absolute;right:-60px;top:-70px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(247,213,150,.55),rgba(247,213,150,0) 65%);animation:drift 12s ease-in-out infinite}
+    .hero-eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border-radius:var(--r-pill);background:var(--coral-tint);color:var(--coral-ink);font-weight:800;font-size:.86rem}
+    .hero h1{margin:14px 0 6px;font-size:var(--t-hero);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+    .hero .en{display:block;font-family:var(--font-display);font-size:var(--t-hero-en);font-weight:700;opacity:.92;letter-spacing:-.01em;margin-top:4px}
+    .hero .sub{max-width:560px;margin:12px 0 0;font-size:.96rem;color:rgba(255,255,255,.92);position:relative;z-index:1}
+    .hero-meta{margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.82);font-weight:700;letter-spacing:.01em;position:relative;z-index:1}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;position:relative;z-index:1}
+    .hero-chip{min-height:84px;padding:13px;border-radius:var(--r-md);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.20);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+    .hero-chip strong{display:block;font-size:.98rem}.hero-chip span{display:block;margin-top:3px;font-size:.82rem;color:rgba(255,255,255,.82)}
+    .hero-wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;display:block}
+
+    /* ============ SECTIONS ============ */
+    .section{margin-top:var(--s8)}
+    .eyebrow{font-family:var(--font-display);font-weight:700;color:var(--coral-ink);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+    .section-head{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line-strong)}
+    .section-head h2{margin:4px 0 0;font-size:var(--t-h2);letter-spacing:-.02em;font-weight:800}
+    .section-head p{margin:2px 0 0;color:var(--muted);font-size:.92rem}
+    .bilingual{display:block;color:var(--muted);font-size:var(--t-en);font-weight:600;margin-top:2px;letter-spacing:.005em}
+
+    /* overview day rows */
+    .ov-list{display:grid;gap:12px}
+    .ov-row{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 16px 16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-1);text-decoration:none;color:inherit;overflow:hidden;transition:box-shadow .16s,transform .09s}
+    .ov-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;transition:width .16s}
+    .ov-row.d1::before{background:var(--d1)}.ov-row.d2::before{background:var(--d2)}.ov-row.d3::before{background:var(--d3)}
+    .ov-row:hover{box-shadow:var(--sh-2)}
+    .ov-row:hover::before,.ov-row:focus-visible::before{width:8px}
+    .ov-row:active{transform:translateY(1px) scale(.995)}
+    .folio{font-family:var(--font-display);font-size:var(--t-folio);font-weight:800;color:var(--gold);line-height:1;font-feature-settings:"tnum" 1}
+    .ov-body .badge{display:inline-block;font-size:.74rem;font-weight:900;color:var(--ink-2);letter-spacing:.02em;margin-bottom:3px}
+    .ov-body h3{margin:0;font-size:var(--t-h3);font-weight:800;letter-spacing:-.01em}
+    .ov-body .desc{margin:6px 0 8px;color:var(--ink-2);font-size:.92rem}
+    .ministat{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:.8rem;font-weight:700;color:var(--muted)}
+    .ministat span{white-space:nowrap}
+    .ov-chev{font-size:1.4rem;color:var(--muted);font-weight:700}
+
+    /* ============ MAP PLATE ============ */
+    .plate{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);overflow:hidden}
+    .plate-cap{display:flex;align-items:center;gap:8px;padding:12px 16px;font-family:var(--font-display);font-weight:700;color:var(--ink-2);font-size:.86rem;letter-spacing:.02em;border-bottom:1px solid var(--line)}
+    #google-map{width:100%;height:clamp(340px,55vh,520px);display:block;background:var(--bg-2)}
+    .day-map{width:100%;height:clamp(280px,42vh,360px);display:block;background:var(--bg-2)}
+    .gm-map-caption{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--surface);border-top:1px solid var(--line)}
+    .gm-legend{display:flex;align-items:center;gap:8px;min-height:44px;font-size:.9rem;color:var(--ink-2);font-weight:800}
+    .gm-dot{width:13px;height:13px;border-radius:50%;display:inline-block;flex:0 0 auto}
+    .gm-dot.blue{background:#2D8FA8}.gm-dot.orange{background:#A8542B}.gm-dot.green{background:#4F9D5B}.gm-dot.purple{background:#8A5BBF}
+    .map-note{margin:14px;padding:0;border-radius:var(--r-md);background:var(--coral-tint);border:1px solid #f6d6c8}
+    .map-note summary{cursor:pointer;list-style:none;padding:13px 16px;font-weight:800;color:var(--coral-ink);font-size:.92rem}
+    .map-note summary::-webkit-details-marker{display:none}
+    .map-note[open] summary{border-bottom:1px solid #f6d6c8}
+    .map-note .mn-body{padding:13px 16px;color:var(--ink-2);font-size:.9rem}
+    .map-actions{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 14px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .map-actions::-webkit-scrollbar{display:none}
+    .map-actions a{scroll-snap-align:start;display:block;min-height:44px;text-decoration:none;color:var(--d1-ink);background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;font-weight:800;font-size:.92rem}
+    .map-actions span{display:block;color:var(--muted);font-size:.76rem;font-weight:600;margin-top:2px}
+
+    /* ============ DAY CARDS ============ */
+    .day-card{overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-1)}
+    .day-top{padding:20px;color:#fff}
+    .day-top.d1{background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),var(--d1-grad)}
+    .day-top.d2{background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),var(--d2-grad)}
+    .day-top.d3{background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),var(--d3-grad)}
+    .day-top h3{margin:0 0 5px;font-size:var(--t-h3);font-weight:800;letter-spacing:-.01em}
+    .day-top .sub{margin:0;color:rgba(255,255,255,.92);font-size:.9rem}
+    .glance{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+    .glance span{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.30);border-radius:var(--r-pill);padding:6px 11px;font-size:.78rem;font-weight:800;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+    .day-content{padding:18px}
+
+    .family-note{position:relative;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:14px 16px;border-radius:var(--r-md);background:#FBF1DD;border:1px solid #ecd9b3;border-left:4px solid var(--gold);color:#7a5a1f;margin-bottom:16px}
+    .family-note .icon{width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh-1)}
+
+    .day-map-shell{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);box-shadow:var(--sh-1);margin-bottom:16px}
+    .day-map-legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 15px;background:var(--surface);border-top:1px solid var(--line)}
+    .day-map-route{color:var(--ink-2);font-weight:700;font-size:.84rem}
+
+    /* timeline */
+    .timeline{position:relative;display:grid;gap:10px;padding-left:6px}
+    .timeline.d1{--rail:var(--d1);--rail-ink:var(--d1-ink);--rail-tint:var(--d1-tint)}
+    .timeline.d2{--rail:var(--d2);--rail-ink:var(--d2-ink);--rail-tint:var(--d2-tint)}
+    .timeline.d3{--rail:var(--d3);--rail-ink:var(--d3-ink);--rail-tint:var(--d3-tint)}
+    .tl{position:relative;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface-2);overflow:hidden}
+    .tl.now{box-shadow:inset 4px 0 var(--coral)}
+    .tl-head{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center;min-height:56px;padding:12px 14px;background:none;border:0;cursor:pointer;text-align:left;font:inherit;color:inherit}
+    .tl-time{font-family:var(--font-num);font-feature-settings:"tnum" 1;font-size:var(--t-time);font-weight:800;color:var(--rail-ink);background:var(--rail-tint);border-radius:var(--r-sm);padding:7px 10px;line-height:1.1;text-align:center;white-space:nowrap}
+    .tl-time small{display:block;color:var(--muted);font-size:var(--t-time-sub);font-weight:700;margin-top:2px;font-family:var(--font-sans)}
+    .tl-titles{min-width:0}
+    .tl-title{display:block;font-size:var(--t-card-h);font-weight:800;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .now-tag{display:inline-block;margin-left:7px;vertical-align:middle;background:var(--coral-ink);color:#fff;font-size:.66rem;font-weight:900;padding:2px 8px;border-radius:var(--r-pill);letter-spacing:.02em}
+    .tl-chev{font-size:1.1rem;color:var(--muted);transition:transform .2s}
+    .tl.open .tl-chev{transform:rotate(180deg)}
+    .tl-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease}
+    .tl.open .tl-panel{grid-template-rows:1fr}
+    .tl-panel>.tl-panel-in{overflow:hidden;min-height:0}
+    .tl-panel-in p{margin:0;padding:0 14px 12px 14px;color:var(--ink-2);font-size:.92rem}
+    .tl-go{display:inline-flex;align-items:center;gap:4px;margin:0 14px 14px;text-decoration:none;font-weight:800;font-size:.86rem;color:var(--rail-ink);background:var(--rail-tint);padding:10px 15px;border-radius:var(--r-pill);min-height:44px}
+
+    /* meals */
+    .meal-grid{display:grid;grid-template-columns:1fr;gap:13px;margin-top:16px}
+    .meal{padding:15px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--bg-2)}
+    .meal h4{margin:0 0 8px;font-size:1rem;font-weight:800}
+    .meal ul{margin:0;padding-left:18px;color:var(--ink-2)}.meal li{margin:0}.meal li+li{margin-top:5px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:var(--r-pill);font-size:.78rem;font-weight:900;margin-bottom:8px}
+    .pill.eat{background:var(--eat-tint);color:var(--eat)}
+    .pill.d1{background:var(--d1-tint);color:var(--d1-ink)}
+    .pill.d2{background:var(--d2-tint);color:var(--d2-ink)}
+    .pill.d3{background:var(--d3-tint);color:var(--d3-ink)}
+    .pill.rose{background:var(--rose-tint);color:var(--rose)}
+
+    /* places */
+    .places{display:grid;grid-template-columns:1fr;gap:12px}
+    .place{position:relative;display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;padding:14px 16px 14px 18px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1);overflow:hidden}
+    .place::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
+    .place.d1::before{background:var(--d1)}.place.d2::before{background:var(--d2)}.place.d3::before{background:var(--d3)}
+    .place-tile{width:56px;height:56px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .place.d1 .place-tile{background:var(--d1-tint)}.place.d2 .place-tile{background:var(--d2-tint)}.place.d3 .place-tile{background:var(--d3-tint)}
+    .place .pill{margin-bottom:4px}
+    .place h3{margin:0;font-size:var(--t-card-h);font-weight:800;letter-spacing:-.01em}
+    .place p.note{margin:5px 0 10px;color:var(--ink-2);font-size:.88rem;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .place-go{display:inline-flex;align-items:center;gap:6px;min-height:44px;text-decoration:none;border-radius:var(--r-sm);padding:10px 16px;background:var(--coral-ink);color:#fff;font-weight:800;font-size:.92rem;box-shadow:var(--sh-1)}
+    .place-go:active{transform:translateY(1px) scale(.99)}
+
+    /* tips */
+    .tips{display:grid;grid-template-columns:1fr;gap:0}
+    .tip{display:grid;grid-template-columns:auto auto 1fr;gap:14px;align-items:start;padding:18px 6px;border-bottom:1px solid var(--line)}
+    .tip:last-child{border-bottom:0}
+    .tip .folio{font-size:1.7rem}
+    .tip .ic{font-size:1.3rem;line-height:1.2}
+    .tip h4{margin:0 0 5px;font-size:1.02rem;font-weight:800}
+    .tip p{margin:0;color:var(--ink-2);font-size:.92rem}
+    .share-note{margin-top:18px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:16px;border-radius:var(--r-md);background:var(--bg-2);border:1px solid var(--line-strong);color:var(--ink-2)}
+    .share-note .ic{width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh-1)}
+
+    footer{margin-top:var(--s8);padding-top:20px;border-top:1px solid var(--gold);text-align:center;color:var(--muted);font-size:.86rem}
+    footer .top-link{display:inline-block;margin-top:8px;padding:10px 16px;min-height:44px;text-decoration:none;font-weight:800;color:var(--coral-ink)}
+
+    /* ============ BOTTOM DOCK ============ */
+    .dock{position:fixed;left:0;right:0;bottom:0;z-index:28;background:var(--surface);border-top:1px solid var(--line-strong);box-shadow:var(--sh-3);padding-bottom:env(safe-area-inset-bottom);transition:transform .26s ease}
+    .dock.hide{transform:translateY(120%)}
+    .dock-inner{width:min(720px,100% - 24px);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;height:var(--dock);align-items:center}
+    .dock a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;text-decoration:none;color:var(--ink-2);font-weight:800;font-size:.74rem;border-radius:var(--r-md)}
+    .dock a .ic{font-size:1.25rem}
+    .dock a.primary{color:var(--coral-ink);background:var(--coral-tint)}
+    .dock a:active{transform:scale(.96)}
+    @supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){.dock{background:var(--surface)}}
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,100,60,.5)}70%{box-shadow:0 0 0 7px rgba(232,100,60,0)}100%{box-shadow:0 0 0 0 rgba(232,100,60,0)}}
+    @keyframes drift{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+    .js .reveal{opacity:0;transform:translateY(14px)}
+    .js .reveal.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+
+    /* ============ RESPONSIVE ============ */
+    @media (min-width:520px){.meal-grid{grid-template-columns:1fr 1fr}}
+    @media (min-width:600px){
+      .gm-map-caption{grid-template-columns:repeat(4,1fr)}
+      .places{grid-template-columns:1fr 1fr}
+      .tips{grid-template-columns:1fr 1fr}
+      .map-actions{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-auto-columns:auto;overflow:visible}
     }
-    .day-map-legend{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px 16px;
-      align-items:center;
-      padding:12px 15px;
-      background:#fff;
-      border-top:1px solid #e5e7eb;
+    @media (min-width:720px){
+      .wrap{width:min(760px,100% - 48px)}
+      .topbar .bar-inner{width:min(760px,100% - 48px)}
+      .dock{left:50%;right:auto;transform:translateX(-50%);bottom:14px;max-width:560px;width:calc(100% - 28px);border-radius:var(--r-xl);border:1px solid var(--line-strong)}
+      .dock.hide{transform:translate(-50%,160%)}
+      .dock-inner{width:100%}
+      body{padding-bottom:calc(var(--dock) + 14px + 28px)}
     }
-    .day-map-route{
-      color:#475569;
-      font-weight:700;
-      font-size:.85rem;
-    }
-    @media (max-width: 640px){
-      .day-map{height:320px}
+    @media (min-width:960px){
+      .wrap{width:min(1040px,100% - 64px)}
+      .topbar .bar-inner{width:min(1040px,100% - 64px)}
+      .ov-list{grid-template-columns:repeat(3,1fr)}
+      .tips{grid-template-columns:repeat(4,1fr)}
+      .tip{border-bottom:0;border-right:1px solid var(--line);padding:6px 18px}
+      .tip:last-child{border-right:0}
     }
 
+    /* ============ REDUCED MOTION ============ */
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1!important;transform:none!important}
+      .dock{transform:none!important}
+    }
+
+    /* ============ PRINT ============ */
+    @media print{
+      :root{--stack:0px}
+      body{background:#fff;color:#000;padding:0}
+      .topbar,.dock,.skip-link,.map-actions,.tl-go,.place-go,.hero .sun,.hero-wave{display:none!important}
+      .wrap{width:100%}
+      .hero,.plate,.day-card,.ov-row,.place,.day-map-shell{box-shadow:none}
+      .tl-panel{grid-template-rows:1fr!important}
+      .tl-chev{display:none}
+      .section{break-inside:avoid;margin-top:24px}
+      .map-note{display:block}.map-note .mn-body{display:block!important}
+    }
   </style>
 </head>
 <body>
+  <span id="top"></span>
+  <a class="skip-link" href="#overview">본문 바로가기</a>
+
+  <!-- ============ STICKY TOP BARS ============ -->
+  <div class="topbar" id="topbar">
+    <div class="bar-inner">
+      <div class="app-bar">
+        <div class="app-title">🗽 뉴욕 <b>3일</b> 가이드</div>
+        <a class="today-badge" id="todayBadge" href="#day1"><span class="dot"></span> 오늘 · DAY 1</a>
+      </div>
+    </div>
+    <div class="progress"></div>
+    <div class="switcher">
+      <div class="bar-inner">
+        <nav class="seg-track" id="segTrack" aria-label="섹션 이동">
+          <a class="seg" data-k="overview" href="#overview">한눈에</a>
+          <a class="seg day" data-k="d1" href="#day1">DAY 1</a>
+          <a class="seg day" data-k="d2" href="#day2">DAY 2</a>
+          <a class="seg day" data-k="d3" href="#day3">DAY 3</a>
+          <a class="seg" data-k="map" href="#map">지도</a>
+          <a class="seg" data-k="places" href="#places">장소</a>
+          <a class="seg" data-k="tips" href="#tips">팁</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
   <div class="wrap">
+    <!-- ============ HERO ============ -->
     <header class="hero">
-      <div class="eyebrow">👨‍👩‍👧‍👦 Family Trip · 가족여행용</div>
-      <h1>뉴욕 3일 여행 가이드<br><span style="font-size:.55em;font-weight:800;opacity:.9">NYC 3-Day Family Guide</span></h1>
+      <div class="sun" aria-hidden="true"></div>
+      <div class="hero-eyebrow">👨‍👩‍👧‍👦 Family Trip · 가족여행용</div>
+      <h1>뉴욕 3일 여행 가이드<span class="en">NYC 3-Day Family Guide</span></h1>
       <p class="sub">숙소는 <strong>하이브리지 호텔 Highbridge Hotel</strong> 기준입니다. 무리 없는 동선, 아이와 함께 보기 좋은 일정, 팁 부담 적은 푸드홀 중심으로 정리했습니다.</p>
+      <div class="hero-meta">6/13–6/15 · 3 days · Highbridge Hotel</div>
       <div class="hero-grid">
         <div class="hero-chip"><strong>🏨 Base</strong><span>Highbridge Hotel · Bronx</span></div>
         <div class="hero-chip"><strong>🚇 Move</strong><span>Subway 중심 · 라인 확인</span></div>
         <div class="hero-chip"><strong>🍽️ Eat</strong><span>Food hall · No-tip friendly</span></div>
         <div class="hero-chip"><strong>⏰ Pace</strong><span>아이 동반 여유 일정</span></div>
       </div>
+      <svg class="hero-wave" viewBox="0 0 720 28" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 120 28, 240 0, 360 12 C 480 24, 600 4, 720 14 L720 28 L0 28 Z" fill="#FBF6EF"/></svg>
     </header>
-    <nav class="nav"><div class="nav-inner"><a href="#overview">한눈에 보기</a><a href="#map">큰 지도</a><a href="#day1">DAY 1</a><a href="#day2">DAY 2</a><a href="#day3">DAY 3</a><a href="#places">장소 찾기</a><a href="#tips">핵심 팁</a></div></nav>
-    <section id="overview" class="section"><div class="section-head"><h2>한눈에 보는 3일 일정</h2><p>Quick overview</p></div><div class="overview">
-      <div class="overview-card blue"><div class="day-label">DAY 1 · 첫째 날</div><h3>자연사박물관 + 타임스퀘어 <span class="bilingual">AMNH + Times Square</span></h3><p>오후 3시 박물관 관람 후 타임스퀘어 산책. 저녁은 Urban Hawker 또는 한식 푸드코트 추천.</p></div>
-      <div class="overview-card green"><div class="day-label">DAY 2 · 둘째 날</div><h3>SUMMIT + 하이라인 + 첼시마켓 <span class="bilingual">SUMMIT + High Line + Chelsea Market</span></h3><p>호텔 조식 후 전망대, 점심 푸드홀, 오후 산책, 저녁은 첼시마켓 내부에서 해결.</p></div>
-      <div class="overview-card purple"><div class="day-label">DAY 3 · 셋째 날</div><h3>자유의 여신상 크루즈 + 몬트리올 출발 <span class="bilingual">Statue Cruise + Drive to Montréal</span></h3><p>오전 크루즈, 점심 후 호텔 복귀. 오후 3시쯤 몬트리올 방향 출발.</p></div>
-    </div></section>
-    <section id="map" class="section"><div class="section-head"><h2>큰 지도형 동선 보기</h2><p>Large visual route map</p></div><div class="card big-map"><div class="map-shell">
-          <div id="google-map" aria-label="뉴욕 3일 여행 구글 지도"></div>
-          <div class="gm-map-caption">
-            <div class="gm-legend"><span class="gm-dot blue"></span> DAY 1 관광</div>
-            <div class="gm-legend"><span class="gm-dot orange"></span> DAY 1 식사</div>
-            <div class="gm-legend"><span class="gm-dot green"></span> DAY 2 동선</div>
-            <div class="gm-legend"><span class="gm-dot purple"></span> DAY 3 동선</div>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section id="overview" class="section">
+      <div class="section-head"><div class="eyebrow" lang="en">Overview</div><h2>한눈에 보는 3일 일정</h2><p>날짜를 누르면 해당 일정으로 이동합니다</p></div>
+      <div class="ov-list">
+        <a class="ov-row d1 reveal" href="#day1">
+          <div class="folio">01</div>
+          <div class="ov-body">
+            <span class="badge">DAY 1 · 첫째 날</span>
+            <h3>자연사박물관 + 타임스퀘어<span class="bilingual" lang="en">AMNH + Times Square</span></h3>
+            <p class="desc">오후 3시 박물관 관람 후 타임스퀘어 산책. 저녁은 Urban Hawker 또는 한식 푸드코트 추천.</p>
+            <div class="ministat"><span>📍 14:00 시작</span><span>🦖 자연사박물관</span><span>🍜 어반 호커</span></div>
           </div>
-        </div><div class="map-note"><strong>지도 보는 법:</strong> 실제 Google Maps 위에 주요 장소를 표시했습니다. 하이브리지 호텔에서 출발해, 1일차는 자연사박물관과 타임스퀘어, 2일차는 미드타운에서 첼시 방향, 3일차는 다운타운 크루즈 후 다시 호텔로 돌아와 몬트리올로 출발하는 흐름입니다.</div><div class="map-actions">
-      <a href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">🏨 Highbridge Hotel<span>숙소 / Base</span></a><a href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">🦖 AMNH<span>자연사박물관</span></a><a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">🌃 Times Square<span>타임스퀘어</span></a><a href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">🍜 Urban Hawker<span>저녁 추천</span></a><a href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">🏙️ SUMMIT<span>전망대</span></a><a href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">🌿 High Line<span>산책 코스</span></a><a href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">🍽️ Chelsea Market<span>구경 + 저녁</span></a><a href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">🥗 Brookfield Place<span>3일차 점심</span></a>
-      </div></div></section>
-    <section id="day1" class="section"><div class="day-card"><div class="day-top blue"><h3>DAY 1 · 자연사박물관 + 타임스퀘어 <span class="bilingual">AMNH + Times Square</span></h3><p>오후부터 시작하는 가벼운 첫날 일정입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👨‍👩‍👧‍👦</div><div><strong>가족여행 포인트:</strong> 첫날은 이동 피로가 있을 수 있으니, 박물관 핵심 전시만 보고 타임스퀘어는 사진과 분위기 위주로 가볍게 보는 것이 좋습니다.</div></div><div class="day-map-shell"><div id="map-day1" class="day-map" aria-label="DAY 1 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot blue"></span> DAY 1 동선</div><div class="day-map-route">🏨 호텔 → 🦖 자연사박물관 → 🌃 타임스퀘어 → 🍜 어반 호커 → 🏨 호텔</div></div></div><div class="timeline">
-      <div class="tl"><div class="tl-time">14:00<small>2:00 PM</small></div><div><h4>호텔 출발 <span class="bilingual">Leave hotel</span></h4><p>하이브리지 호텔에서 맨해튼 방향으로 이동합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">15:00–17:30<small>3:00–5:30 PM</small></div><div><h4>미국 자연사박물관 관람 <span class="bilingual">American Museum of Natural History</span></h4><p>공룡, 해양생물, 우주 관련 전시 위주로 보면 아이와 함께 보기 좋습니다.</p></div></div>
-      <div class="tl"><div class="tl-time">18:00<small>6:00 PM</small></div><div><h4>타임스퀘어 산책 · 사진 <span class="bilingual">Times Square walk & photos</span></h4><p>전광판, 캐릭터, 주변 상점 구경. 사람이 많으니 아이 손을 꼭 잡고 이동하세요.</p></div></div>
-      <div class="tl"><div class="tl-time">19:30<small>7:30 PM</small></div><div><h4>저녁 식사 <span class="bilingual">Dinner</span></h4><p>Urban Hawker를 1순위로 추천합니다. 한식이 필요하면 Food Gallery 32도 좋습니다.</p></div></div>
-      <div class="tl"><div class="tl-time">21:00<small>9:00 PM</small></div><div><h4>호텔 복귀 <span class="bilingual">Return to hotel</span></h4><p>첫날은 일찍 쉬고 다음 날 일정을 준비합니다.</p></div></div>
-      </div><div class="meal-grid"><div class="meal"><div class="pill orange">🍽️ No-tip friendly</div><h4>저녁 추천</h4><ul><li><strong>Urban Hawker</strong> — 푸드홀, 가장 추천</li><li><strong>Food Gallery 32</strong> — 한식·아시안 푸드코트</li><li><strong>Cook Eatery</strong> — 간단한 델리/빠른 식사</li></ul></div><div class="meal"><div class="pill blue">🚇 Subway tip</div><h4>이동 팁</h4><ul><li>뉴욕 지하철은 색보다 <strong>라인 번호/문자</strong> 확인</li><li>호텔 복귀 시 <strong>Uptown/Bronx 방향</strong> 확인</li><li>아이 동반이면 환승 적은 경로 우선</li></ul></div></div></div></div></section>
-    <section id="day2" class="section"><div class="day-card"><div class="day-top green"><h3>DAY 2 · SUMMIT + 하이라인 + 첼시마켓 <span class="bilingual">SUMMIT + High Line + Chelsea Market</span></h3><p>전망대, 산책, 실내 마켓을 한 번에 즐기는 뉴욕 핵심 코스입니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">👟</div><div><strong>가족여행 포인트:</strong> 이날은 걷는 양이 많습니다. 편한 신발을 신고, 하이라인 산책 중간에 쉬는 시간을 넣으면 좋습니다.</div></div><div class="day-map-shell"><div id="map-day2" class="day-map" aria-label="DAY 2 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot green"></span> DAY 2 동선</div><div class="day-map-route">🏨 호텔 → 🏙️ SUMMIT → 🥗 밴더빌트 마켓 → 🌿 하이라인 → 🍽️ 첼시마켓 → 🏨 호텔</div></div></div><div class="timeline">
-      <div class="tl"><div class="tl-time">08:00<small>8:00 AM</small></div><div><h4>호텔 조식 <span class="bilingual">Hotel breakfast</span></h4><p>아침은 호텔에서 편하게 먹고 출발합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">09:30–11:15<small>9:30–11:15 AM</small></div><div><h4>SUMMIT One Vanderbilt <span class="bilingual">Observation deck</span></h4><p>사진 명소가 많습니다. 어린이는 거울 공간에서 뛰지 않도록 주의하세요.</p></div></div>
-      <div class="tl"><div class="tl-time">11:30<small>11:30 AM</small></div><div><h4>점심 식사 <span class="bilingual">Lunch</span></h4><p>Vanderbilt Market 또는 Grand Central Dining Concourse 추천.</p></div></div>
-      <div class="tl"><div class="tl-time">13:00–14:30<small>1:00–2:30 PM</small></div><div><h4>하이라인 산책 <span class="bilingual">Walk the High Line</span></h4><p>Hudson Yards 쪽에서 시작해 Chelsea 방향으로 내려오는 동선이 자연스럽습니다.</p></div></div>
-      <div class="tl"><div class="tl-time">14:30–16:30<small>2:30–4:30 PM</small></div><div><h4>첼시마켓 구경 <span class="bilingual">Explore Chelsea Market</span></h4><p>실내라 쉬기 좋고, 간식과 기념품 구경도 편합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">17:00–18:30<small>5:00–6:30 PM</small></div><div><h4>저녁 식사 <span class="bilingual">Dinner</span></h4><p>첼시마켓 내부에서 Very Fresh Noodles, Miznon, Lobster Place 중 선택.</p></div></div>
-      <div class="tl"><div class="tl-time">19:30<small>7:30 PM</small></div><div><h4>호텔 복귀 <span class="bilingual">Return to hotel</span></h4><p>걷는 일정이 많으니 너무 늦게까지 끌지 않는 것이 좋습니다.</p></div></div>
-      </div><div class="meal-grid"><div class="meal"><div class="pill green">🥗 Lunch</div><h4>점심 추천</h4><ul><li><strong>Vanderbilt Market</strong> — SUMMIT 후 동선 좋음</li><li><strong>Grand Central Dining Concourse</strong> — 찾기 쉬운 실내 식사</li></ul></div><div class="meal"><div class="pill orange">🍽️ Dinner</div><h4>저녁 추천</h4><ul><li><strong>Very Fresh Noodles</strong> — 면류</li><li><strong>Miznon</strong> — 피타/샌드위치류</li><li><strong>Lobster Place</strong> — 해산물/랍스터롤</li></ul></div></div></div></div></section>
-    <section id="day3" class="section"><div class="day-card"><div class="day-top purple"><h3>DAY 3 · 자유의 여신상 크루즈 + 몬트리올 출발 <span class="bilingual">Statue Cruise + Drive to Montréal</span></h3><p>마지막 날은 오전 크루즈 후 여유 있게 출발 준비합니다.</p></div><div class="day-content"><div class="family-note"><div class="icon">🚗</div><div><strong>가족여행 포인트:</strong> 오후에 장거리 운전이 있으므로 마지막 날은 크루즈와 점심만 넣고, 무리한 추가 관광은 피하는 것이 좋습니다.</div></div><div class="day-map-shell"><div id="map-day3" class="day-map" aria-label="DAY 3 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot purple"></span> DAY 3 동선</div><div class="day-map-route">🏨 호텔 → ⛴️ 배터리 파크 → 🥗 허드슨 이츠 → 🏨 호텔</div></div></div><div class="timeline">
-      <div class="tl"><div class="tl-time">08:00<small>8:00 AM</small></div><div><h4>호텔 조식 · 짐 정리 <span class="bilingual">Breakfast & packing</span></h4><p>차에 실을 짐과 필요한 물건을 미리 나눠두면 편합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">09:30–11:30<small>9:30–11:30 AM</small></div><div><h4>자유의 여신상 크루즈 <span class="bilingual">Statue of Liberty Cruise</span></h4><p>섬에 내리는 일정은 시간이 길어질 수 있으니, 당일 출발이면 뷰 크루즈가 더 안전합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">12:00<small>12:00 PM</small></div><div><h4>점심 식사 <span class="bilingual">Lunch</span></h4><p>Hudson Eats at Brookfield Place 추천. 실내 좌석이 있어 가족 식사에 편합니다.</p></div></div>
-      <div class="tl"><div class="tl-time">13:00–14:00<small>1:00–2:00 PM</small></div><div><h4>호텔 복귀 · 출발 준비 <span class="bilingual">Return to hotel & prepare to leave</span></h4><p>차량 준비, 화장실, 간식/물 챙기기.</p></div></div>
-      <div class="tl"><div class="tl-time">15:00<small>3:00 PM</small></div><div><h4>몬트리올 출발 <span class="bilingual">Depart for Montréal</span></h4><p>국경 통과와 휴게소 시간을 고려해 여유 있게 이동하세요.</p></div></div>
-      </div><div class="meal-grid"><div class="meal"><div class="pill purple">🥗 Lunch</div><h4>점심 추천</h4><ul><li><strong>Hudson Eats at Brookfield Place</strong> — 가장 추천</li><li><strong>Gansevoort Liberty Market</strong> — 대안 푸드홀</li></ul></div><div class="meal"><div class="pill pink">⛴️ Cruise note</div><h4>크루즈 선택 팁</h4><ul><li>섬에 내리는 페리는 대기 시간이 길 수 있음</li><li>오후 출발이면 60–90분 뷰 크루즈가 현실적</li><li>승선 장소와 출발 시간을 전날 확인</li></ul></div></div></div></div></section>
-    <section id="places" class="section"><div class="section-head"><h2>장소 찾기 모음</h2><p>Place finder · Korean / English</p></div><div class="places">
-      <div class="place"><div class="pill blue">🏨 Base</div><h3>하이브리지 호텔 <span class="bilingual">Highbridge Hotel</span></h3><p>브롱스 숙소. 매일 출발/복귀 기준점입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill blue">🦖 Day 1</div><h3>미국 자연사박물관 <span class="bilingual">American Museum of Natural History</span></h3><p>아이와 함께 보기 좋은 대표 박물관입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill orange">🌃 Day 1</div><h3>타임스퀘어 <span class="bilingual">Times Square</span></h3><p>야경, 사진, 상점 구경 포인트입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill orange">🍜 Dinner</div><h3>어반 호커 <span class="bilingual">Urban Hawker</span></h3><p>타임스퀘어 근처 푸드홀. 팁 부담 적은 저녁 1순위입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill green">🏙️ Day 2</div><h3>서밋 원 밴더빌트 <span class="bilingual">SUMMIT One Vanderbilt</span></h3><p>뉴욕 전망과 사진 명소입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill green">🥗 Lunch</div><h3>밴더빌트 마켓 <span class="bilingual">Vanderbilt Market</span></h3><p>SUMMIT 이후 점심 먹기 좋은 푸드홀입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Vanderbilt+Market+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill green">🌿 Day 2</div><h3>하이라인 <span class="bilingual">The High Line</span></h3><p>도시 위 산책로. Hudson Yards에서 Chelsea 방향 추천.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill green">🍽️ Day 2</div><h3>첼시마켓 <span class="bilingual">Chelsea Market</span></h3><p>실내 구경, 간식, 저녁까지 해결하기 좋습니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill purple">⛴️ Day 3</div><h3>배터리 파크 <span class="bilingual">Battery Park</span></h3><p>자유의 여신상 크루즈 출발 지역입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Battery+Park+New+York" target="_blank">Google Maps</a></div></div>
-      <div class="place"><div class="pill purple">🥗 Lunch</div><h3>허드슨 이츠 <span class="bilingual">Hudson Eats at Brookfield Place</span></h3><p>마지막 날 점심으로 편한 실내 푸드홀입니다.</p><div class="btns"><a class="btn" href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">Google Maps</a></div></div>
-    </div></section>
-    <section id="tips" class="section"><div class="section-head"><h2>핵심 팁</h2><p>Family travel tips</p></div><div class="tips"><div class="tip"><div class="pill blue">🚇 Subway</div><h4>색보다 라인 확인</h4><p>뉴욕 지하철은 색깔보다 숫자/문자 라인이 중요합니다. 같은 색이어도 다른 곳으로 갈 수 있습니다.</p></div><div class="tip"><div class="pill orange">🍽️ Food hall</div><h4>팁 부담 줄이기</h4><p>푸드홀, 푸드코트, 카운터 주문 식당은 테이블서비스보다 팁 부담이 적습니다.</p></div><div class="tip"><div class="pill green">👟 Kids pace</div><h4>아이 속도에 맞추기</h4><p>사진 명소보다 화장실, 휴식, 간식 시간을 더 넉넉히 잡으면 일정이 편합니다.</p></div><div class="tip"><div class="pill purple">🚗 Last day</div><h4>마지막 날 압축 금지</h4><p>크루즈 후 몬트리올 장거리 이동이 있으므로 추가 관광은 최소화하는 것이 좋습니다.</p></div></div><div class="print-note"><strong>공유 팁:</strong> 이 파일은 휴대폰 브라우저에서 열어도 보기 좋고, 각 장소의 Google Maps 버튼을 누르면 바로 길찾기 확인이 가능합니다.</div></section>
-    <footer>뉴욕 3일 가족여행 가이드 · NYC 3-Day Family Guide · Highbridge Hotel 기준</footer>
+          <div class="ov-chev" aria-hidden="true">›</div>
+        </a>
+        <a class="ov-row d2 reveal" href="#day2">
+          <div class="folio">02</div>
+          <div class="ov-body">
+            <span class="badge">DAY 2 · 둘째 날</span>
+            <h3>SUMMIT + 하이라인 + 첼시마켓<span class="bilingual" lang="en">SUMMIT + High Line + Chelsea Market</span></h3>
+            <p class="desc">호텔 조식 후 전망대, 점심 푸드홀, 오후 산책, 저녁은 첼시마켓 내부에서 해결.</p>
+            <div class="ministat"><span>📍 08:00 시작</span><span>🏙️ SUMMIT</span><span>🚶 걷기 많음</span></div>
+          </div>
+          <div class="ov-chev" aria-hidden="true">›</div>
+        </a>
+        <a class="ov-row d3 reveal" href="#day3">
+          <div class="folio">03</div>
+          <div class="ov-body">
+            <span class="badge">DAY 3 · 셋째 날</span>
+            <h3>자유의 여신상 크루즈 + 몬트리올 출발<span class="bilingual" lang="en">Statue Cruise + Drive to Montréal</span></h3>
+            <p class="desc">오전 크루즈, 점심 후 호텔 복귀. 오후 3시쯤 몬트리올 방향 출발.</p>
+            <div class="ministat"><span>📍 08:00 시작</span><span>⛴️ 크루즈</span><span>🚗 몬트리올 출발</span></div>
+          </div>
+          <div class="ov-chev" aria-hidden="true">›</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ BIG MAP ============ -->
+    <section id="map" class="section">
+      <div class="section-head"><div class="eyebrow" lang="en">All routes</div><h2>큰 지도형 동선 보기</h2><p>3일 동선을 한 지도에서 확인</p></div>
+      <div class="plate">
+        <div class="plate-cap">🗺️ 전체 동선 · All routes</div>
+        <div id="google-map" aria-label="뉴욕 3일 여행 구글 지도"></div>
+        <div class="gm-map-caption">
+          <div class="gm-legend"><span class="gm-dot blue"></span> DAY 1 관광</div>
+          <div class="gm-legend"><span class="gm-dot orange"></span> DAY 1 식사</div>
+          <div class="gm-legend"><span class="gm-dot green"></span> DAY 2 동선</div>
+          <div class="gm-legend"><span class="gm-dot purple"></span> DAY 3 동선</div>
+        </div>
+        <details class="map-note">
+          <summary>ⓘ 지도 보는 법</summary>
+          <div class="mn-body">실제 Google Maps 위에 주요 장소를 표시했습니다. 하이브리지 호텔에서 출발해, 1일차는 자연사박물관과 타임스퀘어, 2일차는 미드타운에서 첼시 방향, 3일차는 다운타운 크루즈 후 다시 호텔로 돌아와 몬트리올로 출발하는 흐름입니다.</div>
+        </details>
+        <div class="map-actions">
+          <a href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">🏨 Highbridge Hotel<span>숙소 / Base</span></a>
+          <a href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">🦖 AMNH<span>자연사박물관</span></a>
+          <a href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">🌃 Times Square<span>타임스퀘어</span></a>
+          <a href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">🍜 Urban Hawker<span>저녁 추천</span></a>
+          <a href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">🏙️ SUMMIT<span>전망대</span></a>
+          <a href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">🌿 High Line<span>산책 코스</span></a>
+          <a href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">🍽️ Chelsea Market<span>구경 + 저녁</span></a>
+          <a href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">🥗 Brookfield Place<span>3일차 점심</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DAY 1 ============ -->
+    <section id="day1" class="section">
+      <div class="day-card">
+        <div class="day-top d1">
+          <h3>DAY 1 · 자연사박물관 + 타임스퀘어<span class="bilingual" lang="en">AMNH + Times Square</span></h3>
+          <p class="sub">오후부터 시작하는 가벼운 첫날 일정입니다.</p>
+          <div class="glance"><span>🕑 14:00 시작</span><span>🚶 가벼운 동선</span><span>🍽️ 저녁 1끼</span></div>
+        </div>
+        <div class="day-content">
+          <div class="family-note"><div class="icon" aria-hidden="true">👨‍👩‍👧‍👦</div><div><strong>가족여행 포인트:</strong> 첫날은 이동 피로가 있을 수 있으니, 박물관 핵심 전시만 보고 타임스퀘어는 사진과 분위기 위주로 가볍게 보는 것이 좋습니다.</div></div>
+          <div class="day-map-shell"><div id="map-day1" class="day-map" aria-label="DAY 1 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot blue"></span> DAY 1 동선</div><div class="day-map-route">🏨 호텔 → 🦖 자연사박물관 → 🌃 타임스퀘어 → 🍜 어반 호커 → 🏨 호텔</div></div></div>
+          <div class="timeline d1">
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">14:00<small>2:00 PM</small></span><span class="tl-titles"><span class="tl-title">호텔 출발</span><span class="bilingual" lang="en">Leave hotel</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>하이브리지 호텔에서 맨해튼 방향으로 이동합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">15:00<small>3:00–5:30 PM</small></span><span class="tl-titles"><span class="tl-title">미국 자연사박물관 관람</span><span class="bilingual" lang="en">American Museum of Natural History</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>공룡, 해양생물, 우주 관련 전시 위주로 보면 아이와 함께 보기 좋습니다.</p><a class="tl-go" href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">18:00<small>6:00 PM</small></span><span class="tl-titles"><span class="tl-title">타임스퀘어 산책 · 사진</span><span class="bilingual" lang="en">Times Square walk &amp; photos</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>전광판, 캐릭터, 주변 상점 구경. 사람이 많으니 아이 손을 꼭 잡고 이동하세요.</p><a class="tl-go" href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">19:30<small>7:30 PM</small></span><span class="tl-titles"><span class="tl-title">저녁 식사</span><span class="bilingual" lang="en">Dinner</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>Urban Hawker를 1순위로 추천합니다. 한식이 필요하면 Food Gallery 32도 좋습니다.</p><a class="tl-go" href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">21:00<small>9:00 PM</small></span><span class="tl-titles"><span class="tl-title">호텔 복귀</span><span class="bilingual" lang="en">Return to hotel</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>첫날은 일찍 쉬고 다음 날 일정을 준비합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+          </div>
+          <div class="meal-grid">
+            <div class="meal reveal"><div class="pill eat">🍽️ No-tip friendly</div><h4>저녁 추천</h4><ul><li><strong>Urban Hawker</strong> — 푸드홀, 가장 추천</li><li><strong>Food Gallery 32</strong> — 한식·아시안 푸드코트</li><li><strong>Cook Eatery</strong> — 간단한 델리/빠른 식사</li></ul></div>
+            <div class="meal reveal"><div class="pill d1">🚇 Subway tip</div><h4>이동 팁</h4><ul><li>뉴욕 지하철은 색보다 <strong>라인 번호/문자</strong> 확인</li><li>호텔 복귀 시 <strong>Uptown/Bronx 방향</strong> 확인</li><li>아이 동반이면 환승 적은 경로 우선</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DAY 2 ============ -->
+    <section id="day2" class="section">
+      <div class="day-card">
+        <div class="day-top d2">
+          <h3>DAY 2 · SUMMIT + 하이라인 + 첼시마켓<span class="bilingual" lang="en">SUMMIT + High Line + Chelsea Market</span></h3>
+          <p class="sub">전망대, 산책, 실내 마켓을 한 번에 즐기는 뉴욕 핵심 코스입니다.</p>
+          <div class="glance"><span>🕗 08:00 시작</span><span>🚶 걷기 많음</span><span>🍽️ 점심·저녁</span></div>
+        </div>
+        <div class="day-content">
+          <div class="family-note"><div class="icon" aria-hidden="true">👟</div><div><strong>가족여행 포인트:</strong> 이날은 걷는 양이 많습니다. 편한 신발을 신고, 하이라인 산책 중간에 쉬는 시간을 넣으면 좋습니다.</div></div>
+          <div class="day-map-shell"><div id="map-day2" class="day-map" aria-label="DAY 2 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot green"></span> DAY 2 동선</div><div class="day-map-route">🏨 호텔 → 🏙️ SUMMIT → 🥗 밴더빌트 마켓 → 🌿 하이라인 → 🍽️ 첼시마켓 → 🏨 호텔</div></div></div>
+          <div class="timeline d2">
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">08:00<small>8:00 AM</small></span><span class="tl-titles"><span class="tl-title">호텔 조식</span><span class="bilingual" lang="en">Hotel breakfast</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>아침은 호텔에서 편하게 먹고 출발합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">09:30<small>9:30–11:15 AM</small></span><span class="tl-titles"><span class="tl-title">SUMMIT One Vanderbilt</span><span class="bilingual" lang="en">Observation deck</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>사진 명소가 많습니다. 어린이는 거울 공간에서 뛰지 않도록 주의하세요.</p><a class="tl-go" href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">11:30<small>11:30 AM</small></span><span class="tl-titles"><span class="tl-title">점심 식사</span><span class="bilingual" lang="en">Lunch</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>Vanderbilt Market 또는 Grand Central Dining Concourse 추천.</p><a class="tl-go" href="https://maps.google.com/?q=Vanderbilt+Market+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">13:00<small>1:00–2:30 PM</small></span><span class="tl-titles"><span class="tl-title">하이라인 산책</span><span class="bilingual" lang="en">Walk the High Line</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>Hudson Yards 쪽에서 시작해 Chelsea 방향으로 내려오는 동선이 자연스럽습니다.</p><a class="tl-go" href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">14:30<small>2:30–4:30 PM</small></span><span class="tl-titles"><span class="tl-title">첼시마켓 구경</span><span class="bilingual" lang="en">Explore Chelsea Market</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>실내라 쉬기 좋고, 간식과 기념품 구경도 편합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">17:00<small>5:00–6:30 PM</small></span><span class="tl-titles"><span class="tl-title">저녁 식사</span><span class="bilingual" lang="en">Dinner</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>첼시마켓 내부에서 Very Fresh Noodles, Miznon, Lobster Place 중 선택.</p><a class="tl-go" href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">19:30<small>7:30 PM</small></span><span class="tl-titles"><span class="tl-title">호텔 복귀</span><span class="bilingual" lang="en">Return to hotel</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>걷는 일정이 많으니 너무 늦게까지 끌지 않는 것이 좋습니다.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+          </div>
+          <div class="meal-grid">
+            <div class="meal reveal"><div class="pill d2">🥗 Lunch</div><h4>점심 추천</h4><ul><li><strong>Vanderbilt Market</strong> — SUMMIT 후 동선 좋음</li><li><strong>Grand Central Dining Concourse</strong> — 찾기 쉬운 실내 식사</li></ul></div>
+            <div class="meal reveal"><div class="pill eat">🍽️ Dinner</div><h4>저녁 추천</h4><ul><li><strong>Very Fresh Noodles</strong> — 면류</li><li><strong>Miznon</strong> — 피타/샌드위치류</li><li><strong>Lobster Place</strong> — 해산물/랍스터롤</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DAY 3 ============ -->
+    <section id="day3" class="section">
+      <div class="day-card">
+        <div class="day-top d3">
+          <h3>DAY 3 · 자유의 여신상 크루즈 + 몬트리올 출발<span class="bilingual" lang="en">Statue Cruise + Drive to Montréal</span></h3>
+          <p class="sub">마지막 날은 오전 크루즈 후 여유 있게 출발 준비합니다.</p>
+          <div class="glance"><span>🕗 08:00 시작</span><span>⛴️ 크루즈</span><span>🚗 오후 출발</span></div>
+        </div>
+        <div class="day-content">
+          <div class="family-note"><div class="icon" aria-hidden="true">🚗</div><div><strong>가족여행 포인트:</strong> 오후에 장거리 운전이 있으므로 마지막 날은 크루즈와 점심만 넣고, 무리한 추가 관광은 피하는 것이 좋습니다.</div></div>
+          <div class="day-map-shell"><div id="map-day3" class="day-map" aria-label="DAY 3 동선 지도"></div><div class="day-map-legend"><div class="gm-legend"><span class="gm-dot purple"></span> DAY 3 동선</div><div class="day-map-route">🏨 호텔 → ⛴️ 배터리 파크 → 🥗 허드슨 이츠 → 🏨 호텔</div></div></div>
+          <div class="timeline d3">
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">08:00<small>8:00 AM</small></span><span class="tl-titles"><span class="tl-title">호텔 조식 · 짐 정리</span><span class="bilingual" lang="en">Breakfast &amp; packing</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>차에 실을 짐과 필요한 물건을 미리 나눠두면 편합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">09:30<small>9:30–11:30 AM</small></span><span class="tl-titles"><span class="tl-title">자유의 여신상 크루즈</span><span class="bilingual" lang="en">Statue of Liberty Cruise</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>섬에 내리는 일정은 시간이 길어질 수 있으니, 당일 출발이면 뷰 크루즈가 더 안전합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Battery+Park+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">12:00<small>12:00 PM</small></span><span class="tl-titles"><span class="tl-title">점심 식사</span><span class="bilingual" lang="en">Lunch</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>Hudson Eats at Brookfield Place 추천. 실내 좌석이 있어 가족 식사에 편합니다.</p><a class="tl-go" href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">13:00<small>1:00–2:00 PM</small></span><span class="tl-titles"><span class="tl-title">호텔 복귀 · 출발 준비</span><span class="bilingual" lang="en">Return to hotel &amp; prepare to leave</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>차량 준비, 화장실, 간식/물 챙기기.</p><a class="tl-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">길찾기 ›</a></div></div></div>
+            <div class="tl"><button class="tl-head" aria-expanded="false"><span class="tl-time">15:00<small>3:00 PM</small></span><span class="tl-titles"><span class="tl-title">몬트리올 출발</span><span class="bilingual" lang="en">Depart for Montréal</span></span><span class="tl-chev" aria-hidden="true">⌄</span></button><div class="tl-panel"><div class="tl-panel-in"><p>국경 통과와 휴게소 시간을 고려해 여유 있게 이동하세요.</p><a class="tl-go" href="https://maps.google.com/?q=Montreal+QC+Canada" target="_blank">길찾기 ›</a></div></div></div>
+          </div>
+          <div class="meal-grid">
+            <div class="meal reveal"><div class="pill d3">🥗 Lunch</div><h4>점심 추천</h4><ul><li><strong>Hudson Eats at Brookfield Place</strong> — 가장 추천</li><li><strong>Gansevoort Liberty Market</strong> — 대안 푸드홀</li></ul></div>
+            <div class="meal reveal"><div class="pill rose">⛴️ Cruise note</div><h4>크루즈 선택 팁</h4><ul><li>섬에 내리는 페리는 대기 시간이 길 수 있음</li><li>오후 출발이면 60–90분 뷰 크루즈가 현실적</li><li>승선 장소와 출발 시간을 전날 확인</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PLACES ============ -->
+    <section id="places" class="section">
+      <div class="section-head"><div class="eyebrow" lang="en">Place finder</div><h2>장소 찾기 모음</h2><p>Korean / English · 버튼으로 바로 길찾기</p></div>
+      <div class="places">
+        <div class="place d1 reveal"><div class="place-tile" aria-hidden="true">🏨</div><div><div class="pill d1">🏨 Base</div><h3>하이브리지 호텔 <span class="bilingual" lang="en">Highbridge Hotel</span></h3><p class="note">브롱스 숙소. 매일 출발/복귀 기준점입니다.</p><a class="place-go" href="https://maps.google.com/?q=Highbridge+Hotel+Bronx" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d1 reveal"><div class="place-tile" aria-hidden="true">🦖</div><div><div class="pill d1">🦖 Day 1</div><h3>미국 자연사박물관 <span class="bilingual" lang="en">American Museum of Natural History</span></h3><p class="note">아이와 함께 보기 좋은 대표 박물관입니다.</p><a class="place-go" href="https://maps.google.com/?q=American+Museum+of+Natural+History+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d1 reveal"><div class="place-tile" aria-hidden="true">🌃</div><div><div class="pill eat">🌃 Day 1</div><h3>타임스퀘어 <span class="bilingual" lang="en">Times Square</span></h3><p class="note">야경, 사진, 상점 구경 포인트입니다.</p><a class="place-go" href="https://maps.google.com/?q=Times+Square+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d1 reveal"><div class="place-tile" aria-hidden="true">🍜</div><div><div class="pill eat">🍜 Dinner</div><h3>어반 호커 <span class="bilingual" lang="en">Urban Hawker</span></h3><p class="note">타임스퀘어 근처 푸드홀. 팁 부담 적은 저녁 1순위입니다.</p><a class="place-go" href="https://maps.google.com/?q=Urban+Hawker+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d2 reveal"><div class="place-tile" aria-hidden="true">🏙️</div><div><div class="pill d2">🏙️ Day 2</div><h3>서밋 원 밴더빌트 <span class="bilingual" lang="en">SUMMIT One Vanderbilt</span></h3><p class="note">뉴욕 전망과 사진 명소입니다.</p><a class="place-go" href="https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d2 reveal"><div class="place-tile" aria-hidden="true">🥗</div><div><div class="pill d2">🥗 Lunch</div><h3>밴더빌트 마켓 <span class="bilingual" lang="en">Vanderbilt Market</span></h3><p class="note">SUMMIT 이후 점심 먹기 좋은 푸드홀입니다.</p><a class="place-go" href="https://maps.google.com/?q=Vanderbilt+Market+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d2 reveal"><div class="place-tile" aria-hidden="true">🌿</div><div><div class="pill d2">🌿 Day 2</div><h3>하이라인 <span class="bilingual" lang="en">The High Line</span></h3><p class="note">도시 위 산책로. Hudson Yards에서 Chelsea 방향 추천.</p><a class="place-go" href="https://maps.google.com/?q=The+High+Line+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d2 reveal"><div class="place-tile" aria-hidden="true">🍽️</div><div><div class="pill d2">🍽️ Day 2</div><h3>첼시마켓 <span class="bilingual" lang="en">Chelsea Market</span></h3><p class="note">실내 구경, 간식, 저녁까지 해결하기 좋습니다.</p><a class="place-go" href="https://maps.google.com/?q=Chelsea+Market+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d3 reveal"><div class="place-tile" aria-hidden="true">⛴️</div><div><div class="pill d3">⛴️ Day 3</div><h3>배터리 파크 <span class="bilingual" lang="en">Battery Park</span></h3><p class="note">자유의 여신상 크루즈 출발 지역입니다.</p><a class="place-go" href="https://maps.google.com/?q=Battery+Park+New+York" target="_blank">🧭 지도 ›</a></div></div>
+        <div class="place d3 reveal"><div class="place-tile" aria-hidden="true">🥗</div><div><div class="pill d3">🥗 Lunch</div><h3>허드슨 이츠 <span class="bilingual" lang="en">Hudson Eats at Brookfield Place</span></h3><p class="note">마지막 날 점심으로 편한 실내 푸드홀입니다.</p><a class="place-go" href="https://maps.google.com/?q=Brookfield+Place+New+York" target="_blank">🧭 지도 ›</a></div></div>
+      </div>
+    </section>
+
+    <!-- ============ TIPS ============ -->
+    <section id="tips" class="section">
+      <div class="section-head"><div class="eyebrow" lang="en">Field notes</div><h2>핵심 팁</h2><p>Family travel tips</p></div>
+      <div class="tips">
+        <div class="tip reveal"><div class="folio">01</div><div class="ic" aria-hidden="true">🚇</div><div><h4>색보다 라인 확인</h4><p>뉴욕 지하철은 색깔보다 숫자/문자 라인이 중요합니다. 같은 색이어도 다른 곳으로 갈 수 있습니다.</p></div></div>
+        <div class="tip reveal"><div class="folio">02</div><div class="ic" aria-hidden="true">🍽️</div><div><h4>팁 부담 줄이기</h4><p>푸드홀, 푸드코트, 카운터 주문 식당은 테이블서비스보다 팁 부담이 적습니다.</p></div></div>
+        <div class="tip reveal"><div class="folio">03</div><div class="ic" aria-hidden="true">👟</div><div><h4>아이 속도에 맞추기</h4><p>사진 명소보다 화장실, 휴식, 간식 시간을 더 넉넉히 잡으면 일정이 편합니다.</p></div></div>
+        <div class="tip reveal"><div class="folio">04</div><div class="ic" aria-hidden="true">🚗</div><div><h4>마지막 날 압축 금지</h4><p>크루즈 후 몬트리올 장거리 이동이 있으므로 추가 관광은 최소화하는 것이 좋습니다.</p></div></div>
+      </div>
+      <div class="share-note"><div class="ic" aria-hidden="true">📱</div><div><strong>공유 팁:</strong> 이 파일은 휴대폰 브라우저에서 열어도 보기 좋고, 각 장소의 Google Maps 버튼을 누르면 바로 길찾기 확인이 가능합니다.</div></div>
+    </section>
+
+    <footer>
+      뉴욕 3일 가족여행 가이드 · NYC 3-Day Family Guide · Highbridge Hotel 기준
+      <a class="top-link" href="#top">↑ 맨 위로</a>
+    </footer>
   </div>
 
+  <!-- ============ BOTTOM THUMB DOCK ============ -->
+  <nav class="dock" id="dock" aria-label="빠른 이동">
+    <div class="dock-inner">
+      <a href="#map"><span class="ic" aria-hidden="true">🗺️</span>큰 지도</a>
+      <a class="primary" href="#places"><span class="ic" aria-hidden="true">📍</span>장소</a>
+      <a href="#tips"><span class="ic" aria-hidden="true">💡</span>팁</a>
+    </div>
+  </nav>
+
+  <!-- ============ GOOGLE MAPS ============ -->
   <script>
     function initMap() {
       const places = [
-        {
-          key: "hotel",
-          day: "base",
-          title: "하이브리지 호텔",
-          titleEn: "Highbridge Hotel",
-          pos: { lat: 40.8374, lng: -73.9277 },
-          note: "숙소 · 매일 출발/복귀 기준점",
-          url: "https://maps.google.com/?q=Highbridge+Hotel+Bronx",
-          color: "#2563eb"
-        },
-        {
-          key: "amnh",
-          day: "day1",
-          title: "미국 자연사박물관",
-          titleEn: "American Museum of Natural History",
-          pos: { lat: 40.7813, lng: -73.97399 },
-          note: "DAY 1 · 오후 3시 관람",
-          url: "https://maps.google.com/?q=American+Museum+of+Natural+History+New+York",
-          color: "#2563eb"
-        },
-        {
-          key: "times",
-          day: "day1",
-          title: "타임스퀘어",
-          titleEn: "Times Square",
-          pos: { lat: 40.7580, lng: -73.9855 },
-          note: "DAY 1 · 저녁 산책/사진",
-          url: "https://maps.google.com/?q=Times+Square+New+York",
-          color: "#2563eb"
-        },
-        {
-          key: "urban",
-          day: "meal1",
-          title: "어반 호커",
-          titleEn: "Urban Hawker",
-          pos: { lat: 40.7614, lng: -73.9808 },
-          note: "DAY 1 저녁 추천 · 푸드홀",
-          url: "https://maps.google.com/?q=Urban+Hawker+New+York",
-          color: "#ea580c"
-        },
-        {
-          key: "summit",
-          day: "day2",
-          title: "서밋 원 밴더빌트",
-          titleEn: "SUMMIT One Vanderbilt",
-          pos: { lat: 40.7529, lng: -73.9787 },
-          note: "DAY 2 · 전망대",
-          url: "https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York",
-          color: "#059669"
-        },
-        {
-          key: "vanderbilt",
-          day: "meal2",
-          title: "밴더빌트 마켓",
-          titleEn: "Vanderbilt Market",
-          pos: { lat: 40.7540, lng: -73.9794 },
-          note: "DAY 2 점심 추천 · 푸드홀",
-          url: "https://maps.google.com/?q=Vanderbilt+Market+New+York",
-          color: "#059669"
-        },
-        {
-          key: "highline",
-          day: "day2",
-          title: "하이라인",
-          titleEn: "The High Line",
-          pos: { lat: 40.7480, lng: -74.0048 },
-          note: "DAY 2 · Hudson Yards 쪽에서 산책 시작",
-          url: "https://maps.google.com/?q=The+High+Line+New+York",
-          color: "#059669"
-        },
-        {
-          key: "chelsea",
-          day: "day2",
-          title: "첼시마켓",
-          titleEn: "Chelsea Market",
-          pos: { lat: 40.7424, lng: -74.0060 },
-          note: "DAY 2 · 구경 + 저녁",
-          url: "https://maps.google.com/?q=Chelsea+Market+New+York",
-          color: "#059669"
-        },
-        {
-          key: "battery",
-          day: "day3",
-          title: "배터리 파크",
-          titleEn: "Battery Park",
-          pos: { lat: 40.7033, lng: -74.0170 },
-          note: "DAY 3 · 자유의 여신상 크루즈 출발 지역",
-          url: "https://maps.google.com/?q=Battery+Park+New+York",
-          color: "#7c3aed"
-        },
-        {
-          key: "brookfield",
-          day: "day3",
-          title: "허드슨 이츠",
-          titleEn: "Hudson Eats at Brookfield Place",
-          pos: { lat: 40.7127, lng: -74.0158 },
-          note: "DAY 3 점심 추천 · 실내 푸드홀",
-          url: "https://maps.google.com/?q=Brookfield+Place+New+York",
-          color: "#7c3aed"
-        }
+        { key:"hotel", day:"base", title:"하이브리지 호텔", titleEn:"Highbridge Hotel", pos:{lat:40.8374,lng:-73.9277}, note:"숙소 · 매일 출발/복귀 기준점", url:"https://maps.google.com/?q=Highbridge+Hotel+Bronx", color:"#2D8FA8" },
+        { key:"amnh", day:"day1", title:"미국 자연사박물관", titleEn:"American Museum of Natural History", pos:{lat:40.7813,lng:-73.97399}, note:"DAY 1 · 오후 3시 관람", url:"https://maps.google.com/?q=American+Museum+of+Natural+History+New+York", color:"#2D8FA8" },
+        { key:"times", day:"day1", title:"타임스퀘어", titleEn:"Times Square", pos:{lat:40.7580,lng:-73.9855}, note:"DAY 1 · 저녁 산책/사진", url:"https://maps.google.com/?q=Times+Square+New+York", color:"#2D8FA8" },
+        { key:"urban", day:"meal1", title:"어반 호커", titleEn:"Urban Hawker", pos:{lat:40.7614,lng:-73.9808}, note:"DAY 1 저녁 추천 · 푸드홀", url:"https://maps.google.com/?q=Urban+Hawker+New+York", color:"#A8542B" },
+        { key:"summit", day:"day2", title:"서밋 원 밴더빌트", titleEn:"SUMMIT One Vanderbilt", pos:{lat:40.7529,lng:-73.9787}, note:"DAY 2 · 전망대", url:"https://maps.google.com/?q=SUMMIT+One+Vanderbilt+New+York", color:"#4F9D5B" },
+        { key:"vanderbilt", day:"meal2", title:"밴더빌트 마켓", titleEn:"Vanderbilt Market", pos:{lat:40.7540,lng:-73.9794}, note:"DAY 2 점심 추천 · 푸드홀", url:"https://maps.google.com/?q=Vanderbilt+Market+New+York", color:"#4F9D5B" },
+        { key:"highline", day:"day2", title:"하이라인", titleEn:"The High Line", pos:{lat:40.7480,lng:-74.0048}, note:"DAY 2 · Hudson Yards 쪽에서 산책 시작", url:"https://maps.google.com/?q=The+High+Line+New+York", color:"#4F9D5B" },
+        { key:"chelsea", day:"day2", title:"첼시마켓", titleEn:"Chelsea Market", pos:{lat:40.7424,lng:-74.0060}, note:"DAY 2 · 구경 + 저녁", url:"https://maps.google.com/?q=Chelsea+Market+New+York", color:"#4F9D5B" },
+        { key:"battery", day:"day3", title:"배터리 파크", titleEn:"Battery Park", pos:{lat:40.7033,lng:-74.0170}, note:"DAY 3 · 자유의 여신상 크루즈 출발 지역", url:"https://maps.google.com/?q=Battery+Park+New+York", color:"#8A5BBF" },
+        { key:"brookfield", day:"day3", title:"허드슨 이츠", titleEn:"Hudson Eats at Brookfield Place", pos:{lat:40.7127,lng:-74.0158}, note:"DAY 3 점심 추천 · 실내 푸드홀", url:"https://maps.google.com/?q=Brookfield+Place+New+York", color:"#8A5BBF" }
       ];
 
       const baseStyles = [
-        { featureType: "poi.business", stylers: [{ visibility: "on" }] },
-        { featureType: "transit", stylers: [{ visibility: "on" }] },
-        { featureType: "water", elementType: "geometry", stylers: [{ color: "#dbeafe" }] },
-        { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f8fafc" }] }
+        { featureType:"poi.business", stylers:[{ visibility:"on" }] },
+        { featureType:"transit", stylers:[{ visibility:"on" }] },
+        { featureType:"water", elementType:"geometry", stylers:[{ color:"#CDE6EA" }] },
+        { featureType:"landscape", elementType:"geometry", stylers:[{ color:"#F4ECE0" }] }
       ];
 
       const makeMarkerIcon = (color) => ({
         path: google.maps.SymbolPath.CIRCLE,
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: "#ffffff",
-        strokeWeight: 3,
-        scale: 9
+        fillColor: color, fillOpacity: 1, strokeColor: "#ffffff", strokeWeight: 3, scale: 9
       });
 
-      const findPlaces = (keys) =>
-        keys.map(k => places.find(p => p.key === k)).filter(Boolean);
+      const findPlaces = (keys) => keys.map(k => places.find(p => p.key === k)).filter(Boolean);
 
       // 컨테이너 하나에 마커 + 동선(폴리라인)을 그려주는 재사용 함수
       function buildMap(containerId, markerKeys, routes) {
@@ -344,12 +562,8 @@
 
         const map = new google.maps.Map(el, {
           center: { lat: 40.7665, lng: -73.9850 },
-          zoom: 11,
-          mapTypeControl: false,
-          streetViewControl: false,
-          fullscreenControl: true,
-          clickableIcons: true,
-          styles: baseStyles
+          zoom: 11, mapTypeControl: false, streetViewControl: false,
+          fullscreenControl: true, clickableIcons: true, styles: baseStyles
         });
 
         const bounds = new google.maps.LatLngBounds();
@@ -358,18 +572,10 @@
         findPlaces(markerKeys).forEach((p, index) => {
           bounds.extend(p.pos);
           const marker = new google.maps.Marker({
-            position: p.pos,
-            map,
-            title: `${p.title} · ${p.titleEn}`,
-            label: {
-              text: String(index + 1),
-              color: "#ffffff",
-              fontWeight: "900",
-              fontSize: "12px"
-            },
+            position: p.pos, map, title: `${p.title} · ${p.titleEn}`,
+            label: { text: String(index + 1), color: "#ffffff", fontWeight: "900", fontSize: "12px" },
             icon: makeMarkerIcon(p.color)
           });
-
           marker.addListener("click", () => {
             info.setContent(`
               <div class="gm-info">
@@ -385,19 +591,8 @@
         routes.forEach(({ keys, color }) => {
           const path = findPlaces(keys).map(p => p.pos);
           new google.maps.Polyline({
-            path,
-            geodesic: true,
-            strokeColor: color,
-            strokeOpacity: 0.85,
-            strokeWeight: 5,
-            icons: [{
-              icon: {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                scale: 3,
-                strokeColor: color
-              },
-              offset: "55%"
-            }],
+            path, geodesic: true, strokeColor: color, strokeOpacity: 0.85, strokeWeight: 5,
+            icons: [{ icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 3, strokeColor: color }, offset: "55%" }],
             map
           });
         });
@@ -405,22 +600,129 @@
         map.fitBounds(bounds, 58);
       }
 
-      const day1Route = { keys: ["hotel", "amnh", "times", "urban", "hotel"], color: "#2563eb" };
-      const day2Route = { keys: ["hotel", "summit", "vanderbilt", "highline", "chelsea", "hotel"], color: "#059669" };
-      const day3Route = { keys: ["hotel", "battery", "brookfield", "hotel"], color: "#7c3aed" };
+      const day1Route = { keys: ["hotel","amnh","times","urban","hotel"], color: "#2D8FA8" };
+      const day2Route = { keys: ["hotel","summit","vanderbilt","highline","chelsea","hotel"], color: "#4F9D5B" };
+      const day3Route = { keys: ["hotel","battery","brookfield","hotel"], color: "#8A5BBF" };
 
       // 전체 보기 지도: 3일 동선 모두 표시
       buildMap("google-map", places.map(p => p.key), [day1Route, day2Route, day3Route]);
 
       // 일차별 지도: 해당 날짜 동선만 표시
-      buildMap("map-day1", ["hotel", "amnh", "times", "urban"], [day1Route]);
-      buildMap("map-day2", ["hotel", "summit", "vanderbilt", "highline", "chelsea"], [day2Route]);
-      buildMap("map-day3", ["hotel", "battery", "brookfield"], [day3Route]);
+      buildMap("map-day1", ["hotel","amnh","times","urban"], [day1Route]);
+      buildMap("map-day2", ["hotel","summit","vanderbilt","highline","chelsea"], [day2Route]);
+      buildMap("map-day3", ["hotel","battery","brookfield"], [day3Route]);
     }
-
     window.initMap = initMap;
   </script>
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&loading=async&callback=initMap"></script>
 
+  <!-- ============ UI INTERACTIONS ============ -->
+  <style>
+    .gm-info{max-width:260px;font-family:var(--font-sans);color:var(--ink);line-height:1.45}
+    .gm-info strong{display:block;font-size:15px;margin-bottom:3px}
+    .gm-info span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+    .gm-info a{display:inline-block;color:var(--d1-ink);font-weight:800;text-decoration:none;font-size:13px}
+  </style>
+  <script>
+    (function(){
+      document.documentElement.classList.add('js');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // --- accordion timeline ---
+      document.querySelectorAll('.tl-head').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tl = btn.closest('.tl');
+          const open = tl.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      // --- scroll-spy + segmented switcher ---
+      const segs = Array.from(document.querySelectorAll('.seg'));
+      const byKey = {}; segs.forEach(s => byKey[s.dataset.k] = s);
+      const sectionKey = { overview:'overview', map:'map', day1:'d1', day2:'d2', day3:'d3', places:'places', tips:'tips' };
+      const track = document.getElementById('segTrack');
+      let activeKey = null;
+      function setActive(key){
+        if (key === activeKey || !byKey[key]) return;
+        activeKey = key;
+        segs.forEach(s => { const on = s.dataset.k === key; s.classList.toggle('is-active', on); if (on) s.setAttribute('aria-current','true'); else s.removeAttribute('aria-current'); });
+        const pill = byKey[key];
+        const left = pill.offsetLeft - track.clientWidth/2 + pill.clientWidth/2;
+        track.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+      }
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) setActive(sectionKey[e.target.id]); });
+      }, { rootMargin: '-118px 0px -55% 0px', threshold: 0 });
+      Object.keys(sectionKey).forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+      // --- app bar shrink + progress + dock auto-hide ---
+      const topbar = document.getElementById('topbar');
+      const dock = document.getElementById('dock');
+      let lastY = window.scrollY, ticking = false;
+      function onScroll(){
+        const y = window.scrollY;
+        topbar.classList.toggle('shrink', y > 24);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        topbar.style.setProperty('--progress', max > 0 ? (y / max).toFixed(4) : 0);
+        if (!reduce){
+          if (y > lastY && y > 220) dock.classList.add('hide');
+          else dock.classList.remove('hide');
+        }
+        lastY = y; ticking = false;
+      }
+      window.addEventListener('scroll', () => { if (!ticking){ window.requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+      onScroll();
+
+      // --- entrance reveal ---
+      if (!reduce && 'IntersectionObserver' in window){
+        const rev = new IntersectionObserver((entries, obs) => {
+          entries.forEach((e, i) => { if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }
+
+      // --- "오늘" smart date context ---
+      const trip = { 'd1':'2026-06-13', 'd2':'2026-06-14', 'd3':'2026-06-15' };
+      const labelByDay = { 'd1':'DAY 1', 'd2':'DAY 2', 'd3':'DAY 3' };
+      const hrefByDay = { 'd1':'#day1', 'd2':'#day2', 'd3':'#day3' };
+      const sectionByDay = { 'd1':'day1', 'd2':'day2', 'd3':'day3' };
+      function todayStr(){ const d = new Date(); const p = n => String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+      const t = todayStr();
+      let currentDay = 'd1';
+      const badge = document.getElementById('todayBadge');
+      const match = Object.keys(trip).find(k => trip[k] === t);
+      if (match){
+        currentDay = match;
+        badge.innerHTML = '<span class="dot"></span> 오늘 · ' + labelByDay[currentDay];
+      } else if (t < trip.d1){
+        const days = Math.round((new Date(trip.d1) - new Date(t)) / 86400000);
+        badge.innerHTML = '<span class="dot"></span> D-' + days;
+        currentDay = 'd1';
+      } else {
+        // after trip (or unknown) — default to Day 1 overview entry
+        badge.innerHTML = '<span class="dot"></span> DAY 1';
+        currentDay = 'd1';
+      }
+      badge.setAttribute('href', hrefByDay[currentDay]);
+
+      // open + mark the current day's first timeline row
+      const sec = document.getElementById(sectionByDay[currentDay]);
+      if (sec){
+        const firstTl = sec.querySelector('.timeline .tl');
+        if (firstTl){
+          firstTl.classList.add('open','now');
+          const hb = firstTl.querySelector('.tl-head'); if (hb) hb.setAttribute('aria-expanded','true');
+          const titles = firstTl.querySelector('.tl-titles .tl-title');
+          if (titles && !titles.querySelector('.now-tag')){
+            const tag = document.createElement('span'); tag.className = 'now-tag'; tag.textContent = '지금/다음';
+            titles.appendChild(tag);
+          }
+        }
+      }
+    })();
+  </script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8zyJ7FAlpE_N3wzYROV6xgI0twSIylfc&loading=async&callback=initMap"></script>
 </body>
 </html>
