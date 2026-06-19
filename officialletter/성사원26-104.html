@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 여름 권역별 어린이 특별 집회 신청 안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    font-size:16px;
+    --bg-top:#FFF6E9;
+    --bg-mid:#FDEBD6;
+    --bg-bot:#FBE2C6;
+    --ink:#23323A;
+    --ink-soft:#5C6D74;
+    --teal:#0F6E63;
+    --teal-deep:#0A4F47;
+    --teal-tint:#E4F1EE;
+    --amber:#E8941C;
+    --amber-deep:#B5710E;
+    --amber-tint:#FCEDD3;
+    --coral:#E0452C;
+    --coral-deep:#B5331E;
+    --coral-tint:#FCE3DC;
+    --card:#FFFFFF;
+    --line:#EFE3D2;
+    --line-soft:#F4ECDF;
+    --sans:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
+    --serif:'Gowun Batang',serif;
+    --shadow:0 1px 2px rgba(35,50,58,.05),0 8px 22px rgba(35,50,58,.07);
+    --shadow-sm:0 1px 2px rgba(35,50,58,.05),0 3px 10px rgba(35,50,58,.05);
+    --radius:1.1rem;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--sans);
+    font-size:1rem;
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background:
+      radial-gradient(60rem 30rem at 85% -6%, rgba(232,148,28,.16), transparent 60%),
+      linear-gradient(176deg, var(--bg-top) 0%, var(--bg-mid) 48%, var(--bg-bot) 100%);
+    background-attachment:fixed;
+    padding:0.9rem 0.85rem 2.6rem;
+  }
+
+  .page{max-width:54rem;margin:0 auto;}
+  .stack{display:flex;flex-direction:column;gap:0.9rem;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  /* ---------- eyebrow ---------- */
+  .eyebrow{
+    display:flex;align-items:center;gap:0.5rem;
+    font-size:0.82rem;font-weight:800;letter-spacing:.03em;
+    color:var(--teal);
+    margin:0 0 0.85rem;
+  }
+  .eyebrow--inline{margin-bottom:0.4rem;}
+  .eb-dot{width:0.8rem;height:0.8rem;border-radius:50%;border:0.18rem solid var(--teal);flex:0 0 auto;}
+
+  /* ---------- brand bar ---------- */
+  .brandbar{padding:1.1rem 1.15rem;position:relative;overflow:hidden;}
+  .brandbar::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0.3rem;background:linear-gradient(var(--teal),var(--amber));}
+  .brand-name{display:flex;flex-direction:column;line-height:1.2;padding-left:0.4rem;}
+  .brand-ko{font-family:var(--serif);font-weight:700;font-size:clamp(1.4rem,6.5vw,1.7rem);color:var(--ink);letter-spacing:.05em;}
+  .brand-en{font-size:0.66rem;font-weight:700;letter-spacing:.22em;color:var(--teal);margin-top:0.15rem;}
+  .brand-meta{margin-top:0.65rem;padding-left:0.4rem;}
+  .brand-meta p{margin:0;font-size:0.76rem;color:var(--ink-soft);line-height:1.55;}
+  .brand-divider{height:1px;background:var(--line-soft);margin:0.85rem 0 0.75rem;}
+  .docmeta{display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .chip{font-size:0.72rem;font-weight:700;padding:0.28rem 0.6rem;border-radius:999px;background:var(--teal);color:#fff;}
+  .chip--soft{background:var(--teal-tint);color:var(--teal-deep);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;border:none;color:#fff;
+    background:
+      radial-gradient(22rem 16rem at 92% -28%, rgba(255,206,140,.34), transparent 62%),
+      linear-gradient(150deg,#0F6E63 0%,#0A4F47 100%);
+    padding:1.55rem 1.3rem 1.6rem;
+  }
+  .hero-sun{position:absolute;right:-1.5rem;top:-2rem;width:9rem;height:9rem;opacity:.6;pointer-events:none;}
+  .hero-eyebrow{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;font-weight:800;letter-spacing:.04em;color:#FCD79B;position:relative;margin:0 0 0.6rem;}
+  .hero-eyebrow .eb-dot{border-color:#FCD79B;}
+  .hero-title{position:relative;margin:0;font-weight:800;letter-spacing:-.01em;font-size:clamp(1.85rem,8.5vw,2.9rem);line-height:1.18;}
+  .hero-sub{position:relative;font-family:var(--serif);font-weight:400;font-size:clamp(1.05rem,4.6vw,1.45rem);color:#FCE9CE;margin:0.5rem 0 0;letter-spacing:.02em;}
+  .hero-lead{position:relative;margin:0.9rem 0 0;max-width:52ch;font-size:0.9rem;line-height:1.72;color:rgba(255,255,255,.86);}
+
+  /* ---------- deadline banner (emphasis) ---------- */
+  .deadline{
+    position:relative;overflow:hidden;color:#fff;border:none;
+    background:linear-gradient(135deg,#E0452C 0%,#B5331E 100%);
+    border-radius:var(--radius);
+    box-shadow:0 10px 28px rgba(224,69,44,.3);
+    padding:1.2rem 1.25rem;
+    display:flex;gap:1rem;align-items:center;
+  }
+  .deadline::after{content:"";position:absolute;right:-3rem;bottom:-4rem;width:11rem;height:11rem;border-radius:50%;background:rgba(255,255,255,.07);}
+  .deadline-ic{position:relative;flex:0 0 auto;width:3.4rem;height:3.4rem;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;}
+  .deadline-ic svg{width:1.75rem;height:1.75rem;color:#fff;position:relative;z-index:1;}
+  .deadline-ic::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.55);}
+  .deadline-body{position:relative;min-width:0;}
+  .deadline-kicker{display:flex;flex-wrap:wrap;align-items:center;gap:0.45rem;font-size:0.8rem;font-weight:800;letter-spacing:.04em;}
+  .deadline-tag{background:rgba(255,255,255,.22);padding:0.15rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:800;letter-spacing:.02em;}
+  .deadline-date{font-size:clamp(1.45rem,7vw,2.1rem);font-weight:800;line-height:1.12;margin:0.25rem 0 0;letter-spacing:-.01em;}
+  .deadline-date .yr{font-size:0.55em;font-weight:700;opacity:.85;margin-right:0.3rem;}
+  .deadline-note{font-size:0.82rem;margin:0.2rem 0 0;color:rgba(255,255,255,.92);}
+
+  /* ---------- groups & grids (mobile-first auto-stack) ---------- */
+  .group{display:block;}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:0.8rem;}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:0.8rem;}
+
+  /* facts */
+  .fact{background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow-sm);padding:1.1rem 1.1rem 1rem;display:flex;flex-direction:column;}
+  .fact-ic{width:2.4rem;height:2.4rem;border-radius:0.7rem;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal);margin-bottom:0.75rem;}
+  .fact-ic svg{width:1.3rem;height:1.3rem;}
+  .fact-label{margin:0;font-size:0.8rem;font-weight:700;color:var(--ink-soft);}
+  .fact-main{margin:0.3rem 0 0;font-size:clamp(1.35rem,6vw,1.6rem);font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+  .fact-main .arrow{color:var(--teal);margin:0 0.15rem;}
+  .fact-foot{margin:0.35rem 0 0;font-size:0.8rem;color:var(--ink-soft);}
+
+  /* themes */
+  .theme{background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow-sm);padding:1.25rem 1.25rem 1.35rem;border-top:0.2rem solid var(--teal);}
+  .theme:nth-child(2){border-top-color:var(--amber);}
+  .theme-ic{width:2.3rem;height:2.3rem;border-radius:0.65rem;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal);margin-bottom:0.8rem;}
+  .theme:nth-child(2) .theme-ic{background:var(--amber-tint);color:var(--amber-deep);}
+  .theme-ic svg{width:1.25rem;height:1.25rem;}
+  .theme-tag{margin:0;font-size:0.8rem;font-weight:800;color:var(--ink-soft);}
+  .theme-tag span{font-weight:600;opacity:.78;}
+  .theme-title{margin:0.55rem 0 0;font-family:var(--serif);font-weight:700;font-size:clamp(1.1rem,4.6vw,1.35rem);line-height:1.42;color:var(--ink);letter-spacing:.01em;}
+
+  /* ---------- panel ---------- */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem 1.25rem;}
+
+  /* audience */
+  .pills{display:flex;flex-wrap:wrap;gap:0.55rem;}
+  .pill{display:inline-flex;align-items:baseline;gap:0.4rem;background:var(--teal-tint);color:var(--teal-deep);font-weight:800;font-size:0.9rem;padding:0.55rem 0.95rem;border-radius:999px;}
+  .pill em{font-style:normal;font-weight:600;font-size:0.78rem;opacity:.82;}
+  .note{display:flex;gap:0.6rem;align-items:flex-start;margin:1rem 0 0;padding:0.8rem 0.9rem;border-radius:0.75rem;background:var(--amber-tint);font-size:0.85rem;line-height:1.6;color:var(--amber-deep);}
+  .note-ic{flex:0 0 auto;width:1.15rem;height:1.15rem;color:var(--amber-deep);margin-top:0.1rem;}
+  .note-ic svg{width:1.15rem;height:1.15rem;}
+  .note--plain{background:transparent;padding:0.9rem 0 0;color:var(--ink-soft);gap:0;}
+
+  /* ---------- fees ---------- */
+  .price{background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow-sm);padding:1.25rem 1.25rem 1.35rem;}
+  .price-tag{display:inline-block;margin:0 0 0.65rem;font-size:0.8rem;font-weight:800;letter-spacing:.02em;color:var(--teal);background:var(--teal-tint);padding:0.25rem 0.75rem;border-radius:999px;}
+  .price:nth-child(2) .price-tag{color:var(--amber-deep);background:var(--amber-tint);}
+  .price-amount{margin:0;font-weight:800;color:var(--ink);line-height:1;}
+  .price-amount .num{font-size:clamp(1.9rem,9vw,2.4rem);letter-spacing:-.02em;}
+  .price-amount .won{font-size:1.05rem;margin-left:0.2rem;font-weight:700;}
+  .price-desc{margin:0.75rem 0 0;font-size:0.82rem;line-height:1.6;color:var(--ink-soft);}
+  .price-badge{display:inline-block;margin-top:0.5rem;font-size:0.74rem;font-weight:700;color:var(--amber-deep);background:var(--amber-tint);padding:0.18rem 0.55rem;border-radius:0.45rem;}
+
+  /* important callout */
+  .important{margin:0.8rem 0 0;border:1px solid #F0C4B9;background:var(--coral-tint);border-radius:0.9rem;padding:0.95rem 1rem;}
+  .important-head{display:flex;align-items:center;gap:0.5rem;margin:0 0 0.5rem;}
+  .important-badge{display:inline-flex;align-items:center;gap:0.3rem;background:var(--coral);color:#fff;font-size:0.72rem;font-weight:800;letter-spacing:.03em;padding:0.2rem 0.55rem;border-radius:0.4rem;}
+  .important-badge svg{width:0.85rem;height:0.85rem;}
+  .important-title{font-size:0.86rem;font-weight:800;color:var(--coral-deep);}
+  .important-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.45rem;}
+  .important-list li{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.86rem;line-height:1.55;color:var(--coral-deep);}
+  .important-list li::before{content:"";flex:0 0 auto;width:0.4rem;height:0.4rem;border-radius:50%;background:var(--coral);margin-top:0.55rem;}
+  .important-list b{font-weight:800;}
+
+  /* ---------- materials ---------- */
+  .panel--row{display:flex;gap:0.9rem;align-items:flex-start;}
+  .panel-ic{flex:0 0 auto;width:2.85rem;height:2.85rem;border-radius:0.8rem;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal);}
+  .panel-ic svg{width:1.5rem;height:1.5rem;}
+  .mat-main{margin:0;font-size:clamp(0.95rem,4vw,1.05rem);font-weight:600;color:var(--ink);}
+  .mat-main b{font-weight:800;color:var(--teal-deep);}
+  .mat-sub{margin:0.35rem 0 0;font-size:0.8rem;color:var(--ink-soft);line-height:1.55;}
+
+  /* ---------- steps ---------- */
+  .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0.9rem;}
+  .step{display:flex;gap:0.85rem;align-items:flex-start;}
+  .step-no{flex:0 0 auto;width:1.85rem;height:1.85rem;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:#fff;font-weight:800;font-size:0.95rem;margin-top:0.1rem;}
+  .step-body{min-width:0;}
+  .step-title{margin:0 0 0.2rem;font-size:0.92rem;font-weight:800;color:var(--ink);}
+  .step-text{margin:0.15rem 0 0;font-size:0.86rem;line-height:1.6;color:var(--ink-soft);word-break:break-word;}
+  .step-text b{color:var(--ink);font-weight:700;}
+  .kv{font-weight:700;color:var(--ink);}
+  .acct{font-weight:800;color:var(--teal-deep);letter-spacing:.04em;background:var(--teal-tint);padding:0.1rem 0.5rem;border-radius:0.4rem;margin-left:0.15rem;}
+
+  /* ---------- meetings ---------- */
+  .meeting{background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow-sm);padding:1.1rem 1.2rem;border-left:0.2rem solid var(--amber);}
+  .meeting-role{margin:0;font-size:0.8rem;font-weight:800;color:var(--amber-deep);}
+  .meeting-when{margin:0.4rem 0 0;font-size:1.15rem;font-weight:800;color:var(--ink);}
+  .meeting-where{display:flex;align-items:center;gap:0.35rem;margin:0.4rem 0 0;font-size:0.85rem;font-weight:600;color:var(--ink-soft);}
+  .meeting-where svg{width:0.9rem;height:0.9rem;color:var(--amber-deep);flex:0 0 auto;}
+
+  /* ---------- contact ---------- */
+  .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:0.65rem;}
+  .contact-item{display:flex;align-items:center;gap:0.7rem;min-height:3rem;background:var(--teal-tint);border-radius:0.8rem;padding:0.75rem 0.9rem;text-decoration:none;color:var(--ink);font-size:0.9rem;transition:background .2s ease;}
+  .contact-item:hover{background:#D7E8E4;}
+  .contact-item b{font-weight:800;}
+  .contact-ic{flex:0 0 auto;width:2.1rem;height:2.1rem;border-radius:0.55rem;display:grid;place-items:center;background:#fff;color:var(--teal);}
+  .contact-ic svg{width:1.05rem;height:1.05rem;}
+  .contact-num{display:block;font-weight:800;color:var(--teal-deep);letter-spacing:.02em;font-size:0.9rem;margin-top:0.05rem;}
+
+  /* ---------- links ---------- */
+  .link{color:var(--teal-deep);font-weight:800;text-decoration:underline;text-underline-offset:0.2rem;text-decoration-thickness:0.1rem;text-decoration-color:rgba(15,110,99,.4);word-break:break-all;}
+  .link:hover{text-decoration-color:var(--teal);}
+  a[href^="tel:"]{color:inherit;text-decoration:none;}
+  a:focus-visible,.contact-item:focus-visible{outline:0.18rem solid var(--amber);outline-offset:0.15rem;border-radius:0.35rem;}
+
+  /* ---------- footer ---------- */
+  .foot{text-align:center;padding:0.6rem 0 0;}
+  .foot-rule{width:2.5rem;height:0.18rem;border-radius:999px;background:linear-gradient(90deg,var(--teal),var(--amber));margin:0 auto 0.7rem;}
+  .foot-name{margin:0;font-family:var(--serif);font-weight:700;font-size:1.25rem;letter-spacing:.14em;color:var(--ink);}
+  .foot-tag{margin:0.35rem 0 0;font-size:0.68rem;font-weight:700;letter-spacing:.22em;color:var(--teal);}
+
+  /* ---------- larger screens ---------- */
+  @media (min-width:640px){
+    body{padding:1.5rem 1.25rem 3rem;}
+    .stack{gap:1.1rem;}
+    .brandbar{padding:1.4rem 1.6rem;}
+    .brand-top{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;}
+    .brand-meta{margin-top:0;text-align:right;}
+    .hero{padding:2.2rem 2.2rem 2.1rem;}
+    .panel{padding:1.5rem 1.7rem;}
+    .deadline{padding:1.4rem 1.7rem;}
+  }
+
+  /* ---------- reveal ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    html.js .stack>*{opacity:0;transform:translateY(0.9rem);}
+    html.js .stack.play>*{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1);}
+    html.js .stack.play>*:nth-child(1){transition-delay:.00s}
+    html.js .stack.play>*:nth-child(2){transition-delay:.05s}
+    html.js .stack.play>*:nth-child(3){transition-delay:.10s}
+    html.js .stack.play>*:nth-child(4){transition-delay:.15s}
+    html.js .stack.play>*:nth-child(5){transition-delay:.20s}
+    html.js .stack.play>*:nth-child(6){transition-delay:.25s}
+    html.js .stack.play>*:nth-child(7){transition-delay:.30s}
+    html.js .stack.play>*:nth-child(8){transition-delay:.35s}
+    html.js .stack.play>*:nth-child(9){transition-delay:.40s}
+    html.js .stack.play>*:nth-child(10){transition-delay:.45s}
+    html.js .stack.play>*:nth-child(11){transition-delay:.50s}
+    html.js .stack.play>*:nth-child(12){transition-delay:.55s}
+    .deadline-ic::after{animation:ring 2.4s ease-out infinite;}
+    @keyframes ring{0%{transform:scale(1);opacity:.55}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    @page{margin:12mm;}
+    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .page{max-width:100%;}
+    .stack{gap:0.7rem;}
+    .card,.fact,.theme,.price,.meeting,.panel,.hero,.deadline{box-shadow:none;break-inside:avoid;}
+    .hero{background:#0A4F47!important;}
+    .deadline{background:#B5331E!important;}
+    html.js .stack>*{opacity:1!important;transform:none!important;}
+    .deadline-ic::after{animation:none;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="stack">
+
+    <!-- ===== BRAND BAR (no logo) ===== -->
+    <header class="brandbar card">
+      <div class="brand-top">
+        <div class="brand-name">
+          <span class="brand-ko">성경진리사역원</span>
+          <span class="brand-en">BIBLE TRUTH MINISTRY</span>
+        </div>
+        <div class="brand-meta">
+          <p>경기도 용인시 기흥구 한보라1로 50 (17080)</p>
+          <p>TEL 1544-0031 · FAX 031-286-3132 · btmkoffice@naver.com</p>
+        </div>
+      </div>
+      <div class="brand-divider"></div>
+      <div class="docmeta">
+        <span class="chip">문서번호 성사원26-104</span>
+        <span class="chip chip--soft">2026.06.12</span>
+        <span class="chip chip--soft">수신 · 경인권역 교회들</span>
+        <span class="chip chip--soft">발신 · 사역의 일 (경인권역 어린이 봉사팀)</span>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <svg class="hero-sun" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="20" fill="rgba(255,210,150,.5)"/>
+        <g stroke="rgba(255,214,158,.55)" stroke-width="3" stroke-linecap="round">
+          <path d="M50 14V4M50 96v-10M14 50H4M96 50h-10M24 24l-7-7M83 83l-7-7M76 24l7-7M17 83l7-7"/>
+        </g>
+      </svg>
+      <p class="hero-eyebrow"><span class="eb-dot"></span>경인권역 어린이 사역 안내</p>
+      <h1 class="hero-title">2026 여름 권역별<br/>어린이 특별 집회</h1>
+      <p class="hero-sub">및 후속 교재 신청 안내</p>
+      <p class="hero-lead">주님 안에서 경인권역 각지 교회들에게 문안드립니다. 올여름 권역별로 진행되는 어린이 특별 집회에 교회의 격려와 함께함을 부탁드립니다.</p>
+    </section>
+
+    <!-- ===== DEADLINE (top emphasis) ===== -->
+    <section class="deadline">
+      <span class="deadline-ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.6 1.6M5.5 4 8 2M18.5 4 16 2"/></svg>
+      </span>
+      <div class="deadline-body">
+        <p class="deadline-kicker">신청 마감 <span class="deadline-tag">마감 임박 · 서둘러 주세요</span></p>
+        <p class="deadline-date"><span class="yr">2026년</span>6월 23일 (화) 오후 9시</p>
+        <p class="deadline-note">이 시각 이후에는 신청이 마감됩니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== AT A GLANCE ===== -->
+    <section class="group">
+      <p class="eyebrow"><span class="eb-dot"></span>한눈에 보기</p>
+      <div class="facts">
+        <div class="fact">
+          <span class="fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></span>
+          <p class="fact-label">집회 일시</p>
+          <p class="fact-main">7.17<span class="arrow">→</span>19</p>
+          <p class="fact-foot">2026년 · 금요일–주일</p>
+        </div>
+        <div class="fact">
+          <span class="fact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 17v3.5"/></svg></span>
+          <p class="fact-label">진행 방식</p>
+          <p class="fact-main">온라인</p>
+          <p class="fact-foot">Zoom 실시간 진행</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== THEMES ===== -->
+    <section class="group">
+      <p class="eyebrow"><span class="eb-dot"></span>집회 주제</p>
+      <div class="grid-2">
+        <article class="theme">
+          <span class="theme-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 18.5A1.5 1.5 0 0 1 5.5 17H20"/></svg></span>
+          <p class="theme-tag">유아 · 유치 <span>5–7세</span></p>
+          <p class="theme-title">야곱 · 요셉 이야기</p>
+        </article>
+        <article class="theme">
+          <span class="theme-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 18.5A1.5 1.5 0 0 1 5.5 17H20"/></svg></span>
+          <p class="theme-tag">초등학생 <span>1–6학년</span></p>
+          <p class="theme-title">사복음서에 나타난<br/>주 예수님의 보배로운 인성</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== AUDIENCE ===== -->
+    <section class="panel">
+      <p class="eyebrow"><span class="eb-dot"></span>신청 대상</p>
+      <div class="pills">
+        <span class="pill">유치 <em>5–7세</em></span>
+        <span class="pill">초등 <em>1–6학년</em></span>
+        <span class="pill">학부모</span>
+        <span class="pill">봉사자</span>
+      </div>
+      <p class="note">
+        <span class="note-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span>
+        <span>초등학교 6학년은 추후 가을에 전국 단위로 사역원에서 복음 집회로 모일 예정입니다.</span>
+      </p>
+    </section>
+
+    <!-- ===== FEES ===== -->
+    <section class="group">
+      <p class="eyebrow"><span class="eb-dot"></span>신청 금액 (참가비)</p>
+      <div class="grid-2">
+        <article class="price">
+          <span class="price-tag">초등</span>
+          <p class="price-amount"><span class="num">30,000</span><span class="won">원</span></p>
+          <p class="price-desc">집회 운영비 · 교재 · 찬송 음원 · 기타 자료 포함</p>
+        </article>
+        <article class="price">
+          <span class="price-tag">유치</span>
+          <p class="price-amount"><span class="num">25,000</span><span class="won">원</span></p>
+          <p class="price-desc">집회 운영비 · 찬송 음원 · 기타 자료 포함<br/><span class="price-badge">교재는 PDF로 제공</span></p>
+        </article>
+      </div>
+
+      <div class="important">
+        <div class="important-head">
+          <span class="important-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>필독</span>
+          <span class="important-title">입금 · 신청 시 꼭 확인하세요</span>
+        </div>
+        <ul class="important-list">
+          <li><span>회비가 <b>입금 확인되어야 신청이 완료</b>됩니다.</span></li>
+          <li><span>한 번 신청 후 <b>취소 시 환불은 불가</b>합니다.</span></li>
+          <li><span>입금자명은 <b>반드시 ‘교회명’</b>으로 입금해 주세요.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== MATERIALS ===== -->
+    <section class="panel panel--row">
+      <span class="panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 6.5 5 4.5 5.5v13C6.5 18 10 18 12 19.5 14 18 17.5 18 19.5 18.5v-13C17.5 5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg></span>
+      <div>
+        <p class="eyebrow eyebrow--inline"><span class="eb-dot"></span>교재 안내</p>
+        <p class="mat-main">교재 <b>1권 10,000원</b> · 후속 교재 <b>1권 5,000원</b></p>
+        <p class="mat-sub">택배비 별도 — 주소지 한 곳당 5,000원 · 교재는 각 교회 집회소로 직접 발송됩니다.</p>
+      </div>
+    </section>
+
+    <!-- ===== HOW TO APPLY ===== -->
+    <section class="panel">
+      <p class="eyebrow"><span class="eb-dot"></span>신청 방법</p>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-no">1</span>
+          <div class="step-body">
+            <p class="step-title">참가비 입금</p>
+            <p class="step-text"><span class="kv">카카오뱅크</span> <span class="acct">794 21243 065</span></p>
+            <p class="step-text">예금주 <b>나승연</b> · <a href="tel:01094818321">010-9481-8321</a></p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">2</span>
+          <div class="step-body">
+            <p class="step-title">신청서 제출</p>
+            <p class="step-text">작성한 신청서를 이메일로 보내 주세요 → <a class="link" href="mailto:avecnsy@hanmail.net">avecnsy@hanmail.net</a></p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">3</span>
+          <div class="step-body">
+            <p class="step-title">교재 수령자 정보 기재</p>
+            <p class="step-text">교회별 교재 수령자의 <b>이름 · 주소 · 전화번호</b>를 신청서에 함께 기재해 주세요.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="note note--plain">※ 첨부1 「2026 여름 권역별 어린이 특별 집회 및 후속 교재 신청서」 양식을 작성해 주세요.</p>
+    </section>
+
+    <!-- ===== OFFLINE MEETINGS ===== -->
+    <section class="group">
+      <p class="eyebrow"><span class="eb-dot"></span>봉사자 · 학부모 집회 (오프라인)</p>
+      <div class="grid-2">
+        <article class="meeting">
+          <p class="meeting-role">봉사자 집회</p>
+          <p class="meeting-when">6/21 주일 · 15:00</p>
+          <p class="meeting-where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>화성 교회</p>
+        </article>
+        <article class="meeting">
+          <p class="meeting-role">학부모 집회</p>
+          <p class="meeting-when">7/5 주일 · 15:00</p>
+          <p class="meeting-where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>성남 교회</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="panel">
+      <p class="eyebrow"><span class="eb-dot"></span>문의</p>
+      <div class="contacts">
+        <a class="contact-item" href="tel:01029579179">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <span><b>박영준</b> br.<span class="contact-num">010-2957-9179</span></span>
+        </a>
+        <a class="contact-item" href="tel:01048796335">
+          <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <span><b>한정민</b> br.<span class="contact-num">010-4879-6335</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER (no logo) ===== -->
+    <footer class="foot">
+      <div class="foot-rule"></div>
+      <p class="foot-name">성경진리사역원</p>
+      <p class="foot-tag">IN CHRIST · BIBLE TRUTH MINISTRY</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  document.documentElement.classList.add('js');
+  window.addEventListener('DOMContentLoaded', function(){
+    requestAnimationFrame(function(){
+      var s = document.querySelector('.stack');
+      if (s) s.classList.add('play');
+    });
+  });
+</script>
+</body>
+</html>
