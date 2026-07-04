@@ -2,515 +2,726 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>안양교회 2026 상반기 통계 리포트</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>안양교회 2026 상반기 집회 참석 분석</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --ink:#1C2740; --ink-soft:#3A4763; --muted:#67748C;
-  --paper:#F1F3F7; --card:#FFFFFF; --line:#DDE3EC;
-  --gold:#C9A227; --gold-deep:#A8841B; --gold-bg:#FBF4DE;
-  --silver:#9FB0C2; --bronze:#B07A4A; --faint:#C6CDD8;
-  --jewel:#5C4A82; --jewel-bg:#EFEAF7;
-  --green:#2E7D64; --green-bg:#E4F1EC;
-  --alert:#B3402F; --alert-bg:#F9E9E5;
-  --serif:'Noto Serif KR','Nanum Myeongjo',serif;
-  --sans:'Pretendard','Pretendard Variable',-apple-system,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+  --paper:#F3F5F3; --card:#FFFFFF; --ink:#1B2724; --muted:#5D6B66; --line:#E2E8E4;
+  --ever:#16584D; --deep:#0E3A33; --eversoft:#E4EEEB;
+  --gold:#C9972B; --goldt:#8F6D14; --goldsoft:#FBF3DE;
+  --alarm:#B23A2E; --alsoft:#F9E9E6;
+  --silver:#9AA4AD; --sky:#5B7DA3; --violet:#7B5BB5; --midg:#4E8C7F; --gray:#CBD4D0;
+  --r:16px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;font-size:16px;
-  font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Segoe UI",sans-serif;
+  font-size:1rem;line-height:1.6;color:var(--ink);background:var(--paper);word-break:keep-all;overflow-wrap:break-word}
+.serif{font-family:"Noto Serif KR","Apple SD Gothic Neo",serif}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:680px;margin:0 auto;padding:0 1rem}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
 
-/* ---------- header ---------- */
-header{background:var(--ink);color:#EDF0F6;padding:64px 0 56px;position:relative;overflow:hidden}
-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
-  background:linear-gradient(90deg,var(--gold) 0 34.6%,var(--silver) 0 50.1%,var(--bronze) 0 56.8%,var(--faint) 0 68.6%,var(--jewel) 0 100%)}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.14em;color:#B9C4D9;font-weight:600}
-.eyebrow::before{content:"";width:9px;height:9px;background:var(--gold);display:inline-block}
-header h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.6vw,46px);line-height:1.3;margin:18px 0 10px;color:#fff}
-header h1 em{font-style:normal;color:#E9C862}
-.lede{max-width:640px;color:#C7D0E0;font-size:16.5px}
-.meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13.5px;color:#93A1BC}
-.meta b{color:#D7DEEC;font-weight:600}
+/* ── 히어로 ─────────────────────────── */
+.hero{background:linear-gradient(170deg,var(--deep) 0%,#123F37 55%,var(--ever) 100%);color:#F2F6F4;padding:2.1rem 0 1.7rem}
+.hero .eyebrow{font-size:.75rem;letter-spacing:.34em;color:#BFD6CF}
+.hero h1{font-size:1.65rem;line-height:1.32;margin:.5rem 0 .3rem;font-weight:700}
+.hero .period{font-size:.83rem;color:#A9C6BE}
+.hero .lede{margin-top:.9rem;font-size:.93rem;color:#DCEAE5;line-height:1.7}
+.hero .lede strong{color:#F6D98B;font-weight:600}
+.rhythm{margin-top:1.2rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:.8rem .8rem .55rem}
+.rhythm .bars{display:flex;align-items:flex-end;gap:2px;height:58px}
+.rhythm .bar{flex:1;background:linear-gradient(to top,#C9972B,#EFC964);border-radius:2px 2px 0 0;min-width:3px;padding:0;transition:filter .15s}
+.rhythm .bar.dim{background:linear-gradient(to top,#6E8A83,#93ACA5)}
+.rhythm .bar:active{filter:brightness(1.25)}
+.rhythm .gap{flex:1;height:100%;border-left:1.5px dashed rgba(255,255,255,.35);min-width:3px}
+.rhythm .cap{display:flex;justify-content:space-between;font-size:.66rem;color:#9DBBB2;margin-top:.4rem}
+.rhythm .hint{font-size:.72rem;color:#9DBBB2;margin-top:.25rem}
+.rhythm .hint b{color:#EFC964;font-weight:600}
 
-/* ---------- sections ---------- */
-section{padding:58px 0 14px}
-.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
-.sec-no{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--gold-deep);letter-spacing:.06em}
-h2{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3vw,28px);color:var(--ink)}
-.sec-sub{color:var(--muted);font-size:15px;margin:6px 0 26px;max-width:760px}
+/* ── 스티키 내비 ────────────────────── */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(243,245,243,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topnav .in{max-width:680px;margin:0 auto;display:flex;gap:.4rem;overflow-x:auto;padding:.55rem 1rem;scrollbar-width:none}
+.topnav .in::-webkit-scrollbar{display:none}
+.topnav a{flex:none;font-size:.8rem;color:var(--muted);text-decoration:none;padding:.34rem .75rem;border-radius:99px;border:1px solid var(--line);background:#fff}
+.topnav a.on{background:var(--ever);border-color:var(--ever);color:#fff;font-weight:600}
 
-/* ---------- cards & grids ---------- */
-.grid{display:grid;gap:14px}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(158px,1fr))}
-.kpi{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);padding:18px 18px 15px}
-.kpi .n{font-family:var(--serif);font-weight:900;font-size:32px;line-height:1.1}
-.kpi .n small{font-size:16px;font-weight:700;color:var(--muted)}
-.kpi .l{font-size:13px;color:var(--muted);margin-top:5px}
-.kpi.warn{border-top-color:var(--alert)} .kpi.warn .n{color:var(--alert)}
-.kpi.good{border-top-color:var(--green)} .kpi.good .n{color:var(--green)}
+/* ── 공통 ──────────────────────────── */
+main{padding:1.3rem 0 2rem}
+section{margin-top:1.9rem;scroll-margin-top:3.4rem}
+.eyebrow2{display:inline-block;font-size:.7rem;letter-spacing:.28em;color:var(--ever);font-weight:700}
+h2{font-size:1.3rem;margin:.3rem 0 .25rem;line-height:1.35}
+.sub{font-size:.84rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.05rem;margin-top:.85rem;box-shadow:0 1px 2px rgba(27,39,36,.04)}
+p{font-size:.94rem}
+.note{font-size:.79rem;color:var(--muted);margin-top:.65rem;padding-top:.55rem;border-top:1px dashed var(--line)}
+.tap-hint{font-size:.76rem;color:var(--goldt);background:var(--goldsoft);border-radius:99px;padding:.18rem .7rem;display:inline-block;margin-top:.5rem}
+.fade{animation:fade .25s ease}
+@keyframes fade{from{opacity:.35}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}}
 
-.panel{background:var(--card);border:1px solid var(--line);padding:26px;margin-bottom:16px}
-.panel h3{font-size:16.5px;font-weight:700;margin-bottom:4px}
-.panel .hint{font-size:13px;color:var(--muted);margin-bottom:14px}
-.chart-box{position:relative;height:340px}
-.chart-box.tall{height:380px} .chart-box.short{height:300px}
+/* 진단 */
+.diag{margin-top:.85rem;display:grid;gap:.55rem}
+.diag .d{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--ever);border-radius:12px;padding:.75rem .9rem;font-size:.9rem}
+.diag .d.warn{border-left-color:var(--alarm)}
+.diag .d.gold{border-left-color:var(--gold)}
 
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:860px){.cols{grid-template-columns:1fr}}
+/* KPI */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-top:.85rem}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8rem .85rem;text-align:left;display:block;width:100%;transition:transform .12s}
+.kpi:active{transform:scale(.97)}
+.kpi .v{font-size:1.45rem;font-weight:700}
+.kpi .v small{font-size:.82rem;font-weight:600;color:var(--muted);margin-left:.08rem}
+.kpi .k{font-size:.74rem;color:var(--muted);margin-top:.1rem;line-height:1.4}
+.kpi .go{font-size:.7rem;color:var(--ever);margin-top:.3rem;font-weight:600}
+.kpi.warn .v{color:var(--alarm)}
+.kpi.good .v{color:var(--ever)}
 
-.callout{border-left:4px solid var(--muted);background:var(--card);border:1px solid var(--line);
-  border-left-width:4px;padding:20px 22px;margin-bottom:16px}
-.callout h4{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;gap:8px;align-items:center}
-.callout p{font-size:14.5px;color:var(--ink-soft)}
-.callout .figure{font-family:var(--serif);font-weight:900;font-size:26px;margin:6px 0 8px}
-.callout.alert{border-left-color:var(--alert);background:linear-gradient(0deg,var(--alert-bg),var(--alert-bg)) padding-box}
-.callout.alert .figure{color:var(--alert)}
-.callout.green{border-left-color:var(--green);background:var(--green-bg)}
-.callout.green .figure{color:var(--green)}
-.callout.jewel{border-left-color:var(--jewel);background:var(--jewel-bg)}
-.callout.jewel .figure{color:var(--jewel)}
-.callout.gold{border-left-color:var(--gold);background:var(--gold-bg)}
-.callout.gold .figure{color:var(--gold-deep)}
-.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;letter-spacing:.05em}
-.tag.alert{background:var(--alert);color:#fff}.tag.green{background:var(--green);color:#fff}
-.tag.jewel{background:var(--jewel);color:#fff}.tag.gold{background:var(--gold-deep);color:#fff}
+/* 차트 */
+.chart-box{position:relative;height:240px;margin-top:.55rem}
+.chart-box.tall{height:300px}
+.chart-box.mini{height:150px}
 
-/* ---------- spectrum (signature) ---------- */
-.spectrum{height:64px;display:flex;border:1px solid var(--line);overflow:hidden}
-.spectrum div{position:relative;transition:filter .2s}
-.spectrum div:hover{filter:brightness(1.07)}
-.sp-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:16px}
-.sp-item{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
-.sp-item .sw{width:14px;height:14px;margin-top:3px;flex:none}
-.sp-item b{font-size:15px}
-.sp-item .d{color:var(--muted);font-size:12.5px;display:block}
-.big-insight{margin-top:22px;padding:22px 26px;background:var(--ink);color:#E7ECF5}
-.big-insight .n{font-family:var(--serif);font-weight:900;font-size:38px;color:#E9C862;line-height:1.15}
-.big-insight p{font-size:14.5px;color:#BFC9DC;margin-top:6px;max-width:720px}
+/* 탭·칩 */
+.tabs{display:flex;gap:.4rem;overflow-x:auto;margin-top:.8rem;padding-bottom:.15rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;font-size:.84rem;padding:.5rem .85rem;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:var(--muted);min-height:2.5rem}
+.tab[aria-selected="true"]{background:var(--ever);border-color:var(--ever);color:#fff;font-weight:700}
+.tab.alarm[aria-selected="true"]{background:var(--alarm);border-color:var(--alarm)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.chip{font-size:.83rem;padding:.42rem .8rem;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:var(--muted);min-height:2.4rem}
+.chip[aria-pressed="true"]{background:var(--ever);border-color:var(--ever);color:#fff;font-weight:700}
 
-/* ---------- tables ---------- */
-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card)}
-th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
-th:first-child,td:first-child{text-align:left}
-thead th{font-size:12.5px;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);letter-spacing:.03em}
-tbody tr:hover{background:#F7F9FC}
-.delta-up{color:var(--green);font-weight:700}.delta-dn{color:var(--alert);font-weight:700}.delta-flat{color:var(--muted)}
-.minibar{display:flex;height:14px;width:150px;background:#EEF1F6}
-.minibar span{display:block;height:100%}
-td.barcell{padding-top:12px}
+/* 주간 탐색 카드 */
+.wk-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.wk-title{font-size:1.05rem;font-weight:700}
+.wk-title small{font-size:.76rem;color:var(--muted);font-weight:500;margin-left:.35rem}
+.wk-nav{display:flex;gap:.4rem}
+.wk-nav button{width:2.4rem;height:2.4rem;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:1.05rem;color:var(--ever);font-weight:700}
+.wk-nav button:disabled{opacity:.35}
+.wk-total{display:flex;align-items:baseline;gap:.55rem;margin:.55rem 0 .2rem}
+.wk-total .n{font-size:2.1rem;font-weight:700}
+.wk-total .d{font-size:.84rem;font-weight:600}
+.wk-total .d.up{color:var(--ever)} .wk-total .d.down{color:var(--alarm)} .wk-total .d.flat{color:var(--muted)}
+.wk-note{font-size:.8rem;color:var(--goldt);background:var(--goldsoft);border-radius:8px;padding:.35rem .6rem;margin:.4rem 0 .55rem;display:none}
+.wk-note.show{display:block}
+.mrow{display:grid;grid-template-columns:4.6rem 1fr 2.6rem;align-items:center;gap:.55rem;margin:.34rem 0}
+.mrow .lab{font-size:.8rem;color:var(--muted)}
+.mrow .track{display:block;height:.62rem;background:var(--paper);border-radius:99px;overflow:hidden}
+.mrow .fill{display:block;height:100%;border-radius:99px;transition:width .3s ease}
+.mrow .val{font-size:.84rem;font-weight:700;text-align:right}
+.wk-new{font-size:.82rem;color:var(--muted);margin-top:.5rem}
+.wk-new b{color:var(--ink)}
 
-/* ---------- recommendations ---------- */
-.rec{background:var(--card);border:1px solid var(--line);padding:24px 26px;margin-bottom:14px;display:grid;
-  grid-template-columns:56px 1fr;gap:18px;align-items:start}
-.rec .no{font-family:var(--serif);font-weight:900;font-size:30px;color:var(--gold-deep);border-top:3px solid var(--gold);padding-top:6px}
-.rec h4{font-size:17px;font-weight:700;margin-bottom:6px}
-.rec p{font-size:14.5px;color:var(--ink-soft)}
-.rec .target{margin-top:10px;font-size:13.5px;background:var(--gold-bg);display:inline-block;padding:5px 12px;color:var(--gold-deep);font-weight:700}
-@media(max-width:600px){.rec{grid-template-columns:1fr}.rec .no{border-top:none;border-left:3px solid var(--gold);padding:0 0 0 10px;font-size:24px}}
+/* 인사이트 카드 (집회) */
+.mi-stats{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin:.15rem 0 .45rem}
+.mi-stats .big{font-size:1.5rem;font-weight:700}
+.mi-stats .arr{color:var(--muted)}
+.mi-pill{font-size:.8rem;font-weight:700;border-radius:99px;padding:.16rem .65rem;color:#fff}
+.insight.alarm-bg{background:linear-gradient(150deg,#FDF6F4,#F9E9E6);border-color:#EAC7C0}
 
-/* ---------- footer ---------- */
-footer{margin-top:56px;background:var(--ink);color:#9AA7C0;padding:36px 0;font-size:13px}
-footer b{color:#D7DEEC}
-.footnote{background:var(--card);border:1px dashed var(--line);padding:18px 22px;font-size:13px;color:var(--muted);margin-top:8px}
-.footnote b{color:var(--ink-soft)}
-.names{font-size:13px;color:var(--ink-soft);line-height:1.9}
-.names b{background:var(--jewel-bg);color:var(--jewel);padding:1px 7px;font-weight:600;white-space:nowrap}
-@media print{
-  header{padding:34px 0} section{padding:30px 0 6px;break-inside:avoid}
-  .chart-box{height:280px} body{font-size:13px}
-}
-@media (prefers-reduced-motion:no-preference){
-  section .panel,section .callout,section .rec{animation:rise .5s ease both}
-  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* 지역·계층 상세 */
+.u-head{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem}
+.u-name{font-size:1.05rem;font-weight:700}
+.u-enr{font-size:.8rem;color:var(--muted)}
+.u-stats{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+.u-stat{flex:1 1 30%;background:var(--paper);border-radius:10px;padding:.5rem .6rem;min-width:6.2rem}
+.u-stat .l{font-size:.7rem;color:var(--muted)}
+.u-stat .v{font-size:1.05rem;font-weight:700}
+.u-alert{font-size:.82rem;margin-top:.6rem}
+.u-alert b{color:var(--alarm)}
+.u-note{font-size:.82rem;color:var(--muted);margin-top:.45rem}
+
+/* 참여 구조 */
+.stack{display:flex;height:2.7rem;border-radius:11px;overflow:hidden;margin-top:.85rem;border:1px solid var(--line)}
+.stack button{height:100%;transition:opacity .15s;position:relative}
+.stack button .in-n{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:#fff}
+.stack button[aria-pressed="false"]{opacity:.45}
+.stack button[aria-pressed="true"]{opacity:1;box-shadow:inset 0 0 0 3px var(--gold)}
+.stack.idle button{opacity:1}
+.seg-detail{margin-top:.8rem;background:var(--paper);border-radius:12px;padding:.75rem .85rem}
+.seg-detail .t{font-weight:700;font-size:.95rem}
+.seg-detail .t i{display:inline-block;width:.7em;height:.7em;border-radius:3px;margin-right:.4rem}
+.seg-detail p{font-size:.86rem;color:var(--muted);margin-top:.3rem}
+.seg-detail p b{color:var(--ink)}
+
+/* 표 */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:.7rem;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.84rem;background:#fff}
+th,td{padding:.55rem .6rem;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{background:var(--eversoft);font-weight:700;font-size:.77rem}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#fff;z-index:1;border-right:1px solid var(--line)}
+th:first-child{background:var(--eversoft)}
+tr:last-child td{border-bottom:none}
+tr.total td{background:var(--goldsoft);font-weight:700}
+tr.rowbtn{cursor:pointer}
+tr.rowbtn:active td{background:var(--eversoft)}
+td .chev{color:var(--silver);font-size:.8rem;margin-left:.25rem}
+
+/* 퍼널 */
+.funnel{margin-top:.85rem;display:grid;gap:.45rem}
+.fstep{display:flex;align-items:center;gap:.65rem;width:100%;text-align:left}
+.fbar{height:2.5rem;border-radius:9px;background:linear-gradient(90deg,var(--ever),#2E7A6D);color:#fff;display:flex;align-items:center;padding:0 .7rem;font-size:.83rem;font-weight:600;white-space:nowrap;transition:filter .15s}
+.fstep[aria-pressed="true"] .fbar{filter:brightness(1.12);box-shadow:0 0 0 2.5px var(--gold)}
+.fnum{font-size:.95rem;font-weight:700}
+.fnum small{font-weight:500;color:var(--muted);font-size:.75rem}
+.f-detail{margin-top:.7rem;background:var(--paper);border-radius:12px;padding:.7rem .85rem;font-size:.85rem;color:var(--muted)}
+.f-detail b{color:var(--ink)}
+
+.notes li{font-size:.85rem;color:var(--muted);margin:.4rem 0 .4rem 1.1rem}
+details{margin-top:.85rem}
+summary{cursor:pointer;font-weight:700;font-size:.93rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.78rem .9rem;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:2.8rem}
+summary::after{content:"▾";color:var(--muted)}
+details[open] summary::after{content:"▴"}
+summary::-webkit-details-marker{display:none}
+
+footer{padding:1.5rem 0 3rem;border-top:1px solid var(--line);margin-top:2.2rem}
+footer p{font-size:.77rem;color:var(--muted)}
+
+@media (min-width:560px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .hero h1{font-size:1.95rem}
 }
 </style>
 </head>
 <body>
 
-<header>
+<header class="hero">
   <div class="wrap">
-    <span class="eyebrow">안양교회 사역 데이터 리포트 · 2026 상반기</span>
-    <h1>출석은 견고했다,<br>참여의 <em>깊이</em>가 얕아지고 있다</h1>
-    <p class="lede">주간 출석은 25주 내내 평균 186명 선을 지켰습니다. 그러나 한 사람이 참여하는 집회 수는 분기마다 줄었고,
-    기도집회는 3분의 1로 내려앉았습니다. 하반기의 과제는 '더 많이 모이는 것'이 아니라 '더 깊이 참여하게 하는 것'입니다.</p>
-    <div class="meta">
-      <span>기간 <b>2026. 1. 3 – 6. 27</b> (25주)</span>
-      <span>집계 대상 <b>재적 366명 · 6개 지역 · 3개 계층</b></span>
-      <span>자료 <b>주간 통계표 25건</b> (5/9 누락)</span>
-      <span>작성 <b>2026. 7. 2</b></span>
+    <div class="eyebrow serif">안양교회 통계 보고</div>
+    <h1 class="serif">2026 상반기<br>집회 참석 분석</h1>
+    <div class="period num">2026. 1. 3 ~ 6. 27 · 25주 (5/9 자료 없음) · 작성 7. 4</div>
+    <p class="lede">집회의 본류는 견고했다 — 주평균 <strong>186명</strong>. 그러나 안쪽에서 <strong>기도집회·소그룹·다음세대</strong>가 얇아지고 있고 새 얼굴의 유입도 줄었다. 하반기의 키워드는 유지가 아니라 <strong>회복과 재점화</strong>다.</p>
+    <div class="rhythm">
+      <div class="bars" id="rhythmBars"></div>
+      <div class="cap num"><span>1월</span><span>2월</span><span>3월</span><span>4월</span><span>5월</span><span>6월</span></div>
+      <div class="hint"><b>막대를 탭</b>하면 그 주의 상세로 이동합니다 · 회색은 연휴 주, 점선은 자료 없음(5/9)</div>
     </div>
   </div>
 </header>
 
-<!-- 1. KPI -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">01</span><h2>상반기 핵심 지표</h2></div>
-    <p class="sec-sub">숫자 하나로 요약하면 "186명"입니다. 재적이 두 차례 확대(227→365→366)되는 동안에도 실제 모이는 인원은 흔들리지 않았습니다.</p>
-    <div class="grid kpis">
-      <div class="kpi"><div class="n">186<small>명</small></div><div class="l">주간 평균 출석 (최고 199 · 최저 143)</div></div>
-      <div class="kpi"><div class="n">4,643<small>명</small></div><div class="l">상반기 출석 연인원</div></div>
-      <div class="kpi good"><div class="n">70<small>명</small></div><div class="l">25주 개근 — 재적의 19%</div></div>
-      <div class="kpi good"><div class="n">57<small>명</small></div><div class="l">새신자 방문 (연인원 159명)</div></div>
-      <div class="kpi good"><div class="n">47<small>%</small></div><div class="l">새신자 재적 등록률 (27명 편입)</div></div>
-      <div class="kpi warn"><div class="n">117<small>명</small></div><div class="l">상반기 출석 기록 없음 — 재적의 32%</div></div>
-    </div>
+<nav class="topnav" aria-label="섹션 이동">
+  <div class="in" id="navIn">
+    <a href="#summary">요약</a><a href="#weekly">주간</a><a href="#meetings">집회별</a><a href="#units">지역·계층</a><a href="#engage">참여 구조</a><a href="#alerts">이탈 경보</a><a href="#newcomers">새신자</a><a href="#notes">노트</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ── 요약 ─────────────────────────── -->
+<section id="summary">
+  <span class="eyebrow2">요약</span>
+  <h2 class="serif">세 문장, 여섯 개의 숫자</h2>
+  <div class="diag">
+    <div class="d"><b>본류는 견고하다.</b> 지역집회 평균 167명, 주간 참석은 연휴 주를 빼면 175~199명의 좁은 띠에서 유지됐다.</div>
+    <div class="d warn"><b>안쪽이 얇아지고 있다.</b> 기도집회가 4/18을 기점으로 주 50 → 19명(−62%), 소그룹 −13%, 청년대학생 −22%.</div>
+    <div class="d gold"><b>파이프라인이 좁아졌다.</b> 새신자 첫 방문이 5~6월 두 달간 4명, 월 활동 인원은 212~215명 정체.</div>
+  </div>
+  <div class="kpis num">
+    <button class="kpi" data-go="#weekly"><span class="v">186<small>명</small></span><span class="k">주평균 참석 (주간총계)</span><span class="go">주간 흐름 보기 ›</span></button>
+    <button class="kpi" data-go="#weekly"><span class="v">4,643<small>명</small></span><span class="k">상반기 누적 연인원</span><span class="go">주간 흐름 보기 ›</span></button>
+    <button class="kpi good" data-go="#engage"><span class="v">250<small>명</small></span><span class="k">1회 이상 참석 (재적 372명 중)</span><span class="go">참여 구조 보기 ›</span></button>
+    <button class="kpi" data-go="#newcomers"><span class="v">57<small>명</small></span><span class="k">새신자 방문 (고유 인원)</span><span class="go">정착 단계 보기 ›</span></button>
+    <button class="kpi warn" data-go="#meetings" data-meet="기도집회"><span class="v">−62<small>%</small></span><span class="k">기도집회 (4월 중순 이후)</span><span class="go">급감 분석 보기 ›</span></button>
+    <button class="kpi warn" data-go="#alerts"><span class="v">43<small>명</small></span><span class="k">이탈 경보 (3주+ 연속 결석)</span><span class="go">지역·계층별 보기 ›</span></button>
   </div>
 </section>
 
-<!-- 2. weekly flow -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">02</span><h2>25주의 흐름</h2></div>
-    <p class="sec-sub">설 연휴(2/21)와 5월 연휴(5/2) 두 번의 계절적 저점을 빼면 175~199명의 좁은 띠 안에서 움직였습니다.
-    5월 초 침체(143명)는 4주 만에 회복되어 6월은 다시 190명 선으로 마감했습니다.</p>
-    <div class="panel">
-      <h3>주간 출석 총계 추이</h3>
-      <div class="hint">점선 세로선은 주요 이벤트 · 참석률 급락처럼 보이는 구간은 2/7 재적 확대(227→365명)에 따른 분모 변화입니다</div>
-      <div class="chart-box"><canvas id="weeklyChart"></canvas></div>
+<!-- ── 주간 탐색 ─────────────────────── -->
+<section id="weekly">
+  <span class="eyebrow2">주간 흐름</span>
+  <h2 class="serif">25주, 한 주씩 들여다보기</h2>
+  <p class="sub">그래프의 점 또는 히어로의 막대를 탭하면 그 주의 상세가 아래에 표시됩니다. 카드는 좌우로 밀어 이동할 수 있습니다.</p>
+  <div class="card">
+    <div class="chart-box"><canvas id="chTotal" aria-label="주간총계 25주 선 그래프 (점을 탭해 주간 선택)"></canvas></div>
+  </div>
+  <div class="card" id="wkCard">
+    <div class="wk-head">
+      <div class="wk-title num"><span id="wkName">6/27</span> 주간<small id="wkRange"></small></div>
+      <div class="wk-nav">
+        <button id="wkPrev" aria-label="이전 주">‹</button>
+        <button id="wkNext" aria-label="다음 주">›</button>
+      </div>
     </div>
+    <div class="wk-total num"><span class="n" id="wkTotal">193</span><span style="font-size:.9rem;color:var(--muted)">명 참석</span><span class="d" id="wkDelta"></span></div>
+    <div class="wk-note num" id="wkNote"></div>
+    <div id="wkBars"></div>
+    <div class="wk-new num" id="wkNew"></div>
   </div>
 </section>
 
-<!-- 3. structure -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">03</span><h2>참여의 구조 — 373명의 스펙트럼</h2></div>
-    <p class="sec-sub">상반기 명단에 등장한 373명 전원을 출석 빈도로 나누면 교회의 실제 모양이 보입니다.
-    교회 통계표가 쓰는 금·은·보석의 언어를 그대로 빌렸습니다 — 나오지 않는 이들은 잃어버린 숫자가 아니라 <b>찾아야 할 보석</b>입니다.</p>
-    <div class="panel">
-      <div class="spectrum" id="spectrum"></div>
-      <div class="sp-legend">
-        <div class="sp-item"><span class="sw" style="background:var(--gold)"></span><div><b>핵심 129명</b> · 34.6%<span class="d">재적 기간의 90% 이상 출석 (개근 70명 포함)</span></div></div>
-        <div class="sp-item"><span class="sw" style="background:var(--silver)"></span><div><b>정기 58명</b> · 15.5%<span class="d">60–89% 출석</span></div></div>
-        <div class="sp-item"><span class="sw" style="background:var(--bronze)"></span><div><b>간헐 25명</b> · 6.7%<span class="d">30–59% 출석</span></div></div>
-        <div class="sp-item"><span class="sw" style="background:var(--faint)"></span><div><b>소원 44명</b> · 11.8%<span class="d">30% 미만 출석</span></div></div>
-        <div class="sp-item"><span class="sw" style="background:var(--jewel)"></span><div><b>찾아야 할 보석 117명</b> · 31.4%<span class="d">상반기 출석 기록 없음</span></div></div>
-      </div>
-      <div class="big-insight">
-        <div class="n">교회를 움직이는 187명</div>
-        <p>핵심(129) + 정기(58) = 187명. 주간 평균 출석 186명과 정확히 일치합니다.
-        매주 모이는 교회는 곧 이 187명이며, 그 절반 이상(70명)은 25주 개근입니다.
-        허리가 이만큼 단단하다는 것이 상반기의 가장 큰 자산입니다.</p>
-      </div>
-    </div>
-    <div class="cols">
-      <div class="callout gold">
-        <h4><span class="tag gold">깊이 지표</span> 1인당 주간 집회 참여 수</h4>
-        <div class="figure">1.97 → 1.84 → 1.77</div>
-        <p>1분기 → 2분기 → 6월. 출석 인원은 그대로인데 한 사람이 참여하는 집회 수가 계속 줄고 있습니다.
-        '주일 지역집회만 참석'하는 패턴이 늘어나는 중이며, 이것이 이 리포트의 핵심 경고입니다.</p>
-      </div>
-      <div class="callout jewel">
-        <h4><span class="tag jewel">보석 117명의 구성</span> 어디에 있는가</h4>
-        <div class="figure">청대 33 · 유초 17 · #6 16</div>
-        <p>117명 중 103명은 2월 재적 확대 때 편입된 뒤 한 번도 출석하지 않은 인원입니다.
-        즉 대부분 '떠난 사람'이 아니라 '아직 연결되지 않은 사람'입니다. 지역·계층별 분포: 청대 33, 유초 17, #6 16, #1·#4 각 12, #2 10, #3·#5 각 6, 중고 5.</p>
-      </div>
-    </div>
+<!-- ── 집회별 ────────────────────────── -->
+<section id="meetings">
+  <span class="eyebrow2">집회별</span>
+  <h2 class="serif">다섯 집회, 서로 다른 계절</h2>
+  <p class="sub">탭을 눌러 집회별 흐름과 진단을 확인하세요. 점선은 전·후반 평균선입니다.</p>
+  <div class="tabs" role="tablist" aria-label="집회 선택" id="meetTabs"></div>
+  <div class="card">
+    <div class="chart-box"><canvas id="chMeet"></canvas></div>
+  </div>
+  <div class="card insight" id="meetInsight"></div>
+</section>
+
+<!-- ── 지역·계층 ─────────────────────── -->
+<section id="units">
+  <span class="eyebrow2">지역·계층</span>
+  <h2 class="serif">아홉 지역·계층의 온도차</h2>
+  <p class="sub">막대나 칩을 탭하면 해당 지역·계층의 25주 흐름과 이탈 현황이 열립니다. 비교 기준: 재편 직후(2~3월) 대 최근(5~6월) 정상 주 평균.</p>
+  <div class="card">
+    <div class="chart-box tall"><canvas id="chUnit" aria-label="지역·계층별 비교 가로 막대 (탭하여 선택)"></canvas></div>
+  </div>
+  <div class="chips" id="unitChips" role="group" aria-label="지역·계층 선택"></div>
+  <div class="card" id="unitCard">
+    <div class="u-head"><span class="u-name" id="uName">청년대학생</span><span class="u-enr num" id="uEnr"></span></div>
+    <div class="chart-box mini"><canvas id="chUnitMini"></canvas></div>
+    <div class="u-stats num" id="uStats"></div>
+    <div class="u-alert num" id="uAlert"></div>
+    <div class="u-note" id="uNote"></div>
   </div>
 </section>
 
-<!-- 4. meetings -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">04</span><h2>집회별 진단 — 갈라진 두 흐름</h2></div>
-    <p class="sec-sub">주일 지역집회는 미동도 없이 견고합니다(-2%). 문제는 주중입니다.
-    복음전파는 3월 캠페인을 계기로 완전히 다른 체질이 되었고, 기도집회는 4월 중순을 기점으로 급락했습니다.</p>
-    <div class="panel">
-      <h3>집회별 주간 참여 인원</h3>
-      <div class="hint">5개 집회 · 25주 추이</div>
-      <div class="chart-box tall"><canvas id="meetingChart"></canvas></div>
+<!-- ── 참여 구조 ─────────────────────── -->
+<section id="engage">
+  <span class="eyebrow2">참여 구조</span>
+  <h2 class="serif">두터운 핵심, 얇은 허리, 넓은 바깥</h2>
+  <p class="sub">2/7~6/27 명부 372명의 20주 출석률 분포. 구간을 탭하면 설명이 바뀝니다.</p>
+  <div class="card">
+    <div class="stack idle" id="segStack" role="group" aria-label="참여 구간 선택"></div>
+    <div class="seg-detail fade" id="segDetail">
+      <div class="t">구간을 탭해 보세요</div>
+      <p>핵심(75%+) 174 · 정기 20 · 간헐 18 · 저조 38 · 무참석 122명 — 핵심층이 두텁고 중간이 얇은 양극 구조입니다.</p>
     </div>
-    <div class="cols">
-      <div class="panel">
-        <h3>1분기 → 2분기, 주당 평균의 변화</h3>
-        <div class="hint">Q1: 1/3–3/28 (13주) · Q2: 4/4–6/27 (12주)</div>
-        <div class="chart-box short"><canvas id="deltaChart"></canvas></div>
-      </div>
-      <div>
-        <div class="callout alert">
-          <h4><span class="tag alert">최우선 경고</span> 기도집회, 주 47명 → 16명</h4>
-          <div class="figure">−66%</div>
-          <p>1~3월 주 45~57명으로 가장 안정적이던 집회가 4/18(32명)부터 꺾여 5~6월엔 주 16명으로 굳었습니다.
-          핵심 단서: <b>1분기에 3회 이상 참여하다 2분기에 끊은 12명은 지금도 교회에는 출석 중</b>입니다.
-          신앙의 이탈이 아니라 시간대·형식·운영의 문제일 가능성이 높다는 뜻이며, 이 12명에게 직접 물어보는 것이 회복의 출발점입니다.
-          양 분기 모두 지킨 코어는 30명입니다.</p>
-        </div>
-        <div class="callout green">
-          <h4><span class="tag green">구조적 전환</span> 복음전파, 캠페인에서 상시 체제로</h4>
-          <div class="figure">주 13명 → 20명 (+53%)</div>
-          <p>1~2월 주 0~8명이던 복음전파가 3월 캠페인(최대 62명, 월평균 34명)을 지나며
-          4~6월 주 19~32명의 '상시 체제'로 자리 잡았습니다. 참여 저변은 Q1 71명 → Q2 50명으로 좁아진 대신
-          소수가 꾸준히 나가는 구조입니다. 같은 기간 새신자 방문도 3~4월에 집중(43명)되어 캠페인의 열매가 확인됩니다.</p>
-        </div>
-      </div>
-    </div>
-    <div class="footnote"><b>조용한 하락도 있습니다.</b> 가정집회(활력그룹)는 주 40 → 36명(−10%), 소그룹집회는 주 101 → 92명(−9%),
-    특히 6월 소그룹은 평균 86명까지 내려왔습니다. 급락은 아니지만 '깊이 1.77'의 배경이 되는 흐름이므로 하반기 소그룹 재편 시 함께 다뤄야 합니다.</div>
+    <p class="note">금·은·보석(주 3회+ / 1~2회 / 0회)은 교회의 주간 분류로, 위 구간은 이를 20주로 확장해 재계산한 것.</p>
   </div>
 </section>
 
-<!-- 5. departments -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">05</span><h2>지역 및 계층별 진단</h2></div>
-    <p class="sec-sub">같은 교회 안에 세 개의 다른 계절이 있습니다. 성장하는 장년 지역들, 정상을 지키는 3·5지역, 그리고 구조적 침체의 청년대학생부.</p>
-    <div class="cols">
-      <div class="panel">
-        <h3>2분기 평균 참석률 (재적 대비)</h3>
-        <div class="hint">4/4–6/27 주간총계 평균 ÷ 6/27 재적</div>
-        <div class="chart-box short"><canvas id="deptChart"></canvas></div>
-      </div>
-      <div class="panel">
-        <h3>지역·계층별 성적표</h3>
-        <div class="hint">출석 = 주간총계 월평균 · 구성 = 핵심/정기/간헐/소원/보석</div>
-        <table id="deptTable">
-          <thead><tr><th>지역·계층</th><th>1월→6월 출석</th><th>추세</th><th class="bar">참여 구성</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-    <div class="cols">
-      <div class="callout alert">
-        <h4><span class="tag alert">집중 관리</span> 청년대학생부 — 재적 60, 실제 16</h4>
-        <div class="figure">21.6명 → 16.0명 (−26%)</div>
-        <p>1월 대비 6월 출석이 5.6명 줄어 전 지역·계층 중 유일하게 뚜렷한 하락세입니다. 재적 60명 중 33명은 상반기 무출석,
-        핵심층은 8명뿐입니다. 다만 유입은 살아 있습니다 — 상반기 새신자 중 청대가 가장 많았고(송다솜·김정준·송정민·신수연 등 5주 연속 방문자 4명이 재적 등록 완료),
-        문제는 유입이 아니라 <b>정착과 재적 명단의 현실화</b>입니다.</p>
-      </div>
-      <div class="callout green">
-        <h4><span class="tag green">성장 동력</span> 6지역 · 2지역 · 1지역</h4>
-        <div class="figure">+4.4 · +3.4 · +2.1명</div>
-        <p>1월 대비 6월 출석 증가폭입니다. 특히 6지역은 22.8 → 27.2명으로 가장 크게 성장했습니다.
-        3지역은 참석률 75%로 부동의 1위이며 재적 37명 중 핵심층이 23명(62%)에 달합니다 —
-        타 지역·계층이 배울 만한 '핵심층 비율'의 표준입니다. 중고등부는 재적 18명의 소규모 계층으로 절대 인원 관리가 필요합니다.</p>
-      </div>
-    </div>
+<!-- ── 이탈 경보 ─────────────────────── -->
+<section id="alerts">
+  <span class="eyebrow2">이탈 경보</span>
+  <h2 class="serif">활동하다 멈춘 43명</h2>
+  <p class="sub">상반기 참석 이력이 있으나 6/27 기준 연속 결석 중 (무참석 122명과 별개). 행을 탭하면 해당 지역·계층 상세로 이동합니다.</p>
+  <div class="kpis num" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><span class="v">8<small>명</small></span><span class="k">3주 연속 — 지금 잡을 골든타임</span></div>
+    <div class="kpi warn"><span class="v">9<small>명</small></span><span class="k">4~7주 연속</span></div>
+    <div class="kpi warn"><span class="v">26<small>명</small></span><span class="k">8주 이상 — 이탈 진행</span></div>
+  </div>
+  <div class="tbl-wrap" role="region" aria-label="지역·계층별 이탈 경보 인원표" tabindex="0">
+    <table class="num" id="alertTable">
+      <thead><tr><th>지역·계층</th><th>3주</th><th>4~7주</th><th>8주+</th><th>계</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
 </section>
 
-<!-- 6. newcomers & recovery -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">06</span><h2>새 얼굴, 그리고 돌아온 얼굴</h2></div>
-    <p class="sec-sub">유입과 회복 — 하반기 계획의 낙관적 근거가 되는 두 가지 사실입니다.</p>
-    <div class="grid kpis" style="margin-bottom:16px">
-      <div class="kpi good"><div class="n">57<small>명</small></div><div class="l">상반기 고유 방문자</div></div>
-      <div class="kpi"><div class="n">16<small>명</small></div><div class="l">3회 이상 재방문</div></div>
-      <div class="kpi good"><div class="n">27<small>명</small></div><div class="l">재적 등록 완료 (47%)</div></div>
-      <div class="kpi good"><div class="n">3<small>명</small></div><div class="l">장기 결석 후 6월 복귀</div></div>
-    </div>
-    <div class="cols">
-      <div class="callout gold">
-        <h4><span class="tag gold">등록 검토 대상</span> 이미 우리 곁에 있는 두 사람</h4>
-        <p class="names" style="margin-top:6px">
-        <b>전영숙</b> (4지역) — 상반기 <b>20주</b> 방문. 사실상 매주 출석 중이나 아직 새신자 명단에 있습니다.<br>
-        <b>장명호</b> (유초등부) — <b>10주</b> 방문. 마찬가지로 재적 미편입 상태입니다.<br>
-        <span style="color:var(--muted)">두 사람의 등록만으로도 '정착률 47%'의 다음 단계가 시작됩니다. 나머지 미등록 방문자 30명 중 2회 이상 재방문자를 하반기 초 재접촉 대상으로 권합니다.</span></p>
-      </div>
-      <div class="callout green">
-        <h4><span class="tag green">회복의 증거</span> 20주 만에 돌아온 2지역 세 사람</h4>
-        <p class="names" style="margin-top:6px">
-        <b>정고은</b> — 5/30 복귀 후 <b>5주 연속</b> 출석 중<br>
-        <b>조성민</b> — 5/30 복귀 후 3주 출석<br>
-        <b>장혁</b> — 6/6 복귀<br>
-        <span style="color:var(--muted)">반년 가까이 소식 없던 이들도 돌아온다는 실증 사례입니다. '찾아야 할 보석 117명' 프로젝트가 헛수고가 아닐 근거이며, 2지역의 접촉 방식을 다른 지역·계층과 공유할 가치가 있습니다.</span></p>
-      </div>
-    </div>
+<!-- ── 새신자 ────────────────────────── -->
+<section id="newcomers">
+  <span class="eyebrow2">새신자</span>
+  <h2 class="serif">57명이 왔고, 3명이 남았다</h2>
+  <p class="sub">정착 단계를 탭하면 설명이 바뀝니다. 병목은 "정착 이후"에 있습니다.</p>
+  <div class="card">
+    <div class="funnel num" id="funnel"></div>
+    <div class="f-detail fade" id="fDetail"><b>첫 방문 57명</b> — 1월 28명은 집계 시작 효과 포함. 2~4월 25명이 오다가 5~6월 4명으로 급감했습니다.</div>
+  </div>
+  <div class="card">
+    <p style="font-weight:700;font-size:.95rem">월별 첫 방문</p>
+    <div class="chart-box mini"><canvas id="chNew"></canvas></div>
+    <p class="note">1월은 집계 시작 효과(이전부터 오던 새신자 포함). 3월 유입 정점은 복음전파 캠페인 시기와 겹칩니다.</p>
   </div>
 </section>
 
-<!-- 7. recommendations -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">07</span><h2>하반기를 위한 다섯 가지 제언</h2></div>
-    <p class="sec-sub">우선순위 순입니다. 각 항목에 데이터 근거와 측정 가능한 목표를 붙였습니다 — 목표 수치는 논의를 위한 출발점으로 조정해 쓰시면 됩니다.</p>
-
-    <div class="rec"><div class="no">1</div><div>
-      <h4>기도집회 재건 — 이탈자 12명에게 먼저 묻기</h4>
-      <p>주 47명이던 기도집회가 16명이 됐지만, 끊은 12명은 여전히 교회에 나옵니다. 떠난 게 아니라 그 모임을 떠난 것입니다.
-      7월 중 12명 개별 인터뷰로 원인(시간대·요일·형식·거리)을 확인하고, 결과에 따라 시간대 이원화나 지역별 분산 개최를 검토하십시오.
-      코어 30명이 남아 있어 재건의 불씨는 충분합니다.</p>
-      <span class="target">목표 예시 — 12월까지 주 35명 (1분기의 75%) 회복</span>
-    </div></div>
-
-    <div class="rec"><div class="no">2</div><div>
-      <h4>'찾아야 할 보석' 117명 접촉 프로젝트</h4>
-      <p>117명 중 103명은 한 번도 연결된 적 없는 2월 편입 인원입니다. 하반기 26주 동안 주 4~5명씩 접촉하면 연내 전수 접촉이 가능합니다.
-      우선순위는 규모 순 — 청대 33 · 유초 17 · #6 16. 접촉 결과를 '연락 가능 / 타교회 출석 / 소재 불명'으로 분류해
-      연말 재적 명단을 현실화하고, 2지역의 복귀 사례(3명)를 접촉 매뉴얼로 정리해 공유하십시오.</p>
-      <span class="target">목표 예시 — 연내 117명 전수 접촉 · 복귀 10명 이상</span>
-    </div></div>
-
-    <div class="rec"><div class="no">3</div><div>
-      <h4>청년대학생부 리빌딩 — 유입은 있다, 정착 구조를 세우라</h4>
-      <p>출석 하락(−26%)과 무출석 33명이라는 숫자 뒤에, 5주 연속 방문 후 등록한 새신자 4명이 있습니다.
-      새 유입이 살아 있으므로 대책의 초점은 전도가 아니라 정착입니다 — 등록 후 첫 8주 동반자 배정, 소그룹 즉시 편성을 권합니다.
-      핵심층 8명이 소진되지 않도록 리더 부담 분산도 함께 설계해야 합니다.</p>
-      <span class="target">목표 예시 — 주간 출석 16 → 22명 · 핵심층 8 → 12명</span>
-    </div></div>
-
-    <div class="rec"><div class="no">4</div><div>
-      <h4>참여 깊이 1.77을 2.0으로 — '한 집회 더' 캠페인</h4>
-      <p>주일 지역집회는 견고하니, 다음 단계는 지역집회'만' 나오는 정기층 58명이 소그룹이나 가정집회 중 하나를 더 갖게 하는 것입니다.
-      6월 소그룹이 86명까지 내려온 지금이 소그룹 재편(신규 그룹핑·NG그룹핑 활성화)의 적기입니다.
-      깊이 지표(1인당 집회 수)를 하반기 월간 점검 항목에 추가하십시오.</p>
-      <span class="target">목표 예시 — 깊이 지표 1.77 → 2.0 · 소그룹 주 100명 회복</span>
-    </div></div>
-
-    <div class="rec"><div class="no">5</div><div>
-      <h4>복음전파 상시 체제를 넓히고, 정착 파이프라인을 완성하라</h4>
-      <p>3월 캠페인이 주 20명의 상시 체제로 정착한 것은 상반기 최대 성과입니다. 하반기엔 참여 저변을 Q2의 50명에서 70명으로 넓히고
-      (가을 캠페인 1회 권장), 그 열매가 새는 곳을 막으십시오 — 전영숙(20주)·장명호(10주)의 등록,
-      미등록 방문자 30명 재접촉이 그 시작입니다. 정착률 47%는 이미 준수하니 '방문 3회 → 등록 제안'을 표준 절차로 만들면 됩니다.</p>
-      <span class="target">목표 예시 — 복음전파 참여 저변 70명 · 새신자 등록률 55%</span>
-    </div></div>
-  </div>
+<!-- ── 데이터 노트 ───────────────────── -->
+<section id="notes">
+  <span class="eyebrow2">데이터 노트</span>
+  <h2 class="serif">읽을 때 감안할 것</h2>
+  <details open>
+    <summary>기준과 특이사항</summary>
+    <div class="card" style="margin-top:.6rem">
+      <ul class="notes">
+        <li><b>2/7 소그룹 편성 재편</b>으로 관리 명부가 227 → 365명으로 확대(142명 편입). 분모가 달라져 비율 비교가 불가하므로 본 보고서는 <b>참석 인원(실수)</b> 중심.</li>
+        <li><b>정상 주 기준</b>: 월간 비교에서 설 연휴 주(2/21)와 연휴 주(5/2)는 제외.</li>
+        <li><b>5/9 주차 자료 없음.</b> 2/21은 설 연휴(기도집회 미개최), 5/2는 상반기 최저(143명).</li>
+        <li>주간총계 = 재적자 참석 + 새신자 참석. 재적은 재편 후 365 → 366명으로 정체(등재 5명, 정리 4명).</li>
+        <li>원자료: 주간 통계 파일 25건 × 지역·계층 시트 9개(개인별 참석 기록 포함).</li>
+      </ul>
+    </div>
+  </details>
+  <details>
+    <summary>부록 · 주차별 상세 표</summary>
+    <div class="tbl-wrap" role="region" aria-label="주차별 상세 통계표" tabindex="0">
+      <table class="num" id="apxTable">
+        <thead><tr><th>주차</th><th>복음전파</th><th>가정</th><th>기도</th><th>소그룹</th><th>지역</th><th>총계</th><th>새신자</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
 </section>
 
-<!-- appendix -->
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">부록</span><h2>데이터 주석</h2></div>
-    <div class="footnote" style="margin-bottom:10px">
-      <b>참석률 해석 주의.</b> 1월의 80~85%와 2월 이후의 50% 안팎은 신앙의 온도 차가 아니라 분모의 차이입니다.
-      2/7에 재적이 227 → 365명으로 확대(전체 교적 반영 추정)되며 비율이 낮아졌을 뿐, 실제 출석 인원은 동일한 수준을 유지했습니다.
-      이후 소폭 조정을 거쳐 6/27 기준 재적은 366명입니다.
-    </div>
-    <div class="footnote" style="margin-bottom:10px">
-      <b>상반기 25주 전체 무출석(1월부터 재적 유지) 11명.</b>
-      박정규·안혜경·박은심·김경호·김춘희(2지역) · 이태희(3지역) · 최규철(4지역) · 유태원(5지역) · 신지환·박아선(중고) · 이은지(청대).
-      117명 접촉 프로젝트에서 최우선 심방 대상으로 권합니다.
-    </div>
-    <div class="footnote">
-      <b>집계 기준.</b> 주간총계 = 해당 주 5개 집회(복음전파·가정집회·기도집회·소그룹집회·지역집회) 중 1회 이상 참석한 인원 + 새신자.
-      분기 구분: Q1 = 1/3–3/28(13주), Q2 = 4/4–6/27(12주). 5/9 주간 자료는 원본에 없어 집계에서 제외했습니다.
-      개인별 분석은 주간 통계표의 명단(참석·불참)을 25주에 걸쳐 연결해 산출했습니다.
-    </div>
-  </div>
-</section>
+</main>
 
 <footer>
   <div class="wrap">
-    <b>안양교회 2026 상반기 사역 통계 리포트</b> · 주간 통계표 25건 기반 · 하반기 계획 수립 기초 자료 · 2026. 7. 2 작성
+    <p>안양교회 2026 상반기 집회 참석 분석 · 주간 통계 원자료 25건 기준 · 작성 2026. 7. 4</p>
+    <p style="margin-top:.3rem">모든 수치는 지역·계층 시트의 개인 참석 기록과 통계 시트 집계를 교차 검증한 값입니다.</p>
   </div>
 </footer>
 
 <script>
-const W = ["1/3","1/10","1/17","1/24","1/31","2/7","2/14","2/21","2/28","3/7","3/14","3/21","3/28","4/4","4/11","4/18","4/25","5/2","5/16","5/23","5/30","6/6","6/13","6/20","6/27"];
-const TOT = [187,194,182,188,192,187,182,175,179,195,197,193,192,193,190,199,184,143,184,178,171,193,189,183,193];
-const M = {
-  "지역집회":[173,181,155,170,167,165,166,151,158,174,184,185,172,177,169,170,171,124,166,158,157,172,175,167,177],
-  "소그룹집회":[101,97,89,101,99,102,90,90,111,120,103,99,115,109,115,109,86,59,111,87,88,100,83,83,77],
-  "기도집회":[47,54,53,45,49,57,50,0,47,54,49,50,53,49,44,32,23,14,22,18,10,17,15,17,16],
-  "가정집회":[42,40,39,40,40,42,44,18,45,43,44,43,45,39,39,39,31,29,37,37,36,36,37,35,41],
-  "복음전파":[8,3,5,5,1,3,4,0,4,35,62,13,26,19,13,19,25,10,7,26,27,19,21,20,32]
-};
-const MCOLOR = {"지역집회":"#2C4A7C","소그룹집회":"#2E7D64","기도집회":"#B3402F","가정집회":"#C9822B","복음전파":"#5C4A82"};
-const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-Chart.defaults.font.family = "'Pretendard','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif";
-Chart.defaults.color = "#67748C";
-Chart.defaults.borderColor = "#E4E9F1";
+/* ── 데이터 ─────────────────────────── */
+const WEEKS=['1/3','1/10','1/17','1/24','1/31','2/7','2/14','2/21','2/28','3/7','3/14','3/21','3/28','4/4','4/11','4/18','4/25','5/2','5/16','5/23','5/30','6/6','6/13','6/20','6/27'];
+const TOTAL=[187,194,182,188,192,187,182,175,179,195,197,193,192,193,190,199,184,143,184,178,171,193,189,183,193];
+const REGION=[173,181,155,170,167,165,166,151,158,174,184,185,172,177,169,170,171,124,166,158,157,172,175,167,177];
+const SMALLG=[101,97,89,101,99,102,90,90,111,120,103,99,115,109,115,109,86,59,111,87,88,100,83,83,77];
+const PRAYER=[47,54,53,45,49,57,50,0,47,54,49,50,53,49,44,32,23,14,22,18,10,17,15,17,16];
+const HOME=[42,40,39,40,40,42,44,18,45,43,44,43,45,39,39,39,31,29,37,37,36,36,37,35,41];
+const EVANG=[8,3,5,5,1,3,4,0,4,35,62,13,26,19,13,19,25,10,7,26,27,19,21,20,32];
+const NEWC=[13,17,15,17,21,3,3,3,4,7,4,6,5,5,6,8,2,1,1,3,0,2,1,6,6];
+const LBL=WEEKS.map(w=>['1/3','2/7','3/7','4/4','5/2','6/6'].includes(w)?w.split('/')[0]+'월':'');
+const WKNOTE={'2/21':'설 연휴 — 기도집회 미개최, 가정집회 18명','5/2':'연휴 주 — 상반기 최저','4/18':'상반기 최고 참석 주간','5/16':'직전 주(5/9)는 자료 없음','3/14':'복음전파 캠페인 정점(62명)','2/7':'소그룹 재편 시행 주 — 명부 227→365명'};
 
-/* signature spectrum */
+const MEET={
+ '전체':{color:'#16584D',data:TOTAL,min:120,max:212,guide:Array(25).fill(188),
+   ins:`<div class="mi-stats"><span class="big num">186명</span><span style="font-size:.85rem;color:var(--muted)">주평균 · 정상 주 188명</span></div>
+        <p>연휴 주(2/21·5/2)를 빼면 <b>175~199명의 좁은 띠</b>에서 안정. 최고 199명(4/18), 최저 143명(5/2). 3월이 정점(194명), 5월 침체 후 6월 190명 선 복귀.</p>`},
+ '지역집회':{color:'#16584D',data:REGION,min:100,max:200,guide:[...Array(17).fill(171.1),...Array(8).fill(167.4)],
+   ins:`<div class="mi-stats num"><span class="big">171.1</span><span class="arr">→</span><span class="big">167.4</span><span class="mi-pill" style="background:#5D6B66">−2.2%</span></div>
+        <p><b>가장 견고한 본류.</b> 주일 중심 집회로 상반기 내내 151~185명 유지. 최고 185명(3/21). 전·후반 차이는 오차 수준.</p>`},
+ '소그룹':{color:'#C9972B',data:SMALLG,min:0,max:130,guide:[...Array(17).fill(102.9),...Array(8).fill(89.9)],
+   ins:`<div class="mi-stats num"><span class="big">102.9</span><span class="arr">→</span><span class="big">89.9</span><span class="mi-pill" style="background:#B23A2E">−12.7%</span></div>
+        <p><b>주의 구간.</b> 3월 정점(120명) 이후 내림세, 6월 77~100명. 재편의 목적이 소그룹 활성화였다는 점에서 역행 신호.</p>`},
+ '기도집회':{color:'#B23A2E',data:PRAYER,min:0,max:62,alarm:true,guide:[...Array(15).fill(50.1),...Array(10).fill(18.9)],
+   ins:`<div class="mi-stats num"><span class="big">50.1</span><span class="arr">→</span><span class="big" style="color:var(--alarm)">18.9</span><span class="mi-pill" style="background:#B23A2E">−62%</span></div>
+        <p><b>상반기 최대 경보.</b> 설 연휴를 빼면 14주 연속 44~57명이던 참석이 <b>4/18 주 32명</b>을 시작으로 10~23명대로 단절, 6월엔 15~17명 저점이 고착.</p>
+        <p style="margin-top:.4rem"><b>확인이 필요한 지점</b> — 4월 중순에 바뀐 요인(시간대·장소·형식·인도자·중계 여부). 완만한 감소가 아닌 특정 시점의 단절이라는 것이 데이터의 신호.</p>`},
+ '가정집회':{color:'#5B7DA3',data:HOME,min:0,max:50,guide:[...Array(17).fill(40.9),...Array(8).fill(37.0)],
+   ins:`<div class="mi-stats num"><span class="big">40.9</span><span class="arr">→</span><span class="big">37.0</span><span class="mi-pill" style="background:#5D6B66">−9.5%</span></div>
+        <p><b>완만한 약화.</b> 설 주(18명)를 빼면 29~45명. 4월 말~5월 초에 잠시 주춤(29~31명) 후 6월 35~41명으로 복귀.</p>`},
+ '복음전파':{color:'#7B5BB5',data:EVANG,min:0,max:70,guide:[...Array(17).fill(15.3),...Array(8).fill(21.7)],
+   ins:`<div class="mi-stats num"><span class="big">15.3</span><span class="arr">→</span><span class="big" style="color:var(--ever)">21.7</span><span class="mi-pill" style="background:#16584D">+42%</span></div>
+        <p><b>상반기 유일한 점화.</b> 1~2월 주 0~8명 → 3월 캠페인에서 최대 62명 → 이후 주 20명 안팎의 <b>새 기준선</b>이 유지(6/27 주 32명). 집중이 습관을 만든 내부 증거.</p>`}
+};
+
+const UNITS=['1지역','2지역','3지역','4지역','5지역','6지역','유초등부','중고등부','청년대학생'];
+const USHORT=['1지역','2지역','3지역','4지역','5지역','6지역','유초','중고','청대'];
+const UW={
+ '1지역':[20,20,22,20,24,23,18,21,22,24,23,25,23,23,28,27,21,16,25,20,21,23,24,23,23],
+ '2지역':[28,24,23,24,23,25,25,22,26,23,25,25,25,27,24,26,26,19,26,25,24,28,29,26,28],
+ '3지역':[28,28,25,26,26,25,26,25,24,26,29,25,28,26,27,29,28,26,27,28,26,26,28,26,26],
+ '4지역':[23,21,23,22,22,24,24,24,17,19,23,25,22,23,22,22,23,19,20,20,19,22,22,21,20],
+ '5지역':[16,17,17,16,18,17,17,16,17,15,17,15,14,16,16,16,16,14,16,16,15,16,14,17,17],
+ '6지역':[19,24,21,24,26,24,27,26,23,28,24,24,28,29,23,25,27,22,24,22,23,30,26,26,27],
+ '유초등부':[24,26,20,24,22,19,17,19,22,29,27,19,25,24,22,25,24,14,20,23,21,25,25,19,23],
+ '중고등부':[9,10,9,9,12,12,11,9,8,12,11,12,9,9,10,10,5,0,12,11,9,11,8,6,9],
+ '청년대학생':[20,24,22,23,19,18,17,13,20,19,18,23,18,16,18,19,14,13,14,13,13,12,13,19,20]};
+const UENR=[46,47,36,39,24,49,47,18,60];
+const UEARLY=[22.6,24.9,26.1,22.0,16.0,25.4,22.6,10.7,19.0];
+const ULATE =[22.7,26.6,26.7,20.6,15.9,25.4,22.3,9.4,14.9];
+const UALERT=[[2,4,2],[1,0,4],[0,1,0],[0,2,4],[0,0,1],[3,1,0],[0,0,5],[0,1,1],[2,0,9]];
+const UNOTE=['4월 셋째~넷째 주 27~28명 최고 후 평상 수준 복귀.',
+ '유일하게 뚜렷이 오른 지역(+7%) — 6월 28~29명.',
+ '24~29명, 편차가 가장 작은 안정 지역.',
+ '완만한 감소(−6%). 5~6월 19~22명.',
+ '14~18명의 좁은 띠 유지.',
+ '6/6 주 30명 최고. 전 기간 안정.',
+ '3월 정점 29명 · 연휴 주 14명 저점 · 6월 회복.',
+ '5/2 주 전원 결석(0명) · 6/20 6명 저점 — 규모가 작아 변동 민감.',
+ '−22% 하락이 뚜렷하나 6월 마지막 2주 19·20명 반등 — 7월 흐름 확인 필요.'];
+
+const SEGS=[
+ {k:'핵심',n:174,c:'#16584D',tc:'#fff',def:'20주 중 75% 이상 출석',
+  txt:'<b>교회의 몸통.</b> 372명 중 47%가 거의 매주 참석하며, 그중 <b>45명</b>은 10주 이상 주 3회+ 출석한 "금" 헌신 그룹입니다.'},
+ {k:'정기',n:20,c:'#4E8C7F',tc:'#fff',def:'50~74% 출석',
+  txt:'격주 안팎으로 꾸준한 그룹. 핵심으로 올라올 가장 가까운 후보층입니다.'},
+ {k:'간헐',n:18,c:'#C9972B',tc:'#fff',def:'25~49% 출석',
+  txt:'한 달에 1~2주 참석. 재편으로 새로 드러난 인원 일부가 이 구간으로 유입됐습니다.'},
+ {k:'저조',n:38,c:'#9AA4AD',tc:'#fff',def:'1~24% 출석',
+  txt:'상반기 1~4회 수준의 참석. 정기·간헐과 합쳐도 허리층은 76명(20%)에 그칩니다.'},
+ {k:'무참석',n:122,c:'#CBD4D0',tc:'#5D6B66',def:'20주간 0회',
+  txt:'<b>재편 편입 105명 + 기존 17명.</b> 편입 142명 중 상반기에 참석 흔적을 남긴 사람은 37명(26%)뿐이고, 2~5월 무참석자 중 6월에 첫 활동을 시작한 사람은 <b>단 1명</b> — 명단 등재만으로는 움직이지 않았습니다.'}];
+
+const FUN=[
+ {t:'첫 방문',n:57,pct:'',w:100,c:'linear-gradient(90deg,#16584D,#2E7A6D)',
+  d:'<b>첫 방문 57명</b> — 1월 28명은 집계 시작 효과 포함. 2~4월 25명이 오다가 <b>5~6월 4명</b>으로 급감. 3월 캠페인기와 유입 정점이 겹친 점이 힌트입니다.'},
+ {t:'2회 이상 재방문',n:31,pct:'54%',w:62,c:'linear-gradient(90deg,#2E7A6D,#4E8C7F)',
+  d:'<b>재방문 31명(54%)</b> — 문 앞까지 오는 흐름은 살아 있습니다. 절반 이상이 다시 왔다는 뜻.'},
+ {t:'4회 이상 출석',n:10,pct:'18%',w:36,c:'linear-gradient(90deg,#4E8C7F,#6BA294)',
+  d:'<b>4회 이상 10명</b> — 사실상 정착 단계. 이 중 <b>20주·10주를 출석하고도 미등재</b>인 새신자가 2명 포함돼 있습니다.'},
+ {t:'명부 등재',n:3,pct:'5%',w:22,c:'linear-gradient(90deg,#C9972B,#E7C15B)',tc:'#3E3006',
+  d:'<b>등재 3명</b> — 강문주 · 성준연 · 이진미. 방문 대비 전환율 5%. 병목은 유입이 아니라 <b>정착 이후 절차</b>에 있습니다.'}];
+
+const ALERTS=[['청년대학생',2,'—',9,11,8],['1지역',2,4,2,8,0],['4지역','—',2,4,6,3],['2지역',1,'—',4,5,1],['유초등부','—','—',5,5,6],['6지역',3,1,'—',4,5],['중고등부','—',1,1,2,7],['3지역','—',1,'—',1,2],['5지역','—','—',1,1,4]];
+
+/* ── 공통 유틸 ──────────────────────── */
+const $=s=>document.querySelector(s);
+const HOLIDAY=new Set(['2/21','5/2']);
+const state={week:24,meet:'전체',unit:8};
+const hasChart=!!window.Chart;
+if(hasChart){
+  Chart.defaults.font.family=getComputedStyle(document.body).fontFamily;
+  Chart.defaults.font.size=11;
+  Chart.defaults.color='#5D6B66';
+}
+const gridY={grid:{color:'#E2E8E4'},border:{display:false},ticks:{precision:0}};
+const monthX={grid:{display:false},ticks:{callback:v=>LBL[v],maxRotation:0,autoSkip:false}};
+
+/* ── 히어로 리듬 스트립 (탭 → 주간 선택) ── */
 (function(){
-  const seg = [[129,"--gold","핵심 129명"],[58,"--silver","정기 58명"],[25,"--bronze","간헐 25명"],[44,"--faint","소원 44명"],[117,"--jewel","찾아야 할 보석 117명"]];
-  const el = document.getElementById("spectrum");
-  seg.forEach(([n,c,t])=>{const d=document.createElement("div");d.style.width=(n/373*100)+"%";d.style.background=css(c);d.title=t+" · "+(n/373*100).toFixed(1)+"%";el.appendChild(d);});
+  const box=$('#rhythmBars'); const mx=Math.max(...TOTAL);
+  WEEKS.forEach((w,i)=>{
+    const b=document.createElement('button');
+    b.className='bar'+(HOLIDAY.has(w)?' dim':'');
+    b.style.height=Math.max(12,Math.round(TOTAL[i]/mx*100))+'%';
+    b.setAttribute('aria-label',w+' 주간 '+TOTAL[i]+'명 — 상세 보기');
+    b.addEventListener('click',()=>{setWeek(i);$('#weekly').scrollIntoView({behavior:'smooth'});});
+    box.appendChild(b);
+    if(w==='5/2'){const g=document.createElement('div');g.className='gap';g.title='5/9 자료 없음';box.appendChild(g);}
+  });
 })();
 
-/* event marker plugin */
-const events = [{i:5,t:"재적 확대 227→365",dy:8},{i:7,t:"설 연휴",dy:30},{i:15,t:"최고 199명",dy:8},{i:17,t:"연휴 · 최저 143명",dy:8}];
-const evPlugin = {id:"ev", afterDatasetsDraw(c){
-  const {ctx, chartArea:a, scales:{x}} = c;
-  ctx.save(); ctx.setLineDash([4,4]); ctx.strokeStyle="rgba(28,39,64,.28)";
-  ctx.font="11px 'Pretendard',sans-serif"; ctx.fillStyle="#67748C";
-  events.forEach(e=>{const px=x.getPixelForValue(e.i);
-    ctx.beginPath(); ctx.moveTo(px,a.top+18); ctx.lineTo(px,a.bottom); ctx.stroke();
-    ctx.textAlign = e.i>20?"right":"left";
-    ctx.fillText(e.t, px + (e.i>20?-5:5), a.top + e.dy);
-  }); ctx.restore();
-}};
+/* ── 주간 탐색기 ────────────────────── */
+const MROWS=[['지역집회',REGION,'#16584D',185],['소그룹',SMALLG,'#C9972B',120],['기도집회',PRAYER,'#B23A2E',57],['가정집회',HOME,'#5B7DA3',45],['복음전파',EVANG,'#7B5BB5',62]];
+let chTotal=null;
+function setWeek(i,scroll){
+  state.week=Math.max(0,Math.min(24,i));
+  const w=WEEKS[state.week], card=$('#wkCard');
+  $('#wkName').textContent=w;
+  $('#wkTotal').textContent=TOTAL[state.week];
+  const d=$('#wkDelta');
+  if(state.week===0){d.textContent='';}
+  else{
+    const diff=TOTAL[state.week]-TOTAL[state.week-1];
+    const ref=WEEKS[state.week-1];
+    d.className='d '+(diff>0?'up':diff<0?'down':'flat');
+    d.textContent=(diff>0?'▲':diff<0?'▼':'—')+' '+Math.abs(diff)+'명 ('+ref+' 대비)';
+  }
+  const note=$('#wkNote');
+  if(WKNOTE[w]){note.textContent=WKNOTE[w];note.classList.add('show');}
+  else note.classList.remove('show');
+  const bars=$('#wkBars'); bars.innerHTML='';
+  MROWS.forEach(([lab,arr,col,mx])=>{
+    const v=arr[state.week];
+    bars.insertAdjacentHTML('beforeend',
+     `<div class="mrow"><span class="lab">${lab}</span><span class="track"><span class="fill" style="width:${Math.round(v/mx*100)}%;background:${col}"></span></span><span class="val num">${v}</span></div>`);
+  });
+  $('#wkNew').innerHTML=NEWC[state.week]>0?`이번 주 새신자 참석 <b>${NEWC[state.week]}명</b>`:'이번 주 새신자 참석 기록 없음';
+  $('#wkPrev').disabled=state.week===0;
+  $('#wkNext').disabled=state.week===24;
+  card.classList.remove('fade');void card.offsetWidth;card.classList.add('fade');
+  if(chTotal)chTotal.update();
+}
+$('#wkPrev').addEventListener('click',()=>setWeek(state.week-1));
+$('#wkNext').addEventListener('click',()=>setWeek(state.week+1));
+(function(){ /* 스와이프 */
+  let sx=null;
+  const el=$('#wkCard');
+  el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(sx===null)return;
+    const dx=e.changedTouches[0].clientX-sx; sx=null;
+    if(Math.abs(dx)>45) setWeek(state.week+(dx<0?1:-1));
+  },{passive:true});
+})();
 
-new Chart(document.getElementById("weeklyChart"),{
-  type:"line", plugins:[evPlugin],
-  data:{labels:W,datasets:[{label:"주간 출석 총계",data:TOT,borderColor:"#1C2740",backgroundColor:"rgba(28,39,64,.06)",
-    fill:true,tension:.3,pointRadius:3,pointBackgroundColor:"#1C2740",borderWidth:2.2}]},
-  options:{maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y}명`}}},
-    scales:{y:{min:120,max:230,ticks:{callback:v=>v+"명"}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:45,font:{size:10.5}}}}}
+if(hasChart){
+  chTotal=new Chart($('#chTotal'),{type:'line',
+    data:{labels:WEEKS,datasets:[{data:TOTAL,borderColor:'#16584D',borderWidth:2.5,tension:.3,
+      fill:{target:'origin',above:'rgba(22,88,77,.07)'},
+      pointRadius:ctx=>ctx.dataIndex===state.week?6:(HOLIDAY.has(WEEKS[ctx.dataIndex])?4:2.5),
+      pointBackgroundColor:ctx=>ctx.dataIndex===state.week?'#C9972B':(HOLIDAY.has(WEEKS[ctx.dataIndex])?'#C9972B':'#16584D'),
+      pointBorderColor:ctx=>ctx.dataIndex===state.week?'#8F6D14':'#16584D',
+      pointBorderWidth:ctx=>ctx.dataIndex===state.week?2:1}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      onClick:(e,els,chart)=>{const p=chart.getElementsAtEventForMode(e,'nearest',{intersect:false,axis:'x'},true);if(p.length)setWeek(p[0].index);},
+      plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>WEEKS[c[0].dataIndex]+' 주간',label:c=>c.parsed.y+'명 — 탭하여 상세 보기'}}},
+      scales:{x:{...monthX},y:{...gridY,suggestedMin:120,suggestedMax:210}}}});
+}
+
+/* ── 집회 탭 ────────────────────────── */
+let chMeet=null;
+const meetTabs=$('#meetTabs');
+Object.keys(MEET).forEach(k=>{
+  const b=document.createElement('button');
+  b.className='tab'+(MEET[k].alarm?' alarm':''); b.role='tab'; b.textContent=k;
+  b.setAttribute('aria-selected',k===state.meet);
+  b.addEventListener('click',()=>setMeet(k));
+  meetTabs.appendChild(b);
+});
+function setMeet(k){
+  state.meet=k;
+  [...meetTabs.children].forEach(b=>b.setAttribute('aria-selected',b.textContent===k));
+  const m=MEET[k];
+  const ic=$('#meetInsight');
+  ic.innerHTML=m.ins; ic.classList.toggle('alarm-bg',!!m.alarm);
+  ic.classList.remove('fade');void ic.offsetWidth;ic.classList.add('fade');
+  if(chMeet){
+    chMeet.data.datasets[0].data=m.data;
+    chMeet.data.datasets[0].borderColor=m.color;
+    chMeet.data.datasets[0].fill.above=m.color+'14';
+    chMeet.data.datasets[1].data=m.guide;
+    chMeet.options.scales.y.suggestedMin=m.min;
+    chMeet.options.scales.y.suggestedMax=m.max;
+    chMeet.update();
+  }
+}
+if(hasChart){
+  chMeet=new Chart($('#chMeet'),{type:'line',
+    data:{labels:WEEKS,datasets:[
+      {data:MEET['전체'].data,borderColor:MEET['전체'].color,borderWidth:2.5,tension:.3,pointRadius:0,pointHitRadius:10,fill:{target:'origin',above:'rgba(22,88,77,.08)'}},
+      {data:MEET['전체'].guide,borderColor:'#8F6D14',borderWidth:1.5,borderDash:[5,4],pointRadius:0,tension:0}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{filter:i=>i.datasetIndex===0,callbacks:{title:c=>WEEKS[c[0].dataIndex]+' 주간',label:c=>c.parsed.y+'명'}}},
+      scales:{x:{...monthX},y:{...gridY,suggestedMin:120,suggestedMax:212}}}});
+}
+setMeet('전체');
+
+/* ── 지역·계층 탐색기 ───────────────── */
+let chUnit=null,chMini=null;
+const chipBox=$('#unitChips');
+USHORT.forEach((n,i)=>{
+  const b=document.createElement('button');
+  b.className='chip'; b.textContent=n;
+  b.setAttribute('aria-pressed',i===state.unit);
+  b.addEventListener('click',()=>setUnit(i));
+  chipBox.appendChild(b);
+});
+function setUnit(i,scroll){
+  state.unit=i;
+  [...chipBox.children].forEach((b,bi)=>b.setAttribute('aria-pressed',bi===i));
+  $('#uName').textContent=UNITS[i];
+  $('#uEnr').textContent='재적 '+UENR[i]+'명 (6/27 기준)';
+  const e=UEARLY[i],l=ULATE[i],diff=(l-e)/e*100;
+  const col=diff<=-8?'var(--alarm)':diff>=4?'var(--ever)':'var(--ink)';
+  $('#uStats').innerHTML=
+   `<div class="u-stat"><div class="l">2~3월 주평균</div><div class="v">${e.toFixed(1)}명</div></div>
+    <div class="u-stat"><div class="l">5~6월 주평균</div><div class="v">${l.toFixed(1)}명</div></div>
+    <div class="u-stat"><div class="l">증감</div><div class="v" style="color:${col}">${diff>0?'+':''}${diff.toFixed(1)}%</div></div>`;
+  const a=UALERT[i],tot=a[0]+a[1]+a[2];
+  $('#uAlert').innerHTML=tot===0?'이탈 경보: 해당 없음'
+   :`이탈 경보 <b>${tot}명</b> — 3주 ${a[0]} · 4~7주 ${a[1]} · 8주+ ${a[2]}`;
+  $('#uNote').textContent=UNOTE[i];
+  const card=$('#unitCard');
+  card.classList.remove('fade');void card.offsetWidth;card.classList.add('fade');
+  if(chMini){
+    chMini.data.datasets[0].data=UW[UNITS[i]];
+    const mx=Math.max(...UW[UNITS[i]]);
+    chMini.options.scales.y.suggestedMax=Math.ceil(mx*1.15);
+    chMini.update();
+  }
+  if(chUnit)chUnit.update();
+  if(scroll)$('#unitCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+if(hasChart){
+  chUnit=new Chart($('#chUnit'),{type:'bar',
+    data:{labels:USHORT,datasets:[
+      {label:'2~3월',data:UEARLY,backgroundColor:'#B9CFC9',borderRadius:4},
+      {label:'5~6월',data:ULATE,borderRadius:4,
+       backgroundColor:ctx=>ctx.dataIndex===state.unit?'#C9972B':(ctx.dataIndex>=7?'#B23A2E':'#16584D')}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      onClick:(e,els,chart)=>{const p=chart.getElementsAtEventForMode(e,'nearest',{intersect:false,axis:'y'},true);if(p.length)setUnit(p[0].index,true);},
+      plugins:{legend:{position:'bottom',labels:{boxWidth:9,boxHeight:9,padding:9}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.x+'명 — 탭하여 상세'}}},
+      scales:{x:{...gridY,position:'top'},y:{grid:{display:false},ticks:{color:'#1B2724',font:{weight:600}}}}}});
+  chMini=new Chart($('#chUnitMini'),{type:'line',
+    data:{labels:WEEKS,datasets:[{data:UW[UNITS[state.unit]],borderColor:'#16584D',borderWidth:2,tension:.3,pointRadius:0,pointHitRadius:8,fill:{target:'origin',above:'rgba(22,88,77,.08)'}}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>WEEKS[c[0].dataIndex]+' 주간',label:c=>c.parsed.y+'명'}}},
+      scales:{x:{...monthX,ticks:{...monthX.ticks,font:{size:9.5}}},y:{...gridY,suggestedMin:0}}}});
+}
+setUnit(8);
+
+/* ── 참여 구조 ─────────────────────── */
+const stack=$('#segStack');
+SEGS.forEach((g,i)=>{
+  const b=document.createElement('button');
+  b.style.width=(g.n/372*100)+'%'; b.style.background=g.c;
+  b.setAttribute('aria-pressed','false');
+  b.setAttribute('aria-label',g.k+' '+g.n+'명 — 설명 보기');
+  if(g.n>=38)b.innerHTML=`<span class="in-n" style="color:${g.tc}">${g.n}</span>`;
+  b.addEventListener('click',()=>setSeg(i));
+  stack.appendChild(b);
+});
+function setSeg(i){
+  stack.classList.remove('idle');
+  [...stack.children].forEach((b,bi)=>b.setAttribute('aria-pressed',String(bi===i)));
+  const g=SEGS[i], d=$('#segDetail');
+  d.innerHTML=`<div class="t"><i style="background:${g.c}"></i>${g.k} · ${g.n}명 <span style="font-weight:500;color:var(--muted);font-size:.8rem">(${g.def})</span></div><p>${g.txt}</p>`;
+  d.classList.remove('fade');void d.offsetWidth;d.classList.add('fade');
+}
+
+/* ── 이탈 표 (행 탭 → 지역·계층 상세) ── */
+(function(){
+  const tb=$('#alertTable tbody');
+  ALERTS.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.className='rowbtn'; tr.tabIndex=0;
+    tr.innerHTML=`<td>${r[0]}<span class="chev">›</span></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><b>${r[4]}</b></td>`;
+    const go=()=>{setUnit(r[5]);$('#units').scrollIntoView({behavior:'smooth'});};
+    tr.addEventListener('click',go);
+    tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+    tb.appendChild(tr);
+  });
+  const t=document.createElement('tr');t.className='total';
+  t.innerHTML='<td>계</td><td>8</td><td>9</td><td>26</td><td>43</td>';
+  tb.appendChild(t);
+})();
+
+/* ── 새신자 퍼널 ────────────────────── */
+const fun=$('#funnel');
+FUN.forEach((f,i)=>{
+  const b=document.createElement('button');
+  b.className='fstep'; b.setAttribute('aria-pressed',i===0?'true':'false');
+  b.innerHTML=`<span class="fbar num" style="width:${f.w}%;background:${f.c};${f.tc?'color:'+f.tc:''}">${f.t}</span><span class="fnum num">${f.n}명 ${f.pct?`<small>${f.pct}</small>`:''}</span>`;
+  b.addEventListener('click',()=>{
+    [...fun.children].forEach((x,xi)=>x.setAttribute('aria-pressed',String(xi===i)));
+    const d=$('#fDetail'); d.innerHTML=f.d;
+    d.classList.remove('fade');void d.offsetWidth;d.classList.add('fade');
+  });
+  fun.appendChild(b);
+});
+if(hasChart){
+  new Chart($('#chNew'),{type:'bar',
+    data:{labels:['1월*','2월','3월','4월','5월','6월'],datasets:[{data:[28,6,10,9,2,2],backgroundColor:'#C9972B',borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'명 첫 방문'}}},
+      scales:{x:{grid:{display:false}},y:{...gridY,suggestedMax:30}}}});
+}
+
+/* ── KPI 딥링크 ─────────────────────── */
+document.querySelectorAll('.kpi[data-go]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    if(b.dataset.meet)setMeet(b.dataset.meet);
+    document.querySelector(b.dataset.go).scrollIntoView({behavior:'smooth'});
+  });
 });
 
-new Chart(document.getElementById("meetingChart"),{
-  type:"line",
-  data:{labels:W,datasets:Object.keys(M).map(k=>({label:k,data:M[k],borderColor:MCOLOR[k],
-    backgroundColor:MCOLOR[k],tension:.3,pointRadius:2,borderWidth:2}))},
-  options:{maintainAspectRatio:false,
-    plugins:{legend:{position:"top",labels:{usePointStyle:true,pointStyle:"line",boxWidth:26}},
-      tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}명`}}},
-    scales:{y:{beginAtZero:true,ticks:{callback:v=>v+"명"}},x:{grid:{display:false},ticks:{maxRotation:60,minRotation:45,font:{size:10.5}}}}}
-});
+/* ── 부록 표 ────────────────────────── */
+(function(){
+  const tb=$('#apxTable tbody');
+  WEEKS.forEach((w,i)=>{
+    const tr=document.createElement('tr');
+    const mark=w==='2/21'?' ☾':(w==='5/2'?' ✈':'');
+    tr.innerHTML=`<td>${w}${mark}</td><td>${EVANG[i]}</td><td>${HOME[i]}</td><td>${PRAYER[i]}</td><td>${SMALLG[i]}</td><td>${REGION[i]}</td><td><b>${TOTAL[i]}</b></td><td>${NEWC[i]}</td>`;
+    tb.appendChild(tr);
+    if(w==='5/2'){const g=document.createElement('tr');g.innerHTML=`<td>5/9</td><td colspan="7" style="text-align:center;color:#9AA4AD">자료 없음</td>`;tb.appendChild(g);}
+  });
+})();
 
-/* Q1→Q2 delta */
-const dl = ["복음전파 13→20명","지역집회 169→165명","소그룹집회 101→92명","가정집회 40→36명","기도집회 47→23명"];
-const dv = [53,-2,-9,-10,-51];
-const valPlugin = {id:"vals", afterDatasetsDraw(c){
-  const {ctx} = c; ctx.save(); ctx.font="700 12px 'Pretendard',sans-serif";
-  c.getDatasetMeta(0).data.forEach((b,i)=>{const v=c.data.datasets[0].data[i];
-    ctx.fillStyle = v>0?"#2E7D64":(v<-20?"#B3402F":"#67748C");
-    ctx.textAlign = v>=0?"left":"right";
-    ctx.fillText((v>0?"+":"")+v+"%", b.x + (v>=0?6:-6), b.y+4);}); ctx.restore();
-}};
-new Chart(document.getElementById("deltaChart"),{
-  type:"bar", plugins:[valPlugin],
-  data:{labels:dl,datasets:[{data:dv,backgroundColor:dv.map(v=>v>0?"#2E7D64":(v<-20?"#B3402F":"#9FB0C2")),barThickness:22}]},
-  options:{indexAxis:"y",maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{enabled:false}},
-    scales:{x:{min:-70,max:70,ticks:{callback:v=>v+"%"}},y:{grid:{display:false},ticks:{font:{size:12.5}}}}}
-});
+/* ── 스크롤스파이 ───────────────────── */
+(function(){
+  const links=[...document.querySelectorAll('.topnav a')];
+  const map={};links.forEach(a=>map[a.getAttribute('href').slice(1)]=a);
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('on'));const a=map[e.target.id];if(a){a.classList.add('on');a.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});}}});
+  },{rootMargin:'-25% 0px -65% 0px'});
+  document.querySelectorAll('main section').forEach(s=>io.observe(s));
+})();
 
-/* dept rate */
-const dept = [["3지역",75],["5지역",66],["2지역",55],["4지역",54],["6지역",52],["1지역",50],["유초등부",47],["중고등부",46],["청년대학생",26]];
-new Chart(document.getElementById("deptChart"),{
-  type:"bar", plugins:[{id:"v2",afterDatasetsDraw(c){const{ctx}=c;ctx.save();ctx.font="700 12px 'Pretendard',sans-serif";
-    c.getDatasetMeta(0).data.forEach((b,i)=>{ctx.fillStyle="#1C2740";ctx.textAlign="left";ctx.fillText(c.data.datasets[0].data[i]+"%",b.x+6,b.y+4);});ctx.restore();}}],
-  data:{labels:dept.map(d=>d[0]),datasets:[{data:dept.map(d=>d[1]),
-    backgroundColor:dept.map(d=>d[1]>=60?"#2E7D64":(d[1]<35?"#B3402F":"#C9A227")),barThickness:20}]},
-  options:{indexAxis:"y",maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{enabled:false}},
-    scales:{x:{min:0,max:90,ticks:{callback:v=>v+"%"}},y:{grid:{display:false},ticks:{font:{size:12.5}}}}}
-});
-
-/* dept table */
-const DT = [
- ["3지역",26.6,26.5,[23,4,2,2,6]],
- ["5지역",16.8,16.0,[14,2,1,2,6]],
- ["2지역",24.4,27.8,[17,7,4,7,10]],
- ["4지역",22.2,21.2,[17,4,1,5,12]],
- ["6지역",22.8,27.2,[20,8,3,2,16]],
- ["1지역",21.2,23.2,[13,10,3,8,12]],
- ["유초등부",23.2,23.0,[14,6,4,7,17]],
- ["중고등부",9.8,8.5,[3,8,0,2,5]],
- ["청년대학생",21.6,16.0,[8,9,7,9,33]]
-];
-const SC = ["--gold","--silver","--bronze","--faint","--jewel"];
-const tb = document.querySelector("#deptTable tbody");
-DT.forEach(([n,j,u,seg])=>{
-  const d = u-j, sum = seg.reduce((a,b)=>a+b,0);
-  const cls = d>=1?"delta-up":(d<=-1?"delta-dn":"delta-flat");
-  const arrow = d>=1?"▲":(d<=-1?"▼":"—");
-  const bar = seg.map((v,i)=>`<span style="width:${v/sum*100}%;background:${css(SC[i])}"></span>`).join("");
-  tb.insertAdjacentHTML("beforeend",
-   `<tr><td>${n}</td><td>${j.toFixed(1)} → ${u.toFixed(1)}명</td>
-    <td class="${cls}">${arrow} ${Math.abs(d).toFixed(1)}</td>
-    <td class="barcell"><div class="minibar" title="핵심 ${seg[0]} · 정기 ${seg[1]} · 간헐 ${seg[2]} · 소원 ${seg[3]} · 보석 ${seg[4]} / 계 ${sum}명">${bar}</div></td></tr>`);
-});
+/* 초기 주간: 최신 주 */
+setWeek(24);
 </script>
 </body>
 </html>
