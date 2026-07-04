@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0F24">
+<title>요한복음 17장에 있는 하나 — 건축의 여정</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-size:1rem;line-height:1.85;
+  word-break:keep-all;overflow-wrap:break-word;overflow-x:hidden;
+  background:#0A0F24;color:var(--ink);
+  --ink:#EDE9DD;--sub:#A8AFBF;--gold:#E2C069;--gold-dim:#B4964F;
+  --gold-soft:rgba(226,192,105,.13);--line:rgba(226,192,105,.4);
+  --card:rgba(233,229,218,.045);--card-line:rgba(233,229,218,.13);
+  --bad:#CE7B6C;--bad-soft:rgba(206,123,108,.12);
+}
+.serif{font-family:'Noto Serif KR','Nanum Myeongjo','Apple Myungjo',Batang,serif}
+.wrap{max-width:28rem;margin:0 auto;padding:0 1.35rem}
+section,header.hero{padding:4.4rem 0 4.8rem}
+img,svg{max-width:100%}
+
+/* ---------- 색의 여정 : 밤 → 저점 → 여명 → 빛 ---------- */
+#prologue{min-height:100svh;display:flex;align-items:center;text-align:center;padding:5rem 0;
+  background:
+  radial-gradient(1.3px 1.3px at 18% 20%,rgba(255,255,255,.7),transparent 60%),
+  radial-gradient(1px 1px at 71% 11%,rgba(255,255,255,.5),transparent 60%),
+  radial-gradient(1.5px 1.5px at 85% 34%,rgba(226,192,105,.65),transparent 60%),
+  radial-gradient(1px 1px at 30% 50%,rgba(255,255,255,.35),transparent 60%),
+  radial-gradient(1px 1px at 60% 72%,rgba(255,255,255,.3),transparent 60%),
+  radial-gradient(1.3px 1.3px at 9% 80%,rgba(255,255,255,.42),transparent 60%),
+  radial-gradient(1px 1px at 90% 86%,rgba(226,192,105,.4),transparent 60%),
+  #0A0F24}
+#act1{background:linear-gradient(#0A0F24,#0E1533 10rem)}
+#act2{background:linear-gradient(#0E1533,#121B3B 10rem)}
+#act3{background:linear-gradient(#121B3B,#15223F 10rem)}
+#act4{background:linear-gradient(#15223F,#1B222C 12rem)}
+#act5{background:linear-gradient(#1B222C,#212E3E 10rem)}
+#act6{background:linear-gradient(#212E3E,#2A3749 10rem)}
+#act7{background:linear-gradient(180deg,#2A3749 0,#39414B 8rem,#4C4837 46%,#63552F 100%)}
+#finale{background:linear-gradient(180deg,#63552F 0,#B0914D 4.5rem,#E9DCBB 11rem,#F7F0DC 15rem)}
+#epilogue{background:linear-gradient(#F7F0DC,#FCF9F0 8rem);padding-bottom:2.5rem}
+
+.light{--ink:#3B321F;--sub:#7E7255;--gold:#8F6B16;--gold-dim:#A07E29;
+  --gold-soft:rgba(143,107,22,.1);--line:rgba(143,107,22,.42);
+  --card:rgba(143,107,22,.05);--card-line:rgba(143,107,22,.2);
+  --bad:#A8543F;--bad-soft:rgba(168,84,63,.1);color:var(--ink)}
+
+/* ---------- 프롤로그 ---------- */
+.pre-ch{font-size:.74rem;letter-spacing:.55em;text-indent:.55em;color:var(--gold-dim);margin-bottom:1.1rem}
+h1{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.95rem;line-height:1.5;letter-spacing:-.015em}
+h1 em{font-style:normal;color:var(--gold)}
+.orn{text-align:center;color:var(--gold);opacity:.7;margin:1.6rem 0;letter-spacing:.4em;text-indent:.4em;font-size:.85rem}
+.pro-q{font-family:'Noto Serif KR',serif;font-size:1.14rem;line-height:2.15;color:#DDD8CB}
+.pro-q .vs{display:block;margin-top:.7rem;font-family:'Noto Sans KR';font-size:.74rem;letter-spacing:.2em;color:var(--gold-dim)}
+.pro-lead{margin-top:2rem;font-size:.94rem;color:var(--sub);line-height:2}
+.scroll-hint{margin-top:3.2rem;font-size:.74rem;letter-spacing:.24em;color:var(--gold-dim)}
+.scroll-hint b{display:block;font-weight:400;font-size:1rem;margin-bottom:.4rem;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(.35rem)}}
+@media(prefers-reduced-motion:reduce){.scroll-hint b{animation:none}}
+
+/* ---------- 막 구조 ---------- */
+.act-mark{display:flex;align-items:center;gap:.9rem;color:var(--gold);font-size:.73rem;letter-spacing:.45em;text-indent:.45em;white-space:nowrap}
+.act-mark::before,.act-mark::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
+.act-mark::after{background:linear-gradient(90deg,var(--line),transparent)}
+.act-title{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.62rem;line-height:1.5;letter-spacing:-.02em;text-align:center;margin:.9rem 0 .15rem}
+.act-sub{text-align:center;color:var(--sub);font-size:.88rem;margin-bottom:2rem}
+.lead{margin-bottom:1.3rem}
+.lead+.lead{margin-top:-0.3rem}
+.h3{font-family:'Noto Serif KR',serif;font-weight:600;font-size:1.12rem;margin:2.4rem 0 .7rem;color:var(--ink)}
+.h3::before{content:'';display:inline-block;width:.95rem;height:1px;background:var(--gold);vertical-align:middle;margin-right:.55rem;opacity:.85}
+.bridge{margin-top:3.4rem;text-align:center;font-family:'Noto Serif KR',serif;color:var(--gold-dim);font-size:1rem;line-height:1.95;position:relative;padding-top:2.4rem}
+.bridge::before{content:'';position:absolute;top:0;left:50%;width:1px;height:1.7rem;background:linear-gradient(rgba(226,192,105,0),var(--line))}
+.light .bridge::before{background:linear-gradient(rgba(143,107,22,0),var(--line))}
+
+/* ---------- 인용 블록 ---------- */
+blockquote.quote{font-family:'Noto Serif KR',serif;font-size:1.02rem;line-height:2.05;
+  margin:1.7rem 0;padding:1.1rem 1.15rem 1.05rem 1.3rem;
+  border-left:3px solid var(--gold);border-radius:0 14px 14px 0;
+  background:linear-gradient(100deg,var(--gold-soft),transparent 80%)}
+blockquote.quote cite{display:block;margin-top:.65rem;font-style:normal;font-family:'Noto Sans KR',sans-serif;
+  font-size:.74rem;letter-spacing:.16em;color:var(--gold-dim);text-align:right}
+blockquote.quote.msg{border-left-color:rgba(233,229,218,.4);
+  background:linear-gradient(100deg,rgba(233,229,218,.06),transparent 80%)}
+.light blockquote.quote.msg{border-left-color:rgba(59,50,31,.3);
+  background:linear-gradient(100deg,rgba(59,50,31,.05),transparent 80%)}
+
+/* ---------- 카드 ---------- */
+.card{border:1px solid var(--card-line);background:var(--card);border-radius:14px;padding:1.1rem 1.15rem;margin:1.5rem 0}
+.card.gold{border-color:var(--line);background:linear-gradient(160deg,var(--gold-soft),rgba(226,192,105,.03))}
+.card.gold .big{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.24rem;line-height:1.75;color:var(--gold)}
+.card p.note{font-size:.86rem;color:var(--sub);line-height:1.8;margin-top:.5rem}
+.kicker{display:inline-block;font-size:.7rem;letter-spacing:.26em;text-indent:.26em;color:var(--gold-dim);
+  border:1px solid var(--card-line);padding:.16rem .75rem;border-radius:99px;margin-bottom:.65rem}
+
+/* ---------- 타임라인 ---------- */
+.tl{list-style:none;position:relative;margin:1.8rem 0;padding-left:2.05rem}
+.tl::before{content:'';position:absolute;left:.44rem;top:.5rem;bottom:.5rem;width:1px;
+  background:linear-gradient(var(--line),rgba(226,192,105,.06))}
+.tl li{position:relative;padding-bottom:1.4rem}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:'';position:absolute;left:-1.88rem;top:.44rem;width:.58rem;height:.58rem;border-radius:50%;
+  background:#0E1533;border:1.5px solid var(--gold)}
+.tl li:last-child::before{background:var(--gold);box-shadow:0 0 12px rgba(226,192,105,.55)}
+.tl-ch{font-family:'Noto Serif KR',serif;color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.08em;display:block}
+.tl strong{display:block;font-size:1.03rem;margin:.05rem 0 .12rem;font-weight:700}
+.tl p{color:var(--sub);font-size:.88rem;line-height:1.78}
+
+/* ---------- 번호 단계 ---------- */
+.steps{list-style:none;counter-reset:s;margin:1.5rem 0 .4rem}
+.steps li{counter-increment:s;position:relative;padding:0 0 1.15rem 2.6rem;font-size:.96rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.14rem;width:1.72rem;height:1.72rem;border-radius:50%;
+  border:1px solid var(--line);color:var(--gold);font-family:'Noto Serif KR',serif;font-weight:700;font-size:.88rem;
+  display:grid;place-items:center;background:rgba(226,192,105,.07)}
+.steps li::after{content:'';position:absolute;left:.85rem;top:2.05rem;bottom:.25rem;width:1px;background:var(--card-line)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::after{display:none}
+.steps strong{font-weight:700}
+.steps span{color:var(--sub);font-size:.9rem}
+
+/* ---------- ≠ / = 카드 ---------- */
+.neq{list-style:none;margin:1.6rem 0;display:grid;gap:.55rem}
+.neq li{display:grid;grid-template-columns:1fr auto 3.1rem;align-items:center;gap:.6rem;
+  border:1px solid var(--card-line);background:var(--card);border-radius:12px;padding:.62rem 1rem}
+.neq .t{font-family:'Noto Serif KR',serif;font-weight:600;font-size:.98rem}
+.neq .op{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.3rem;color:var(--bad);line-height:1}
+.neq .r{font-family:'Noto Serif KR',serif;font-weight:700;color:var(--sub);text-align:right}
+.neq li.eq{border-color:var(--line);background:linear-gradient(120deg,rgba(226,192,105,.16),rgba(226,192,105,.03))}
+.neq li.eq .op{color:var(--gold)}
+.neq li.eq .t,.neq li.eq .r{color:var(--gold);font-size:1.05rem}
+
+/* ---------- 2열 그리드·아이콘 카드 ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.6rem 0}
+.icard{border:1px solid var(--card-line);background:var(--card);border-radius:14px;padding:1rem .75rem .9rem;text-align:center}
+.icard svg{width:100%;max-width:8rem;height:auto;margin:0 auto .55rem;display:block}
+.icard h4{font-size:.85rem;letter-spacing:.08em;margin-bottom:.3rem;font-weight:700}
+.icard.no h4{color:var(--sub)}
+.icard.yes{border-color:var(--line)}
+.icard.yes h4{color:var(--gold)}
+.icard p{font-size:.79rem;color:var(--sub);line-height:1.72}
+
+/* ---------- 큰 숫자 ---------- */
+.bn{display:flex;align-items:baseline;justify-content:center;gap:.15rem;margin:2.3rem 0 .5rem;
+  font-family:'Noto Serif KR',serif;color:var(--gold)}
+.bn .n{font-size:5rem;font-weight:900;line-height:1;letter-spacing:-.03em;text-shadow:0 0 36px rgba(226,192,105,.35)}
+.bn .u{font-size:1.6rem;font-weight:700}
+.bn-cap{text-align:center;color:var(--sub);font-size:.92rem;line-height:1.9;margin:0 auto 1rem;max-width:24rem}
+
+/* ---------- 2×2 매트릭스 ---------- */
+.mx{margin:1.8rem 0 .5rem}
+.mx-top{font-size:.71rem;letter-spacing:.22em;color:var(--gold-dim);margin-bottom:.4rem}
+.mx-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
+  border-left:1px solid var(--line);border-bottom:1px solid var(--line);padding:0 0 .55rem .55rem}
+.mx-bot{font-size:.71rem;letter-spacing:.22em;color:var(--gold-dim);text-align:right;margin-top:.4rem}
+.q{border:1px solid var(--card-line);background:var(--card);border-radius:12px;padding:.8rem .72rem}
+.q .tag{font-size:.66rem;letter-spacing:.1em;color:var(--sub);display:block;margin-bottom:.32rem}
+.q h4{font-family:'Noto Serif KR',serif;font-weight:600;font-size:.94rem;line-height:1.55;margin-bottom:.28rem}
+.q p{font-size:.78rem;color:var(--sub);line-height:1.68}
+.q.gold{border-color:var(--line);background:linear-gradient(150deg,rgba(226,192,105,.17),rgba(226,192,105,.03))}
+.q.gold h4{color:var(--gold)}
+.q.bad{border-color:rgba(206,123,108,.45);background:linear-gradient(150deg,var(--bad-soft),transparent)}
+.q.bad h4{color:var(--bad)}
+
+/* ---------- 두 갈래 순서도 ---------- */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.8rem 0}
+.path{border-radius:14px;padding:.9rem .6rem;border:1px solid}
+.path.p-bad{border-color:rgba(206,123,108,.35);background:linear-gradient(180deg,var(--bad-soft),transparent 65%)}
+.path.p-gold{border-color:var(--line);background:linear-gradient(180deg,var(--gold-soft),transparent 65%)}
+.path h4{text-align:center;font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.12rem;margin-bottom:.65rem}
+.p-bad h4{color:var(--bad)}
+.p-gold h4{color:var(--gold)}
+.fb{border:1px solid var(--card-line);background:rgba(8,12,26,.35);border-radius:10px;
+  padding:.5rem .5rem;text-align:center;font-size:.82rem;line-height:1.62}
+.fb em{display:block;font-style:normal;font-size:.69rem;color:var(--sub);margin-top:.1rem}
+.fa{text-align:center;color:var(--sub);font-size:.78rem;line-height:2}
+.fb.end-bad{color:var(--bad);border-color:rgba(206,123,108,.45);font-weight:700}
+.fb.end-gold{color:var(--gold);border-color:var(--line);font-weight:700}
+
+/* ---------- 증상 카드 ---------- */
+.sym{display:grid;gap:.7rem;margin:1.7rem 0}
+.sy{display:grid;grid-template-columns:2.8rem 1fr;gap:.9rem;align-items:start;
+  border:1px solid var(--card-line);background:var(--card);border-radius:14px;padding:1rem 1rem}
+.sy svg{width:2.8rem;height:2.8rem;stroke:var(--gold);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+.sy h4{font-size:.97rem;font-weight:700;margin-bottom:.12rem}
+.sy p{font-size:.84rem;color:var(--sub);line-height:1.75}
+
+/* ---------- 두 기둥·교환표·리듬 ---------- */
+.pillar{border:1px solid var(--line);border-radius:14px;padding:1.05rem .95rem;
+  background:linear-gradient(180deg,var(--gold-soft),transparent 70%)}
+.pillar h4{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.35rem;color:var(--gold);margin-bottom:.4rem}
+.pillar p{font-size:.86rem;line-height:1.82}
+.swap{margin:1.7rem 0;border:1px solid var(--card-line);border-radius:14px;overflow:hidden}
+.sw-h{display:grid;grid-template-columns:1fr 2rem 1fr;background:var(--card);padding:.55rem .95rem;
+  font-size:.7rem;letter-spacing:.16em;color:var(--sub)}
+.sw-h span:last-child{text-align:right;color:var(--gold-dim)}
+.sw-r{display:grid;grid-template-columns:1fr 2rem 1fr;padding:.62rem .95rem;border-top:1px solid var(--card-line);align-items:center;font-size:.95rem}
+.sw-r .a{color:var(--sub)}
+.sw-r .ar{text-align:center;color:var(--gold-dim)}
+.sw-r .b{text-align:right;font-weight:500}
+.rhy{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.7rem 0}
+.rh{border:1px solid var(--card-line);background:var(--card);border-radius:12px;padding:.9rem .5rem;text-align:center}
+.rh strong{font-family:'Noto Serif KR',serif;font-weight:600;font-size:1.02rem;display:block}
+.rh span{display:block;margin-top:.32rem;font-size:.76rem;color:var(--gold);letter-spacing:.14em}
+
+/* ---------- 픽토그래프·기타 ---------- */
+.persons{display:flex;flex-wrap:wrap;justify-content:center;gap:.42rem;margin:1.8rem 0 .5rem}
+.pp{width:1.5rem;height:1.88rem;fill:#93A7C9}
+.pp.s{fill:var(--gold)}
+.pcap{text-align:center;font-size:.85rem;color:var(--sub);line-height:1.8}
+.whisper{text-align:center;font-family:'Noto Serif KR',serif;color:var(--gold-dim);margin:2.4rem 0 0;font-size:1rem;line-height:2}
+.whisper cite{display:block;font-family:'Noto Sans KR',sans-serif;font-style:normal;font-size:.72rem;letter-spacing:.16em;color:var(--sub);margin-top:.35rem}
+.letter{border:1px solid var(--card-line);border-radius:14px;padding:1.2rem 1.15rem;margin:1.8rem 0;
+  background:linear-gradient(160deg,rgba(233,229,218,.05),transparent)}
+.letter .l-line{font-family:'Noto Serif KR',serif;font-size:1.08rem;line-height:2}
+.letter .l-line b{color:var(--gold);font-weight:700}
+.letter p{margin-top:.6rem;font-size:.85rem;color:var(--sub);line-height:1.82}
+figure{margin:1.9rem 0}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:.8rem;color:var(--sub);text-align:center;margin-top:.7rem;line-height:1.75}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin-top:.9rem}
+.chip{font-family:'Noto Serif KR',serif;font-size:.82rem;color:var(--ink);border:1px solid var(--card-line);
+  background:var(--card);border-radius:99px;padding:.24rem .8rem}
+.banner{margin:2.6rem 0 0;text-align:center}
+.banner .b-main{font-family:'Noto Serif KR',serif;font-weight:900;font-size:1.52rem;line-height:1.7;color:var(--gold)}
+.banner .b-vs{display:block;margin-top:.5rem;font-size:.74rem;letter-spacing:.22em;color:var(--gold-dim)}
+.epi{font-family:'Noto Serif KR',serif;font-weight:600;font-size:1.26rem;line-height:2.15;text-align:center;margin:1.4rem 0 3rem}
+footer{text-align:center;font-size:.76rem;letter-spacing:.1em;color:#9A8C64;padding-bottom:3.5rem;line-height:2}
+
+/* ---------- 스크롤 리빌 ---------- */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease}
+.js .rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ic-p" viewBox="0 0 24 30"><circle cx="12" cy="6.5" r="4.6"/><path d="M12 13.4c-5.4 0-8.6 3.5-8.6 8.9V30h17.2v-7.7c0-5.4-3.2-8.9-8.6-8.9z"/></symbol>
+</defs></svg>
+
+<!-- ═══════════ 프롤로그 · 한 밤의 기도 ═══════════ -->
+<header class="hero" id="prologue">
+  <div class="wrap">
+    <p class="pre-ch">제 5 장</p>
+    <h1 class="serif">요한복음 17장에 있는<br><em>하나</em></h1>
+    <div class="orn" aria-hidden="true">✦ ✦ ✦</div>
+    <blockquote class="pro-q">“예수님께서 이 말씀을 하시고”<br>“아들을 영광스럽게 하셔서 아들이<br>아버지를 영광스럽게 하도록 하여 주십시오.”
+      <span class="vs">요한복음 17장 1절</span>
+    </blockquote>
+    <p class="pro-lead">잡히시기 전날 밤, 주님은 마지막 메시지를 마치시고 기도하셨다.<br>그 기도의 주제는 단 하나 — 아버지·아들·성령의 삼일 하나님께서 하나이신 것처럼, 그분께 속한 모든 사람이 완전하게 하나가 되는 것.</p>
+    <p class="scroll-hint"><b aria-hidden="true">▾</b>어둠에서 빛으로 · 아래로 내려가며 읽으세요</p>
+  </div>
+</header>
+
+<!-- ═══════════ 제1막 · 하나가 되는 과정 ═══════════ -->
+<section id="act1">
+  <div class="wrap">
+    <p class="act-mark rv">제 1 막</p>
+    <h2 class="act-title rv">하나가 되는 과정</h2>
+    <p class="act-sub rv">요한복음 14–17장 · 한 편의 메시지, 한 편의 기도</p>
+
+    <p class="lead rv">14장부터 16장까지는 한 편의 메시지이고, 그 끝에 이 기도가 있다. 주님은 기도하시면서, 앞에서 말씀하신 것들을 하나님께서 온전하게 해 주시기를 구하셨다. 그렇다면 그 말씀은 무엇을 말하고 있었는가.</p>
+
+    <figure class="rv">
+      <ol class="tl">
+        <li><span class="tl-ch">14장</span><strong>보혜사가 오신다</strong><p>주님의 가심이 곧 오심 — “나는 아버지께로 갑니다”(17:11)</p></li>
+        <li><span class="tl-ch">15장</span><strong>포도나무와 가지</strong><p>우리와 그분의 관계는 포도나무와 가지가 연결된 관계</p></li>
+        <li><span class="tl-ch">16장</span><strong>성령 안에서의 연결</strong><p>아버지와 아들께서 소유하신 것을 모두 우리에게 전달하시는 영</p></li>
+        <li><span class="tl-ch">17장</span><strong>하나를 위한 기도</strong><p>삼일 하나님께서 하나이신 것처럼, 모든 믿는 이들이 완전하게 하나가 되도록</p></li>
+      </ol>
+      <figcaption>세 장의 말씀이 한 편의 기도로 수렴된다</figcaption>
+    </figure>
+
+    <div class="orn rv" aria-hidden="true">✦</div>
+
+    <p class="h3 rv">한 알의 밀알 — 영광의 다섯 걸음</p>
+    <p class="lead rv" style="font-size:.92rem;color:var(--sub)">주님은 그분의 영광스럽게 되심을 한 알의 밀알로 예언하셨다(요 12:23, 13:31–32 참조).</p>
+    <ol class="steps rv">
+      <li><strong>죽음</strong> — <span>한 알의 밀알로 죽으심으로</span></li>
+      <li><strong>깨어짐</strong> — <span>그분의 인성의 껍질이 깨뜨려지고</span></li>
+      <li><strong>해방</strong> — <span>그분 안에 있던 신성한 생명이 해방되어</span></li>
+      <li><strong>분배</strong> — <span>많은 사람들에게 분배되며</span></li>
+      <li><strong>표현</strong> — <span>그 사람들 안에서 표현된다</span></li>
+    </ol>
+    <blockquote class="quote msg rv">주님 안에 있는 그 신성한 생명은 바로 아버지의 신성한 요소이기 때문에 아들의 영광스럽게 됨을 통하여 아버지께서도 아들에게서 영광스럽게 되신다.<cite>본문에서</cite></blockquote>
+
+    <div class="orn rv" aria-hidden="true">✦</div>
+
+    <p class="h3 rv">서로가 서로의 거처가 되는 하나</p>
+    <figure class="rv" role="img" aria-label="아버지, 아들, 여러분을 나타내는 세 원이 서로 겹쳐지고 그 중심에 하나라는 글자가 있는 다이어그램">
+      <svg viewBox="0 0 320 296" aria-hidden="true">
+        <circle cx="160" cy="100" r="86" fill="rgba(226,192,105,.055)" stroke="#D9B65C" stroke-width="1.3" opacity=".95"/>
+        <circle cx="114" cy="184" r="86" fill="rgba(201,212,230,.05)" stroke="#AFC0DC" stroke-width="1.3" opacity=".85"/>
+        <circle cx="206" cy="184" r="86" fill="rgba(227,201,168,.05)" stroke="#D8C2A2" stroke-width="1.3" opacity=".85"/>
+        <circle cx="160" cy="156" r="22" fill="rgba(226,192,105,.16)"/>
+        <text x="160" y="163" text-anchor="middle" font-family="'Noto Serif KR',serif" font-weight="900" font-size="17" fill="#E2C069">하나</text>
+        <text x="160" y="62" text-anchor="middle" font-family="'Noto Serif KR',serif" font-size="14.5" fill="#D9B65C">아버지</text>
+        <text x="82" y="216" text-anchor="middle" font-family="'Noto Serif KR',serif" font-size="14.5" fill="#AFC0DC">나 · 아들</text>
+        <text x="240" y="216" text-anchor="middle" font-family="'Noto Serif KR',serif" font-size="14.5" fill="#D8C2A2">여러분</text>
+      </svg>
+      <div class="chips">
+        <span class="chip">내가 아버지 안에</span>
+        <span class="chip">여러분이 내 안에</span>
+        <span class="chip">내가 여러분 안에</span>
+      </div>
+      <figcaption>“그날에는 … 여러분이 알 것입니다” — 요 14:20</figcaption>
+    </figure>
+
+    <blockquote class="quote rv">“누구든지 나를 사랑하면 나의 말을 지킬 것입니다. 그러면 나의 아버지께서 그를 사랑하실 것이고, 우리가 그에게 가서 그와 함께 서로 거처를 정할 것입니다.”<cite>요한복음 14장 23절</cite></blockquote>
+
+    <blockquote class="quote msg rv">이 하나는 주님께서 가심으로 이루어진다. 즉 주님께서 죽고 부활하셔서 하나님 안으로 들어가시고 또한 사람 안으로 들어오심으로 하나님이 사람의 거처가 되고 사람이 하나님의 거처가 되는 것을 통해서이다.<cite>본문에서</cite></blockquote>
+
+    <div class="card gold rv">
+      <span class="kicker">이 메시지의 열쇠</span>
+      <p class="big">거처를 예비하는 것이 바로 건축이고,<br>건축의 결과가 바로 <u style="text-decoration:none;border-bottom:2px solid var(--gold)">하나</u>이다.</p>
+      <p class="note">이 하나는 사실상 건축의 결과이며, 주님께서 가셔서 거처를 예비하신 것(요 14:3)의 산출물이다.</p>
+    </div>
+
+    <p class="bridge rv">그렇다면, 이 하나는 어떻게 지어지는가.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제2막 · 건축을 거쳐야만 하나가 있음 ═══════════ -->
+<section id="act2">
+  <div class="wrap">
+    <p class="act-mark rv">제 2 막</p>
+    <h2 class="act-title rv">건축을 거쳐야만<br>하나가 있다</h2>
+    <p class="act-sub rv">재료는 하나를 만들지 못한다 · 건축이 하나를 만든다</p>
+
+    <div class="grid2 rv">
+      <div class="icard no">
+        <svg viewBox="0 0 130 92" aria-hidden="true" fill="none" stroke="#8A93A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="58" width="26" height="16" rx="2" transform="rotate(-8 27 66)"/>
+          <rect x="56" y="64" width="24" height="15" rx="2" transform="rotate(5 68 71)"/>
+          <rect x="92" y="56" width="25" height="16" rx="2" transform="rotate(-4 104 64)"/>
+          <ellipse cx="38" cy="34" rx="13" ry="9"/>
+          <rect x="66" y="24" width="26" height="15" rx="2" transform="rotate(10 79 31)"/>
+          <ellipse cx="106" cy="30" rx="11" ry="8"/>
+        </svg>
+        <h4>건축 이전</h4>
+        <p>좋은 재료가 한 무더기 쌓여 있어도, 쌓여만 있으면 아무 의미가 없다</p>
+      </div>
+      <div class="icard yes">
+        <svg viewBox="0 0 130 92" aria-hidden="true" fill="none" stroke="#E2C069" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 44 L65 14 L108 44"/>
+          <path d="M32 40 V78 H98 V40"/>
+          <path d="M57 78 V58 H73 V78"/>
+          <rect x="40" y="48" width="12" height="11" rx="1"/>
+          <rect x="78" y="48" width="12" height="11" rx="1"/>
+          <path d="M65 14 V6" stroke-width="1.3"/>
+        </svg>
+        <h4>건축 이후</h4>
+        <p>재료가 좋지 못하더라도 집으로 건축되면, 거기에 참된 ‘하나’가 있다</p>
+      </div>
+    </div>
+
+    <blockquote class="quote msg rv">만일 어떤 재료들이 집으로 건축되지 않았다면 그 재료들이 얼마나 좋든지에 상관없이 그것은 아무런 의미도 갖지 못한다. 재료가 그렇게 좋지 못하더라도 집으로 건축된다면 거기에 참된 ‘하나’가 있는 것이다.<cite>본문에서</cite></blockquote>
+
+    <p class="h3 rv">하나에 대한 오해를 걷어 내면</p>
+    <ul class="neq rv">
+      <li><span class="t">의견이 같아짐</span><span class="op">≠</span><span class="r">하나</span></li>
+      <li><span class="t">분쟁이 없음</span><span class="op">≠</span><span class="r">하나</span></li>
+      <li><span class="t">함께 봉사함</span><span class="op">≠</span><span class="r">하나</span></li>
+      <li class="eq"><span class="t">건축을 거침</span><span class="op">=</span><span class="r">하나</span></li>
+    </ul>
+
+    <blockquote class="quote msg rv">분쟁이 없다는 것이 한 가지 일이고 하나가 되는 것은 또 다른 별개의 일이다. 우리에게 분쟁이 없지만 하나가 아닐 수 있으며, 우리가 다투지 않지만 하나가 아닐 수 있다.<cite>본문에서</cite></blockquote>
+
+    <div class="orn rv" aria-hidden="true">✦</div>
+
+    <p class="h3 rv">다락방의 하나는 갑자기 오지 않았다</p>
+    <div class="bn rv" aria-label="백이십 명"><span class="n">120</span><span class="u">명</span></div>
+    <p class="bn-cap rv">오순절 이전, 작은 다락방에서 한마음 한뜻으로 견고하게 기도하던 사람들(행 1:14–15).<br>그 하나의 광경 뒤에는 건축의 과정이 있었다.</p>
+    <ol class="steps rv">
+      <li><strong>3년 반</strong> — <span>주님을 따르며 그분의 인도를 받음</span></li>
+      <li><strong>부활의 주님</strong> — <span>그들 안으로 들어오셔서(요 20:22) 하나 되게 하는 요소가 되심(14:20)</span></li>
+      <li><strong>40일</strong> — <span>부활 후 그들을 가르치심(행 1:3) — 하나의 광경이 나타나도록 건축하심</span></li>
+    </ol>
+
+    <div class="card rv">
+      <p style="font-size:.92rem;line-height:1.9">에베소서 4장 — 사도·신언자·복음 전하는 자·목자와 교사, 모든 은사는 <b style="color:var(--gold)">그리스도의 몸을 건축하기 위한 것</b>이며, 우리가 믿음과 하나님의 아들에 대한 온전한 지식에서의 <b style="color:var(--gold)">하나에 이르게</b> 하려는 것이다. 이 하나는 바로 건축의 결과이다.</p>
+    </div>
+
+    <p class="bridge rv">건축이 이토록 절실한 이유 —<br>하나님의 모든 축복이 거기에 걸려 있기 때문이다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제3막 · 하나님의 축복은 오직 하나에 ═══════════ -->
+<section id="act3">
+  <div class="wrap">
+    <p class="act-mark rv">제 3 막</p>
+    <h2 class="act-title rv">하나님의 축복은<br>오직 하나에 있다</h2>
+    <p class="act-sub rv">다섯 줄기의 축복이 흘러드는 단 하나의 자리</p>
+
+    <figure class="rv" role="img" aria-label="성령의 길, 복음의 능력, 하나님의 권위, 하나님의 빛, 생명의 공급이 중심의 하나를 향해 모여드는 다이어그램">
+      <svg viewBox="0 0 340 292" aria-hidden="true">
+        <defs>
+          <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#E2C069"/></marker>
+        </defs>
+        <g stroke="rgba(226,192,105,.55)" stroke-width="1.3" marker-end="url(#arw)">
+          <line x1="170" y1="56" x2="170" y2="116"/>
+          <line x1="276" y1="133" x2="220" y2="152"/>
+          <line x1="236" y1="259" x2="200" y2="210"/>
+          <line x1="104" y1="259" x2="140" y2="210"/>
+          <line x1="64" y1="133" x2="120" y2="152"/>
+        </g>
+        <circle cx="170" cy="168" r="54" fill="none" stroke="rgba(226,192,105,.16)" stroke-width="1"/>
+        <circle cx="170" cy="168" r="46" fill="rgba(226,192,105,.12)" stroke="#E2C069" stroke-width="1.5"/>
+        <text x="170" y="169" text-anchor="middle" font-family="'Noto Serif KR',serif" font-weight="900" font-size="21" fill="#E2C069">하나</text>
+        <text x="170" y="188" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="10" fill="#B4964F" letter-spacing="2">안에</text>
+        <g>
+          <rect x="120" y="41" width="100" height="30" rx="15" fill="rgba(10,15,36,.92)" stroke="rgba(233,229,218,.22)"/>
+          <text x="170" y="60.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">성령의 길</text>
+          <rect x="226" y="118" width="100" height="30" rx="15" fill="rgba(10,15,36,.92)" stroke="rgba(233,229,218,.22)"/>
+          <text x="276" y="137.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">복음의 능력</text>
+          <rect x="186" y="244" width="100" height="30" rx="15" fill="rgba(10,15,36,.92)" stroke="rgba(233,229,218,.22)"/>
+          <text x="236" y="263.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">생명의 공급</text>
+          <rect x="54" y="244" width="100" height="30" rx="15" fill="rgba(10,15,36,.92)" stroke="rgba(233,229,218,.22)"/>
+          <text x="104" y="263.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">하나님의 빛</text>
+          <rect x="14" y="118" width="100" height="30" rx="15" fill="rgba(10,15,36,.92)" stroke="rgba(233,229,218,.22)"/>
+          <text x="64" y="137.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">하나님의 권위</text>
+        </g>
+      </svg>
+      <figcaption>“성령의 길이 하나 안에 있고 복음의 능력이 하나 안에 있으며, 하나님의 권위가 하나 안에 있고 하나님의 빛이 하나 안에 있으며, 하나님의 생명의 공급도 하나 안에 있다.”</figcaption>
+    </figure>
+
+    <p class="lead rv">그러나 이 하나에는 한 가지 선결 조건이 있다 — 건축을 거쳐야 한다는 것. 건축을 거치지 않으면 참된 하나가 없으며, 설령 있다 해도 오래가지 못한다.</p>
+
+    <p class="h3 rv">자동차의 비유 — 도금보다 조립</p>
+    <div class="grid2 rv">
+      <div class="icard yes">
+        <svg viewBox="0 0 130 78" aria-hidden="true" fill="none" stroke="#E2C069" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 54 h-6 v-9 q0-7 9-8 l12-3 10-11 h26 l11 11 14 2 q9 2 9 9 v9 h-7"/>
+          <path d="M53 26 l-7 9 h34 l-8-9z" stroke-width="1.2"/>
+          <circle cx="38" cy="55" r="9"/><circle cx="94" cy="55" r="9"/>
+          <path d="M47 55 h38"/>
+          <path d="M8 30 h9 M4 40 h10 M8 50 h7" opacity=".7" stroke-width="1.3"/>
+        </svg>
+        <h4>건축된 차</h4>
+        <p>가속페달만 밟으면 달린다 — 조립되어 있기 때문</p>
+      </div>
+      <div class="icard no">
+        <svg viewBox="0 0 130 78" aria-hidden="true" fill="none" stroke="#8A93A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="26" cy="52" r="10"/><circle cx="26" cy="52" r="3.5"/>
+          <rect x="48" y="16" width="46" height="16" rx="6" transform="rotate(-7 71 24)"/>
+          <path d="M96 46 l5 6 -5 6 5 6 -5 6"/>
+          <path d="M52 52 l6-4 6 4 6-4 6 4" opacity=".9"/>
+          <circle cx="112" cy="24" r="5"/>
+        </svg>
+        <h4>분해된 차</h4>
+        <p>부품을 도금해 더 반짝여도, 움직일 수 없다</p>
+      </div>
+    </div>
+    <p class="lead rv" style="font-size:.92rem;color:var(--sub)">집회도 그렇다. 기도도 있고 활동도 있지만 모두 단독적이고 개별적일 뿐 전체적이고 하나 된 움직임이 없다면 — 좋은 부품이 흩어져 쌓여 있는 것과 같아서, 전진할 수 있는 동력이 없다.</p>
+
+    <div class="card rv">
+      <span class="kicker">1946 · 난징의 기억</span>
+      <p style="font-family:'Noto Serif KR',serif;font-size:.98rem;line-height:2">“매번 난징으로 돌아올 때마다 나는 그곳에서 찬송이든 기도든 혹은 메시지든 무엇을 하든지 한마음과 한뜻이 있음을 분명하게 느낄 수 있었다. … <b style="color:var(--gold)">그들이 바로 우리를 추천하는 편지이다.</b>”</p>
+      <p class="note">가끔 오는 사람도 일단 그들 가운데 오면, 그 안에 있는 영이 하나임을 느끼고 그 안에서 신선함을 느낀다.</p>
+    </div>
+
+    <blockquote class="quote rv">“여러분 가운데 두 사람이 땅에서 무엇을 구하든지 마음을 같이하면, 하늘에 계신 내 아버지께서 그들을 위하여 다 이루어 주실 것입니다. 왜냐하면 두세 사람이 내 이름으로 모인 곳에는 나도 그들 가운데 있기 때문입니다.”<cite>마태복음 18장 19–20절</cite></blockquote>
+
+    <blockquote class="quote msg rv">하나님의 임재는 개인의 단독적인 영성을 통해 나타나지 않는다. … 하나님의 임재는 오직 한마음 한뜻이 된 곳에서만 나타날 수 있고 오직 조화되어 일치되는 곳에서만 찾아볼 수 있다.<cite>본문에서</cite></blockquote>
+
+    <p class="bridge rv">그런데 왜 우리 가운데 그 축복이 보이지 않는가.<br>메시지는 이제 등불을 들어 우리의 실상을 비춘다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제4막 · 진단, 개인주의라는 병 ═══════════ -->
+<section id="act4">
+  <div class="wrap">
+    <p class="act-mark rv">제 4 막 · 이야기의 저점</p>
+    <h2 class="act-title rv">진단 —<br>개인주의라는 병</h2>
+    <p class="act-sub rv">다투지 않는다, 소란스럽지도 않다 · 그런데 영은 흩어져 있다</p>
+
+    <blockquote class="quote msg rv">오늘날 많은 집회에서 내가 느끼는 영은 산만한 영이다. 각각의 사람들이 명백하게 개인으로 서 있다. … 비록 다투지 않고 싸우지 않고 소란스럽게 하지 않지만 우리가 기능을 발휘할 때 각 사람이 여기저기 흩어져 있고 건축된 모습이 조금도 없다.<cite>본문에서</cite></blockquote>
+
+    <figure class="rv" role="img" aria-label="같은 아홉 개의 점이 왼쪽에서는 흩어져 있고 오른쪽에서는 금색 선으로 연결되어 있는 비교 그림">
+      <div class="grid2" style="margin:0">
+        <div class="icard no">
+          <svg viewBox="0 0 150 118" aria-hidden="true">
+            <g fill="#7B8496" opacity=".85">
+              <circle cx="28" cy="32" r="3.4"/><circle cx="66" cy="20" r="3.4"/><circle cx="104" cy="30" r="3.4"/>
+              <circle cx="132" cy="52" r="3.4"/><circle cx="44" cy="60" r="3.4"/><circle cx="80" cy="52" r="3.4"/>
+              <circle cx="116" cy="80" r="3.4"/><circle cx="34" cy="92" r="3.4"/><circle cx="76" cy="98" r="3.4"/><circle cx="126" cy="100" r="3.4"/>
+            </g>
+          </svg>
+          <h4>산만한 영</h4>
+          <p>각자 기도하고 각자 찬송을 고르지만, 서로 연결되어 있지 않고 서로를 상관하지 않는다</p>
+        </div>
+        <div class="icard yes">
+          <svg viewBox="0 0 150 118" aria-hidden="true">
+            <g stroke="rgba(226,192,105,.5)" stroke-width="1">
+              <line x1="28" y1="32" x2="66" y2="20"/><line x1="66" y1="20" x2="104" y2="30"/><line x1="104" y1="30" x2="132" y2="52"/>
+              <line x1="28" y1="32" x2="44" y2="60"/><line x1="66" y1="20" x2="80" y2="52"/><line x1="104" y1="30" x2="80" y2="52"/>
+              <line x1="132" y1="52" x2="116" y2="80"/><line x1="44" y1="60" x2="80" y2="52"/><line x1="44" y1="60" x2="34" y2="92"/>
+              <line x1="80" y1="52" x2="76" y2="98"/><line x1="116" y1="80" x2="126" y2="100"/><line x1="116" y1="80" x2="76" y2="98"/>
+              <line x1="34" y1="92" x2="76" y2="98"/><line x1="76" y1="98" x2="126" y2="100"/>
+            </g>
+            <g fill="#E2C069">
+              <circle cx="28" cy="32" r="3.4"/><circle cx="66" cy="20" r="3.4"/><circle cx="104" cy="30" r="3.4"/>
+              <circle cx="132" cy="52" r="3.4"/><circle cx="44" cy="60" r="3.4"/><circle cx="80" cy="52" r="3.4"/>
+              <circle cx="116" cy="80" r="3.4"/><circle cx="34" cy="92" r="3.4"/><circle cx="76" cy="98" r="3.4"/><circle cx="126" cy="100" r="3.4"/>
+            </g>
+          </svg>
+          <h4>조화된 영</h4>
+          <p>같은 사람들이라도 영이 연결되면, 전체적이고 하나 된 움직임이 있다</p>
+        </div>
+      </div>
+      <figcaption>같은 사람들, 다른 영 — 차이는 연결에 있다</figcaption>
+    </figure>
+
+    <p class="h3 rv">세 가지 증상</p>
+    <div class="sym rv">
+      <div class="sy">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 28 C11 19 19 12 29 8"/><path d="M13 19.5 l2.5-6"/><path d="M20 13.5 l.5-6.5"/><path d="M9 24 l-6-2.5"/><path d="M25 10 l6-3"/></svg>
+        <div><h4>가시가 섞인 말</h4><p>말 속에 스스로도 깨닫지 못한 가시가 있어 사람을 찌른다. 한 면으로 온전하게 하지만, 다른 한 면으로 허물어뜨린다.</p></div>
+      </div>
+      <div class="sy">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 30 C17 30 7 20.5 7 13.5 a10 10 0 0 1 20 0 C27 20.5 17 30 17 30z"/><circle cx="17" cy="13.5" r="3.6"/></svg>
+        <div><h4>지방마다 다른 냄새</h4><p>각 지방이 그리스도의 냄새가 아니라 자신만의 냄새를 풍기고, 교회와 교회의 영이 서로 따로 떨어져 있다.</p></div>
+      </div>
+      <div class="sy">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="10" r="4.2"/><path d="M17 16.5 c-4.6 0-7.3 3-7.3 7.6 V28 h14.6 v-3.9 c0-4.6-2.7-7.6-7.3-7.6z"/><circle cx="17" cy="18" r="14.5" stroke-dasharray="2.5 3.5" opacity=".55"/></svg>
+        <div><h4>‘서로 짊어짐’의 부재</h4><p>총명하고 능력이 뛰어나지만, 다른 사람을 자신을 실족하게 만드는 돌로 여기고 혼자 하는 것이 가장 좋다고 생각한다.</p></div>
+      </div>
+    </div>
+
+    <blockquote class="quote msg rv">사실상 지방의 문제는 지방 자체에 있는 것이 아니라 사람 자신에게 건축이 결여되어 있기 때문이다.<cite>본문에서</cite></blockquote>
+
+    <div class="card rv">
+      <p style="font-family:'Noto Serif KR',serif;font-size:1rem;line-height:2;text-align:center">“우리는 모두 영을 가지고 있기 때문에<br>우리 안에 있는 참된 상황을 <b style="color:var(--gold)">결코 속일 수 없다</b>.”</p>
+    </div>
+
+    <p class="bridge rv">문제는 지방도, 제도도 아니었다.<br>건축되지 않은 사람 — 곧 나였다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제5막 · 갈림길, 영적임보다 건축됨 ═══════════ -->
+<section id="act5">
+  <div class="wrap">
+    <p class="act-mark rv">제 5 막</p>
+    <h2 class="act-title rv">갈림길 —<br>영적임보다 건축됨</h2>
+    <p class="act-sub rv">하나님이 보시는 좌표는 우리의 생각과 다르다</p>
+
+    <p class="lead rv">우리는 사람을 ‘영적인가, 영적이지 않은가’로 가늠한다. 그러나 이 메시지는 전혀 다른 축 하나를 세로로 긋는다 — <b style="color:var(--gold)">건축될 수 있는가.</b></p>
+
+    <div class="mx rv" role="img" aria-label="영적임을 가로축, 건축됨을 세로축으로 하는 2×2 매트릭스. 영적이면서 건축되지 않은 자리가 위험한 사분면으로 표시되어 있다">
+      <p class="mx-top">↑ 건축됨</p>
+      <div class="mx-grid">
+        <div class="q"><span class="tag">건축 ○ · 영적 △</span><h4>다듬어지지 않은 돌</h4><p>형편없어 보여도, 건축되어 다른 사람과 함께 동역할 수 있다</p></div>
+        <div class="q gold"><span class="tag">건축 ○ · 영적 ○</span><h4>하나님이 찾으시는 사람</h4><p>한마음 한뜻 — 임재와 축복이 그 뒤를 따른다</p></div>
+        <div class="q"><span class="tag">건축 ✕ · 영적 ✕</span><h4>쌓여 있는 재료</h4><p>얼마나 좋든지, 아무 의미도 갖지 못한다</p></div>
+        <div class="q bad"><span class="tag">건축 ✕ · 영적 ○</span><h4>반듯하지만 홀로 있는 돌</h4><p>영적이지만 건축되지 않음 — ‘사탄이 원하는 길’</p></div>
+      </div>
+      <p class="mx-bot">영적임 →</p>
+    </div>
+
+    <blockquote class="quote msg rv">온전하게 하는 것만 있고 건축하는 것이 없다면 실질적으로는 배역의 길을 걷는 것이다. 영적이지만 건축되지 않는다면 사탄이 원하는 길을 가는 것이다.<cite>본문에서</cite></blockquote>
+
+    <div class="card gold rv">
+      <span class="kicker">좌표를 바꾸는 한 문장</span>
+      <p class="big" style="font-size:1.12rem">“당신이라는 사람이 가진 어려움은 영적인가 영적이지 않은가가 아니라 건축될 수 있는가 건축될 수 없는가이다.”</p>
+    </div>
+
+    <div class="orn rv" aria-hidden="true">✦</div>
+
+    <p class="h3 rv">아주 작은 시작이면 충분하다</p>
+    <div class="bn rv" aria-label="십 퍼센트"><span class="n">10</span><span class="u">%</span></div>
+    <p class="bn-cap rv">타이베이 교회의 봉사에서 한마음 한뜻의 광경이 10퍼센트만 있더라도 —<br>교회 전체가 달라질 것이고, 하나님의 축복은 자연스럽게 그 뒤를 따를 것이다.</p>
+
+    <div class="persons rv" role="img" aria-label="형제 다섯 명과 자매 네 명, 모두 아홉 사람을 나타내는 픽토그래프">
+      <svg class="pp" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp s" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp s" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp s" aria-hidden="true"><use href="#ic-p"/></svg>
+      <svg class="pp s" aria-hidden="true"><use href="#ic-p"/></svg>
+    </div>
+    <p class="pcap rv">형제 다섯 · 자매 넷 — “한 형제가 찬송을 선곡하면 모든 이들이 기쁘게 함께 찬송한다.”<br>하나님은 이러한 광경과 이러한 영을 반드시 축복하신다.</p>
+
+    <div class="letter rv">
+      <span class="kicker">이천 년 동안 빛나는 이름 하나</span>
+      <p class="l-line">“사도로 부름받은 바울과 그리고 <b>형제 소스데네</b>는 고린도에 있는 하나님의 교회 …”</p>
+      <p>고린도전서 1장 1–2절 — 가장 큰 사도의 편지 첫 줄에, 잘 알려지지 않은 형제의 이름이 나란히 적혀 있다. 홀로 서지 않는 영, 몸의 느낌, 동역의 광경.</p>
+    </div>
+
+    <p class="bridge rv">그렇다면 건축을 가로막는<br>마지막 뿌리는 무엇인가.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제6막 · 뿌리, 교만과 겸손 ═══════════ -->
+<section id="act6">
+  <div class="wrap">
+    <p class="act-mark rv">제 6 막</p>
+    <h2 class="act-title rv">뿌리 —<br>교만과 겸손</h2>
+    <p class="act-sub rv">건축이 없다면, 그 뿌리는 다름 아닌 교만이다</p>
+
+    <blockquote class="quote msg rv">교만이라는 씨를 갖고 있지 않은 사람은 한 사람도 없다 …<cite>본문에서</cite></blockquote>
+    <p class="lead rv" style="font-size:.92rem;color:var(--sub)">이것이 주님께서 우리 안에서 그분의 건축의 일을 진행하시는 데 있어 가장 큰 어려움이다. 그 씨는 아주 작은 속삭임으로 싹을 틔운다.</p>
+
+    <p class="whisper rv" style="margin-top:1.6rem">“왜 내가 아닌 그 형제가 장로가 되어야 합니까?”<cite>교만에서 의심이 산출된다</cite></p>
+
+    <div class="paths rv" role="img" aria-label="교만은 의심과 단독을 거쳐 허물어뜨림과 배역으로, 겸손은 순복과 조화를 거쳐 건축과 축복으로 이어지는 두 갈래 순서도">
+      <div class="path p-bad">
+        <h4>교만</h4>
+        <div class="fb">의심과 불평<em>“왜 내가 아닌 …”</em></div>
+        <p class="fa" aria-hidden="true">▼</p>
+        <div class="fb">단독 · 불복종</div>
+        <p class="fa" aria-hidden="true">▼</p>
+        <div class="fb end-bad">허물어뜨림 · 배역<em>바벨의 영</em></div>
+      </div>
+      <div class="path p-gold">
+        <h4>겸손</h4>
+        <div class="fb">순복과 굽힘<em>부드러움</em></div>
+        <p class="fa" aria-hidden="true">▼</p>
+        <div class="fb">조화 · 동역</div>
+        <p class="fa" aria-hidden="true">▼</p>
+        <div class="fb end-gold">건축 · 축복<em>하나</em></div>
+      </div>
+    </div>
+
+    <p class="h3 rv">심은 대로 거둔다 — 되돌아오는 순환</p>
+    <figure class="rv" role="img" aria-label="심는다, 그대로 거둔다, 내게 돌아온다가 원을 이루며 순환하는 다이어그램. 중앙에 콩을 심으면 콩이 난다는 문장이 있다">
+      <svg viewBox="0 0 320 232" aria-hidden="true">
+        <circle cx="160" cy="116" r="76" fill="none" stroke="rgba(226,192,105,.5)" stroke-width="1.4"/>
+        <g fill="#E2C069">
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(226,78) rotate(60)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(160,192) rotate(180)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(94,78) rotate(300)"/>
+        </g>
+        <g>
+          <rect x="112" y="26" width="96" height="28" rx="14" fill="rgba(8,12,26,.55)" stroke="rgba(233,229,218,.25)"/>
+          <text x="160" y="44.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">심는다</text>
+          <rect x="178" y="140" width="96" height="28" rx="14" fill="rgba(8,12,26,.55)" stroke="rgba(233,229,218,.25)"/>
+          <text x="226" y="158.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">그대로 거둔다</text>
+          <rect x="46" y="140" width="96" height="28" rx="14" fill="rgba(8,12,26,.55)" stroke="rgba(233,229,218,.25)"/>
+          <text x="94" y="158.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#EDE9DD">내게 돌아온다</text>
+        </g>
+        <text x="160" y="110" text-anchor="middle" font-family="'Noto Serif KR',serif" font-weight="700" font-size="14" fill="#E2C069">콩을 심으면</text>
+        <text x="160" y="130" text-anchor="middle" font-family="'Noto Serif KR',serif" font-weight="700" font-size="14" fill="#E2C069">콩이 난다</text>
+      </svg>
+      <figcaption>‘폐병’에 걸린 채 사람을 돌보면 그들도 같은 병에 걸린다 — 교만으로 돌보면, 언젠가 당신이 돌본 이들이 일어나 더 심하게 당신을 비판할 것이다.</figcaption>
+    </figure>
+
+    <p class="lead rv">이 순환의 무게를 가장 무겁게 들려주는 말씀이 있다. 그날에 많은 사람이 “주님, 주님” 하며 자신이 행한 예언과 능력의 일들을 내세울 것이다. 그때 주님의 대답은 —</p>
+    <blockquote class="quote rv">“나는 여러분을 도무지 알지 못합니다. 불법을 행하는 사람들이여, 나에게서 떠나가십시오.”<cite>마태복음 7장 22–23절</cite></blockquote>
+    <p class="lead rv" style="font-size:.92rem;color:var(--sub)">일한 것이 없어서가 아니다. 머리이신 그분께 순복하지 않고, 몸에 붙어 있지 않은 채 단독으로 행한 일 — 그것이 여기서 말하는 ‘불법’이다.</p>
+
+    <div class="card gold rv">
+      <p class="big" style="font-size:1.14rem;text-align:center">“가장 큰 긍휼을 입고 축복을 입는 사람은<br>바로 가장 겸손한 사람이다.”</p>
+    </div>
+
+    <p class="bridge rv">여기서 길이 갈라진다.<br>메시지는 이제 좁은 길 하나를 가리킨다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제7막 · 길, 겸손과 단순 (여명) ═══════════ -->
+<section id="act7">
+  <div class="wrap">
+    <p class="act-mark rv">제 7 막 · 여명</p>
+    <h2 class="act-title rv">길 —<br>겸손과 단순</h2>
+    <p class="act-sub rv">이 길에는 첫날부터 어떤 지위도 없다</p>
+
+    <p class="lead rv">좁은 길의 시작에는 두 개의 기둥이 서 있다. 원문의 정의 그대로 —</p>
+
+    <div class="grid2 rv">
+      <div class="pillar">
+        <h4>겸손</h4>
+        <p>“자신을 한쪽에 제쳐 놓고 하나님의 안배를 받아들이는 것”</p>
+      </div>
+      <div class="pillar">
+        <h4>단순</h4>
+        <p>“모든 것이 하나님으로부터 나온 것임을 인정하고 또한 다른 의도나 기대를 갖지 않는 것”</p>
+      </div>
+    </div>
+
+    <p class="h3 rv">이 길을 걷는 이의 짐 꾸리기</p>
+    <div class="swap rv" role="table" aria-label="기대하지 말 것과 준비할 것을 대조한 표">
+      <div class="sw-h" role="row"><span>기대하지 말 것</span><span aria-hidden="true"></span><span>준비할 것</span></div>
+      <div class="sw-r" role="row"><span class="a">우대</span><span class="ar" aria-hidden="true">→</span><span class="b">모진 대우</span></div>
+      <div class="sw-r" role="row"><span class="a">칭찬</span><span class="ar" aria-hidden="true">→</span><span class="b">멸시</span></div>
+      <div class="sw-r" role="row"><span class="a">보수</span><span class="ar" aria-hidden="true">→</span><span class="b">빈손</span></div>
+      <div class="sw-r" role="row"><span class="a">높은 지위</span><span class="ar" aria-hidden="true">→</span><span class="b">낮은 자리</span></div>
+    </div>
+    <p class="lead rv" style="font-size:.92rem;color:var(--sub)">교회가 크든 작든, 장로로서 행정을 맡든 화장실 청소를 맡든 — 우리는 다만 최선을 다해 봉사할 뿐이다.</p>
+
+    <p class="h3 rv">흔들리지 않는 걸음의 리듬</p>
+    <div class="rhy rv">
+      <div class="rh"><strong>좋게 말해도</strong><span>이 길을 간다</span></div>
+      <div class="rh"><strong>반대하더라도</strong><span>이 길을 간다</span></div>
+      <div class="rh"><strong>환영을 받아도</strong><span>이 길을 간다</span></div>
+      <div class="rh"><strong>멸시를 받아도</strong><span>이 길을 간다</span></div>
+    </div>
+    <blockquote class="quote msg rv">우리가 이 길을 가는 이유는 다른 데에 있지 않다. 그것은 우리와 하나님 사이의 문제이다.<cite>본문에서</cite></blockquote>
+
+    <p class="lead rv">이 길을 끝까지 걸었던 한 사람의 고백이 있다.</p>
+    <blockquote class="quote rv">“아시아에 있는 모든 사람이 나를 버리고 떠났는데 … 모두 나를 버렸습니다. … 주님께서 나와 함께 서셔서 나에게 힘을 주신 것은 …”<cite>디모데후서 1:15, 4:16–17</cite></blockquote>
+
+    <blockquote class="quote msg rv">주님은 사람들의 발까지 씻어 주실 수 있었는데, 우리가 섬기지 못할 사람이 어디에 있겠는가? 주님은 음부까지도 가셨는데 우리가 가지 못할 곳이 있겠는가?<cite>본문에서</cite></blockquote>
+
+    <p class="whisper rv">“주님 당신 이외에는 사모하는 다른 것이 없습니다.”<cite>바버 자매의 기도</cite></p>
+
+    <p class="bridge rv">그리고 그 길의 끝에서,<br>첫 밤의 기도가 다시 들려온다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 피날레 · 참된 형제 사랑, 참된 건축 (빛) ═══════════ -->
+<section id="finale" class="light">
+  <div class="wrap">
+    <p class="act-mark rv">피 날 레</p>
+    <h2 class="act-title rv">참된 형제 사랑,<br>참된 건축</h2>
+    <p class="act-sub rv">밤이 걷히고 — 기도가 응답되는 자리</p>
+
+    <p class="lead rv">형제자매 사이에 서로 사랑하는 마음이 결여되면, 함께 봉사해도 마치 ‘직장 동료의 분위기’를 풍긴다. 그것이 우리의 마음을 가장 아프게 한다. 그러나 주님이 말씀하시는 사랑은 전혀 다른 근원에서 흘러나온다.</p>
+
+    <figure class="rv" role="img" aria-label="주님과 하나, 신성한 생명, 서로 사랑, 건축, 참된 하나, 그분의 거처가 원을 이루며 순환하고 중앙에 사랑이라는 글자와 하트가 있는 다이어그램">
+      <svg viewBox="0 0 340 320" aria-hidden="true">
+        <circle cx="170" cy="170" r="118" fill="none" stroke="#8F6B16" stroke-width="1.6" opacity=".55"/>
+        <g fill="#8F6B16">
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(229,68) rotate(30)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(288,170) rotate(90)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(229,272) rotate(150)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(111,272) rotate(210)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(52,170) rotate(270)"/>
+          <path d="M-5,-4 L6,0 L-5,4 Z" transform="translate(111,68) rotate(330)"/>
+        </g>
+        <g>
+          <rect x="121" y="37" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="170" y="56.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">주님과 하나</text>
+          <rect x="223" y="96" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="272" y="115.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">신성한 생명</text>
+          <rect x="223" y="214" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="272" y="233.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">서로 사랑</text>
+          <rect x="121" y="273" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="170" y="292.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">건축</text>
+          <rect x="19" y="214" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="68" y="233.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">참된 하나</text>
+          <rect x="19" y="96" width="98" height="30" rx="15" fill="#FFFDF6" stroke="rgba(143,107,22,.45)"/>
+          <text x="68" y="115.5" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#3B321F">그분의 거처</text>
+        </g>
+        <path d="M12 21s-7.5-4.9-10-9.2C.4 8.6 2.3 5 5.7 5c2 0 3.5 1.1 4.3 2.7C10.8 6.1 12.3 5 14.3 5c3.4 0 5.3 3.6 3.7 6.8C19.5 16.1 12 21 12 21z" transform="translate(146,132) scale(2)" fill="#8F6B16" opacity=".92"/>
+        <text x="170" y="205" text-anchor="middle" font-family="'Noto Serif KR',serif" font-weight="900" font-size="20" fill="#8F6B16">사랑</text>
+        <text x="170" y="224" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="10" fill="#A07E29" letter-spacing="1">주님의 사랑 안에서 · 17:26</text>
+      </svg>
+      <figcaption>주님과 하나 됨에서 시작된 사랑이 건축을 이루고, 건축이 참된 하나를 낳아 그분의 거처가 된다 — 순환은 그분에게서 시작해, 그분의 거처에서 완성된다.</figcaption>
+    </figure>
+
+    <blockquote class="quote msg rv">서로 사랑하는 것은 주님과 우리가 하나 된 것에서부터 나오는 것으로 결코 일반적인 것이 아니다. 이것은 주님의 신성한 생명 안에서 그리고 주님의 사랑 안에서(17:26) 서로 사랑하는 것으로, 이러한 사랑이 우리를 건축할 수 있다.<cite>본문에서</cite></blockquote>
+
+    <div class="banner rv">
+      <p class="b-main">“여러분도 서로 사랑하라는 것입니다”</p>
+      <span class="b-vs">요한복음 13:35 · 15:12, 17</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 에필로그 ═══════════ -->
+<section id="epilogue" class="light">
+  <div class="wrap">
+    <div class="orn rv" aria-hidden="true">✦</div>
+    <p class="epi rv">“어느 날 하나님은 당신을 영광 안에 놓으실 것이고<br>다른 사람과 함께 건축하셔서<br>그분의 영광스러운 거처가 되게 하실 것이다.”</p>
+    <footer class="rv">요한복음 17장에 있는 하나 · 제5장<br>인용문은 원문의 표현을 그대로 옮겼으며, ‘…’는 생략을 표시합니다.</footer>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv');
+  function showAll(){ for (var i=0;i<els.length;i++) els[i].classList.add('on'); }
+  if (!('IntersectionObserver' in window)) { showAll(); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  for (var i=0;i<els.length;i++) io.observe(els[i]);
+})();
+</script>
+</body>
+</html>
