@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>찬송 빈칸 퀴즈 · 까맣고 먼지 묻은</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#4b3a2f;
+  --ink-soft:#8a7663;
+  --paper:#fffdf6;
+  --coral:#ff7b7b; --coral-deep:#e75d5d;
+  --sun:#ffd34e;   --sun-deep:#eab53a;
+  --mint:#5fcb8f;  --mint-deep:#3fa871;
+  --sky:#6fb8f2;   --sky-deep:#4f96d6;
+  --lav:#c3a6f5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{
+  font-family:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%,  rgba(255,211,78,.22), transparent 32%),
+    radial-gradient(circle at 88% 16%, rgba(255,123,123,.16), transparent 30%),
+    radial-gradient(circle at 82% 88%, rgba(111,184,242,.20), transparent 34%),
+    linear-gradient(180deg,#fff8e6 0%, #eef8ff 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  letter-spacing:.01em;
+}
+main{max-width:760px;margin:0 auto;padding:14px 14px 0;position:relative;z-index:1}
+
+/* ---- 떠다니는 배경 장식 ---- */
+.deco span{position:fixed;opacity:.15;pointer-events:none;z-index:0;
+  animation:bob 5.5s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+@keyframes bob{from{transform:translateY(-8px) rotate(-6deg)}to{transform:translateY(10px) rotate(8deg)}}
+
+/* ---- 화면 전환 ---- */
+.screen{display:none}
+.screen.on{display:block;animation:rise .45s ease}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ---- 공용 버튼 ---- */
+.btn{font:inherit;font-size:1.1rem;padding:.55em 1.2em;border:3px solid var(--ink);
+  border-radius:16px;cursor:pointer;box-shadow:0 5px 0 rgba(75,58,47,.85);transition:.12s;color:var(--ink)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(75,58,47,.85)}
+.btn-sun{background:var(--sun)}
+.btn-mint{background:var(--mint);color:#fff}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-sky{background:var(--sky);color:#fff}
+.btn:focus-visible,.wcard:focus-visible,.blank:focus-visible,.icon-btn:focus-visible,
+.mode-btn:focus-visible,.blank-in:focus-visible{outline:4px solid rgba(111,184,242,.7);outline-offset:2px}
+
+/* ---- 시작 화면 ---- */
+.start-card{margin-top:5vh;background:var(--paper);border:3px solid var(--ink);border-radius:26px;
+  box-shadow:0 10px 0 rgba(75,58,47,.15);padding:34px 20px 26px;text-align:center}
+.badge-song{display:inline-block;background:var(--sun);border:3px solid var(--ink);border-radius:999px;
+  padding:.25em .9em;font-size:.95rem;box-shadow:0 3px 0 rgba(75,58,47,.5);margin-bottom:20px}
+.title{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-bottom:8px}
+.t{display:inline-grid;place-items:center;width:1.55em;height:1.55em;
+  font-size:clamp(1.6rem,7vw,2.5rem);border:3px solid var(--ink);border-radius:16px;
+  box-shadow:0 4px 0 rgba(75,58,47,.8);animation:pop .5s cubic-bezier(.2,1.6,.4,1) backwards}
+.c1{background:#ffe3e3;transform:rotate(-3deg)}
+.c2{background:#fff3c9;transform:rotate(2deg)}
+.c3{background:#ddf5e7;transform:rotate(-2deg)}
+.c4{background:#def0ff;transform:rotate(3deg)}
+.gap{width:.35em}
+.subtitle{font-size:1.12rem;color:var(--ink-soft);line-height:1.55;margin:12px 0 24px}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:520px;margin:0 auto}
+@media(max-width:540px){.mode-grid{grid-template-columns:1fr}}
+.mode-btn{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:22px 14px 18px;border:3px solid var(--ink);border-radius:20px;
+  box-shadow:0 6px 0 rgba(75,58,47,.8);cursor:pointer;font:inherit;transition:.15s;color:var(--ink)}
+.mode-btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(75,58,47,.8)}
+.mode-btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(75,58,47,.8)}
+.mode-card-btn{background:#fff2f2}
+.mode-type-btn{background:#eef7ff}
+.mode-emoji{font-size:2.1rem}
+.mode-name{font-size:1.22rem}
+.mode-desc{font-size:.9rem;color:var(--ink-soft)}
+.mode-tag{position:absolute;top:-12px;right:-8px;font-size:.8rem;padding:.15em .65em;
+  border:2.5px solid var(--ink);border-radius:999px;box-shadow:0 3px 0 rgba(75,58,47,.5);transform:rotate(6deg)}
+.easy{background:var(--mint);color:#fff}
+.hard{background:var(--coral);color:#fff}
+.credit{margin-top:22px;font-size:.85rem;color:#b3a48f}
+
+/* ---- 퀴즈 상단바 ---- */
+.hud{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding:10px 6px;background:rgba(255,248,230,.92);backdrop-filter:blur(6px);
+  border-radius:0 0 18px 18px}
+.icon-btn{width:46px;height:46px;flex:0 0 auto;font-size:1.3rem;background:#fff;border:3px solid var(--ink);
+  border-radius:14px;box-shadow:0 4px 0 rgba(75,58,47,.85);cursor:pointer;transition:.12s}
+.icon-btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(75,58,47,.85)}
+.hearts-wrap{flex:1;min-width:0}
+.hearts{display:flex;gap:2px;font-size:1.15rem;flex-wrap:wrap;justify-content:center}
+.hearts span{display:inline-block}
+.hearts span.pop{animation:pop .4s cubic-bezier(.2,1.6,.4,1)}
+.progress-label{text-align:center;font-size:.85rem;color:var(--ink-soft);margin-top:1px}
+
+/* ---- 가사 카드 ---- */
+.sheet{background:var(--paper);border:3px solid var(--ink);border-radius:22px;
+  box-shadow:0 8px 0 rgba(75,58,47,.15);padding:18px 16px;margin-top:14px}
+.sheet-head{text-align:center;font-size:1.05rem;color:var(--ink-soft);margin-bottom:10px;letter-spacing:.06em}
+.line{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:2px dashed #eadfce;border-radius:12px}
+.line:last-child{border-bottom:none}
+.line.cleared{animation:lineGlow 1.1s ease}
+@keyframes lineGlow{0%{background:#dff8ea}100%{background:transparent}}
+.line-num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:.95rem;margin-top:8px;border:2.5px solid var(--ink);box-shadow:0 3px 0 rgba(75,58,47,.35)}
+.n0{background:var(--coral)} .n1{background:var(--sun);color:var(--ink)}
+.n2{background:var(--mint)}  .n3{background:var(--sky)}
+.line-text{font-size:clamp(1.12rem,3.6vw,1.42rem);line-height:2.2;word-break:keep-all}
+
+/* ---- 빈칸 (카드 모드) ---- */
+.blank{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;
+  min-height:1.85em;padding:0 .45em;margin:0 .12em;border:3px dashed var(--sun-deep);border-radius:14px;
+  background:#fff7dd;color:#d8b13c;font:inherit;font-size:1em;cursor:pointer;transition:.15s;line-height:1.4}
+.blank.active{border-style:solid;border-color:var(--coral);background:#ffecec;color:var(--coral);
+  animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,123,123,.45)}
+  50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(255,123,123,0)}}
+.blank.done{border-style:solid;border-color:var(--mint-deep);background:#e9faf0;color:#2c8a5b;cursor:default;animation:none}
+.blank.nope{border-style:solid;border-color:var(--coral-deep);background:#ffe3e3;color:var(--coral-deep)}
+
+/* ---- 빈칸 (입력 모드) ---- */
+.blank-in{font:inherit;font-size:1em;text-align:center;vertical-align:middle;
+  border:3px dashed var(--sun-deep);border-radius:14px;background:#fff7dd;
+  padding:.12em .4em;margin:0 .12em;color:var(--ink);outline:none;max-width:9.5em;transition:.15s}
+.blank-in:focus{border-style:solid;border-color:var(--sky-deep);background:#eef7ff;
+  box-shadow:0 0 0 4px rgba(111,184,242,.25)}
+.blank-in.nope{border-style:solid;border-color:var(--coral-deep);background:#ffe3e3}
+
+.pop{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+.shake,.nope{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* ---- 낱말 카드 트레이 ---- */
+.tray{position:sticky;bottom:0;z-index:15;margin-top:16px;
+  padding:12px 10px calc(14px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,253,246,.95);backdrop-filter:blur(8px);
+  border:3px solid var(--ink);border-bottom:none;border-radius:22px 22px 0 0;
+  box-shadow:0 -6px 18px rgba(75,58,47,.08)}
+.tray-label{text-align:center;font-size:.95rem;color:var(--ink-soft);margin-bottom:10px}
+.bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.wcard{font:inherit;font-size:1.2rem;padding:.32em .8em;border:3px solid;border-radius:16px;cursor:pointer;
+  color:var(--ink);box-shadow:0 4px 0 rgba(75,58,47,.5);
+  transition:transform .12s, box-shadow .12s, opacity .25s;user-select:none}
+.wcard:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(75,58,47,.5)}
+.wcard.used{opacity:0;transform:scale(.3) rotate(15deg);pointer-events:none}
+.type-tools{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ---- 결과 화면 ---- */
+.result-card{margin-top:16px;background:var(--paper);border:3px solid var(--ink);border-radius:26px;
+  box-shadow:0 10px 0 rgba(75,58,47,.15);padding:28px 18px;text-align:center}
+.stamp{width:158px;height:158px;margin:0 auto 12px;border:6px double var(--coral-deep);border-radius:50%;
+  display:grid;place-items:center;color:var(--coral-deep);font-size:1.5rem;line-height:1.35;
+  transform:rotate(-9deg);padding:10px;
+  animation:stampIn .55s cubic-bezier(.2,1.4,.4,1) backwards;animation-delay:.1s}
+@keyframes stampIn{0%{transform:rotate(-9deg) scale(2.4);opacity:0}100%{transform:rotate(-9deg) scale(1);opacity:1}}
+.stars{font-size:2.3rem;display:flex;justify-content:center;gap:10px;margin:4px 0 2px}
+.star{animation:starIn .5s cubic-bezier(.2,1.6,.4,1) backwards}
+.star.off{opacity:.3;filter:grayscale(1)}
+@keyframes starIn{0%{transform:scale(0) rotate(-40deg)}100%{transform:scale(1) rotate(0)}}
+.result-msg{font-size:1.15rem;margin:10px 0 14px}
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.chip{background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:.3em .85em;
+  font-size:.92rem;box-shadow:0 3px 0 rgba(75,58,47,.35)}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.lyrics.small .line-text{font-size:1.05rem;line-height:2}
+mark{background:#fff1bf;border-radius:8px;padding:.05em .32em;color:var(--coral-deep)}
+.verse{margin:16px 0 46px;background:linear-gradient(135deg,#fff3c9,#ffe6ef);border:3px solid var(--ink);
+  border-radius:22px;padding:20px 16px;text-align:center;box-shadow:0 8px 0 rgba(75,58,47,.15)}
+.verse-tag{font-size:.9rem;color:var(--ink-soft);margin-bottom:8px}
+.verse p{font-size:1.12rem;line-height:1.7}
+
+/* ---- 토스트 · 하트 · 색종이 ---- */
+#toast{position:fixed;top:14px;left:50%;transform:translate(-50%,-90px);z-index:80;
+  background:var(--ink);color:#fff;padding:.5em 1.1em;border-radius:999px;font-size:1rem;
+  box-shadow:0 6px 16px rgba(0,0,0,.22);transition:transform .3s cubic-bezier(.2,1.4,.4,1);
+  pointer-events:none;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+#toast.show{transform:translate(-50%,0)}
+.fly{position:fixed;z-index:60;font-size:1.3rem;pointer-events:none;animation:flyup .95s ease-out forwards}
+@keyframes flyup{from{transform:translateY(0) scale(.6);opacity:1}to{transform:translateY(-72px) scale(1.25);opacity:0}}
+#confetti{position:fixed;inset:0;z-index:70;pointer-events:none;display:none}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important;transition-duration:.001s !important}
+}
+</style>
+</head>
+<body>
+
+<div class="deco" aria-hidden="true">
+  <span style="top:7%;left:4%;font-size:2rem;--d:0s">🎵</span>
+  <span style="top:15%;right:6%;font-size:1.7rem;--d:1.2s">💛</span>
+  <span style="top:46%;left:2%;font-size:2.3rem;--d:.6s">🎶</span>
+  <span style="top:62%;right:3%;font-size:1.8rem;--d:1.8s">💗</span>
+  <span style="bottom:14%;left:7%;font-size:1.7rem;--d:.9s">🎵</span>
+  <span style="bottom:7%;right:10%;font-size:2.1rem;--d:1.5s">🎶</span>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<main>
+
+  <!-- ══════════ 시작 화면 ══════════ -->
+  <section id="s-start" class="screen on">
+    <div class="start-card">
+      <div class="badge-song">🎵 찬송 10번</div>
+      <h1 class="title" aria-label="까맣고 먼지 묻은">
+        <span class="t c1" style="animation-delay:.05s" aria-hidden="true">까</span><span class="t c2" style="animation-delay:.12s" aria-hidden="true">맣</span><span class="t c3" style="animation-delay:.19s" aria-hidden="true">고</span>
+        <span class="gap" aria-hidden="true"></span>
+        <span class="t c4" style="animation-delay:.26s" aria-hidden="true">먼</span><span class="t c1" style="animation-delay:.33s" aria-hidden="true">지</span>
+        <span class="gap" aria-hidden="true"></span>
+        <span class="t c2" style="animation-delay:.40s" aria-hidden="true">묻</span><span class="t c3" style="animation-delay:.47s" aria-hidden="true">은</span>
+      </h1>
+      <p class="subtitle">빈칸에 숨은 낱말을 찾아서<br>찬송을 완성해 보세요!</p>
+      <div class="mode-grid">
+        <button class="mode-btn mode-card-btn" data-mode="card">
+          <span class="mode-emoji">🃏</span>
+          <span class="mode-name">낱말 카드 모드</span>
+          <span class="mode-desc">카드를 골라 빈칸을 채워요</span>
+          <span class="mode-tag easy">쉬움</span>
+        </button>
+        <button class="mode-btn mode-type-btn" data-mode="type">
+          <span class="mode-emoji">✏️</span>
+          <span class="mode-name">직접 쓰기 모드</span>
+          <span class="mode-desc">낱말을 직접 써서 채워요</span>
+          <span class="mode-tag hard">도전!</span>
+        </button>
+      </div>
+      <p class="credit">작사 다음 세대 팀 · 작곡 전국 찬송 팀</p>
+    </div>
+  </section>
+
+  <!-- ══════════ 퀴즈 화면 ══════════ -->
+  <section id="s-quiz" class="screen">
+    <header class="hud">
+      <button id="btn-home" class="icon-btn" aria-label="처음 화면으로">🏠</button>
+      <div class="hearts-wrap">
+        <div id="hearts" class="hearts" aria-hidden="true"></div>
+        <div id="progress-label" class="progress-label">0 / 8</div>
+      </div>
+      <button id="btn-sound" class="icon-btn" aria-label="소리 끄기">🔊</button>
+    </header>
+
+    <div class="sheet">
+      <div class="sheet-head">🎼 노래를 완성해요 🎼</div>
+      <div id="lyrics" class="lyrics"></div>
+    </div>
+
+    <div id="card-tray" class="tray">
+      <div class="tray-label">👇 알맞은 낱말 카드를 눌러요</div>
+      <div id="bank" class="bank"></div>
+    </div>
+
+    <div id="type-tray" class="tray" hidden>
+      <div class="tray-label">✏️ 빈칸에 쓰고 엔터(Enter)를 눌러요</div>
+      <div class="type-tools">
+        <button id="btn-hint" class="btn btn-sun">💡 힌트 (첫 글자)</button>
+        <button id="btn-checkall" class="btn btn-mint">✅ 정답 확인!</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 결과 화면 ══════════ -->
+  <section id="s-result" class="screen">
+    <div class="result-card">
+      <div class="stamp">참<br>잘했어요!</div>
+      <div id="stars" class="stars"></div>
+      <p id="result-msg" class="result-msg"></p>
+      <div class="stats">
+        <span class="chip">⏱️ <b id="st-time"></b></span>
+        <span class="chip">🙈 실수 <b id="st-miss"></b>번</span>
+        <span class="chip">💡 힌트 <b id="st-hint"></b>번</span>
+      </div>
+      <div class="btn-row">
+        <button id="btn-retry" class="btn btn-coral">🔁 다시 도전!</button>
+        <button id="btn-gohome" class="btn btn-sky">🏠 처음으로</button>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-head">🎤 다 같이 불러 봐요!</div>
+      <div id="full-lyrics" class="lyrics small"></div>
+    </div>
+
+    <div class="verse">
+      <div class="verse-tag">📖 오늘의 말씀 · 요한복음 13장 34절</div>
+      <p>"서로 사랑하라.<br>내가 너희를 사랑한 것 같이<br>너희도 서로 사랑하라."</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ═══════════ 데이터 ═══════════ */
+const LINES = [
+  ['까맣고 먼지 묻은 제자들 ', {a:'발'}, ' 씻겨 주신'],
+  [{a:'노예'}, '처럼 낮아지셔 제자들을 ', {a:'사랑'}, '하신 ', {a:'주 예수님'}],
+  ['내가 ', {a:'사랑'}, '한 것 같이 여러분도 ', {a:'사랑'}, '하십시오'],
+  ['이것이 내 ', {a:'새 계명'}, '입니다 이것이 곧 ', {a:'사랑'}, '의 명령입니다'],
+];
+const DISTRACTORS = ['손', '왕', '미움'];
+const PASTELS = [
+  ['#ffe3e3','#e75d5d'], ['#fff3c9','#c99a2e'], ['#ddf5e7','#3fa871'],
+  ['#def0ff','#4f96d6'], ['#efe3ff','#8f6cd8'],
+];
+const CHEERS = [
+  '괜찮아요! 다시 한번 🤔',
+  '아깝다! 다른 낱말을 볼까요? 👀',
+  '거의 다 왔어요, 힘내요! 💪',
+  '음~ 노래를 떠올려 봐요 🎵',
+];
+
+const $  = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const norm = s => (s || '').replace(/\s+/g, '');
+
+const S = {
+  mode:'card', blanks:[], cur:-1,
+  miss:0, hint:0, streak:0, doneCount:0, start:0,
+  sound:true,
+  reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+};
+
+/* ═══════════ 효과음 (Web Audio) ═══════════ */
+let AC = null;
+function beep(freq, dur = 0.12, type = 'sine', vol = 0.16, delay = 0){
+  if (!S.sound) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+    const t = AC.currentTime + delay;
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g).connect(AC.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  } catch(e){}
+}
+const sfx = {
+  tap(){ beep(520, .06, 'triangle', .10); },
+  good(){ beep(660, .10); beep(880, .16, 'sine', .16, .09); },
+  bad(){ beep(196, .18, 'square', .05); },
+  line(){ beep(784, .09, 'triangle', .14); beep(988, .12, 'triangle', .14, .08); },
+  win(){ [523,659,784,1047,1319].forEach((f,i)=>beep(f, .22, 'sine', .15, i*.12)); },
+};
+
+/* ═══════════ 유틸 ═══════════ */
+function show(id){
+  $$('.screen').forEach(s => s.classList.remove('on'));
+  $(id).classList.add('on');
+  window.scrollTo({ top: 0 });
+}
+function shuffle(a){
+  for (let i = a.length - 1; i > 0; i--){
+    const j = (Math.random() * (i + 1)) | 0;
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+let toastTimer;
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+function wiggle(el){
+  el.classList.remove('nope'); void el.offsetWidth;
+  el.classList.add('nope');
+  setTimeout(() => el.classList.remove('nope'), 500);
+}
+function spawnHearts(el){
+  if (S.reduced) return;
+  const r = el.getBoundingClientRect();
+  ['❤️','💛','💚'].forEach((e,i) => {
+    const s = document.createElement('span');
+    s.className = 'fly'; s.textContent = e;
+    s.style.left = (r.left + r.width/2 + (i-1)*16) + 'px';
+    s.style.top  = r.top + 'px';
+    s.style.animationDelay = (i * 0.07) + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1100);
+  });
+}
+
+/* ═══════════ 게임 시작 ═══════════ */
+function startGame(mode){
+  Object.assign(S, { mode, blanks:[], cur:-1, miss:0, hint:0, streak:0, doneCount:0, start:Date.now() });
+
+  const ly = $('#lyrics');
+  ly.innerHTML = '';
+  let bi = 0;
+
+  LINES.forEach((parts, li) => {
+    const line = document.createElement('div');
+    line.className = 'line'; line.dataset.line = li;
+    const num = document.createElement('span');
+    num.className = 'line-num n' + (li % 4);
+    num.textContent = li + 1;
+    const p = document.createElement('p');
+    p.className = 'line-text';
+
+    parts.forEach(part => {
+      if (typeof part === 'string'){
+        p.appendChild(document.createTextNode(part));
+        return;
+      }
+      const idx = bi++;
+      let el;
+      if (mode === 'card'){
+        el = document.createElement('button');
+        el.type = 'button'; el.className = 'blank'; el.textContent = '?';
+        el.setAttribute('aria-label', '빈칸 ' + (idx+1));
+        el.addEventListener('click', () => {
+          if (!S.blanks[idx].done){ selectBlank(idx); sfx.tap(); }
+        });
+      } else {
+        el = document.createElement('input');
+        el.className = 'blank-in'; el.type = 'text';
+        el.autocomplete = 'off'; el.autocapitalize = 'off'; el.spellcheck = false;
+        el.maxLength = Math.max(6, part.a.length + 2);
+        el.setAttribute('aria-label', '빈칸 ' + (idx+1));
+        el.addEventListener('keydown', e => {
+          if (e.key === 'Enter' && !e.isComposing){ e.preventDefault(); checkOne(idx, true); }
+        });
+        el.addEventListener('focus', () => { S.cur = idx; });
+      }
+      el.style.minWidth = (norm(part.a).length * 1.25 + 1.1) + 'em';
+      S.blanks.push({ a: part.a, el, done:false, line:li });
+      p.appendChild(el);
+    });
+
+    line.append(num, p);
+    ly.appendChild(line);
+  });
+
+  buildHearts();
+  updateProgress();
+
+  if (mode === 'card'){
+    buildBank();
+    $('#card-tray').hidden = false;
+    $('#type-tray').hidden = true;
+    selectBlank(0);
+  } else {
+    $('#card-tray').hidden = true;
+    $('#type-tray').hidden = false;
+    S.cur = 0;
+    setTimeout(() => S.blanks[0].el.focus(), 350);
+  }
+  show('#s-quiz');
+}
+
+function buildBank(){
+  const words = shuffle([ ...S.blanks.map(b => b.a), ...DISTRACTORS ]);
+  const bank = $('#bank');
+  bank.innerHTML = '';
+  words.forEach((w, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'wcard'; b.textContent = w;
+    const [bg, bd] = PASTELS[i % PASTELS.length];
+    b.style.background = bg; b.style.borderColor = bd;
+    b.addEventListener('click', () => onCard(b, w));
+    bank.appendChild(b);
+  });
+}
+
+function buildHearts(){
+  const h = $('#hearts');
+  h.innerHTML = '';
+  S.blanks.forEach(() => {
+    const s = document.createElement('span');
+    s.textContent = '🤍';
+    h.appendChild(s);
+  });
+}
+
+function updateProgress(){
+  const hs = $('#hearts').children;
+  for (let i = 0; i < hs.length; i++){
+    if (i < S.doneCount && hs[i].textContent !== '❤️'){
+      hs[i].textContent = '❤️';
+      hs[i].classList.add('pop');
+    }
+  }
+  $('#progress-label').textContent = S.doneCount + ' / ' + S.blanks.length;
+}
+
+/* ═══════════ 카드 모드 ═══════════ */
+function selectBlank(i){
+  S.cur = i;
+  S.blanks.forEach((b, j) => b.el.classList.toggle('active', j === i && !b.done));
+  const el = S.blanks[i] && S.blanks[i].el;
+  if (el) el.scrollIntoView({ block:'nearest', behavior: S.reduced ? 'auto' : 'smooth' });
+}
+
+function onCard(btn, w){
+  if (S.cur < 0) return;
+  const b = S.blanks[S.cur];
+  if (!b || b.done) return;
+
+  if (norm(w) === norm(b.a)){
+    btn.disabled = true;
+    btn.classList.add('used');
+    setTimeout(() => btn.remove(), 280);
+    fillBlank(S.cur, b.a);
+  } else {
+    S.miss++; S.streak = 0;
+    btn.classList.remove('shake'); void btn.offsetWidth; btn.classList.add('shake');
+    wiggle(b.el);
+    sfx.bad();
+    toast(CHEERS[(Math.random() * CHEERS.length) | 0]);
+  }
+}
+
+/* ═══════════ 정답 처리 (공통) ═══════════ */
+function fillBlank(idx, text){
+  const b = S.blanks[idx];
+  b.done = true; S.doneCount++; S.streak++;
+
+  if (b.el.tagName === 'INPUT'){
+    const span = document.createElement('span');
+    span.className = 'blank done pop';
+    span.textContent = text;
+    span.style.minWidth = b.el.style.minWidth;
+    b.el.replaceWith(span);
+    b.el = span;
+  } else {
+    b.el.textContent = text;
+    b.el.classList.remove('active');
+    b.el.classList.add('done', 'pop');
+    b.el.disabled = true;
+  }
+
+  sfx.good();
+  spawnHearts(b.el);
+  updateProgress();
+
+  if (S.streak === 3) toast('🔥 3연속 정답! 대단해요!');
+  else if (S.streak === 5) toast('🌟 5연속 정답! 멋져요!');
+  else if (S.streak === 8) toast('👑 한 번도 안 틀렸어요!');
+
+  if (S.blanks.filter(x => x.line === b.line).every(x => x.done)){
+    const lineEl = $('#lyrics .line[data-line="' + b.line + '"]');
+    if (lineEl) lineEl.classList.add('cleared');
+    if (S.doneCount < S.blanks.length) sfx.line();
+  }
+
+  if (S.doneCount === S.blanks.length){ finish(); return; }
+
+  const next = S.blanks.findIndex(x => !x.done);
+  if (S.mode === 'card') selectBlank(next);
+  else {
+    const n = S.blanks[next];
+    if (n && n.el.tagName === 'INPUT') n.el.focus();
+  }
+}
+
+/* ═══════════ 입력 모드 ═══════════ */
+function checkOne(idx, announce){
+  const b = S.blanks[idx];
+  if (!b || b.done) return true;
+  const val = norm(b.el.value);
+  if (!val){
+    if (announce){ wiggle(b.el); toast('빈칸에 낱말을 써 보세요 ✏️'); }
+    return false;
+  }
+  if (val === norm(b.a)){ fillBlank(idx, b.a); return true; }
+  S.miss++; S.streak = 0;
+  wiggle(b.el);
+  if (b.el.select) b.el.select();
+  sfx.bad();
+  if (announce) toast(CHEERS[(Math.random() * CHEERS.length) | 0]);
+  return false;
+}
+
+function checkAll(){
+  sfx.tap();
+  let wrong = 0, empty = 0;
+  const undone = S.blanks.map((b, i) => ({ b, i })).filter(x => !x.b.done);
+  undone.forEach(({ b, i }) => {
+    if (b.done) return;
+    const v = norm(b.el.value || '');
+    if (!v){ empty++; wiggle(b.el); return; }
+    if (v === norm(b.a)) fillBlank(i, b.a);
+    else { wrong++; S.miss++; S.streak = 0; wiggle(b.el); }
+  });
+  if (wrong){ sfx.bad(); toast('빨간 칸을 다시 살펴봐요 👀'); }
+  else if (empty) toast('아직 빈칸이 남았어요 ✏️');
+}
+
+function giveHint(){
+  const idx = (S.cur >= 0 && S.blanks[S.cur] && !S.blanks[S.cur].done)
+    ? S.cur
+    : S.blanks.findIndex(b => !b.done);
+  if (idx < 0) return;
+  const b = S.blanks[idx];
+  const first = b.a.trim()[0];
+  b.el.value = first;
+  b.el.focus();
+  try { b.el.setSelectionRange(1, 1); } catch(e){}
+  S.hint++;
+  sfx.tap();
+  toast('💡 첫 글자는 「' + first + '」 이에요!');
+}
+
+/* ═══════════ 완료 & 결과 ═══════════ */
+function finish(){
+  const ms = Date.now() - S.start;
+  sfx.win();
+  if (!S.reduced) confettiBurst();
+  toast('🎉 찬송 완성!');
+  setTimeout(() => showResult(ms), 1100);
+}
+
+function showResult(ms){
+  const bad = S.miss + S.hint;
+  const stars = bad <= 1 ? 3 : bad <= 4 ? 2 : 1;
+
+  const starEl = $('#stars');
+  starEl.innerHTML = '';
+  for (let i = 0; i < 3; i++){
+    const s = document.createElement('span');
+    s.textContent = i < stars ? '⭐' : '☆';
+    s.className = 'star' + (i < stars ? '' : ' off');
+    s.style.animationDelay = (0.25 + i * 0.25) + 's';
+    starEl.appendChild(s);
+  }
+
+  $('#result-msg').textContent =
+    stars === 3 ? '우와! 찬송 박사님이에요! 👏'
+    : stars === 2 ? '정말 잘했어요! 한 번 더 하면 별 셋! ✨'
+    : '포기하지 않고 끝까지 해냈어요! 👍';
+
+  const sec = Math.round(ms / 1000);
+  $('#st-time').textContent = (sec >= 60 ? Math.floor(sec/60) + '분 ' : '') + (sec % 60) + '초';
+  $('#st-miss').textContent = S.miss;
+  $('#st-hint').textContent = S.hint;
+
+  const fl = $('#full-lyrics');
+  fl.innerHTML = '';
+  LINES.forEach((parts, li) => {
+    const line = document.createElement('div');
+    line.className = 'line';
+    const num = document.createElement('span');
+    num.className = 'line-num n' + (li % 4);
+    num.textContent = li + 1;
+    const p = document.createElement('p');
+    p.className = 'line-text';
+    parts.forEach(part => {
+      if (typeof part === 'string') p.appendChild(document.createTextNode(part));
+      else {
+        const m = document.createElement('mark');
+        m.textContent = part.a;
+        p.appendChild(m);
+      }
+    });
+    line.append(num, p);
+    fl.appendChild(line);
+  });
+
+  show('#s-result');
+}
+
+/* ═══════════ 색종이 ═══════════ */
+function confettiBurst(){
+  const c = $('#confetti'), x = c.getContext('2d');
+  const W = c.width = innerWidth, H = c.height = innerHeight;
+  c.style.display = 'block';
+  const cols = ['#ff7b7b','#ffd34e','#5fcb8f','#6fb8f2','#c3a6f5','#ff9fcf'];
+  const P = Array.from({ length: 150 }, () => ({
+    x: Math.random() * W, y: -H * Math.random() * 0.6 - 20,
+    w: 7 + Math.random() * 8, h: 9 + Math.random() * 10,
+    vy: 2.2 + Math.random() * 3.2, vx: -1.4 + Math.random() * 2.8,
+    r: Math.random() * Math.PI * 2, vr: -0.12 + Math.random() * 0.24,
+    col: cols[(Math.random() * cols.length) | 0],
+    round: Math.random() < 0.25,
+  }));
+  const t0 = performance.now();
+  (function frame(t){
+    x.clearRect(0, 0, W, H);
+    const el = t - t0;
+    P.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += 0.02;
+      if (p.y > H + 20 && el < 3200){ p.y = -20; p.x = Math.random() * W; p.vy = 2.2 + Math.random() * 3.2; }
+      x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.col;
+      if (p.round){ x.beginPath(); x.arc(0, 0, p.w / 2, 0, 7); x.fill(); }
+      else x.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      x.restore();
+    });
+    if (el < 5200) requestAnimationFrame(frame);
+    else { x.clearRect(0, 0, W, H); c.style.display = 'none'; }
+  })(t0);
+}
+
+/* ═══════════ 이벤트 연결 ═══════════ */
+$$('.mode-btn').forEach(b =>
+  b.addEventListener('click', () => { sfx.tap(); startGame(b.dataset.mode); })
+);
+$('#btn-home').addEventListener('click', () => { sfx.tap(); show('#s-start'); });
+$('#btn-gohome').addEventListener('click', () => { sfx.tap(); show('#s-start'); });
+$('#btn-retry').addEventListener('click', () => { sfx.tap(); startGame(S.mode); });
+$('#btn-hint').addEventListener('click', giveHint);
+$('#btn-checkall').addEventListener('click', checkAll);
+$('#btn-sound').addEventListener('click', function(){
+  S.sound = !S.sound;
+  this.textContent = S.sound ? '🔊' : '🔇';
+  this.setAttribute('aria-label', S.sound ? '소리 끄기' : '소리 켜기');
+  if (S.sound) sfx.tap();
+});
+</script>
+</body>
+</html>
