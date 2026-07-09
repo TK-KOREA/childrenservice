@@ -136,10 +136,7 @@ body.screen-start .dock,body.screen-end .dock{display:none}
 
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* Ripple + fx */
-.ripple{position:fixed;width:60px;height:60px;border-radius:50%;pointer-events:none;z-index:60;
-  transform:translate(-50%,-50%);border:5px solid rgba(46,196,182,.7);animation:rip .85s ease-out forwards}
-@keyframes rip{to{width:520px;height:520px;opacity:0;border-width:2px}}
+/* fx */
 .fx-canvas{position:fixed;inset:0;pointer-events:none;z-index:70}
 
 /* ===== Q1 icon character ===== */
@@ -553,14 +550,6 @@ function chimePop(){ initAudio(); tone(880,0,.07,"square",.05); }
 function burst(opts){
   if(window.confetti){ window.confetti(Object.assign({colors:CONFETTI_COLORS}, opts)); }
 }
-function celebrate(originEl){
-  if(window.confetti){
-    burst({particleCount:100,spread:72,startVelocity:46,origin:{y:.68}});
-    setTimeout(()=>burst({particleCount:60,angle:60,spread:60,origin:{x:0,y:.72}}),110);
-    setTimeout(()=>burst({particleCount:60,angle:120,spread:60,origin:{x:1,y:.72}}),220);
-  } else fallbackConfetti();
-  if(originEl) ripple(originEl);
-}
 function grandFinale(){
   if(!window.confetti){ fallbackConfetti(); return; }
   const end = Date.now() + 2200;
@@ -570,14 +559,6 @@ function grandFinale(){
     if(Date.now() < end) requestAnimationFrame(frame);
   })();
   burst({particleCount:160,spread:100,startVelocity:50,origin:{y:.6}});
-}
-function ripple(originEl){
-  const r = originEl.getBoundingClientRect();
-  const d = el("div",{class:"ripple"});
-  d.style.left = (r.left + r.width/2) + "px";
-  d.style.top  = (r.top + r.height/2) + "px";
-  document.body.append(d);
-  setTimeout(()=>d.remove(), 900);
 }
 function fallbackConfetti(){
   const cv = el("canvas",{class:"fx-canvas"}); document.body.append(cv);
@@ -619,7 +600,6 @@ function markCorrect(originEl, opts){
   const q = QUESTIONS[state.index];
   showFeedback(opts.msg || q.win || "정답이에요! 🎉", "good");
   chimeCorrect();
-  if(opts.grand) grandFinale(); else celebrate(originEl || stage);
   stage.classList.add("locked");
   if(!opts.suppressNext){
     const last = state.index === QUESTIONS.length-1;
