@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>사랑으로 섬기신 예수님 · 성경 퀴즈</title>
+<title>2026 경기권역 어린이특별집회 · 초고4 퀴즈</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -174,6 +174,12 @@ body.screen-start .dock,body.screen-end .dock{display:none}
 .cho-tile.revealed .cho-cons{opacity:0;transform:scale(1.5)}
 .cho-tile.revealed .cho-full{opacity:1;transform:none}
 @keyframes choPop{0%{transform:scale(1)}45%{transform:scale(1.18) rotate(3deg)}100%{transform:scale(1)}}
+.reveal-btn{font-family:'Jua',sans-serif;font-size:clamp(1.15rem,2vw,1.7rem);color:#fff;border:none;cursor:pointer;
+  background:linear-gradient(180deg,var(--teal),var(--teal-deep));
+  padding:clamp(12px,1.6vh,18px) clamp(28px,4vw,48px);border-radius:999px;
+  box-shadow:0 14px 26px -12px rgba(25,154,142,.8);transition:.2s;animation:bob 1.5s ease-in-out infinite}
+.reveal-btn:hover{transform:translateY(-3px) scale(1.03)}
+.locked .reveal-btn{display:none}
 
 /* Word-chip option layout (short one-word answers) */
 .opts.opts-word{grid-template-columns:repeat(2,minmax(0,1fr));max-width:660px}
@@ -391,35 +397,29 @@ body.screen-start .dock,body.screen-end .dock{display:none}
 /* ================= Data ================= */
 const QUESTIONS = [
   { type:"icons",
-    q:"예수님께서 제자들의 발을 씻기시기 전에 하신 행동으로 옳은 것은?",
+    q:"예수님께서 제자들의 발을 씻기기 위해 허리에 수건을 동여매신 행동은 어떤 의미를 담고 있나요?",
     options:[
-      {icon:"🧎",text:"제자들에게 무릎을 꿇으라고 명령하셨어요"},
-      {icon:"💧",text:"제자들에게 세례를 베풀 준비를 하셨어요"},
-      {icon:"🍲",text:"제자들에게 맛있는 음식을 차려 주셨어요"},
-      {icon:"🧥",text:"겉옷을 벗으시고 수건을 허리에 동여매셨어요",correct:true},
+      {icon:"🩴",text:"제자들에게 샌들을 청결하게 관리하는 법을 교육함"},
+      {icon:"👑",text:"위엄 있는 스승으로서 제자들을 가르치려는 준비"},
+      {icon:"🍽️",text:"유대인들이 식사 전에 반드시 갖추어야 하는 정식 복장"},
+      {icon:"🧎",text:"노예와 같이 낮은 위치에서 다른 사람을 섬기는 자세",correct:true},
     ],
-    win:"겉옷을 벗고 수건을 두르셨어요! 낮아지심으로 섬기셨답니다 🤍" },
+    win:"맞아요! 주 예수님은 제자들을 참되게 사랑하심으로 기꺼이 낮아지셨어요 🤍" },
 
   { type:"chosung",
-    q:"예수님께서 수건을 동여매신 것은 '종처럼 낮아져 ○○'하신다는 뜻이에요. 초성을 보고 알맞은 낱말을 골라 보세요!",
-    answerWord:"섬김",
-    options:[
-      {text:"섬김",correct:true},
-      {text:"다스림"},
-      {text:"가르침"},
-      {text:"꾸미기"},
-    ],
-    win:"낮아져 '섬김'! 예수님처럼 종의 마음으로 섬겨요 💧" },
+    q:"수건을 허리에 동여맨다는 것은 ○○과 같이 다른 사람들을 섬기기 위해 낮아지는 것을 말합니다.",
+    answerWord:"노예",
+    win:"아주 옛날에 노예들은 사람들을 섬길 때 앞치마를 허리에 동여매었어요." },
 
   { type:"hotspot",
-    q:"유대인들이 집에 들어갈 때 발 씻는 것을 중요하게 여긴 이유는?",
+    q:"예수님 당시 사람들은 왜 식사하기 전에 발을 씻었을까요? 발을 씻지 않으면 어떤 점이 불편했을까요??",
     options:[
-      {text:"물이 매우 흔해서 자주 씻는 게 예의였기 때문이에요"},
-      {text:"제사장만 할 수 있는 거룩한 의식이었기 때문이에요"},
-      {text:"샌들을 신어 먼지가 잘 묻고, 낮은 상에 기대어 식사했기 때문이에요",correct:true},
-      {text:"발을 안 씻으면 집에 못 들어가는 법이 있었기 때문이에요"},
+      {text:"샌들을 신지 않고 식탁에 앉는 것이 예의에 어긋났기 때문입니다."},
+      {text:"식사 전 발을 씻지 않으면 음식을 먹을 수 없는 법이 있었기 때문입니다."},
+      {text:"낮은 상 곁에 기대어 앉아 발이 다른 사람과 가까이 놓였기 때문입니다.",correct:true},
+      {text:"식사 중에 발을 만지는 것이 종교적인 금기였기 때문입니다."},
     ],
-    win:"맞아요! 먼지 묻은 발, 낮은 상에서의 식사 때문이었어요 👣" },
+    win:"맞아요! 낮은 상에 기대어 앉아 발이 다른 사람 가까이 놓였기 때문이에요 👣" },
 
   { type:"blank",
     q:"예수님께서 주신 '새 계명'을 완성해 보세요!",
@@ -646,14 +646,8 @@ function block(){ return el("div",{class:"q-block"}); }
 function renderIcons(q){
   const b = block();
   b.append(head(q));
-  const char = el("div",{class:"char"},
-    el("div",{class:"halo"}),
-    el("div",{class:"char-emoji",text:"🧑"}),
-    el("div",{class:"towel",text:"🧣"})
-  );
-  b.append(char);
   b.append(buildOptions(q,(o,btn,wrap)=>{
-    if(o.correct){ char.classList.add("served"); finishCorrect(wrap,btn); }
+    if(o.correct) finishCorrect(wrap,btn);
     else nudge(btn);
   }));
   return b;
@@ -664,7 +658,7 @@ function renderChosung(q){
   const chosungOf = ch => { const c = ch.charCodeAt(0) - 0xAC00; return (c<0||c>11171) ? ch : CHO[(c/588)|0]; };
   const b = block();
   b.append(head(q));
-  b.append(el("div",{class:"gate-hint",text:"초성을 보고 알맞은 낱말을 골라 보세요! 🔤"}));
+  b.append(el("div",{class:"gate-hint",text:"초성을 보고 낱말을 맞혀 본 뒤, 버튼을 눌러 정답을 확인해요! 🔤"}));
 
   const tiles = [];
   const board = el("div",{class:"cho-board"});
@@ -677,17 +671,19 @@ function renderChosung(q){
   }
   b.append(board);
 
-  b.append(buildOptions(q,(o,btn,wrap)=>{
-    if(o.correct){
-      finishCorrect(wrap, btn, {suppressNext:true});
-      tiles.forEach((t,i)=> setTimeout(()=>{ t.classList.add("revealed"); chimePop(); }, 180 + i*300));
-      const done = 180 + tiles.length*300 + 280;
-      setTimeout(()=>{
-        const last = state.index === QUESTIONS.length-1;
-        showNext(last ? "결과 보기 🎊" : "다음 문제 →");
-      }, done);
-    } else nudge(btn);
-  }, "opts-word"));
+  const revealBtn = el("button",{class:"reveal-btn",attrs:{type:"button"},text:"정답 확인하기 ✨"});
+  revealBtn.addEventListener("click",()=>{
+    if(state.answered) return;
+    revealBtn.remove();
+    finishCorrect(null, null, {suppressNext:true});
+    tiles.forEach((t,i)=> setTimeout(()=>{ t.classList.add("revealed"); chimePop(); }, 180 + i*300));
+    const done = 180 + tiles.length*300 + 280;
+    setTimeout(()=>{
+      const last = state.index === QUESTIONS.length-1;
+      showNext(last ? "결과 보기 🎊" : "다음 문제 →");
+    }, done);
+  });
+  b.append(revealBtn);
   return b;
 }
 
@@ -720,7 +716,7 @@ function renderHotspot(q){
     scene.querySelector(".tip").classList.add("show");
     spot.style.transition="opacity .3s"; spot.style.opacity="0";
     setTimeout(()=>{ spot.style.display="none"; }, 300);
-    gate.textContent = "이제 왜 발을 씻었을지 골라 볼까요?";
+    gate.textContent = "이제 왜 식사 자리가 불편했을지 골라 볼까요?";
     setTimeout(()=>{ opts.style.display=""; }, 700);
   });
   return b;
@@ -1115,13 +1111,11 @@ function showStart(){
   clearFeedback(); nextBtn.hidden = true;
   stage.innerHTML = "";
   stage.append(el("div",{class:"hero"},
-    el("div",{class:"eyebrow",text:"성경 퀴즈 · 초등 고학년"}),
-    el("h1",{text:"사랑으로 섬기신 예수님"}),
-    el("div",{class:"motif"}, el("span",{text:"🪣"}), el("span",{text:"💧"}), el("span",{text:"🧣"})),
-    el("p",{class:"lead",text:"예수님이 제자들의 발을 씻기신 이야기로 떠나는 열 문제 여행. 큰 화면에 띄우고 다 함께 풀어 보세요!"}),
+    el("div",{class:"eyebrow",text:"2026 여름 어린이 특별집회 초고4 · 퀴즈"}),
+    el("h1",{text:"제자들을 사랑하신"}),
+    el("h1",{text:"주 예수님"}),
     el("button",{class:"big-btn",attrs:{type:"button"},text:"퀴즈 시작하기 ✨",
       on:{click:()=>{ initAudio(); state.index=0; state.correct=0; loadQuestion(); }}}),
-    el("div",{class:"note",text:"👆 진행자가 화면을 보여 주며 함께 진행하는 방식이에요"})
   ));
 }
 
