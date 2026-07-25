@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#23282F">
+<meta name="description" content="교회를 건축하려면 일에 대해 아는 것이 필요함 — 메시지 인포그래픽">
+<title>교회를 건축하려면 일에 대해 아는 것이 필요함</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F3EA; --card:#FBF8F0; --card2:#FCFAF3;
+  --ink:#29241B; --ink2:#6E6455; --ink3:#3E382C;
+  --gold:#A07E28; --gold-d:#7A5F1C; --gold-l:#C9A85C;
+  --gold-bg:#F1E8D0; --gold-line:#D9C795;
+  --ash:#7C7366; --ash-bg:#ECE8E0; --ash-line:#D4CEC2;
+  --line:#E7E1D2;
+  --dark:#23282F; --dark2:#2C323B; --dark-line:#3C434E;
+  --serif:'Noto Serif KR','Nanum Myeongjo','Apple SD Gothic Neo',serif;
+  --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:1rem;line-height:1.95;color:var(--ink);
+  background:var(--paper);word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+blockquote,figure{margin:0}
+ol,ul{list-style:none}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.3rem}
+
+/* 진행 막대 */
+#pgbar{position:fixed;top:0;left:0;height:.2rem;width:0;z-index:50;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold-l))}
+
+/* 스크롤 리빌 */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .plumb-line{animation:none!important}
+  .fill{transition:none!important}
+}
+
+/* ───── 표지 ───── */
+.hero{background:var(--dark);color:#F2ECDD;padding:5rem 0 3.8rem;position:relative}
+.hero .plumb{position:absolute;top:0;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center}
+.plumb-line{width:1px;height:3rem;background:var(--gold-l);transform-origin:top;animation:drop 1.1s ease-out}
+@keyframes drop{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.plumb-bob{width:.5rem;height:.5rem;background:var(--gold-l);transform:rotate(45deg);margin-top:.15rem}
+.eyebrow{font-size:.7rem;letter-spacing:.34em;text-indent:.34em;color:var(--gold-l);
+  font-weight:700;text-align:center;margin-bottom:1.5rem}
+.hero h1{text-align:center;font-family:var(--serif);margin-bottom:1.7rem}
+.t-sm{display:block;font-size:1.02rem;font-weight:600;letter-spacing:.16em;text-indent:.16em;
+  color:#CFC7B4;margin-bottom:.6rem}
+.t-lg{display:block;font-size:clamp(1.95rem,8.6vw,2.5rem);font-weight:900;line-height:1.5;
+  color:#F6F0E1;letter-spacing:.01em}
+.lead{font-size:.97rem;line-height:2.05;color:#CFC8B7;text-align:center}
+.lead b{color:#EFE7D2}
+.hint{margin-top:2.1rem;text-align:center;font-size:.74rem;letter-spacing:.12em;color:#8D8878}
+
+/* ───── 말씀 카드 ───── */
+.verse{margin:2.1rem auto 0;text-align:center;padding:1.45rem .9rem 1.3rem;position:relative;
+  border-top:1px solid var(--gold-line);border-bottom:1px solid var(--gold-line)}
+.verse::before{content:"✦";position:absolute;top:-.68em;left:50%;transform:translateX(-50%);
+  background:var(--paper);padding:0 .55rem;color:var(--gold);font-size:.72rem}
+.verse blockquote{font-family:var(--serif);font-size:1.02rem;line-height:2.05;color:var(--ink)}
+.verse figcaption{margin-top:.75rem;font-size:.72rem;letter-spacing:.14em;color:var(--gold-d)}
+.vdark{border-color:rgba(201,168,92,.45)}
+.vdark::before{background:var(--dark);color:var(--gold-l)}
+.vdark blockquote{color:#F0E9D8}
+.vdark figcaption{color:var(--gold-l)}
+.band .verse::before{background:var(--dark)}
+
+/* ───── 섹션 공통 ───── */
+.sec{padding:4rem 0}
+.band{background:var(--dark);color:#E8E1D0;padding:4.3rem 0}
+.act{text-align:center;margin-bottom:2.3rem}
+.act-plumb{display:flex;flex-direction:column;align-items:center;margin-bottom:1rem}
+.act-plumb i{width:1px;height:1.6rem;background:var(--gold-line);display:block}
+.act-plumb b{width:.42rem;height:.42rem;background:var(--gold);transform:rotate(45deg);display:block;margin-top:.18rem}
+.band .act-plumb i{background:rgba(201,168,92,.5)}
+.band .act-plumb b{background:var(--gold-l)}
+.act-no{font-size:.72rem;letter-spacing:.38em;text-indent:.38em;color:var(--gold-d);font-weight:700}
+.band .act-no{color:var(--gold-l)}
+.act h2{font-family:var(--serif);font-weight:900;font-size:1.55rem;line-height:1.5;margin:.4rem 0 .25rem}
+.band .act h2{color:#F4EEDF}
+.act-sub{font-size:.85rem;color:var(--ink2)}
+.band .act-sub{color:#A39C8A}
+.body-p{font-size:.96rem;line-height:2.05;color:var(--ink3);margin-bottom:1.15rem}
+.body-p b{color:var(--ink)}
+.band .body-p{color:#CFC8B7}
+.band .body-p b{color:#EFE7D2}
+
+/* ───── 메시지 원문 블록 ───── */
+.origin{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--gold);
+  padding:1.3rem 1.2rem 1.2rem;margin:1.9rem 0;border-radius:0 .4rem .4rem 0}
+.origin figcaption{font-size:.68rem;letter-spacing:.3em;color:var(--gold-d);font-weight:700;margin-bottom:.6rem}
+.origin blockquote{font-family:var(--serif);font-size:.97rem;line-height:2.1;color:#3A342A}
+.band .origin{background:var(--dark2);border-color:var(--dark-line);border-left-color:var(--gold-l)}
+.band .origin figcaption{color:var(--gold-l)}
+.band .origin blockquote{color:#E8E1D0}
+
+/* ───── 두 기둥(계층 구조도) ───── */
+.pillars{margin:2.3rem 0 1rem;text-align:center}
+.beam{background:var(--ink);color:#F2ECDD;font-family:var(--serif);font-weight:700;
+  letter-spacing:.22em;text-indent:.22em;padding:.8rem .5rem;font-size:1.02rem}
+.cols{display:flex;gap:2.4rem;justify-content:center;padding:0 1.7rem}
+.col{flex:1;max-width:8.6rem;border:1px solid var(--gold-line);border-top:none;background:var(--card);
+  padding:1.6rem .4rem;font-family:var(--serif);font-weight:700;font-size:1.05rem;line-height:1.75;
+  background-image:repeating-linear-gradient(90deg,transparent 0 9px,rgba(160,126,40,.06) 9px 10px)}
+.base{height:3px;background:var(--ink)}
+.pillar-cap{font-size:.82rem;color:var(--ink2);margin-top:1rem}
+
+/* ───── 큰 숫자 ───── */
+.bignum{text-align:center;margin:2rem 0 1.7rem}
+.bignum .n{font-family:var(--serif);font-weight:900;font-size:clamp(3rem,16vw,4.2rem);
+  line-height:1.2;color:var(--gold-d);letter-spacing:.02em}
+.band .bignum .n{color:var(--gold-l)}
+.bignum .c{font-size:.85rem;color:var(--ink2);margin-top:.45rem;line-height:1.8}
+.band .bignum .c{color:#A39C8A}
+
+/* ───── 여섯 가지 아이콘 배열 ───── */
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.7rem 0}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:.45rem;
+  padding:.9rem .3rem .75rem;text-align:center;color:var(--gold-d)}
+.chip svg{width:1.3rem;height:1.3rem;stroke:currentColor;fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;margin-bottom:.3rem}
+.chip b{display:block;font-size:.96rem;color:var(--ink)}
+.chip span{display:block;font-size:.69rem;color:var(--ink2);line-height:1.55;margin-top:.15rem}
+
+/* ───── 비유 대조 카드 ───── */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.7rem 0 .6rem}
+.duo-card{background:var(--ash-bg);border:1px solid var(--ash-line);border-radius:.45rem;
+  padding:1rem .85rem;font-size:.84rem;line-height:1.8;color:#5A5344}
+.duo-card b{display:block;font-family:var(--serif);font-size:.98rem;margin-bottom:.3rem;color:var(--ink)}
+.duo-cap{text-align:center;font-size:.85rem;color:var(--ink2)}
+
+/* ───── 간증 카드 ───── */
+.testi{background:var(--card);border:1px solid var(--line);border-radius:.6rem;
+  padding:1.6rem 1.15rem 1.1rem;margin:1.7rem 0;position:relative}
+.testi::before{content:"“";position:absolute;top:.1rem;left:.9rem;font-family:var(--serif);
+  font-size:2.6rem;line-height:1;color:var(--gold-line)}
+.testi p{font-family:var(--serif);font-size:.98rem;line-height:2.05;color:var(--ink3)}
+.testi .who{font-family:var(--sans);font-size:.75rem;color:var(--ink2);margin-top:.55rem;text-align:right}
+
+/* ───── 좌우 대조 순서도 ───── */
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:2.1rem 0 1.2rem}
+.path{display:flex;flex-direction:column;text-align:center}
+.p-head{font-size:.8rem;font-weight:700;letter-spacing:.06em;padding:.55rem .3rem;
+  border-radius:2rem;margin-bottom:.7rem}
+.path-a .p-head{background:var(--ash-bg);color:#5E574B;border:1px solid var(--ash-line)}
+.path-b .p-head{background:var(--gold-bg);color:var(--gold-d);border:1px solid var(--gold-line)}
+.p-node{border-radius:.45rem;padding:.72rem .4rem;font-size:.82rem;line-height:1.7;
+  background:var(--card);border:1px solid var(--line);color:var(--ink3)}
+.path-a .p-node{background:#F2EFE8;border-color:var(--ash-line)}
+.p-arr{font-size:.82rem;line-height:1;padding:.34rem 0;color:#B9AE97}
+.path-b .p-arr{color:var(--gold)}
+.p-end{border-radius:.45rem;padding:.85rem .4rem;font-weight:700;font-size:.92rem;font-family:var(--serif)}
+.path-a .p-end{background:var(--ash);color:#F4F1EA}
+.path-b .p-end{background:var(--gold-d);color:#FBF6E8}
+
+/* ───── 인용 강조 ───── */
+.pull{font-family:var(--serif);font-weight:700;font-size:1.2rem;line-height:1.9;
+  text-align:center;margin:2.5rem .6rem;color:var(--ink)}
+.pull em{font-style:normal;box-shadow:inset 0 -.55em var(--gold-bg)}
+.pull small{display:block;font-family:var(--sans);font-weight:400;font-size:.72rem;
+  letter-spacing:.2em;color:var(--gold-d);margin-top:.7rem}
+
+/* ───── 선언문(어두운 부) ───── */
+.stmt{font-family:var(--serif);font-weight:900;font-size:1.5rem;line-height:1.9;
+  text-align:center;margin:2rem 0;color:#F4EEDF}
+.stmt i{font-style:normal;color:var(--gold-l)}
+
+/* ───── 스펙트럼 ───── */
+.spec{margin:2.3rem 0 1.9rem;position:relative}
+.spec-line{position:absolute;top:.95rem;left:9%;right:9%;height:1px;background:var(--gold-line)}
+.spec-row{display:flex;justify-content:space-between;position:relative}
+.spec-pt{width:33%;text-align:center}
+.spec-dot{display:inline-flex;width:1.9rem;height:1.9rem;border-radius:50%;align-items:center;
+  justify-content:center;font-size:.8rem;background:var(--paper);border:1px solid var(--ash-line);
+  color:var(--ash);position:relative;z-index:1}
+.spec-pt.mid .spec-dot{width:2.25rem;height:2.25rem;background:var(--gold-d);
+  border-color:var(--gold-d);color:#FBF6E8;font-size:.62rem}
+.spec-pt b{display:block;font-size:.92rem;margin-top:.5rem}
+.spec-pt.mid b{color:var(--gold-d)}
+.spec-pt i{display:block;font-style:normal;font-size:.7rem;color:var(--ink2);margin-top:.12rem;line-height:1.5}
+
+/* ───── 진행 막대 ───── */
+.bars{margin:2.1rem 0 .5rem}
+.bar-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.bar-l{width:7rem;flex:none;font-size:.82rem;text-align:right;line-height:1.5;color:var(--ink3)}
+.bar{flex:1;height:1.55rem;background:#EFEBE0;border-radius:.3rem;overflow:hidden}
+.fill{height:100%;width:0;border-radius:.3rem;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:.45rem;color:#FBF6E8;font-size:.72rem;font-weight:700;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold));
+  transition:width 1.2s cubic-bezier(.2,.7,.25,1) .15s}
+.fill.f2{background:linear-gradient(90deg,#4A5262,#5C6576)}
+.bars.in .fill{width:var(--w)}
+.bar-cap{font-size:.83rem;color:var(--ink2);text-align:center;margin-top:1rem;line-height:1.8}
+
+/* ───── 의사/어린아이 대조 ───── */
+.sduo{display:flex;align-items:stretch;gap:.5rem;margin:1.9rem 0 1.2rem}
+.sduo>div{flex:1;text-align:center;padding:1.05rem .45rem;border-radius:.5rem}
+.sduo .a{background:var(--card);border:1px solid var(--line)}
+.sduo .b{background:var(--ash-bg);border:1px solid var(--ash-line)}
+.sduo em{display:block;font-style:normal;font-size:.72rem;color:var(--ink2);letter-spacing:.04em}
+.sduo b{display:block;font-family:var(--serif);font-size:.98rem;margin-top:.3rem;line-height:1.65}
+.sduo .vs{flex:none;align-self:center;font-size:.72rem;color:var(--gold-d);font-weight:700;
+  letter-spacing:.1em;padding:0 .1rem}
+
+/* ───── 네 가지 열쇠(번호 단계) ───── */
+.steps{margin:2.1rem 0 1rem}
+.step{display:flex;gap:1rem;margin-bottom:2rem;position:relative}
+.step::before{content:"";position:absolute;left:1.07rem;top:2.7rem;bottom:-1.5rem;width:1px;background:var(--gold-line)}
+.step:last-child::before{display:none}
+.s-num{flex:none;width:2.15rem;height:2.15rem;border-radius:50%;background:var(--gold-d);
+  color:#FBF6E8;font-family:var(--serif);font-weight:700;font-size:.98rem;
+  display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.s-body{flex:1;min-width:0}
+.s-body h3{font-family:var(--serif);font-size:1.12rem;font-weight:700;margin:.3rem 0 .4rem}
+.s-body p{font-size:.91rem;line-height:1.95;color:var(--ink3)}
+.ex{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.ex span{font-size:.74rem;border-radius:2rem;padding:.3rem .75rem;line-height:1.5;
+  background:#F2EFE7;border:1px solid var(--line);color:var(--ink2)}
+.ex span.good{background:var(--gold-bg);border-color:var(--gold-line);color:var(--gold-d);font-weight:700}
+
+/* ───── 십중팔구 픽토그래프 ───── */
+.picto{display:flex;gap:.26rem;margin:.85rem 0 .35rem;flex-wrap:wrap}
+.pf{width:1.45rem;height:1.45rem}
+.pf-f{fill:var(--gold)}
+.pf-h{fill:var(--gold);opacity:.42}
+.pf-o{fill:none;stroke:#B7AC93;stroke-width:1.5}
+.picto-cap{font-size:.83rem;color:var(--gold-d);font-weight:700;line-height:1.7}
+
+/* ───── 교정·인도 흐름 ───── */
+.fixflow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.45rem;
+  margin:2.1rem 0 .3rem;text-align:center}
+.fx{font-size:.8rem;background:var(--card);border:1px solid var(--line);border-radius:2rem;
+  padding:.45rem .85rem;line-height:1.55}
+.fx.gold{background:var(--gold-d);border-color:var(--gold-d);color:#FBF6E8;font-weight:700}
+.fa{color:var(--gold);font-size:.8rem}
+
+/* ───── 경계 카드 ───── */
+.caution{background:var(--card);border:1px solid var(--line);border-radius:.55rem;
+  padding:1.3rem 1.15rem;margin:1.5rem 0}
+.c-tag{display:inline-block;font-size:.66rem;letter-spacing:.22em;text-indent:.22em;font-weight:700;
+  color:#6E6455;background:var(--ash-bg);border:1px solid var(--ash-line);border-radius:2rem;
+  padding:.24rem .72rem .2rem}
+.caution h3{font-family:var(--serif);font-size:1.15rem;margin:.7rem 0 .4rem}
+.caution p{font-size:.91rem;line-height:1.95;color:var(--ink3)}
+.c-q{margin-top:.75rem;font-family:var(--serif);font-size:.95rem;line-height:2;
+  color:var(--ink);border-left:2px solid var(--gold-line);padding-left:.85rem}
+
+/* ───── 속담 콜아웃 ───── */
+.proverb{text-align:center;margin:2.4rem 0;padding:1.6rem 1.1rem 1.4rem;
+  border:1px dashed var(--gold-line);border-radius:.55rem;background:var(--card2)}
+.pv-tag{font-size:.66rem;letter-spacing:.3em;text-indent:.3em;color:var(--gold-d);font-weight:700}
+.proverb blockquote{font-family:var(--serif);font-weight:700;font-size:1.06rem;line-height:2;margin:.6rem 0 .5rem}
+.proverb p{font-size:.82rem;color:var(--ink2);line-height:1.85}
+
+/* ───── 종장 흐름도 ───── */
+.ff{display:flex;flex-direction:column;align-items:center;margin:2.3rem 0 1rem;text-align:center}
+.ff-n{background:var(--dark2);border:1px solid var(--dark-line);border-radius:.55rem;
+  padding:.9rem 1.25rem;font-size:.92rem;line-height:1.75;color:#E8E1D0;min-width:15.5rem}
+.ff-a{width:1px;height:1.15rem;background:rgba(201,168,92,.55)}
+.ff-c{color:var(--gold-l);font-size:.72rem;line-height:1;padding-bottom:.25rem}
+.ff-alert{margin:.95rem 0;font-size:.8rem;color:#E9C889;border:1px dashed rgba(201,168,92,.6);
+  border-radius:2rem;padding:.5rem 1.05rem;max-width:19rem;line-height:1.7}
+.ff-n.gold{background:var(--gold-d);border-color:var(--gold-d);color:#FBF6E8;
+  font-family:var(--serif);font-weight:700;font-size:1.02rem}
+
+.orn{text-align:center;color:var(--gold-l);font-size:.85rem;margin-top:2.6rem}
+
+/* ───── 푸터 ───── */
+footer{background:var(--dark);border-top:1px solid var(--dark-line);color:#8D8878;
+  padding:2.5rem 0 3rem;font-size:.74rem;line-height:2;text-align:center}
+footer b{color:#C4BDAB;font-weight:500}
+</style>
+</head>
+<body>
+<div id="pgbar" aria-hidden="true"></div>
+
+<!-- ═══════════ 표지 ═══════════ -->
+<header class="hero">
+  <div class="plumb" aria-hidden="true"><span class="plumb-line"></span><span class="plumb-bob"></span></div>
+  <div class="wrap">
+    <p class="eyebrow rv">교회의 건축을 위한 말씀 · 제8장</p>
+    <h1 class="rv"><span class="t-sm">교회를 건축하려면</span><span class="t-lg">일에 대해<br>아는 것이 필요함</span></h1>
+    <p class="lead rv">복음을 전하여 죄인을 구원받게 하고, 진리를 가르쳐 성도들을 온전하게 하는 것 — 귀한 일입니다. 그러나 그것만으로는 교회가 건축되지 않습니다. 교회를 건축하기 원하는 사람은 <b>사람에 대해</b> 알아야 할 뿐 아니라, <b>일에 대해서도</b> 알아야 합니다.</p>
+    <figure class="verse vdark rv">
+      <blockquote>&ldquo;각 사람은 자기가 어떻게 건축하고 있는지 살펴보십시오.&rdquo;</blockquote>
+      <figcaption>고린도전서 3장 10절 · 회복역</figcaption>
+    </figure>
+    <p class="hint rv">아래로 내리며 한 편의 이야기로 읽어 가십시오 ▾</p>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════ 서장 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">서장</p>
+      <h2>건축을 받치는 두 기둥</h2>
+      <p class="act-sub">사람을 앎, 그리고 일을 앎</p>
+    </div>
+    <p class="body-p rv">열심히 주님을 섬기는 사람이라도, 다만 전도와 가르침만을 생각한다면 굳이 일에 대해 알 필요가 없을지 모릅니다. 그러나 목표가 <b>교회의 건축</b>이라면 이야기가 달라집니다. 우리가 접촉하는 모든 사람에 대하여 — 그의 동기가 어디에 있는지, 혈기는 처리받았는지, 그의 영은 어떠한지 — 알아야 하고, 동시에 모든 일에 대하여 그 본질과 결과와 관계와 영향을 알아야 합니다.</p>
+    <div class="pillars rv" role="img" aria-label="사람을 앎과 일을 앎, 두 기둥이 교회의 건축을 받치는 구조도">
+      <div class="beam">교회의 건축</div>
+      <div class="cols">
+        <div class="col">사람을<br>앎</div>
+        <div class="col">일을<br>앎</div>
+      </div>
+      <div class="base"></div>
+      <p class="pillar-cap">교회를 돌보는 것도, 말씀의 사역도, 심방과 인도까지도<br>이 두 기둥 위에 서 있습니다.</p>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;우리가 교회를 돌볼 수 있는가를 결정짓는 가장 중요한 요인은 우리가 사람에 대하여 잘 아는지의 여부와 일에 대하여 잘 아는지의 여부이다.&rdquo;</blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ 제1막 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제1막</p>
+      <h2>만 달러의 헌금</h2>
+      <p class="act-sub">좋은 일은 언제나 단순한가</p>
+    </div>
+    <p class="body-p rv">어느 날, 주님을 사랑하는 한 형제가 갑자기 헌금을 가져와 말합니다. &ldquo;주님께서 저를 감동시키셨기 때문에, 교회가 쓰도록 드립니다.&rdquo; 한 면에서 이것은 주님께 감사하며 기뻐할 일입니다. 그러나 다른 한 면에서, 우리는 이 일이 그렇게 단순하지 않다는 것을 알아야 합니다.</p>
+    <div class="bignum rv">
+      <div class="n">만 달러</div>
+      <p class="c">헌금함을 열었을 때 —<br>장로들은 무엇을 보아야 하는가</p>
+    </div>
+    <p class="body-p rv">세심하게 관찰하고 기도하며, 심사숙고하고 빛 비춤을 구하면서, 헌신한 사람의 내력과 배경, 돈의 출처, 주님 앞에서의 동기와 헌신의 영을 살펴야 합니다. 하나의 헌신 앞에서 살펴야 할 것이 여섯 가지입니다.</p>
+    <div class="chips rv" role="list" aria-label="헌신에 대해 살펴야 할 여섯 가지">
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.2 5.8 13a4.1 4.1 0 1 1 5.7-5.8l.5.5.5-.5a4.1 4.1 0 1 1 5.7 5.8Z"/></svg>
+        <b>동기</b><span>어디서<br>나왔는가</span>
+      </div>
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5.5L12 20 3 9.5Z"/><path d="M3 9.5h18"/><path d="M12 20 8.5 9.5 12 4l3.5 5.5"/></svg>
+        <b>본질</b><span>그 일 자체는<br>무엇인가</span>
+      </div>
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c5 0 3-11 9-11h6"/><path d="m16.5 4.5 2.5 2.5-2.5 2.5"/></svg>
+        <b>방법</b><span>어떻게<br>드려졌는가</span>
+      </div>
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r="0.9" fill="currentColor" stroke="none"/></svg>
+        <b>용도</b><span>어디에<br>쓰이는가</span>
+      </div>
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8"/><path d="M12 13C12 9 9 7 5 7c0 4 3 6 7 6Z"/><path d="M12 11c0-3.5 2.5-5 6-5 0 3.5-2.5 5-6 5Z"/></svg>
+        <b>결과</b><span>무엇을<br>낳는가</span>
+      </div>
+      <div class="chip" role="listitem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.6"/><path d="M18.2 5.8a8.8 8.8 0 0 1 0 12.4"/><path d="M5.8 5.8a8.8 8.8 0 0 0 0 12.4"/></svg>
+        <b>영향</b><span>무엇을<br>남기는가</span>
+      </div>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;우리는 주님께 감사하고 찬양하면서 만 달러를 덥석 받으면서 마음속으로 &lsquo;좀처럼 얻기 어려운 것을 얻었다.&rsquo;라고 생각해서는 안 된다. 만일 그렇게 한다면 우리는 교회를 건축하는 일을 하는 것이 아니라 교회를 허무는 일을 하는 것이다.&rdquo;</blockquote>
+    </figure>
+    <div class="duo rv">
+      <div class="duo-card"><b>수술을 한다고</b>반드시 병이 낫는 것은 아닙니다. 오히려 생명을 잃을 수도 있습니다.</div>
+      <div class="duo-card"><b>음식을 먹는다고</b>반드시 유익한 것은 아닙니다. 불결하면 식중독을 일으킵니다.</div>
+    </div>
+    <p class="duo-cap rv">&lsquo;좋아 보이는 일&rsquo;이 반드시 건축하는 것은 아닙니다.<br>그러므로 근원을 추적하여 본질을 간파해야 합니다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제2막 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제2막</p>
+      <h2>두 선교사 이야기</h2>
+      <p class="act-sub">사랑으로 행한 일이 교회를 허물 때</p>
+    </div>
+    <p class="body-p rv">전에 서양에서 온 두 선교사 형제가 있었습니다. 그중 한 명은 의사였습니다. 그는 병을 치료해 주면서 치료비를 받지 않았고, 심지어 사람들의 입원비를 대신 지불해 주기도 했습니다. 어느 날 한 자매가 간증했습니다.</p>
+    <figure class="testi rv">
+      <p>제 아이가 결핵을 앓았는데, 의사 형제님이 아이를 위해 두 번이나 수술을 해 주셨어요.</p>
+      <p class="who">— 처음에는 수술비의 절반만, 두 번째는 무료로</p>
+    </figure>
+    <p class="body-p rv">한 면에서 그는 가난하고 고통받는 사람을 돌볼 줄 아는 좋은 형제였습니다. 그러나 이 방법은 사람들이 <b>그에게</b> 감사하게 할 뿐, 더 많은 그리스도를 얻게 하지 못했습니다. 도움을 받은 이들은 교회 안에서 책임형제나 그 의사 형제를 보기만 해도 스스로 낮은 사람이라고 느끼게 되었습니다. 같은 도움이라도, 어느 손에서 오느냐에 따라 길이 갈라집니다.</p>
+    <div class="contrast rv" role="img" aria-label="사람의 손에서 오는 도움과 하나님의 손에서 오는 도움의 대조 순서도">
+      <div class="path path-a">
+        <div class="p-head">사람의 손에서</div>
+        <div class="p-node">사람에게서 직접<br>도움을 받음</div>
+        <div class="p-arr">▼</div>
+        <div class="p-node">사람에게<br>감사하게 됨</div>
+        <div class="p-arr">▼</div>
+        <div class="p-node">스스로 낮은 자라고<br>느끼게 됨</div>
+        <div class="p-arr">▼</div>
+        <div class="p-end">교회가 허물어짐</div>
+      </div>
+      <div class="path path-b">
+        <div class="p-head">하나님의 손에서</div>
+        <div class="p-node">은밀한 헌금을 통해<br>도움을 받음</div>
+        <div class="p-arr">▼</div>
+        <div class="p-node">하나님께<br>감사하게 됨</div>
+        <div class="p-arr">▼</div>
+        <div class="p-node">한 인격으로<br>세워짐</div>
+        <div class="p-arr">▼</div>
+        <div class="p-end">교회가 건축됨</div>
+      </div>
+    </div>
+    <p class="pull rv">&ldquo;그것은 사회나 자선단체이지<br><em>교회는 아니다.</em>&rdquo;<small>메시지 원문</small></p>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;그들은 사람 앞에서 조금도 비굴하다는 느낌을 갖지 않을 것이고 사람에게서 도움 받았다거나 교회로부터 도움을 받았다는 느낌을 갖지 않게 된다. 그들은 단지 하나님께서 그들을 돌보신다는 느낌만을 가질 것이다. 이렇게 할 때 도움 받은 사람은 하나님 앞에 사는 한 인격으로 세워진다.&rdquo;</blockquote>
+    </figure>
+    <figure class="verse rv">
+      <blockquote>&ldquo;그대는 구제할 때, 오른손이 하는 것을 왼손이 모르게 하여, 그대의 구제를 은밀한 가운데 하십시오. 은밀한 가운데 보시는 그대의 아버지께서 갚으실 것입니다.&rdquo;</blockquote>
+      <figcaption>마태복음 6장 3–4절 · 회복역</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ 제3막 (어두운 전환부) ═══════════ -->
+<section class="band">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제3막</p>
+      <h2>오직 하나님의 은혜</h2>
+      <p class="act-sub">사람을 빚진 자로 만들지 말라</p>
+    </div>
+    <div class="bignum rv">
+      <div class="n">백 년</div>
+      <p class="c">서양 선교사들이 이 땅에서 일한 세월 —<br>그러나 그 결과는 건축이 아니라 손상이었습니다.</p>
+    </div>
+    <p class="body-p rv">우리는 사람들이 우리를 빚진 자로 만드는 것을 허락해서는 안 됩니다. 무엇으로 사람을 돕든지 <b>주님 앞에서</b>, 은밀하게 해야 합니다. 사람들이 그들 자신을 다른 사람 위에 두고 은혜를 베푸는 자가 될 때, 교회는 결코 건축될 수 없습니다.</p>
+    <p class="stmt rv">사람의 은혜가 아니라,<br><i>오직 하나님의 은혜</i></p>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;사람들이 사람에게서 은혜를 입은 것이 아니라 하나님께 은혜를 입었다는 느낌을 갖도록 해야 한다.&rdquo;</blockquote>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ 제4막 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제4막</p>
+      <h2>교만도, 비하도 아닌</h2>
+      <p class="act-sub">있는 그대로 아는 것</p>
+    </div>
+    <p class="body-p rv">서양 형제들의 목적은 매우 순수하고 좋았지만, 방법은 고려해 볼 필요가 있었습니다. 문제는 우리 쪽에도 있었습니다 — 무엇이든 서양에서 온 것은 다 좋다고 여기는 마음, 곧 <b>자신을 비하하는 마음</b>입니다. 우리는 자신을 높일 수 없지만, 이런 식으로 자신을 낮게 보아서도 안 됩니다.</p>
+    <div class="spec rv" role="img" aria-label="교만과 자기 비하 사이, 있는 그대로 아는 분별의 자리">
+      <div class="spec-line" aria-hidden="true"></div>
+      <div class="spec-row">
+        <div class="spec-pt"><span class="spec-dot">✕</span><b>교만</b><i>아무 의미 없음</i></div>
+        <div class="spec-pt mid"><span class="spec-dot">●</span><b>있는 그대로 앎</b><i>참된 분별</i></div>
+        <div class="spec-pt"><span class="spec-dot">✕</span><b>자기 비하</b><i>더욱 의미 없음</i></div>
+      </div>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;우리는 모두 주님을 위해 일하고 봉사하는 일에서 교만한 것은 참으로 아무런 의미가 없다는 것과 자기를 비하하는 것은 더욱 의미가 없다는 것을 반드시 알아야 한다.&rdquo;</blockquote>
+    </figure>
+    <div class="bars rv" role="img" aria-label="서양의 것의 장점 팔십 퍼센트, 동양의 것의 장점 적어도 이십 퍼센트">
+      <div class="bar-row"><span class="bar-l">서양의 것의<br>장점</span><div class="bar"><div class="fill" style="--w:80%">80%</div></div></div>
+      <div class="bar-row"><span class="bar-l">동양의 것의<br>장점</span><div class="bar"><div class="fill f2" style="--w:20%">20%</div></div></div>
+      <p class="bar-cap">설령 서양의 것이 팔십 퍼센트의 장점을 갖고 있을지라도,<br>동양의 것도 적어도 이십 퍼센트의 장점을 갖고 있습니다.<br><b>어느 쪽도 백 퍼센트는 아닙니다.</b></p>
+    </div>
+    <div class="sduo rv">
+      <div class="a"><em>의술에 있어서는</em><b>능숙한<br>의사</b></div>
+      <div class="vs">그러나</div>
+      <div class="b"><em>영적인 일에 있어서는</em><b>말을 갓 배우는<br>어린아이</b></div>
+    </div>
+    <p class="body-p rv">교회의 필요를 공급할 수 있느냐는 요한복음을 추구하느냐 데살로니가전서를 추구하느냐에 달려 있지 않습니다. 어느 책으로도 사람들에게 영적인 필요를 공급할 수 있습니다. 이러한 분별을 갖기 위해, 우리는 일에 대하여 아는 것이 필요합니다.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 제5막 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제5막</p>
+      <h2>일을 아는 네 가지 열쇠</h2>
+      <p class="act-sub">천천히, 그러나 철저하게</p>
+    </div>
+    <p class="body-p rv">일에 대하여 알고자 한다면 반드시 천천히 해야 하며 급하게 해서는 안 됩니다. 교회의 행정이든, 말씀의 사역이든, 심방이든 — 어떤 일이 임하든지 다음 네 가지를 가지고 관찰하십시오.</p>
+    <ol class="steps">
+      <li class="step rv">
+        <span class="s-num" aria-hidden="true">1</span>
+        <div class="s-body">
+          <h3>근원을 추적하라</h3>
+          <p>모든 일은 사람과 함께 옵니다. 이 일이 누구와 함께 왔는지, 누가 시작하고 주도했는지 보아야 합니다. 시작한 사람에게 문제가 있다면, 설령 일이 옳을지라도 문제의 소지가 있습니다.</p>
+          <div class="picto" aria-hidden="true">
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-f" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-h" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+            <svg class="pf pf-o" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.6"/><path d="M4.6 21.5c.5-4.5 3.5-7.1 7.4-7.1s6.9 2.6 7.4 7.1Z"/></svg>
+          </div>
+          <p class="picto-cap">&ldquo;언제나 사람이 옳으면 십중팔구는 일도 옳다.&rdquo;</p>
+        </div>
+      </li>
+      <li class="step rv">
+        <span class="s-num" aria-hidden="true">2</span>
+        <div class="s-body">
+          <h3>동기와 본질을 보라</h3>
+          <p>왜 이 일을 하는가, 그리고 그 일 자체는 옳은가. 자신을 드러내기 위한 헌금도 있고, 책망을 피하기 위한 헌금도 있습니다. 또한 동기가 옳아 보여도 — 사랑으로 도왔을지라도 — 일의 본질 자체가 그르다면 그 일은 옳지 않습니다.</p>
+          <div class="ex">
+            <span>자기를 드러내려는 헌금 ✕</span>
+            <span>책망을 피하려는 헌금 ✕</span>
+          </div>
+        </div>
+      </li>
+      <li class="step rv">
+        <span class="s-num" aria-hidden="true">3</span>
+        <div class="s-body">
+          <h3>방법을 살피라</h3>
+          <p>본질이 옳을지라도 방법이 옳은지 더 조사해야 합니다. 헌금을 직접 가지고 온 형제 앞에서 그 자리에서 칭찬해서도, 직접적으로 거절해서도 안 됩니다. 충분히 교통하여 그를 주님 앞으로 인도하고, 헌금함으로 안내해야 합니다.</p>
+          <div class="ex">
+            <span>그 자리에서 칭찬 ✕</span>
+            <span>직접적인 거절 ✕</span>
+            <span class="good">교통으로 인도 ○</span>
+          </div>
+        </div>
+      </li>
+      <li class="step rv">
+        <span class="s-num" aria-hidden="true">4</span>
+        <div class="s-body">
+          <h3>결과와 영향을 헤아리라</h3>
+          <p>때로 일의 결과는 좋지만, 그 결과가 주는 영향은 오히려 좋지 않게 나타납니다. 그런 일 또한 해서는 안 되는 일입니다. 일이 이렇게 진행될 때 어떤 결과를 가져올지 미리 추적할 수 있어야 합니다.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="body-p rv">그리고 문제를 발견했다면, 마음대로 처리하지 말고 듣고 물어보아야 합니다. 일을 대충 처리하고 지나가거나 방치해 두면 <b>건축의 기회</b>를 잃어버립니다.</p>
+    <div class="fixflow rv" role="img" aria-label="문제 발견에서 건축에 이르는 흐름">
+      <span class="fx">문제를 발견하면</span><span class="fa">▶</span>
+      <span class="fx">듣고 물어봄</span><span class="fa">▶</span>
+      <span class="fx">교정 · 인도 · 가르침</span><span class="fa">▶</span>
+      <span class="fx gold">교회가 건축됨</span>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;이럴 때 우리는 반드시 합당하게 그를 교정하고 인도하며, 가르침을 주어야 한다. 이것이 바로 교회를 건축하는 것이다.&rdquo;</blockquote>
+    </figure>
+    <figure class="verse rv">
+      <blockquote>&ldquo;내가 기도하는 것은 여러분의 사랑이 온전한 지식과 모든 분별력으로 더욱더 풍성하게 되어&rdquo;</blockquote>
+      <figcaption>빌립보서 1장 9절 · 회복역</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ 제6막 ═══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">제6막</p>
+      <h2>문지기의 깨어 있음</h2>
+      <p class="act-sub">무엇을 받아들이고, 무엇을 제한할 것인가</p>
+    </div>
+    <p class="body-p rv">일을 아는 사람은 <b>민족적인 우월감</b>과 <b>세상의 풍속</b> 앞에서 깨어 있습니다. 우리는 서양의 영적인 사역을 매우 존경하지만, 서양의 모든 것이 옳다는 것에 대해서는 결코 인정할 수 없습니다. 주님께서 단지 서양 사람들의 주님이시고 우리의 주님은 아니시란 말입니까? 주님의 빛이 서양에만 임한다는 말입니까?</p>
+    <div class="caution rv">
+      <span class="c-tag">경계 · 세상의 풍속</span>
+      <h3>자녀의 생일파티</h3>
+      <p>한 서양 형제가 자녀의 생일파티를 열어 형제들을 초대하고는 매우 기쁘게 이야기했습니다. 그러나 세상의 풍속을 교회 안으로 가지고 들어올 수는 없습니다. 그것은 실로 육체의 행위이며, 주님의 일을 손상시킵니다.</p>
+      <p class="c-q">&ldquo;우리는 지난 삼십 년 동안 주님의 회복의 길에서 생일파티를 열어본 적이 없다.&rdquo;</p>
+    </div>
+    <div class="caution rv">
+      <span class="c-tag">경계 · 분별 없는 감사</span>
+      <h3>성탄 카드의 감사 편지</h3>
+      <p>우리에게 큰 영적 도움을 준 스팍스 형제조차, 자신이 발행한 신문에 성탄 카드를 보내 준 이들에게 공개적으로 감사하는 편지를 실었습니다. 하나님께서 성탄절을 인정하신다는 말입니까? 이 일에 있어서는, 그가 우리의 도움을 필요로 했습니다.</p>
+      <p class="c-q">서양으로부터 온 것이 모두 옳은 것은 아닙니다. 사실상 그들도 많은 부분에서 우리의 도움이 필요합니다.</p>
+    </div>
+    <div class="proverb rv">
+      <span class="pv-tag">중국 북부의 속담</span>
+      <blockquote>&ldquo;두부를 만들어 내지 못할 뿐 아니라,<br>갈아 놓은 콩조차 물과 함께 흘려보낸다.&rdquo;</blockquote>
+      <p>맷돌로 콩을 갈 때 주의하지 않으면 남는 것이 하나도 없듯이,<br>우리가 먼저 철저하게 공과를 배워야만 교회를 건축할 수 있습니다.</p>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;오늘날 우리가 여기에 있고 교회가 우리 앞에 있으므로 우리는 마치 문지기들과 같다.&rdquo;</blockquote>
+    </figure>
+    <p class="body-p rv">그러므로 서양 형제들이 오면 여전히 받아들이고 주님을 섬기게 하되, 사람과 일에 대해 아는 것을 배워서 — 격려해야 할 것은 합당하게 격려하고, 제한해야 할 것은 적절하게 제한해야 합니다. 싸워야 할 일은 싸우고, 싸울 필요가 없는 것은 절대로 싸우지 말아야 합니다.</p>
+    <figure class="verse rv">
+      <blockquote>&ldquo;세상이나 세상에 있는 것들을 사랑하지 마십시오.&rdquo;</blockquote>
+      <figcaption>요한일서 2장 15절 · 회복역</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ 종장 (어두운 마무리) ═══════════ -->
+<section class="band">
+  <div class="wrap">
+    <div class="act rv">
+      <div class="act-plumb" aria-hidden="true"><i></i><b></b></div>
+      <p class="act-no">종장</p>
+      <h2>건축을 향하여</h2>
+      <p class="act-sub">멈추지 말아야 할 자리</p>
+    </div>
+    <p class="body-p rv">복음을 전파하여 죄인을 구원받게 하고, 사람을 도와 영적으로 온전하게 되도록 하는 것 — 거기서 그쳐서는 안 됩니다. 그것만으로는 참되게 주님의 교회를 건축할 수 없기 때문입니다.</p>
+    <div class="ff rv" role="img" aria-label="복음 전파에서 교회의 건축에 이르는 흐름도">
+      <div class="ff-n">복음을 전파하여<br>죄인이 구원받게 함</div>
+      <div class="ff-a" aria-hidden="true"></div><div class="ff-c" aria-hidden="true">▼</div>
+      <div class="ff-n">사람을 도와<br>영적으로 온전하게 함</div>
+      <div class="ff-alert">여기서 멈추면, 참된 건축에 이르지 못합니다</div>
+      <div class="ff-n">사람을 그리스도 안으로<br>인도함</div>
+      <div class="ff-a" aria-hidden="true"></div><div class="ff-c" aria-hidden="true">▼</div>
+      <div class="ff-n gold">교회 안에서 세워지고<br>건축되게 함</div>
+    </div>
+    <figure class="origin rv">
+      <figcaption>메시지 원문</figcaption>
+      <blockquote>&ldquo;우리는 사람을 그리스도 안으로 인도하고 사람들이 교회 안에서 세워지고 건축되도록 도와야 한다.&rdquo;</blockquote>
+    </figure>
+    <figure class="verse vdark rv">
+      <blockquote>&ldquo;몸이 자람으로써 사랑 안에서 스스로 건축되는 것입니다.&rdquo;</blockquote>
+      <figcaption>에베소서 4장 16절 · 회복역</figcaption>
+    </figure>
+    <p class="orn rv" aria-hidden="true">✦</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>「교회를 건축하려면 일에 대해 아는 것이 필요함」</b><br>교회의 건축을 위한 말씀 제8장을 서사 구조로 재구성한 인포그래픽</p>
+    <p style="margin-top:.6rem">성경 인용 — 한국어 회복역 (tk-korea.github.io/recoverybible)</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var bar=document.getElementById('pgbar');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in')});
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+    });
+  },{threshold:.12,rootMargin:'0px 0px -4% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
