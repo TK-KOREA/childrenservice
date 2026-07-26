@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16351f">
+<title>포도나무 관리 — 결과 리포트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9ecdc; --card:#fdfdf6; --ink:#1c2b1a; --muted:#64705c;
+  --green:#2f6b40; --green-deep:#16351f; --leaf:#5b9a63;
+  --grape:#6d3fa4; --grape-soft:#f0e9f8;
+  --gold:#c9972f; --gold-soft:#f7efdb;
+  --line:#d9dcc6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:1rem;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:480px;margin:0 auto;padding:14px 14px 46px}
+h1,h2,h3{font-family:'Gowun Batang','Noto Serif KR',serif;color:#1d3524}
+h2{font-size:1.34rem;line-height:1.5;margin:14px 0 6px}
+h3{font-size:1.02rem;margin:26px 0 10px}
+
+/* ---------- 표제부 ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(165deg,#16351f,#1e4a2b 55%,#173a22);color:#f2f1e4;border-radius:26px;padding:40px 24px 34px;text-align:center}
+.hero-deco{position:absolute;top:-34px;right:-38px;width:200px;opacity:.13;pointer-events:none}
+.eyebrow{font-size:.72rem;letter-spacing:.2em;color:#e3c06b;font-weight:700}
+.hero h1{font-size:2.15rem;font-weight:700;letter-spacing:.05em;margin:14px 0 10px;color:#f6f4e6}
+.hero-sub{font-size:.95rem;color:#d6dcc4;line-height:1.8}
+.hero-sub b{color:#f0d58f;font-weight:700}
+.cluster{width:104px;margin:22px auto 4px;display:block}
+.verse{margin:16px auto 0;max-width:310px}
+.verse blockquote{font-family:'Gowun Batang',serif;font-size:1.14rem;line-height:1.95;font-weight:400}
+.verse figcaption{margin-top:10px;font-size:.72rem;letter-spacing:.14em;color:#e3c06b}
+
+/* ---------- 한눈에 보기 ---------- */
+.glance{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 18px;margin-top:14px;box-shadow:0 12px 26px rgba(28,43,26,.07)}
+.glance ul{list-style:none;margin-top:10px}
+.glance li{position:relative;padding-left:22px;font-size:.93rem;margin:8px 0}
+.glance li::before{content:"";position:absolute;left:2px;top:9px;width:10px;height:10px;border-radius:50%}
+.glance li:nth-child(1)::before{background:var(--gold)}
+.glance li:nth-child(2)::before{background:var(--grape)}
+.glance li:nth-child(3)::before{background:var(--leaf)}
+
+/* ---------- 공통 카드 ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px 20px 24px;margin-top:16px;box-shadow:0 14px 30px rgba(28,43,26,.07)}
+.kicker{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.18em;color:var(--green);background:#eef2df;padding:5px 12px;border-radius:999px}
+.big{font-family:'Gowun Batang',serif;font-weight:700;font-size:3.9rem;color:var(--grape);line-height:1.05;margin:18px 0 4px;letter-spacing:.01em}
+.big small{font-size:1.15rem;color:var(--muted);font-weight:400;margin-left:4px;font-family:'Noto Sans KR',sans-serif}
+.big.alt{color:var(--green);font-size:3.4rem}
+.cap{font-size:.83rem;color:var(--muted)}
+i.d-gold,i.d-grape,i.d-green,i.d-gray{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px;vertical-align:0}
+.d-gold{background:#cf9c33}.d-grape{background:#7b4bb0}.d-green{background:#5b9a63}.d-gray{background:#b3b09c}
+.dots{display:inline-flex;align-items:center;gap:6px;margin-left:6px}
+.sowhat{margin-top:18px;background:#f1f5e7;border-left:4px solid var(--green);border-radius:4px 14px 14px 4px;padding:13px 15px}
+.sowhat span{display:block;font-size:.68rem;font-weight:700;letter-spacing:.14em;color:var(--green);margin-bottom:5px}
+.sowhat p{font-size:.93rem}
+.vref{margin-top:14px;font-family:'Gowun Batang',serif;font-size:.9rem;color:#5a7a52;text-align:right}
+
+/* ---------- 대조 · 게이지 ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 14px}
+.duo>div{border-radius:18px;padding:16px 12px;text-align:center}
+.duo-a{background:linear-gradient(160deg,#eaf3e2,#dfeccf);border:1px solid #cfe0bb}
+.duo-b{background:#faf9f1;border:1.5px dashed #cfcbb4}
+.duo span{display:block;font-size:.72rem;letter-spacing:.1em;font-weight:700;color:var(--green)}
+.duo-b span{color:#98957f}
+.duo b{display:block;font-family:'Gowun Batang',serif;font-size:2.05rem;line-height:1.3;color:#2f6b40}
+.duo b i{font-style:normal}
+.duo-b b{color:#a8a48c}
+.duo em{font-style:normal;font-size:.72rem;color:var(--muted)}
+.gauge-bar{height:14px;background:#eceadb;border-radius:999px;overflow:hidden}
+.gauge-bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#3a7a4c,#6d3fa4);transition:width 1.2s cubic-bezier(.2,.7,.2,1) .2s}
+.in .gauge-bar i{width:var(--w)}
+.gauge-lab{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:6px}
+.gauge-lab span:first-child{color:var(--green);font-weight:700}
+
+/* ---------- 손길 ---------- */
+.person{display:flex;gap:12px;align-items:center;background:#f6f8ee;border:1px solid #e0e5cd;border-radius:16px;padding:13px 14px;margin-top:16px}
+.ava{width:46px;height:46px;border-radius:50%;background:#e7f0da;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.person b{font-size:.95rem}
+.person span{display:block;font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:2px}
+
+/* ---------- 순위 차트 ---------- */
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 20px}
+.chips.two{grid-template-columns:1fr 1fr}
+.chip{background:#f6f8ee;border:1px solid #e0e5cd;border-radius:14px;padding:11px 8px;text-align:center}
+.chip b{display:block;font-family:'Gowun Batang',serif;font-size:1.16rem;color:#1d3524;line-height:1.35}
+.chip span{display:block;font-size:.66rem;color:var(--muted);margin-top:2px}
+.trow{margin:11px 0}
+.tline{display:flex;align-items:baseline;gap:7px}
+.trk{font-size:.76rem;color:var(--muted);min-width:2.5em}
+.tnm{flex:1;font-size:.88rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tnm em{font-style:normal;font-size:.72rem;color:var(--muted);font-weight:400;margin-left:2px}
+.tvl{font-family:'Gowun Batang',serif;font-size:1rem;color:#1d3524}
+.tbar{height:9px;background:#eeecdd;border-radius:999px;margin-top:4px;overflow:hidden}
+.tbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#356f46,#66a06f);transition:width 1s cubic-bezier(.2,.7,.2,1) .15s}
+.in .tbar i{width:var(--w)}
+.t1 .tbar i{background:linear-gradient(90deg,#b98a24,#e0b45a)}
+.t3 .tbar i{background:linear-gradient(90deg,#c29b52,#dbc08c)}
+.tlast .tbar i{background:linear-gradient(90deg,#6d3fa4,#9a6fc6)}
+.tlast .tvl{color:var(--grape)}
+.chart-cap{font-size:.8rem;color:var(--muted);margin-top:14px;text-align:center;line-height:1.75}
+.note{margin-top:16px;background:var(--grape-soft);border-radius:14px;padding:13px 15px;font-size:.88rem;line-height:1.7}
+.note.green{background:#e9f2e3}
+.verse.in-card{background:#f2f6ea;border-radius:16px;padding:20px 16px;text-align:center;margin:20px 0 4px;max-width:none}
+.verse.in-card blockquote{font-size:1rem;line-height:1.9;color:#27492f}
+.verse.in-card figcaption{color:#5a7a52}
+
+/* ---------- 칭찬의 결 ---------- */
+.prow{margin:10px 0}
+.prow>span{font-size:.82rem;display:block}
+.prow:first-child>span{font-weight:700}
+.pline{display:flex;align-items:center;gap:8px;margin-top:3px}
+.pbar{flex:1;height:8px;background:#eeecdd;border-radius:999px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#6d3fa4,#9a6fc6);transition:width 1s cubic-bezier(.2,.7,.2,1) .15s}
+.in .pbar i{width:var(--w)}
+.prow b{font-size:.8rem;color:var(--grape);font-weight:700;min-width:2.8em;text-align:right}
+.stk{display:flex;height:18px;border-radius:999px;overflow:hidden;margin:12px 0 10px}
+.stk span{display:block;height:100%}
+.k-grape{background:#7b4bb0}.k-green{background:#4f8f5c}.k-gold{background:#cf9c33}.k-gray{background:#b3b09c}
+.legend{list-style:none;margin-top:2px}
+.legend li{display:flex;align-items:center;font-size:.82rem;margin:5px 0;gap:3px}
+.legend b{margin-left:auto;font-size:.8rem;font-weight:700;color:#1d3524}
+.tiny{font-size:.7rem;color:#8b8874;margin-top:8px}
+.picto{margin-top:22px;text-align:center}
+.grapes{display:flex;justify-content:center;gap:7px;margin-bottom:10px}
+.grapes i{width:21px;height:21px;border-radius:50%;border:2px solid #b9a9d6;background:#faf8fd}
+.grapes i.on{background:radial-gradient(circle at 32% 30%,#9a6fc6,#6d3fa4);border-color:#6d3fa4}
+.picto p{font-size:.9rem}
+
+/* ---------- 제언 ---------- */
+.steps{list-style:none;counter-reset:s;margin-top:14px}
+.steps li{position:relative;padding:2px 0 2px 46px;margin:16px 0;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:#2f6b40;color:#f2f5e6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-family:'Gowun Batang',serif}
+.steps b{display:block;font-size:.95rem}
+.steps li>span{display:block;font-size:.85rem;color:var(--muted);margin-top:3px;line-height:1.65}
+
+/* ---------- 원자료 ---------- */
+.raw{margin-top:20px;border-top:1px dashed var(--line);padding-top:14px}
+.raw summary{cursor:pointer;font-size:.82rem;font-weight:700;color:var(--green)}
+.raw table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.74rem}
+.raw caption{caption-side:top;text-align:left;font-size:.72rem;color:var(--muted);margin:10px 0 4px;font-weight:700}
+.raw th{background:#f0f2e2;color:#3e5a3f;font-weight:700;padding:7px 5px;text-align:left;border-bottom:1px solid var(--line)}
+.raw td{padding:7px 5px;border-bottom:1px solid #ecead9;vertical-align:top}
+.raw th.n,.raw td.n{text-align:right;font-variant-numeric:tabular-nums}
+.raw .plus{color:#2f6b40;font-weight:700}
+
+/* ---------- 종장 ---------- */
+.final{margin-top:16px;background:linear-gradient(170deg,#16351f,#1d4629);color:#eef0dd;border-radius:26px;padding:36px 24px;text-align:center;overflow:hidden}
+.final .kicker{background:transparent;border:1px solid rgba(227,192,107,.5);color:#e3c06b}
+.final .verse{margin-top:20px}
+.final .verse blockquote{color:#f5f3e2;font-size:1.12rem}
+.close-txt{font-size:.92rem;line-height:1.9;margin-top:22px;color:#dfe4cc;text-align:left}
+.close-txt b{color:#f0d58f}
+.close-sign{margin-top:16px;font-family:'Gowun Batang',serif;font-size:.95rem;color:#cdd8b8}
+.final .cluster{width:72px;margin:22px auto 0}
+footer{margin-top:26px;text-align:center;font-size:.68rem;color:#8b8874;line-height:1.9}
+footer a{color:#2f6b40}
+
+/* ---------- 덩굴 구분선 · 등장 효과 ---------- */
+.vine{display:flex;justify-content:center;margin:6px 0 -8px}
+.vine svg{width:150px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .tbar i,.pbar i,.gauge-bar i{transition:none;width:var(--w)!important}
+}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}.tbar i,.pbar i,.gauge-bar i{width:var(--w)!important}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero rv">
+  <svg class="hero-deco" viewBox="0 0 140 150" aria-hidden="true">
+    <circle cx="42" cy="50" r="15" fill="#fff"/><circle cx="70" cy="45" r="15" fill="#fff"/><circle cx="98" cy="50" r="15" fill="#fff"/>
+    <circle cx="28" cy="78" r="15" fill="#fff"/><circle cx="56" cy="78" r="15" fill="#fff"/><circle cx="84" cy="78" r="15" fill="#fff"/><circle cx="112" cy="78" r="15" fill="#fff"/>
+    <circle cx="42" cy="106" r="15" fill="#fff"/><circle cx="70" cy="110" r="15" fill="#fff"/><circle cx="98" cy="106" r="15" fill="#fff"/><circle cx="70" cy="136" r="14" fill="#fff"/>
+  </svg>
+  <p class="eyebrow">2026 여름 · 경기권역 어린이 특별집회</p>
+  <h1>포도나무 관리</h1>
+  <p class="hero-sub">결과 리포트 — 한 그루의 나무, 열세 개의 가지,<br>그리고 <b>1,451알</b>의 포도</p>
+  <svg class="cluster" viewBox="0 0 140 150" aria-hidden="true">
+    <path d="M70 27 C69 13 77 5 91 4 C90 17 82 25 70 27Z" fill="#5b9a63"/>
+    <path d="M70 28 C66 17 58 11 47 9" fill="none" stroke="#8a6a3c" stroke-width="3.5" stroke-linecap="round"/>
+    <g stroke="rgba(20,30,18,.18)" stroke-width="1">
+      <circle cx="42" cy="50" r="15" fill="#7b4bb0"/><circle cx="70" cy="45" r="15" fill="#d3a13c"/><circle cx="98" cy="50" r="15" fill="#7b4bb0"/>
+      <circle cx="28" cy="78" r="15" fill="#5b9a63"/><circle cx="56" cy="78" r="15" fill="#7b4bb0"/><circle cx="84" cy="78" r="15" fill="#7b4bb0"/><circle cx="112" cy="78" r="15" fill="#d3a13c"/>
+      <circle cx="42" cy="106" r="15" fill="#7b4bb0"/><circle cx="70" cy="110" r="15" fill="#5b9a63"/><circle cx="98" cy="106" r="15" fill="#7b4bb0"/><circle cx="70" cy="136" r="14" fill="#7b4bb0"/>
+    </g>
+    <g fill="rgba(255,255,255,.32)">
+      <circle cx="37" cy="45" r="4"/><circle cx="65" cy="40" r="4"/><circle cx="51" cy="73" r="4"/><circle cx="93" cy="101" r="4"/><circle cx="65" cy="131" r="3.5"/>
+    </g>
+  </svg>
+  <figure class="verse">
+    <blockquote>"나는 참포도나무요,<br>나의 아버지는 농부이십니다."</blockquote>
+    <figcaption>요한복음 15:1 · 회복역</figcaption>
+  </figure>
+</header>
+
+<section class="glance rv">
+  <p class="kicker">한눈에 보기</p>
+  <ul>
+    <li>포도 <b>1,451알</b> — 차감 <b>0</b>, 전부 격려로 맺혔습니다</li>
+    <li>13개 조 <b>모두 103알 이상</b> — 1위와 13위의 차이는 단 <b>16알</b></li>
+    <li>한 손길의 <b>406회</b> 기록 — 가장 큰 칭찬은 '적극 참여'</li>
+  </ul>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제1장 · 열매</p>
+  <h2>이번 여름, 맺힌 포도</h2>
+  <p class="big"><span class="count" data-t="1451">0</span><small>알</small></p>
+  <p class="cap">전체 기록 406건 · 13개 조 · 세 빛깔의 포도
+    <span class="dots"><span><i class="d-gold"></i>금</span><span><i class="d-grape"></i>보라</span><span><i class="d-green"></i>초록</span></span></p>
+  <div class="sowhat"><span>이 숫자가 말하는 것</span>
+    <p>1,451은 점수의 합계가 아니라, 경기권역 어린이 한 사람 한 사람이 <b>보였고 · 인정받았고 · 격려받은 순간</b>의 합계입니다.</p></div>
+  <p class="vref">"열매를 많이 맺는 이것으로 내 아버지는 영광스럽게 되시고" — 요한복음 15:8</p>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제2장 · 은혜</p>
+  <h2>단 한 알도<br>거두어 가지 않았습니다</h2>
+  <div class="duo">
+    <div class="duo-a"><span>총 부여</span><b>+<i class="count" data-t="1451">0</i></b><em>1,451개 전부 칭찬으로</em></div>
+    <div class="duo-b"><span>총 차감</span><b>0</b><em>한 건도 없음</em></div>
+  </div>
+  <div class="gauge">
+    <div class="gauge-bar"><i style="--w:100%"></i></div>
+    <div class="gauge-lab"><span>격려로 맺힘 100%</span><span>차감 0%</span></div>
+  </div>
+  <div class="sowhat"><span>이 숫자가 말하는 것</span>
+    <p>이 포도밭의 관리 원칙은 <b>정죄가 아니라 공급</b>이었습니다. 잘못을 세는 대신 자람만 세었고, 두려움이 아니라 격려가 열매를 맺게 했습니다.</p></div>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제3장 · 손길</p>
+  <h2>사백여섯 번,<br>허리를 굽힌 손길</h2>
+  <p class="big alt"><span class="count" data-t="406">0</span><small>건</small></p>
+  <p class="cap">한 알 한 알, 사람의 손으로 세어졌습니다</p>
+  <div class="person">
+    <div class="ava">🌿</div>
+    <div><b>담당자 최은숙</b><span>전체 406건 단독 기록 · 부여 +1,451 · 차감 0<br>기록 1건당 평균 3.6알</span></div>
+  </div>
+  <div class="sowhat"><span>이 숫자가 말하는 것</span>
+    <p>포도는 저절로 세어지지 않습니다. 칭찬 한 번마다 멈추어 적어 내려간 <b>406번의 신실함</b>이 이 리포트의 바탕입니다. 물 주는 이의 수고를 함께 기억해 주십시오.</p></div>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제4장 · 가지들</p>
+  <h2>열세 가지가 모두<br>열매를 맺었습니다</h2>
+  <div class="chips">
+    <div class="chip"><b>119알</b><span>공동 우승 · 5조 6조</span></div>
+    <div class="chip"><b>16알</b><span>1위↔13위 차이</span></div>
+    <div class="chip"><b>103알+</b><span>모든 조의 최소 수확</span></div>
+  </div>
+  <div class="chart">
+    <div class="trow t1" style="--w:100%"><div class="tline"><span class="trk">🥇</span><span class="tnm">5조 <em>안산·부천</em></span><b class="tvl">119</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow t1" style="--w:100%"><div class="tline"><span class="trk">🥇</span><span class="tnm">6조 <em>수원·인천10</em></span><b class="tvl">119</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow t3" style="--w:99.2%"><div class="tline"><span class="trk">🥉</span><span class="tnm">11조 <em>안양·이천·의정부</em></span><b class="tvl">118</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:95.8%"><div class="tline"><span class="trk">4위</span><span class="tnm">4조 <em>시흥·하남</em></span><b class="tvl">114</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:95.8%"><div class="tline"><span class="trk">4위</span><span class="tnm">7조 <em>파주·인천5</em></span><b class="tvl">114</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:95%"><div class="tline"><span class="trk">6위</span><span class="tnm">2조 <em>화성</em></span><b class="tvl">113</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:94.1%"><div class="tline"><span class="trk">7위</span><span class="tnm">9조 <em>고양·양주</em></span><b class="tvl">112</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:94.1%"><div class="tline"><span class="trk">7위</span><span class="tnm">10조 <em>과천·여주·안성</em></span><b class="tvl">112</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:90.8%"><div class="tline"><span class="trk">9위</span><span class="tnm">8조 <em>구리·인천1-3</em></span><b class="tvl">108</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:90.8%"><div class="tline"><span class="trk">9위</span><span class="tnm">13조 <em>의왕·광명·인천7-8</em></span><b class="tvl">108</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:89.1%"><div class="tline"><span class="trk">11위</span><span class="tnm">1조 <em>성남</em></span><b class="tvl">106</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow" style="--w:88.2%"><div class="tline"><span class="trk">12위</span><span class="tnm">12조 <em>김포·광주</em></span><b class="tvl">105</b></div><div class="tbar"><i></i></div></div>
+    <div class="trow tlast" style="--w:86.6%"><div class="tline"><span class="trk">13위</span><span class="tnm">3조 <em>용인</em> ✦</span><b class="tvl">103</b></div><div class="tbar"><i></i></div></div>
+  </div>
+  <p class="chart-cap">막대 길이가 거의 같지요 — 그것이 이 포도밭의 이야기입니다.<br>13개 조의 포도를 모두 더하면 정확히 <b>1,451알</b>, 한 알도 새지 않았습니다.</p>
+  <div class="note">🍇 <b>✦ 마지막 가지의 보랏빛</b> — 13위 3조(용인)는 보라 포도 <b>2알</b>, 우승조와 같은 수를 맺었습니다. 이 나무에는 버려지는 가지가 없습니다.</div>
+  <figure class="verse in-card">
+    <blockquote>"나는 포도나무요, 여러분은 가지들입니다. 그가 내 안에, 내가 그 안에 거하면, 그 사람은 열매를 많이 맺습니다. 왜냐하면 나를 떠나서는 여러분이 아무것도 할 수 없기 때문입니다."</blockquote>
+    <figcaption>요한복음 15:5 · 회복역</figcaption>
+  </figure>
+  <details class="raw">
+    <summary>원자료 그대로 보기 — 최종 순위표</summary>
+    <table>
+      <thead><tr><th>순위</th><th>조</th><th>지역</th><th class="n">금</th><th class="n">보라</th><th class="n">초록</th><th class="n">누적</th></tr></thead>
+      <tbody>
+        <tr><td>🥇</td><td>5조</td><td>안산, 부천</td><td class="n">7</td><td class="n">2</td><td class="n">4</td><td class="n"><b>119</b></td></tr>
+        <tr><td>🥇</td><td>6조</td><td>수원, 인천10</td><td class="n">7</td><td class="n">2</td><td class="n">4</td><td class="n"><b>119</b></td></tr>
+        <tr><td>🥉</td><td>11조</td><td>안양, 이천, 의정부</td><td class="n">7</td><td class="n">2</td><td class="n">3</td><td class="n"><b>118</b></td></tr>
+        <tr><td>4위</td><td>4조</td><td>시흥, 하남</td><td class="n">7</td><td class="n">1</td><td class="n">4</td><td class="n"><b>114</b></td></tr>
+        <tr><td>4위</td><td>7조</td><td>파주, 인천5</td><td class="n">7</td><td class="n">1</td><td class="n">4</td><td class="n"><b>114</b></td></tr>
+        <tr><td>6위</td><td>2조</td><td>화성</td><td class="n">7</td><td class="n">1</td><td class="n">3</td><td class="n"><b>113</b></td></tr>
+        <tr><td>7위</td><td>9조</td><td>고양, 양주</td><td class="n">7</td><td class="n">1</td><td class="n">2</td><td class="n"><b>112</b></td></tr>
+        <tr><td>7위</td><td>10조</td><td>과천, 여주, 안성</td><td class="n">7</td><td class="n">1</td><td class="n">2</td><td class="n"><b>112</b></td></tr>
+        <tr><td>9위</td><td>8조</td><td>구리, 인천1-3</td><td class="n">7</td><td class="n">0</td><td class="n">3</td><td class="n"><b>108</b></td></tr>
+        <tr><td>9위</td><td>13조</td><td>의왕, 광명, 인천7-8</td><td class="n">7</td><td class="n">0</td><td class="n">3</td><td class="n"><b>108</b></td></tr>
+        <tr><td>11위</td><td>1조</td><td>성남</td><td class="n">7</td><td class="n">0</td><td class="n">1</td><td class="n"><b>106</b></td></tr>
+        <tr><td>12위</td><td>12조</td><td>김포, 광주</td><td class="n">7</td><td class="n">0</td><td class="n">0</td><td class="n"><b>105</b></td></tr>
+        <tr><td>13위</td><td>3조</td><td>용인</td><td class="n">6</td><td class="n">2</td><td class="n">3</td><td class="n"><b>103</b></td></tr>
+      </tbody>
+    </table>
+  </details>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제5장 · 칭찬의 결</p>
+  <h2>무엇을 칭찬했습니까</h2>
+  <div class="chips two">
+    <div class="chip"><b>적극 참여</b><span>최다 포도 · +161알 (27회)</span></div>
+    <div class="chip"><b>집회 태도</b><span>최다 횟수 · 49회 (+97알)</span></div>
+  </div>
+  <div class="pchart">
+    <div class="prow" style="--w:100%"><span>적극 참여</span><div class="pline"><div class="pbar"><i></i></div><b>+161</b></div></div>
+    <div class="prow" style="--w:60.2%"><span>집회 태도</span><div class="pline"><div class="pbar"><i></i></div><b>+97</b></div></div>
+    <div class="prow" style="--w:56.5%"><span>말씀3 (진행팀 · 유치)</span><div class="pline"><div class="pbar"><i></i></div><b>+91</b></div></div>
+    <div class="prow" style="--w:41%"><span>초고</span><div class="pline"><div class="pbar"><i></i></div><b>+66</b></div></div>
+    <div class="prow" style="--w:40.4%"><span>활동놀이 (조장 · 태도)</span><div class="pline"><div class="pbar"><i></i></div><b>+65</b></div></div>
+    <div class="prow" style="--w:40.4%"><span>조장체크</span><div class="pline"><div class="pbar"><i></i></div><b>+65</b></div></div>
+  </div>
+  <p class="tiny">상위 6개 사유 · 전체 사유는 아래 원자료 참조</p>
+
+  <h3>칭찬 1,451알의 구성</h3>
+  <div class="stk">
+    <span class="k-grape" style="width:31.1%"></span><span class="k-green" style="width:30.9%"></span><span class="k-gold" style="width:19.9%"></span><span class="k-gray" style="width:18.1%"></span>
+  </div>
+  <ul class="legend">
+    <li><i class="d-grape"></i>태도 · 참여 <b>451알 · 31%</b></li>
+    <li><i class="d-green"></i>말씀 · 활동 등 순서 부여 <b>449알 · 31%</b></li>
+    <li><i class="d-gold"></i>출석 · 시간 엄수 <b>289알 · 20%</b></li>
+    <li><i class="d-gray"></i>섬김 · 기타 (조장체크 외) <b>262알 · 18%</b></li>
+  </ul>
+  <p class="tiny">사유명 키워드 기준 분류</p>
+
+  <div class="picto">
+    <div class="grapes"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p>포도 <b>열 알 가운데 세 알</b>은 '태도와 참여'에 맺혔습니다.</p>
+  </div>
+  <div class="note green">📖 <b>말씀 곁에서 맺힌 포도</b> — '말씀3 · 말씀4' 순서와 관련된 칭찬만 <b>382알(26%)</b>. 네 알 중 한 알은 말씀 곁에서 맺혔습니다.</div>
+  <div class="sowhat"><span>이 숫자가 말하는 것</span>
+    <p>칭찬의 저울이 성취가 아니라 <b>마음</b>을 향해 있었습니다. '잘했다'보다 '함께했다'가 더 많은 포도를 맺었습니다.</p></div>
+  <details class="raw">
+    <summary>원자료 그대로 보기 — 칭찬 사유 통계 · 담당자 현황</summary>
+    <table>
+      <caption>칭찬 사유 통계</caption>
+      <thead><tr><th>사유</th><th class="n">횟수</th><th class="n">포도</th></tr></thead>
+      <tbody>
+        <tr><td>적극 참여</td><td class="n">27회</td><td class="n plus">+161개</td></tr>
+        <tr><td>집회 태도</td><td class="n">49회</td><td class="n plus">+97개</td></tr>
+        <tr><td>말씀3(진행팀:유치)</td><td class="n">13회</td><td class="n plus">+91개</td></tr>
+        <tr><td>초고</td><td class="n">13회</td><td class="n plus">+66개</td></tr>
+        <tr><td>활동놀이(조장:태도)</td><td class="n">13회</td><td class="n plus">+65개</td></tr>
+        <tr><td>조장체크</td><td class="n">13회</td><td class="n plus">+65개</td></tr>
+        <tr><td>남자와여자-조장(태도)</td><td class="n">13회</td><td class="n plus">+65개</td></tr>
+        <tr><td>초저</td><td class="n">13회</td><td class="n plus">+63개</td></tr>
+        <tr><td>말씀4(조장부여:태도)</td><td class="n">13회</td><td class="n plus">+63개</td></tr>
+        <tr><td>말씀3(조장부여)</td><td class="n">13회</td><td class="n plus">+63개</td></tr>
+        <tr><td>말씀3(진행팀:초고)</td><td class="n">13회</td><td class="n plus">+62개</td></tr>
+        <tr><td>말씀3(정시출석)</td><td class="n">13회</td><td class="n plus">+56개</td></tr>
+        <tr><td>출석(활동놀이)</td><td class="n">13회</td><td class="n plus">+52개</td></tr>
+        <tr><td>남자와여자 출석</td><td class="n">13회</td><td class="n plus">+48개</td></tr>
+        <tr><td>말씀4(정시출석)</td><td class="n">13회</td><td class="n plus">+47개</td></tr>
+        <tr><td>출석</td><td class="n">12회</td><td class="n plus">+43개</td></tr>
+        <tr><td>시간 엄수</td><td class="n">11회</td><td class="n plus">+43개</td></tr>
+        <tr><td>남자와여자(운영팀:초저)</td><td class="n">12회</td><td class="n plus">+36개</td></tr>
+        <tr><td>활동놀이(진행팀:초고)</td><td class="n">12회</td><td class="n plus">+35개</td></tr>
+        <tr><td>활동놀이(진행팀:초저)</td><td class="n">13회</td><td class="n plus">+33개</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>담당자별 현황</caption>
+      <thead><tr><th>담당자</th><th class="n">기록</th><th class="n">부여</th><th class="n">차감</th></tr></thead>
+      <tbody><tr><td>최은숙</td><td class="n">406건</td><td class="n plus">+1451</td><td class="n">0</td></tr></tbody>
+    </table>
+  </details>
+</section>
+
+<div class="vine" aria-hidden="true"><svg viewBox="0 0 160 34"><path d="M6 17 C 40 4, 60 30, 84 17 S 128 4, 154 17" fill="none" stroke="#8aa07e" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="23" r="5" fill="#c9972f"/><circle cx="84" cy="27" r="5" fill="#6d3fa4"/><circle cx="96" cy="23" r="5" fill="#5b9a63"/></svg></div>
+
+<section class="card rv">
+  <p class="kicker">제6장 · 다음 포도밭</p>
+  <h2>운영진을 위한 세 가지 제언</h2>
+  <ol class="steps">
+    <li><b>태도 · 참여 중심의 칭찬 기조 유지</b><span>포도 10알 중 3알이 마음에 주어졌습니다. 이 저울을 그대로 두십시오.</span></li>
+    <li><b>기록 사역의 동역</b><span>406건이 한 손에서 나왔습니다. 조별 기록 동역자를 세우면 손길은 가벼워지고 기록은 더 촘촘해집니다.</span></li>
+    <li><b>지역 혼합 조 편성 유지</b><span>상위와 하위의 격차가 16알(약 13%)에 그쳤습니다. 균형 있게 작동한 구조입니다.</span></li>
+  </ol>
+</section>
+
+<section class="final rv">
+  <p class="kicker">종장 · 자라게 하신 분</p>
+  <figure class="verse">
+    <blockquote>"나는 심었고, 아볼로는 물을 주었습니다.<br>그러나 하나님께서 자라게 하셨습니다."</blockquote>
+    <figcaption>고린도전서 3:6 · 회복역</figcaption>
+  </figure>
+  <p class="close-txt">심은 이도 있었고 물 준 이도 있었습니다. 그러나 자라게 하신 분은 하나님이십니다. 1,451알의 포도는 운영의 성과이기 전에 경기권역 어린이들 안에 흐른 생명의 표현이며, 이들이 곧 <b>하나님의 경작지</b>(고린도전서 3:9)라는 증거입니다.</p>
+  <p class="close-sign">다음 여름에도, 이 나무 아래에서 다시 만나기를 소망합니다.</p>
+  <svg class="cluster" viewBox="0 0 140 150" aria-hidden="true">
+    <path d="M70 27 C69 13 77 5 91 4 C90 17 82 25 70 27Z" fill="#5b9a63"/>
+    <path d="M70 28 C66 17 58 11 47 9" fill="none" stroke="#b99a63" stroke-width="3.5" stroke-linecap="round"/>
+    <g stroke="rgba(0,0,0,.2)" stroke-width="1">
+      <circle cx="42" cy="50" r="15" fill="#8a5cc0"/><circle cx="70" cy="45" r="15" fill="#d3a13c"/><circle cx="98" cy="50" r="15" fill="#8a5cc0"/>
+      <circle cx="56" cy="78" r="15" fill="#8a5cc0"/><circle cx="84" cy="78" r="15" fill="#5b9a63"/>
+      <circle cx="70" cy="106" r="15" fill="#8a5cc0"/>
+    </g>
+  </svg>
+</section>
+
+</div>
+<script>
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ run(e.target); io2.unobserve(e.target); }
+    });
+  }, {threshold:0.6});
+  document.querySelectorAll('.count').forEach(function(el){ io2.observe(el); });
+
+  function run(el){
+    var t = parseInt(el.getAttribute('data-t'), 10);
+    if(reduce){ el.textContent = t.toLocaleString('ko-KR'); return; }
+    var start = null, dur = 1300;
+    function frame(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(t * p).toLocaleString('ko-KR');
+      if(p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
