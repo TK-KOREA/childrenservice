@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사람들을 구원하심 ① 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F0F7F2;
+    --paper-dot:#DEEDE3;
+    --card:#FFFFFF;
+    --ink:#2B4038;
+    --ink-soft:#5F7469;
+    --line:#DCE8E0;
+    --leaf:#3D9A6A;
+    --leaf-deep:#2E7D53;
+    --leaf-soft:#E3F4EA;
+    --sun:#FFC94D;
+    --sun-deep:#E0A929;
+    --sun-soft:#FFF3D6;
+    --sky:#4FA3D9;
+    --sky-deep:#3A87B8;
+    --coral:#E8735A;
+    --coral-deep:#C75A44;
+    --coral-soft:#FBE9E4;
+    --branch:#8A6B4F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{font-size:16px;}
+  body{
+    font-family:'Gowun Dodum',sans-serif;
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:radial-gradient(var(--paper-dot) 1.2px, transparent 1.3px);
+    background-size:22px 22px;
+    line-height:1.65;
+    word-break:keep-all;
+    min-height:100vh;
+  }
+  .app{max-width:780px;margin:0 auto;padding:28px 18px 70px;}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;line-height:1.3;}
+
+  button{font-family:inherit;cursor:pointer;}
+  button:focus-visible, input:focus-visible{outline:3px solid var(--sky);outline-offset:2px;}
+
+  /* ---------- 공통 카드 & 버튼 ---------- */
+  .card{
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:24px;
+    padding:26px 24px;
+    box-shadow:0 6px 0 rgba(43,64,56,.05);
+  }
+  .btn{
+    font-family:'Jua',sans-serif;
+    font-size:1.15rem;
+    color:#fff;
+    background:var(--leaf);
+    border:none;
+    border-bottom:5px solid var(--leaf-deep);
+    border-radius:18px;
+    padding:13px 34px;
+    transition:transform .06s ease;
+  }
+  .btn:active{transform:translateY(3px);border-bottom-width:2px;}
+  .btn.sun{background:var(--sun);border-bottom-color:var(--sun-deep);color:var(--ink);}
+  .btn.ghost{
+    background:#fff;color:var(--ink);
+    border:2.5px solid var(--line);border-bottom-width:5px;
+    font-size:1rem;padding:10px 22px;
+  }
+  .pill{
+    display:inline-block;
+    font-family:'Jua',sans-serif;
+    font-size:.85rem;
+    background:var(--sun-soft);
+    border:2px solid var(--sun);
+    color:var(--ink);
+    border-radius:999px;
+    padding:3px 14px;
+  }
+
+  /* ---------- 시작 화면 ---------- */
+  .screen{display:none;}
+  .screen.active{display:block;animation:rise .35s ease;}
+  @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+  .hero{text-align:center;padding:36px 24px 34px;}
+  .hero .eyebrow{
+    font-family:'Jua',sans-serif;color:var(--leaf-deep);
+    font-size:.95rem;letter-spacing:.04em;margin-bottom:6px;
+  }
+  .hero h1{font-size:clamp(1.9rem,5.5vw,2.6rem);margin:8px 0 4px;}
+  .hero .sub{color:var(--ink-soft);margin-bottom:18px;}
+  .tree-svg{width:150px;height:auto;margin:2px auto 10px;display:block;}
+  .verse-card{
+    background:var(--sun-soft);
+    border:2px solid var(--sun);
+    border-radius:18px;
+    padding:16px 20px;
+    margin:18px auto 22px;
+    max-width:520px;
+    text-align:center;
+  }
+  .verse-card .ref{font-family:'Jua',sans-serif;font-size:.9rem;color:var(--sun-deep);margin-bottom:4px;}
+  .verse-card .txt{font-family:'Jua',sans-serif;font-size:1.12rem;}
+  .format-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px;}
+  .format-chips span{
+    font-size:.82rem;background:#fff;border:2px solid var(--line);
+    border-radius:999px;padding:4px 13px;color:var(--ink-soft);
+  }
+
+  /* ---------- 진행 나뭇가지(열매) ---------- */
+  .branch-wrap{margin:0 auto 20px;text-align:center;}
+  .branch{
+    position:relative;display:flex;justify-content:space-between;
+    max-width:500px;margin:0 auto;padding:14px 6px 4px;
+  }
+  .branch::before{
+    content:'';position:absolute;top:9px;left:2px;right:2px;height:5px;
+    background:var(--branch);border-radius:99px;
+  }
+  .fruit{
+    position:relative;width:24px;height:24px;border-radius:50%;
+    background:#fff;border:2.5px dashed #C6D9CC;margin-top:12px;flex:none;
+  }
+  .fruit::before{ /* 줄기 */
+    content:'';position:absolute;top:-12px;left:50%;width:3px;height:12px;
+    background:var(--branch);transform:translateX(-50%);border-radius:2px;
+  }
+  .fruit::after{ /* 잎 */
+    content:'';position:absolute;top:-13px;left:58%;width:10px;height:6px;
+    background:var(--leaf);border-radius:70% 100% 20% 100%;transform:rotate(-24deg);
+  }
+  .fruit.ok{background:var(--leaf);border:2.5px solid var(--leaf-deep);}
+  .fruit.no{background:var(--coral);border:2.5px solid var(--coral-deep);}
+  .fruit.current{background:var(--sun);border:2.5px solid var(--sun-deep);animation:pulse 1.5s ease-in-out infinite;}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,201,77,.55);}
+    50%{box-shadow:0 0 0 9px rgba(255,201,77,0);}
+  }
+  .branch-label{font-family:'Jua',sans-serif;font-size:.95rem;color:var(--ink-soft);margin-top:8px;}
+
+  /* ---------- 문제 화면 ---------- */
+  .q-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .q-num{font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--leaf-deep);}
+  .q-text{font-family:'Jua',sans-serif;font-size:clamp(1.3rem,3.4vw,1.55rem);margin-bottom:22px;}
+  .q-text .blank{
+    display:inline-block;min-width:2.6em;border-bottom:4px solid var(--sun);
+    text-align:center;color:var(--sun-deep);
+  }
+
+  /* 사지선다 */
+  .opts{display:grid;gap:12px;}
+  .opt{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:5px;
+    border-radius:16px;padding:13px 16px;
+    font-family:'Jua',sans-serif;font-size:1.08rem;color:var(--ink);
+    transition:transform .06s ease;
+  }
+  .opt:not(:disabled):hover{border-color:var(--leaf);}
+  .opt:not(:disabled):active{transform:translateY(2px);border-bottom-width:3px;}
+  .opt .tag{
+    flex:none;width:34px;height:34px;border-radius:50%;
+    background:var(--paper);display:grid;place-items:center;font-size:1rem;
+  }
+  .opt:disabled{cursor:default;opacity:.55;}
+  .opt.correct{background:var(--leaf-soft);border-color:var(--leaf);opacity:1;}
+  .opt.correct .tag{background:var(--leaf);color:#fff;}
+  .opt.wrong{background:var(--coral-soft);border-color:var(--coral);opacity:1;}
+  .opt.wrong .tag{background:var(--coral);color:#fff;}
+
+  /* OX */
+  .ox-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:420px;margin:0 auto;}
+  .ox{
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:6px;
+    border-radius:22px;padding:20px 10px 14px;text-align:center;
+    transition:transform .06s ease;
+  }
+  .ox:not(:disabled):active{transform:translateY(3px);border-bottom-width:3px;}
+  .ox .mark{font-family:'Jua',sans-serif;font-size:3.4rem;line-height:1;display:block;}
+  .ox .lbl{font-family:'Jua',sans-serif;font-size:1rem;color:var(--ink-soft);}
+  .ox[data-v="o"] .mark{color:var(--sky);}
+  .ox[data-v="x"] .mark{color:var(--coral);}
+  .ox:not(:disabled):hover{border-color:var(--leaf);}
+  .ox:disabled{cursor:default;opacity:.5;}
+  .ox.correct{background:var(--leaf-soft);border-color:var(--leaf);opacity:1;}
+  .ox.wrong{background:var(--coral-soft);border-color:var(--coral);opacity:1;}
+
+  /* 초성 퀴즈 */
+  .input-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .answer-input{
+    flex:1;min-width:180px;
+    font-family:'Jua',sans-serif;font-size:1.25rem;color:var(--ink);
+    border:2.5px solid var(--line);border-radius:16px;
+    padding:12px 18px;background:#fff;
+  }
+  .answer-input:disabled{background:var(--paper);}
+  .hint-area{margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .hint-chip{
+    display:none;font-family:'Jua',sans-serif;font-size:1.15rem;
+    background:var(--sun-soft);border:2px dashed var(--sun-deep);
+    border-radius:14px;padding:6px 18px;letter-spacing:.35em;padding-right:12px;
+  }
+  .hint-chip.show{display:inline-block;animation:rise .3s ease;}
+  .wiggle{animation:wiggle .4s ease;}
+  @keyframes wiggle{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-7px);}
+    50%{transform:translateX(7px);}
+    75%{transform:translateX(-4px);}
+  }
+
+  /* 순서 맞추기 & 말씀 완성 */
+  .seq-list{display:grid;gap:12px;}
+  .seq-item{
+    position:relative;display:flex;align-items:center;gap:14px;text-align:left;
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:5px;
+    border-radius:16px;padding:13px 16px;
+    font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--ink);
+    transition:transform .06s ease;
+  }
+  .seq-item:not(:disabled):hover{border-color:var(--leaf);}
+  .seq-item .slot{
+    flex:none;width:34px;height:34px;border-radius:50%;
+    border:2.5px dashed #C6D9CC;display:grid;place-items:center;
+    font-family:'Jua',sans-serif;font-size:1.05rem;color:#fff;
+  }
+  .seq-item.picked{background:var(--leaf-soft);border-color:var(--leaf);cursor:default;}
+  .seq-item.picked .slot{background:var(--leaf);border:none;}
+  .seq-item.answered-wrong{background:var(--coral-soft);border-color:var(--coral);}
+  .seq-item.answered-wrong .slot{background:var(--coral);border:none;}
+  .seq-tools{margin-top:14px;display:flex;justify-content:flex-end;}
+
+  .verse-build{
+    min-height:64px;background:var(--sun-soft);border:2px dashed var(--sun-deep);
+    border-radius:16px;padding:14px 18px;margin-bottom:16px;
+    font-family:'Jua',sans-serif;font-size:1.15rem;
+  }
+  .verse-build .ph{color:var(--sun-deep);opacity:.75;font-size:.98rem;}
+  .chip-pool{display:flex;flex-wrap:wrap;gap:10px;}
+  .word-chip{
+    font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--ink);
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:5px;
+    border-radius:999px;padding:9px 18px;transition:transform .06s ease;
+  }
+  .word-chip:not(:disabled):hover{border-color:var(--leaf);}
+  .word-chip:not(:disabled):active{transform:translateY(2px);border-bottom-width:3px;}
+  .word-chip:disabled{opacity:.25;cursor:default;}
+
+  /* 짝 맞추기 */
+  .match-note{font-size:.95rem;color:var(--ink-soft);margin-bottom:14px;}
+  .people{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px;}
+  .person{
+    font-family:'Jua',sans-serif;font-size:1.1rem;color:var(--ink);
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:5px;
+    border-radius:999px;padding:9px 24px;transition:transform .06s ease;
+  }
+  .person:not(:disabled):hover{border-color:var(--sky);}
+  .person.selected{background:#EAF4FB;border-color:var(--sky);}
+  .person.paired{background:var(--leaf-soft);border-color:var(--leaf);cursor:default;opacity:.85;}
+  .speeches{display:grid;gap:12px;}
+  .speech{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    background:#fff;border:2.5px solid var(--line);border-bottom-width:5px;
+    border-radius:16px;padding:13px 16px;
+    font-family:'Gowun Dodum',sans-serif;font-size:1.02rem;color:var(--ink);
+    transition:transform .06s ease;
+  }
+  .speech:not(:disabled):hover{border-color:var(--sky);}
+  .speech.paired{background:var(--leaf-soft);border-color:var(--leaf);cursor:default;}
+  .speech .who{
+    display:none;flex:none;font-family:'Jua',sans-serif;font-size:.9rem;
+    background:var(--leaf);color:#fff;border-radius:999px;padding:2px 12px;
+  }
+  .speech.paired .who{display:inline-block;}
+  .flash-wrong{animation:flashWrong .45s ease;}
+  @keyframes flashWrong{
+    0%,100%{background:#fff;border-color:var(--line);}
+    40%{background:var(--coral-soft);border-color:var(--coral);transform:translateX(-5px);}
+    70%{transform:translateX(5px);}
+  }
+
+  /* 피드백 */
+  .feedback{display:none;border-radius:18px;padding:18px 20px;margin-top:22px;}
+  .feedback.show{display:block;animation:rise .3s ease;}
+  .feedback.good{background:var(--leaf-soft);border:2px solid var(--leaf);}
+  .feedback.bad{background:var(--coral-soft);border:2px solid var(--coral);}
+  .fb-title{font-family:'Jua',sans-serif;font-size:1.25rem;margin-bottom:6px;}
+  .feedback.good .fb-title{color:var(--leaf-deep);}
+  .feedback.bad .fb-title{color:var(--coral-deep);}
+  .fb-body{font-size:1rem;}
+  .fb-body b{font-family:'Jua',sans-serif;font-weight:400;}
+  .next-row{display:flex;justify-content:flex-end;margin-top:20px;}
+
+  /* ---------- 결과 화면 ---------- */
+  .result-hero{text-align:center;padding:34px 22px 30px;}
+  .result-hero h2{font-size:clamp(1.7rem,5vw,2.2rem);margin-bottom:4px;}
+  .score-big{font-family:'Jua',sans-serif;font-size:3.2rem;color:var(--leaf-deep);line-height:1.1;}
+  .score-big small{font-size:1.4rem;color:var(--ink-soft);}
+  .score-msg{margin-top:8px;font-size:1.05rem;}
+  .practice-card{
+    background:#EAF4FB;border:2px solid var(--sky);
+    border-radius:18px;padding:16px 20px;margin:20px auto;max-width:540px;text-align:center;
+  }
+  .practice-card .tit{font-family:'Jua',sans-serif;color:var(--sky-deep);margin-bottom:4px;}
+  .review{margin-top:26px;text-align:left;}
+  .review h3{font-size:1.2rem;margin-bottom:12px;text-align:center;}
+  .review-list{display:grid;gap:8px;max-width:560px;margin:0 auto;}
+  .review-item{
+    display:flex;align-items:flex-start;gap:12px;
+    background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;
+    font-size:.95rem;
+  }
+  .review-item .ico{
+    flex:none;width:26px;height:26px;border-radius:50%;margin-top:1px;
+    display:grid;place-items:center;color:#fff;font-family:'Jua',sans-serif;font-size:.9rem;
+  }
+  .review-item.ok .ico{background:var(--leaf);}
+  .review-item.no .ico{background:var(--coral);}
+  .end-btns{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap;}
+
+  /* 색종이 */
+  .confetti-piece{
+    position:fixed;top:-16px;width:10px;height:14px;border-radius:3px;
+    z-index:50;pointer-events:none;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    to{transform:translateY(110vh) rotate(720deg);opacity:.9;}
+  }
+
+  @media (max-width:520px){
+    .card{padding:22px 16px;}
+    .fruit{width:20px;height:20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== 시작 화면 ===== -->
+  <section id="screen-start" class="screen active">
+    <div class="card hero">
+      <p class="eyebrow">어린이 주일공과 · 사람들을 구원하심 ①</p>
+      <svg class="tree-svg" viewBox="0 0 140 130" aria-hidden="true">
+        <ellipse cx="70" cy="121" rx="46" ry="7" fill="#DEEDE3"/>
+        <path d="M66 120 C68 98 66 86 60 72 L66 70 C70 84 74 84 80 74 L85 77 C79 88 74 98 74 120 Z" fill="#8A6B4F"/>
+        <circle cx="46" cy="52" r="26" fill="#57B183"/>
+        <circle cx="94" cy="50" r="24" fill="#2E7D53"/>
+        <circle cx="70" cy="34" r="27" fill="#3D9A6A"/>
+        <circle cx="54" cy="36" r="5.5" fill="#FFC94D"/>
+        <circle cx="86" cy="42" r="5" fill="#F19A4D"/>
+        <circle cx="70" cy="55" r="5" fill="#E8735A"/>
+        <circle cx="38" cy="60" r="4.5" fill="#FFC94D"/>
+        <circle cx="100" cy="62" r="4.5" fill="#E8735A"/>
+      </svg>
+      <h1>함께 퀴즈를 풀어보아요!</h1>
+      <p class="sub">삭개오와 십자가의 강도 이야기, 얼마나 기억하고 있나요?<br>정답을 맞힐 때마다 나뭇가지에 초록 열매가 열려요.</p>
+      <div class="verse-card">
+        <div class="ref">[누가복음 19장 10절]</div>
+        <div class="txt">사람의 아들이 온 것은 잃어버린 사람을<br>찾아 구원하기 위한 것입니다.</div>
+      </div>
+      <div class="format-chips">
+        <span>OX 퀴즈</span><span>네 개 중 골라요</span><span>초성 퀴즈</span>
+        <span>순서 맞추기</span><span>짝 맞추기</span><span>말씀 완성하기</span>
+      </div>
+      <button class="btn" id="btn-start">퀴즈 시작하기</button>
+    </div>
+  </section>
+
+  <!-- ===== 문제 화면 ===== -->
+  <section id="screen-quiz" class="screen">
+    <div class="branch-wrap">
+      <div class="branch" id="branch"></div>
+      <div class="branch-label" id="branch-label"></div>
+    </div>
+    <div class="card">
+      <div class="q-head">
+        <span class="q-num" id="q-num"></span>
+        <span class="pill" id="q-badge"></span>
+      </div>
+      <div class="q-text" id="q-text"></div>
+      <div id="interaction"></div>
+      <div class="feedback" id="feedback" aria-live="polite">
+        <div class="fb-title" id="fb-title"></div>
+        <div class="fb-body" id="fb-body"></div>
+      </div>
+      <div class="next-row">
+        <button class="btn" id="btn-next" style="display:none;">다음 문제</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 결과 화면 ===== -->
+  <section id="screen-end" class="screen">
+    <div class="card result-hero">
+      <h2 id="end-title">참 잘했어요!</h2>
+      <div class="branch-wrap" style="margin-top:16px;">
+        <div class="branch" id="branch-final"></div>
+      </div>
+      <div class="score-big"><span id="score-num">0</span><small> / 10</small></div>
+      <p class="score-msg" id="score-msg"></p>
+
+      <div class="verse-card">
+        <div class="ref">함께 암송해요 · [누가복음 19장 10절]</div>
+        <div class="txt">사람의 아들이 온 것은 잃어버린 사람을<br>찾아 구원하기 위한 것입니다.</div>
+      </div>
+
+      <div class="practice-card">
+        <div class="tit">이번 주 실천 약속</div>
+        <div>매일 밤 잠자리에 들기 전, 주님께 그날 있었던 일 중<br>한 가지 이상을 자백하고 회개해요.</div>
+      </div>
+
+      <div class="review">
+        <h3 class="jua">문제 다시 보기</h3>
+        <div class="review-list" id="review-list"></div>
+      </div>
+
+      <div class="end-btns">
+        <button class="btn sun" id="btn-retry">다시 풀기</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ================= 문제 데이터 ================= */
+  const QUESTIONS = [
+    {
+      type:'ox', badge:'OX 퀴즈',
+      q:'삭개오는 세리들의 우두머리인 <b>세리장</b>이었고, <b>부자</b>였어요.',
+      answer:true,
+      explain:'예수님께서 여리고에 오셨을 때, 그곳에는 세리장이고 부자인 삭개오가 있었어요.',
+      short:'삭개오는 세리장이고 부자였어요 → O'
+    },
+    {
+      type:'choice', badge:'네 개 중 골라요',
+      q:'키가 작은 삭개오는 예수님을 보려고 무리를 앞질러 달려가, 어떤 나무 위로 올라갔나요?',
+      options:['포도나무','돌무화과나무','감람나무','종려나무'],
+      answerText:'돌무화과나무',
+      explain:'무리가 앞을 가려 예수님을 볼 수 없었던 삭개오는 돌무화과나무 위로 올라갔고, 예수님께서 나무 위의 삭개오를 발견하셨어요.',
+      short:'삭개오가 올라간 나무 → 돌무화과나무'
+    },
+    {
+      type:'choice', badge:'네 개 중 골라요',
+      q:'삭개오는 구원받은 후, 남을 속여 빼앗은 것이 있다면 <b>몇 배</b>로 갚겠다고 말했나요?',
+      options:['두 배','세 배','네 배','열 배'],
+      answerText:'네 배',
+      explain:'"내 소유의 절반을 가난한 사람들에게 주고, 속여 빼앗았다면 네 배로 갚겠습니다." 삭개오는 구원받은 즉시 과거의 죄를 깨끗하게 해결했어요.',
+      short:'속여 빼앗은 것은 → 네 배로 갚겠다고 했어요'
+    },
+    {
+      type:'input', badge:'초성 퀴즈',
+      q:'삭개오의 직업은 사람들에게서 세금을 거두는 <span class="blank">○○</span>였어요. 이 직업은 나병 환자보다 더 소외될 만큼 사람들에게 멸시를 받았어요.',
+      accept:['세리','세리장'],
+      hint:'ㅅㄹ',
+      answerText:'세리',
+      explain:'당시 세리들 대부분은 나라에서 정한 것보다 세금을 더 많이 거두어 자기 것으로 챙겼기 때문에, 극심한 비난과 멸시를 받았어요. 그런 삭개오에게 예수님이 먼저 찾아가셨답니다.',
+      short:'삭개오의 직업 → 세리'
+    },
+    {
+      type:'order', badge:'순서 맞추기',
+      q:'삭개오 이야기예요. <b>일어난 순서대로</b> 카드를 눌러 주세요.',
+      items:[
+        '예수님께서 여리고에 오셨어요',
+        '삭개오가 돌무화과나무 위로 올라갔어요',
+        '예수님께서 "오늘 그대의 집에 머물겠습니다"라고 하셨어요',
+        '삭개오가 재물을 나누고 네 배로 갚겠다고 약속했어요'
+      ],
+      explain:'예수님은 나무 위의 삭개오를 먼저 불러 주셨고, 삭개오는 기뻐하며 예수님을 영접한 뒤 재물을 나누고 죄를 해결했어요.',
+      short:'이야기 순서 → 여리고에 오심 → 나무에 올라감 → 집에 머무심 → 네 배 약속'
+    },
+    {
+      type:'ox', badge:'OX 퀴즈',
+      q:'예수님은 사람들에게 멸시받는 세리 삭개오에게 다가가기를 <b>망설이셨어요</b>.',
+      answer:false,
+      explain:'예수님은 망설이지 않으시고 삭개오를 구원하시려고 직접 찾아가셨어요. 예수님은 모든 사람을 차별 없이 같은 사랑으로 사랑하세요. 우리도 친구를 따돌리지 말고, 약하고 도움이 필요한 친구에게 먼저 다가가요.',
+      short:'예수님이 망설이셨다? → X, 직접 찾아가셨어요'
+    },
+    {
+      type:'choice', badge:'네 개 중 골라요',
+      q:'십자가에 못 박힌 한 강도의 마음을 감동하게 한 것은 무엇이었나요?',
+      options:[
+        '예수님께서 보여 주신 놀라운 기적',
+        '자기를 못 박은 사람들을 용서해 달라는 예수님의 기도',
+        '구경하던 무리의 큰 외침',
+        '로마 군인들의 명령'
+      ],
+      answerText:'자기를 못 박은 사람들을 용서해 달라는 예수님의 기도',
+      explain:'"아버지, 저 사람들을 용서하여 주십시오. 그들은 자기들이 무슨 일을 하고 있는지 알지 못합니다." 이 기도에 감동한 강도는 예수님이 참으로 그리스도이시며 하나님의 아들이심을 알게 되었어요.',
+      short:'강도를 감동하게 한 것 → 예수님의 용서 기도'
+    },
+    {
+      type:'match', badge:'짝 맞추기',
+      q:'누가 한 말일까요? <b>사람</b>을 먼저 누르고, 그 사람이 한 <b>말</b>을 눌러 짝을 지어 주세요.',
+      pairs:[
+        {left:'삭개오', right:'"내 소유의 절반을 가난한 사람들에게 주겠습니다."'},
+        {left:'강도',   right:'"주님의 왕국에 들어가실 때에 나를 기억해 주십시오."'},
+        {left:'예수님', right:'"오늘 그대가 나와 함께 낙원에 있을 것입니다."'}
+      ],
+      explain:'회개한 강도의 부탁에 예수님은 "오늘 그대가 나와 함께 낙원에 있을 것"이라고 약속해 주셨어요.',
+      short:'말한 사람 짝 짓기 → 삭개오 · 강도 · 예수님'
+    },
+    {
+      type:'input', badge:'초성 퀴즈',
+      q:'예수님과 함께 못 박힌 강도는 자신의 악한 마음을 돌이켜 <span class="blank">○○</span>했을 때, 즉시 구원받을 수 있었어요.',
+      accept:['회개'],
+      hint:'ㅎㄱ',
+      answerText:'회개',
+      explain:'강도처럼 우리도 죄를 자백하고 회개할 줄 알아야 해요. 하나님 앞에서 잘못한 것은 하나님께, 사람 앞에서 잘못한 것은 그 사람에게 가서 용서를 구해요.',
+      short:'강도가 구원받은 비결 → 회개'
+    },
+    {
+      type:'verse', badge:'말씀 완성하기',
+      q:'이번 주 암송 말씀이에요. 단어를 <b>순서대로</b> 눌러 누가복음 19장 10절을 완성해 주세요.',
+      words:['사람의 아들이','온 것은','잃어버린 사람을','찾아','구원하기','위한 것입니다'],
+      explain:'[누가복음 19장 10절] 사람의 아들이 온 것은 잃어버린 사람을 찾아 구원하기 위한 것입니다.',
+      short:'암송 말씀 → 누가복음 19장 10절'
+    }
+  ];
+
+  /* ================= 상태 ================= */
+  const TOTAL = QUESTIONS.length;
+  let current = 0;
+  let results = new Array(TOTAL).fill(null);
+  let answered = false;
+
+  /* ================= 도우미 ================= */
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, html) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html !== undefined) n.innerHTML = html;
+    return n;
+  };
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function shuffleDifferent(arr){
+    if (arr.length < 2) return arr.slice();
+    let s = shuffle(arr), tries = 0;
+    while (tries < 12 && s.every((v, i) => v === arr[i])){ s = shuffle(arr); tries++; }
+    return s;
+  }
+  const CIRCLED = ['①','②','③','④','⑤','⑥'];
+
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    $(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+
+  /* ================= 진행 나뭇가지 ================= */
+  function renderBranch(container, withCurrent){
+    container.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++){
+      const f = el('div','fruit');
+      if (results[i] === true) f.classList.add('ok');
+      else if (results[i] === false) f.classList.add('no');
+      else if (withCurrent && i === current) f.classList.add('current');
+      container.appendChild(f);
+    }
+  }
+  function updateProgress(){
+    renderBranch($('#branch'), true);
+    $('#branch-label').textContent = '문제 ' + (current + 1) + ' / ' + TOTAL;
+  }
+
+  /* ================= 채점 공통 ================= */
+  function finishAnswer(correct, bodyHTML, titleOverride){
+    if (answered) return;
+    answered = true;
+    results[current] = correct;
+    const fb = $('#feedback');
+    fb.classList.remove('good','bad');
+    fb.classList.add('show', correct ? 'good' : 'bad');
+    $('#fb-title').textContent = titleOverride || (correct ? '정답이에요! 🎉' : '아쉬워요!');
+    $('#fb-body').innerHTML = bodyHTML;
+    const nextBtn = $('#btn-next');
+    nextBtn.style.display = 'inline-block';
+    nextBtn.textContent = (current === TOTAL - 1) ? '결과 보기' : '다음 문제';
+    nextBtn.focus();
+    updateProgress();
+  }
+
+  /* ================= 유형별 렌더링 ================= */
+  function renderChoice(q, box){
+    const opts = shuffle(q.options);
+    const wrap = el('div','opts');
+    opts.forEach((text, i) => {
+      const b = el('button','opt');
+      b.type = 'button';
+      b.appendChild(el('span','tag', CIRCLED[i]));
+      b.appendChild(el('span','', text));
+      b.addEventListener('click', () => {
+        if (answered) return;
+        wrap.querySelectorAll('.opt').forEach(o => {
+          o.disabled = true;
+          if (o.dataset.text === q.answerText) o.classList.add('correct');
+        });
+        const ok = (text === q.answerText);
+        if (!ok) b.classList.add('wrong');
+        finishAnswer(ok,
+          (ok ? '' : '정답은 <b>「' + q.answerText + '」</b>이에요.<br>') + q.explain);
+      });
+      b.dataset.text = text;
+      wrap.appendChild(b);
+    });
+    box.appendChild(wrap);
+  }
+
+  function renderOX(q, box){
+    const grid = el('div','ox-grid');
+    [{v:'o', mark:'O', lbl:'맞아요'}, {v:'x', mark:'X', lbl:'아니에요'}].forEach(item => {
+      const b = el('button','ox');
+      b.type = 'button';
+      b.dataset.v = item.v;
+      b.appendChild(el('span','mark', item.mark));
+      b.appendChild(el('span','lbl', item.lbl));
+      b.addEventListener('click', () => {
+        if (answered) return;
+        const pickedTrue = (item.v === 'o');
+        grid.querySelectorAll('.ox').forEach(o => {
+          o.disabled = true;
+          const isAnswerBtn = (o.dataset.v === 'o') === q.answer;
+          if (isAnswerBtn) o.classList.add('correct');
+        });
+        const ok = (pickedTrue === q.answer);
+        if (!ok) b.classList.add('wrong');
+        finishAnswer(ok,
+          (ok ? '' : '정답은 <b>「' + (q.answer ? 'O' : 'X') + '」</b>예요.<br>') + q.explain);
+      });
+      grid.appendChild(b);
+    });
+    box.appendChild(grid);
+  }
+
+  function renderInput(q, box){
+    const row = el('div','input-row');
+    const input = el('input','answer-input');
+    input.type = 'text';
+    input.placeholder = '정답을 적어 주세요';
+    input.setAttribute('autocomplete','off');
+    const submit = el('button','btn', '정답 확인');
+    submit.type = 'button';
+    row.appendChild(input);
+    row.appendChild(submit);
+
+    const hintArea = el('div','hint-area');
+    const hintBtn = el('button','btn ghost', '💡 힌트 보기');
+    hintBtn.type = 'button';
+    const hintChip = el('span','hint-chip', q.hint);
+    hintArea.appendChild(hintBtn);
+    hintArea.appendChild(hintChip);
+
+    hintBtn.addEventListener('click', () => {
+      hintChip.classList.add('show');
+      hintBtn.disabled = true;
+      hintBtn.style.opacity = .55;
+    });
+
+    function check(){
+      if (answered) return;
+      const val = input.value.replace(/\s+/g,'');
+      if (!val){
+        input.classList.remove('wiggle');
+        void input.offsetWidth;
+        input.classList.add('wiggle');
+        input.focus();
+        return;
+      }
+      const ok = q.accept.includes(val);
+      input.disabled = true;
+      submit.disabled = true;
+      hintBtn.disabled = true;
+      finishAnswer(ok,
+        (ok ? '' : '정답은 <b>「' + q.answerText + '」</b>예요.<br>') + q.explain);
+    }
+    submit.addEventListener('click', check);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+
+    box.appendChild(row);
+    box.appendChild(hintArea);
+    setTimeout(() => input.focus(), 60);
+  }
+
+  function renderOrder(q, box){
+    const base = q.items.map((text, id) => ({text, id}));
+    const displayed = shuffleDifferent(base);
+    const list = el('div','seq-list');
+    let picks = [];
+
+    displayed.forEach(item => {
+      const b = el('button','seq-item');
+      b.type = 'button';
+      b.dataset.id = item.id;
+      b.appendChild(el('span','slot',''));
+      b.appendChild(el('span','', item.text));
+      b.addEventListener('click', () => {
+        if (answered || b.classList.contains('picked')) return;
+        picks.push(item.id);
+        b.classList.add('picked');
+        b.querySelector('.slot').textContent = picks.length;
+        if (picks.length === base.length) evaluate();
+      });
+      list.appendChild(b);
+    });
+
+    const tools = el('div','seq-tools');
+    const resetBtn = el('button','btn ghost', '↩ 처음부터 다시 고르기');
+    resetBtn.type = 'button';
+    resetBtn.addEventListener('click', () => {
+      if (answered) return;
+      picks = [];
+      list.querySelectorAll('.seq-item').forEach(b => {
+        b.classList.remove('picked');
+        b.querySelector('.slot').textContent = '';
+      });
+    });
+    tools.appendChild(resetBtn);
+
+    function evaluate(){
+      const ok = picks.every((id, i) => id === i);
+      resetBtn.disabled = true;
+      resetBtn.style.opacity = .5;
+      list.querySelectorAll('.seq-item').forEach(b => {
+        b.disabled = true;
+        if (!ok){
+          const id = Number(b.dataset.id);
+          const pickedPos = picks.indexOf(id);
+          if (pickedPos !== id){
+            b.classList.remove('picked');
+            b.classList.add('answered-wrong');
+          }
+        }
+      });
+      let body = q.explain;
+      if (!ok){
+        body = '올바른 순서는 이렇답니다.<br>' +
+          q.items.map((t, i) => CIRCLED[i] + ' ' + t).join('<br>') +
+          '<br><br>' + q.explain;
+      }
+      finishAnswer(ok, body);
+    }
+
+    box.appendChild(list);
+    box.appendChild(tools);
+  }
+
+  function renderMatch(q, box){
+    const note = el('p','match-note','짝이 맞으면 초록색으로 연결돼요. 한 번도 틀리지 않고 모두 이으면 열매를 얻어요!');
+    const peopleRow = el('div','people');
+    const speechCol = el('div','speeches');
+    let selected = null;
+    let misses = 0;
+    let pairedCount = 0;
+
+    const lefts = shuffle(q.pairs.map(p => p.left));
+    lefts.forEach(name => {
+      const b = el('button','person', name);
+      b.type = 'button';
+      b.dataset.name = name;
+      b.addEventListener('click', () => {
+        if (answered || b.classList.contains('paired')) return;
+        peopleRow.querySelectorAll('.person').forEach(p => p.classList.remove('selected'));
+        b.classList.add('selected');
+        selected = name;
+      });
+      peopleRow.appendChild(b);
+    });
+
+    const rights = shuffleDifferent(q.pairs.map(p => p.right));
+    rights.forEach(text => {
+      const b = el('button','speech');
+      b.type = 'button';
+      const who = el('span','who','');
+      b.appendChild(who);
+      b.appendChild(el('span','', text));
+      b.addEventListener('click', () => {
+        if (answered || b.classList.contains('paired')) return;
+        if (!selected){
+          b.classList.remove('flash-wrong');
+          void b.offsetWidth;
+          b.classList.add('flash-wrong');
+          return;
+        }
+        const pair = q.pairs.find(p => p.right === text);
+        if (pair.left === selected){
+          b.classList.add('paired');
+          who.textContent = selected;
+          const personBtn = peopleRow.querySelector('.person[data-name="' + selected + '"]');
+          personBtn.classList.remove('selected');
+          personBtn.classList.add('paired');
+          personBtn.disabled = true;
+          selected = null;
+          pairedCount++;
+          if (pairedCount === q.pairs.length){
+            const ok = (misses === 0);
+            finishAnswer(ok,
+              (ok ? '' : '헷갈렸던 짝이 있어서 열매는 아쉽게 놓쳤지만, 결국 모두 찾아냈어요!<br>') + q.explain,
+              ok ? '완벽하게 짝을 지었어요! 🎉' : '짝을 모두 찾았어요!');
+          }
+        } else {
+          misses++;
+          b.classList.remove('flash-wrong');
+          void b.offsetWidth;
+          b.classList.add('flash-wrong');
+        }
+      });
+      speechCol.appendChild(b);
+    });
+
+    box.appendChild(note);
+    box.appendChild(peopleRow);
+    box.appendChild(speechCol);
+  }
+
+  function renderVerse(q, box){
+    const base = q.words.map((text, id) => ({text, id}));
+    const displayed = shuffleDifferent(base);
+    const build = el('div','verse-build');
+    const ph = el('span','ph','여기에 말씀이 완성돼요 ✏️');
+    build.appendChild(ph);
+    const pool = el('div','chip-pool');
+    let picks = [];
+
+    displayed.forEach(item => {
+      const b = el('button','word-chip', item.text);
+      b.type = 'button';
+      b.addEventListener('click', () => {
+        if (answered || b.disabled) return;
+        picks.push(item.id);
+        b.disabled = true;
+        renderBuild();
+        if (picks.length === base.length) evaluate();
+      });
+      pool.appendChild(b);
+    });
+
+    function renderBuild(){
+      if (picks.length === 0){
+        build.innerHTML = '';
+        build.appendChild(ph);
+        return;
+      }
+      build.textContent = picks.map(id => q.words[id]).join(' ');
+    }
+
+    const tools = el('div','seq-tools');
+    const resetBtn = el('button','btn ghost', '↩ 처음부터 다시 고르기');
+    resetBtn.type = 'button';
+    resetBtn.addEventListener('click', () => {
+      if (answered) return;
+      picks = [];
+      pool.querySelectorAll('.word-chip').forEach(c => c.disabled = false);
+      renderBuild();
+    });
+    tools.appendChild(resetBtn);
+
+    function evaluate(){
+      const ok = picks.every((id, i) => id === i);
+      resetBtn.disabled = true;
+      resetBtn.style.opacity = .5;
+      pool.querySelectorAll('.word-chip').forEach(c => c.disabled = true);
+      finishAnswer(ok,
+        (ok ? '' : '말씀을 다시 함께 읽어 보아요.<br>') + '<b>' + q.explain + '</b>');
+    }
+
+    box.appendChild(build);
+    box.appendChild(pool);
+    box.appendChild(tools);
+  }
+
+  /* ================= 문제 표시 ================= */
+  function renderQuestion(){
+    answered = false;
+    const q = QUESTIONS[current];
+    $('#q-num').textContent = '문제 ' + (current + 1);
+    $('#q-badge').textContent = q.badge;
+    $('#q-text').innerHTML = q.q;
+    const box = $('#interaction');
+    box.innerHTML = '';
+    const fb = $('#feedback');
+    fb.classList.remove('show','good','bad');
+    $('#btn-next').style.display = 'none';
+    updateProgress();
+
+    switch(q.type){
+      case 'choice': renderChoice(q, box); break;
+      case 'ox':     renderOX(q, box); break;
+      case 'input':  renderInput(q, box); break;
+      case 'order':  renderOrder(q, box); break;
+      case 'match':  renderMatch(q, box); break;
+      case 'verse':  renderVerse(q, box); break;
+    }
+  }
+
+  /* ================= 결과 ================= */
+  function renderEnd(){
+    const score = results.filter(Boolean).length;
+    $('#score-num').textContent = score;
+    renderBranch($('#branch-final'), false);
+
+    let title, msg;
+    if (score === TOTAL){
+      title = '완벽해요!';
+      msg = '초록 열매 열 개를 모두 거두었어요! 말씀 박사님이네요. 🎉';
+    } else if (score >= 8){
+      title = '정말 잘했어요!';
+      msg = '초록 열매를 ' + score + '개나 거두었어요. 말씀을 꼼꼼히 기억하고 있네요!';
+    } else if (score >= 5){
+      title = '잘했어요!';
+      msg = '초록 열매 ' + score + '개! 아쉬웠던 문제만 다시 보면 금방 완벽해질 거예요.';
+    } else {
+      title = '괜찮아요!';
+      msg = '이야기를 다시 떠올리며 한 번 더 도전해 보아요. 분명 더 잘할 수 있어요!';
+    }
+    $('#end-title').textContent = title;
+    $('#score-msg').textContent = msg;
+
+    const list = $('#review-list');
+    list.innerHTML = '';
+    QUESTIONS.forEach((q, i) => {
+      const ok = results[i] === true;
+      const item = el('div','review-item ' + (ok ? 'ok' : 'no'));
+      item.appendChild(el('span','ico', ok ? '✓' : '✗'));
+      item.appendChild(el('span','', '<b>' + (i + 1) + '.</b> ' + q.short));
+      list.appendChild(item);
+    });
+
+    showScreen('#screen-end');
+    if (score >= 8) launchConfetti();
+  }
+
+  /* ================= 색종이 ================= */
+  function launchConfetti(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const colors = ['#3D9A6A','#FFC94D','#4FA3D9','#E8735A','#57B183'];
+    for (let i = 0; i < 70; i++){
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (2.4 + Math.random() * 1.8) + 's';
+      p.style.animationDelay = (Math.random() * .7) + 's';
+      p.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5200);
+    }
+  }
+
+  /* ================= 흐름 제어 ================= */
+  function startQuiz(){
+    current = 0;
+    results = new Array(TOTAL).fill(null);
+    document.querySelectorAll('.confetti-piece').forEach(p => p.remove());
+    showScreen('#screen-quiz');
+    renderQuestion();
+  }
+
+  $('#btn-start').addEventListener('click', startQuiz);
+  $('#btn-retry').addEventListener('click', startQuiz);
+  $('#btn-next').addEventListener('click', () => {
+    if (!answered) return;
+    if (current === TOTAL - 1){ renderEnd(); }
+    else { current++; renderQuestion(); }
+  });
+})();
+</script>
+</body>
+</html>
