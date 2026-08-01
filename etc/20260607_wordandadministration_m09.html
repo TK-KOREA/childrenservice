@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>성전에서 성으로 — 건축의 의미</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDEBE4; --card:#F7F5EF; --card2:#F0EDE5;
+  --line:#D9D5C8; --line-soft:#E3E0D5;
+  --ink:#292519; --ink2:#5D5748; --ink3:#8B8474;
+  --gold:#A5802B; --gold-deep:#87671F; --gold-bright:#C9A244; --gold-tint:#F7F0DD;
+  --silver:#8A939E;
+  --jasper:#2E6E5E; --jasper-deep:#245648; --jasper-tint:#E2EBE4;
+  --night:#0E1420; --moon:#E7C878; --moon-soft:#CBC5B4; --moon-bright:#F2D98F;
+  --night-line:rgba(231,200,120,.28);
+  --serif:'Gowun Batang','Noto Serif KR','Nanum Myeongjo',serif;
+  --sans:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.85;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.wrap{max-width:28rem;margin:0 auto;padding:0 1.3rem}
+section{padding:3rem 0 3.2rem}
+p{margin:0 0 1rem}
+p:last-child{margin-bottom:0}
+.small{font-size:.85rem;color:var(--ink2)}
+
+/* ---------- 공통 타이포 ---------- */
+.eyebrow{display:flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:700;letter-spacing:.34em;color:var(--gold-deep);margin-bottom:1.05rem}
+.eyebrow::before{content:"";width:1.4rem;height:1px;background:var(--gold)}
+h1{font-family:var(--serif);font-size:1.6rem;line-height:1.62;font-weight:700}
+h2{font-family:var(--serif);font-size:1.45rem;line-height:1.5;font-weight:700;margin:0 0 1rem}
+h3{font-family:var(--serif);font-size:1.1rem;line-height:1.55;font-weight:700;margin:1.6rem 0 .7rem}
+
+/* ---------- 돌 줄눈(섹션 구분선) ---------- */
+.joint{max-width:28rem;margin:0 auto;padding:0 1.3rem}
+.joint-in{position:relative;height:7px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.joint-in::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;background:var(--bg);border:1px solid var(--gold);transform:translate(-50%,-50%) rotate(45deg)}
+
+/* ---------- 성경 구절 카드 ---------- */
+.verse{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.05rem 1.15rem;margin:1.4rem 0}
+.verse .ref{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.22em;color:var(--gold-deep);border-bottom:1px solid var(--gold-bright);padding-bottom:.2rem;margin-bottom:.6rem}
+.verse .vt{font-family:var(--serif);font-size:.98rem;line-height:1.95;color:var(--ink)}
+.verse .vn{font-size:.68rem;color:var(--gold);vertical-align:super;margin-right:.15rem;font-family:var(--sans)}
+
+/* ---------- 메시지 원문 인용(깊이 블록) ---------- */
+.quote{border-left:3px solid var(--gold);padding:.25rem 0 .25rem 1.05rem;margin:1.7rem 0;font-family:var(--serif);font-size:.98rem;line-height:2;color:var(--ink)}
+.quote .qlabel{display:block;font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.28em;color:var(--gold-deep);margin-bottom:.55rem}
+
+/* ---------- 히어로 ---------- */
+.hero{padding:3.4rem 0 2.4rem}
+.hero .sub{font-size:.9rem;color:var(--ink2);margin:0 0 1.6rem}
+.hero .sub b{font-weight:700}
+.hero .sub .w-temple{color:var(--jasper)}
+.hero .sub .w-city{color:var(--gold-deep)}
+.hero-art{display:block;width:100%;height:auto;margin-top:.4rem}
+.cue{text-align:center;color:var(--gold);font-size:.95rem;margin-top:1.5rem}
+
+/* ---------- 프롤로그: 좌우 대조 ---------- */
+.contrast{display:grid;gap:.85rem;margin:1.4rem 0}
+.ccard{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:1.05rem 1.1rem}
+.ccard .ctag{display:flex;align-items:center;gap:.45rem;font-size:.72rem;font-weight:700;letter-spacing:.2em;margin-bottom:.5rem}
+.ccard .ctext{font-family:var(--serif);font-size:1rem;line-height:1.85}
+.ccard .csub{font-size:.8rem;color:var(--ink3);margin-top:.45rem}
+.ccard.no{background:var(--card2);border-style:dashed;color:var(--ink2)}
+.ccard.no .ctag{color:var(--ink3)}
+.ccard.yes{background:var(--gold-tint);border-color:var(--gold)}
+.ccard.yes .ctag{color:var(--gold-deep)}
+.ccard.yes .csub{color:var(--ink2)}
+
+/* ---------- 1막: 재료 ---------- */
+.materials{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1.6rem 0 1rem;text-align:center}
+.mat svg{width:60px;height:60px}
+.mat .mname{font-family:var(--serif);font-weight:700;font-size:1.02rem;margin-top:.45rem}
+.mat .mrole{font-size:.76rem;color:var(--ink2);line-height:1.55;margin-top:.2rem}
+.sumchip{display:flex;justify-content:center;margin:1.1rem 0 0}
+.sumchip span{display:inline-block;border:1px solid var(--gold);border-radius:999px;background:var(--card);padding:.45rem 1.1rem;font-family:var(--serif);font-size:.95rem;color:var(--ink)}
+.sumchip b{color:var(--gold-deep)}
+.burn{margin-top:1.5rem;border:1px dashed var(--line);border-radius:10px;padding:.85rem 1rem;font-size:.84rem;color:var(--ink3);line-height:1.7}
+.burn b{color:var(--ink2)}
+
+/* ---------- 2막: 큰 숫자와 두 카드 ---------- */
+.bigwrap{display:flex;align-items:center;gap:1.1rem;margin:.2rem 0 1.2rem}
+.bignum{font-family:var(--serif);font-size:6.2rem;line-height:1;font-weight:700;color:var(--gold)}
+.biglabel{font-size:.88rem;color:var(--ink2);line-height:1.7}
+.twocards{display:grid;gap:.95rem;margin:1.4rem 0}
+.tcard{border:1px solid var(--line);border-top:3px solid var(--jasper);border-radius:12px;background:var(--card);padding:1.1rem 1.15rem}
+.tcard.city{border-top-color:var(--gold)}
+.tcard .tkind{font-size:.7rem;font-weight:700;letter-spacing:.3em;color:var(--jasper)}
+.tcard.city .tkind{color:var(--gold-deep)}
+.tcard h3{margin:.35rem 0 .3rem;font-size:1.3rem}
+.tcard .tdesc{font-size:.88rem;color:var(--ink2);line-height:1.75}
+.vmini{margin-top:.85rem;padding-top:.85rem;border-top:1px dashed var(--line);font-family:var(--serif);font-size:.9rem;line-height:1.85;color:var(--ink2)}
+.vmini .ref{display:block;font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.2em;color:var(--gold-deep);margin-bottom:.35rem}
+.hist{margin-top:1.5rem;background:var(--card2);border-radius:12px;padding:1rem 1.1rem;font-size:.86rem;color:var(--ink2);line-height:1.8}
+.hist .htag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.22em;color:var(--gold-deep);margin-bottom:.4rem}
+
+/* ---------- 3막: 벤다이어그램·이야기·점검 ---------- */
+figure{margin:1.4rem 0}
+.venn{display:block;width:100%;max-width:22rem;margin:0 auto;height:auto}
+figcaption{text-align:center;font-size:.8rem;color:var(--ink3);margin-top:.5rem;line-height:1.6}
+.story{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;margin:1.7rem 0}
+.story-head{display:flex;align-items:center;gap:.55rem;padding:.7rem 1.1rem;background:var(--card2);border-bottom:1px solid var(--line);font-size:.76rem;font-weight:700;letter-spacing:.14em;color:var(--ink2)}
+.story-head svg{width:22px;height:22px;flex:none}
+.story-body{padding:1.05rem 1.15rem;font-family:var(--serif);font-size:.95rem;line-height:1.95}
+.story-body p{margin-bottom:.8rem}
+.check{border:1px solid var(--gold);border-radius:12px;background:var(--gold-tint);padding:1.05rem 1.15rem;margin:1.6rem 0}
+.check .ctag2{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.3em;color:var(--gold-deep);margin-bottom:.5rem}
+.check .cq{font-family:var(--serif);font-weight:700;font-size:1.03rem;line-height:1.8}
+.check .ca{font-size:.83rem;color:var(--ink2);margin-top:.55rem;line-height:1.7}
+.callout{margin:1.8rem 0;text-align:center;font-family:var(--serif);font-size:1.02rem;line-height:2;padding:0 .3rem}
+.callout .mark{color:var(--gold);font-weight:700}
+
+/* ---------- 4막: 단계·비교표·권위 예 ---------- */
+.steps{margin:1.5rem 0}
+.step{display:grid;grid-template-columns:auto 1fr;gap:.95rem;align-items:start;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:1rem 1.1rem}
+.step .snum{font-family:var(--serif);font-size:1.7rem;font-weight:700;line-height:1.15;color:var(--jasper)}
+.step.s2 .snum{color:var(--gold-deep)}
+.step .stitle{font-family:var(--serif);font-weight:700;font-size:1.06rem}
+.step .sdesc{font-size:.86rem;color:var(--ink2);margin-top:.25rem;line-height:1.7}
+.step .stag{display:inline-block;margin-top:.55rem;font-size:.7rem;letter-spacing:.14em;color:var(--jasper);border:1px solid var(--jasper);border-radius:999px;padding:.12rem .6rem}
+.step.s2 .stag{color:var(--gold-deep);border-color:var(--gold)}
+.sarrow{text-align:center;color:var(--gold);padding:.5rem 0;font-size:.9rem}
+.sarrow .snote{display:block;font-size:.78rem;color:var(--ink2);line-height:1.65;margin-top:.25rem}
+.cmp{width:100%;border-collapse:collapse;margin:1.6rem 0 .4rem;font-size:.9rem}
+.cmp th{font-family:var(--serif);font-size:1.05rem;font-weight:700;padding:.6rem .4rem .55rem;border-bottom:1px solid var(--line)}
+.cmp th.t1{color:var(--jasper);border-top:3px solid var(--jasper)}
+.cmp th.t2{color:var(--gold-deep);border-top:3px solid var(--gold)}
+.cmp td{padding:.58rem .4rem;border-bottom:1px solid var(--line-soft);text-align:center;color:var(--ink2);line-height:1.6}
+.cmp tr:last-child td{border-bottom:1px solid var(--line)}
+.minis{display:grid;gap:.7rem;margin:1.2rem 0}
+.mini{border:1px solid var(--line);border-left:3px solid var(--silver);border-radius:10px;background:var(--card);padding:.85rem 1rem;font-size:.86rem;color:var(--ink2);line-height:1.75}
+.mini b{color:var(--ink);font-family:var(--serif)}
+
+/* ---------- 전환 다리(어스름) ---------- */
+.bridge{background:linear-gradient(180deg,#242A38 0%,#1B2130 100%);padding:2.7rem 0}
+.bridge .quote{border-left-color:var(--moon);color:#EAE4D2;margin:0}
+.bridge .qlabel{color:var(--moon)}
+
+/* ---------- 5막: 전쟁 ---------- */
+.hands{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.5rem 0}
+.hand{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:1rem .8rem;text-align:center}
+.hand svg{width:46px;height:46px}
+.hand .hname{font-family:var(--serif);font-weight:700;font-size:1rem;margin-top:.45rem}
+.hand .hsub{font-size:.76rem;color:var(--ink2);margin-top:.15rem;line-height:1.6}
+.enw{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.4rem 0}
+.encard{border:1px solid var(--line);border-top:3px solid var(--jasper);border-radius:12px;background:var(--card);padding:.9rem .85rem;font-size:.82rem;color:var(--ink2);line-height:1.7}
+.encard.neh{border-top-color:var(--gold)}
+.encard b{display:block;font-family:var(--serif);font-size:1rem;color:var(--ink);margin-bottom:.25rem}
+.pyr{margin:1.6rem 0 .4rem;display:grid;gap:5px}
+.pyr-top{width:80%;margin:0 auto;background:var(--gold-tint);border:1px solid var(--gold);border-radius:8px;padding:.7rem .8rem;text-align:center;font-family:var(--serif);font-weight:700;font-size:.98rem}
+.pyr-top .ps{display:block;font-family:var(--sans);font-weight:400;font-size:.73rem;color:var(--ink2);margin-top:.2rem;letter-spacing:.05em}
+.pyr-base{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.pyr-b{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.68rem .5rem;text-align:center;font-family:var(--serif);font-weight:700;font-size:.95rem}
+.pyr-b .ps{display:block;font-family:var(--sans);font-weight:400;font-size:.72rem;color:var(--ink3);margin-top:.15rem}
+.pyrcap{text-align:center;font-size:.78rem;color:var(--ink3);margin-bottom:1rem}
+.chat{display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0 .5rem}
+.bub{max-width:86%;padding:.75rem .95rem;border-radius:14px;font-size:.92rem;line-height:1.75;font-family:var(--serif)}
+.bub .who{display:block;font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.24em;margin-bottom:.3rem}
+.bub.enemy{align-self:flex-start;background:#E4E1D7;color:var(--ink2);border-bottom-left-radius:4px}
+.bub.enemy .who{color:var(--ink3)}
+.bub.neh{align-self:flex-end;background:var(--gold-tint);border:1px solid var(--gold);border-bottom-right-radius:4px}
+.bub.neh .who{color:var(--gold-deep)}
+.chatcap{font-size:.8rem;color:var(--ink2);text-align:center;margin-bottom:1.2rem;line-height:1.7}
+.flow{margin:1.2rem 0 .3rem}
+.fbox{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:.75rem .9rem;font-size:.89rem;text-align:center;line-height:1.7}
+.farr{text-align:center;color:var(--gold);padding:.32rem 0;font-size:.82rem}
+.fsplit{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fopt{border:1px dashed var(--line);border-radius:10px;background:var(--card2);padding:.7rem .7rem;font-size:.78rem;color:var(--ink2);text-align:center;line-height:1.65}
+.fopt .fc{display:block;font-weight:700;color:var(--ink);font-size:.78rem;margin-bottom:.3rem}
+.ffinal{border:1px solid var(--gold);background:var(--gold-tint);font-family:var(--serif);font-weight:700}
+
+/* ---------- 6막: 2×2 매트릭스 ---------- */
+.mxwrap{margin:1.6rem 0}
+.mx{display:grid;grid-template-columns:1.1rem 1fr;gap:.5rem}
+.mx-y{writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-size:.7rem;letter-spacing:.22em;color:var(--ink2)}
+.mx-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mxc{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:.75rem .7rem}
+.mxc .mxtag{font-size:.66rem;color:var(--ink3);letter-spacing:.05em;margin-bottom:.3rem}
+.mxc .mt{font-family:var(--serif);font-weight:700;font-size:.92rem;line-height:1.5}
+.mxc .md{font-size:.74rem;color:var(--ink2);margin-top:.3rem;line-height:1.6}
+.mxc.best{background:var(--gold-tint);border-color:var(--gold)}
+.mxc.best .mxtag{color:var(--gold-deep)}
+.mxc.worst{background:transparent;border-style:dashed}
+.mxc.worst .mt{color:var(--ink2)}
+.mx-x{text-align:center;font-size:.7rem;letter-spacing:.22em;color:var(--ink2);margin-top:.45rem}
+.keyline{margin:1.3rem 0;text-align:center;font-family:var(--serif);font-size:1.04rem;line-height:1.9}
+.keyline .kt{color:var(--jasper)}
+.keyline .kc{color:var(--gold-deep)}
+
+/* ---------- 종막·에필로그(밤) ---------- */
+.night{background:linear-gradient(180deg,#1A2233 0%,var(--night) 26%,#0A0F19 100%);color:#E9E4D6}
+.night section{padding:3.2rem 0}
+.night .eyebrow{color:var(--moon)}
+.night .eyebrow::before{background:var(--moon)}
+.night h2{color:#F3EEDE}
+.night p{color:var(--moon-soft)}
+.night .small{color:#9A9484}
+.person{border:1px solid var(--night-line);border-radius:12px;background:rgba(231,200,120,.06);padding:1.1rem 1.15rem;margin:1.5rem 0}
+.person .ptag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.28em;color:var(--moon);margin-bottom:.55rem}
+.person .pq{font-family:var(--serif);font-size:.98rem;line-height:2;color:#EDE7D6}
+.pstep{display:flex;gap:.6rem;font-size:.84rem;color:var(--moon-soft);margin-top:.7rem;line-height:1.7}
+.pstep .pnum{font-family:var(--serif);font-weight:700;color:var(--moon);flex:none}
+.tl{position:relative;border-left:1px solid var(--night-line);margin:1.8rem 0 1.8rem .3rem;padding-left:1.15rem;display:grid;gap:1.25rem}
+.tli{position:relative}
+.tli::before{content:"";position:absolute;left:-1.44rem;top:.5rem;width:8px;height:8px;border-radius:50%;background:var(--moon);box-shadow:0 0 0 3px rgba(231,200,120,.14)}
+.tli .tbook{font-family:var(--serif);font-weight:700;font-size:1.02rem;color:var(--moon)}
+.tli .tdesc{font-size:.86rem;color:var(--moon-soft);margin-top:.2rem;line-height:1.75}
+.mergefig{margin:2rem 0 1rem}
+.merge{display:block;width:100%;max-width:22rem;margin:0 auto;height:auto}
+.njtitle{font-family:var(--serif);text-align:center;font-size:1.5rem;font-weight:700;color:#F5F0E0;margin:.7rem 0 .4rem;letter-spacing:.05em}
+.njcap{text-align:center;font-size:.85rem;color:var(--moon-soft);line-height:1.8;margin:0 auto;max-width:24rem}
+.night .verse{background:rgba(255,255,255,.045);border-color:var(--night-line)}
+.night .verse .ref{color:var(--moon);border-bottom-color:rgba(231,200,120,.5)}
+.night .verse .vt{color:#EDE8D8}
+.night .verse .vn{color:var(--moon)}
+.njoint{max-width:28rem;margin:0 auto;padding:0 1.3rem}
+.njoint-in{position:relative;height:7px;border-top:1px solid rgba(231,200,120,.2);border-bottom:1px solid rgba(231,200,120,.2)}
+.njoint-in::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;background:var(--night);border:1px solid var(--moon);transform:translate(-50%,-50%) rotate(45deg)}
+.askcard{border:1px solid var(--moon);border-radius:14px;background:rgba(231,200,120,.07);padding:1.25rem 1.2rem;text-align:center;margin:1.6rem 0}
+.askcard .aq{font-family:var(--serif);font-size:1.1rem;line-height:1.95;font-weight:700;color:#F3EEDE}
+.bless{margin:2.6rem 0 0;text-align:center}
+.bless .orn{width:7px;height:7px;border:1px solid var(--moon);transform:rotate(45deg);margin:0 auto 1.15rem}
+.bless .bt{font-family:var(--serif);font-size:1.04rem;line-height:2.1;color:#F0EBDA}
+footer{padding:2.4rem 0 2.8rem;text-align:center;font-size:.72rem;color:#867F6E;line-height:2}
+footer .wrap{border-top:1px solid rgba(231,200,120,.14);padding-top:1.6rem}
+
+/* ---------- 스크롤 등장 ---------- */
+@media (prefers-reduced-motion:no-preference){
+  [data-r]{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  [data-r].in{opacity:1;transform:none}
+  .cue{animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  .nj-glow{animation:glow 5.5s ease-in-out infinite alternate}
+  @keyframes glow{from{opacity:.55}to{opacity:1}}
+}
+@media (min-width:30rem){
+  .contrast{grid-template-columns:1fr 1fr}
+  .twocards{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ 히어로 ═══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">제9장 · 건축의 서사</div>
+    <h1>건축의 의미는<br>하나님께서 사람 위에<br>그분의 권위를 세우시는 것임</h1>
+    <p class="sub"><b class="w-temple">성전</b>(임재)에서 <b class="w-city">성</b>(권위)으로 — 아래로 내려가며 함께 지어져 가는 한 편의 건축 이야기</p>
+    <svg class="hero-art" viewBox="0 0 340 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="성전에서 성으로 가는 여정 그림">
+      <title>성전에서 성으로 가는 여정</title>
+      <!-- 땅과 오르는 계단 -->
+      <path d="M12 112 H196 V104 H216 V96 H236 V88 H330" fill="none" stroke="#B9B4A4" stroke-width="1.4"/>
+      <!-- 성전 -->
+      <g stroke="#2E6E5E" stroke-width="1.6" fill="none" stroke-linejoin="round">
+        <rect x="40" y="104" width="64" height="8"/>
+        <rect x="46" y="98" width="52" height="6"/>
+        <line x1="52" y1="72" x2="52" y2="98"/>
+        <line x1="65" y1="72" x2="65" y2="98"/>
+        <line x1="79" y1="72" x2="79" y2="98"/>
+        <line x1="92" y1="72" x2="92" y2="98"/>
+        <rect x="44" y="66" width="56" height="6"/>
+        <path d="M40 66 L72 48 L104 66 Z"/>
+      </g>
+      <!-- 여정의 점선 -->
+      <path d="M116 106 C150 106 196 98 232 88" fill="none" stroke="#8A939E" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 8"/>
+      <!-- 성 -->
+      <g stroke="#A5802B" stroke-width="1.6" fill="none" stroke-linejoin="round">
+        <rect x="252" y="64" width="66" height="24"/>
+        <rect x="244" y="52" width="14" height="36"/>
+        <rect x="312" y="52" width="14" height="36"/>
+        <path d="M258 64 v-5 h7 v5 M271 64 v-5 h7 v5 M284 64 v-5 h7 v5 M297 64 v-5 h7 v5"/>
+        <path d="M246 52 v-4 h4 v4 M252 52 v-4 h4 v4 M314 52 v-4 h4 v4 M320 52 v-4 h4 v4"/>
+        <path d="M279 88 v-9 a6 6 0 0 1 12 0 v9"/>
+      </g>
+      <!-- 성 위의 빛 -->
+      <circle cx="285" cy="26" r="13" fill="#C9A244" opacity="0.16"/>
+      <circle cx="285" cy="26" r="6" fill="#C9A244"/>
+      <g stroke="#C9A244" stroke-width="1.4" stroke-linecap="round">
+        <line x1="285" y1="12" x2="285" y2="7"/>
+        <line x1="285" y1="40" x2="285" y2="45"/>
+        <line x1="271" y1="26" x2="266" y2="26"/>
+        <line x1="299" y1="26" x2="304" y2="26"/>
+        <line x1="275" y1="16" x2="272" y2="13"/>
+        <line x1="295" y1="16" x2="298" y2="13"/>
+        <line x1="275" y1="36" x2="272" y2="39"/>
+        <line x1="295" y1="36" x2="298" y2="39"/>
+      </g>
+    </svg>
+    <div class="cue" aria-hidden="true">▾</div>
+  </div>
+</header>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 프롤로그 ═══════════ -->
+<section id="prologue">
+  <div class="wrap">
+    <div class="eyebrow" data-r>프롤로그</div>
+    <h2 data-r>건축이란 무엇인가?</h2>
+    <p data-r>사람들은 흔히 건축을, 흩어져 있는 사람들이 함께 동역하도록 하나의 단체로 묶는 일이라고 생각한다. 그러나 성경이 말하는 건축은 전혀 다른 것이다.</p>
+    <div class="contrast" data-r>
+      <div class="ccard no">
+        <div class="ctag"><span>✕</span><span>일반적인 생각</span></div>
+        <div class="ctext">단독적인 사람들을 단체적인 몸이 되게 하는 것</div>
+        <div class="csub">— 사람을 조직하는 것</div>
+      </div>
+      <div class="ccard yes">
+        <div class="ctag"><span>✓</span><span>건축의 참된 의미</span></div>
+        <div class="ctext">그리스도를 형제자매들 안으로 건축하여, 그들 안에 건축된 그리스도로 인해 한 몸이 되는 것</div>
+        <div class="csub">— 그리스도를 건축하는 것</div>
+      </div>
+    </div>
+    <div class="verse" data-r>
+      <span class="ref">에베소서 4:11-12</span>
+      <div class="vt"><span class="vn">11</span>그분께서 직접 어떤 사람들은 사도로, 어떤 사람들은 신언자로, 어떤 사람들은 복음 전파자로, 또 어떤 사람들은 목자 및 교사로 주셨습니다. <span class="vn">12</span>이것은 성도들을 온전하게 하여 그 사역의 일을 하게 하려는 것, 곧 그리스도의 몸을 건축하게 하려는 것입니다.</div>
+    </div>
+  </div>
+</section>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 제1막 재료 ═══════════ -->
+<section id="act1">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제1막</div>
+    <h2 data-r>건축의 재료 — 금과 은과 보석</h2>
+    <div class="verse" data-r>
+      <span class="ref">고린도전서 3:12</span>
+      <div class="vt">누구든지 이 기초 위에 금이나 은이나 보석이나 나무나 풀이나 짚으로 건축하면,</div>
+    </div>
+    <div class="materials" data-r>
+      <div class="mat">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs><radialGradient id="gGold" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#F6E1A6"/><stop offset="55%" stop-color="#D2A94E"/><stop offset="100%" stop-color="#9A7524"/>
+          </radialGradient></defs>
+          <circle cx="32" cy="32" r="26" fill="url(#gGold)" stroke="#87671F" stroke-width="1"/>
+          <ellipse cx="24" cy="22" rx="8" ry="5" fill="#FFFFFF" opacity="0.35"/>
+        </svg>
+        <div class="mname">금</div>
+        <div class="mrole">아버지의<br>신성한 본성</div>
+      </div>
+      <div class="mat">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs><radialGradient id="gSil" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#F4F7F9"/><stop offset="55%" stop-color="#B7C0C9"/><stop offset="100%" stop-color="#7C8692"/>
+          </radialGradient></defs>
+          <circle cx="32" cy="32" r="26" fill="url(#gSil)" stroke="#6E7883" stroke-width="1"/>
+          <ellipse cx="24" cy="22" rx="8" ry="5" fill="#FFFFFF" opacity="0.5"/>
+        </svg>
+        <div class="mname">은</div>
+        <div class="mrole">아들이신<br>그리스도의 구속</div>
+      </div>
+      <div class="mat">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="gGem" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8FD0BB"/><stop offset="100%" stop-color="#1F5C4C"/>
+          </linearGradient></defs>
+          <path d="M20 16 L44 16 L54 30 L32 56 L10 30 Z" fill="url(#gGem)" stroke="#1F5C4C" stroke-width="1.2" stroke-linejoin="round"/>
+          <g stroke="#DFF3EA" stroke-width="0.9" opacity="0.85" fill="none">
+            <path d="M20 16 L32 31 L44 16"/>
+            <path d="M10 30 L32 31 L54 30"/>
+            <path d="M32 31 L32 56"/>
+          </g>
+        </svg>
+        <div class="mname">보석</div>
+        <div class="mrole">그 영의 일</div>
+      </div>
+    </div>
+    <div class="sumchip" data-r><span>금 + 은 + 보석 = <b>삼일 하나님</b></span></div>
+    <p class="small" data-r style="text-align:center;margin-top:1rem">이 말은 아버지의 신성한 본성과 아들의 구속과 그 영의 일로 건축한다는 의미이다.</p>
+    <div class="burn" data-r><b>나무 · 풀 · 짚</b> — 만일 나무나 짚이나 풀로 건축하면 불타 버릴 것이다(고전 3:12-15). 재료가 건축을 결정한다.</div>
+  </div>
+</section>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 제2막 두 가지 건축 ═══════════ -->
+<section id="act2">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제2막</div>
+    <div class="bigwrap" data-r>
+      <div class="bignum">2</div>
+      <div class="biglabel">성경 전체에서, 우주 가운데 있는 하나님의 건축은<br><b>오직 두 가지</b>이다.</div>
+    </div>
+    <p data-r>성경 안에서 건축과 관련된 모든 기록은 거처 아니면 성에 대해 말한다. 성전과 궁전은 모두 거처를 가리키며, 바벨탑을 제외하고는 성경의 모든 건축물이 거처가 아니면 성이다.</p>
+    <div class="twocards" data-r>
+      <div class="tcard">
+        <span class="tkind">오늘의 건축</span>
+        <h3>거처</h3>
+        <div class="tdesc">교회는 하나님의 거처이자 하나님의 집이다.</div>
+        <div class="vmini"><span class="ref">에베소서 2:21-22</span>그분 안에서 건축물 전체가 함께 연결되어 주님 안에 있는 성전으로 자라 가고 있으며, 그분 안에서 여러분 또한 영 안에 있는 하나님의 거처로 함께 건축되고 있습니다.</div>
+      </div>
+      <div class="tcard city">
+        <span class="tkind">장래의 목표</span>
+        <h3>성</h3>
+        <div class="tdesc">하나님께서 건축하실 목표는 한 성, 곧 새 예루살렘이다.</div>
+        <div class="vmini"><span class="ref">히브리서 11:10</span>왜냐하면 그가 하나님께서 설계하시고 건축하신, 기초가 있는 성을 간절히 기다렸기 때문입니다.</div>
+      </div>
+    </div>
+    <div class="hist" data-r>
+      <span class="htag">파괴 → 회복</span><br>
+      이스라엘 백성이 가나안에 들어가 하나님을 위해 건축한 것도 성전과 성이었다(왕상 8장). 대적 사탄은 거룩한 성과 성전을 파괴함으로 하나님과 그분의 백성 사이의 관계를 파괴하려 했다. 그러나 회복의 움직임이 시작될 때마다 그들이 회복한 것 역시 성전과 성이었다.
+    </div>
+  </div>
+</section>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 제3막 성전: 연합 ═══════════ -->
+<section id="act3">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제3막</div>
+    <h2 data-r>성전의 건축 — 하나님과 사람의 연합</h2>
+    <p data-r>성전은 하나님의 임재의 방면을 강조하는데, 하나님의 임재는 바로 하나님과 사람의 연합이다. 그러므로 성전을 건축하는 것은 하나님과 사람의 연합을 건축하는 것이다.</p>
+    <figure data-r>
+      <svg class="venn" viewBox="0 0 340 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하나님과 사람이 겹치는 자리가 연합이다">
+        <title>하나님과 사람의 연합</title>
+        <circle cx="128" cy="106" r="80" fill="#A5802B" fill-opacity="0.10" stroke="#A5802B" stroke-width="1.5"/>
+        <circle cx="212" cy="106" r="80" fill="#55503F" fill-opacity="0.08" stroke="#6B6557" stroke-width="1.5"/>
+        <path d="M170 38 A80 80 0 0 1 170 174 A80 80 0 0 1 170 38 Z" fill="#2E6E5E" fill-opacity="0.2"/>
+        <text x="88" y="112" text-anchor="middle" font-family="Gowun Batang, serif" font-size="17" font-weight="700" fill="#87671F">하나님</text>
+        <text x="252" y="112" text-anchor="middle" font-family="Gowun Batang, serif" font-size="17" font-weight="700" fill="#3A362B">사람</text>
+        <text x="170" y="100" text-anchor="middle" font-family="Gowun Batang, serif" font-size="19" font-weight="700" fill="#245648">연합</text>
+        <text x="170" y="124" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11.5" fill="#4C6B60">임재 · 성전</text>
+      </svg>
+      <figcaption>하나님께서 우리 안에 연합되신 그 분량만큼, 우리는 다른 사람과 연결된다.</figcaption>
+    </figure>
+    <div class="verse" data-r>
+      <span class="ref">고린도전서 6:19</span>
+      <div class="vt">여러분의 몸이 여러분 안에 계신 성령의 성전인 것을 알지 못합니까? 이 성령은 여러분이 하나님께 받은 것이며, 또한 여러분은 여러분 자신의 것이 아닙니다.</div>
+    </div>
+    <p class="small" data-r>구약에서 성전이 건축되었을 때 여호와의 영광이 성전에 충만하였다(왕상 8:10-11). 하나님께서 친히 그분의 백성 가운데로 오셔서 그들과 연합되신 것이다.</p>
+    <div class="story" data-r>
+      <div class="story-head">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#8B8474" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="7" cy="8" r="2.6"/><path d="M2.6 18 c0-3 2-4.6 4.4-4.6 s4.4 1.6 4.4 4.6"/>
+          <circle cx="17" cy="8" r="2.6"/><path d="M12.6 18 c0-3 2-4.6 4.4-4.6 s4.4 1.6 4.4 4.6"/>
+        </svg>
+        한 장면 — 예의는 있으나 건축이 없는 두 형제
+      </div>
+      <div class="story-body">
+        <p>예를 들면 동역자의 집에서 함께 사는 의견이 다른 두 형제가 있는데, 그들이 비록 다투지는 않지만 하나 되지 못한다 하자. 그들은 같은 방에 함께 살면서 마주칠 때마다 언제나 예의바르게 행동하지만 그들 안에 건축은 없다. 한 번 물어 보자. 그들 가운데 하나님의 임재가 있는가? 하나님의 성전이 있는가? 없다.</p>
+        <p>그들 두 사람은 형제에 불과하고 함께 주님을 섬기는 사람에 불과하며, 함께 동역자의 집에 거하는 사람에 불과할 따름이다. 그들 둘 사이에는 하나님의 임재가 없고 하나님의 성전도 없다.</p>
+      </div>
+    </div>
+    <p data-r>이러한 이들을 어떻게 도울 것인가? 길은 하나이다. 그들 안으로 하나님을 들어오지 못하게 하는 그 부분, 곧 자아의 성분이 처리되어 그리스도께서 그들 안에 더욱 많이 연합되시게 하는 것이다. 우리가 참되게 사람들에게 영적인 도움을 줄 때마다, 사람들은 내적으로 하나님과 더 많이 연합될 뿐 아니라 함께 지체된 이들과 더 긴밀하게 연결된다.</p>
+    <div class="check" data-r>
+      <span class="ctag2">점검</span>
+      <div class="cq">당신이 전한 그 말씀을 통해, 하나님께서 사람 안에 더욱 많이 연합되셨는가?</div>
+      <div class="ca">만일 당신의 메시지가 하나님께서 사람 안으로 연합되시도록 하지 못했다면, 당신이 한 일은 건축의 일이 아니며 성전을 건축한 것도 아니다.</div>
+    </div>
+    <div class="callout" data-r><span class="mark">「</span>성전을 건축하는 것은 바로 당신이 한 그 일을 통하여 하나님께서 거처를 얻으시게 하고 사람 안에 거하실 수 있게 하는 것이다.<span class="mark">」</span></div>
+  </div>
+</section>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 제4막 성: 권위 ═══════════ -->
+<section id="act4">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제4막</div>
+    <h2 data-r>성의 건축 — 하나님의 권위</h2>
+    <p data-r>성전과 성은 차이가 있다. 성전은 거처와 거주의 문제이지만, 성은 통치의 문제이다. 성을 건축하는 것은 하나님의 주권을 건축하는 것으로, 하나님께서 그분의 권위를 사람 안에 건축하시는 것이다.</p>
+    <div class="steps" data-r>
+      <div class="step">
+        <div class="snum">1</div>
+        <div>
+          <div class="stitle">먼저 — 성전</div>
+          <div class="sdesc">하나님의 임재를 사람 안으로 건축하심</div>
+          <span class="stag">초보 단계 · 시작</span>
+        </div>
+      </div>
+      <div class="sarrow">▼<span class="snote">먼저 하나님과 사람의 연합이 있은 후에야,<br>하나님께서 사람에게 그분의 권위를 건축하실 수 있다.</span></div>
+      <div class="step s2">
+        <div class="snum">2</div>
+        <div>
+          <div class="stitle">나중 — 성</div>
+          <div class="sdesc">하나님의 권위와 주권을 사람에게 건축하심</div>
+          <span class="stag">최종 단계 · 가장 높은 단계</span>
+        </div>
+      </div>
+    </div>
+    <table class="cmp" data-r>
+      <thead>
+        <tr><th class="t1">성전</th><th class="t2">성</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>거처와 거주</td><td>통치</td></tr>
+        <tr><td>하나님의 임재</td><td>하나님의 주권과 권위</td></tr>
+        <tr><td>하나님과 사람의 연합</td><td>사람 위의 하나님의 다스리심</td></tr>
+        <tr><td>에스라의 회복</td><td>느헤미야의 회복</td></tr>
+        <tr><td>전쟁이 없었다</td><td>전쟁을 해야 했다</td></tr>
+      </tbody>
+    </table>
+    <h3 data-r>무엇이 권위 아래 있는 것인가</h3>
+    <p class="small" data-r>교회만이 아니라, 온 우주가 권위의 문제이자 질서의 문제이다.</p>
+    <div class="minis" data-r>
+      <div class="mini"><b>천사장 미가엘</b> — 모세의 시체에 관하여 마귀와 다투며 논쟁할 때에도, 감히 그를 거슬러 모욕하는 심판을 내리지 않고 다만 "주님께서 그대를 꾸짖으실 것입니다."라고 말하였다(유 9).</div>
+      <div class="mini"><b>백부장</b> — "나도 권위 아래 있는 사람이고, 내 아래에도 병사들이 있어, 이 사람에게 '가거라.'라고 하면 가고, 저 사람에게 '오너라.'라고 하면 옵니다."(마 8:9)</div>
+    </div>
+    <div class="verse" data-r>
+      <span class="ref">요한계시록 22:3</span>
+      <div class="vt">더 이상 저주가 없을 것이고, 하나님과 어린양의 보좌가 그 성안에 있을 것이며, 그분의 노예들이 그분을 섬길 것입니다.</div>
+    </div>
+    <p class="small" data-r>새 예루살렘의 중심은 바로 하나님과 어린양의 보좌인데, 이것은 권위의 문제이고 주권의 문제이다.</p>
+    <blockquote class="quote" data-r>
+      <span class="qlabel">메시지 원문에서</span>
+      그러므로 건축의 의미는 바로 하나님께서 사람 안에서 그분의 임재를 건축하시는 것이고 하나님께서 사람 위에 그분의 통치를 건축하는 것이다. 달리 말하면 하나님께서 사람 안에서 사람과의 연합을 건축하는 것이고, 사람의 존재에 하나님의 통치를 건축하는 것이다. 만일 이 땅 위에 성전이 없고 성이 없다면 하나님은 하늘에만 계실 수 있고 하늘에서만 다스리실 수 있다. 오직 이 땅에서 성전을 가지실 때 하나님은 비로소 땅 위에 거하실 수 있으며, 이 땅 위에 성을 가지실 때 하나님의 뜻은 땅에서도 이루어지고 하나님께서 비로소 땅을 다스리실 수 있으시다.
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════ 전환의 다리 ═══════════ -->
+<section class="bridge">
+  <div class="wrap">
+    <blockquote class="quote" data-r>
+      <span class="qlabel">전환 — 임재에서 권위로</span>
+      하나님의 임재는 전쟁의 문제가 아니지만 하나님의 권위는 전쟁의 문제이다. 사탄이 사람에게서 훼손시키고자 하는 것은 하나님의 임재가 아니라 하나님의 권위이다. 임재는 하나님의 최종적인 목적이 아니며 권위가 하나님의 최종적인 목적이다. 성경의 가장 끝에 나타나는 것은 한 성인데, 하나님의 보좌가 그 성의 중심이다.
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════ 제5막 성벽과 전쟁 ═══════════ -->
+<section id="act5">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제5막</div>
+    <h2 data-r>성벽과 전쟁 — 대적의 계략을 간파함</h2>
+    <p data-r>건축에는 반드시 전쟁이 따른다. 에베소서 2장은 건축을 말하고, 6장에 이르러 영적인 전쟁을 언급한다. 전쟁은 임재를 위한 것이 아니라 권위를 위한 것이다.</p>
+    <div class="verse" data-r>
+      <span class="ref">느헤미야 4:17</span>
+      <div class="vt">성벽을 건축하는 이들과 짐을 운반하는 이들은 일하는 동안 한 손으로는 짐을 나르고 다른 한 손으로는 무기를 잡았다.</div>
+    </div>
+    <div class="hands" data-r>
+      <div class="hand">
+        <svg viewBox="0 0 52 52" aria-hidden="true">
+          <g stroke="#2E6E5E" stroke-width="1.4" fill="#E2EBE4" stroke-linejoin="round">
+            <rect x="8" y="31" width="16" height="9" rx="1"/>
+            <rect x="28" y="31" width="16" height="9" rx="1"/>
+            <rect x="18" y="19" width="16" height="9" rx="1"/>
+          </g>
+        </svg>
+        <div class="hname">한 손에는 일</div>
+        <div class="hsub">한 면으로는<br>건축하고</div>
+      </div>
+      <div class="hand">
+        <svg viewBox="0 0 52 52" aria-hidden="true">
+          <polygon points="26,6 29,10 28,30 24,30 23,10" fill="#C9A244" stroke="#87671F" stroke-width="1"/>
+          <rect x="17" y="29" width="18" height="3.6" rx="1.8" fill="#87671F"/>
+          <rect x="24" y="32.6" width="4" height="8" fill="#6B531B"/>
+          <circle cx="26" cy="43.5" r="3" fill="#87671F"/>
+        </svg>
+        <div class="hname">한 손에는 병기</div>
+        <div class="hsub">다른 한 면으로는<br>전쟁을 해야 한다</div>
+      </div>
+    </div>
+    <div class="enw" data-r>
+      <div class="encard"><b>에스라</b>성전을 회복하였다. 전쟁이 없었는데, 보호와 관련된 문제가 아니었기 때문이다.</div>
+      <div class="encard neh"><b>느헤미야</b>성을 회복하려 하자 즉시 대적이 왔다(느 4:7-8). 성이 보호를 위한 것이기 때문이다.</div>
+    </div>
+    <h3 data-r>계략을 간파하는 세 가지 앎</h3>
+    <div class="pyr" data-r>
+      <div class="pyr-top">대적의 계략을 앎<span class="ps">영적인 전쟁에서 첫 번째로 처리해야 될 것</span></div>
+      <div class="pyr-base">
+        <div class="pyr-b">사람을 앎<span class="ps">첫 번째 기초</span></div>
+        <div class="pyr-b">일을 앎<span class="ps">두 번째 기초</span></div>
+      </div>
+    </div>
+    <div class="pyrcap">사람을 알고 일을 아는 기초가 있어야, 그 안에 숨은 대적의 계략을 간파할 수 있다.</div>
+    <div class="verse" data-r>
+      <span class="ref">에베소서 6:11</span>
+      <div class="vt">마귀의 계략에 대항해 설 수 있도록, 하나님께서 주신 완전한 전투 장비로 무장하십시오.</div>
+    </div>
+    <div class="chat" data-r>
+      <div class="bub enemy"><span class="who">대적</span>"오라, 우리가 … 서로 만나자."</div>
+      <div class="bub neh"><span class="who">느헤미야</span>"네가 말한 바 이런 일은 없는 일이요 네 마음에서 지어낸 것이라."</div>
+    </div>
+    <div class="chatcap">느헤미야 6:1-9 — 영적인 전쟁은 먼저 칼로 싸우는 것이 아니라, 대적의 계략을 간파하는 것이다.</div>
+    <div class="story" data-r>
+      <div class="story-head">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#8B8474" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 4 h10 M9 4 v5 a3 3 0 0 0 6 0 V4 M12 12 v6 M8 20 h8"/>
+        </svg>
+        한 가지 사례 — 큰 잔인가, 작은 잔들인가
+      </div>
+      <div class="story-body">
+        <p>과거에 떡 떼는 집회 때 사용하는 잔을 큰 잔에서 조그만 잔들로 바꾸는 것에 관한 문제가 있었다. 이것은 큰 잔이냐 혹은 작은 잔들이냐의 문제가 아니라 <b>권위의 문제</b>이다. 행정적인 방면에서 이를 결정하는 권위는 장로들에게 있다. 설령 당신의 주장이 진리에 부합하더라도, 여전히 정상적인 수속과 과정을 거쳐야 한다.</p>
+      </div>
+    </div>
+    <div class="flow" data-r>
+      <div class="fbox">지역에서 <b>느낌과 제의</b>가 생긴다</div>
+      <div class="farr">▼</div>
+      <div class="fbox">정상적인 과정을 거쳐 <b>장로집회 앞에</b> 내놓는다</div>
+      <div class="farr">▼</div>
+      <div class="fbox">장로들이 신중하게 <b>주님 앞에서 기도하며</b> 주님의 뜻과 인도를 구한다</div>
+      <div class="farr">▼</div>
+      <div class="fsplit">
+        <div class="fopt"><span class="fc">교회 안에서 할 수 없는 일이라 느끼면</span>권위에 순복하고 아무 말도 하지 않는다</div>
+        <div class="fopt"><span class="fc">일리가 있다고 여기면</span>그 지역만이 아니라 온 교회가 함께 실행한다</div>
+      </div>
+      <div class="farr">▼</div>
+      <div class="fbox ffinal">이것이 바로 교회이다</div>
+    </div>
+    <p data-r style="margin-top:1.4rem">오늘 대적이 교회 안에서 하고 있는 일은 권위와 질서를 파괴하려는 것이다. 교회에서 다툼으로 할 수 있는 것은 아무것도 없다. 교회는 권위를 세우고 성벽을 건축하여 성도들을 보호해야 한다.</p>
+  </div>
+</section>
+
+<div class="joint" aria-hidden="true"><div class="joint-in"></div></div>
+
+<!-- ═══════════ 제6막 둘 다 있어야 함 ═══════════ -->
+<section id="act6">
+  <div class="wrap">
+    <div class="eyebrow" data-r>제6막</div>
+    <h2 data-r>성전과 성, 이 둘 중 하나라도 부족해서는 안 됨</h2>
+    <div class="keyline" data-r><span class="kt">성전</span>이 없으면 거처가 없고,<br><span class="kc">성</span>이 없으면 보호가 없다.</div>
+    <div class="mxwrap" data-r>
+      <div class="mx">
+        <div class="mx-y">하나님의 권위 (질서) →</div>
+        <div class="mx-grid">
+          <div class="mxc">
+            <div class="mxtag">임재 ✕ · 권위 ✓</div>
+            <div class="mt">규칙만 있는 모임</div>
+            <div class="md">정해진 규칙만 지키는 것으로는 충분하지 않다.</div>
+          </div>
+          <div class="mxc best">
+            <div class="mxtag">임재 ✓ · 권위 ✓</div>
+            <div class="mt">성전이 있고 성이 있는 교회</div>
+            <div class="md">강하고 능력이 있는 교회 — 임재로 가득하고 권위로 충만하다.</div>
+          </div>
+          <div class="mxc worst">
+            <div class="mxtag">임재 ✕ · 권위 ✕</div>
+            <div class="mt">한 무더기의 돌들</div>
+            <div class="md">어지럽게 쌓아 놓은 것에 불과한, 가장 약한 모임.</div>
+          </div>
+          <div class="mxc">
+            <div class="mxtag">임재 ✓ · 권위 ✕</div>
+            <div class="mt">성벽 없는 성전</div>
+            <div class="md">보호가 없어, 얼마 안 가 성전조차 잃고 임재도 잃는다.</div>
+          </div>
+        </div>
+        <div class="mx-x" style="grid-column:2">하나님의 임재 (연합) →</div>
+      </div>
+    </div>
+    <p class="small" data-r>서로 친밀하고 서로 사랑하는 것이 반드시 하나님의 임재는 아니다. 그것은 사람의 타고난 감정에서 나온 것일 뿐일 수 있다. 설령 그 가운데 하나님과의 연합이 있다 할지라도, 하나님의 권위가 없다면 이 또한 보호가 없는 것이다. 사탄은 교회 안에서 질서가 없고 권위가 없다면 하나님의 임재가 쉽게 상실될 수 있음을 잘 알고 있다.</p>
+    <blockquote class="quote" data-r>
+      <span class="qlabel">메시지 원문에서</span>
+      한 지방교회가 어떤 일에 봉착하게 되면 이 사람 저 사람이 다 한 마디씩 하거나, 누가 말을 하든 다 일리가 있다고 하거나, 그렇지 않으면 누구의 말도 듣지 않으려고 한다. 이런 교회는 가장 약한 교회이고 건축이 없는 교회이며, 한 무더기의 돌들을 어지럽게 쌓아놓은 것에 불과하다. 강하고 능력이 있는 교회는 바로 하나님의 임재로 가득할 뿐 아니라 하나님의 권위로 충만한 교회이다. 여기에는 성전이 있고 성도 있다.
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════ 종막 · 에필로그 (밤) ═══════════ -->
+<div class="night">
+  <section id="finale">
+    <div class="wrap">
+      <div class="eyebrow" data-r>종막</div>
+      <h2 data-r>새 예루살렘 — 임재와 권위가 하나로</h2>
+      <div class="person" data-r>
+        <span class="ptag">우주 가운데 건축된 한 사람</span>
+        <div class="pq">이렇게 할 때 그 사람은 안에 하나님의 임재뿐 아니라 또한 하나님의 주권도 있는 건축된 사람이 될 것이다. 이제부터 그는 어디를 가든지 누구와도 건축될 수 있다. 그는 우주 가운데 건축된 한 사람이 된다.</div>
+        <div class="pstep"><span class="pnum">①</span><span>먼저 그가 조금씩 하나님과 연합되게 한다 — 그의 실생활에 하나님의 임재가 있게 하는 것, 곧 성전이다.</span></div>
+        <div class="pstep"><span class="pnum">②</span><span>그런 후에 그가 하나님의 권위를 알게 한다 — 그의 존재에 성벽을 쌓아 올리는 것, 곧 성이다.</span></div>
+      </div>
+      <div class="tl" data-r>
+        <div class="tli">
+          <div class="tbook">창세기</div>
+          <div class="tdesc">우주가 혼돈에 있었다. 질서를 잃어버렸기 때문이다.</div>
+        </div>
+        <div class="tli">
+          <div class="tbook">마태복음</div>
+          <div class="tdesc">하나님께서 회복의 일을 시작하셨다. 회복이 진행될수록 질서가 세워진다.</div>
+        </div>
+        <div class="tli">
+          <div class="tbook">요한계시록</div>
+          <div class="tdesc">모든 것이 질서 안으로 들어온다. 마침내 한 성이 나타난다.</div>
+        </div>
+      </div>
+      <figure class="mergefig" data-r>
+        <svg class="merge" viewBox="0 0 340 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="성전과 성이 새 예루살렘에서 하나로 합해지는 그림">
+          <title>성전과 성이 하나로 합해짐</title>
+          <defs>
+            <radialGradient id="gNJ" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(231,200,120,0.5)"/>
+              <stop offset="60%" stop-color="rgba(231,200,120,0.12)"/>
+              <stop offset="100%" stop-color="rgba(231,200,120,0)"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="62" r="46" fill="rgba(127,191,169,0.10)" stroke="#7FBFA9" stroke-width="1.5"/>
+          <text x="100" y="58" text-anchor="middle" font-family="Gowun Batang, serif" font-size="17" font-weight="700" fill="#CFE8DD">성전</text>
+          <text x="100" y="78" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#9FC9BA">임재</text>
+          <circle cx="240" cy="62" r="46" fill="rgba(231,200,120,0.10)" stroke="#E7C878" stroke-width="1.5"/>
+          <text x="240" y="58" text-anchor="middle" font-family="Gowun Batang, serif" font-size="17" font-weight="700" fill="#F2D98F">성</text>
+          <text x="240" y="78" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#D9BC74">권위</text>
+          <path d="M100 110 C100 152 158 150 166 178" fill="none" stroke="rgba(231,200,120,0.5)" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>
+          <path d="M240 110 C240 152 182 150 174 178" fill="none" stroke="rgba(231,200,120,0.5)" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>
+          <text x="170" y="138" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#CBC5B4">임재와 권위가 하나로</text>
+          <circle class="nj-glow" cx="170" cy="218" r="64" fill="url(#gNJ)"/>
+          <circle cx="170" cy="218" r="54" fill="rgba(231,200,120,0.05)" stroke="#E7C878" stroke-width="1.5"/>
+          <circle cx="170" cy="218" r="4.5" fill="#F2D98F"/>
+          <g stroke="#E7C878" stroke-width="1.5" stroke-linecap="round">
+            <line x1="179" y1="218" x2="187" y2="218"/>
+            <line x1="176.4" y1="211.6" x2="182" y2="206"/>
+            <line x1="170" y1="209" x2="170" y2="201"/>
+            <line x1="163.6" y1="211.6" x2="158" y2="206"/>
+            <line x1="161" y1="218" x2="153" y2="218"/>
+            <line x1="163.6" y1="224.4" x2="158" y2="230"/>
+            <line x1="170" y1="227" x2="170" y2="235"/>
+            <line x1="176.4" y1="224.4" x2="182" y2="230"/>
+          </g>
+          <text x="170" y="254" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="12" letter-spacing="4" fill="#E7C878">보좌</text>
+        </svg>
+      </figure>
+      <div class="njtitle" data-r>새 예루살렘</div>
+      <p class="njcap" data-r>새 예루살렘이 출현할 때 이 둘은 하나로 합해질 것이다.<br>한 면으로 그것은 성이며 — 권위이고,<br>다른 한 면으로 사람들 가운데 있는 하나님의 장막이며 — 거처이다.<br>그 성의 중심은 하나님과 어린양의 보좌이다.</p>
+      <div class="verse" data-r>
+        <span class="ref">요한계시록 21:2-3</span>
+        <div class="vt"><span class="vn">2</span>또 내가 보니, 거룩한 성 새 예루살렘이 하늘에서 하나님에게서 내려오는데, 남편을 위하여 단장한 신부로 준비되어 있었습니다. <span class="vn">3</span>또 나는 보좌에서 나오는 큰 음성을 들었습니다. "보아라, 하나님의 장막이 사람들과 함께 있고, 하나님께서 그들과 함께 장막을 치실 것이다. 그들은 하나님의 백성들이 될 것이고, 하나님은 직접 그들과 함께 계시며 그들의 하나님이 되실 것이다."</div>
+      </div>
+      <div class="verse" data-r>
+        <span class="ref">요한계시록 22:3</span>
+        <div class="vt">더 이상 저주가 없을 것이고, 하나님과 어린양의 보좌가 그 성안에 있을 것이며, 그분의 노예들이 그분을 섬길 것입니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="njoint" aria-hidden="true"><div class="njoint-in"></div></div>
+
+  <section id="epilogue">
+    <div class="wrap">
+      <div class="eyebrow" data-r>에필로그</div>
+      <h2 data-r>우리는 무엇을 건축하고 있는가</h2>
+      <p data-r>하나님의 교회는 성전이며 성이다. 하나님의 교회에는 하나님의 임재가 있고, 하나님의 교회에는 하나님의 주권이 있다. 우리는 반드시 우리가 무슨 일을 하고 있는지를 자문해 보아야 한다.</p>
+      <div class="askcard" data-r>
+        <div class="aq">우리는 여기에서 교회를 건축하고 있는가,<br>아니면 기독교를 건축하고 있는가?</div>
+      </div>
+      <p data-r>우리가 배워야 될 가장 우선적인 공과는 우리가 하나님의 주권 아래 있는지, 우리가 하나님께서 안배하신 그 질서 아래 있는지, 우리가 자신의 위치를 지키고 있는지의 여부를 아는 것이다.</p>
+      <div class="bless" data-r>
+        <div class="orn" aria-hidden="true"></div>
+        <div class="bt">주님께서 우리를 은혜로 대해 주셔서<br>우리가 건축이 무엇인지를<br>알게 해 주시기 바란다.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      본문 — 제9장 「건축의 의미는 하나님께서 사람 위에 그분의 권위를 세우시는 것임」<br>
+      성경 구절 — 한국어 회복역
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('[data-r]');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) { els[i].classList.add('in'); }
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    for (var j = 0; j < entries.length; j++) {
+      if (entries[j].isIntersecting) {
+        entries[j].target.classList.add('in');
+        io.unobserve(entries[j].target);
+      }
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  for (var k = 0; k < els.length; k++) { io.observe(els[k]); }
+})();
+</script>
+</body>
+</html>
