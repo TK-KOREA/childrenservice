@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>하나님께서 정하신 길은 집을 얻는 것</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141B33;
+  --ink-2:#232C4C;
+  --dawn:#EDEFF6;
+  --paper:#FFFFFF;
+  --cord:#A81E2D;
+  --cord-bright:#E0616B;
+  --cord-soft:#F0DCDC;
+  --lamp:#B58433;
+  --slate:#5E6885;
+  --line:#DCE0EB;
+  --disp:'Gowun Batang','Nanum Myeongjo',serif;
+  --body:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --num:'Cormorant Garamond',Georgia,serif;
+}
+*{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--dawn);color:var(--ink);
+  font-family:var(--body);font-size:1rem;font-weight:400;line-height:1.8;
+  letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word;
+}
+p{margin:0 0 .9em}
+h1,h2,h3,h4{margin:0;font-family:var(--disp);font-weight:700;line-height:1.45}
+
+/* ── 레이아웃 ───────────────────────── */
+.wrap{max-width:520px;margin:0 auto;background:var(--dawn);
+  box-shadow:0 0 60px rgba(20,27,51,.08)}
+.page{position:relative;padding:0 18px 64px}
+.sec{position:relative;padding:52px 0 8px 34px}
+
+/* 붉은 줄 */
+.cord{position:absolute;left:26px;top:0;bottom:0;width:2px;background:var(--cord-soft)}
+.cord-fill{position:absolute;left:26px;top:0;width:2px;height:0;background:var(--cord);
+  box-shadow:0 0 8px rgba(168,30,45,.35)}
+.knot{position:absolute;left:1px;top:56px;width:14px;height:14px;border-radius:50%;
+  background:var(--dawn);border:2px solid var(--cord)}
+.knot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--cord)}
+
+/* ── HERO ──────────────────────────── */
+.hero{background:var(--ink);color:#E9EBF4;padding:44px 24px 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;left:-40%;top:-30%;width:180%;height:70%;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(224,97,107,.16),transparent 70%);pointer-events:none}
+.eyebrow{font-family:var(--num);font-size:.8125rem;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--cord-bright);margin-bottom:14px;position:relative}
+.hero h1{font-size:1.875rem;line-height:1.42;letter-spacing:-.02em;position:relative}
+.hero h1 em{font-style:normal;color:var(--cord-bright)}
+.hero .lead{font-size:.9375rem;color:#A9B1CB;margin-top:14px;line-height:1.8;position:relative}
+.hero .rule{width:38px;height:2px;background:var(--cord-bright);margin:22px 0;position:relative}
+
+/* 전환 다이어그램 */
+.turn{margin:6px 0 4px;position:relative}
+.turn svg{width:100%;height:auto;display:block}
+.turn .bx{fill:none;stroke:#4A5578;stroke-width:1}
+.turn .lb{font-family:var(--disp);font-size:14px;fill:#E9EBF4}
+.turn .sb{font-family:var(--body);font-size:10.5px;fill:#8E97B6}
+.turn .arc{fill:none;stroke:var(--cord-bright);stroke-width:1.6;stroke-linecap:round}
+.turn .at{font-family:var(--body);font-size:10px;fill:var(--cord-bright);letter-spacing:.02em}
+.turn .core{font-family:var(--disp);font-size:13px;fill:var(--lamp);letter-spacing:.1em}
+
+/* 인용 */
+.quote{position:relative;background:var(--paper);border-left:3px solid var(--cord);
+  padding:18px 18px 16px;margin:20px 0;font-family:var(--disp);font-size:1.0625rem;
+  line-height:1.92;color:var(--ink);box-shadow:0 1px 0 rgba(20,27,51,.05)}
+.quote .ref{display:block;margin-top:10px;font-family:var(--body);font-size:.75rem;
+  letter-spacing:.06em;color:var(--cord);font-weight:500}
+.quote.on-dark{background:rgba(255,255,255,.05);border-left-color:var(--cord-bright);
+  color:#E9EBF4;box-shadow:none}
+.quote.on-dark .ref{color:var(--cord-bright)}
+.quote.speak{border-left-color:var(--lamp);background:#FBF7EE}
+.quote.speak .ref{color:var(--lamp)}
+
+/* 개요 칩 */
+.outline{padding:26px 24px 34px;background:var(--ink);position:relative}
+.outline .ot{font-size:.75rem;letter-spacing:.22em;color:#7F89A9;margin-bottom:14px}
+.chip{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid #2C3556;
+  color:#C9CFE2;text-decoration:none;font-size:.875rem;line-height:1.6}
+.chip:last-child{border-bottom:1px solid #2C3556}
+.chip b{font-family:var(--num);font-size:1rem;color:var(--cord-bright);
+  flex:0 0 26px;font-weight:600;font-style:italic}
+
+/* 창(窓) */
+.window{position:relative;height:56px;display:flex;justify-content:flex-start;padding-left:8px}
+.window svg{display:block}
+
+/* ── 섹션 공통 ──────────────────────── */
+.sec .tag{font-family:var(--num);font-style:italic;font-size:1.125rem;color:var(--cord);
+  letter-spacing:.08em;display:block;margin-bottom:6px}
+.sec h2{font-size:1.375rem;letter-spacing:-.02em;line-height:1.5}
+.sec .sub{font-size:.875rem;color:var(--slate);margin-top:10px;line-height:1.75}
+.body{font-size:1rem;color:#2B3350;margin-top:16px}
+.body p{margin-bottom:1em}
+
+h3.h{font-size:1.0625rem;margin:34px 0 6px;letter-spacing:-.01em}
+h3.h .mk{font-family:var(--num);font-style:italic;color:var(--cord);margin-right:8px;font-weight:600}
+h4.h4{font-size:.9375rem;margin:26px 0 4px;color:var(--ink)}
+.cap{font-size:.8125rem;color:var(--slate);line-height:1.7}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:2px;
+  padding:18px 16px;margin:18px 0}
+.card.tint{background:#F7F4FB;border-color:#E3DEEF}
+
+/* Big number */
+.big{display:flex;align-items:baseline;gap:12px;margin:22px 0 6px}
+.big .n{font-family:var(--num);font-size:4rem;line-height:.85;color:var(--cord);font-weight:600}
+.big .t{font-size:.875rem;color:var(--slate);line-height:1.6}
+.big .t b{display:block;font-size:1.0625rem;color:var(--ink);font-family:var(--disp)}
+
+/* 좌우 대조표 */
+.vs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--paper);margin:18px 0}
+.vs>div{padding:14px 12px}
+.vs>div:nth-child(odd){border-right:1px solid var(--line)}
+.vs .hd{background:#F2F4FA;font-family:var(--disp);font-weight:700;font-size:.9375rem;
+  border-bottom:1px solid var(--line)}
+.vs .hd.r{color:var(--cord)}
+.vs .row{border-bottom:1px solid #EDEFF5;font-size:.875rem;line-height:1.7}
+.vs .row .k{display:block;font-size:.6875rem;letter-spacing:.12em;color:#98A0B8;margin-bottom:3px}
+
+/* 단계 */
+.steps{margin:18px 0;counter-reset:st}
+.step{position:relative;padding:0 0 18px 40px}
+.step::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:1px;
+  width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;
+  font-family:var(--num);font-size:.875rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step::after{content:"";position:absolute;left:11.5px;top:28px;bottom:2px;width:1px;background:var(--line)}
+.step:last-child::after{display:none}
+.step b{display:block;font-family:var(--disp);font-size:.9375rem}
+.step span{font-size:.875rem;color:var(--slate);line-height:1.7}
+
+/* 여정 흐름 */
+.jour{background:var(--paper);border:1px solid var(--line);padding:16px 14px;margin:18px 0}
+.jour .from{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}
+.jour .from div{font-size:.6875rem;line-height:1.45;color:var(--slate);padding:8px 2px;
+  border:1px dashed #C9CFE0;background:#FAFBFD}
+.jour .from div b{display:block;font-family:var(--disp);font-size:.8125rem;color:var(--ink);font-weight:700}
+.jour .arw{text-align:center;color:var(--cord);font-size:.875rem;margin:10px 0 8px;letter-spacing:.3em}
+.jour .to{text-align:center;padding:12px;border:1px solid var(--cord);background:#FDF6F6}
+.jour .to b{font-family:var(--disp);font-size:1.0625rem;display:block;color:var(--cord)}
+.jour .to span{font-size:.75rem;color:var(--slate)}
+
+/* 3세대 타임라인 */
+.gen{margin:18px 0;position:relative;padding-left:22px}
+.gen::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.gen .g{position:relative;padding:0 0 16px}
+.gen .g::before{content:"";position:absolute;left:-21px;top:8px;width:11px;height:11px;border-radius:50%;
+  background:var(--dawn);border:2px solid var(--slate)}
+.gen .g.z::before{border-color:var(--cord);background:var(--cord)}
+.gen .g b{font-family:var(--disp);font-size:.9375rem;display:block}
+.gen .g span{font-size:.8125rem;color:var(--slate)}
+
+/* 게이지 */
+.gauge{margin:18px 0}
+.gauge .g{margin-bottom:16px}
+.gauge .lab{display:flex;justify-content:space-between;font-size:.8125rem;margin-bottom:6px}
+.gauge .lab b{font-family:var(--disp);font-size:.9375rem}
+.gauge .lab i{font-style:normal;color:var(--slate);font-size:.75rem}
+.gauge .track{height:12px;background:#E2E6F0;position:relative;overflow:hidden}
+.gauge .fill{position:absolute;left:0;top:0;bottom:0;width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.gauge .g.down .fill{background:#A8AEC2}
+.gauge .g.up .fill{background:linear-gradient(90deg,var(--cord),var(--cord-bright))}
+.gauge .note{font-size:.75rem;color:var(--slate);margin-top:5px}
+
+/* 픽토그램 배열 */
+.pics{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 8px}
+.pics svg{width:26px;height:26px;display:block}
+.pics .p1{fill:none;stroke:var(--cord);stroke-width:1.6}
+.pics .p2{fill:var(--cord);stroke:none}
+.legend{display:flex;gap:16px;font-size:.75rem;color:var(--slate);margin-bottom:6px}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:0}
+.legend .a{border:1.5px solid var(--cord)}
+.legend .b{background:var(--cord)}
+
+/* 목록 카드 */
+.items{margin:14px 0}
+.item{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:13px 0;border-top:1px solid var(--line)}
+.item:last-child{border-bottom:1px solid var(--line)}
+.item .n{font-family:var(--num);font-size:1.0625rem;font-weight:600;color:var(--cord);line-height:1.5}
+.item b{font-family:var(--disp);font-size:.9375rem;display:block;line-height:1.6}
+.item span{font-size:.8125rem;color:var(--slate);line-height:1.7;display:block}
+.item .v{font-size:.75rem;color:var(--lamp);letter-spacing:.04em;margin-top:3px;display:block}
+
+/* 갈림길 */
+.fork{margin:20px 0}
+.fork .q{background:var(--ink);color:#E9EBF4;padding:14px;font-family:var(--disp);
+  font-size:.9375rem;text-align:center}
+.fork .split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.fork .opt{border:1px solid var(--line);background:var(--paper);padding:12px 10px;font-size:.8125rem;line-height:1.6}
+.fork .opt b{display:block;font-family:var(--disp);font-size:.875rem;margin-bottom:3px}
+.fork .opt.no{color:#8890A8}
+.fork .opt.no b{color:#6C7590}
+.fork .down{text-align:center;color:var(--cord);margin:8px 0;letter-spacing:.3em;font-size:.875rem}
+.fork .yes{border:2px solid var(--cord);background:#FDF6F6;padding:16px;text-align:center;
+  font-family:var(--disp);font-size:1.0625rem;color:var(--cord);line-height:1.6}
+
+/* 기도 주간표 */
+.week{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:18px 0 8px}
+.week .d{border:1px solid var(--line);background:var(--paper);padding:10px 4px;text-align:center}
+.week .d .w{font-family:var(--num);font-size:.75rem;letter-spacing:.1em;color:var(--slate)}
+.week .d .dot{width:9px;height:9px;border-radius:50%;background:var(--cord-soft);margin:7px auto 6px}
+.week .d .who{font-size:.6875rem;line-height:1.4;color:var(--ink)}
+.week .d.me{border-color:var(--cord);background:#FDF6F6}
+.week .d.me .dot{background:var(--cord)}
+.week .d.me .who{color:var(--cord);font-weight:600}
+
+/* 벤 */
+.venn svg{width:100%;height:auto;display:block;margin:14px 0 4px}
+.venn .c1{fill:rgba(94,104,133,.16);stroke:var(--slate);stroke-width:1}
+.venn .c2{fill:rgba(168,30,45,.12);stroke:var(--cord);stroke-width:1}
+.venn .t{font-family:var(--disp);font-size:13px;fill:var(--ink)}
+.venn .s{font-family:var(--body);font-size:10px;fill:var(--slate)}
+.venn .m{font-family:var(--disp);font-size:14px;fill:var(--cord);font-weight:700}
+
+/* 순환 */
+.cycle svg{width:100%;height:auto;display:block}
+.cycle .ring{fill:none;stroke:var(--cord-soft);stroke-width:1.4}
+.cycle .arc{fill:none;stroke:var(--cord);stroke-width:1.8;stroke-linecap:round}
+.cycle .nd{fill:var(--paper);stroke:var(--cord);stroke-width:1.4}
+.cycle .t{font-family:var(--disp);font-size:12.5px;fill:var(--ink);font-weight:700}
+.cycle .s{font-family:var(--body);font-size:9.5px;fill:var(--slate)}
+.cycle .ct{font-family:var(--disp);font-size:13px;fill:var(--cord)}
+
+/* 마무리 */
+.end{background:var(--ink);color:#E9EBF4;padding:44px 24px}
+.end h2{font-size:1.375rem;line-height:1.55}
+.end .quote{margin-top:22px}
+.foot{background:#0F1528;color:#6E7796;font-size:.75rem;padding:22px 24px 34px;line-height:1.8}
+.foot b{color:#98A1BE;font-weight:500}
+
+/* 강조 */
+mark{background:linear-gradient(transparent 58%,rgba(224,97,107,.32) 58%);color:inherit;padding:0 1px}
+.kw{color:var(--cord);font-weight:600}
+
+/* 모션 */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .gauge .fill{transition:none}
+}
+@media (max-width:359px){
+  .sec{padding-left:28px}
+  .jour .from div{font-size:.625rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="eyebrow">새해 메시지 · 하나 </div>
+  <h1>하나님께서 정하신 길은<br><em>집</em>을 얻는 것</h1>
+  <p class="lead">하나님은 다만 여러분과 여러분의 아내만을 얻기 원하시는 것이 아닙니다.<br>그분은 <span style="color:#E9EBF4">온 가족을, 온 집을 다</span> 얻기 원하십니다.</p>
+  <div class="rule"></div>
+
+  <div class="turn" aria-label="아버지들의 마음과 자녀들의 마음이 서로에게로 돌아오는 전환 다이어그램">
+    <svg viewBox="0 0 300 214" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9" fill="none" stroke="#E0616B" stroke-width="1.6" stroke-linecap="round"/>
+        </marker>
+      </defs>
+      <rect class="bx" x="62" y="8" width="176" height="52" rx="2"/>
+      <text class="lb" x="150" y="31" text-anchor="middle">아버지들의 마음</text>
+      <text class="sb" x="150" y="48" text-anchor="middle">나이 든 세대</text>
+
+      <rect class="bx" x="62" y="154" width="176" height="52" rx="2"/>
+      <text class="lb" x="150" y="177" text-anchor="middle">자녀들의 마음</text>
+      <text class="sb" x="150" y="194" text-anchor="middle">젊은 세대</text>
+
+      <path class="arc" marker-end="url(#ah)" d="M62,36 C14,46 14,168 60,178"/>
+      <path class="arc" marker-end="url(#ah)" d="M238,178 C286,168 286,46 240,36"/>
+      <text class="at" x="150" y="98" text-anchor="middle">먼저 아버지들이 돌이켜야</text>
+      <text class="core" x="150" y="118" text-anchor="middle">시 대 의  전 환</text>
+      <text class="at" x="150" y="138" text-anchor="middle">그때 자녀들이 돌아옵니다</text>
+    </svg>
+  </div>
+
+  <blockquote class="quote on-dark">
+    여호와의 크고 두려운 날이 오기 전에, 내가 신언자 엘리야를 너희에게 보내리니 그가 아버지들의 마음을 자녀들에게로 돌아오게 하고 자녀들의 마음을 아버지들에게로 돌아오게 하여, 내가 가서 저주로 그 땅을 치지 않게 할 것이다.
+    <span class="ref">말라기 4:5-6 · 구약의 마지막 두 구절</span>
+  </blockquote>
+  <p class="lead" style="padding-bottom:26px">주님께서 처음 이 땅에 오시기 전에 이 전환이 있어야 했습니다. 주님이 다시 오시기 전에도 동일합니다.</p>
+</header>
+
+<nav class="outline">
+  <div class="ot">메시지의 흐름</div>
+  <a class="chip" href="#intro"><b>0</b><span>시대의 전환과 두 세대의 동역</span></a>
+  <a class="chip" href="#p1"><b>I</b><span>하나님께서 정하신 길 — 구원의 단위는 '온 집'이다</span></a>
+  <a class="chip" href="#p2"><b>II</b><span>성경의 기본 원칙 — 구약과 신약의 열일곱 예표</span></a>
+  <a class="chip" href="#p3"><b>III</b><span>가장이 져야 할 영적 책임과 결단</span></a>
+  <a class="chip" href="#p4"><b>IV</b><span>가장 큰 원칙과 하나님의 주권 앞에 선 우리</span></a>
+</nav>
+
+<div class="page">
+  <div class="cord" aria-hidden="true"></div>
+  <div class="cord-fill" id="cordFill" aria-hidden="true"></div>
+
+  <div class="window" aria-hidden="true">
+    <svg width="36" height="52" viewBox="0 0 36 52" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="6" width="30" height="30" fill="none" stroke="#C0C7D8" stroke-width="1.4"/>
+      <line x1="16" y1="6" x2="16" y2="36" stroke="#C0C7D8" stroke-width="1"/>
+      <line x1="1" y1="21" x2="31" y2="21" stroke="#C0C7D8" stroke-width="1"/>
+      <path d="M8,30 C8,40 8,44 8,52" fill="none" stroke="#A81E2D" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- ══════════ 서론 ══════════ -->
+  <section class="sec rv" id="intro">
+    <span class="knot" aria-hidden="true"></span>
+    <span class="tag">0</span>
+    <h2>시대의 전환에는<br>두 세대가 필요합니다</h2>
+    <p class="sub">지난 시대의 전환마다 두 세대가 함께 있었습니다. 다음 시대의 전환도 동일합니다.</p>
+
+    <div class="body">
+      <p>오늘날 나이 든 세대와 젊은 세대 사이에 점점 더 큰 분열이 있습니다. 나이 든 세대는 요구하고 기대합니다. 이것이 젊은 세대를 뒤로 물러나게 하고, 자신을 열지 않게 만듭니다.</p>
+    </div>
+
+    <div class="vs rv">
+      <div class="hd">지금의 분열</div>
+      <div class="hd r">전환된 가정</div>
+      <div class="row"><span class="k">아버지</span>요구하고 기대함</div>
+      <div class="row"><span class="k">아버지</span>마음이 자녀에게 돌아옴</div>
+      <div class="row"><span class="k">자녀</span>물러나고 닫아 버림</div>
+      <div class="row"><span class="k">자녀</span>마음이 아버지에게 돌아옴</div>
+      <div class="row" style="border:0"><span class="k">마음의 점유</span>경력 · 승진 · 세상의 염려</div>
+      <div class="row" style="border:0"><span class="k">마음의 점유</span>다음 세대를 향한 부담</div>
+    </div>
+
+    <h3 class="h"><span class="mk">◆</span>시대를 전환한 두 세대의 동역</h3>
+    <p class="cap">전환은 언제나 한 세대만의 일이 아니었습니다. 두 세대가 함께 살고 함께 건축했습니다.</p>
+
+    <div class="items rv">
+      <div class="item"><div class="n">1</div><div><b>노아와 그의 아들들</b><span>그 두려운 날이 오기 전에 함께 방주를 건축했습니다.</span></div></div>
+      <div class="item"><div class="n">2</div><div><b>모세와 다음 세대</b><span>한 시대를 끝내고 다음 시대를 열었습니다.</span></div></div>
+      <div class="item"><div class="n">3</div><div><b>침례자 요한과 주 예수님</b><span>두 세대가 관련되어 구약을 신약으로 전환했습니다.</span></div></div>
+    </div>
+
+    <blockquote class="quote speak rv">
+      다음 시대의 전환을 위해서도 두 세대가 필요합니다. 부모들과 자녀들이 필요합니다. 함께 동역해야 합니다. 함께 건축해야 합니다.
+      <span class="ref">메시지 중에서</span>
+    </blockquote>
+  </section>
+
+  <!-- ══════════ I ══════════ -->
+  <section class="sec rv" id="p1">
+    <span class="knot" aria-hidden="true"></span>
+    <span class="tag">I</span>
+    <h2>복음 전파를 위해<br>하나님께서 정하신 길은<br>'온 집'을 단위로 삼는 것</h2>
+    <p class="sub">하나님께서 우리에게 주신 구원의 약속은 <span class="kw">한 집</span>을 그 단위로 하셨으며, 개개인을 그 단위로 하지 않으셨습니다.</p>
+
+    <div class="big rv">
+      <div class="n">1</div>
+      <div class="t"><b>집 — 구원의 단위</b>한 사람이 아니라 한 집이<br>하나님의 약속의 단위입니다.</div>
+    </div>
+
+    <blockquote class="quote rv">
+      주 예수님을 믿으십시오. 그러면 그대와 그대의 집안 식구가 구원을 받을 것입니다.
+      <span class="ref">사도행전 16:31</span>
+    </blockquote>
+
+    <h4 class="h4">빌립보 감옥에서 열린 창문</h4>
+    <div class="steps rv">
+      <div class="step"><b>한밤중의 기도와 찬양</b><span>바울과 실라가 기도하며 하나님을 찬양하는 노래를 불렀습니다. 아마 죄수들의 구원을 위해 기도했을 것입니다.</span></div>
+      <div class="step"><b>죄수들이 귀를 기울여 들음</b><span>그때 그 감옥이 바로 바울과 실라의 '집'이 된 것입니다.</span></div>
+      <div class="step"><b>"내가 무엇을 해야 구원을 받겠습니까?"</b><span>구원받고자 하는 그 요구가 어디에서 왔겠습니까? 바로 그들의 기도로부터 왔을 것입니다.</span></div>
+    </div>
+
+    <h3 class="h"><span class="mk">A</span>영원한 생명은 개인에게, 구원은 집에</h3>
+    <div class="vs rv">
+      <div class="hd">영원한 생명</div>
+      <div class="hd r">구 원</div>
+      <div class="row"><span class="k">단위</span>개인</div>
+      <div class="row"><span class="k">단위</span>집</div>
+      <div class="row"><span class="k">방식</span>한 사람 한 사람이<br>거듭나고 주님을 영접함</div>
+      <div class="row"><span class="k">방식</span>구원이 그 집에 이르고<br>온 집이 거룩하게 됨</div>
+      <div class="row" style="border:0"><span class="k">예</span>각 사람이 믿어야 함</div>
+      <div class="row" style="border:0"><span class="k">예</span>삭개오는 한 사람이었으나<br>구원이 그의 집에 이름</div>
+    </div>
+    <p class="cap">이것은 논리적으로 보이지 않기에 어렵습니다. 그러나 두 가지가 다 사실입니다. 우리는 한 사람씩 믿어야 하고, 구원은 집에 이릅니다.</p>
+
+    <h3 class="h"><span class="mk">B</span>우리 집에서 태어난 자녀는<br>영적으로도 우리 집에서 태어나야</h3>
+    <p class="cap">시편 87편은 우리의 유산을 자랑하는 장면입니다. 모든 민족이 유명한 사람들을 자랑합니다. 그러나 하나님께서 백성들을 등록하실 때 세시는 것은 시온에서 태어난 사람입니다.</p>
+
+    <div class="jour rv" aria-label="다섯 출생지에서 예루살렘과 시온으로 가는 여정">
+      <div class="from">
+        <div><b>라합</b>이집트<br>세상</div>
+        <div><b>바벨론</b>기독교</div>
+        <div><b>블레셋</b>천연적인<br>사람</div>
+        <div><b>두로</b>사업</div>
+        <div><b>구스</b>땅끝</div>
+      </div>
+      <div class="arw">▼</div>
+      <div class="to"><b>예루살렘 — 교회 생활</b><span>그리고 시온의 고봉을 추구함</span></div>
+    </div>
+
+    <blockquote class="quote rv">
+      그러나 시온에 관해서는 이렇게들 말하리라. "이 사람 저 사람이 시온에서 태어났고 가장 높으신 분께서 직접 시온을 세우시리라." … 여호와는 백성들을 등록하실 때에 그 수를 세시며 말씀하시리라. "이 사람이 거기서 태어났다."
+      <span class="ref">시편 87:5-6</span>
+    </blockquote>
+
+    <h4 class="h4">한 형제의 간증 — 세 세대</h4>
+    <div class="gen rv">
+      <div class="g"><b>부모 세대</b><span>세상에서 태어났으나 구원을 받으셨습니다.</span></div>
+      <div class="g"><b>나의 세대</b><span>바벨론에서 — 기독교 안에서 태어나 주님께로 인도받았고, 이제 회복 안으로 들어왔습니다.</span></div>
+      <div class="g z"><b>자녀 4명 · 손주 10명</b><span>배우자들을 포함하여 모두 시온에 있습니다. 그들은 예루살렘에서 태어났습니다.</span></div>
+    </div>
+    <p class="cap">우리는 우리의 자녀를 한 사람도 잃어버리기를 원치 않습니다. 그들이 세상으로 흘러 떠내려가서, 결국 힘써서 다시 찾아오는 일이 없기를 원합니다.</p>
+
+    <h3 class="h"><span class="mk">C</span>다음 세대에게 길이 있는가</h3>
+    <p class="cap">교회의 다음 세대에게 길이 있는지의 여부는, 우리 가운데에서 태어난 자녀들을 주님께로 이끌었는지에 달려 있습니다.</p>
+
+    <div class="gauge rv">
+      <div class="g down">
+        <div class="lab"><b>낳고서 잃어버릴 때</b><i>한 세대 후</i></div>
+        <div class="track"><div class="fill" data-w="26%"></div></div>
+        <div class="note">주님의 회복은 한 세대만 이렇게 흘러가면 잃어버린 바 될 것입니다.</div>
+      </div>
+      <div class="g up">
+        <div class="lab"><b>낳은 자녀가 굳게 서고 + 밖에서 더해질 때</b><i>한 세대 후</i></div>
+        <div class="track"><div class="fill" data-w="92%"></div></div>
+        <div class="note">인수는 증가할 것이고 교회는 강화될 것입니다.</div>
+      </div>
+    </div>
+
+    <blockquote class="quote speak rv">
+      결코 하나를 낳고서 그 하나를 잃어버리는 일을 하지 말아야 합니다. 하나를 낳았으면 그 하나를 거듭나게 해야 합니다.
+      <span class="ref">I. C. 2</span>
+    </blockquote>
+  </section>
+
+  <!-- ══════════ II ══════════ -->
+  <section class="sec rv" id="p2">
+    <span class="knot" aria-hidden="true"></span>
+    <span class="tag">II</span>
+    <h2>성경의 기본 원칙 —<br>하나님은 한 집을 단위로<br>사람을 구원하십니다</h2>
+    <p class="sub">이것은 신약에만 있는 것이 아닙니다. 구약에서든 신약에서든 동일한 하나의 원칙입니다.</p>
+
+    <div class="big rv">
+      <div class="n">17</div>
+      <div class="t"><b>온 집의 예표</b>구약 일곱 · 신약 열<br>같은 원칙이 성경 전체를 관통합니다.</div>
+    </div>
+
+    <div class="legend"><span><i class="a"></i>구약의 예표 7</span><span><i class="b"></i>신약의 실제 10</span></div>
+    <div class="pics rv" aria-label="온 집을 나타내는 집 픽토그램 열일곱 개">
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p1" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path class="p2" d="M3 11 L12 4 L21 11 V21 H3 Z"/></svg>
+    </div>
+
+    <h3 class="h"><span class="mk">◇</span>구약의 예표 일곱</h3>
+    <div class="items rv">
+      <div class="item"><div class="n">1</div><div><b>온 집이 방주에 들어감</b><span>노아는 480세에 이상을 받았고, 20년 후 자녀들이 태어났습니다. 방주를 짓는 것은 그와 그의 온 집의 일이 되었습니다. 그들은 복음을 전파하면서 방주를 건축했고, 자신들을 방주 안으로 건축해 넣었습니다.</span><span class="v">창세기 7:1</span></div></div>
+      <div class="item"><div class="n">2</div><div><b>온 집이 할례를 받음</b><span>이스마엘 이후 13년의 침묵 — 육체의 노력으로 씨를 산출해서는 안 됩니다. 자녀들은 엄마와 아빠가 십자가를 통과하는 것을, 육체와 자아가 잘라지는 것을 목격할 필요가 있습니다.</span><span class="v">창세기 17:1, 23</span></div></div>
+      <div class="item"><div class="n">3</div><div><b>한 집에 한 마리의 유월절 어린양</b><span>어린양이신 주님은 크십니다. 누구도 혼자서 다 누릴 수 없습니다. 집안 식구가 어린양에 비해 너무 적으면 가장 가까운 이웃과 함께 먹어야 합니다.</span><span class="v">출애굽기 12:3-4</span></div></div>
+      <div class="item"><div class="n">4</div><div><b>온 집이 제사장 직분을 받음</b><span>아론과 그의 아들들. 부모들이 제사장으로 살고 있습니까? 자녀들이 우리가 주님과 시간을 보내는 것을 보아야 합니다.</span><span class="v">출애굽기 28:1</span></div></div>
+      <div class="item"><div class="n">5</div><div><b>창녀 라합의 온 집이 구원받음</b><span>성벽이 다 무너졌으나 라합의 집만 무너지지 않았습니다. 그녀는 할 수 있는 한 많은 사람을 자기 집으로 불러 모았습니다.</span><span class="v">여호수아 6:17</span></div></div>
+      <div class="item"><div class="n">6</div><div><b>온 집이 축복을 얻음</b><span>궤가 오벳에돔의 집에 석 달을 머물렀습니다. 하나님의 임재를 돌본다면 여러분의 집이 영적인 축복을 받을 것입니다.</span><span class="v">사무엘하 6:11</span></div></div>
+      <div class="item"><div class="n">7</div><div><b>온 집이 즐거워함</b><span>1년에 세 번, 온 집안이 예루살렘에 모여 가장 좋은 것을 먹고 기뻐했습니다. 이것이 교회 생활입니다.</span><span class="v">신명기 14:26</span></div></div>
+    </div>
+
+    <blockquote class="quote rv">
+      만약 어린양에 비해 집안 식구가 너무 적으면, 자기와 자기 집에서 가장 가까운 이웃이 사람 수를 감안하여 어린양을 고르되, 각 사람이 먹는 양을 가늠하여 어린양을 먹을 인수를 계산해야 한다.
+      <span class="ref">출애굽기 12:4</span>
+    </blockquote>
+    <p class="cap">나와 나의 남편만, 나와 나의 자녀만으로는 어린양을 누리기에 여전히 너무나 부족합니다. 우리는 문을 더 열어야 합니다.</p>
+
+    <h3 class="h"><span class="mk">◆</span>신약의 실제 열</h3>
+    <div class="items rv">
+      <div class="item"><div class="n">1</div><div><b>삭개오의 집</b><span>주님께서 나무 위에 있는 그를 이름을 불러 부르셨습니다. 주님께서 우리 자녀들을 한 사람 한 사람 이름을 불러 부르시도록 기도해야 합니다.</span><span class="v">누가복음 19:5, 9</span></div></div>
+      <div class="item"><div class="n">2</div><div><b>한 신하의 온 집</b><span>그 아버지가 그 시간을 알았고, 그와 온 집안이 믿었습니다.</span><span class="v">요한복음 4:53</span></div></div>
+      <div class="item"><div class="n">3</div><div><b>고넬료의 온 집</b><span>그는 친척들과 가까운 친구들을 불러 모아 놓고 기다렸습니다. 친구들도 그의 집의 일부였습니다.</span><span class="v">사도행전 10:2, 24 · 11:14</span></div></div>
+      <div class="item"><div class="n">4</div><div><b>루디아의 집</b><span>유럽에서 주님에 의해 가장 먼저 얻어진 사람. 그녀와 그녀의 집안 사람들이 침례를 받았습니다.</span><span class="v">사도행전 16:15</span></div></div>
+      <div class="item"><div class="n">5</div><div><b>간수의 집</b><span>그가 바울과 실라를 집으로 초대했고, 온 집안 식구가 침례를 받고 함께 음식을 먹으며 크게 기뻐했습니다.</span><span class="v">사도행전 16:31-34</span></div></div>
+      <div class="item"><div class="n">6</div><div><b>그리스보의 온 집</b><span>회당장 그리스보가 그의 온 집안 식구와 함께 주님을 믿었습니다.</span><span class="v">사도행전 18:8</span></div></div>
+      <div class="item"><div class="n">7</div><div><b>그 영의 약속은 여러분과 여러분의 자녀에게</b><span>베드로가 복음을 전파했을 때, 그는 온 집이 얻어져야 함을 말하고 있습니다.</span><span class="v">사도행전 2:38-39</span></div></div>
+      <div class="item"><div class="n">8</div><div><b>평안히 그 집에 머물 것임</b><span>길에서는 한 개인을 접촉하지만, 문을 두드릴 때는 그 집 전체를 만나는 것입니다.</span><span class="v">누가복음 10:5-6</span></div></div>
+      <div class="item"><div class="n">9</div><div><b>스데바나의 집</b><span>바울이 스데바나 집 사람들에게 침례를 주었습니다.</span><span class="v">고린도전서 1:16</span></div></div>
+      <div class="item"><div class="n">10</div><div><b>오네시보로의 집</b><span>그와 그의 집은 감옥에 갇힌 바울을 부끄러워하지 않고 자주 찾아갔습니다. 우리는 고통받는 성도들을 돌보아야 합니다.</span><span class="v">디모데후서 1:16</span></div></div>
+    </div>
+
+    <blockquote class="quote rv">
+      이 약속은 여러분과 여러분의 자녀와 또 멀리 떨어져 있는 모든 사람, 곧 주 우리 하나님께서 부르시는 모든 사람에게 하신 것입니다.
+      <span class="ref">사도행전 2:39</span>
+    </blockquote>
+
+    <div class="card tint rv">
+      <b style="font-family:var(--disp)">여러분의 집은 얼마나 큽니까?</b>
+      <p class="cap" style="margin-top:8px">부모님, 남편과 아내, 자녀들, 손주들 — 그리고 친척, 가까운 친구, 동역자, 학급 친구, 직장 동료, 이웃. 이 모든 사람이 우리의 집안 식구가 될 수 있습니다. <span class="kw">여러분의 믿음만큼 그 집은 큰 것입니다.</span></p>
+    </div>
+  </section>
+
+  <!-- ══════════ III ══════════ -->
+  <section class="sec rv" id="p3">
+    <span class="knot" aria-hidden="true"></span>
+    <span class="tag">III</span>
+    <h2>가장은 그의 집을 대신해<br>결단을 내릴 수 있습니다</h2>
+    <p class="sub">성경에서 가장인 사람은 하나님 앞에서 특별히 자신의 온 집을 주님께 돌아오게 하고 주님을 섬기게 하는 책임을 져야 합니다.</p>
+
+    <div class="fork rv" aria-label="여호수아의 갈림길 — 누구를 섬길 것인가">
+      <div class="q">여러분은 누구를 섬길 것인지<br>오늘 선택해야 합니다</div>
+      <div class="split">
+        <div class="opt no"><b>강 건너편의 신들</b>조상들이 섬기던 것</div>
+        <div class="opt no"><b>아모리 족속의 신들</b>지금 거주하는 땅의 것<br>— 맘몬 · 부 · 승진</div>
+      </div>
+      <div class="down">▼</div>
+      <div class="yes">오직 나와 내 집은<br>여호와를 섬길 것입니다</div>
+    </div>
+    <p class="cap" style="text-align:center">여호수아 24:15</p>
+
+    <div class="body">
+      <p>아버지들은 세상을 섬기거나 맘몬을 섬길 수 있습니다. 돈을 위해서, 승진을 위해서 사탄에게 자신을 팔 수가 있습니다. 계시록 18장은 바벨론의 상품 목록 안에 <mark>사람들의 혼</mark>이 거래된다고 말합니다.</p>
+      <p>아버지로서 우리의 일은 자녀들의 등을 떠밀어 부자가 되게 만드는 것이 아닙니다. 모든 것이 결국은 다 불타 버릴 것입니다.</p>
+    </div>
+
+    <h3 class="h"><span class="mk">A</span>믿음으로 선포하고,<br>권위를 사용하여 인도할 때</h3>
+    <p class="cap">우리는 믿음으로 우리의 집을 하나님을 경배하는 집, 주님을 믿는 집으로 결정했음을 선포해야 합니다. 우리가 권위를 사용하여 인도한다면 자연히 자녀들을 인도하게 될 것입니다.</p>
+
+    <h4 class="h4">아버지와 어머니의 기도 — 한 주간</h4>
+    <div class="week rv" aria-label="요일별로 한 자녀씩 기도한 부모의 주간표">
+      <div class="d"><div class="w">MON</div><div class="dot"></div><div class="who">누나</div></div>
+      <div class="d"><div class="w">TUE</div><div class="dot"></div><div class="who">형 조</div></div>
+      <div class="d me"><div class="w">WED</div><div class="dot"></div><div class="who">나</div></div>
+      <div class="d"><div class="w">THU</div><div class="dot"></div><div class="who">여동생</div></div>
+      <div class="d"><div class="w">FRI</div><div class="dot"></div><div class="who">동생 대니</div></div>
+    </div>
+    <div class="big rv" style="margin-top:10px">
+      <div class="n">52</div>
+      <div class="t"><b>주(週) — 해마다</b>부모님이 돌아가신 후에야<br>알게 된 사실이었습니다.</div>
+    </div>
+    <blockquote class="quote speak rv">
+      수요일이 저의 날이었습니다. 매주 그렇게 하셨습니다. 1년에 52주를 그렇게 하셨습니다. … 그럴 때 우리의 자녀들이 다 좋은 믿는 이들이 되었습니다.
+      <span class="ref">메시지 중에서</span>
+    </blockquote>
+
+    <h3 class="h"><span class="mk">B</span>엄마와 아빠가 하나일 때</h3>
+    <p class="cap">이 집은 우리의 집이며, 주님을 섬기는 이 일은 우리가 결정한 것입니다. 우리가 이 위치에 서 있을 때 우리 수하에 있는 사람들이 다 따라올 것이고 그들은 도망갈 수 없을 것입니다. 우리는 분열될 수 없고, 이 문제에 있어서 다른 의견을 가질 수 없습니다.</p>
+    <p class="cap" style="margin-top:10px">자녀들이 어릴 때 집회소로 데리고 와서 어떻게 청소하는지, 어떻게 안내 봉사를 하는지, 어떻게 섬기는지를 보여 주어야 합니다.</p>
+
+    <div class="card rv">
+      <b style="font-family:var(--disp)">제사장으로 사는 아버지</b>
+      <p class="cap" style="margin-top:8px">제가 어릴 때 아침마다 거실에 무릎 꿇고 계신 아버지를 보았습니다. 자녀들을 위해, 교회를 위해 기도하고 계셨습니다. 그분이 저에게 그러한 영적인 인상을 주셨습니다. 아버지처럼 저도 주님을 알고 싶어 했습니다.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ IV ══════════ -->
+  <section class="sec rv" id="p4">
+    <span class="knot" aria-hidden="true"></span>
+    <span class="tag">IV</span>
+    <h2>가장 큰 원칙,<br>그리고 하나님의 주권</h2>
+    <p class="sub">온 집이 구원받는 것은 성경에서 가장 큰 원칙입니다. 당신 한 사람이 항상 하나님 앞에 서 있다면 당신의 집은 하나님 앞에서 변화될 것입니다.</p>
+
+    <blockquote class="quote rv">
+      왜냐하면 믿지 않는 남편이 아내로 말미암아 거룩하게 되고, 믿지 않는 아내가 그 형제로 말미암아 거룩하게 되기 때문입니다. 그렇지 않다면 여러분의 자녀들이 깨끗하지 않을 것입니다. 그러나 이제 그들은 거룩합니다.
+      <span class="ref">고린도전서 7:14</span>
+    </blockquote>
+    <p class="cap">거룩하게 된다는 것은 <span class="kw">분별된다</span>는 것입니다. 하나님께로 분별되는 것입니다. 한 믿는 이의 자녀들은 위치에 있어서 거룩합니다. 이것이 놀랍지 않습니까?</p>
+
+    <h3 class="h"><span class="mk">A</span>초대할 것인가, 방문할 것인가</h3>
+    <div class="vs rv">
+      <div class="hd">집회에 초대할 때</div>
+      <div class="hd r">그 집을 방문할 때</div>
+      <div class="row" style="border:0">많은 사람들이<br>자기 혼자만 옵니다.</div>
+      <div class="row" style="border:0">그들의 온 집안 식구를<br>가까이할 수 있습니다.</div>
+    </div>
+
+    <h3 class="h"><span class="mk">B</span>다음 세대를 그냥 내버려 두는 실패</h3>
+    <p class="cap">개신교의 큰 실패는 집안의 다음 세대를 그냥 내버려 두고 그들에게 신앙의 자유를 허용했다는 점입니다.</p>
+    <blockquote class="quote rv">
+      마땅히 가야 할 길을 따라 아이를 훈련시켜라. 그가 늙어서도 그 길을 떠나지 않으리라.
+      <span class="ref">잠언 22:6</span>
+    </blockquote>
+
+    <h3 class="h"><span class="mk">C</span>자녀의 구원은 우리에게 시험이 됩니다</h3>
+    <p class="cap">자녀들을 위해 기도하지 않는 것은 잘못이지만, 이기적으로 온통 그들만을 위해 기도하는 것도 잘못된 것입니다.</p>
+    <div class="steps rv">
+      <div class="step"><b>한 자매의 물음</b><span>자녀를 위해 계속 기도해 왔는데 자녀가 주님을 믿지 않습니다.</span></div>
+      <div class="step"><b>워치만 니 형제님의 대답</b><span>"교회 안에 있는 다른 자녀들을 위해서 기도하는 게 어떻겠습니까? 너무 이기적이지 마십시오. 다른 성도들의 자녀들을 위해서 기도하십시오."</span></div>
+      <div class="step"><b>전환, 그리고 응답</b><span>그 자매님이 전환하여 다른 자녀들을 위해 기도했을 때, 그녀의 자녀가 구원을 받았습니다.</span></div>
+    </div>
+
+    <h3 class="h"><span class="mk">D</span>우리의 책임과 하나님의 선택</h3>
+    <p class="cap">우리는 반드시 주님의 가르침에 따라 자녀들을 양육함으로써 우리의 책임을 다해야 합니다. 그러나 결국 그들이 구원받고 주님을 찾는 것은 전적으로 하나님의 영원한 선택과 미리 정하심에 달려 있습니다.</p>
+
+    <div class="venn rv">
+      <svg viewBox="0 0 300 186" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="우리의 책임과 하나님의 주권이 만나는 곳에 긍휼이 있다">
+        <circle class="c1" cx="112" cy="90" r="72"/>
+        <circle class="c2" cx="188" cy="90" r="72"/>
+        <text class="t" x="66" y="66" text-anchor="middle">우리의 책임</text>
+        <text class="s" x="66" y="84" text-anchor="middle">양육 · 본 · 기도</text>
+        <text class="s" x="66" y="99" text-anchor="middle">권위를 사용해 인도함</text>
+        <text class="t" x="234" y="66" text-anchor="middle">하나님의 주권</text>
+        <text class="s" x="234" y="84" text-anchor="middle">영원한 선택</text>
+        <text class="s" x="234" y="99" text-anchor="middle">미리 정하심</text>
+        <text class="m" x="150" y="86" text-anchor="middle">긍휼</text>
+        <text class="s" x="150" y="103" text-anchor="middle" fill="#A81E2D">우리는 여기에</text>
+        <text class="s" x="150" y="116" text-anchor="middle" fill="#A81E2D">필사적으로 기도합니다</text>
+        <text class="s" x="150" y="174" text-anchor="middle">야곱과 에서는 같은 부모에게서 같은 날에 태어났습니다 · 로마서 9:13</text>
+      </svg>
+    </div>
+
+    <div class="vs rv">
+      <div class="hd r">좋은 결과가 있다면</div>
+      <div class="hd">나쁜 결과가 있다면</div>
+      <div class="row" style="border:0">주님의 긍휼입니다.</div>
+      <div class="row" style="border:0">우리가 그 책임을<br>감당해야만 합니다.</div>
+    </div>
+
+    <blockquote class="quote speak rv">
+      우리가 부모로서 하는 것은 자녀들의 영적인 장래를 결정할 수가 없습니다. 우리는 다만 본으로서 살아야만 합니다. 그리고 우리는 기도해야만 합니다. 주님의 긍휼을 구해야만 합니다.
+      <span class="ref">메시지 중에서</span>
+    </blockquote>
+    <p class="cap">"그럼 아무것도 할 필요가 없습니까?" 그런 관념도 틀린 것입니다. 우리는 우리의 책임을, 우리의 의무를 다해야만 합니다. 그러나 그 결과는 하나님의 긍휼에 달려 있습니다.</p>
+
+    <h3 class="h"><span class="mk">◆</span>이것이 우리에게 담대함을 줍니다</h3>
+    <div class="cycle rv">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="약속과 원칙이 담대함을 주고, 담대함이 기도가 되어 온 집이 구원받는 순환">
+        <defs>
+          <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="#A81E2D" stroke-width="1.7" stroke-linecap="round"/>
+          </marker>
+        </defs>
+        <circle class="ring" cx="150" cy="150" r="98"/>
+        <path class="arc" marker-end="url(#ah2)" d="M212,78 A98,98 0 0 1 226,132"/>
+        <path class="arc" marker-end="url(#ah2)" d="M226,172 A98,98 0 0 1 190,230"/>
+        <path class="arc" marker-end="url(#ah2)" d="M110,230 A98,98 0 0 1 74,172"/>
+        <path class="arc" marker-end="url(#ah2)" d="M74,132 A98,98 0 0 1 108,76"/>
+
+        <circle class="nd" cx="150" cy="52" r="30"/>
+        <text class="t" x="150" y="50" text-anchor="middle">약속</text>
+        <text class="s" x="150" y="64" text-anchor="middle">하나님이 하신</text>
+
+        <circle class="nd" cx="248" cy="150" r="30"/>
+        <text class="t" x="248" y="148" text-anchor="middle">원칙</text>
+        <text class="s" x="248" y="162" text-anchor="middle">집이 단위</text>
+
+        <circle class="nd" cx="150" cy="248" r="30"/>
+        <text class="t" x="150" y="246" text-anchor="middle">기도</text>
+        <text class="s" x="150" y="260" text-anchor="middle">긍휼을 구함</text>
+
+        <circle class="nd" cx="52" cy="150" r="30"/>
+        <text class="t" x="52" y="148" text-anchor="middle">담대함</text>
+        <text class="s" x="52" y="162" text-anchor="middle">근거가 있음</text>
+
+        <text class="ct" x="150" y="146" text-anchor="middle">온 집이</text>
+        <text class="ct" x="150" y="164" text-anchor="middle">구원받습니다</text>
+      </svg>
+    </div>
+    <p class="cap">여기에 하나님의 약속이 있고, 여기에 기본적인 원칙이 있습니다. 우리는 이러한 하나님의 약속에 근거해서, 이 기본적인 원칙들을 두고 기도해야만 합니다.</p>
+  </section>
+</div>
+
+<section class="end">
+  <div class="eyebrow" style="color:var(--cord-bright)">맺는 말</div>
+  <h2>주님께서 우리의<br>온 집을 얻으시길 원합니다</h2>
+  <blockquote class="quote on-dark">
+    자녀들이 자랄수록, 그들이 교회 생활을 거절할 때 우리는 정말 주님이 그들을 긍휼히 여기시도록 기도해야 합니다. 우리는 정말 우리의 길을 고려해야 합니다. … 여기서 멈추겠습니다. 우리는 기도할 필요가 있습니다. 이 교통 후에 기도해야만 합니다. 주님의 긍휼을 구해야 합니다. 아멘.
+    <span class="ref">메시지의 마지막</span>
+  </blockquote>
+  <p style="color:#A9B1CB;font-size:.9375rem;margin-top:18px">우리는 매일 주님께 우리 자신을 열어 기도하고, 우리의 모든 실수에 그분의 피를 적용해야 합니다. 그래서 주님께서 다음 세대를 얻으시게 해야 합니다.</p>
+</section>
+
+<footer class="foot">
+  <b>하나님께서 정하신 길은 집을 얻는 것</b> — 새해 메시지 1<br>
+  성경 인용: 한국어 회복역 (Recovery Version)<br>
+  본문 인용은 메시지 윤문 원문을 그대로 실었습니다.
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv');
+
+  function activate(el){
+    el.classList.add('in');
+    el.querySelectorAll('.fill').forEach(function(f){
+      f.style.width = f.getAttribute('data-w') || '0';
+    });
+  }
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(activate);
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ activate(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  var page = document.querySelector('.page');
+  var fill = document.getElementById('cordFill');
+  var ticking = false;
+
+  function drawCord(){
+    ticking = false;
+    if (!page || !fill) return;
+    var r = page.getBoundingClientRect();
+    var mark = window.innerHeight * 0.62;
+    var h = Math.min(Math.max(mark - r.top, 0), r.height);
+    fill.style.height = h + 'px';
+  }
+
+  if (reduce){
+    window.addEventListener('load', function(){
+      if (page && fill) fill.style.height = page.getBoundingClientRect().height + 'px';
+    });
+  } else {
+    window.addEventListener('scroll', function(){
+      if (!ticking){ ticking = true; requestAnimationFrame(drawCord); }
+    }, { passive: true });
+    window.addEventListener('resize', drawCord);
+    drawCord();
+    window.addEventListener('load', drawCord);
+  }
+})();
+</script>
+</div>
+</body>
+</html>
