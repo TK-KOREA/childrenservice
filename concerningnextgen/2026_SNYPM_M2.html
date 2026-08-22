@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M2 가정을 통해 청년들을 교회생활로 이끎</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple-950:#292250;
+  --purple-900:#332B5C;
+  --purple-700:#544787;
+  --purple-500:#7A6DB0;
+  --purple-100:#E9E5F3;
+  --purple-50:#F4F2FA;
+  --gold-700:#9C7A22;
+  --gold-600:#B8912F;
+  --gold-100:#F6EEDA;
+  --paper:#FBF9F4;
+  --card:#FFFFFF;
+  --ink:#2C2836;
+  --ink-soft:#6C6678;
+  --line:#E7E2D7;
+  --warn:#A24A48;
+  --ok:#3F7355;
+  --serif:'Noto Serif KR','Nanum Myeongjo',serif;
+  --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  font-size:1rem;
+  line-height:1.8;
+  color:var(--ink);
+  background:#EAE6DE;
+  word-break:keep-all;
+  -webkit-text-size-adjust:100%;
+}
+#pbar{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+  background:linear-gradient(90deg,var(--purple-700),var(--gold-600))}
+.wrap{max-width:480px;margin:0 auto;background:var(--paper);
+  box-shadow:0 0 46px rgba(41,34,80,.12)}
+
+/* ---------- 표지 ---------- */
+.hero{
+  min-height:88svh;
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(184,145,47,.22), transparent 55%),
+    linear-gradient(168deg,#463A78 0%, #544787 46%, #332B5C 100%);
+  color:#F2EFFA;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:4.5rem 1.5rem 3.5rem;position:relative;overflow:hidden;
+}
+.hero .ic-house{width:2.1rem;height:2.1rem;color:#D9BE6E;margin-bottom:1.1rem;opacity:.95}
+.hero .eyebrow{font-size:.78rem;letter-spacing:.14em;color:#CFC7E8;font-weight:500}
+.hero .series{font-family:var(--serif);font-size:.95rem;color:#D9BE6E;font-weight:600;
+  margin:.9rem 0 .55rem;letter-spacing:.06em}
+.hero .msg-no{display:inline-block;font-size:.72rem;letter-spacing:.3em;border:1px solid rgba(217,190,110,.55);
+  color:#E4D19A;border-radius:999px;padding:.1rem .8rem .1rem 1.05rem;margin-bottom:1.1rem}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(1.65rem,7.4vw,2.15rem);
+  line-height:1.42;letter-spacing:-.01em;text-wrap:balance}
+.hero .refs{margin-top:1.4rem;font-size:.8rem;color:#BBB1DE;letter-spacing:.04em}
+.hero .motif{margin-top:2.4rem;font-family:var(--serif);font-size:.92rem;color:#E9DFC0;
+  border-top:1px solid rgba(217,190,110,.4);border-bottom:1px solid rgba(217,190,110,.4);
+  padding:.55rem 1.1rem;letter-spacing:.35em;text-indent:.35em}
+.hero .scroll-hint{position:absolute;bottom:1.2rem;left:0;right:0;font-size:.72rem;color:#A79CD0;
+  letter-spacing:.1em;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ---------- 섹션 공통 ---------- */
+section{padding:3.6rem 1.35rem 3.1rem;border-top:1px solid var(--line);background:var(--paper)}
+.sec-head{margin-bottom:1.9rem}
+.act{display:inline-block;font-size:.72rem;letter-spacing:.34em;color:var(--gold-700);
+  font-weight:700;text-indent:.34em;margin-bottom:.35rem}
+.act-badge{display:inline-block;font-size:.66rem;letter-spacing:.12em;color:var(--purple-700);
+  border:1px solid var(--purple-100);background:var(--purple-50);border-radius:999px;
+  padding:.05rem .6rem;margin-left:.5rem;vertical-align:.12em;font-weight:700}
+.sec-title{font-family:var(--serif);font-size:1.42rem;font-weight:900;color:var(--purple-900);
+  line-height:1.4;letter-spacing:-.01em}
+.sec-lead{margin-top:.55rem;font-size:.93rem;color:var(--ink-soft)}
+.p{margin:1.1rem 0 0;font-size:1rem}
+.p b{color:var(--purple-900)}
+.note{margin-top:.9rem;font-size:.85rem;color:var(--ink-soft);
+  border-left:2px solid var(--line);padding-left:.8rem}
+
+/* 등장 애니메이션 */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .hero .scroll-hint{animation:none}
+}
+
+/* ---------- 인용구 · 성경 ---------- */
+.quote{position:relative;background:linear-gradient(180deg,#FFFFFF,#F8F4EB);
+  border-left:3px solid var(--gold-600);border-radius:0 14px 14px 0;
+  padding:1.35rem 1.2rem 1.2rem;margin:1.6rem 0 0;
+  font-family:var(--serif);font-size:1.02rem;line-height:1.95;color:#3C3554;
+  box-shadow:0 10px 26px rgba(41,34,80,.06)}
+.quote::before{content:'\201C';display:block;font-size:2.3rem;line-height:.4;
+  color:var(--gold-600);margin:.35rem 0 .75rem;font-family:var(--serif)}
+.quote .src{display:block;margin-top:.85rem;font-family:var(--sans);
+  font-size:.78rem;color:var(--ink-soft);font-weight:700;letter-spacing:.05em}
+.scripture{background:linear-gradient(165deg,#3B3268,#292250);color:#EDE8F7;
+  border-radius:16px;padding:1.7rem 1.4rem 1.5rem;margin:1.7rem 0 0;
+  font-family:var(--serif);font-size:1.04rem;line-height:2.05;
+  box-shadow:0 16px 36px rgba(41,34,80,.22)}
+.scripture em{font-style:normal;color:#E7CF8F;font-weight:700}
+.scripture .ref{display:block;margin-top:1rem;font-family:var(--sans);font-size:.78rem;
+  color:#B9AEDC;letter-spacing:.08em;font-weight:700}
+.scripture--mini{background:var(--purple-50);color:#3C3554;border:1px solid var(--purple-100);
+  border-radius:12px;padding:1.05rem 1.1rem .95rem;margin:1.2rem 0 0;
+  font-family:var(--serif);font-size:.95rem;line-height:1.9;box-shadow:none}
+.scripture--mini em{color:var(--gold-700)}
+.scripture--mini .ref{color:var(--purple-500)}
+
+/* ---------- 서막: 절반+절반 / 두 세대 ---------- */
+.split{margin:1.7rem 0 0;text-align:center}
+.split-bar{display:flex;border-radius:12px;overflow:hidden;
+  box-shadow:0 10px 24px rgba(41,34,80,.10)}
+.sp{flex:1;padding:1.05rem .5rem .95rem;color:#fff}
+.sp b{display:block;font-family:var(--serif);font-size:1.5rem;font-weight:900;line-height:1.2}
+.sp span{display:block;font-size:.78rem;opacity:.92;margin-top:.15rem}
+.sp.a{background:linear-gradient(160deg,#C09A38,#9C7A22)}
+.sp.b{background:linear-gradient(160deg,#6A5CA3,#544787)}
+.split-eq{font-family:var(--serif);font-size:1.3rem;color:var(--ink-soft);margin:.55rem 0 .1rem}
+.split-res{font-family:var(--serif);font-size:1.22rem;font-weight:900;color:var(--purple-900)}
+.split-cap{margin-top:.55rem;font-size:.85rem;color:var(--ink-soft)}
+.gen2{display:flex;align-items:center;justify-content:center;gap:.55rem;
+  margin:1.6rem 0 0;flex-wrap:wrap}
+.gen-item{flex:1;min-width:7.2rem;text-align:center;border:1.5px solid var(--purple-100);
+  background:#fff;border-radius:12px;padding:.85rem .4rem .75rem}
+.gen-item .g-tag{font-size:.7rem;letter-spacing:.16em;color:var(--gold-700);font-weight:700}
+.gen-item .g-name{font-family:var(--serif);font-weight:700;color:var(--purple-900);
+  font-size:.98rem;margin-top:.1rem}
+.gen-plus{font-family:var(--serif);font-size:1.25rem;color:var(--ink-soft)}
+.gen-goal{width:100%;margin-top:.7rem;text-align:center;background:var(--purple-900);color:#EDE8F7;
+  border-radius:12px;padding:.75rem .8rem;font-family:var(--serif);font-size:.98rem}
+.gen-goal small{display:block;font-family:var(--sans);font-size:.74rem;color:#B9AEDC;margin-top:.1rem}
+
+/* ---------- 제1막: 타임라인 ---------- */
+.timeline{margin:1.8rem 0 0;position:relative;padding-left:1.55rem}
+.timeline::before{content:'';position:absolute;left:.42rem;top:.45rem;bottom:.5rem;
+  width:2px;background:linear-gradient(180deg,var(--gold-600),var(--purple-500))}
+.tl-item{position:relative;padding-bottom:1.7rem}
+.tl-item:last-child{padding-bottom:.2rem}
+.tl-dot{position:absolute;left:-1.55rem;top:.42rem;width:.86rem;height:.86rem;border-radius:50%;
+  background:var(--paper);border:2.5px solid var(--gold-600)}
+.tl-item.deep .tl-dot{border-color:var(--purple-700);background:var(--purple-700)}
+.tl-tag{display:inline-block;font-family:var(--serif);font-weight:900;font-size:1.05rem;
+  color:var(--purple-900)}
+.tl-badge{display:inline-block;font-size:.68rem;font-weight:700;color:#7A5E14;
+  background:var(--gold-100);border:1px solid #E8D9AC;border-radius:999px;
+  padding:.02rem .55rem;margin-left:.45rem;vertical-align:.15em;letter-spacing:.06em}
+.tl-title{font-size:.95rem;font-weight:700;color:var(--ink);margin-top:.15rem}
+.tl-text{font-size:.92rem;color:var(--ink-soft);margin-top:.25rem}
+
+/* ---------- 제2막: 대조 카드 ---------- */
+.vs-card{border-radius:14px;padding:1.3rem 1.2rem 1.2rem;margin-top:1.5rem;background:#fff;
+  border:1.5px solid var(--line);box-shadow:0 10px 24px rgba(41,34,80,.05)}
+.vs-card .vs-q{font-family:var(--serif);font-weight:900;font-size:1.12rem;line-height:1.55;
+  color:var(--purple-900)}
+.vs-card .vs-a{display:inline-block;margin-top:.7rem;font-weight:700;font-size:.92rem;
+  border-radius:999px;padding:.18rem .85rem;letter-spacing:.02em}
+.vs-card.q1 .vs-a{color:#7A5E14;background:var(--gold-100);border:1px solid #E8D9AC}
+.vs-card.q2{border-color:var(--purple-100);background:var(--purple-50)}
+.vs-card.q2 .vs-a{color:#fff;background:var(--purple-700)}
+.vs-card .vs-t{margin-top:.7rem;font-size:.92rem;color:var(--ink-soft)}
+.vs-divider{text-align:center;margin:1.2rem 0 -.3rem;font-family:var(--serif);
+  font-size:.95rem;color:var(--gold-700);letter-spacing:.4em;text-indent:.4em;font-weight:700}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.5rem}
+.key{background:#fff;border:1.5px solid var(--purple-100);border-radius:12px;
+  padding:1rem .9rem .9rem;position:relative}
+.key .k-num{font-family:var(--serif);font-size:.8rem;font-weight:900;color:var(--gold-600);
+  letter-spacing:.14em}
+.key .k-title{font-family:var(--serif);font-weight:900;font-size:1.05rem;color:var(--purple-900);
+  margin-top:.15rem}
+.key .k-text{font-size:.83rem;color:var(--ink-soft);margin-top:.35rem;line-height:1.7}
+@media (max-width:360px){.keys{grid-template-columns:1fr}}
+
+/* ---------- 제3막: 딜레마 ---------- */
+.sub{margin:2.4rem 0 .2rem;display:flex;align-items:baseline;gap:.55rem}
+.sub .s-no{font-family:var(--serif);font-weight:900;color:var(--gold-600);font-size:1.02rem;letter-spacing:.06em}
+.sub .s-name{font-family:var(--serif);font-weight:900;color:var(--purple-900);font-size:1.16rem;line-height:1.5}
+.flow{margin:1.35rem 0 0}
+.fl-box{background:#fff;border:1.5px solid var(--line);border-radius:12px;
+  padding:.85rem 1rem;text-align:center;font-size:.95rem;line-height:1.7}
+.fl-box b{color:var(--purple-900)}
+.fl-box.start{border-color:var(--purple-100);background:var(--purple-50)}
+.fl-box.bad{border-color:#E4C9C8;background:#FBF3F2;color:#7E403E;font-weight:700;font-family:var(--serif)}
+.fl-arrow{text-align:center;color:var(--gold-600);font-size:.78rem;padding:.4rem 0;line-height:1.5}
+.fl-arrow small{display:block;color:var(--ink-soft);font-size:.79rem;font-weight:500}
+.stats{display:flex;gap:.7rem;margin:1.45rem 0 0}
+.stat{flex:1;background:#fff;border:1.5px solid var(--line);border-radius:12px;
+  text-align:center;padding:1rem .5rem .85rem}
+.stat .s-val{font-family:var(--serif);font-weight:900;font-size:1.72rem;color:var(--purple-900);line-height:1.15}
+.stat .s-cap{font-size:.78rem;color:var(--ink-soft);margin-top:.3rem;line-height:1.6}
+.gap{margin:1.5rem 0 0;background:#fff;border:1.5px solid var(--line);border-radius:14px;
+  padding:1.2rem 1.15rem 1.25rem}
+.gap-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:.85rem}
+.gap-row:first-child{margin-top:0}
+.gap-label{font-size:.86rem;font-weight:700;color:var(--ink)}
+.gap-num{font-family:var(--serif);font-weight:900;font-size:1.3rem;color:var(--purple-900)}
+.gap-num.warnn{color:var(--warn)}
+.bar{height:.6rem;border-radius:999px;background:var(--purple-100);margin-top:.3rem;overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--purple-500),var(--purple-700))}
+.fill.short{background:linear-gradient(90deg,#C98A87,#A24A48)}
+.gap-cap{margin-top:.9rem;font-size:.8rem;color:var(--ink-soft);line-height:1.7}
+.epi{margin:1.4rem 0 0;background:var(--gold-100);border:1px solid #E8D9AC;border-radius:12px;
+  padding:1rem 1.1rem .95rem}
+.epi .e-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.16em;
+  color:#7A5E14;margin-bottom:.3rem}
+.epi p{font-size:.9rem;color:#5B4E22;line-height:1.78}
+
+/* ---------- 제4막: Before & After ---------- */
+.ba{margin:1.6rem 0 0}
+.ba-card{border-radius:14px;padding:1.25rem 1.2rem 1.15rem;border:1.5px solid var(--line);background:#fff}
+.ba-card .ba-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.22em;
+  text-indent:.22em;border-radius:999px;padding:.1rem .75rem;margin-bottom:.6rem}
+.ba-card.before{background:#F7F5EF}
+.ba-card.before .ba-tag{background:#E9E5DC;color:#736D60}
+.ba-card.before h4{color:#5A5566}
+.ba-card.after{border-color:var(--purple-100);
+  background:linear-gradient(180deg,#FBFAFE,var(--purple-50));
+  box-shadow:0 12px 28px rgba(41,34,80,.08)}
+.ba-card.after .ba-tag{background:var(--purple-700);color:#fff}
+.ba-card h4{font-family:var(--serif);font-size:1.1rem;font-weight:900;color:var(--purple-900);margin-bottom:.45rem}
+.ba-list{list-style:none}
+.ba-list li{position:relative;padding-left:1.05rem;font-size:.92rem;color:var(--ink-soft);
+  margin-top:.4rem;line-height:1.72}
+.ba-list li::before{content:'';position:absolute;left:0;top:.62rem;width:.4rem;height:.4rem;
+  border-radius:50%;background:#C9C2B4}
+.ba-card.after .ba-list li{color:#4A4362}
+.ba-card.after .ba-list li::before{background:var(--gold-600)}
+.ba-arrow{text-align:center;padding:1rem 0 .9rem}
+.ba-arrow .ba-word{display:block;font-family:var(--serif);font-weight:900;color:var(--gold-700);
+  letter-spacing:.34em;text-indent:.34em;font-size:1rem}
+.ba-arrow .ba-line{display:block;font-size:.84rem;color:var(--ink-soft);margin-top:.3rem}
+.ba-arrow .ba-glyph{display:block;color:var(--gold-600);font-size:.9rem;margin-top:.25rem}
+.testi{margin:1.6rem 0 0;font-family:var(--serif);font-size:.97rem;line-height:2.05;
+  color:#4A4362;text-align:center;padding:0 .4rem}
+
+/* ---------- 제5막: 정하신 길 ---------- */
+.bignum{margin:1.8rem 0 0;text-align:center}
+.bn-val{font-family:var(--serif);font-weight:900;font-size:3.4rem;color:var(--purple-900);
+  line-height:1;letter-spacing:-.02em}
+.bn-unit{font-family:var(--serif);font-weight:700;font-size:1.4rem;color:var(--purple-700);margin-left:.15rem}
+.bn-cap{font-size:.87rem;color:var(--ink-soft);margin-top:.5rem;line-height:1.7}
+.bn-cap b{color:var(--purple-900)}
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.6rem 0 0}
+.ct-col{border-radius:14px;overflow:hidden;border:1.5px solid var(--line);background:#fff}
+.ct-col.hl{border-color:var(--purple-100);box-shadow:0 12px 26px rgba(41,34,80,.09)}
+.ct-head{padding:.85rem .5rem .75rem;text-align:center;font-family:var(--serif);font-weight:900;
+  font-size:1.02rem;color:#5A5566;background:#F2EFE8;line-height:1.4}
+.ct-col.hl .ct-head{background:linear-gradient(160deg,#544787,#3B3268);color:#F1EDFA}
+.ct-head small{display:block;font-family:var(--sans);font-weight:500;font-size:.72rem;opacity:.8;margin-top:.1rem}
+.ct-row{padding:.7rem .6rem;font-size:.85rem;line-height:1.65;color:var(--ink-soft);
+  border-top:1px solid var(--line);text-align:center}
+.ct-row b{display:block;font-size:.66rem;letter-spacing:.16em;color:var(--gold-700);
+  font-weight:700;margin-bottom:.1rem}
+.ct-col.hl .ct-row{color:#4A4362}
+.ways{display:grid;gap:.65rem;margin:1.6rem 0 0}
+.way{display:flex;align-items:center;gap:.9rem;background:#fff;border:1.5px solid var(--line);
+  border-radius:12px;padding:.9rem 1rem}
+.way .w-ico{width:2.3rem;height:2.3rem;flex:none;display:flex;align-items:center;justify-content:center;
+  border-radius:10px;background:#F2EFE8;color:#8A8496}
+.way .w-ico svg{width:1.25rem;height:1.25rem}
+.way .w-name{font-weight:700;font-size:.95rem;color:#5A5566;line-height:1.5}
+.way .w-desc{font-size:.8rem;color:var(--ink-soft);line-height:1.6}
+.way.hl{border-color:var(--purple-100);background:linear-gradient(180deg,#FBFAFE,var(--purple-50))}
+.way.hl .w-ico{background:var(--purple-700);color:#EFEAF9}
+.way.hl .w-name{color:var(--purple-900)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.3rem 0 0}
+.chip{font-size:.85rem;font-weight:700;color:var(--purple-900);background:#fff;
+  border:1.5px solid var(--purple-100);border-radius:999px;padding:.32rem .9rem;line-height:1.5}
+.chip small{font-weight:500;color:var(--ink-soft);font-size:.76rem}
+.crescendo{margin:2.1rem 0 .3rem;text-align:center;font-family:var(--serif);color:var(--purple-900)}
+.crescendo .cr-lead{font-family:var(--sans);font-size:.86rem;color:var(--ink-soft)}
+.cr1{font-size:1.02rem;font-weight:600;margin-top:.55rem}
+.cr2{font-size:1.28rem;font-weight:700;margin-top:.15rem}
+.cr3{font-size:1.68rem;font-weight:900;margin-top:.2rem;color:var(--purple-950)}
+.cr3 em{font-style:normal;color:var(--gold-700)}
+
+/* ---------- 제6막: 실행 ---------- */
+.health{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.5rem 0 0}
+.h-card{border-radius:12px;padding:1rem .85rem .95rem;text-align:center;border:1.5px solid var(--line);background:#fff}
+.h-card.good{border-color:#CBDCCF;background:#F3F8F4}
+.h-card.warnc{border-color:#E4C9C8;background:#FBF3F2}
+.h-sign{font-size:.7rem;font-weight:700;letter-spacing:.16em}
+.h-card.good .h-sign{color:var(--ok)}
+.h-card.warnc .h-sign{color:var(--warn)}
+.h-formula{font-family:var(--serif);font-weight:700;font-size:.94rem;margin-top:.4rem;
+  color:var(--ink);line-height:1.7}
+.h-formula b{font-size:1.1rem;font-weight:900}
+@media (max-width:380px){.health{grid-template-columns:1fr}}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin:1.5rem 0 0}
+.step{text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;
+  padding:.95rem .4rem .85rem}
+.st-num{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;
+  border-radius:50%;background:var(--purple-700);color:#fff;font-family:var(--serif);
+  font-weight:900;font-size:.92rem}
+.st-name{font-weight:700;font-size:.9rem;color:var(--purple-900);margin-top:.45rem}
+.st-desc{font-size:.76rem;color:var(--ink-soft);margin-top:.2rem;line-height:1.6}
+.st-result{margin-top:.7rem;text-align:center;background:var(--purple-900);color:#EDE8F7;
+  border-radius:12px;padding:.75rem .8rem;font-family:var(--serif);font-size:.98rem}
+.fruit{margin:1.7rem 0 0;background:#fff;border:1.5px solid var(--purple-100);border-radius:14px;
+  padding:1.35rem 1.2rem 1.25rem;box-shadow:0 12px 26px rgba(41,34,80,.07)}
+.fr-eyebrow{font-size:.68rem;letter-spacing:.2em;color:var(--gold-700);font-weight:700;margin-bottom:.6rem}
+.fr-top{display:flex;align-items:center;gap:1.05rem}
+.fr-big{font-family:var(--serif);font-weight:900;font-size:2.85rem;color:var(--purple-900);
+  line-height:1;flex:none;letter-spacing:-.02em}
+.fr-side{flex:1}
+.fr-cap{font-size:.86rem;color:var(--ink-soft);line-height:1.65}
+.fr-seg{display:flex;gap:.3rem;margin-top:.55rem}
+.fr-seg i{flex:1;height:.58rem;border-radius:999px;background:var(--purple-100)}
+.fr-seg i.on{background:linear-gradient(90deg,var(--purple-500),var(--purple-700))}
+.fr-list{list-style:none;margin-top:1.05rem;border-top:1px dashed var(--line);padding-top:.95rem}
+.fr-list li{position:relative;padding-left:1.05rem;font-size:.9rem;color:var(--ink-soft);
+  margin-top:.45rem;line-height:1.72}
+.fr-list li::before{content:'';position:absolute;left:0;top:.6rem;width:.4rem;height:.4rem;
+  border-radius:50%;background:var(--gold-600)}
+.fr-list li b{color:var(--purple-900)}
+
+/* ---------- 제7막: 여섯 가지 위임 ---------- */
+.commissions{list-style:none;margin:1.7rem 0 0;display:grid;gap:.85rem}
+.cm{display:flex;gap:1rem;background:#fff;border:1.5px solid var(--line);border-radius:14px;
+  padding:1.2rem 1.15rem 1.1rem}
+.cm-num{flex:none;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--gold-600);
+  line-height:1.2;width:1.55rem;text-align:center}
+.cm h4{font-family:var(--serif);font-weight:900;font-size:1.07rem;color:var(--purple-900);line-height:1.55}
+.cm p{font-size:.9rem;color:var(--ink-soft);margin-top:.35rem;line-height:1.78}
+.mini80{margin-top:.7rem;display:flex;align-items:center;gap:.65rem;background:var(--purple-50);
+  border:1px solid var(--purple-100);border-radius:10px;padding:.55rem .75rem}
+.mini80 b{font-family:var(--serif);font-weight:900;font-size:1.55rem;color:var(--purple-900);line-height:1}
+.mini80 span{font-size:.76rem;color:var(--ink-soft);line-height:1.55}
+.cm.final{background:linear-gradient(165deg,#3B3268,#292250);border-color:transparent;
+  box-shadow:0 16px 34px rgba(41,34,80,.22)}
+.cm.final .cm-num{color:#E7CF8F}
+.cm.final h4{color:#F1EDFA}
+.cm.final p{color:#C6BCE4}
+
+/* ---------- 맺음 ---------- */
+.closing{border-top:1px solid var(--line);background:linear-gradient(180deg,var(--paper),#F3F0E9);
+  padding:4.6rem 1.6rem 2.6rem;text-align:center}
+.ornament{color:var(--gold-600);font-size:.95rem;letter-spacing:.7em;text-indent:.7em;margin-bottom:2.1rem}
+.close-quote{font-family:var(--serif);font-size:1.13rem;line-height:2.15;color:var(--purple-950);
+  font-weight:600;text-wrap:balance}
+.close-verse{margin-top:2.4rem;font-family:var(--serif);font-size:.93rem;color:var(--ink-soft);line-height:2}
+.close-verse b{display:block;color:var(--purple-700);font-family:var(--sans);font-size:.76rem;
+  letter-spacing:.1em;margin-top:.45rem;font-weight:700}
+.footer{margin-top:3.2rem;padding-top:1.3rem;border-top:1px solid var(--line);
+  font-size:.74rem;color:#9A93A8;line-height:1.85}
+</style>
+</head>
+<body>
+<div id="pbar"></div>
+<main class="wrap">
+
+<!-- ═══════════ 표지 ═══════════ -->
+<header class="hero">
+  <svg class="ic-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 11.5 12 4.5l9 7"/><path d="M5.5 10.2V19.5h13V10.2"/><path d="M10 19.5v-5.2h4v5.2"/>
+  </svg>
+  <p class="eyebrow">2026 봄 전국 중고등부 학부모 봉사자 집회</p>
+  <p class="series">교회생활을 위해 다음 세대를 양성함</p>
+  <span class="msg-no">메시지 2</span>
+  <h1>가정을 통해<br>청년들을 교회생활로 이끎</h1>
+  <p class="refs">성경 · 행 2:46-47 &nbsp;|&nbsp; 롬 16:5상 &nbsp;|&nbsp; 행 20:20 &nbsp;|&nbsp; 히 10:25</p>
+  <div class="motif">이 집 저 집에서</div>
+  <div class="scroll-hint">아래로 내리며 말씀의 여정을 따라가십시오 ▾</div>
+</header>
+
+<!-- ═══════════ 서막 · 부담 ═══════════ -->
+<section id="act0">
+  <div class="sec-head rv">
+    <span class="act">서 막</span>
+    <h2 class="sec-title">다음 세대를 향한 부담</h2>
+    <p class="sec-lead">왜 우리는 우리 가운데서 태어난 자녀들에게 이토록 수고해야 합니까? 한 형제님의 말씀에서 이 부담이 시작됩니다.</p>
+  </div>
+
+  <blockquote class="quote rv">
+    만약 교회 증가분 중 절반이 우리 자신의 자녀들에게서 오고, 나머지 절반이 세상으로부터 온다면, 교회는 매우 풍성해질 것입니다.
+    <span class="src">— 워치만 니</span>
+  </blockquote>
+
+  <div class="split rv">
+    <div class="split-bar">
+      <div class="sp a"><b>절반</b><span>우리의 자녀들에게서</span></div>
+      <div class="sp b"><b>절반</b><span>세상으로부터</span></div>
+    </div>
+    <div class="split-eq">=</div>
+    <div class="split-res">매우 풍성한 교회</div>
+    <p class="split-cap">유망한 이들이 많아지고, 청년들이 온전하게 되어<br>하나님의 집의 기둥들로 건축됩니다.</p>
+  </div>
+
+  <p class="p rv">그분은 또 이렇게 말씀하셨습니다. 만약 우리가 너무나 많은 청년들을 잃어버린다면, <b>왕국 복음은 결코 땅끝까지 이르지 못할 것</b>이라고. 왕국의 복음이 확산되고 교회가 풍성해지기 위해서는 적어도 <b>두 세대의 추구하는 이들, 곧 이기는 이들</b>이 필요합니다.</p>
+
+  <div class="gen2 rv">
+    <div class="gen-item"><div class="g-tag">첫째 세대</div><div class="g-name">이기는 이들</div></div>
+    <div class="gen-plus">+</div>
+    <div class="gen-item"><div class="g-tag">다음 세대</div><div class="g-name">이기는 이들</div></div>
+    <div class="gen-goal">왕국 복음이 땅끝까지<small>교회가 풍성해지고 강화됩니다</small></div>
+  </div>
+
+  <p class="note rv">신명기와 시편과 예언서들은 거듭 우리의 자녀들과 자녀들의 자녀들, 곧 손주들에게까지 우리를 인도하며 언급합니다.</p>
+</section>
+
+<!-- ═══════════ 제1막 · 간증 ═══════════ -->
+<section id="act1">
+  <div class="sec-head rv">
+    <span class="act">제 1 막</span>
+    <h2 class="sec-title">한 아버지의 간증</h2>
+    <p class="sec-lead">어린이와 청소년의 길에서 수년간 봉사해 온 한 형제님의 진실하고 정직한 이야기입니다.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">18세</span>
+      <div class="tl-title">교회생활 안으로 인도됨</div>
+      <p class="tl-text">"주님은 저에게 아브라함에게 나타나셨던 것처럼 영광의 하나님으로 나타나셨습니다." 가족과 친구와 공동체를 잃는 큰 대가를 치르고 이 길에 들어섰습니다.</p>
+    </div>
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">19세</span>
+      <div class="tl-title">아직 10대에 결혼</div>
+      <p class="tl-text">농촌 지역 출신으로, 그 당시 일찍 결혼하는 것은 흔한 일이었습니다. 두 사람의 운명은 농부가 되는 것이었습니다.</p>
+    </div>
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">1970년</span><span class="tl-badge">56년 전</span>
+      <div class="tl-title">로스앤젤레스로 이주</div>
+      <p class="tl-text">주님께서 그분의 회복으로 인도하셨고, 교회생활의 처음 7년 정도를 그곳에서 살며 봉사했습니다.</p>
+    </div>
+    <div class="tl-item rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">네 자녀</span>
+      <div class="tl-title">세 딸과 한 아들의 아버지</div>
+      <p class="tl-text">자녀들은 어린 시절 강제가 아니라 기꺼이, 공개적으로 주님을 영접하고 믿어 구원을 받아들이고 침례를 받았습니다.</p>
+    </div>
+    <div class="tl-item deep rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">10대 시절</span>
+      <div class="tl-title">각자 자신의 길을 선택하기 시작</div>
+      <p class="tl-text">자녀들은 자신만의 정체성과 선호와 가치관을 발달시켰고, 고등학교를 마치고 대학에 갔을 때 그들 중 일부는 주님의 회복의 길을 취하지 않았습니다.</p>
+    </div>
+    <div class="tl-item deep rv">
+      <div class="tl-dot"></div>
+      <span class="tl-tag">오늘까지</span>
+      <div class="tl-title">기도와 간구의 근원</div>
+      <p class="tl-text">"이것은 저희 부부에게 꽤 큰 고통이 되었고, 그것은 많은 기도와 간구의 근원이 되었습니다."</p>
+    </div>
+  </div>
+
+  <blockquote class="quote rv">
+    하나님의 구원과 그들의 구원, 그리고 그들의 추구하는 것 모두가 하나님의 선택하심과 예정하심에 달려 있습니다. 그러므로 우리는 그들을 위해 기도해야 합니다. 우리는 그들을 위한 본으로서 살아야 합니다. 그리고 우리는 그분의 긍휼을 위해 기도해야 합니다.
+    <span class="src">— 엡 1:4-5 참조</span>
+  </blockquote>
+</section>
+
+<!-- ═══════════ 제2막 · 질문 ═══════════ -->
+<section id="act2">
+  <div class="sec-head rv">
+    <span class="act">제 2 막</span>
+    <h2 class="sec-title">두 가지 질문</h2>
+    <p class="sec-lead">어바인에서 봉사자들이 모여 청년들을 얻기를 절실히, 심지어 필사적으로 기도할 때 마음속에 있었던 강렬하고 큰 질문입니다.</p>
+  </div>
+
+  <div class="vs-card q1 rv">
+    <p class="vs-q">"우리는 왜 주님의 회복 안에 있는가?"</p>
+    <span class="vs-a">이상(Vision) 때문에</span>
+    <p class="vs-t">그리스도와 교회에 관한 분명한 계시 — 오늘날 이 땅에서 주님은 하나의 움직임, 하나의 일, 하나의 길을 가지고 계시며, 한 도시에는 하나의 교회뿐이라는 이상. 이 이상이 18세의 젊은이를 사로잡았고, 그는 아주 높은 대가를 치르고 이 길로 들어왔습니다.</p>
+  </div>
+
+  <div class="vs-divider">그 러 나</div>
+
+  <div class="vs-card q2 rv">
+    <p class="vs-q">"왜 나의 자녀들이 여기에 있는가?"</p>
+    <span class="vs-a">"엄마 아빠가 여기에 있기 때문"</span>
+    <p class="vs-t">저는 저의 답변을 바꾸어야 했습니다.</p>
+  </div>
+
+  <blockquote class="quote rv">
+    그들은 이상을 보았기 때문에 여기 있는 것이 아닙니다. 그들은 위대한 계시 때문에 여기에 있는 것이 아닙니다. &hellip; 엄마 아빠가 이 길을 취했기 때문에 그들이 여기에 있는 것입니다. 그들은 동일한 이상을 가지고 있지 않고 이상에 의해 통제되지 않습니다.
+  </blockquote>
+
+  <p class="p rv">또한 이상을 보고 계시에 사로잡혔던 많은 이들조차 십자가에 의해, 자아에 의해, 육체에 의해 걸려 넘어져 이 길에서 떠났습니다. 그러므로 청년들에게는 <b>두 가지</b>가 필요합니다.</p>
+
+  <div class="keys rv">
+    <div class="key">
+      <div class="k-num">하나</div>
+      <div class="k-title">이상</div>
+      <p class="k-text">그들을 통제하고 지배하는, 그리스도와 교회에 대한 계시</p>
+    </div>
+    <div class="key">
+      <div class="k-num">둘</div>
+      <div class="k-title">십자가의 길</div>
+      <p class="k-text">자아를 부인하고 혼 생명을 잃으며, 어떤 대가를 치르더라도 주님을 따르는 길</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 제3막 · 딜레마 ═══════════ -->
+<section id="act3">
+  <div class="sec-head rv">
+    <span class="act">제 3 막</span>
+    <h2 class="sec-title">두 가지 딜레마</h2>
+    <p class="sec-lead">수년 전 어바인에서 청소년의 일을 발전시킬 때, 봉사자들이 정말로 고군분투하며 부딪힌 두 개의 벽입니다.</p>
+  </div>
+
+  <div class="sub rv">
+    <span class="s-no">딜레마 ①</span>
+    <span class="s-name">연령별 격리 — 교회생활 안에서의 탈락</span>
+  </div>
+
+  <div class="flow">
+    <div class="fl-box start rv">중고등부 전용 지역<br><b>중고등학생과 봉사자 약 60명</b></div>
+    <div class="fl-arrow rv">▼<small>주의 상 집회 · '성경으로의 여행' 공과 — 달콤하고 귀한 시간</small></div>
+    <div class="fl-box rv">고등학교 졸업, 대학 진학</div>
+    <div class="fl-arrow rv">▼<small>지역은 중고등학생으로만 제한 — "그러면 그들은 어디로 가야 합니까?"</small></div>
+    <div class="fl-box rv">연장하고 성숙한 성도들이 있는 다른 지역으로</div>
+    <div class="fl-arrow rv">▼<small>이상도, 계시도, 관계도 없이</small></div>
+    <div class="fl-box bad rv">"그들은 거기에 있는 그 누구도 몰랐습니다"</div>
+    <div class="fl-arrow rv">▼</div>
+    <div class="fl-box bad rv">보존되지 못하고 떠내려감</div>
+  </div>
+
+  <p class="p rv">주의 상 집회까지는 있었지만, 신원 집회가 진행될 때 무슨 일이 일어나고 있는지 이해하지 못했고 마음이 없어 떠나 버리곤 했습니다. 저희는 청소년의 일 안에서 그들을 붙잡아 둘 수는 있었지만, <b>교회생활 안에서 그들을 보존할 수 없었습니다.</b> 그들에게는 많은 사랑과 품어 줌과 양육함과 목양이 필요했습니다.</p>
+
+  <blockquote class="quote rv">
+    아버지들의 마음을 자녀들에게로 돌아오게 하고, 자녀들의 마음을 아버지들에게로 돌아오게 하는 것 — 그들을 돌볼 누군가가 반드시 있어야 했습니다.
+    <span class="src">— 말라기 4:6 참조</span>
+  </blockquote>
+
+  <div class="sub rv">
+    <span class="s-no">딜레마 ②</span>
+    <span class="s-name">봉사의 과중 — 역량과 분량의 한계</span>
+  </div>
+
+  <div class="stats rv">
+    <div class="stat"><div class="s-val">4개</div><p class="s-cap">청소년 소그룹<br>(중학 여 · 중학 남 · 고교 여 · 고교 남)</p></div>
+    <div class="stat"><div class="s-val">70~80명</div><p class="s-cap">매주 금요일 밤,<br>열린 네 가정에 모인 청소년</p></div>
+  </div>
+
+  <div class="gap rv">
+    <div class="gap-row"><span class="gap-label">필요한 봉사자</span><span class="gap-num">80명</span></div>
+    <div class="bar"><div class="fill" style="width:100%"></div></div>
+    <div class="gap-row"><span class="gap-label">실제 봉사자</span><span class="gap-num warnn">8~10명</span></div>
+    <div class="bar"><div class="fill short" style="width:12%"></div></div>
+    <p class="gap-cap">전시간으로 섬기는 봉사자가 감당할 수 있는 적절한 돌봄은 3명 정도이고, 직장이나 자녀가 있는 자매님이라면 1명 정도입니다. 이것은 역량을 훨씬 벗어난 일이었습니다.</p>
+  </div>
+
+  <blockquote class="quote rv">
+    저에게는 실질적인 교회생활이 없었고 단지 청소년의 일만 있었습니다. 100%의 시간을 청소년들에게 봉사하면서 정작 자신은 정상적인 교회생활을 하지 못하는 것은 정말 힘들었습니다.
+  </blockquote>
+
+  <div class="epi rv">
+    <span class="e-tag">피아노 옆의 클립보드</span>
+    <p>주일 오전 집회 끝에 피아노 옆에서 펜과 클립보드를 들고 함께 봉사할 성도들을 모집하는 광고를 했습니다. 하지만 집회가 끝나고 기다려도, 한두 명 외에는 아무도 오지 않았습니다.</p>
+  </div>
+
+  <p class="p rv">그때 깨달았습니다. 이런 종류의 목양하는 일은 <b>우리 스스로 하는 역량과 분량 안에 있지 않다</b>는 것을. 이 80명의 청소년들은 우리 가정의 식탁에는 앉아 있었지만, 아직 교회 안에 있는 것이 아니었습니다. 주님께 얻어진 바 되지 않았고, 이상을 보지 못했습니다. 저희에게는 해결책이 필요했습니다.</p>
+</section>
+
+<!-- ═══════════ 제4막 · 돌이킴 ═══════════ -->
+<section id="act4">
+  <div class="sec-head rv">
+    <span class="act">제 4 막</span>
+    <h2 class="sec-title">돌이킴</h2>
+    <p class="sec-lead">주님께서 이 시기에 정말로 저희를 인도해 주셨습니다. 저희는 이것이 길이 아니라는 것을 깨달았습니다.</p>
+  </div>
+
+  <div class="ba">
+    <div class="ba-card before rv">
+      <span class="ba-tag">BEFORE</span>
+      <h4>지금까지의 길</h4>
+      <ul class="ba-list">
+        <li>금요일 밤, 청소년만의 소그룹 4개</li>
+        <li>봉사자의 교회생활 = 100% 청소년의 일</li>
+        <li>고등학교 졸업과 동시에 끝나는 돌봄</li>
+        <li>지치고 메말라 가는 봉사자들</li>
+      </ul>
+    </div>
+    <div class="ba-arrow rv">
+      <span class="ba-word">돌 이 킴</span>
+      <span class="ba-line">"저희는 소위 청소년 소그룹들을 모두 중단하기로 했습니다."</span>
+      <span class="ba-glyph">▼</span>
+    </div>
+    <div class="ba-card after rv">
+      <span class="ba-tag">AFTER</span>
+      <h4>교회의 정하신 길</h4>
+      <ul class="ba-list">
+        <li>연장한 분들 · 젊은 분들 · 중년 · 어린이 · 아기가 함께 있는 일반 소그룹 안으로</li>
+        <li>부모님이 가기 때문이 아니라, 자신이 가는 자신만의 소그룹</li>
+        <li>성도들은 영적인 부모가 되고, 어린아이들은 동생이 됨</li>
+        <li>봉사자 자신이 먼저 공급받는 교회생활</li>
+      </ul>
+    </div>
+  </div>
+
+  <blockquote class="quote rv">
+    저희 자신에게 교회생활이 없는데 어떻게 그들을 교회생활 안으로 이끌 수 있겠습니까? 그것은 말이 되지 않고 불가능합니다. 청소년의 일은 고등학교를 졸업하면 끝이 납니다.
+  </blockquote>
+
+  <p class="testi rv">이 나팔을 불기 시작했을 때, 함께 봉사하던 한 형제님은 머리를 숙이고 눈물을 쏟아냈습니다. 우리가 이 청소년들을 교회생활로 이끌려면 우리 자신에게 먼저 교회생활과 소그룹이 필요하다는 것을, 주님께서 보여 주셨습니다.</p>
+</section>
+
+<!-- ═══════════ 제5막 · 하나님께서 정하신 길 ═══════════ -->
+<section id="act5">
+  <div class="sec-head rv">
+    <span class="act">제 5 막</span><span class="act-badge">개요 Ⅰ</span>
+    <h2 class="sec-title">하나님께서 정하신 길 — 가정 집회</h2>
+    <p class="sec-lead">우리는 교회의 건축이 가정 집회에 기초한다는 것을 분명히 보아야 합니다. 가정 집회는 하나님께서 그분의 교회를 건축하시는 데 그분의 목표에 도달하기 위한 유일한 길입니다.</p>
+  </div>
+
+  <div class="scripture rv">
+    그들이 날마다 한마음 한뜻으로 성전에 모이고 <em>이 집 저 집에서</em> 떡을 떼기를 꾸준히 계속하고 기쁨과 단순한 마음으로 함께 음식을 먹으며 하나님을 찬양하고 모든 사람 앞에서 은혜를 얻었다. 그래서 주님께서 구원받는 사람들을 날마다 더하시어 합치셨다.
+    <span class="ref">사도행전 2:46-47 (회복역)</span>
+  </div>
+
+  <div class="bignum rv">
+    <span class="bn-val">3,000</span><span class="bn-unit">명</span>
+    <p class="bn-cap">오순절 날, 베드로의 복음 전파로 하루 만에 구원받고 침례받은 사람들.<br>이들은 어디에서 건축되었습니까? — 각 공동체별로, 집집마다, <b>이 집 저 집에서.</b></p>
+  </div>
+
+  <div class="contrast rv">
+    <div class="ct-col">
+      <div class="ct-head">대집회<small>성전에서</small></div>
+      <div class="ct-row"><b>성격</b>단체적인 큰 집회</div>
+      <div class="ct-row"><b>내용</b>사도들의 가르침</div>
+    </div>
+    <div class="ct-col hl">
+      <div class="ct-head">가정 집회<small>이 집 저 집에서</small></div>
+      <div class="ct-row"><b>성격</b>사적이고 치밀한 집회</div>
+      <div class="ct-row"><b>내용</b>사도들의 교통</div>
+    </div>
+  </div>
+  <p class="note rv">성도들은 성전에서 받은 가르침을 집으로 가져가, 말씀을 확인하며 교통을 가졌습니다. 처음 성령께서 창시하시고 하나님께서 정하신 길은 바로 이 두 종류의 집회 방식이었습니다(행 20:20).</p>
+
+  <div class="ways">
+    <div class="way rv">
+      <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><ellipse cx="12" cy="12" rx="8.5" ry="5.5"/><ellipse cx="12" cy="12" rx="4.2" ry="2.4"/></svg></div>
+      <div><div class="w-name">그리스인의 방식</div><div class="w-desc">콜로세움 같은 경기장 모임</div></div>
+    </div>
+    <div class="way rv">
+      <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3 3.5 8.5h17L12 3z"/><path d="M5.5 8.5V18M12 8.5V18M18.5 8.5V18"/><path d="M4 18h16"/></svg></div>
+      <div><div class="w-name">유대교의 방식</div><div class="w-desc">회당과 성전 모임</div></div>
+    </div>
+    <div class="way hl rv">
+      <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4.5l9 7"/><path d="M5.5 10.2V19.5h13V10.2"/><path d="M10 19.5v-5.2h4v5.2"/></svg></div>
+      <div><div class="w-name">성령께서 고안하신 교회의 건축의 길</div><div class="w-desc">이 집 저 집에서 — 몇몇 선택된 집이 아닌 모든 가정에서</div></div>
+    </div>
+  </div>
+
+  <div class="scripture--mini scripture rv">
+    유대와 갈릴리와 사마리아 전역에 있는 교회는 평안을 누리며 건축되어 갔고 &hellip;
+    <span class="ref">사도행전 9:31</span>
+  </div>
+  <p class="p rv">교회생활의 초기에 사도들은 매우 신속하게 교회를 건축했습니다. 그러나 그 <b>건축의 길이 바로 소그룹과 가정 집회</b>였습니다. 위트니스 리 형제님은, 도시의 교회가 건축되지 않은 이유는 성령께서 고안하신 가정에서의 건축의 길을 취하지 않았기 때문이라고 지적하셨습니다.</p>
+
+  <div class="chips rv">
+    <span class="chip">아굴라와 브리스길라의 집 <small>로마 · 에베소</small></span>
+    <span class="chip">빌레몬의 집 <small>골로새</small></span>
+  </div>
+  <p class="note rv">"그들의 집에 있는 교회"(롬 16:5상). 브리스가와 아굴라는 어디에 있든지 집을 열어 교회의 실행을 위한 부담을 짊어졌습니다(롬 16:5 각주 1 참조).</p>
+
+  <div class="scripture--mini scripture rv">
+    그들이 날마다 성전에서 그리고 <em>이 집 저 집에서</em> 예수님께서 그리스도이시라는 복음을 쉬지 않고 가르치며 전하였다.
+    <span class="ref">사도행전 5:42</span>
+  </div>
+
+  <div class="crescendo rv">
+    <p class="cr-lead">가정 집회는 그리스도인 집회의</p>
+    <div class="cr1">최고의 길이요</div>
+    <div class="cr2">뛰어난 길일 뿐 아니라</div>
+    <div class="cr3">결국 <em>유일한 길</em>입니다</div>
+  </div>
+</section>
+
+<!-- ═══════════ 제6막 · 실행 ═══════════ -->
+<section id="act6">
+  <div class="sec-head rv">
+    <span class="act">제 6 막</span><span class="act-badge">개요 Ⅱ</span>
+    <h2 class="sec-title">가정을 통한 실행 — 소그룹이 곧 교회생활</h2>
+    <p class="sec-lead">우리는 마땅히 가정을 통해 최선을 다해 청년들을 교회생활로 들어오게 하는 실행을 해야 합니다. 소그룹은 우리의 실지적인 교회생활이 되어야 합니다.</p>
+  </div>
+
+  <blockquote class="quote rv">
+    교회생활 안에 있지 않은 사람은 돌아갈 집이 없는 고아입니다. 교회생활을 시작한 그날, 우리는 집으로 돌아왔음을 알게 됩니다.
+  </blockquote>
+  <p class="note rv">지방 교회 안에 있는 우리 모두에게는 자신만의 소그룹이 필요합니다. 소그룹은 교회의 축소판입니다.</p>
+
+  <blockquote class="quote rv">
+    집회를 가정으로 가져가는 것이 바로 하나님께서 정하신 길의 심장부입니다. 만일 우리가 집회를 가정으로 가져가지 못한다면, 주님의 회복 안에 큰 실패가 있을 것입니다.
+  </blockquote>
+
+  <div class="keys rv">
+    <div class="key">
+      <div class="k-num">유익 하나</div>
+      <div class="k-title">영적인 분위기</div>
+      <p class="k-text">아이들은 어려서부터 영적인 분위기에 싸여, 늘 영원한 것들의 실재를 보며 자랍니다(딤후 3:15).</p>
+    </div>
+    <div class="key">
+      <div class="k-num">유익 둘</div>
+      <div class="k-title">조류에서의 보존</div>
+      <p class="k-text">아이들이 조류에 휩쓸려 떠내려가는 것에서 보존되고, 온 가정이 정상적인 가정이 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="sub rv">
+    <span class="s-no">관점 ①</span>
+    <span class="s-name">관념의 전환 — "이미 좋은 것입니다"</span>
+  </div>
+
+  <blockquote class="quote rv">
+    어떤 사람이 회복되었을 때, 그 사람을 반드시 대집회에 데리고 가야만 성공할 수 있다고 생각하지 말아야 합니다. 그가 매주 소그룹 집회에 온다면, 그것으로 이미 좋은 것입니다.
+  </blockquote>
+  <p class="p rv">대집회는 사람을 남아 있게 할 수 없지만, 이 집 저 집에서 하는 집회는 사람들을 <b>교회의 기층으로</b> 이끌어 옵니다. 가정 집회에 참석하여 즉시 교회생활에 붙잡히는 것 — 이것이 바로 하나님의 지혜입니다.</p>
+
+  <div class="health rv">
+    <div class="h-card good">
+      <div class="h-sign">✓ 정상적인 교회</div>
+      <p class="h-formula">소그룹 집회 참석<br><b>&gt;</b><br>주의 상 집회 참석</p>
+    </div>
+    <div class="h-card warnc">
+      <div class="h-sign">⚠ 타락하고 있다는 신호</div>
+      <p class="h-formula">주의 상 집회 참석<br><b>&gt;</b><br>소그룹 집회 참석</p>
+    </div>
+  </div>
+
+  <div class="sub rv">
+    <span class="s-no">관점 ②</span>
+    <span class="s-name">보존의 여정 — 데려오는 것보다 남아 있게 하는 것</span>
+  </div>
+  <p class="p rv">청년들을 데리고 오는 것은 쉽지만, 그들을 남아 있게 하는 것은 쉽지 않습니다.</p>
+
+  <div class="steps rv">
+    <div class="step"><span class="st-num">1</span><div class="st-name">중학교 시기</div><p class="st-desc">남아 있도록<br>붙들어 줌</p></div>
+    <div class="step"><span class="st-num">2</span><div class="st-name">고등학교 시기</div><p class="st-desc">그 시기를<br>지나가게 함</p></div>
+    <div class="step"><span class="st-num">3</span><div class="st-name">대학교 시기</div><p class="st-desc">수고하여<br>그들을 얻음</p></div>
+  </div>
+  <div class="st-result rv">그 후에야 그들은 안전하고도 견고해집니다</div>
+
+  <div class="fruit rv">
+    <div class="fr-eyebrow">어바인에서의 간증 — 소그룹으로 들어간 열매</div>
+    <div class="fr-top">
+      <div class="fr-big">2/3</div>
+      <div class="fr-side">
+        <p class="fr-cap">1~2년 만에 소그룹에 <b>활동적으로 참여</b>하게 된 청소년의 비율</p>
+        <div class="fr-seg"><i class="on"></i><i class="on"></i><i></i></div>
+      </div>
+    </div>
+    <ul class="fr-list">
+      <li><b>봉사자를 보내지 않았습니다</b> — 소그룹 성도들이 그 청소년들을 주님께 얻어진 지체로 알고 직접 목양하도록 교통했습니다. 캠퍼스에서 새로 얻은 이들을 돌보듯이, 우리 자신의 청소년들을 돌보아야 합니다.</li>
+      <li>1년에 두 번, 봉사자들이 모여 명단을 확인했습니다.</li>
+      <li>소그룹의 내용도 청소년과 새 신자들의 필요에 맞게 조정되었습니다.</li>
+      <li>대학이나 다른 주로 이주했을 때, 그들이 가장 먼저 찾은 것은 소그룹 집회였습니다.</li>
+      <li>청소년들이 소그룹에 친구들을 데려와, 구원받고 침례받는 역사가 일어났습니다.</li>
+    </ul>
+  </div>
+
+  <div class="sub rv">
+    <span class="s-no">확장</span>
+    <span class="s-name">가정에서 캠퍼스로</span>
+  </div>
+  <p class="p rv">복음은 반드시 가정에서부터 나가야 합니다. <b>캠퍼스 일의 기초와 바탕도 집회소가 아닌 가정</b>입니다. 교회 안의 청년들은 중년 부부 혹은 젊은 부부의 가정으로 초대할 수 있으며, 이들 가정은 반드시 집을 열어 청년들을 접대할 준비가 되어 있어야 합니다. 특별히 18~19세의 청년들이 캠퍼스로 가게 해야 합니다. 교회생활 안에 있는 청년들은 모두가 유용한 이들입니다.</p>
+  <p class="note rv">소그룹의 목적은 나의 영양 공급만을 위한 것이 아니라 교회의 증가와 건축을 위한 것입니다. 또한 청소년들을 인도하여 함께 떡을 떼게 하며, 떡을 떼는 것이 무엇이고 그 의미가 무엇인지 — 왜 주님을 경배하며 왜 그 찬송을 선택하는지 — 소그룹 안에서 목양하고 가르쳐 주어야 합니다.</p>
+
+  <div class="scripture--mini scripture rv">
+    어떤 사람들의 습관과 같이 우리 자신의 모이기를 폐하지 말고 &hellip;
+    <span class="ref">히브리서 10:25</span>
+  </div>
+  <p class="p rv">실지적으로 교회생활은 그룹 집회 가운데서 완성됩니다. <b>오늘 가장 중요한 일은 바로 우리 자신의 그룹 집회를 갖는 것입니다.</b> 소그룹은 진리를 추구하고, 기도하고, 교통하고, 주님을 위해 말하는 법을 배우는 실지적인 교회생활입니다.</p>
+</section>
+
+<!-- ═══════════ 제7막 · 여섯 가지 위임 ═══════════ -->
+<section id="act7">
+  <div class="sec-head rv">
+    <span class="act">제 7 막</span>
+    <h2 class="sec-title">소그룹 집회를 위한 여섯 가지 위임</h2>
+    <p class="sec-lead">위트니스 리 형제님께서 소그룹 집회를 위해 우리에게 주신 여섯 가지의 강력한 위임입니다.</p>
+  </div>
+
+  <ol class="commissions">
+    <li class="cm rv">
+      <span class="cm-num">1</span>
+      <div>
+        <h4>관념을 바꾸는 것</h4>
+        <p>소그룹 집회는 단순한 하나의 프로그램이 아닙니다. '교회에 다니는(going to church)' 바벨론적 관념에서 벗어나, 교회에 가는 것이 아니라 교회를 건축해야 합니다. 소그룹에 있다면, 그는 교회생활 안에 있는 것입니다.</p>
+        <div class="mini80"><b>80%</b><span>실지적인 교회생활의 운용 면에서 소그룹 집회가 갖는 가치</span></div>
+      </div>
+    </li>
+    <li class="cm rv">
+      <span class="cm-num">2</span>
+      <div>
+        <h4>집회에 나오기를 그친 성도들을 회복하는 것</h4>
+        <p>낙심하거나 상황이 바뀌어 물러난 이들을 소그룹 집회로 끌어당겨 회복합니다. 주의 날 오전에 오게 하는 것이 목적이 아니라, 하나님께서 정하신 길의 심장부인 소그룹 안으로 이끄는 것이 그들을 보존하는 길입니다.</p>
+      </div>
+    </li>
+    <li class="cm rv">
+      <span class="cm-num">3</span>
+      <div>
+        <h4>교회의 증가를 위해 복음을 전파하는 것</h4>
+        <p>소그룹에서 친구와 친척과 이웃과 동료들의 명단을 놓고 기도하고, 이들을 가정을 통해 소그룹으로 데려와 구원받고 침례받게 합니다. 복음은 반드시 우리의 가정에서 전파되어야 합니다.</p>
+      </div>
+    </li>
+    <li class="cm rv">
+      <span class="cm-num">4</span>
+      <div>
+        <h4>사람들을 보존하는 것</h4>
+        <p>소그룹 안에 들어온 이들을 기도와 돌봄, 목양과 소중히 품음으로 끝까지 붙잡고 보존합니다. 성도들은 결코 소그룹을 '졸업'하지 않으며, 소그룹의 사랑과 돌봄이 사람들을 보존합니다.</p>
+      </div>
+    </li>
+    <li class="cm rv">
+      <span class="cm-num">5</span>
+      <div>
+        <h4>소그룹 집회의 풍성을 강화하는 것</h4>
+        <p>찬송과 교통, 그리고 모든 것을 포함하신 그리스도의 풍성 안으로 들어감으로써 소그룹을 매우 풍성하고 즐겁고 매력 있게 만듭니다. 그럴 때 성도들이 공급받고 이상을 보게 됩니다.</p>
+      </div>
+    </li>
+    <li class="cm final rv">
+      <span class="cm-num">6</span>
+      <div>
+        <h4>삼일 하나님의 표현에 도달하는 것</h4>
+        <p>앞의 다섯 가지 위임의 결과로, 소그룹 집회가 풍성하고 남아 있는 열매를 맺으며 그리스도와 삼일 하나님을 표현하고, 우리가 있는 지방에서 예수의 증거를 선명하게 나타냅니다.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ═══════════ 맺는 기도 ═══════════ -->
+<footer class="closing">
+  <div class="ornament rv">✦</div>
+  <p class="close-quote rv">주님께서 우리의 가정들과<br>가정 집회들을 얻으시고,<br>가정을 통한 교회생활을 통해<br>우리의 모든 청소년들을 사로잡으시고<br>보존하시기를 바랍니다.</p>
+  <p class="close-verse rv">"이 집 저 집에서 떡을 떼기를 꾸준히 계속하고 &hellip;<br>주님께서 구원받는 사람들을 날마다 더하시어 합치셨다."<b>사도행전 2:46-47</b></p>
+  <p class="footer">2026 봄 전국 중고등부 학부모 봉사자 집회 · 메시지 2<br>「가정을 통해 청년들을 교회생활로 이끎」 집회 말씀 지문을 재구성한 인포그래픽<br>성경 본문 · 한국어 회복역</p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var pb=document.getElementById('pbar');
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    pb.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){io.observe(el);});
+  }else{
+    els.forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+</body>
+</html>
