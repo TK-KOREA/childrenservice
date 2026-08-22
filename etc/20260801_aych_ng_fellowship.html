@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>다음 세대 사역 전략 보고서 · 2026.08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F5EE;
+  --surface:#FFFFFF;
+  --ink:#182E24;
+  --pine:#1E4634;
+  --pine-deep:#12241B;
+  --moss:#3E7856;
+  --moss-soft:#E7EFE2;
+  --amber:#DD9A2B;
+  --amber-soft:#F6E7C6;
+  --clay:#B8492F;
+  --clay-soft:#F4DDD5;
+  --line:#DCE3D5;
+  --dim:#5B6B5E;
+  --radius:14px;
+  /* ── 타입 스케일 · 1rem(16px) 기준 ── */
+  --fs-2xs:.75rem;   /* 12px — 마이크로 라벨·범례 */
+  --fs-xs:.8125rem;  /* 13px — 캡션·메타·표 머리글 */
+  --fs-sm:.875rem;   /* 14px — 보조 본문·표 본문 */
+  --fs-base:1rem;    /* 16px — 기본 본문 */
+  --fs-md:1.0625rem; /* 17px — 소제목 */
+  --fs-lg:1.375rem;  /* 22px — 카드 수치 */
+  --fs-xl:1.625rem;  /* 26px — 히어로 수치 */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:'IBM Plex Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:var(--fs-base);
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono','IBM Plex Sans KR',monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+svg,img{max-width:100%;height:auto}
+
+/* ---------- HERO ---------- */
+.hero{
+  background:linear-gradient(168deg,var(--pine-deep) 0%,var(--pine) 78%,#265640 100%);
+  color:#E9F0E6;
+  padding:56px 0 50px;
+  animation:rise .7s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hero{animation:none}}
+.hero-eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--fs-2xs);letter-spacing:.18em;
+  color:#A8C4A6;text-transform:uppercase;margin-bottom:18px;
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+}
+.hero-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;flex:none}
+.hero h1{
+  font-family:'Gowun Batang',serif;font-weight:700;
+  font-size:clamp(1.8rem,5.5vw,2.875rem);
+  line-height:1.3;letter-spacing:-.01em;
+  max-width:640px;
+}
+.hero h1 .em{color:#F3C567}
+.hero-sub{margin-top:14px;color:#C6D6C3;max-width:620px;font-size:var(--fs-base)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;margin-top:38px;align-items:start}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
+
+/* cohort chart */
+.cohort{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:var(--radius);padding:22px 22px 16px}
+.cohort-title{font-size:var(--fs-sm);font-weight:700;color:#DCEAD8;margin-bottom:4px}
+.cohort-cap{font-size:var(--fs-xs);color:#9FB89C;margin-bottom:16px}
+.cohort-row{display:grid;grid-template-columns:64px 1fr 36px;align-items:center;gap:10px;margin-bottom:9px}
+.cohort-label{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-2xs);color:#B9CDB5;text-align:right}
+.cohort-dots{display:flex;flex-wrap:wrap;gap:4px}
+.cohort-dots i{width:13px;height:13px;border-radius:3.5px;display:block}
+.d-up i{background:var(--amber)}
+.d-mid i{background:#5E7B67}
+.d-young i{background:#8FBF97}
+.cohort-num{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);color:#DCEAD8}
+.cohort-legend{display:flex;gap:10px 16px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font-size:var(--fs-2xs);color:#AFC5AB}
+.cohort-legend span{display:flex;align-items:center;gap:6px}
+.cohort-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex:none}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hstat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:var(--radius);padding:16px 18px}
+.hstat .v{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xl);font-weight:600;color:#F3C567;line-height:1.15}
+.hstat .k{font-size:var(--fs-xs);color:#C6D6C3;margin-top:6px;line-height:1.5}
+
+/* ---------- SECTIONS ---------- */
+.section{padding:58px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-no{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);font-weight:600;color:var(--amber);letter-spacing:.1em}
+.sec-title{font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(1.375rem,4.2vw,1.6875rem);letter-spacing:-.01em}
+.sec-desc{color:var(--dim);font-size:var(--fs-base);max-width:720px;margin-bottom:26px}
+
+/* metric cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 19px 16px;display:flex;flex-direction:column;gap:8px}
+.card .label{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-2xs);letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.card .value{font-size:var(--fs-lg);font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.card .value small{font-size:var(--fs-sm);font-weight:500;color:var(--dim)}
+.card .note{font-size:var(--fs-sm);color:var(--dim);line-height:1.6}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-2xs);font-weight:700;padding:4px 11px;border-radius:99px;width:fit-content}
+.chip.red{background:var(--clay-soft);color:var(--clay)}
+.chip.amb{background:var(--amber-soft);color:#9A6A12}
+.chip.grn{background:var(--moss-soft);color:var(--moss)}
+.chip.ok{background:#E3EDF6;color:#2E5B84}
+
+/* matrix table */
+.legend{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:var(--fs-sm);color:var(--dim);margin-bottom:14px}
+.scroll-hint{display:none;align-items:center;gap:6px;font-size:var(--fs-2xs);color:var(--dim);margin:-4px 0 10px}
+.tbl-scroll,.raci-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:760px}
+th,td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:var(--fs-sm)}
+thead th{background:var(--pine);color:#EAF2E6;font-size:var(--fs-xs);font-weight:700;letter-spacing:.03em;border-bottom:none}
+tbody tr:last-child td{border-bottom:none}
+td.rowhead{background:var(--moss-soft);font-weight:700;font-size:var(--fs-sm);color:var(--pine);white-space:nowrap;width:118px;position:sticky;left:0;z-index:2;box-shadow:inset -1px 0 0 var(--line)}
+.tbl-scroll thead th:first-child{position:sticky;left:0;background:var(--pine);z-index:3;box-shadow:inset -1px 0 0 rgba(255,255,255,.18)}
+td .need{font-weight:700;display:block;margin:5px 0 3px;font-size:.9375rem}
+td .det{color:var(--dim);font-size:var(--fs-sm);line-height:1.6}
+
+/* ---------- ECOSYSTEM (dark) ---------- */
+.eco{background:var(--pine-deep);color:#E9F0E6;margin-top:58px;padding:58px 0 62px}
+.eco .sec-title{color:#F1F6EE}
+.eco .sec-desc{color:#A8BFA5}
+.eco-grid{display:grid;grid-template-columns:.85fr 1.35fr;gap:30px;align-items:start}
+@media(max-width:900px){.eco-grid{grid-template-columns:1fr}}
+.eco-points{display:flex;flex-direction:column;gap:12px}
+.eco-point{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 16px}
+.eco-point b{color:#F3C567;font-size:.9375rem;display:block;margin-bottom:4px}
+.eco-point p{font-size:var(--fs-sm);color:#C0D2BD;line-height:1.65}
+.mermaid-card{background:#F6F8F3;border-radius:var(--radius);padding:18px 12px;color:var(--ink)}
+.mermaid{display:flex;justify-content:center;font-family:'IBM Plex Sans KR',sans-serif;overflow-x:auto}
+.mermaid svg{max-width:100%;height:auto}
+.mermaid-cap{font-size:var(--fs-xs);color:#8AA087;margin-top:10px;text-align:center}
+
+/* ---------- TIMELINE ---------- */
+.phase{margin-bottom:34px}
+.phase-tag{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:var(--fs-2xs);font-weight:600;letter-spacing:.1em;padding:6px 14px;border-radius:99px;margin-bottom:16px;line-height:1.5}
+.phase-tag.p1{background:var(--clay-soft);color:var(--clay)}
+.phase-tag.p2{background:var(--amber-soft);color:#9A6A12}
+.phase-tag.p3{background:var(--moss-soft);color:var(--moss)}
+.tl{position:relative;padding-left:26px;border-left:2px solid var(--line);margin-left:8px;display:flex;flex-direction:column;gap:16px}
+.tl-item{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.tl-item::before{content:"";position:absolute;left:-33px;top:20px;width:11px;height:11px;border-radius:50%;background:var(--moss);border:3px solid var(--paper)}
+.tl-item.key{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft)}
+.tl-item.key::before{background:var(--amber)}
+.tl-date{font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);font-weight:600;color:var(--moss);margin-bottom:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tl-item.key .tl-date{color:#9A6A12}
+.badge{font-size:var(--fs-2xs);font-weight:700;background:var(--amber);color:#fff;padding:2px 9px;border-radius:99px;letter-spacing:.05em}
+.tl-title{font-weight:700;font-size:var(--fs-base);margin-bottom:3px}
+.tl-note{font-size:var(--fs-sm);color:var(--dim);line-height:1.6}
+.milist{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.mi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.mi b{font-size:.9375rem;display:block;margin-bottom:4px}
+.mi p{font-size:var(--fs-sm);color:var(--dim);line-height:1.6}
+
+/* ---------- RACI ---------- */
+.raci-scroll{margin-bottom:26px}
+.raci{min-width:820px}
+.raci td,.raci th{text-align:center;font-size:var(--fs-xs);padding:12px 10px}
+.raci td:first-child{text-align:left;font-weight:600;font-size:var(--fs-sm);min-width:220px;line-height:1.5;position:sticky;left:0;background:var(--surface);z-index:2;box-shadow:inset -1px 0 0 var(--line)}
+.raci thead th:first-child{position:sticky;left:0;background:var(--pine);z-index:3;box-shadow:inset -1px 0 0 rgba(255,255,255,.18)}
+.rc{display:inline-block;width:30px;height:30px;line-height:30px;border-radius:8px;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:var(--fs-xs)}
+.rc.R{background:var(--pine);color:#fff}
+.rc.A{background:var(--amber);color:#fff}
+.rc.C{background:var(--moss-soft);color:var(--moss)}
+.rc.I{background:#EEF1EA;color:#8A968B}
+.raci-legend{display:flex;gap:10px 16px;flex-wrap:wrap;align-items:center;font-size:var(--fs-xs);color:var(--dim);margin-bottom:14px}
+.raci-legend span{display:inline-flex;align-items:center;gap:6px}
+.raci-legend .rc{width:24px;height:24px;line-height:24px;font-size:var(--fs-2xs)}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.role{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 19px;border-top:4px solid var(--moss)}
+.role.hot{border-top-color:var(--clay)}
+.role.warm{border-top-color:var(--amber)}
+.role h4{font-size:var(--fs-md);margin-bottom:10px;font-family:'Gowun Batang',serif}
+.role ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.role li{font-size:var(--fs-sm);color:#37473B;line-height:1.6;padding-left:16px;position:relative}
+.role li::before{content:"›";position:absolute;left:2px;color:var(--amber);font-weight:700}
+
+/* footer */
+footer{margin-top:60px;background:var(--pine-deep);color:#93AC92;padding:30px 0 38px;font-size:var(--fs-xs);line-height:1.75}
+footer b{color:#CBDCC8}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:760px){
+  .scroll-hint{display:flex}
+}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .hero{padding:38px 0 34px}
+  .hero-eyebrow{gap:8px 10px;margin-bottom:14px;letter-spacing:.14em}
+  .hero-sub{margin-top:12px}
+  .hero-grid{gap:20px;margin-top:26px}
+  .cohort{padding:18px 16px 14px}
+  .cohort-row{grid-template-columns:56px 1fr 32px;gap:8px}
+  .cohort-dots i{width:12px;height:12px}
+  .hero-stats{gap:10px}
+  .hstat{padding:14px 15px}
+  .section{padding:42px 0 6px}
+  .sec-head{gap:10px}
+  .sec-desc{margin-bottom:20px}
+  .cards{gap:12px}
+  .card{padding:16px 16px 14px}
+  th,td{padding:12px 13px}
+  .eco{margin-top:42px;padding:42px 0 46px}
+  .eco-grid{gap:18px}
+  .mermaid-card{padding:14px 8px}
+  .phase{margin-bottom:28px}
+  .phase-tag{border-radius:14px}
+  .tl{padding-left:20px;margin-left:5px;gap:14px}
+  .tl-item{padding:13px 15px}
+  .tl-item::before{left:-29px;width:10px;height:10px}
+  .mi{padding:14px 15px}
+  .raci td:first-child{min-width:148px}
+  .raci td,.raci th{padding:11px 8px}
+  .rc{width:28px;height:28px;line-height:28px}
+  .role{padding:16px 16px}
+  footer{margin-top:42px;padding:26px 0 34px}
+}
+@media(max-width:380px){
+  .wrap{padding:0 16px}
+  .hstat .v{font-size:1.5rem}
+  .card .value{font-size:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow mono">
+      <span>다음 세대 사역 전략 보고서</span><span class="dot"></span>
+      <span>안양 · 유초등부 — 중고등부</span><span class="dot"></span>
+      <span>2026. 08. 01. 책임 형제 교통 기반</span>
+    </div>
+    <h1>3년 안에 <span class="em">13명</span>이 올라온다,<br>지금 생태계를 세울 때</h1>
+    <p class="hero-sub">전시간 봉사자 이임으로 드러난 구조적 공백을, 특정인 의존이 아닌 <b>전 성도가 참여하는 선순환 생태계</b>로 전환하기 위한 필요 진단과 실행 로드맵.</p>
+
+    <div class="hero-grid">
+      <div class="cohort" role="img" aria-label="학년별 재적 분포: 6학년 5명, 5학년 3명, 4학년 5명이 3년 내 중고등부 진학. 3학년부터 1학년은 각 1명. 유치·유아 약 15명.">
+        <div class="cohort-title">학년별 재적 분포 — 진학의 파도</div>
+        <div class="cohort-cap">■ 1칸 = 어린이 1명 · 유초등 16명 + 유치·유아 약 15명</div>
+        <div class="cohort-row d-up"><span class="cohort-label">6학년</span><span class="cohort-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="cohort-num">5</span></div>
+        <div class="cohort-row d-up"><span class="cohort-label">5학년</span><span class="cohort-dots"><i></i><i></i><i></i></span><span class="cohort-num">3</span></div>
+        <div class="cohort-row d-up"><span class="cohort-label">4학년</span><span class="cohort-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="cohort-num">5</span></div>
+        <div class="cohort-row d-mid"><span class="cohort-label">3학년</span><span class="cohort-dots"><i></i></span><span class="cohort-num">1</span></div>
+        <div class="cohort-row d-mid"><span class="cohort-label">2학년</span><span class="cohort-dots"><i></i></span><span class="cohort-num">1</span></div>
+        <div class="cohort-row d-mid"><span class="cohort-label">1학년</span><span class="cohort-dots"><i></i></span><span class="cohort-num">1</span></div>
+        <div class="cohort-row d-young"><span class="cohort-label">유치·유아</span><span class="cohort-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cohort-num">≈15</span></div>
+        <div class="cohort-legend">
+          <span><i style="background:var(--amber)"></i>3년 내 중고등부 진학 13명</span>
+          <span><i style="background:#5E7B67"></i>허리 구간(각 1명)</span>
+          <span><i style="background:#8FBF97"></i>뒤이어 자라는 세대</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="v mono">13명</div><div class="k">3년 내 중고등부 진학<br>(내년만 5명)</div></div>
+        <div class="hstat"><div class="v mono">4명</div><div class="k">현재 중고등부 봉사자<br>(형제 2 · 대학생 자매 2)</div></div>
+        <div class="hstat"><div class="v mono">≈31명</div><div class="k">유초등 + 유치·유아 재적<br>지속 성장세</div></div>
+        <div class="hstat"><div class="v mono">D-29</div><div class="k">8/30 전 성도 공론화 집회<br>핵심 전환점</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ 01 DASHBOARD ═══════════ -->
+<section class="section" id="dashboard">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">01</span><h2 class="sec-title">📊 Executive Dashboard</h2></div>
+    <p class="sec-desc">교통에서 확인된 핵심 지표와 상태. 인프라(시설)는 전국 최고 수준으로 문제가 없으며, 병목은 <b>인적 자원</b>과 <b>재정 운영 방식</b> 두 축에 집중되어 있습니다.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="label">진학 예정 인원</span>
+        <span class="value">13명 <small>/ 3년 내</small></span>
+        <span class="chip red">🔴 대비 시급</span>
+        <span class="note">내년 5명 진학 시작. 중고등부 확장이 예정된 사실로 확정.</span>
+      </div>
+      <div class="card">
+        <span class="label">최대 병목</span>
+        <span class="value">전담 헌신자 공백</span>
+        <span class="chip red">🔴 긴급</span>
+        <span class="note">전시간 봉사자(다솜 자매) 이임 — 담당 형제 표현으로 "수족이 잘린 느낌". 코디·행정·목양 연결 기능 상실.</span>
+      </div>
+      <div class="card">
+        <span class="label">담당자 소진 리스크</span>
+        <span class="value">High</span>
+        <span class="chip red">🔴 최우선 관리</span>
+        <span class="note">유초등부 담당 형제가 지치면 현재의 좋은 분위기(생태계) 자체가 무너질 수 있음 — 교통의 제1 염려.</span>
+      </div>
+      <div class="card">
+        <span class="label">핵심 전환 일정</span>
+        <span class="value">8/30 <small>(주일)</small></span>
+        <span class="chip ok">✅ 확정</span>
+        <span class="note">수련회 이후·추석 전 골든타임. 재정 + 손봉사 필요를 전 성도에게 공론화.</span>
+      </div>
+      <div class="card">
+        <span class="label">재정 리스크</span>
+        <span class="value">갹출 → 교회 지원</span>
+        <span class="chip amb">🟡 전환 이행 중</span>
+        <span class="note">토요 식사비의 학부모 갹출 부담 제거 방향 확정. 헌금 항목 신설 여부는 추가 교통 필요.</span>
+      </div>
+      <div class="card">
+        <span class="label">행정 인력</span>
+        <span class="value">자매 2인 <small>분담</small></span>
+        <span class="chip amb">🟡 역부족</span>
+        <span class="note">코디·소식지·통계·비품 등 업무를 나눠 수행 중이나 "조금씩 하다 지치는" 반복 패턴.</span>
+      </div>
+      <div class="card">
+        <span class="label">토요 소그룹 규모</span>
+        <span class="value">어린이 ≈20 <small>+ 학부모</small></span>
+        <span class="chip grn">🟢 3개 그룹 개편</span>
+        <span class="note">합동 모임 + 연령별 분반 활동 + 공동 식사 체계로 최근 재편. 월 1회 야외 활동 병행.</span>
+      </div>
+      <div class="card">
+        <span class="label">인프라 경쟁력</span>
+        <span class="value">전국 최상위</span>
+        <span class="chip grn">🟢 강점 자산</span>
+        <span class="note">아이들이 "오고 싶어하는" 공간. 이 강점에 사람·재정이 더해지면 시너지 극대화.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 02 MATRIX ═══════════ -->
+<section class="section" id="matrix">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">02</span><h2 class="sec-title">🧩 3D 필요 분석 매트릭스</h2></div>
+    <p class="sec-desc">자원 카테고리 × 대상별로 필요를 입체 분해했습니다. 핵심 통찰: <b>"일이 문제가 아니라 사람이 문제"</b> — 업무 분장보다 <b>헌신된 사람을 세우는 것</b>이 모든 셀을 관통하는 근본 해법입니다.</p>
+    <div class="legend">
+      <span>🔴 <b>긴급</b> — 즉시(8월 내) 착수</span>
+      <span>🟡 <b>보통</b> — 하반기 정착</span>
+      <span>🟢 <b>장기</b> — 구조·생태계 차원</span>
+    </div>
+    <p class="scroll-hint">👉 표를 옆으로 밀어 전체를 확인하세요</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:118px">자원 축</th><th>👧 아이들</th><th>👨‍👩‍👧 학부모</th><th>🙋 봉사자 · 청년</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rowhead">인적 자원</td>
+            <td>🔴<span class="need">중고등 목양자 확보</span><span class="det">진학 13명 대비 봉사자 4명. 부모가 접근하기 어려운 시기 — 나이 차 적은 청년의 접점(하교 케어 등)이 정착을 좌우.</span></td>
+            <td>🟡<span class="need">토요 식사 봉사 인력</span><span class="det">자녀를 다 키우신 노자매님 중심 자원 편성 — "밥 한 끼가 곧 목양". 학부모의 이중 부담 해소.</span></td>
+            <td>🔴<span class="need">헌신된 전담자 발굴</span><span class="det">전시간·반시간 등 형태는 2차 문제. 다음 세대에 자신을 들이는 '사람'이 우선 — 세우는 방법 자체를 연구 과제로.</span></td>
+          </tr>
+          <tr>
+            <td class="rowhead">재정 자원</td>
+            <td>🟡<span class="need">활동 예산 안정화</span><span class="det">소그룹 운영·월 1회 야외 활동·달란트 잔치·야외 섬김 등 정례 활동의 예산 예측 가능성 확보.</span></td>
+            <td>🔴<span class="need">식사비 갹출 부담 제거</span><span class="det">토요 식사 재정은 교회가 감당하기로 방향 확정 — "봉사하며 각출까지 하는 안타까움을 없애자".</span></td>
+            <td>🟢<span class="need">다음 세대 헌금 항목</span><span class="det">일시 모금이 아닌 지속 창구 신설·정례 관리. 부족분은 교회 재정으로 보전 — 봉사자를 재정 스트레스에서 해방.</span></td>
+          </tr>
+          <tr>
+            <td class="rowhead">영적 · 목양</td>
+            <td>🔴<span class="need">진학기 목양 공백 예방</span><span class="det">중등 진학 = 부모 손을 떠나는 시기. 과거 세대의 경험칙: 이때 목양받은 이는 남고, 못 받은 이는 흩어짐.</span></td>
+            <td>🔴<span class="need">말씀 추구 시간 확보</span><span class="det">봉사 매몰로 메시지·상호 교통의 메마름 발생. 토요일 30분 말씀 누림 정착 → 가정 온전케 됨의 출발점.</span></td>
+            <td>🟡<span class="need">봉사자 소진 방지</span><span class="det">담당 형제의 번아웃이 최대 리스크. 짐 분산 + 격려 + 목양적 지원을 체계화.</span></td>
+          </tr>
+          <tr>
+            <td class="rowhead">시스템 · 행정</td>
+            <td>🟡<span class="need">3그룹 분반 체계 정착</span><span class="det">유아·유치 포함 연령별 3개 그룹 — 합동 모임 + 분반 활동 + 공동 식사 구조의 안정 운영.</span></td>
+            <td>🟢<span class="need">주일 지역 생활 회복</span><span class="det">주일 케어를 지역 지체들이 순환 담당 → 학부모 교사의 지역 교회생활·기능 발휘 복원(중기 검토안).</span></td>
+            <td>🔴<span class="need">행정 기능 재배치</span><span class="det">이임 봉사자의 업무 명세(코디·소식지·집회비·통계·비품)를 기준으로 다음 세대 관련 항목을 분리·재분장.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 03 ECOSYSTEM ═══════════ -->
+<section class="eco" id="ecosystem">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">03</span><h2 class="sec-title">🔀 선순환 생태계 구축 프로세스</h2></div>
+    <p class="sec-desc">특정인 의존 구조("한 사람이 없으면 멈추는 구조")에서 벗어나, 전 성도의 참여가 헌신자를 배출하고 그 헌신이 다시 참여를 부르는 순환 구조로 전환합니다.</p>
+    <div class="eco-grid">
+      <div class="eco-points">
+        <div class="eco-point"><b>출발점 — 밥상</b><p>"반만 해줘도 엄청난 부담이 줄어든다." 토요 식사 봉사가 순환의 가장 실제적인 시동 장치입니다.</p></div>
+        <div class="eco-point"><b>지렛대 — 30분</b><p>식사에서 해방된 학부모가 토요일 2시간 중 30분만 말씀을 누려도 가정이 세워지기 시작합니다.</p></div>
+        <div class="eco-point"><b>목표 — 사람</b><p>구조의 최종 산출물은 프로그램이 아니라 헌신된 지체. 헌신자가 나오면 부족한 필요는 채워집니다.</p></div>
+        <div class="eco-point"><b>유지 장치 — 연 2회 환기</b><p>반기별 환기 집회(OT)로 관심과 헌금이 끊기지 않도록 정례화합니다.</p></div>
+      </div>
+      <div>
+        <div class="mermaid-card">
+          <pre class="mermaid">
+flowchart TD
+    A["🤲 전 성도 관심 · 참여<br/>다음 세대 헌금 + 손봉사 자원"]
+    B["🍚 학부모 짐 덜기<br/>토요 식사 · 행정 부담 해방"]
+    C["📖 영적 누림 · 메시지 추구<br/>토요 30분 말씀 시간"]
+    D["🏠 가정의 온전케 됨<br/>젊은 가정이 견고해짐"]
+    E["🌱 다음 세대 자연스러운 목양<br/>아이들이 교회에 심겨짐"]
+    F["🔥 헌신된 지체 배출<br/>봉사 확대 · 계층 간 연결"]
+    G["💰 교회 재정 보전<br/>부족분 지원"]
+    H["📣 연 2회 환기 집회<br/>관심 · 헌금 정례화"]
+    A --> B --> C --> D --> E --> F
+    F -- "선순환 강화" --> A
+    G -.-> B
+    H -.-> A
+    classDef base fill:#EAF2E6,stroke:#3E7856,stroke-width:1.5px,color:#17352A,font-size:14px;
+    classDef gold fill:#F6E7C6,stroke:#DD9A2B,stroke-width:2px,color:#5C400C,font-size:14px;
+    classDef aux fill:#F2F5EE,stroke:#9FB49C,stroke-width:1px,color:#4A5C4D,font-size:13px,stroke-dasharray:4 3;
+    class A,B,C,D,E base;
+    class F gold;
+    class G,H aux;
+          </pre>
+          <p class="mermaid-cap">학부모 해방 → 영적 누림 → 가정 온전 → 자연스러운 목양 → 전 성도 관심으로 되먹임되는 순환 구조</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 04 ROADMAP ═══════════ -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">04</span><h2 class="sec-title">🗓️ 단계별 실행 로드맵</h2></div>
+    <p class="sec-desc">8월은 공론화까지의 카운트다운, 하반기는 습관화, 2027년 이후는 구조화 단계입니다.</p>
+
+    <div class="phase">
+      <span class="phase-tag p1">PHASE 1 · 단기 — 2026년 8월 "공론화 카운트다운"</span>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-date mono">8/2 (주일) <span class="badge">내일</span></div>
+          <div class="tl-title">봉사 집회 — 실무 교통</div>
+          <div class="tl-note">재정 지원 방식(헌금 항목 신설 vs 일반 재정 지원) 및 식사 봉사 운영안 구체화 · 8/30 준비 착수 · 놓친 필요 청취(학부모 교사·중고등부).</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">8/9 (주일)</div>
+          <div class="tl-title">대만 지체 방문 + 유초등부 전람</div>
+          <div class="tl-note">11:00 집회 종료(찬송 10:35 시작) → 환영 인사 → 교회 소개 영상 5분(어린이 11:05 대기) → 전람(찬송·말씀 암송, 10분 내) → 대만 순서 → 12:30 종료. 다음 세대의 실체를 전 성도가 목격하는 자연스러운 예고편.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">8/16 (주일) ~</div>
+          <div class="tl-title">야외 · 수련회 주간</div>
+          <div class="tl-note">교회 전체 수련회 모드 유지 — 이 기간 신규 나팔 자제(수련회 헌금 집중).</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">8/23 (주일)</div>
+          <div class="tl-title">사전 광고</div>
+          <div class="tl-note">8/30 교통 예고 — 지체들이 마음의 준비를 하고 참석하도록 각 지역 안내.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">8/27–29 (목–토)</div>
+          <div class="tl-title">전국 장로·책임자 집회 / 8/29 행사</div>
+          <div class="tl-note">참석 신청 선접수 후 권역 확인 절차. 토요일 저녁 일정과 충돌 없음 확인 완료.</div>
+        </div>
+        <div class="tl-item key">
+          <div class="tl-date mono">8/30 (주일) <span class="badge">D-DAY</span></div>
+          <div class="tl-title">★ 전 성도 공론화 집회</div>
+          <div class="tl-note">다음 세대의 재정 필요 + 토요 식사 손봉사 필요를 열어놓고 나눔 → 자원 접수 개시. "하고 싶은 마음은 있으나 무엇을 할지 모르던 지체"에게 참여의 문을 여는 첫 시도. 팀 책임 형제들이 함께 나팔. 9월(추석 분위기) 진입 전 완료.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <span class="phase-tag p2">PHASE 2 · 중기 — 2026 하반기 "모멘텀 습관화"</span>
+      <div class="milist">
+        <div class="mi"><b>🍚 식사 봉사 정례화</b><p>월별 스케줄 선편성(월 1–2회 자원 접수 → 안배), 자매 간 상호 교대 허용, 결원 시 외식으로 유연 대응.</p></div>
+        <div class="mi"><b>💰 재정 창구 가동</b><p>다음 세대 헌금 항목(또는 확정된 지원 방식) 운영 개시 — 전용 관리 + 부족분 교회 보전 원칙.</p></div>
+        <div class="mi"><b>📖 토요 30분 말씀 추구</b><p>학부모 대상 메시지 누림 시간을 고정 순서로 정착 — 담당 형제·자매들이 분위기 조성.</p></div>
+        <div class="mi"><b>📣 연 2회 환기 체계 설계</b><p>반기 1회 OT·환기 집회를 정례 제도로 — 관심과 헌신이 끊기지 않는 리듬 구축.</p></div>
+        <div class="mi"><b>🔍 전담 헌신자 연구</b><p>이임 봉사자 업무 명세 기반 필요 정의 → 전시간/반시간/가정 자매 반타임 등 시나리오 검토 · 후보 발굴 교통.</p></div>
+        <div class="mi"><b>🤝 청년대학부 영입</b><p>"이것 좀 도와달라" — 막연한 권유가 아닌 구체 과업 단위의 개별 영입으로 중고등부 봉사 접점 확대.</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <span class="phase-tag p3">PHASE 3 · 장기 — 2027~ "생태계 정착"</span>
+      <div class="milist">
+        <div class="mi"><b>🌊 13명 진학 파도 수용</b><p>또래·청년 중심 중고등 목양 체계 완성 — 진학과 동시에 목양 공백 없이 연결.</p></div>
+        <div class="mi"><b>🔗 계층 간 연결 프로그램</b><p>초중고 × 청년대학부 합동 활동을 한 가지부터 시범 운영 → 앞선 계층이 다음 계층을 돌보는 문화.</p></div>
+        <div class="mi"><b>🏛️ 탈(脫) 특정인 의존 구조</b><p>"한 사람이 없으면 멈추는" 부실 구조 탈피 — 모든 지체가 기능을 발휘하는 기반 강화.</p></div>
+        <div class="mi"><b>♻️ 헌신자 자연 배출</b><p>참여 경험 → 부담 → 헌신으로 이어지는 순환이 스스로 봉사자를 길러내는 건강한 생태 환경.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 05 RACI ═══════════ -->
+<section class="section" id="raci">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">05</span><h2 class="sec-title">🎯 R&amp;R — 역할 분담 및 실행 과제</h2></div>
+    <p class="sec-desc">RACI 모델 기준: <b>R</b>(Responsible·실행) / <b>A</b>(Accountable·최종 책임) / <b>C</b>(Consulted·협의) / <b>I</b>(Informed·공유)</p>
+    <div class="raci-legend">
+      <span><span class="rc R">R</span> 실행</span>
+      <span><span class="rc A">A</span> 최종 책임</span>
+      <span><span class="rc C">C</span> 협의</span>
+      <span><span class="rc I">I</span> 공유</span>
+    </div>
+    <p class="scroll-hint">👉 표를 옆으로 밀어 전체를 확인하세요</p>
+    <div class="raci-scroll">
+      <table class="raci">
+        <thead>
+          <tr>
+            <th style="text-align:left">실행 과제</th>
+            <th>장로 ·<br>책임 형제</th>
+            <th>유초등부<br>담당자</th>
+            <th>학부모<br>교사</th>
+            <th>노자매 ·<br>전 성도</th>
+            <th>청년<br>대학부</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>8/30 공론화 집회 기획 · 나팔</td><td><span class="rc A">A</span> <span class="rc R">R</span></td><td><span class="rc C">C</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td></tr>
+          <tr><td>다음 세대 헌금 항목 신설 · 재정 관리</td><td><span class="rc A">A</span></td><td><span class="rc C">C</span></td><td><span class="rc I">I</span></td><td><span class="rc R">R</span></td><td><span class="rc I">I</span></td></tr>
+          <tr><td>토요 식사 봉사 월별 운영</td><td><span class="rc C">C</span></td><td><span class="rc A">A</span></td><td><span class="rc I">I</span></td><td><span class="rc R">R</span></td><td><span class="rc C">C</span></td></tr>
+          <tr><td>토요 30분 학부모 말씀 추구</td><td><span class="rc C">C</span></td><td><span class="rc A">A</span> <span class="rc R">R</span></td><td><span class="rc R">R</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td></tr>
+          <tr><td>중고등부 목양 · 봉사 체계 확대</td><td><span class="rc A">A</span></td><td><span class="rc C">C</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td><td><span class="rc R">R</span></td></tr>
+          <tr><td>전담 헌신자 발굴 · 세우기 연구</td><td><span class="rc A">A</span> <span class="rc R">R</span></td><td><span class="rc C">C</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td><td><span class="rc C">C</span></td></tr>
+          <tr><td>8/9 유초등부 전람 준비</td><td><span class="rc C">C</span></td><td><span class="rc A">A</span> <span class="rc R">R</span></td><td><span class="rc R">R</span></td><td><span class="rc I">I</span></td><td><span class="rc I">I</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="roles">
+      <div class="role hot">
+        <h4>⛪ 장로 · 책임 형제</h4>
+        <ul>
+          <li>8/30 공론화 주도 — 팀 책임자들과 함께 부담을 나팔</li>
+          <li>재정 방식(헌금 항목 vs 일반 지원) 최종 결정, 부족분 교회 보전 원칙 확정</li>
+          <li>헌신자 '세우는 방법' 자체를 지속 연구 과제로 관리</li>
+          <li>연 2회 환기 집회 제도화 — 관심의 리듬 유지</li>
+        </ul>
+      </div>
+      <div class="role hot">
+        <h4>🧑‍🏫 유초등부 담당자</h4>
+        <ul>
+          <li>이임 봉사자 업무 명세에서 다음 세대 항목 분리 → 필요 정의서 작성</li>
+          <li>월별 소그룹 · 식사 · 행사 스케줄 선공유(자원 안배 기반)</li>
+          <li>토요 학부모 말씀 추구 순서 설계 · 인도</li>
+          <li>8/9 전람: 11:05 대기 → 찬송·암송 10분 내 진행</li>
+        </ul>
+      </div>
+      <div class="role warm">
+        <h4>👨‍👩‍👧 학부모 교사</h4>
+        <ul>
+          <li>식사·갹출 부담에서 해방 → 토요 30분 메시지 추구에 참여</li>
+          <li>주중 가정 습관표 · 말씀 암송 지도 지속(현행 강점 유지)</li>
+          <li>중기적으로 주일 지역 교회생활 · 기능 발휘 회복</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h4>🤲 노자매 · 전 성도</h4>
+        <ul>
+          <li>토요 식사 손봉사 자원(월 1–2회 가능 범위 신청)</li>
+          <li>다음 세대 헌금으로 지속 참여 — "물질과 몸을 들이는" 두 갈래</li>
+          <li>봉사를 통해 유초등부와 관계 맺기 — 전 성도의 다음 세대化</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h4>🎓 청년대학부</h4>
+        <ul>
+          <li>진학생 13명의 목양 접점 확보 — 하교 케어 · 소그룹 · 관심의 시간</li>
+          <li>구체 과업 단위 영입 요청에 응답("이것 좀 도와달라")</li>
+          <li>초중고 합동 프로그램 시범 운영의 실행 주체</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>작성 근거</b> · 2026. 8. 1.(토) 책임 형제 교통 녹취 — 유초등부 운영 현황, 전시간 봉사자 이임에 따른 필요, 재정·식사 봉사 공론화(8/30), 대만 방문(8/9) 일정 교통.<br>
+    인명은 역할 중심으로 표기했으며(녹취 상 표기 편차 존재), 수치는 교통 중 언급된 근사치입니다. 본 보고서는 진단이 아닌 <b>실행</b>을 위한 문서로, 8/2 봉사 집회에서의 보완 교통을 전제로 합니다.
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    theme: 'base',
+    flowchart: { curve: 'basis', htmlLabels: true, useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "'IBM Plex Sans KR', sans-serif",
+      fontSize: '14px',
+      primaryColor: '#EAF2E6',
+      primaryTextColor: '#17352A',
+      primaryBorderColor: '#3E7856',
+      lineColor: '#7D967D',
+      edgeLabelBackground: '#F6F8F3',
+      tertiaryColor: '#F6F8F3'
+    }
+  });
+</script>
+</body>
+</html>

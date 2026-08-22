@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제11장 말씀의 사역의 중요성과 위임</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --parchment:#F6EFE1;
+  --paper:#FDFAF3;
+  --ink:#2E2416;
+  --ink-soft:#6E5F49;
+  --line:#E5D9C2;
+  --honey:#A87A1E;
+  --honey-deep:#8A6414;
+  --honey-tint:#F6ECD3;
+  --wine:#6E2836;
+  --wine-deep:#4A1B25;
+  --wine-tint:#F3E6E2;
+  --stone:#94876E;
+  --stone-tint:#EFEAE0;
+  --night:#211809;
+  --gold-night:#D9B96A;
+  --serif:"Gowun Batang","Noto Serif KR","Nanum Myeongjo",Batang,"AppleMyungjo",serif;
+  --sans:"Noto Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--parchment);color:var(--ink);
+  font-family:var(--sans);font-size:1rem;line-height:1.8;
+  word-break:keep-all;overflow-wrap:break-word;
+}
+.wrap{max-width:30rem;margin:0 auto;padding:0 1.3rem}
+p{margin:.85rem 0}
+svg{display:block}
+
+/* ---------- 표지 / 종막 (밤색 커버) ---------- */
+.band{color:#EFE3C6}
+.hero{
+  background:radial-gradient(130% 100% at 50% 0%, #382A10 0%, #241A0A 55%, #1A1206 100%);
+  text-align:center;padding:3.8rem 0 3.2rem;
+}
+.hero-eb{font-size:.74rem;letter-spacing:.2em;color:#C9A85C;margin:0 0 1.1rem;font-weight:500}
+.hero h1{
+  font-family:var(--serif);font-weight:700;font-size:1.95rem;line-height:1.45;
+  margin:0;color:#F3E7C8;
+}
+.hero-orn{margin:1.5rem auto 1.2rem;width:3rem}
+.hero-orn svg{width:100%;height:auto;stroke:#C9A85C;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hero-sub{font-size:.95rem;color:#CBB88C;margin:0;line-height:1.75}
+
+/* ---------- 막 머리글 ---------- */
+.part{margin:4.4rem 0}
+.ph{margin:0 0 1.8rem}
+.ph-eyebrow{
+  display:inline-block;margin:0 0 .55rem;padding:.28rem .75rem;
+  border:1px solid var(--honey);border-radius:99px;
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--honey-deep);
+}
+.ph-title{font-family:var(--serif);font-weight:700;font-size:1.5rem;line-height:1.45;margin:.2rem 0 .5rem}
+.ph-lede{margin:.4rem 0 0;color:var(--ink-soft);font-size:.95rem}
+.orn{
+  text-align:center;color:var(--honey);font-size:.9rem;letter-spacing:.6em;
+  margin:3.4rem 0;user-select:none;
+}
+.h3{
+  display:flex;align-items:center;gap:.55rem;
+  font-family:var(--serif);font-size:1.15rem;font-weight:700;
+  margin:2.4rem 0 .7rem;color:var(--ink);
+}
+.h3::before{
+  content:"";flex:none;width:.55rem;height:.55rem;background:var(--honey);
+  border-radius:2px;transform:rotate(45deg);
+}
+
+/* ---------- 공용 요소 ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem}
+.card h4{margin:0 0 .35rem;font-size:1rem}
+.card p{margin:.3rem 0 0;font-size:.93rem;line-height:1.75}
+
+.quote{
+  background:#FBF4E2;border-left:3px solid var(--honey);
+  border-radius:0 14px 14px 0;padding:1.15rem 1.2rem 1.05rem;margin:1.6rem 0;
+  font-family:var(--serif);font-size:1.04rem;line-height:1.95;color:#3B2F1A;
+}
+.quote::before{
+  content:"\201C";display:block;font-family:var(--serif);
+  font-size:2.1rem;line-height:1;color:var(--honey);opacity:.6;margin-bottom:.3rem;
+}
+.quote p{margin:0}
+.quote-src{margin-top:.7rem;font-family:var(--sans);font-size:.76rem;color:var(--ink-soft);letter-spacing:.06em}
+
+.verse{
+  background:var(--wine-tint);border-left:3px solid var(--wine);
+  border-radius:0 14px 14px 0;padding:.95rem 1.1rem;margin:1.1rem 0;
+  font-family:var(--serif);font-size:.99rem;line-height:1.9;color:#43272B;
+}
+.verse-ref{display:block;margin-bottom:.35rem;font-family:var(--sans);font-size:.73rem;font-weight:700;letter-spacing:.12em;color:var(--wine)}
+.verse p{margin:0}
+
+.note{
+  background:#FBF4E2;border:1px dashed var(--honey);border-radius:12px;
+  padding:.9rem 1rem;font-size:.92rem;line-height:1.75;margin:1.2rem 0;color:#4A3B1E;
+}
+
+/* 단계(번호) */
+.steps{display:grid;gap:1rem;margin:1.4rem 0}
+.step{display:grid;grid-template-columns:2.3rem 1fr;gap:.9rem;align-items:start}
+.step-n{
+  width:2.3rem;height:2.3rem;border-radius:50%;background:var(--honey);color:#FFFDF6;
+  font-family:var(--serif);font-weight:700;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;margin-top:.1rem;
+}
+.step h4{margin:.1rem 0 .3rem;font-size:1rem}
+.step p{margin:0;font-size:.93rem;line-height:1.75}
+.step-w .step-n{background:var(--wine)}
+
+/* Big Number */
+.bignum{text-align:center;margin:2rem 0 1.6rem}
+.bignum-v{font-family:var(--serif);font-weight:700;font-size:2.9rem;line-height:1.15;color:var(--honey-deep)}
+.bignum-v small{font-size:1.3rem;margin-left:.15rem}
+.bignum-c{font-size:.9rem;color:var(--ink-soft);margin:.4rem 0 0}
+
+/* 좌우 대조 (숫자) */
+.duel{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:stretch;margin:1.5rem 0}
+.duel-col{border-radius:14px;padding:1rem .8rem;text-align:center}
+.d-bad{background:var(--stone-tint);border:1px solid #DED5C4;color:#5D5340}
+.d-good{background:var(--honey-tint);border:1px solid #E2CE9C;color:#4A3B1E}
+.duel-vs{align-self:center;font-family:var(--serif);font-weight:700;color:var(--ink-soft);font-size:.85rem}
+.duel-num{font-family:var(--serif);font-weight:700;font-size:1.9rem;line-height:1.15;margin:0}
+.d-bad .duel-num{color:var(--stone)}
+.d-good .duel-num{color:var(--honey-deep)}
+.duel-cap{font-size:.78rem;font-weight:700;margin:.25rem 0 .35rem}
+.duel-desc{font-size:.84rem;line-height:1.65;margin:0}
+
+/* 죽은 실행 vs 산 실행 */
+.vs2{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:1.4rem 0}
+.vs2-col{border-radius:14px;padding:1rem .9rem}
+.vs2-col ul{margin:.5rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
+.vs2-col li{display:grid;grid-template-columns:1.15rem 1fr;gap:.4rem;font-size:.87rem;line-height:1.65}
+.vs2-col li::before{font-weight:700}
+.vs2-bad{background:var(--stone-tint);border:1px solid #DED5C4;color:#5A5140}
+.vs2-bad li::before{content:"\2715";color:var(--stone)}
+.vs2-good{background:var(--honey-tint);border:1px solid #E2CE9C;color:#4A3B1E}
+.vs2-good li::before{content:"\25CB";color:var(--honey-deep)}
+.vs2-h{margin:0;font-family:var(--serif);font-weight:700;font-size:.98rem}
+.vs2-bad .vs2-h{color:#6A5F4B}
+.vs2-good .vs2-h{color:var(--honey-deep)}
+.vs2-tag{display:block;margin-top:.6rem;font-size:.76rem;color:inherit;opacity:.8}
+@media (max-width:23rem){.vs2{grid-template-columns:1fr}.duel{grid-template-columns:1fr;gap:.4rem}.duel-vs{padding:.1rem 0}}
+
+/* 진행 막대 */
+.bars{margin:1.5rem 0}
+.bars-t{margin:0 0 .6rem;font-weight:700;font-size:.93rem}
+.bar{display:grid;grid-template-columns:5.2rem 1fr 4.9rem;gap:.55rem;align-items:center;margin:.45rem 0}
+.bar-l{font-size:.8rem;color:var(--ink-soft)}
+.bar-track{height:.72rem;background:#EDE4CF;border-radius:99px;overflow:hidden}
+.bar-fill{display:block;height:100%;border-radius:99px;width:var(--w)}
+.f-stone{background:var(--stone)}
+.f-honey{background:linear-gradient(90deg,#C1912C,#A87A1E)}
+.bar-v{font-size:.8rem;font-weight:700;text-align:right}
+.bar-note{margin:.4rem 0 0;font-size:.8rem;color:var(--ink-soft)}
+
+/* 순환/허브/벤 다이어그램 */
+.diagram{margin:1.5rem 0 .4rem}
+.diagram svg{width:100%;height:auto}
+.diagram-cap{font-size:.85rem;color:var(--ink-soft);line-height:1.75;margin:.7rem 0 0}
+
+/* 구간(떡 떼는 집회 시간의 원칙) */
+.zones{display:grid;gap:.7rem;margin:1.4rem 0}
+.zone{
+  display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  background:var(--paper);border:1px solid var(--line);border-left-width:4px;
+  border-radius:12px;padding:.9rem 1rem;
+}
+.z-no{border-left-color:var(--wine)}
+.z-ok{border-left-color:var(--honey)}
+.z-badge{
+  width:1.7rem;height:1.7rem;border-radius:50%;flex:none;margin-top:.15rem;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;
+}
+.z-no .z-badge{background:var(--wine-tint);color:var(--wine)}
+.z-ok .z-badge{background:var(--honey-tint);color:var(--honey-deep)}
+.z-when{font-weight:700;font-size:.95rem;margin:0 0 .2rem}
+.z-txt{margin:0;font-size:.89rem;line-height:1.7;color:var(--ink)}
+
+/* 향유 타임라인 */
+.tl{margin:1.7rem 0 .4rem .9rem;padding-left:1.6rem;border-left:2px solid #E0CFA6;display:grid;gap:1.35rem}
+.tl-item{position:relative}
+.tl-icon{
+  position:absolute;left:-2.55rem;top:-.1rem;width:1.9rem;height:1.9rem;
+  background:var(--paper);border:1.5px solid var(--wine);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-icon svg{width:1.05rem;height:1.3rem;stroke:var(--wine);fill:#F6E9E4;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.tl-t{font-family:var(--serif);font-weight:700;font-size:1.02rem;margin:0 0 .15rem}
+.tl-d{margin:0;font-size:.91rem;line-height:1.7}
+.tl-ref{display:inline-block;margin-top:.3rem;font-size:.73rem;font-weight:700;letter-spacing:.08em;color:var(--wine)}
+.tl-head{
+  font-family:var(--serif);font-weight:700;font-size:1.12rem;line-height:1.8;
+  text-align:center;color:var(--wine);margin:1.7rem 0 .2rem;
+}
+
+/* 양쪽의 만족 */
+.mirror{display:grid;gap:.4rem;margin:1.4rem 0;justify-items:stretch}
+.m-side{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.m-t{margin:0 0 .5rem;font-family:var(--serif);font-weight:700;font-size:1.02rem;color:var(--wine)}
+.m-side .verse{margin:.4rem 0}
+.m-side p{margin:.45rem 0 0;font-size:.9rem;line-height:1.75}
+.m-mid{
+  justify-self:center;width:5.6rem;height:5.6rem;border-radius:50%;
+  background:var(--night);color:var(--gold-night);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--serif);font-size:.82rem;line-height:1.55;margin:.35rem 0;
+}
+
+/* 칩 */
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.1rem 0}
+.chip{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:.75rem .8rem;font-size:.86rem;line-height:1.65;text-align:center;
+}
+.chip b{display:block;font-size:.9rem;margin-bottom:.15rem;color:var(--honey-deep)}
+.chip-w b{color:var(--wine)}
+@media (max-width:23rem){.chips{grid-template-columns:1fr}}
+
+/* 잔의 이야기 (시그니처) */
+.cf{margin:1.7rem 0;display:grid}
+.cf-stage{border-radius:16px;padding:1.2rem 1.15rem;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+.cf-ic{width:2.5rem;margin-top:.15rem}
+.cf-ic svg{width:100%;height:auto;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cf-eb{margin:0 0 .2rem;font-size:.72rem;font-weight:700;letter-spacing:.16em}
+.cf-stage h4{margin:0 0 .35rem;font-family:var(--serif);font-size:1.06rem;line-height:1.55}
+.cf-stage p{margin:.3rem 0 0;font-size:.9rem;line-height:1.75}
+.cf1{background:var(--wine-deep);color:#F0DFD7}
+.cf1 .cf-eb{color:#D8A390}
+.cf1 h4{color:#F8ECE4}
+.cf1 .cf-ic svg{stroke:#D8A390}
+.cf2{background:var(--paper);border:1px solid #E0C4BB;color:var(--ink)}
+.cf2 .cf-eb{color:var(--wine)}
+.cf2 h4{color:var(--wine)}
+.cf2 .cf-ic svg{stroke:var(--wine)}
+.cf2 .verse{margin:.7rem 0 0}
+.cf3{background:var(--honey-tint);border:1px solid #E2CE9C;color:#4A3B1E}
+.cf3 .cf-eb{color:var(--honey-deep)}
+.cf3 h4{color:var(--honey-deep)}
+.cf3 .cf-ic svg{stroke:var(--honey-deep)}
+.cf-arrow{justify-self:center;text-align:center;padding:.5rem 0 .45rem;color:var(--ink-soft);font-size:.79rem;letter-spacing:.06em}
+.cf-arrow::after{content:"\2193";display:block;font-size:1.05rem;color:var(--wine);margin-top:.05rem}
+
+/* 떡·잔 2카드 */
+.twocards{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:1.4rem 0}
+.tc{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1rem .85rem;text-align:center}
+.tc svg{width:2.3rem;height:2.3rem;margin:0 auto .45rem;fill:var(--honey-tint);stroke:var(--honey-deep);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tc-w svg{fill:var(--wine-tint);stroke:var(--wine)}
+.tc h4{margin:0 0 .3rem;font-family:var(--serif);font-size:1.02rem}
+.tc p{margin:0;font-size:.85rem;line-height:1.65}
+@media (max-width:23rem){.twocards{grid-template-columns:1fr}}
+
+/* 희고도 붉으심 */
+.split{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:1.5rem 0}
+.split-bar{height:.55rem;background:linear-gradient(90deg,#F8F4EA 0 50%,var(--wine) 50% 100%)}
+.split-in{padding:1.05rem 1.15rem}
+.split-in .verse-ref{margin-bottom:.3rem}
+.split-h{margin:0 0 .4rem;font-family:var(--serif);font-weight:700;font-size:1.08rem}
+.split-h .w1{color:#8B8272}
+.split-h .w2{color:var(--wine)}
+.split-in p{margin:.3rem 0 0;font-size:.9rem;line-height:1.75}
+
+/* 아이콘 카드(배·건축가) */
+.icard{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;border-left-width:4px}
+.icard .ic{width:3.3rem;margin-top:.2rem}
+.icard .ic svg{width:100%;height:auto;stroke-linecap:round;stroke-linejoin:round}
+.ic-stone{border-left-color:var(--stone)}
+.ic-honey{border-left-color:var(--honey)}
+
+/* 성장 흐름 */
+.grow{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.5rem;
+  margin:1.3rem 0 .3rem;font-family:var(--serif);font-weight:700;color:var(--honey-deep);
+}
+.grow .g1{font-size:.95rem}.grow .g2{font-size:1.1rem}.grow .g3{font-size:1.25rem}.grow .g4{font-size:1.45rem}
+.grow .g-a{font-family:var(--sans);font-weight:400;font-size:.85rem;color:var(--ink-soft)}
+.grow-cap{text-align:center;font-size:.84rem;color:var(--ink-soft);margin:.2rem 0 0}
+
+/* 위임 체크리스트 */
+.cl{counter-reset:cl;display:grid;gap:.7rem;margin:1.4rem 0;padding:0;list-style:none}
+.cl li{
+  counter-increment:cl;display:grid;grid-template-columns:2rem 1fr;gap:.85rem;align-items:start;
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:.85rem .95rem;
+  font-size:.92rem;line-height:1.7;
+}
+.cl li::before{
+  content:counter(cl);width:2rem;height:2rem;border-radius:9px;
+  background:var(--night);color:var(--gold-night);
+  font-family:var(--serif);font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-top:.05rem;
+}
+.tracks{display:grid;gap:.7rem;margin:1.2rem 0}
+.track{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--honey);border-radius:12px;padding:.95rem 1.05rem}
+.track-w{border-left-color:var(--wine)}
+.track h4{margin:0 0 .25rem;font-size:.97rem}
+.track p{margin:0;font-size:.89rem;line-height:1.7}
+
+/* 자세 픽토그램 */
+.postures{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1.4rem 0;text-align:center}
+.pos{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:.95rem .4rem .75rem}
+.pos svg{width:2.4rem;height:3.2rem;margin:0 auto;stroke:var(--ink-soft);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.pos p{margin:.4rem 0 0;font-size:.82rem;font-weight:500}
+
+/* 종막 */
+.epi{
+  background:radial-gradient(130% 110% at 50% 100%, #382A10 0%, #241A0A 55%, #1A1206 100%);
+  text-align:center;padding:3.6rem 0 2.8rem;margin-top:4.5rem;
+}
+.epi-orn{color:#C9A85C;letter-spacing:.6em;font-size:.85rem;margin-bottom:1.6rem}
+.epi-q{
+  margin:0;font-family:var(--serif);font-weight:700;font-size:1.22rem;line-height:2;
+  color:#F3E7C8;
+}
+.epi-l{margin:1.6rem 0 0;font-size:.92rem;color:#CBB88C}
+.epi-note{margin:2.6rem 0 0;font-size:.75rem;line-height:1.9;color:#8F7E58}
+
+/* 등장 애니메이션 */
+.js .fx{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}
+.js .fx.on{opacity:1;transform:none}
+.js .bar-fill{width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1) .15s}
+.js .on .bar-fill{width:var(--w)}
+@media (prefers-reduced-motion:reduce){
+  .js .fx{opacity:1;transform:none;transition:none}
+  .js .bar-fill{width:var(--w);transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 표지 ============ -->
+<header class="band hero">
+  <div class="wrap">
+    <p class="hero-eb">교회의 행정과 말씀의 사역 · 제11장</p>
+    <h1>말씀의 사역의<br>중요성과 위임</h1>
+    <div class="hero-orn" aria-hidden="true">
+      <svg viewBox="0 0 48 52">
+        <path d="M8 8 H40"/>
+        <path d="M10 8 C10 19 16 26 24 26 C32 26 38 19 38 8 Z"/>
+        <path d="M24 26 V38"/>
+        <path d="M14 44 C14 40 18.5 38 24 38 C29.5 38 34 40 34 44"/>
+        <path d="M12 46 H36"/>
+      </svg>
+    </div>
+    <p class="hero-sub">집회마다 젖과 꿀 —<br>곧 생명의 공급이 있게 하는 길</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 서막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">서막</p>
+      <h2 class="ph-title">왜 말씀의 사역인가</h2>
+      <p class="ph-lede">교회의 행정과 말씀의 사역, 두 방면 가운데 어느 것이 더 앞서는가.</p>
+    </header>
+
+    <div class="weight fx" style="display:flex;align-items:center;justify-content:center;gap:.8rem;margin:1.6rem 0">
+      <div style="background:var(--honey-tint);border:1.5px solid var(--honey);border-radius:14px;padding:1.05rem 1.15rem;font-family:var(--serif);font-weight:700;font-size:1.18rem;color:var(--honey-deep)">말씀의 기능</div>
+      <div style="font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--ink-soft)">&gt;</div>
+      <div style="background:var(--stone-tint);border:1px solid #DED5C4;border-radius:10px;padding:.55rem .8rem;font-size:.88rem;color:#6A5F4B">행정의 방면</div>
+    </div>
+
+    <p class="fx">기능면에서 말하자면, 어느 지방 교회에서든 말씀의 기능이 행정의 방면보다 중요하다. 그러므로 각 지방 교회는 말씀의 사역을 더 필요로 한다.</p>
+
+    <div class="card fx">
+      <h4>주일 말씀만으로는 부족하다</h4>
+      <p>주일에 전하는 말씀이 살아 있는 말씀이 아니라면 보편적이고 일반적인 효과를 낼 뿐이다. 오히려 다른 시간, 다른 집회들의 말씀이 더 특별하고 확실한 효과를 산출한다. 최근 몇몇 지방 교회가 인도한 성경을 추구하는 집회는 상당히 좋았고, 주님의 임재가 가득했다.</p>
+    </div>
+  </section>
+
+  <div class="orn" aria-hidden="true">&#10022;</div>
+
+  <!-- ============ 제1막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">제1막</p>
+      <h2 class="ph-title">성경을 추구하는 집회</h2>
+      <p class="ph-lede">형제자매들의 마음 안에 성경 읽기를 사모하는 마음을 넣어 주는, 산 실행의 길.</p>
+    </header>
+
+    <h3 class="h3 fx">집회의 두 가지 특징</h3>
+    <div class="steps fx">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <h4>모든 사람이 성경을 추구한다</h4>
+          <p>집회 전반부는 형제자매들의 자유로운 교통이다. 성령께 기회를 드리고, 형제자매들을 통해 풍성이 해방되게 하며, 그들에게 훈련의 기회를 주는 시간이다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <h4>한 형제가 집회를 책임진다</h4>
+          <p>마지막에는 빛 비춤이 있고 말씀에 깊이가 있는 형제가 추구한 말씀을 근거로 결론을 맺으며, 그 장의 한 구절, 반 구절, 한 마디에서 받은 영적인 빛에 근거해 최선을 다해 생명을 공급한다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bignum fx">
+      <p class="bignum-v">20~30<small>분</small></p>
+      <p class="bignum-c">마지막 결론의 공급을 통해 모든 이들이 만족하고 배부르게 되는 시간.<br>이 결론이 없으면 전체 집회는 빈약해지고, 참석 인수는 점차 감소한다.</p>
+    </div>
+
+    <h3 class="h3 fx">죽은 실행과 산 실행</h3>
+    <div class="vs2 fx">
+      <div class="vs2-col vs2-bad">
+        <p class="vs2-h">죽은 실행</p>
+        <ul>
+          <li>단락의 개요와 내용을 이해하고 기억하도록 요구한다</li>
+          <li>교리와 성경 해석에 중점을 둔다</li>
+        </ul>
+        <span class="vs2-tag">시험에 빠진 실행</span>
+      </div>
+      <div class="vs2-col vs2-good">
+        <p class="vs2-h">산 실행</p>
+        <ul>
+          <li>읽은 그 단락에서 받은 생명의 빛을 교통한다</li>
+          <li>영적인 공급에 중점을 둔다</li>
+        </ul>
+        <span class="vs2-tag">주님의 임재가 가득한 집회</span>
+      </div>
+    </div>
+    <p class="fx" style="font-size:.9rem;color:var(--ink-soft)">개요와 단락 구분 도표는 개인 추구를 위해 미리 나누어 주되, 함께 모여 본문을 추구할 때는 완전히 잊어버려야 한다.</p>
+
+    <blockquote class="quote fx">
+      <p>관련된 단락이 어떻게 구분되는지를 설명하거나 개요에 관하여 교통하지 말고, 완전히 단락 구분의 문제와 개요는 잊어버리며, 모든 초점을 읽은 그 단락 안에 두고 거기서 얻은 생명의 빛과 영적인 공급을 교통하는 것을 주의해야 한다.</p>
+      <p class="quote-src">— 본문에서</p>
+    </blockquote>
+
+    <h3 class="h3 fx">추구할 분량의 원칙</h3>
+    <div class="duel fx">
+      <div class="duel-col d-bad">
+        <p class="duel-num">300<span style="font-size:1rem">여 장</span></p>
+        <p class="duel-cap">주 6장 &times; 52주</p>
+        <p class="duel-desc">표면적으로는 많이 추구한 것 같지만, 결과는 얼마나 남아 있을까.</p>
+      </div>
+      <div class="duel-vs">vs</div>
+      <div class="duel-col d-good">
+        <p class="duel-num">52<span style="font-size:1rem">장</span></p>
+        <p class="duel-cap">주 1장 &times; 52주</p>
+        <p class="duel-desc">매 장마다 빛과 공급을 얻는다면, 얼마나 풍성한가.</p>
+      </div>
+    </div>
+    <div class="chips fx">
+      <div class="chip"><b>개인 추구</b>날마다 한 장, 한 주에 여섯 장을 추구하도록 격려한다</div>
+      <div class="chip"><b>집회 추구</b>한 주에 한 장, 한 번의 집회에 한 가지 중점이면 족하다</div>
+    </div>
+    <p class="fx" style="font-size:.9rem;color:var(--ink-soft)">두 가지 이상의 중점을 해방하려 하면 메시지의 중심을 잃거나 중점이 훼손된다. 많은 것을 하려고 욕심내는 것은 결코 좋은 것이 아니다.</p>
+
+    <blockquote class="quote fx">
+      <p>차라리 성경 한 장씩을 추구하여 그 부분의 성경에서 정수가 되는 부분을 우유를 짜듯이 잘 짜서 사람들에게 두어 번 먹여 주고 그 맛을 맛보게 하는 것만 못하다.</p>
+      <p class="quote-src">— 본문에서</p>
+    </blockquote>
+
+    <h3 class="h3 fx">맛의 선순환</h3>
+    <div class="diagram fx">
+      <svg viewBox="0 0 320 320" role="img" aria-label="맛봄, 갈망, 추구, 습관으로 이어지는 순환 다이어그램">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z" fill="#94876E"/>
+          </marker>
+        </defs>
+        <path d="M209 75 A98 98 0 0 1 245 111" fill="none" stroke="#94876E" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M245 209 A98 98 0 0 1 209 245" fill="none" stroke="#94876E" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M111 245 A98 98 0 0 1 75 209" fill="none" stroke="#94876E" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M75 111 A98 98 0 0 1 111 75" fill="none" stroke="#94876E" stroke-width="2" marker-end="url(#arr)"/>
+        <circle cx="160" cy="62" r="44" fill="#F6ECD3" stroke="#A87A1E" stroke-width="1.5"/>
+        <circle cx="258" cy="160" r="44" fill="#F6ECD3" stroke="#A87A1E" stroke-width="1.5"/>
+        <circle cx="160" cy="258" r="44" fill="#F6ECD3" stroke="#A87A1E" stroke-width="1.5"/>
+        <circle cx="62" cy="160" r="44" fill="#F6ECD3" stroke="#A87A1E" stroke-width="1.5"/>
+        <text x="160" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">맛봄</text>
+        <text x="258" y="166" text-anchor="middle" font-size="17" font-weight="700" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">갈망</text>
+        <text x="160" y="264" text-anchor="middle" font-size="17" font-weight="700" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">추구</text>
+        <text x="62" y="166" text-anchor="middle" font-size="17" font-weight="700" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">습관</text>
+        <text x="160" y="152" text-anchor="middle" font-size="19" font-weight="700" fill="#6E2836" font-family="'Gowun Batang',serif">젖과 꿀</text>
+        <text x="160" y="176" text-anchor="middle" font-size="12" fill="#6E5F49" font-family="'Noto Sans KR',sans-serif">생명의 공급</text>
+      </svg>
+      <p class="diagram-cap"><b>맛봄</b> — 성경 안에 있는 생명 공급과 풍성함과 달콤함, 곧 젖과 꿀을 맛본다 &middot; <b>갈망</b> — 더 전진하여 말씀의 공급 얻기를 사모한다 &middot; <b>추구</b> — 집에 돌아가 스스로 성경을 편다(하루 서너 장, 심지어 여섯 장) &middot; <b>습관</b> — 개인적으로 성경을 추구하는 습관이 배양되고, 다음 집회에 다른 사람을 초대해 함께 온다.</p>
+    </div>
+
+    <h3 class="h3 fx">살아 있는 증거</h3>
+    <div class="bars fx">
+      <p class="bars-t">《성경의 중점 진리》 추구 집회 &middot; 주일 저녁</p>
+      <div class="bar"><span class="bar-l">집회소 정원</span><span class="bar-track"><span class="bar-fill f-stone" style="--w:87%"></span></span><span class="bar-v">130여 명</span></div>
+      <div class="bar"><span class="bar-l">참석 인수</span><span class="bar-track"><span class="bar-fill f-honey" style="--w:100%"></span></span><span class="bar-v">140~150명</span></div>
+      <p class="bar-note">바깥뜰에도 사람들이 앉아야 할 정도였고, 주일 오전 집회보다 많았다.</p>
+    </div>
+    <div class="bars fx">
+      <p class="bars-t">남부의 한 지방 교회 &middot; 성경 추구 집회</p>
+      <div class="bar"><span class="bar-l">처음 시작</span><span class="bar-track"><span class="bar-fill f-stone" style="--w:46%"></span></span><span class="bar-v">60~70명</span></div>
+      <div class="bar"><span class="bar-l">지금</span><span class="bar-track"><span class="bar-fill f-honey" style="--w:100%"></span></span><span class="bar-v">140여 명</span></div>
+    </div>
+    <blockquote class="quote fx">
+      <p>이렇게 인수가 증가한 집회들은 하나같이 그 집회 안에 사람들이 누리는 것이 있고 충분한 공급이 있으며, 뭔가를 얻는 것이 있기 때문이다.</p>
+      <p class="quote-src">— 본문에서</p>
+    </blockquote>
+  </section>
+
+  <div class="orn" aria-hidden="true">&#10022;</div>
+
+  <!-- ============ 제2막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">제2막</p>
+      <h2 class="ph-title">중점이 있고, 또한 보편적으로</h2>
+      <p class="ph-lede">한 지방 교회의 말씀은 반드시 중심이 있어야 하고, 거듭하여 그 중심을 강타해야 한다. 그러나 동시에 다른 방면들도 돌아보아야 한다.</p>
+    </header>
+
+    <div class="bignum fx">
+      <p class="bignum-v">4~5<small>년</small></p>
+      <p class="bignum-c">중국 북부에서 십자가라는 한 가지 부담을, 날마다 거듭해서<br>지속적으로 끊임없이 모든 형제자매들 안으로 말해 넣은 시간.</p>
+    </div>
+
+    <div class="diagram fx">
+      <svg viewBox="0 0 320 264" role="img" aria-label="중심 부담을 강타하면서 장로들, 집사들, 심방, 복음, 봉사의 각 방면을 함께 돌보는 구조">
+        <line x1="160" y1="136" x2="160" y2="44" stroke="#DCCBA5" stroke-width="1.5"/>
+        <line x1="160" y1="136" x2="247.5" y2="107.6" stroke="#DCCBA5" stroke-width="1.5"/>
+        <line x1="160" y1="136" x2="214.1" y2="210.4" stroke="#DCCBA5" stroke-width="1.5"/>
+        <line x1="160" y1="136" x2="105.9" y2="210.4" stroke="#DCCBA5" stroke-width="1.5"/>
+        <line x1="160" y1="136" x2="72.5" y2="107.6" stroke="#DCCBA5" stroke-width="1.5"/>
+        <circle cx="160" cy="44" r="36" fill="#FDFAF3" stroke="#A87A1E" stroke-width="1.4"/>
+        <circle cx="247.5" cy="107.6" r="36" fill="#FDFAF3" stroke="#A87A1E" stroke-width="1.4"/>
+        <circle cx="214.1" cy="210.4" r="36" fill="#FDFAF3" stroke="#A87A1E" stroke-width="1.4"/>
+        <circle cx="105.9" cy="210.4" r="36" fill="#FDFAF3" stroke="#A87A1E" stroke-width="1.4"/>
+        <circle cx="72.5" cy="107.6" r="36" fill="#FDFAF3" stroke="#A87A1E" stroke-width="1.4"/>
+        <circle cx="160" cy="136" r="52" fill="#6E2836"/>
+        <text x="160" y="132" text-anchor="middle" font-size="15.5" font-weight="700" fill="#F8ECE4" font-family="'Noto Sans KR',sans-serif">중심 부담</text>
+        <text x="160" y="151" text-anchor="middle" font-size="11.5" fill="#E3BBAB" font-family="'Noto Sans KR',sans-serif">거듭 강타한다</text>
+        <text x="160" y="49" text-anchor="middle" font-size="14" font-weight="500" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">장로들</text>
+        <text x="247.5" y="112.6" text-anchor="middle" font-size="14" font-weight="500" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">집사들</text>
+        <text x="214.1" y="215.4" text-anchor="middle" font-size="14" font-weight="500" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">심방</text>
+        <text x="105.9" y="215.4" text-anchor="middle" font-size="14" font-weight="500" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">복음</text>
+        <text x="72.5" y="112.6" text-anchor="middle" font-size="14" font-weight="500" fill="#2E2416" font-family="'Noto Sans KR',sans-serif">봉사</text>
+      </svg>
+      <p class="diagram-cap">중심을 강타함과 동시에 각 방면을 관찰하고 돌보는 것을 배워야 한다 — 장로인 형제들과 집사인 이들, 심방하는 사람들, 복음에 부담이 있는 사람들, 그리고 봉사까지.</p>
+    </div>
+
+    <div class="card fx" style="border-left:4px solid var(--stone)">
+      <h4>한 방면만 강조할 때</h4>
+      <p>계속해서 &lsquo;육체&rsquo;를 처리하는 부담만 강조하면, 어쩌면 떡 떼는 집회는 메마르고 죽어 가고, 복음의 방면에서 메말라 죽어 가며, 봉사에 있어서는 더욱 심하게 메말라 있을지 모른다. 어떤 방면에서는 온전하게 함을 입지만, 많은 다른 방면에서는 말라 죽어 가는 것이다. 그러므로 반드시 여러 방면을 동시에 돌보아야 한다.</p>
+    </div>
+  </section>
+
+  <div class="orn" aria-hidden="true">&#10022;</div>
+
+  <!-- ============ 제3막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">제3막</p>
+      <h2 class="ph-title">상호적인 집회의 말씀 공급</h2>
+      <p class="ph-lede">기도집회, 떡 떼는 집회, 교통집회 — 모든 상호적인 집회에서 기회를 붙잡아 말씀을 공급해야 한다.</p>
+    </header>
+
+    <div class="card icard ic-stone fx">
+      <div class="ic">
+        <svg viewBox="0 0 64 52" stroke="#94876E" fill="none" stroke-width="1.8">
+          <path d="M8 30 H56 L47 41 H17 Z" fill="#EFEAE0"/>
+          <path d="M33 10 V30"/>
+          <path d="M33 10 L49 27 H33 Z" fill="#FDFAF3"/>
+          <path d="M4 47 Q8 43 12 47 T20 47 T28 47 T36 47 T44 47 T52 47 T60 47"/>
+        </svg>
+      </div>
+      <div>
+        <h4>키 없는 배</h4>
+        <p>말씀의 인도가 전혀 없는 기도집회는 키 없는 배와 같다. 동풍이 불어오면 서쪽으로 가고 서풍이 불어오면 동쪽으로 흘러가며, 한 시간만 지나면 끝나리라 여기고 시간을 때우며 집회가 끝나기를 기다린다. 이러한 집회는 사람을 매혹하지 못할 뿐 아니라, 주님과 형제자매들에 대해서도 합당하지 않다.</p>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">기도집회를 움직이게 하는 두 가지</h3>
+    <div class="steps fx">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <h4>말씀의 인도를 준다</h4>
+          <p>매번 짧은 시간을 사용해 말씀을 전하되, 결코 판에 박힌 방식이 아니어야 한다. 기도 시간이 줄어들거나 기도의 영이 말살되어서는 안 되고, 오히려 기도의 영을 강화하고 북돋아 주어야 한다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <h4>집회를 인도할 줄 안다</h4>
+          <p>어떻게 찬송을 선택하고, 어떻게 광고하며, 어떻게 형제자매들의 마음을 움직여 각 사람이 집회 가운데서 입을 열어 기도하도록 도와줄지를 아는 것이다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grow fx" aria-label="기도집회 인수가 십여 명에서 사십 명으로 증가">
+      <span class="g1">10여 명</span><span class="g-a">&rarr;</span><span class="g2">20명</span><span class="g-a">&rarr;</span><span class="g3">30명</span><span class="g-a">&rarr;</span><span class="g4">40명</span>
+    </div>
+    <p class="grow-cap fx">집회 가운데서 공급을 얻고 무언가를 만졌기 때문에, 성도들은 기도집회에 오는 것을 좋아하게 된다.</p>
+  </section>
+
+  <div class="orn" aria-hidden="true">&#10022;</div>
+
+  <!-- ============ 제4막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">제4막</p>
+      <h2 class="ph-title">떡 떼는 집회 — 주님의 달콤함과 아름다움</h2>
+      <p class="ph-lede">그리스도인의 생활 가운데 가장 중요한 집회. 여기서의 말씀은 일반적인 말씀의 사역이 아니다.</p>
+    </header>
+
+    <h3 class="h3 fx">시간의 원칙</h3>
+    <div class="zones fx">
+      <div class="zone z-no">
+        <span class="z-badge">&#10005;</span>
+        <div>
+          <p class="z-when">떡을 떼기 전</p>
+          <p class="z-txt">가르치는 방식의 말은 결코 하지 않는다. 사람을 주님의 임재에서 끌어내어 사람의 말을 듣게 하기 때문이다.</p>
+        </div>
+      </div>
+      <div class="zone z-no">
+        <span class="z-badge">&#10005;</span>
+        <div>
+          <p class="z-when">떡과 잔을 돌릴 때</p>
+          <p class="z-txt">가르치는 말은 금하되, 사랑의 이야기를 하듯 사랑스러운 어조로 짧은 말씀을 교통할 수 있다. 떡이 전달될 때 떡을 말하고, 잔이 전달될 때 잔을 말한다.</p>
+        </div>
+      </div>
+      <div class="zone z-ok">
+        <span class="z-badge">&#9675;</span>
+        <div>
+          <p class="z-when">떡을 뗀 후</p>
+          <p class="z-txt">교정하고, 인도하고, 해석하고, 만찬의 의미를 설명하는 말씀은 이때 보충하는 말씀으로 하는 것이 가장 좋다.</p>
+        </div>
+      </div>
+    </div>
+    <p class="fx" style="font-size:.9rem;color:var(--ink-soft)">&ldquo;일단 가르치는 느낌을 가지고 교통을 하게 되면 즉시 떡 떼는 집회는 죽게 된다.&rdquo;</p>
+
+    <blockquote class="quote fx">
+      <p>우리의 말은 사람을 주님 앞으로 인도해야지 주님의 임재에서 끌어내는 것이 되어서는 안 된다.</p>
+      <p class="quote-src">— 본문에서</p>
+    </blockquote>
+
+    <h3 class="h3 fx">향유의 자취 — 그분의 온 일생</h3>
+    <p class="fx" style="font-size:.92rem">이십여 년 전 중국 북부의 떡 떼는 집회에서, 매번 짧게 전한 말씀들은 언제나 사람들이 주님의 달콤함과 아름다움을 느끼게 하는 데서 벗어나지 않았다. 복음서에 기록된 향유의 자취를 따라가 보라.</p>
+
+    <div class="tl fx">
+      <div class="tl-item">
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 24 30"><circle cx="12" cy="3.2" r="1.4"/><path d="M8.5 6.2 H15.5"/><path d="M10 6.2 V8.6 C6.6 9.9 4.6 13 4.6 16.2 C4.6 21.4 7.9 25.2 12 25.2 C16.1 25.2 19.4 21.4 19.4 16.2 C19.4 13 17.4 9.9 14 8.6 V6.2"/></svg></span>
+        <p class="tl-t">태어나실 때</p>
+        <p class="tl-d">사람들이 향유를 가져와 그분께 드렸다.</p>
+        <span class="tl-ref">마태복음 2:11</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 24 30"><circle cx="12" cy="3.2" r="1.4"/><path d="M8.5 6.2 H15.5"/><path d="M10 6.2 V8.6 C6.6 9.9 4.6 13 4.6 16.2 C4.6 21.4 7.9 25.2 12 25.2 C16.1 25.2 19.4 21.4 19.4 16.2 C19.4 13 17.4 9.9 14 8.6 V6.2"/></svg></span>
+        <p class="tl-t">그분의 머리에</p>
+        <p class="tl-d">한 사람이 그분의 머리에 기름을 부었다.</p>
+        <span class="tl-ref">마태복음 26:6~7</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 24 30"><circle cx="12" cy="3.2" r="1.4"/><path d="M8.5 6.2 H15.5"/><path d="M10 6.2 V8.6 C6.6 9.9 4.6 13 4.6 16.2 C4.6 21.4 7.9 25.2 12 25.2 C16.1 25.2 19.4 21.4 19.4 16.2 C19.4 13 17.4 9.9 14 8.6 V6.2"/></svg></span>
+        <p class="tl-t">그분의 발에</p>
+        <p class="tl-d">한 사람이 그분의 발에 기름을 부었다.</p>
+        <span class="tl-ref">누가복음 7:36~38</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-icon" aria-hidden="true"><svg viewBox="0 0 24 30"><circle cx="12" cy="3.2" r="1.4"/><path d="M8.5 6.2 H15.5"/><path d="M10 6.2 V8.6 C6.6 9.9 4.6 13 4.6 16.2 C4.6 21.4 7.9 25.2 12 25.2 C16.1 25.2 19.4 21.4 19.4 16.2 C19.4 13 17.4 9.9 14 8.6 V6.2"/></svg></span>
+        <p class="tl-t">돌아가셨을 때</p>
+        <p class="tl-d">사람들이 향유를 가져와 그분을 장사 지냈다.</p>
+        <span class="tl-ref">마태복음 26:12; 마가복음 16:1</span>
+      </div>
+    </div>
+    <p class="tl-head fx">머리에서 발까지, 태어나심부터 죽으심까지 —<br>그분의 온 일생이 달콤하고 사랑스러우시다.</p>
+
+    <h3 class="h3 fx">양쪽의 만족</h3>
+    <div class="mirror fx">
+      <div class="m-side">
+        <p class="m-t">그분의 만족</p>
+        <div class="verse">
+          <span class="verse-ref">이사야 53:10 중~11 상</span>
+          <p>그가 씨를 보게 되며 그의 날은 길 것이요 또 그의 손으로 여호와께서 기뻐하시는 뜻을 성취하리로다 그가 자기 영혼의 수고한 것을 보고 만족하게 여길 것이라</p>
+        </div>
+        <p>오늘 우리가 여기서 집회할 수 있는 것은 주님께서 고난 받으신 결과이므로, 주님은 우리를 보실 때 만족하신다.</p>
+      </div>
+      <div class="m-mid" aria-hidden="true">서로를 보고<br>만족하다</div>
+      <div class="m-side">
+        <p class="m-t">우리의 만족</p>
+        <div class="verse">
+          <span class="verse-ref">시편 17:15</span>
+          <p>나는 의로운 중에 주의 얼굴을 뵈오리니 깰 때에 주의 형상으로 만족하리이다</p>
+        </div>
+        <p>우리도 주님의 상에 나와 떡과 잔 앞에 앉으면, 세상에서 바쁘게 지내다가도 그분 안에서 깨어나 그분의 형상을 보며 만족한다.</p>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">모든 이름 위에 뛰어난 이름</h3>
+    <p class="fx" style="font-size:.92rem">주님은 이미 모든 이름 위에 뛰어난 이름을 얻으셨다(빌립보서 2:9). 집회 전에 성경에서 주님의 이름과 우리의 관계를 모두 찾아 묵상하고, 떡 떼는 집회에서 전적으로 그 이름만을 말했다.</p>
+    <div class="chips fx">
+      <div class="chip chip-w"><b>구원하는 이름</b>우리를 구원하는 이름</div>
+      <div class="chip chip-w"><b>돌아가게 하는 이름</b>우리를 그분께 돌아가게 하는 이름</div>
+      <div class="chip chip-w"><b>기도하는 이름</b>우리가 의지하여 기도할 수 있는 이름</div>
+      <div class="chip chip-w"><b>이기게 하는 이름</b>우리가 사탄을 이기도록 하는 이름</div>
+    </div>
+    <div class="bignum fx">
+      <p class="bignum-v" style="color:var(--wine)">10~15<small>분</small></p>
+      <p class="bignum-c">오직 주 예수님의 이름에 대해서만 말한 시간.<br>그 한 가지 한 가지 항목의 말씀들이 모든 형제자매들을 주님의 이름 안으로 이끌었다.</p>
+    </div>
+
+    <h3 class="h3 fx">잔의 이야기 — 몫의 교환</h3>
+    <div class="verse fx">
+      <span class="verse-ref">시편 16:5</span>
+      <p>여호와는 나의 잔의 소득이시니 나의 분깃을 지키시나이다</p>
+    </div>
+    <p class="fx" style="font-size:.92rem">잔은 곧 우리가 마땅히 받아야 할 &lsquo;몫&rsquo;을 의미한다. 그렇다면 우리의 몫은 무엇이었는가.</p>
+
+    <div class="cf fx">
+      <div class="cf-stage cf1">
+        <div class="cf-ic" aria-hidden="true">
+          <svg viewBox="0 0 40 44"><path d="M7 6 H33"/><path d="M9 6 C9 15.5 14 21.5 20 21.5 C26 21.5 31 15.5 31 6 Z"/><path d="M20 21.5 V31"/><path d="M12 36.5 C12 33.3 15.6 31.5 20 31.5 C24.4 31.5 28 33.3 28 36.5"/><path d="M10.5 38.5 H29.5"/></svg>
+        </div>
+        <div>
+          <p class="cf-eb">원래 우리의 몫</p>
+          <h4>하나님의 진노의 잔</h4>
+          <p>우리가 하나님께 받아야 마땅했던 몫은 진노의 잔, 곧 불 못으로 떨어지는 것이었다. 한 무리의 사람들의 몫은 불과 유황으로 고통받는 것이다(요한계시록 14:10).</p>
+        </div>
+      </div>
+      <div class="cf-arrow"><span>그러나 주님께서</span></div>
+      <div class="cf-stage cf2">
+        <div class="cf-ic" aria-hidden="true">
+          <svg viewBox="0 0 40 44"><path d="M7 6 H33"/><path d="M9 6 C9 15.5 14 21.5 20 21.5 C26 21.5 31 15.5 31 6 Z"/><path d="M20 21.5 V31"/><path d="M12 36.5 C12 33.3 15.6 31.5 20 31.5 C24.4 31.5 28 33.3 28 36.5"/><path d="M10.5 38.5 H29.5"/></svg>
+        </div>
+        <div>
+          <p class="cf-eb">십자가에서</p>
+          <h4>주님께서 우리 대신 그 잔을 마시셨다</h4>
+          <div class="verse">
+            <span class="verse-ref">요한복음 18:11</span>
+            <p>아버지께서 주신 이 잔을 내가 마셔야 하지 않겠습니까?</p>
+          </div>
+          <p>하나님의 진노의 불이 그분을 태우고 있었기에, 주님은 십자가에서 죽으실 때 목이 마르다고 말씀하셨다.</p>
+          <div class="verse">
+            <span class="verse-ref">시편 22:14~15</span>
+            <p>나는 물 같이 쏟아졌으며 내 모든 뼈는 어그러졌으며 내 마음은 밀랍 같아서 내 속에서 녹았으며 &hellip; 내 혀가 입천장에 붙었나이다 주께서 또 나를 죽음의 진토 속에 두셨나이다</p>
+          </div>
+        </div>
+      </div>
+      <div class="cf-arrow"><span>그분의 피로 말미암아</span></div>
+      <div class="cf-stage cf3">
+        <div class="cf-ic" aria-hidden="true">
+          <svg viewBox="0 0 40 44"><path d="M7 6 H33"/><path d="M9 6 C9 15.5 14 21.5 20 21.5 C26 21.5 31 15.5 31 6 Z" fill="#EBD9A8"/><path d="M20 21.5 V31"/><path d="M12 36.5 C12 33.3 15.6 31.5 20 31.5 C24.4 31.5 28 33.3 28 36.5"/><path d="M10.5 38.5 H29.5"/></svg>
+        </div>
+        <div>
+          <p class="cf-eb">우리에게 주어진 몫</p>
+          <h4>구원의 잔, 축복이 넘치는 잔</h4>
+          <p>주님께서 흘리신 피는 구원의 잔을 완성하였고, 이 잔은 축복이 넘치는 잔이다. 오늘 우리가 떡을 떼고 주님을 기념할 때, 바로 이 축복의 잔을 받아들이는 것이다.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">떡과 잔</h3>
+    <div class="twocards fx">
+      <div class="tc">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="24" r="13"/><path d="M15 21 Q22 15 29 21" fill="none"/><path d="M16.5 27 Q22 23.5 27.5 27" fill="none"/></svg>
+        <h4>떡 — 생명</h4>
+        <p>주님의 생명이 이 떡으로 상징되어 우리에게 누림을 준다.</p>
+      </div>
+      <div class="tc tc-w">
+        <svg viewBox="0 0 40 44" aria-hidden="true"><path d="M7 6 H33" fill="none"/><path d="M9 6 C9 15.5 14 21.5 20 21.5 C26 21.5 31 15.5 31 6 Z"/><path d="M20 21.5 V31" fill="none"/><path d="M12 36.5 C12 33.3 15.6 31.5 20 31.5 C24.4 31.5 28 33.3 28 36.5" fill="none"/><path d="M10.5 38.5 H29.5" fill="none"/></svg>
+        <h4>잔 — 축복</h4>
+        <p>하나님과 그분 자신의 모든 것이 우리의 몫으로 이 잔 안에 있다.</p>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">희고도 붉으신 분</h3>
+    <div class="split fx">
+      <div class="split-bar" aria-hidden="true"></div>
+      <div class="split-in">
+        <span class="verse-ref">아가 5:10</span>
+        <p class="split-h"><span class="w1">희고도</span> <span class="w2">붉으며</span>, 만인 위에 뛰어나신 분</p>
+        <p>떡 떼는 집회에서 이 구절을 읽고, &lsquo;희다&rsquo;는 것이 무엇을 가리키는지, &lsquo;붉다&rsquo;는 것은 무엇을 가리키는지, 그분의 아름다움과 사랑스러움이 어디에 있는지를 말해 준다. 그리하여 사람들이 주 예수님에 대해 실재적이고 달콤한 인식을 갖게 한다.</p>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">기념하며, 앙망하며</h3>
+    <div class="chips fx">
+      <div class="chip"><b>기념함</b>떡을 먹고 잔을 마시는 것은 주님의 죽으심을 선포하는 것이다</div>
+      <div class="chip"><b>앙망함</b>아버지의 왕국에서 새것을 마시는 그날까지 (마태복음 26:29)</div>
+    </div>
+    <p class="fx" style="font-size:.9rem;color:var(--ink-soft)">한 편으로 주님을 기념하면서, 다른 한 편으로 그분의 다시 오심을 앙망한다. 이렇게 주님을 기념하는 마음은 느낌으로 가득한 마음이며, 사람을 가장 깊이 감동시킨다.</p>
+
+    <h3 class="h3 fx">사랑 안에서 나타나는 능력</h3>
+    <div class="diagram fx">
+      <svg viewBox="0 0 320 190" role="img" aria-label="사랑과 능력이 주님 안에서 겹치는 벤다이어그램">
+        <circle cx="118" cy="95" r="70" fill="#A87A1E" fill-opacity="0.14" stroke="#A87A1E" stroke-width="1.5"/>
+        <circle cx="202" cy="95" r="70" fill="#6E2836" fill-opacity="0.12" stroke="#6E2836" stroke-width="1.5"/>
+        <text x="86" y="100" text-anchor="middle" font-size="17" font-weight="700" fill="#8A6414" font-family="'Noto Sans KR',sans-serif">사랑</text>
+        <text x="234" y="100" text-anchor="middle" font-size="17" font-weight="700" fill="#6E2836" font-family="'Noto Sans KR',sans-serif">능력</text>
+        <text x="160" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#2E2416" font-family="'Gowun Batang',serif">주님</text>
+        <text x="160" y="110" text-anchor="middle" font-size="10.5" fill="#6E5F49" font-family="'Noto Sans KR',sans-serif">사랑 안의 능력</text>
+      </svg>
+      <p class="diagram-cap">어떤 어머니는 자녀를 매우 사랑해도 잘 돌보는 능력은 갖지 못할 수 있다. 그러나 우리의 주님은 사랑 안에 능력을 가지고 계시고, 그분의 능력은 사랑 안에서 나타난다.</p>
+    </div>
+    <div class="vs2 fx">
+      <div class="vs2-col vs2-bad">
+        <p class="vs2-h">이렇게 말하면</p>
+        <ul><li>&ldquo;주님의 능력은 원자폭탄보다 큽니다&rdquo;</li></ul>
+        <span class="vs2-tag">능력의 메시지는 들었지만, 주님의 사랑스러움은 잊어버린다</span>
+      </div>
+      <div class="vs2-col vs2-good">
+        <p class="vs2-h">이렇게 말하면</p>
+        <ul><li>&ldquo;그분의 능력은 사랑 안에서 나타납니다&rdquo;</li></ul>
+        <span class="vs2-tag">사랑스럽고 능력 있으신 한 분 주님을 느끼게 된다</span>
+      </div>
+    </div>
+
+    <h3 class="h3 fx">북중국의 기도</h3>
+    <p class="fx" style="font-size:.92rem">오 년에 걸쳐 기초를 다지는 인도를 받은 형제자매들은, 떡 떼는 집회에서 이렇게 기도할 수 있었다. 기도 속에 말씀의 공급이 있어, 이 기도를 듣고 많은 사람들의 마음이 열렸다.</p>
+    <blockquote class="quote fx" style="background:var(--wine-tint);border-left-color:var(--wine);color:#43272B">
+      <p>주님 당신은 너무나 향기롭고 달콤하여 머리부터 발끝까지 기름을 바를 가치가 있고 당신이 태어나심부터 죽으심까지 당신의 온 일생이 기름을 바를 가치가 있습니다. 주님 당신은 당신의 받으신 고난의 효능을 보고 만족하시고, 오늘 우리는 당신 앞에 앉아서 마치 잠에서 깨어난 사람처럼 당신을 뵙고서 우리 또한 만족합니다.</p>
+      <p class="quote-src">— 형제자매들의 기도, 본문에서</p>
+    </blockquote>
+  </section>
+
+  <div class="orn" aria-hidden="true">&#10022;</div>
+
+  <!-- ============ 제5막 ============ -->
+  <section class="part">
+    <header class="ph fx">
+      <p class="ph-eyebrow">제5막</p>
+      <h2 class="ph-title">전력을 다하는 위임</h2>
+      <p class="ph-lede">교회의 행정이나 말씀의 사역을 편하게 수행할 수 있는 사람은 아무도 없다.</p>
+    </header>
+
+    <div class="card icard ic-honey fx">
+      <div class="ic">
+        <svg viewBox="0 0 40 46" stroke="#8A6414" fill="none" stroke-width="1.7">
+          <circle cx="20" cy="7" r="3"/>
+          <path d="M20 10 L11 40"/>
+          <path d="M20 10 L29 40"/>
+          <path d="M13.5 32 A13 13 0 0 0 26.5 32"/>
+        </svg>
+      </div>
+      <div>
+        <h4>건축가처럼</h4>
+        <p>노련한 건축가는 설계도를 구상하며 편히 자거나 쉴 수 없다. 밥 먹을 때조차 어디를 다듬어야 할지 생각하고, 한밤중에도 그 일을 생각하며, 시간만 나면 책을 뒤지고 각 방면의 자료를 참고한다. 이렇게 해야 비로소 사람들 앞에 내놓을 수 있는 작품이 나온다. 말씀의 사역도 온 존재를 드려서 하는 일이다.</p>
+      </div>
+    </div>
+
+    <div class="vs2 fx">
+      <div class="vs2-col vs2-bad">
+        <p class="vs2-h">준비 없는 봉사</p>
+        <ul>
+          <li>집회 시간이 다 되어서야 도착한다</li>
+          <li>일곱 시 반이 되어서야 찬송가를 이리저리 뒤적인다</li>
+          <li>시간을 때우고 있다는 느낌을 준다</li>
+          <li>무엇을 말하는지 모른 채 횡설수설한다</li>
+        </ul>
+        <span class="vs2-tag">시간과 수고를 들이지 않은 결과</span>
+      </div>
+      <div class="vs2-col vs2-good">
+        <p class="vs2-h">책임지는 사람의 태도</p>
+        <ul>
+          <li>집회가 좋지 않았다면 음식이 넘어가지 않고 잠도 편히 잘 수 없다</li>
+          <li>&lsquo;다음 주일은 어떻게 공급할까&rsquo;를 늘 생각한다</li>
+          <li>날마다 주님 앞에서 시간을 들여 연구한다</li>
+          <li>스스로 금광을 캐고 보물을 캔다</li>
+        </ul>
+        <span class="vs2-tag">마음이 편안하지 않은 데서 빛이 나온다</span>
+      </div>
+    </div>
+
+    <blockquote class="quote fx">
+      <p>내가 얻은 많은 빛 비춤은 모두 마음이 편안하지 않았기 때문에 얻을 수 있었다.</p>
+      <p class="quote-src">— 본문에서</p>
+    </blockquote>
+
+    <h3 class="h3 fx">마닐라의 간증</h3>
+    <div class="steps step-w fx">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <h4>가장 두려워하던 두 집회</h4>
+          <p>처음 마닐라에 갔을 때, 형제자매들이 가장 두려워하는 집회는 기도집회와 떡 떼는 집회였다. 일반적인 집회에는 빠지지 않고 모이지만, 이 두 집회에는 사람들이 오려고 하지 않았다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <h4>바로잡음</h4>
+          <p>정식으로 떡 떼는 집회를 세우고, 저녁 시간으로 안배하도록 요청했다. &ldquo;낮에도 잘 오지 않는데 저녁이면 더 오지 않을 것&rdquo;이라는 걱정 속에서, 그곳에서 힘을 다해 바로잡으려 노력했다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <h4>결과</h4>
+          <p>교회 집회의 참석 인수 중에서 떡 떼는 집회의 출석률이 가장 높아졌고, 지금은 주일 오전 집회 인수보다 훨씬 많다. 그 이유는 &ldquo;떡 떼는 집회에 참으로 무언가가 있기 때문&rdquo;이다.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="fx" style="font-size:.92rem">과거 중국 북부에서 좋은 결과를 얻었던 데에는 두 가지 요소가 있었다.</p>
+    <div class="chips fx">
+      <div class="chip"><b>머무름</b>적어도 몇 년 동안 한 곳에 있었다</div>
+      <div class="chip"><b>전심전력</b>한 지방 교회만을 위해 온 힘을 다했다</div>
+    </div>
+
+    <h3 class="h3 fx">위임 — 제의이자 요구</h3>
+    <ol class="cl fx">
+      <li>주일 오전의 말씀의 사역만을 주의하지 말라.</li>
+      <li>떡 떼는 집회의 방식을 개선하고, 떡 떼는 집회를 높이 올리라.</li>
+      <li>그렇게 함과 동시에 기도집회를 개선하고 높이라.</li>
+      <li>신선함이 떨어지는 상투적인 말이 아니라, 그 집회를 위한 특정한 말씀을 연구하라 — 오늘의 실지적인 상황을 보고 스스로 금광을 캐고 보물을 캐라.</li>
+    </ol>
+
+    <p class="fx" style="font-size:.92rem">말씀의 사역을 하는 사람은 전적으로 두 종류의 말씀의 사역을 연구해야 한다.</p>
+    <div class="tracks fx">
+      <div class="track">
+        <h4>떡 떼는 집회를 위한 말씀</h4>
+        <p>가르치는 말투가 아니라 감성적으로 주님의 아름다움을 보여 주는 말 — 말할수록 사람들이 주님을 더 보게 하고, 사람을 주님 앞으로 인도하는 짧은 말. 내용은 주님의 일과 인격, 높여짐, 이름, 영광, 다시 오심을 벗어나지 않는다.</p>
+      </div>
+      <div class="track track-w">
+        <h4>기도집회를 위한 말씀</h4>
+        <p>매번 하나의 주제를 가지고 전하되, 기도 시간을 줄이거나 기도의 영을 말살하지 않는다. 오히려 기도의 영을 강화하고 북돋아, 사람들의 마음을 움직여 기도의 입을 열게 한다.</p>
+      </div>
+    </div>
+
+    <div class="note fx">떡이 순서에 따라 전달될 때, 여러분의 한 마디 한 마디가 떡과 함께 전달된다. 떡이 전달될 때 떡에 대하여 말하고, 잔이 전달될 때 잔에 대하여 말하라 — 말씀이 달콤한 느낌으로 가득하게 사람들에게 흘러갈 것이다.</div>
+
+    <h3 class="h3 fx">집회를 조절하는 것을 배움</h3>
+    <div class="postures fx">
+      <div class="pos">
+        <svg viewBox="0 0 44 58" aria-hidden="true"><circle cx="18" cy="9" r="4.5"/><path d="M18 13.5 V31"/><path d="M18 31 H30"/><path d="M30 31 V47"/><path d="M18 21 L27 25"/><path d="M10 51 H36"/></svg>
+        <p>앉음</p>
+      </div>
+      <div class="pos">
+        <svg viewBox="0 0 44 58" aria-hidden="true"><circle cx="22" cy="9" r="4.5"/><path d="M22 13.5 V33"/><path d="M12 22 H32"/><path d="M22 33 L14 50"/><path d="M22 33 L30 50"/></svg>
+        <p>일어섬</p>
+      </div>
+      <div class="pos">
+        <svg viewBox="0 0 44 58" aria-hidden="true"><circle cx="19" cy="9" r="4.5"/><path d="M19 13.5 V31"/><path d="M19 31 L23 47"/><path d="M23 47 H36"/><path d="M19 20 L27 25"/><path d="M10 51 H38"/></svg>
+        <p>무릎 꿇음</p>
+      </div>
+    </div>
+    <p class="fx" style="font-size:.92rem">어떤 때는 집회가 높이 올라가지 않다가 무릎을 꿇고 찬송하면 올라가고, 앉아 있기만 하면 느낌이 없다가 일어나 찬송하면 영이 살아난다. 그러나 이런 방법들이 결코 틀에 박힌 실행이 되어서는 안 된다. 사람의 몸이 갖가지 자세로 반응을 조절하듯, 집회에도 성령의 인도를 따라 합당하게 조절하는 사람이 필요하다. 조절하는 사람이 알아야 할 것은, 형제자매들을 <b>대치하는 것이 아니라 인도한다</b>는 사실이다. 성령은 늘 사람을 통해 움직이시며, 먼저 찬송하고 기도함으로 집회를 조절하기 시작할 때 영은 살아난다.</p>
+  </section>
+
+</main>
+
+<!-- ============ 종막 ============ -->
+<footer class="band epi">
+  <div class="wrap">
+    <p class="epi-orn" aria-hidden="true">&#10022; &#10022; &#10022;</p>
+    <blockquote class="epi-q">&ldquo;근본적으로 주님을 원하고 집회에서 영적인 공급을 얻을 수만 있다면 거의 모든 사람들이 집회에 오기를 좋아할 것이다.&rdquo;</blockquote>
+    <p class="epi-l">이러한 부분은 우리 모두가 공동으로 연구해 볼 가치가 있다.</p>
+    <p class="epi-note">본 페이지는 「제11장 말씀의 사역의 중요성과 위임」의 본문을 구조화&middot;시각화한 것입니다.<br>성경 인용은 본문에 실린 회복역 인용을 그대로 따랐습니다.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.fx');
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<els.length;i++){ els[i].classList.add('on'); }
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add('on');
+        io.unobserve(en.target);
+      }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+  for(var j=0;j<els.length;j++){ io.observe(els[j]); }
+})();
+</script>
+
+</body>
+</html>

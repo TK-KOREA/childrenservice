@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>제10장 말씀의 자료를 선택함</title>
+<meta name="description" content="말씀의 사역을 위한 자료 선택 — 생명을 공급하는 살아 있는 말씀의 길을 시각화한 인포그래픽">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F4EC;      /* 새순빛 종이 */
+  --card:#FBFCF6;
+  --ink:#22301F;        /* 상록 먹색 */
+  --ink2:#57604F;
+  --ink3:#8B9182;
+  --life:#3D6B45;       /* 생명 초록 */
+  --life-deep:#2C5234;
+  --life-bg:#E9F0E5;
+  --life-line:#CBDAC5;
+  --grain:#A57F2C;      /* 곡식빛 — 성경 말씀 */
+  --grain-line:#D8C795;
+  --grain-bg:#F5EEDB;
+  --ash:#8E8A7D;        /* 재빛 — 죽은 것 */
+  --ash-bg:#EAE9E0;
+  --ash-line:#D8D5C9;
+  --line:#DDDFD0;
+  --serif:'Gowun Batang','Noto Serif KR','Nanum Myeongjo','AppleMyungjo',serif;
+  --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.8;font-weight:400;word-break:keep-all;overflow-wrap:break-word}
+::selection{background:#D6E3CF}
+img,svg{max-width:100%}
+.wrap{max-width:34rem;margin:0 auto;padding:0 1.25rem 4rem}
+
+/* 읽기 진행 게이지 */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--life),var(--grain));z-index:50;transition:width .1s linear}
+
+/* ---------- 서막 ---------- */
+header.hero{padding:4.4rem 0 1.2rem;text-align:center}
+.hero .chap{display:inline-block;font-size:.76rem;letter-spacing:.3em;color:var(--life);font-weight:700;border:1px solid var(--life-line);border-radius:999px;padding:.3rem 1rem .3rem 1.25rem;background:var(--card)}
+h1{font-family:var(--serif);font-weight:700;font-size:1.95rem;line-height:1.4;letter-spacing:-.015em;margin:1.15rem 0 .55rem}
+.hero .sub{font-size:.95rem;color:var(--ink2);margin:0}
+.sprout{display:block;margin:1.7rem auto 0;width:30px;height:30px;color:var(--life)}
+
+/* ---------- 성경 말씀 블록 (곡식빛 위계) ---------- */
+.verse{margin:2.1rem 0;padding:1.5rem .9rem;text-align:center;font-family:var(--serif);font-size:1.06rem;line-height:2;border-top:1px solid var(--grain-line);border-bottom:1px solid var(--grain-line)}
+.verse .ref{display:block;margin-top:.75rem;font-family:var(--sans);font-size:.76rem;letter-spacing:.16em;color:var(--grain);font-weight:500}
+
+/* ---------- 섹션 공통 ---------- */
+section{padding-top:3rem}
+.eyebrow{display:flex;align-items:center;gap:.6rem;font-size:.77rem;letter-spacing:.24em;color:var(--life);font-weight:700}
+.eyebrow::before{content:"";width:1.5rem;height:1px;background:var(--life);flex:none}
+h2{font-family:var(--serif);font-weight:700;font-size:1.44rem;line-height:1.45;margin:.6rem 0 .9rem}
+p.lead{font-size:.97rem;color:var(--ink2);margin:0 0 1.15rem}
+p.body{font-size:.94rem;margin:.9rem 0}
+
+/* 원문 인용 블록 */
+.quote{position:relative;margin:1.5rem 0;padding:1.2rem 1.15rem 1.15rem 1.35rem;background:var(--card);border-left:3px solid var(--life);border-radius:0 16px 16px 0;font-family:var(--serif);font-size:1.03rem;line-height:2}
+.quote::before{content:"“";position:absolute;top:-.35rem;left:.55rem;font-family:var(--serif);font-size:1.9rem;color:var(--life);opacity:.55}
+.quote .src{display:block;margin-top:.65rem;font-family:var(--sans);font-size:.73rem;letter-spacing:.1em;color:var(--ink3)}
+.quote.ashline{border-left-color:var(--ash)}
+.quote.ashline::before{color:var(--ash)}
+
+/* 카드 · 칩 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.15rem 1.1rem;margin:1.25rem 0}
+.card h3{margin:0 0 .55rem;font-size:.98rem;font-weight:700}
+.note{font-size:.84rem;color:var(--ink2)}
+.small{font-size:.8rem;color:var(--ink3)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.36rem .78rem;border-radius:999px;font-size:.8rem;background:var(--card);border:1px solid var(--line)}
+.chip.live{background:var(--life-bg);border-color:var(--life-line);color:var(--life-deep);font-weight:500}
+.chip.ash{background:var(--ash-bg);border-color:var(--ash-line);color:var(--ink2)}
+.chip.gold{background:var(--grain-bg);border-color:var(--grain-line);color:#7C5E1D}
+.chip.serif{font-family:var(--serif)}
+
+/* 픽토그램 3배열 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.35rem 0}
+.trio .t{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem .45rem .9rem;text-align:center}
+.trio svg{width:27px;height:27px;color:var(--life)}
+.trio b{display:block;margin-top:.5rem;font-size:.85rem;line-height:1.45}
+.trio span{display:block;margin-top:.2rem;font-size:.72rem;color:var(--ink3);line-height:1.5}
+svg.icon{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ✕ → ○ 대비 스트립 */
+.xo{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:.5rem;margin:1.3rem 0}
+.xo .box{border-radius:14px;padding:.85rem .6rem;text-align:center;font-size:.83rem;line-height:1.55}
+.xo .x{background:var(--ash-bg);border:1px dashed var(--ash-line);color:var(--ink2)}
+.xo .o{background:var(--life-bg);border:1px solid var(--life-line);color:var(--life-deep);font-weight:500}
+.xo .mark{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:700;margin-bottom:.15rem}
+.xo .arr{align-self:center;color:var(--life);font-weight:700}
+
+/* 좌우 대조표 */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.35rem 0}
+.vs .col{border-radius:16px;padding:1rem .85rem;border:1px solid}
+.vs .dead{background:var(--ash-bg);border-color:var(--ash-line)}
+.vs .live{background:var(--life-bg);border-color:var(--life-line)}
+.vs h4{margin:0 0 .55rem;font-size:.88rem;display:flex;align-items:center;gap:.4rem}
+.vs .dead h4{color:#6E6A5D}
+.vs .live h4{color:var(--life-deep)}
+.vs .dot{width:.55rem;height:.55rem;border-radius:50%;flex:none}
+.vs .dead .dot{background:var(--ash)}
+.vs .live .dot{background:var(--life)}
+.vs ul{margin:0;padding:0;list-style:none;font-size:.81rem;line-height:1.65;color:var(--ink2)}
+.vs .live ul{color:#3A5236}
+.vs li{padding:.34rem 0;border-top:1px dashed rgba(0,0,0,.09)}
+.vs li:first-child{border-top:0;padding-top:0}
+
+/* 스크롤 리빌 */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* 벤다이어그램 */
+.venn{text-align:center;margin:1.2rem 0 0}
+.venn svg{width:100%;max-width:330px}
+.venn text{font-family:var(--sans)}
+.fresult{margin:.4rem auto 0;max-width:19rem;background:var(--life);color:#F1F6EC;border-radius:14px;padding:.72rem .9rem;text-align:center;font-size:.92rem;font-weight:500;font-family:var(--serif)}
+.aux{margin:.9rem auto 0;text-align:center}
+
+/* 플로우 차트 */
+.flow{margin:1.35rem 0}
+.fnode{background:var(--card);border:1px solid var(--life-line);border-radius:14px;padding:.78rem .9rem;font-size:.89rem;text-align:center;font-weight:500}
+.fnode.end{background:var(--life-deep);border-color:var(--life-deep);color:#EFF4EA;font-family:var(--serif)}
+.fbranch{display:flex;justify-content:center;align-items:center;gap:.45rem;margin:.45rem 0;font-size:.76rem;flex-wrap:wrap}
+.fbranch .lbl{color:var(--ink3);letter-spacing:.06em}
+.fbranch .stop{background:var(--ash-bg);border:1px dashed var(--ash-line);border-radius:999px;padding:.26rem .7rem;color:var(--ink2)}
+.fbranch .pass{background:var(--life-bg);border:1px solid var(--life-line);border-radius:999px;padding:.26rem .7rem;color:var(--life-deep)}
+.farrow{text-align:center;color:var(--life);font-size:.74rem;letter-spacing:.12em;margin:.3rem 0;font-weight:700}
+.farrow::after{content:"↓";display:block;font-size:1rem;letter-spacing:0;margin-top:-.1rem}
+
+/* 체크 카드 */
+.check{display:flex;gap:.75rem;align-items:flex-start;padding:.8rem 0;border-top:1px dashed var(--line)}
+.check:first-of-type{border-top:0;padding-top:.1rem}
+.check .n{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--life-bg);border:1px solid var(--life-line);color:var(--life-deep);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin-top:.15rem}
+.check b{font-size:.92rem}
+.check p{margin:.15rem 0 0;font-size:.82rem;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+<!-- ══════════ 서막 ══════════ -->
+<header class="hero">
+  <span class="chap">말씀의 사역 · 제10장</span>
+  <h1>말씀의 자료를<br>선택함</h1>
+  <p class="sub">죽은 말씀에서, 생명을 공급하는<br>살아 있는 말씀으로</p>
+  <svg class="sprout icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 12C12 7.5 9 5 4.5 5c0 4.5 3 7 7.5 7z"/><path d="M12 10c0-3.5 2.5-5.5 6.5-5.5 0 4-2.5 6-6.5 6z"/></svg>
+</header>
+
+<div class="verse reveal">
+  생명을 주시는 분은 그 영이십니다. 육체는 무익합니다.<br>내가 여러분에게 한 말이 영이요 생명입니다.
+  <span class="ref">요한복음 6:63 · 회복역</span>
+</div>
+
+<!-- ══════════ 1. 하나의 기준 ══════════ -->
+<section id="s1">
+  <div class="eyebrow reveal">첫째 · 하나의 기준</div>
+  <h2 class="reveal">말씀의 사역은 사람들에게<br>생명을 공급하기 위한 것</h2>
+  <p class="lead reveal">자료를 선택하는 방법은 많습니다. 그러나 그 모든 방법 위에, 결코 놓아서는 안 될 한 가지 기본 원칙이 있습니다. 우리가 전하는 말씀은 —</p>
+
+  <div class="trio reveal">
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 21v-8"/><path d="M12 13C12 8.5 9 6 4.5 6c0 4.5 3 7 7.5 7z"/><path d="M12 11c0-3.5 2.5-5.5 6.5-5.5 0 4-2.5 6-6.5 6z"/></svg>
+      <b>생명을<br>공급하고</b><span>사람 속에<br>생명이 흘러들게</span>
+    </div>
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.4"/><path d="M10.6 10.6L19 19"/><path d="M19 19v-3.2M15.8 15.8V13.4"/></svg>
+      <b>어려움을<br>해결하며</b><span>매인 것을 푸는<br>열쇠가 되게</span>
+    </div>
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 20.5C6.5 16.5 3.5 13.2 3.5 9.6 3.5 7 5.5 5 8 5c1.7 0 3.1.9 4 2.3C12.9 5.9 14.3 5 16 5c2.5 0 4.5 2 4.5 4.6 0 3.6-3 6.9-8.5 10.9z"/></svg>
+      <b>느낌과 필요를<br>만들어 냄</b><span>속에서 깨어나는<br>갈망을 창조</span>
+    </div>
+  </div>
+
+  <div class="xo reveal">
+    <div class="box x"><span class="mark">✕</span>단지 사상이나<br>생각할 거리를 주는 것</div>
+    <div class="arr">→</div>
+    <div class="box o"><span class="mark">○</span>생명을 공급하는<br>살아 있는 말씀</div>
+  </div>
+
+  <blockquote class="quote reveal">
+    우리가 전하는 말씀은 반드시 사람들에게 생명을 공급하고 사람의 어려움을 해결하고 사람들에게 어떤 느낌과 어떤 필요를 만들어내야 한다.
+    <span class="src">— 본문에서, 자료 선택의 기본 원칙</span>
+  </blockquote>
+</section>
+
+<!-- ══════════ 2. 두 가지 근원 ══════════ -->
+<section id="s2">
+  <div class="eyebrow reveal">둘째 · 두 가지 근원</div>
+  <h2 class="reveal">배운 공과와 받은 부담이<br>기본 자료가 됨</h2>
+  <p class="lead reveal">세상 어떤 학문도 기독교보다 많은 책을 갖고 있지 않습니다. 그러나 책은 근원이 아닙니다. 말씀의 사역의 기본 자료는 오직 두 우물에서 흘러나옵니다.</p>
+
+  <div class="venn reveal">
+    <svg viewBox="0 0 340 200" role="img" aria-label="배운 공과와 받은 부담이 겹쳐 기본 자료가 되는 벤다이어그램">
+      <circle cx="128" cy="98" r="76" fill="#3D6B45" fill-opacity="0.10" stroke="#3D6B45" stroke-width="1.5"/>
+      <circle cx="212" cy="98" r="76" fill="#3D6B45" fill-opacity="0.10" stroke="#2C5234" stroke-width="1.5"/>
+      <text x="97" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#22301F">배운 공과</text>
+      <text x="97" y="113" text-anchor="middle" font-size="10.5" fill="#57604F">주님 앞에서 받은</text>
+      <text x="97" y="128" text-anchor="middle" font-size="10.5" fill="#57604F">크고 작은 처리</text>
+      <text x="243" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#22301F">받은 부담</text>
+      <text x="243" y="113" text-anchor="middle" font-size="10.5" fill="#57604F">복음 · 온전케 함</text>
+      <text x="243" y="128" text-anchor="middle" font-size="10.5" fill="#57604F">건축을 향한 부담</text>
+      <text x="170" y="103" text-anchor="middle" font-size="16" font-weight="700" fill="#2C5234">＋</text>
+    </svg>
+    <div class="farrow">근거</div>
+    <div class="fresult">말씀의 사역의 기본 자료</div>
+    <div class="aux"><span class="chip"><span style="color:var(--ink3)">⌄</span>&nbsp;참고 서적 — 견해·표현·예화를 빌리는 ‘보조’, 견문을 넓히는 좋은 실행</span></div>
+  </div>
+
+  <blockquote class="quote reveal">
+    말씀의 사역의 기본 자료는 반드시 주님 앞에서 배운 공과 및 주님 앞에서 받은 부담에 근거해야 한다.
+  </blockquote>
+
+  <div class="card reveal" style="border-color:var(--ash-line);background:var(--ash-bg)">
+    <h3 style="color:#6E6A5D">⚠ 근원이 뒤바뀔 때 — 타락한 사역</h3>
+    <p class="note" style="margin:0">말씀을 전할 때가 되어서야 비로소 이 책 저 책을 뒤져 메시지를 만든다면, 그것은 이미 말씀의 사역을 잃어버린 것입니다.</p>
+  </div>
+
+  <blockquote class="quote ashline reveal">
+    말씀의 사역을 하는 사람이 공과를 배우지 못했고 주님께 받은 부담도 별로 없이 다만 말씀을 전할 때가 되어서야 비로소 이 책 저 책을 뒤져서 찾은 자료로 메시지 한 편을 만들어 말씀을 전한다면 이러한 말씀의 사역은 타락한 것이고 아무런 쓸모가 없는 것이다.
+  </blockquote>
+
+  <div class="chips reveal">
+    <span class="chip live">끊임없이 공과를 배움 — 하나님의 처리를 받아들임</span>
+    <span class="chip live">끊임없이 부담을 받음 — 복음 · 온전 · 건축</span>
+  </div>
+</section>
+
+<!-- ══════════ 3. 동기의 점검 ══════════ -->
+<section id="s3">
+  <div class="eyebrow reveal">셋째 · 동기의 점검</div>
+  <h2 class="reveal">교만하지 말고<br>동기를 주의해야 함</h2>
+  <p class="lead reveal">근원이 올바르다면, 그다음으로 지켜야 할 것은 마음입니다. 자기의 것이 남보다 낫다고 여기는 순간, 우리는 가장 어리석은 사람이 됩니다.</p>
+
+  <div class="card reveal">
+    <h3>자료를 선택할 때의 두 가지 점검</h3>
+    <div class="check"><span class="n">1</span><div><b>근원 — 기초가 되었는가</b><p>내가 배운 공과와 내가 받은 부담이 이 메시지의 기초인가.</p></div></div>
+    <div class="check"><span class="n">2</span><div><b>동기 — 교만하지 않은가</b><p>더 좋은 자료라도 그것은 견문을 넓히고 말씀의 느낌을 깊게 할 뿐이다.</p></div></div>
+  </div>
+
+  <div class="xo reveal">
+    <div class="box o"><span class="mark">○</span>참고하는 취지,<br>광범위한 도움을 얻는 태도</div>
+    <div class="arr">≠</div>
+    <div class="box x"><span class="mark">✕</span>모든 내용을 발췌하여<br>그대로 가져오려는 마음</div>
+  </div>
+
+  <blockquote class="quote ashline reveal">
+    공과를 배운 적이 없고 체험이 없으며 부담도 없는 사람이 말씀의 사역을 수행하며 메시지를 전한다면 그것은 하나님께 죄를 짓는 것이고 임의로 말하는 죄를 범하는 것이다.
+  </blockquote>
+</section>
+
+<!-- ══════════ 4. 살아 있는 자료 ══════════ -->
+<section id="s4">
+  <div class="eyebrow reveal">넷째 · 살아 있는 자료</div>
+  <h2 class="reveal">자료는 살아 있어야 하며,<br>신기한 것이어서는 안 됨</h2>
+  <p class="lead reveal">말씀의 사역자가 늘 받는 유혹 — 남과 다른 신기한 것으로 자신을 차별화하려는 것. 그 순간 말씀은 생명의 냄새를 잃어버립니다.</p>
+
+  <div class="vs reveal">
+    <div class="col dead">
+      <h4><span class="dot"></span>신기한 자료</h4>
+      <ul>
+        <li>남과 차별화하려는 동기</li>
+        <li>생명의 냄새를 잃어버림</li>
+        <li>듣고 한 번 웃고는 잊어버림</li>
+        <li>“책을 읽어 주는 것”과 같음</li>
+      </ul>
+    </div>
+    <div class="col live">
+      <h4><span class="dot"></span>살아 있는 자료</h4>
+      <ul>
+        <li>생명을 공급함</li>
+        <li>성도들의 입맛이 살아남</li>
+        <li>오래된 주제도 새롭게 전함</li>
+        <li>공급이 있는 말씀이 됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card reveal">
+    <h3>‘거듭남’ — 일이백 번을 말한 주제라도</h3>
+    <p class="note" style="margin:0">거듭남은 조금도 신기할 것 없는 오래된 주제입니다. 그러나 살아 있는 자료를 사용하면, 그 오래된 주제를 <b>공급이 있고 성도들의 입맛이 살아나는 방식</b>으로 계속 말할 수 있습니다. 오래된 주제가 문제가 아니라, 죽은 자료가 문제입니다.</p>
+  </div>
+
+  <div class="verse reveal">
+    문자는 사람을 죽이는 것이지만,<br>그 영은 생명을 주시기 때문입니다.
+    <span class="ref">고린도후서 3:6 · 회복역</span>
+  </div>
+
+  <blockquote class="quote reveal">
+    당신은 말씀을 전할 때 반드시 살아 있고 생명을 공급하는 사역이 되게 해야 한다.
+  </blockquote>
+</section>
+
+<!-- ══════════ 5. 성경 해석의 절제 ══════════ -->
+<section id="s5">
+  <div class="eyebrow reveal">다섯째 · 해석의 절제</div>
+  <h2 class="reveal">성경을 해석하는 것을<br>피해야 함</h2>
+  <p class="lead reveal">성경은 쉬운 책이 아닙니다. 성경의 내용을 말하는 것과 성경을 해석하는 것 — 이 둘 사이에는 분명한 차이가 있습니다.</p>
+
+  <div class="vs reveal">
+    <div class="col dead">
+      <h4><span class="dot"></span>성경을 ‘해석’함</h4>
+      <ul>
+        <li>‘구원’ · ‘소홀히’의 의미를 파고듦</li>
+        <li>즉시 어려움에 직면함</li>
+        <li>지식은 주나 생명 공급은 적음</li>
+        <li>교사의 큰 은사에 속한 일</li>
+      </ul>
+    </div>
+    <div class="col live">
+      <h4><span class="dot"></span>성경 ‘내용’을 말함</h4>
+      <ul>
+        <li>몇 구절로 한 편의 메시지</li>
+        <li>구원을 귀히 여기게 함</li>
+        <li>통상 큰 위험이 없음</li>
+        <li>누구나 배워 행할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="verse reveal">
+    우리가 그토록 큰 구원을 소홀히 여긴다면,<br>어떻게 그 벌을 피할 수 있겠습니까?
+    <span class="ref">히브리서 2:3 · 회복역</span>
+  </div>
+  <p class="note reveal" style="text-align:center;margin-top:-.9rem">이 한 구절을 인용해 사람들이 구원을 귀하게 여기게 하는 것 —<br>그것이 ‘내용을 말하는 것’입니다.</p>
+
+  <p class="keyline reveal">“말할 수는 있지만, 해석하지 말아야 한다.”</p>
+
+  <div class="flow reveal">
+    <div class="fnode">이 자료에 성경 ‘해석’이 담겨 있는가?</div>
+    <div class="fbranch"><span class="lbl">아니요 →</span><span class="pass">내용을 말하는 자료 — 통상 위험 없음</span></div>
+    <div class="farrow">예</div>
+    <div class="fnode">성경적 근거 제시가 참으로 필요한가?</div>
+    <div class="fbranch"><span class="lbl">아니요 →</span><span class="stop">해석하지 않는다 · 선택하지 않는다</span></div>
+    <div class="farrow">예</div>
+    <div class="fnode">충분한 확신이 있는가?</div>
+    <div class="fbranch"><span class="lbl">아니요 →</span><span class="stop">받아들이지 않는다</span></div>
+    <div class="farrow">예</div>
+    <div class="fnode end">‘사실의 근거’라는 범위 안에서만 해석한다</div>
+  </div>
+
+  <blockquote class="quote ashline reveal">
+    우리는 사실의 근거라는 범위 안에서 성경을 해석해야지 그 범위를 넘어서는 안 되며, 만일 우리가 성경의 해석을 필요로 하는 범위를 넘어간다면 그 메시지는 분명 죽은 메시지가 될 것이다.
+  </blockquote>
+
+  <div class="card reveal">
+    <h3>역사가 보여 주는 경고</h3>
+    <p class="note"><b style="color:var(--grain)">다니엘의 칠십 이레</b> — 적어도 <b>수십 가지</b>의 서로 다른 해석이 있고, 모두 그 나름의 논리를 갖고 있어 청년들을 쉽게 시험에 빠뜨립니다.</p>
+    <div class="verse" style="margin:1rem 0;padding:1rem .6rem;font-size:.96rem">
+      두 여자가 맷돌질을 하고 있는데,<br>한 사람은 데려가고, 한 사람은 남겨 둡니다.
+      <span class="ref">마태복음 24:41 · 회복역</span>
+    </div>
+    <p class="note" style="margin:0">이 구절조차 “남겨진 사람이 가장 좋다”는 해석이 권위자에게서 나왔습니다. 분별력이 없으면 별의별 해괴한 이론으로 잘못 인도됩니다.</p>
+  </div>
+
+  <div class="persons reveal">
+    <div class="person"><b>앤드루 머리</b><span class="ok">○ 내적인 교통에 정통</span><br><span class="warn">△ 성경 해석은 온전히 정확하지 않음</span></div>
+    <div class="person"><b>스팍스 형제</b><span class="ok">○ 영적인 방면은 주의할 만함</span><br><span class="warn">△ “새 예루살렘은 없다”는 해석은 따를 수 없음</span></div>
+    <div class="person"><b>제시 펜 루이스</b><span class="ok">○ 영적인 사람</span><br><span class="warn">△ 해석에서 매우 큰 오류</span></div>
+    <div class="person"><b>위츠두 자매</b><span class="ok">○ 매우 영적, 상당한 능력</span><br><span class="warn">△ 구원·거듭남 해석의 부정확</span></div>
+  </div>
+  <p class="small reveal" style="text-align:center;margin-top:-.3rem">영적인 체험은 배우되, 성경 해석은 따라갈 수 없다</p>
+
+  <div class="chips reveal" style="justify-content:center">
+    <span class="chip gold serif">쑹상지에 박사 — ‘혈루’ 한 단어로, 해석 없이 한 편의 설교</span>
+  </div>
+</section>
+
+<!-- ══════════ 6. 교육 과정이 아님 ══════════ -->
+<section id="s6">
+  <div class="eyebrow reveal">여섯째 · 학교가 아니라 생명</div>
+  <h2 class="reveal">말씀의 사역이 교재와<br>교육 과정이 되는 것을 피함</h2>
+  <p class="lead reveal">말씀의 사역에는 확실히 교육적인 성향이 필요합니다. 그러나 그것이 하나의 ‘교육 과정’으로 떨어져서는 안 됩니다.</p>
+
+  <div class="big52 reveal">
+    <div class="n"><span id="num52">52</span><span style="font-size:1.6rem">주</span></div>
+    <p class="l">일 년 52주 — 52개의 주제, 이것이 주일학교의 교육 과정.<br>52번을 한 번도 빠짐없이 들었다 해도, 영적인 분량과<br>생명의 체험이 더해졌다고는 말할 수 없습니다.</p>
+  </div>
+
+  <div class="chips reveal" style="justify-content:center">
+    <span class="chip ash" style="text-decoration:line-through">어린이 주일학교 집회</span>
+    <span style="color:var(--life);font-weight:700">→</span>
+    <span class="chip live">어린이 집회 — ‘학교’라는 단어를 떼어 버림</span>
+  </div>
+
+  <blockquote class="quote reveal">
+    우리는 그들이 매번 집회에 올 때마다 속 부분이 만져졌고, 속에 어떤 공급이 있다는 느낌을 받도록 해야 한다.
+  </blockquote>
+
+  <div class="card story reveal">
+    <h3><span style="color:var(--grain)">이야기</span> · 무디와 한 여자아이</h3>
+    <p class="storyp">주일학교에 오겠다고 약속하고 오지 않은 한 여자아이가 있었습니다. 며칠 후 길에서 무디를 본 아이는 도망치듯 달려 한 술집으로 뛰어들어가 침대 밑에 숨었습니다. 무디는 그 술집까지 쫓아가, 침대 밑에서 아이를 나오게 했습니다. 그 후로 그 아이는 주일 어린이 집회에 참석하게 되었습니다.</p>
+    <blockquote class="quote" style="margin:.9rem 0 0;font-size:.97rem">우리가 어린아이를 대할 때 만일 무디처럼 그렇게 부담이 있다면 성공할 것이다.</blockquote>
+  </div>
+
+  <div class="vs reveal">
+    <div class="col dead">
+      <h4><span class="dot"></span>죽은 교육 방식</h4>
+      <ul>
+        <li>분반 · 출석 점검 · 개요 암송</li>
+        <li>“잘했어요. 백점!” — 시험과 상</li>
+        <li>영화 상영에 맞춘 제목 선정</li>
+        <li>외운 것은 한 주면 다 잊음</li>
+      </ul>
+    </div>
+    <div class="col live">
+      <h4><span class="dot"></span>살아 있는 인도</h4>
+      <ul>
+        <li>속 부분이 만져지는 집회</li>
+        <li>천연적인 사랑에서 시작해 느낌을 심음</li>
+        <li>한 사람 한 사람을 향한 부담</li>
+        <li>영원토록 잊을 수 없는 만짐</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chips reveal" style="justify-content:center">
+    <span class="chip gold">1946–1948 상하이 — ‘청년 집회’라는 명칭조차 없이, 한 사람 한 사람 개별 목양</span>
+  </div>
+
+  <div class="torch reveal">
+    <svg class="flame" viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M24 5C17 14 13 20 13 28a11 11 0 0 0 22 0c0-8-4-14-11-23z" fill="#C8A24A"/>
+      <path d="M24 18c-3.6 4.6-5.5 7.8-5.5 11.6a5.5 5.5 0 0 0 11 0c0-3.8-1.9-7-5.5-11.6z" fill="#F3E7C4"/>
+    </svg>
+    <p>우리는 불타오르게 하는 일을 함으로<br>그들을 <b>횃불</b>로 만들고 그들이 다시<br>다른 사람들을 불사르도록 해야 한다.<br>이것이 바로 살아 있는 일이다.</p>
+    <span class="src">— 본문에서</span>
+  </div>
+</section>
+
+<!-- ══════════ 7. 느낌을 만짐 ══════════ -->
+<section id="s7">
+  <div class="eyebrow reveal">일곱째 · 만짐</div>
+  <h2 class="reveal">사람들의 깊은 곳의 느낌을<br>만지는 것을 배워야 함</h2>
+  <p class="lead reveal">로마 숫자와 대문자, 소문자로 된 개요를 순서대로 읽어 가는 수업 식의 말투 — 그것은 완전히 실패한 것입니다. 개요보다 더욱 중요한 것은 사람의 느낌을 만지는 것입니다.</p>
+
+  <div class="duo reveal">
+    <div class="d bone">
+      <svg viewBox="0 0 32 20" aria-hidden="true"><g fill="currentColor"><circle cx="6" cy="6.5" r="4"/><circle cx="6" cy="13.5" r="4"/><circle cx="26" cy="6.5" r="4"/><circle cx="26" cy="13.5" r="4"/><rect x="6" y="7" width="20" height="6"/></g></svg>
+      <span class="g">뼈</span>
+      <p>개요와 장절, 논리의 골격만 —<br>뼈를 먹을 수 있는 사람은<br>그리 많지 않다</p>
+    </div>
+    <div class="d meat">
+      <svg viewBox="0 0 32 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="11" cy="9" rx="8.5" ry="7.5"/><path d="M16.2 13.2 L25.5 20.8" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"/><circle cx="27.6" cy="19.4" r="2.6"/><circle cx="24.6" cy="22.4" r="2.6"/></g></svg>
+      <span class="g">고기</span>
+      <p>씹고 삼켜 양분이 되는 공급 —<br>사람의 깊은 느낌을 만지는<br>살아 있는 말씀</p>
+    </div>
+  </div>
+
+  <blockquote class="quote reveal">
+    우리는 사람들에게 많은 뼈들을 주는 것이 아니라 ‘고기’를 주어야 하는데, 그 이유는 뼈를 먹을 수 있는 사람은 그리 많지 않기 때문이다.
+  </blockquote>
+
+  <div class="card reveal">
+    <h3>‘번거롭게 하는’ 능력</h3>
+    <p class="note">제목도 잊고 내용도 그다지 기억하지 못할지라도, 속에서 누군가 계속 문을 두드려 편안히 지낼 수 없게 되는 것 — 말씀의 사역자와 심방하는 자매들이 함께 배워야 할 능력입니다.</p>
+    <div class="chips" style="margin:.7rem 0 0">
+      <span class="chip serif">모기가 문 것 같은 만짐</span>
+      <span class="chip serif">알지 못하는 사이에 놓는 영적인 주사</span>
+    </div>
+  </div>
+
+  <p class="body reveal" style="text-align:center;color:var(--ink2);font-size:.9rem">무언가에 만져진 사람은, 돌아가서 —</p>
+
+  <div class="trio reveal">
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="11.5" width="6" height="8.5" rx="1"/><path d="M12 4.2C10.3 6 10.2 7.8 12 9c1.8-1.2 1.7-3 0-4.8z"/><path d="M12 9v2.5"/></svg>
+      <b>기도하지 않을 수<br>없게 되고</b>
+    </div>
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 3.5C8.6 7.9 6.5 10.8 6.5 13.7a5.5 5.5 0 0 0 11 0c0-2.9-2.1-5.8-5.5-10.2z"/></svg>
+      <b>죄를 처리하지<br>않을 수 없으며</b>
+    </div>
+    <div class="t">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 10.5v4h3l8 4.8V5.7L7 10.5H4z"/><path d="M18 9.2c1.9 1.5 1.9 4.1 0 5.6"/></svg>
+      <b>복음을 전하지<br>않고는 못 견딤</b>
+    </div>
+  </div>
+
+  <blockquote class="quote reveal">
+    형제자매들이 집회에 와서 개요나 성경 말씀의 장절은 모두 잊을 수 있지만 무언가 만졌다는 느낌을 가졌다면 이것이 가장 중요한 것이다.
+  </blockquote>
+</section>
+
+<!-- ══════════ 8. 건축을 향하여 ══════════ -->
+<section id="s8">
+  <div class="eyebrow reveal">여덟째 · 건축</div>
+  <h2 class="reveal">교회는 말씀의 사역을 통한<br>건축의 절박한 필요가 있음</h2>
+  <p class="lead reveal">구원하고 온전케 하기를 반복하는 것만으로는 백 년이 지나도 건축이 없고 하나님의 거처가 없습니다. 지금은 절박하게 건축이 필요한 중요한 시기입니다.</p>
+
+  <div class="podium reveal">
+    <div class="pod p1"><span class="rank">첫 번째</span><b>말씀의 사역</b><span>각지의 빈약함과 죽어 있음의<br>첫째 원인은 말씀의 부족</span></div>
+    <div class="pod p2"><span class="rank">두 번째</span><b>행정의 일</b><span>건축을 위해<br>그다음으로 필요한 것</span></div>
+  </div>
+  <div class="podbase"></div>
+
+  <p class="keyline reveal">“말씀이 첫 번째이고 행정의 일이 두 번째이다.”</p>
+
+  <div class="chips reveal" style="justify-content:center">
+    <span class="chip ash">빈약함</span><span class="chip ash">연약함</span><span class="chip ash">침체됨</span><span class="chip ash">냉담함</span><span class="chip ash">죽어 있음</span><span class="chip ash">얕음</span>
+  </div>
+  <p class="small reveal" style="text-align:center;margin-top:-.2rem">— 이 모든 원인은 말씀이 부족하기 때문</p>
+
+  <div class="card reveal">
+    <h3>건축된 사람 — 시간과 공간의 제한이 없음</h3>
+    <div class="journey">
+      <span class="city">가오슝</span><span class="go">→</span><span class="city">화리엔</span><span class="go">→</span><span class="city">타이난</span><span class="go">→</span><span class="city" style="border-color:var(--life-line);background:var(--life-bg);color:var(--life-deep)">어디든지</span>
+    </div>
+    <p class="note" style="margin:0;text-align:center">그가 어디를 가든지 그는 하나님의 거처이며,<br>어디를 가든지 기능을 발휘하는 지체입니다.</p>
+  </div>
+
+  <blockquote class="quote reveal">
+    그가 어디를 가든 그는 건축된 한 사람이며 우주 가운데 그리스도의 몸 안에 건축된 사람이다.
+  </blockquote>
+
+  <div class="verse reveal">
+    여러분 자신도 살아 있는 돌들로서<br>영적인 집으로 건축되어 …
+    <span class="ref">베드로전서 2:5 · 회복역</span>
+  </div>
+</section>
+
+<!-- ══════════ 9. 살아 있는 동역 ══════════ -->
+<section id="s9">
+  <div class="eyebrow reveal">아홉째 · 동역</div>
+  <h2 class="reveal">말씀의 사역과 봉사는<br>살아 있는 동역이 필요함</h2>
+  <p class="lead reveal">무엇을 전할지는 기도와 고려, 그리고 봉사하는 사람들과의 교통을 통해 연구해야 합니다. 이것은 의논하며 맞추는 협력이 아니라, 자연스런 협력 — 참되고도 완전한 동역입니다.</p>
+
+  <div class="cycle reveal">
+    <svg viewBox="0 0 320 320" role="img" aria-label="기도와 고려, 봉사자와의 교통, 말씀의 사역, 심방과 돌봄이 순환하는 살아 있는 동역 다이어그램">
+      <circle cx="160" cy="160" r="98" fill="none" stroke="#3D6B45" stroke-opacity="0.55" stroke-width="1.6" stroke-dasharray="3 6"/>
+      <g fill="#3D6B45">
+        <g transform="translate(229.3,90.7) rotate(45)"><path d="M0,-4.5 L9,0 L0,4.5 Z"/></g>
+        <g transform="translate(229.3,229.3) rotate(135)"><path d="M0,-4.5 L9,0 L0,4.5 Z"/></g>
+        <g transform="translate(90.7,229.3) rotate(225)"><path d="M0,-4.5 L9,0 L0,4.5 Z"/></g>
+        <g transform="translate(90.7,90.7) rotate(315)"><path d="M0,-4.5 L9,0 L0,4.5 Z"/></g>
+      </g>
+      <rect x="99" y="16" width="122" height="38" rx="11" fill="#FBFCF6" stroke="#DDDFD0"/>
+      <text x="160" y="40" text-anchor="middle" font-size="13.5" font-weight="500" fill="#22301F" font-family="'Noto Sans KR',sans-serif">기도와 고려</text>
+      <rect x="194" y="141" width="120" height="38" rx="11" fill="#FBFCF6" stroke="#DDDFD0"/>
+      <text x="254" y="165" text-anchor="middle" font-size="12.5" font-weight="500" fill="#22301F" font-family="'Noto Sans KR',sans-serif">봉사자와의 교통</text>
+      <rect x="94" y="266" width="132" height="38" rx="11" fill="#3D6B45"/>
+      <text x="160" y="290" text-anchor="middle" font-size="14" font-weight="700" fill="#F1F6EC" font-family="'Noto Sans KR',sans-serif">말씀의 사역</text>
+      <rect x="6" y="141" width="120" height="38" rx="11" fill="#FBFCF6" stroke="#DDDFD0"/>
+      <text x="66" y="165" text-anchor="middle" font-size="13" font-weight="500" fill="#22301F" font-family="'Noto Sans KR',sans-serif">심방과 돌봄</text>
+      <text x="160" y="150" text-anchor="middle" font-size="13.5" fill="#57604F" font-family="'Noto Sans KR',sans-serif">살아 있는</text>
+      <text x="160" y="176" text-anchor="middle" font-size="21" font-weight="700" fill="#2C5234" font-family="'Gowun Batang',serif">동역</text>
+    </svg>
+  </div>
+
+  <div class="tl reveal">
+    <div class="ev"><b>1940 · 중국 북부</b><p>한 형제를 마음에 품은 부담에서, 말씀의 사역과 봉사의 협력이 시작됨.</p></div>
+    <div class="ev"><b>매주 월요일 08:00 – 15:00</b><p>형제자매들의 상황을 계속 교통하고, 어떤 때는 그들을 위해 금식하며 기도함.</p></div>
+    <div class="ev"><b>모든 집회마다</b><p>그날 전한 말씀이 각 사람의 필요에 정확하게 부응하는 것을 성도들이 기이하게 여김. 매번 어려움이 해결됨.</p></div>
+    <div class="ev"><b>~ 1943 · 거의 2년</b><p>연초부터 연말까지 살아 있는 상황이 이어짐 — 지난 30년을 돌아볼 때 협력이 가장 좋았던 때.</p></div>
+  </div>
+
+  <blockquote class="quote reveal">
+    말씀이 그들의 어려움을 만지고 그들의 깊은 부분을 만졌으며, 그들의 문제를 해결하고 그들의 필요를 공급하였다. 그것은 참으로 살아 있는 말씀이었다.
+  </blockquote>
+</section>
+
+<!-- ══════════ 결론 · 위탁 ══════════ -->
+<section id="s10">
+  <div class="eyebrow reveal">결론 · 위탁</div>
+  <h2 class="reveal">우리의 책임,<br>살아 있는 말씀의 사역</h2>
+  <p class="lead reveal">지금 우리는 곳곳에서 영적인 죽음을 접촉합니다.</p>
+
+  <div class="chips reveal">
+    <span class="chip ash">어린이 집회 — 실행이 죽어 있음</span>
+    <span class="chip ash">청년 집회 — 죽은 문자의 교리뿐</span>
+    <span class="chip ash">주일 집회 — 죽은 규례들</span>
+  </div>
+
+  <blockquote class="quote ashline reveal">
+    이 모든 것들은 다 우리의 책임으로 우리는 더 이상 이런 상황을 지속할 수 없다.
+  </blockquote>
+
+  <p class="body reveal">그러므로 개인적인 사람이 되지 말고 다른 사람과 함께 동역하며 봉사하되 —</p>
+
+  <div class="chips reveal">
+    <span class="chip live">죽은 규례가 아닌, 산 방식을 연구함</span>
+    <span class="chip live">철저하게 공과를 배움</span>
+    <span class="chip live">부담을 받아들임</span>
+    <span class="chip live">각 사람의 필요와 어려움을 이해함</span>
+  </div>
+
+  <p class="body reveal">어린이가, 청소년이, 연장자가, 어머니와 자녀가 어떤 어려움을 안고 있는지 알고 — 모든 사람이 함께 듣지만 그 말씀이 <b>모든 사람을 만질 수 있는</b> 한 편의 메시지를 전해야 합니다.</p>
+
+  <div class="final reveal">
+    <svg class="orn icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 12C12 7.5 9 5 4.5 5c0 4.5 3 7 7.5 7z"/><path d="M12 10c0-3.5 2.5-5.5 6.5-5.5 0 4-2.5 6-6.5 6z"/></svg>
+    <p class="bigq">교회는 살아 있는 상황을<br>이끌어 올 수 있는<br>살아 있는 말씀이 필요하다.</p>
+    <span class="src">— 본문의 결론에서</span>
+  </div>
+
+  <div class="ponder reveal">
+    <p class="q">오늘, 나의 말씀은 살아 있는가.</p>
+  </div>
+</section>
+
+<footer>
+  본 인포그래픽은 「말씀의 자료를 선택함」 메시지 본문(제10장)의 구조와 핵심 문장을 시각화한 것입니다.<br>
+  인용 표시된 문장은 본문 그대로이며, 성경 구절은 한국어 회복역에서 가져왔습니다.
+</footer>
+
+</div><!-- /wrap -->
+
+<style>
+/* ---------- 보충 스타일 (7–결론) ---------- */
+.keyline{text-align:center;font-family:var(--serif);font-size:1.13rem;font-weight:700;color:var(--life-deep);line-height:1.9;margin:1.7rem 0}
+.big52{text-align:center;margin:1.5rem 0}
+.big52 .n{font-family:var(--serif);font-weight:700;font-size:4.8rem;line-height:1;color:var(--grain)}
+.big52 .l{font-size:.85rem;color:var(--ink2);margin:.65rem 0 0;line-height:1.8}
+.persons{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:1.25rem 0 .5rem}
+.person{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.85rem .8rem;font-size:.77rem;line-height:1.62}
+.person b{display:block;font-size:.9rem;margin-bottom:.3rem}
+.person .ok{color:var(--life-deep)}
+.person .warn{color:#8A6A20}
+.story .storyp{font-family:var(--serif);font-size:.95rem;line-height:2;margin:.2rem 0 0}
+.torch{position:relative;margin:2.2rem 0 .3rem;background:#20301E;border-radius:20px;padding:2.1rem 1.4rem 1.7rem;text-align:center;color:#EFE7CD;overflow:hidden}
+.torch::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:210px;height:150px;background:radial-gradient(closest-side,rgba(200,162,74,.30),transparent 72%);pointer-events:none}
+.torch .flame{width:50px;height:50px;display:block;margin:0 auto .8rem;position:relative;transform-origin:50% 88%;animation:flick 2.8s ease-in-out infinite}
+.torch p{position:relative;font-family:var(--serif);font-size:1.07rem;line-height:2.1;margin:0;color:#F3ECD6}
+.torch b{color:#E7CB7C}
+.torch .src{position:relative;display:block;margin-top:.75rem;font-size:.72rem;letter-spacing:.14em;color:#A7B29A}
+@keyframes flick{0%,100%{transform:scale(1) rotate(0deg)}25%{transform:scale(1.05,.96) rotate(-1.6deg)}55%{transform:scale(.96,1.06) rotate(1.3deg)}80%{transform:scale(1.02,.99) rotate(-.5deg)}}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.35rem 0}
+.duo .d{border-radius:16px;padding:1.15rem .75rem 1rem;text-align:center;border:1px solid}
+.duo .bone{background:var(--ash-bg);border-color:var(--ash-line);color:var(--ink2)}
+.duo .meat{background:var(--life-bg);border-color:var(--life-line);color:var(--life-deep)}
+.duo svg{width:36px;height:26px}
+.duo .g{display:block;font-family:var(--serif);font-size:1.55rem;font-weight:700;margin:.3rem 0 .2rem}
+.duo p{margin:0;font-size:.75rem;line-height:1.65;opacity:.92}
+.podium{display:flex;align-items:flex-end;gap:.7rem;height:10rem;margin:1.5rem 0 0}
+.pod{flex:1;border-radius:14px 14px 0 0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:.9rem .45rem}
+.pod.p1{height:100%;background:var(--life);color:#F1F6EC}
+.pod.p2{height:58%;background:var(--ash-bg);border:1px solid var(--ash-line);border-bottom:0;color:var(--ink2)}
+.pod .rank{font-size:.68rem;letter-spacing:.22em;opacity:.85}
+.pod b{font-family:var(--serif);font-size:1.06rem;margin:.18rem 0 .12rem}
+.pod span{font-size:.69rem;opacity:.82;line-height:1.55}
+.podbase{height:1px;background:var(--ash);opacity:.45;margin:0 0 .4rem}
+.journey{display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;margin:.9rem 0 .8rem;font-size:.85rem}
+.journey .city{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.32rem .85rem;font-weight:500}
+.journey .go{color:var(--life);font-weight:700}
+.cycle{text-align:center;margin:1.2rem 0}
+.cycle svg{width:100%;max-width:320px}
+.tl{position:relative;margin:1.6rem 0 .4rem;padding-left:1.45rem}
+.tl::before{content:"";position:absolute;left:.34rem;top:.45rem;bottom:.7rem;width:2px;background:linear-gradient(var(--life),var(--grain))}
+.ev{position:relative;padding:0 0 1.15rem}
+.ev::before{content:"";position:absolute;left:-1.42rem;top:.42rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--paper);border:2px solid var(--life)}
+.ev:last-child{padding-bottom:.2rem}
+.ev:last-child::before{border-color:var(--grain)}
+.ev b{font-size:.89rem}
+.ev p{margin:.18rem 0 0;font-size:.83rem;color:var(--ink2)}
+.final{margin:2.6rem 0 0;background:var(--card);border:1px solid var(--grain-line);border-radius:20px;padding:2.1rem 1.3rem 1.8rem;text-align:center}
+.final .orn{width:26px;height:26px;color:var(--grain);margin:0 auto 1rem;display:block}
+.final .bigq{font-family:var(--serif);font-size:1.22rem;line-height:2.05;margin:0;font-weight:700}
+.final .src{display:block;margin-top:.85rem;font-size:.71rem;letter-spacing:.16em;color:var(--ink3)}
+.ponder{text-align:center;padding:3.8rem 0 .6rem}
+.ponder .q{font-family:var(--serif);font-size:1.04rem;color:var(--ink2);margin:0}
+footer{margin-top:3.2rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--ink3);line-height:1.85;text-align:center}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .torch .flame{animation:none}
+  #bar{transition:none}
+}
+@media (max-width:360px){
+  h1{font-size:1.72rem}
+  h2{font-size:1.3rem}
+  .trio b{font-size:.78rem}
+  .big52 .n{font-size:4.1rem}
+}
+</style>
+
+<script>
+(function(){
+  var bar=document.getElementById('bar');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(sc/max*100):0)+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('on');});
+  }else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(x){
+        if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+
+  var n=document.getElementById('num52');
+  if(n&&!reduce&&('IntersectionObserver' in window)){
+    n.textContent='0';
+    var done=false;
+    var io2=new IntersectionObserver(function(entries){
+      entries.forEach(function(x){
+        if(x.isIntersecting&&!done){
+          done=true;io2.disconnect();
+          var t0=null,dur=900;
+          function step(t){
+            if(!t0)t0=t;
+            var p=Math.min(1,(t-t0)/dur);
+            p=1-Math.pow(1-p,3);
+            n.textContent=Math.round(52*p);
+            if(p<1)requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+      });
+    },{threshold:.6});
+    io2.observe(n);
+  }
+})();
+</script>
+</body>
+</html>
