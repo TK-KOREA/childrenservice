@@ -518,12 +518,28 @@ td.hi{background:var(--youth-soft)}
 <script>
 document.documentElement.classList.add('js');
 (function(){
-  var els=document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){for(var i=0;i<els.length;i++){els[i].classList.add('in');}return;}
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  function show(el){el.classList.add('in');}
+  function showAll(){for(var i=0;i<els.length;i++){show(els[i]);}}
+  if(!('IntersectionObserver' in window)){showAll();return;}
+  /* 잘려 있는 요소(clip-path)는 교차 영역이 0이라 스스로는 화면에 들어온 것으로
+     인식되지 않는다. 그래서 잘리지 않은 부모를 관찰하고, threshold는 0을 쓴다
+     (부모가 화면보다 길면 비율이 0.15에 못 미쳐 영영 안 걸린다). */
   var io=new IntersectionObserver(function(en){
-    en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
-  },{threshold:0.15});
-  for(var j=0;j<els.length;j++){io.observe(els[j]);}
+    en.forEach(function(x){
+      if(!x.isIntersecting){return;}
+      io.unobserve(x.target);
+      var list=x.target.__reveals||[];
+      for(var k=0;k<list.length;k++){show(list[k]);}
+    });
+  },{threshold:0});
+  for(var j=0;j<els.length;j++){
+    var t=els[j].parentElement||els[j];
+    (t.__reveals||(t.__reveals=[])).push(els[j]);
+    io.observe(t);
+  }
+  /* 안전장치: 어떤 이유로든 애니메이션이 돌지 않으면 그래프를 그냥 보여준다 */
+  setTimeout(function(){if(!document.querySelector('.reveal.in')){showAll();}},2500);
 })();
 </script>
 </body>
