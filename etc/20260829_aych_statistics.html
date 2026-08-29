@@ -77,6 +77,8 @@ b{font-weight:700}
 @media (max-width:23rem){.chips{grid-template-columns:1fr 1fr}.chip:last-child{grid-column:1/-1}}
 
 /* bars */
+.hint{font-size:.8125rem;color:var(--ink2);line-height:1.55;margin:.25rem 0 .75rem}
+.hint b{color:var(--ink)}
 .bars{margin:.5rem 0 0}
 .br{display:grid;grid-template-columns:3.75rem 1fr 3.25rem;gap:.5rem;align-items:center;margin:0 0 .375rem}
 .br .l{font-size:.8125rem;font-weight:500;color:var(--ink2);line-height:1.2}
@@ -266,7 +268,8 @@ td.hi{background:var(--youth-soft)}
     <div class="chip"><span class="n">1.9<small>배</small></span><span class="l">75세 이상 ÷ 0~5세</span><span class="d">38,670명 vs 20,653명</span></div>
   </div>
 
-  <h3>연령 한 살당 인구 (명) — 위가 나이 많은 세대</h3>
+  <h3>한 살당 인구 — 세대는 얼마나 두꺼운가</h3>
+  <p class="hint">구간마다 나이 폭이 달라서(50~64세는 15년, 15~18세는 4년) 총인구로는 세대를 비교할 수 없습니다. 그래서 <b>그 나이 한 살에 몇 명이 사는지</b>로 맞춘 값입니다. 막대가 길수록 두꺼운 세대이고, 위가 나이 많은 쪽입니다. 가장 두꺼운 세대는 50~64세이며, 거기서 위아래로 얇아집니다.</p>
   <div class="bars">
     <div class="br"><span class="l">65~74세</span><span class="track"><span class="fill city reveal" style="width:77.4%"></span></span><span class="v">7,063</span></div>
     <div class="br"><span class="l">50~64세</span><span class="track"><span class="fill city reveal" style="width:100%"></span></span><span class="v">9,121</span></div>
