@@ -221,6 +221,19 @@
   .footnotes{list-style:none;margin:14px 2px 0;padding:0;font-size:13px;color:var(--muted);line-height:1.7;}
   .footnotes b{color:var(--ink);}
 
+  /* ── 오픈채팅 ── */
+  .chat-cta{margin-top:18px;}
+  .chat-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    padding:16px 18px;border-radius:14px;text-decoration:none;
+    background:#fee500;color:#371d1e;
+    font-size:17px;font-weight:800;letter-spacing:-.02em;
+    box-shadow:0 10px 20px rgba(6,58,73,.13);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .chat-btn:active{transform:translateY(1px);box-shadow:0 5px 12px rgba(6,58,73,.13);}
+  .chat-btn svg{width:22px;height:22px;flex:0 0 22px;}
+
   /* ── 마무리 ── */
   .closing{
     margin:34px 0 0;padding:26px 22px 34px;
@@ -273,6 +286,13 @@
         </div>
       </div>
     </div>
+
+    <div class="chat-cta">
+      <a class="chat-btn" href="https://open.kakao.com/o/g5J4pwLi" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2C6.75 3.2 2.5 6.61 2.5 10.81c0 2.7 1.76 5.07 4.42 6.41-.19.69-.71 2.57-.81 2.97-.13.5.18.5.39.36.16-.11 2.55-1.73 3.59-2.44.62.09 1.26.14 1.91.14 5.25 0 9.5-3.41 9.5-7.61S17.25 3.2 12 3.2z"/></svg>
+        오픈채팅방 참여하기
+      </a>
+    </div>
   </section>
 
   <section>
@@ -293,6 +313,11 @@
         <div class="flow-time">11:20</div>
         <div class="flow-txt">다시 자유 이용</div>
         <div class="flow-sub">짐은 어드벤처 빌리지 3번에 두고 가정별로 편하게</div>
+      </li>
+      <li>
+        <div class="flow-time">12:30</div>
+        <div class="flow-txt">점심 식사</div>
+        <div class="flow-sub">가정별로 편하게 식사하고 다시 자유롭게 이용합니다</div>
       </li>
       <li>
         <div class="flow-time">18:00</div>
@@ -424,7 +449,7 @@
   <div class="closing">
     <strong>9월 5일 토요일, 오전 11시<br>어드벤처 빌리지 3번에서 만나요</strong>
     <p>얼굴 보고 단체사진 한 장 찍고, 그 뒤로는 자유롭게 놀면 됩니다.</p>
-    <p>인원이나 참석 여부가 바뀌면 미리 알려 주세요.</p>
+    <p>인원이나 참석 여부가 바뀌면 오픈채팅방에 미리 알려 주세요.</p>
     <p class="fine">운영시간과 대여 요금은 캐리비안베이 사정에 따라 달라질 수 있습니다.<br>당일 정보는 캐리비안베이 앱 ‘캐비’에서 한 번 더 확인해 주세요.</p>
   </div>
 
