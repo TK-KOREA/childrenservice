@@ -152,6 +152,12 @@
   .qr-count-note{margin:0 0 8px;font-size:13px;color:var(--muted);}
   .qr-count .roster-grid div{font-size:15px;}
   .qty{font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
+  .qr-spare{
+    margin-top:14px;padding:2px 14px;
+    border:1px dashed var(--sun);border-radius:14px;background:var(--sunlight);
+  }
+  .qr-spare .fam{border-bottom:0;}
+  .qr-spare .who{color:#8a6a2f;}
 
   /* ── QR 뷰어 ── */
   .fam{
@@ -371,7 +377,6 @@
   .pack h3,.rent h3{
     margin:0 0 4px;font-size:17px;font-weight:800;
   }
-  .pack-note{margin:0 0 14px;font-size:13.5px;color:#8a6a2f;}
   .check{list-style:none;margin:0;padding:0;}
   .check li{border-top:1px solid rgba(180,140,60,.22);}
   .check li:first-child{border-top:0;}
@@ -405,7 +410,6 @@
     margin-top:14px;background:var(--shell);border-radius:18px;padding:20px 18px;
     border:1px solid var(--line);
   }
-  .rent-note{margin:0 0 12px;font-size:13.5px;color:var(--muted);}
   .rent-list{list-style:none;margin:0;padding:0;}
   .rent-list li{
     display:flex;justify-content:space-between;gap:12px;align-items:baseline;
@@ -517,7 +521,7 @@
     <p class="hero-eyebrow">유초등부 소그룹 활동</p>
     <h1>캐리비안베이<br>어린이 아웃팅</h1>
     <p class="hero-date">2026년 9월 5일 토요일</p>
-    <p class="hero-count"><b>18가정 55명</b>이 함께합니다</p>
+    <p class="hero-count"><b>17가정 53명</b>이 함께합니다</p>
     <svg class="wave" viewBox="0 0 460 46" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 26 C 60 4, 110 44, 172 26 S 288 4, 344 24 S 420 44, 460 22 L460 46 L0 46 Z" fill="#e7f2f4"/>
     </svg>
@@ -541,7 +545,7 @@
       <div class="ticket-bottom">
         <div class="cost">
           <span class="cost-tag free">지원</span>
-          <div class="cost-txt">입장 티켓<span>유초등부에서 지원합니다 · QR은 아래에서 확인하세요</span></div>
+          <div class="cost-txt">입장 티켓<span>QR은 아래에서 확인하세요</span></div>
         </div>
         <div class="cost">
           <span class="cost-tag">1만 원</span>
@@ -560,12 +564,11 @@
 
   <section>
     <h2>입장 QR</h2>
-    <p class="lead">아래에서 우리 가정 이름을 누르면 QR이 열립니다. 여러 장이면 옆으로 넘겨 보세요.<br>사진으로 남기고 싶으시면 QR 화면 아래 공유 버튼을 눌러 주세요.</p>
+    <p class="lead">우리 가정 이름을 누르면 QR이 열립니다.</p>
 
     <ol class="qr-steps">
       <li>
         <b>비밀번호를 넣고 우리 가정 이름을 눌러요</b>
-        <span>맨 위에 우리 가정 이름이 맞는지 먼저 확인해 주세요</span>
       </li>
       <li>
         <b>집에서 미리 한 번 열어 보세요</b>
@@ -579,13 +582,13 @@
 
     <div class="notice warn">
       <h3>이 링크는 소그룹 밖으로 전달하지 말아 주세요</h3>
-      <p>이 페이지 하나에 18가정 QR이 모두 들어 있습니다. QR은 먼저 스캔한 사람이 입장되기 때문에, 링크가 밖으로 나가면 정작 우리 가족이 못 들어갈 수 있어요.</p>
-      <p style="margin-top:8px">사진으로 담아 둔 QR에는 <b>우리 가정 이름이 함께 찍힙니다.</b> 티켓 번호도 그대로 들어 있으니 소그룹 밖으로는 전달하지 말아 주세요. 행사가 끝나면 사진첩에서 지워 주세요.</p>
+      <p>QR은 먼저 스캔한 사람이 입장됩니다. 링크가 밖으로 나가면 우리 가족이 못 들어갈 수 있어요.</p>
+      <p style="margin-top:8px">저장한 QR 사진에는 <b>가정 이름이 함께 찍힙니다.</b> 행사가 끝나면 사진첩에서 지워 주세요.</p>
     </div>
 
     <div class="qr-lock" id="qrLock">
       <h3>비밀번호를 입력해 주세요</h3>
-      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 이 브라우저에서는 다시 묻지 않아요. (다른 브라우저로 열면 한 번 더 입력해 주세요.)</p>
+      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 다시 묻지 않아요.</p>
       <form class="qr-lock-form" id="qrLockForm" autocomplete="off">
         <input type="password" id="qrPw" aria-label="비밀번호" placeholder="비밀번호" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
         <button type="submit" id="qrPwBtn">확인</button>
@@ -595,7 +598,7 @@
 
     <div class="qr-count locked" id="qrCount">
       <h3>우리 집 QR 장수</h3>
-      <p class="qr-count-note">36개월 미만 영유아는 QR이 따로 없어요. 장수가 다르면 오픈채팅방에 알려 주세요.</p>
+      <p class="qr-count-note">36개월 미만 영유아는 QR이 따로 없어요.</p>
       <div class="roster-grid">
         <div><button type="button" class="fam" data-fam="박송연"><span class="who">박송연</span><span class="qty">2장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="오윤경"><span class="who">오윤경</span><span class="qty">2장<i class="chev">›</i></span></button></div>
@@ -605,7 +608,6 @@
         <div><button type="button" class="fam" data-fam="김지현"><span class="who">김지현</span><span class="qty">3장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="황태호"><span class="who">황태호</span><span class="qty">5장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="국수진"><span class="who">국수진</span><span class="qty">3장<i class="chev">›</i></span></button></div>
-        <div><button type="button" class="fam" data-fam="김리나"><span class="who">김리나</span><span class="qty">2장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="박순애"><span class="who">박순애</span><span class="qty">2장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="이성운"><span class="who">이성운</span><span class="qty">5장<i class="chev">›</i></span></button></div>
         <div><button type="button" class="fam" data-fam="최경해"><span class="who">최경해</span><span class="qty">2장<i class="chev">›</i></span></button></div>
@@ -617,15 +619,17 @@
         <div><button type="button" class="fam" data-fam="지후네"><span class="who">지후네</span><span class="qty">2장<i class="chev">›</i></span></button></div>
       </div>
       <div class="roster-total">
-        <span>18가정 합계</span>
-        <b>52장</b>
+        <span>17가정 합계</span>
+        <b>50장</b>
+      </div>
+      <div class="qr-spare">
+        <div><button type="button" class="fam" data-fam="김리나"><span class="who">남는 티켓</span><span class="qty">7장<i class="chev">›</i></span></button></div>
       </div>
     </div>
   </section>
 
   <section>
     <h2>그날의 흐름</h2>
-    <p class="lead">9월 5일 캐리비안베이 운영시간 기준입니다.</p>
     <ul class="flow">
       <li>
         <div class="flow-time">10:00</div>
@@ -658,27 +662,21 @@
         <div class="flow-sub">퇴장 시간을 넉넉히 잡아 주세요</div>
       </li>
     </ul>
-
-    <div class="notice">
-      <h3>짐은 어드벤처 빌리지 3번에</h3>
-      <p>모이는 장소인 어드벤처 빌리지 3번에 짐을 두시면 됩니다. 단체사진을 찍은 뒤에는 가정별로 자유롭게 워터파크를 이용하시면 돼요.</p>
-    </div>
   </section>
 
   <section>
     <h2>준비물</h2>
-    <p class="lead">탭하면 체크됩니다. 가방 쌀 때 하나씩 확인해 보세요.</p>
+    <p class="lead">탭하면 체크됩니다.</p>
 
     <div class="pack">
       <h3>집에서 꼭 챙겨 오세요</h3>
-      <p class="pack-note">현장에서도 살 수 있지만, 미리 챙기면 훨씬 편해요.</p>
       <ul class="check" id="checklist">
         <li><label>
           <input type="checkbox">
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
             <span class="item-name">입장 QR 미리 열어보기<span class="must">필수</span></span>
-            <span class="item-sub">집에서 비밀번호를 넣고 우리 가정 QR을 한 번 열어 두면, 현장에서 신호가 없어도 열립니다</span>
+            <span class="item-sub">한 번 열어 두면 현장에서 신호가 없어도 열립니다</span>
           </span>
         </label></li>
         <li><label>
@@ -700,7 +698,7 @@
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
             <span class="item-name">젖은 수영복 담을 비닐팩</span>
-            <span class="item-sub">일회용품 규제로 현장에서는 주지 않아요</span>
+            <span class="item-sub">현장에서는 주지 않아요</span>
           </span>
         </label></li>
         <li><label>
@@ -708,7 +706,7 @@
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
             <span class="item-name">분유 · 젖병<span class="must">유아 필수</span></span>
-            <span class="item-sub">현장 판매가 없어 반드시 준비해 오셔야 해요</span>
+            <span class="item-sub">현장 판매가 없어요</span>
           </span>
         </label></li>
         <li><label>
@@ -725,7 +723,6 @@
 
     <div class="rent">
       <h3>현장에서 빌리거나 살 수 있어요</h3>
-      <p class="rent-note">짐을 줄이고 싶다면 아래는 현장에서 해결해도 됩니다.</p>
       <ul class="rent-list">
         <li>
           <span class="rent-name">타월<span>대여</span></span>
@@ -744,7 +741,7 @@
           <span class="rent-price">현장 구입</span>
         </li>
       </ul>
-      <p class="tipline">수영복·수영모·선캡, 세면도구·자외선 차단제도 기프트샵에서 살 수 있습니다. (캐리비안베이 앱 ‘캐비’의 준비물 안내 기준)</p>
+      <p class="tipline">수영복·수영모·선캡, 세면도구·자외선 차단제도 기프트샵에서 살 수 있어요.</p>
     </div>
   </section>
 
@@ -766,7 +763,7 @@
 
   <section>
     <h2>함께 가는 사람들</h2>
-    <p class="lead">이름 옆 숫자는 그 가정의 인원수입니다. 우리 집 인원이 맞는지 확인해 주세요.</p>
+    <p class="lead">이름 옆 숫자는 그 가정의 인원수입니다.</p>
     <div class="roster">
       <div class="roster-grid">
         <div><span class="who">박송연<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
@@ -777,7 +774,7 @@
         <div><span class="who">김지현</span><span class="cnt">3</span></div>
         <div><span class="who">황태호</span><span class="cnt">5</span></div>
         <div><span class="who">국수진</span><span class="cnt">3</span></div>
-        <div><span class="who">김리나</span><span class="cnt">2</span></div>
+        <div><span class="who">김리나</span><span class="flag">개인사정</span></div>
         <div><span class="who">박순애</span><span class="cnt">2</span></div>
         <div><span class="who">이성운</span><span class="cnt">5</span></div>
         <div><span class="who">최경해</span><span class="cnt">2</span></div>
@@ -790,21 +787,19 @@
         <div><span class="who">지후네<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
       </div>
       <div class="roster-total">
-        <span>18가정 함께합니다</span>
-        <b>55명</b>
+        <span>17가정 함께합니다</span>
+        <b>53명</b>
       </div>
     </div>
     <ul class="footnotes">
-      <li><b>36개월 미만 영유아는 3명</b>입니다. 김수영·박송연·지후네 가정 각 1명이에요.</li>
-      <li>36개월 미만은 입장할 때 나이 확인이 필요합니다. <b>주민등록등본</b>을 꼭 챙겨 와 주세요.</li>
+      <li><b>36개월 미만 영유아 3명</b>(김수영·박송연·지후네 각 1명)은 입장할 때 <b>주민등록등본</b>으로 나이 확인이 필요해요.</li>
     </ul>
   </section>
 
   <div class="closing">
     <strong>9월 5일 토요일, 오전 11시<br>어드벤처 빌리지 3번에서 만나요</strong>
-    <p>얼굴 보고 단체사진 한 장 찍고, 그 뒤로는 자유롭게 놀면 됩니다.</p>
     <p>인원이나 참석 여부가 바뀌면 오픈채팅방에 미리 알려 주세요.</p>
-    <p class="fine">운영시간과 대여 요금은 캐리비안베이 사정에 따라 달라질 수 있습니다.<br>당일 정보는 캐리비안베이 앱 ‘캐비’에서 한 번 더 확인해 주세요.</p>
+    <p class="fine">운영시간과 요금은 당일 캐리비안베이 앱 ‘캐비’에서 한 번 더 확인해 주세요.</p>
   </div>
 
 </div>
@@ -1132,6 +1127,12 @@
 
     function src(it) { return 'data:image/png;base64,' + it.d; }
 
+    /* 리나네(김리나)가 개인사정으로 불참해 그 가정의 티켓 2장은
+       '남는 티켓'으로 내놓는다. 번들 키는 그대로 두고 표시만 바꾼다. */
+    var SPARE = { '김리나': 1 };
+    function famLabel(fam) { return SPARE[fam] ? '남는 티켓' : fam + ' 가정'; }
+    function famFile(fam) { return SPARE[fam] ? '남는티켓' : fam; }
+
     /* ── 사진으로 공유 ──
        QR 위에는 아무것도 그리지 않는다. 가정 이름은 아래쪽에만 새긴다.
        유출된 캡처가 어느 가정에서 나왔는지 알 수 있게 하는 것이 목적이고,
@@ -1186,11 +1187,13 @@
           g.beginPath(); g.moveTo(PAD, y + 110); g.lineTo(W - PAD, y + 110); g.stroke();
 
           g.fillStyle = '#0d6072'; g.font = '800 44px ' + F;
-          g.fillText(fam + ' 가정 · ' + (i + 1) + '번', W / 2, y + 158);
+          g.fillText(famLabel(fam) + ' · ' + (i + 1) + '번', W / 2, y + 158);
           g.fillStyle = '#8a8a8a'; g.font = '400 30px ' + F;
-          g.fillText('우리 가정 전용입니다. 소그룹 밖으로 전달하지 말아 주세요.', W / 2, y + 208);
+          g.fillText(SPARE[fam]
+            ? '남는 표입니다. 소그룹 밖으로 전달하지 말아 주세요.'
+            : '우리 가정 전용입니다. 소그룹 밖으로 전달하지 말아 주세요.', W / 2, y + 208);
 
-          var name = 'CB2026_' + fam + '_' + (i + 1) + '번.png';
+          var name = 'CB2026_' + famFile(fam) + '_' + (i + 1) + '번.png';
           if (c.toBlob) {
             c.toBlob(function (b) { b ? res({ blob: b, name: name }) : rej(new Error('blob')); }, 'image/png');
           } else {
@@ -1356,7 +1359,7 @@
         // 마지막 원본은 워터마크가 없으므로 정말 없을 때만 쓴다.
         im.src = list[i].data || list[i].url
           || (items[idx[i]] ? src(items[idx[i]]) : '');
-        im.alt = (curFam ? curFam + ' 가정 ' : '') + (idx[i] + 1) + '번 입장 QR';
+        im.alt = (curFam ? famLabel(curFam) + ' ' : '') + (idx[i] + 1) + '번 입장 QR';
         var cap = document.createElement('p');
         cap.textContent = (idx[i] + 1) + '번';
         sheetBody.appendChild(im);
@@ -1432,7 +1435,7 @@
       items = (DATA && DATA[fam]) || [];
       curFam = fam;
       var done = savedSet();
-      titleEl.textContent = fam + ' 가정';
+      titleEl.textContent = famLabel(fam);
       totalEl.textContent = items.length;
       track.innerHTML = '';
       thumbs.innerHTML = '';
@@ -1459,7 +1462,7 @@
 
         var img = document.createElement('img');
         img.className = 'qr-img';
-        img.alt = fam + ' 가정 입장 QR ' + (i + 1) + '번';
+        img.alt = famLabel(fam) + ' 입장 QR ' + (i + 1) + '번';
         img.onerror = fail(body);
         img.src = src(items[i]);
 
@@ -1480,7 +1483,7 @@
 
         var no = document.createElement('div');
         no.className = 'qr-slide-no';
-        no.textContent = fam + ' 가정 · ' + (i + 1) + '번';
+        no.textContent = famLabel(fam) + ' · ' + (i + 1) + '번';
 
         var cap = document.createElement('div');
         cap.className = 'qr-code-cap';
