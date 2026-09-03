@@ -182,14 +182,21 @@
   .qr-track{
     flex:1 1 auto;min-height:0;
     display:flex;overflow-x:auto;overflow-y:hidden;
+    align-items:stretch;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;-ms-overflow-style:none;
   }
   .qr-track::-webkit-scrollbar{display:none;}
   .qr-slide{
     flex:0 0 100%;scroll-snap-align:center;padding:0 18px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    display:flex;flex-direction:column;align-items:center;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
   }
+  .qr-slide::-webkit-scrollbar{display:none;}
+  /* 내용이 짧으면 가운데로 밀고, 길면 0으로 접혀 스크롤에 자리를 내준다 */
+  .qr-slide::before,.qr-slide::after{content:"";flex:1 1 0;min-height:0;}
+  .qr-slide > *{flex:0 0 auto;}
   .qr-img{
     display:block;width:100%;max-width:290px;height:auto;
     background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;
@@ -207,6 +214,23 @@
   .qr-thumb img{display:block;width:100%;height:100%;object-fit:contain;}
   .qr-thumb.on{border-color:var(--sun);}
   body.qr-open{overflow:hidden;}
+
+  /* 카카오 인앱 브라우저처럼 세로가 짧을 때 */
+  @media (max-height:720px){
+    .qr-panel{padding-top:10px;}
+    .qr-head{padding-bottom:8px;}
+    .qr-title{font-size:17px;}
+    .tk-head{padding:10px 14px;font-size:16px;}
+    .tk-body{padding:10px 12px 12px;}
+    .tk-date{margin-bottom:8px;font-size:14.5px;}
+    .qr-hint{margin-top:8px;}
+    .qr-thumbs{padding-top:9px;}
+    .qr-thumb{flex:0 0 44px;height:44px;}
+  }
+  @media (max-height:600px){
+    .qr-hint{display:none;}
+    .tk{max-width:min(100%, 400px, 46vh);}
+  }
 
   /* ── 비밀번호 잠금 ── */
   .qr-lock{
@@ -238,6 +262,7 @@
 
   /* ── 티켓 카드 (원본 모양 재현) ── */
   .tk{
+    flex:0 0 auto;
     width:100%;max-width:400px;
     max-width:min(100%, 400px, 52vh);
     margin:0 auto;
