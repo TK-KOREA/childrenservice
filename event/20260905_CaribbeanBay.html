@@ -160,16 +160,18 @@
   }
   .fam:active{opacity:.5;}
   .fam .chev{margin-left:7px;color:var(--muted);font-weight:600;font-style:normal;}
-  .qr-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;display:flex;align-items:flex-end;justify-content:center;}
+  .qr-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;display:flex;align-items:stretch;justify-content:center;}
   .qr-modal[hidden]{display:none;}
   .qr-back{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(6,58,73,.62);}
   .qr-panel{
-    position:relative;width:100%;max-width:460px;max-height:92vh;
+    position:relative;width:100%;max-width:460px;
+    height:100vh;height:100dvh;max-height:none;
     display:flex;flex-direction:column;
-    background:var(--shell);border-radius:22px 22px 0 0;
-    padding:18px 0 20px;box-shadow:0 -10px 40px rgba(6,58,73,.28);
+    background:var(--shell);border-radius:0;
+    padding:14px 0 calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 0 40px rgba(6,58,73,.28);
   }
-  .qr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 20px 14px;}
+  .qr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 18px 10px;}
   .qr-title{font-size:19px;font-weight:800;letter-spacing:-.02em;}
   .qr-sub{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums;}
   .qr-close{
@@ -178,14 +180,15 @@
     line-height:1;cursor:pointer;-webkit-tap-highlight-color:transparent;
   }
   .qr-track{
+    flex:1 1 auto;min-height:0;
     display:flex;overflow-x:auto;overflow-y:hidden;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;-ms-overflow-style:none;
   }
   .qr-track::-webkit-scrollbar{display:none;}
   .qr-slide{
-    flex:0 0 100%;scroll-snap-align:center;padding:0 20px;
-    display:flex;flex-direction:column;align-items:center;
+    flex:0 0 100%;scroll-snap-align:center;padding:0 18px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
   }
   .qr-img{
     display:block;width:100%;max-width:290px;height:auto;
@@ -193,8 +196,8 @@
   }
   .qr-slide-no{margin-top:9px;font-size:14px;font-weight:800;color:var(--lagoon);}
   .qr-fail{margin:0;padding:48px 10px;text-align:center;font-size:14px;color:var(--muted);line-height:1.6;}
-  .qr-hint{margin:12px 20px 0;font-size:12.5px;color:var(--muted);line-height:1.55;text-align:center;}
-  .qr-thumbs{display:flex;gap:8px;overflow-x:auto;padding:14px 20px 0;scrollbar-width:none;-ms-overflow-style:none;}
+  .qr-hint{margin:10px 18px 0;font-size:12.5px;color:var(--muted);line-height:1.5;text-align:center;}
+  .qr-thumbs{flex:0 0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 18px 0;scrollbar-width:none;-ms-overflow-style:none;}
   .qr-thumbs::-webkit-scrollbar{display:none;}
   .qr-thumb{
     flex:0 0 52px;height:52px;padding:3px;border-radius:10px;
@@ -235,7 +238,9 @@
 
   /* ── 티켓 카드 (원본 모양 재현) ── */
   .tk{
-    width:100%;max-width:310px;margin:0 auto;
+    width:100%;max-width:400px;
+    max-width:min(100%, 400px, 52vh);
+    margin:0 auto;
     border-radius:16px;overflow:hidden;
     background:#fff;border:1px solid #e4d3ef;
     box-shadow:0 8px 22px rgba(122,46,170,.14);
@@ -254,7 +259,7 @@
   .tk-date::before,.tk-date::after{
     content:"";width:16px;height:1px;background:#c9c9c9;
   }
-  .tk .qr-img{max-width:250px;border:0;padding:0;}
+  .tk .qr-img{max-width:100%;border:0;padding:0;}
   .tk-code{
     margin-top:12px;font-size:16px;font-weight:800;letter-spacing:.04em;
     color:#2b2b2b;word-break:break-all;
