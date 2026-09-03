@@ -231,12 +231,35 @@
   .qr-lock.ok{border-left-color:var(--sun);background:var(--sunlight);}
   .qr-lock.ok h3{color:#8a6a2f;}
   .qr-count.locked .fam .who{color:var(--muted);}
-  .qr-code{
-    margin-top:8px;font-size:15px;font-weight:800;letter-spacing:.04em;
-    color:var(--ink);font-variant-numeric:tabular-nums;word-break:break-all;
-    text-align:center;
-  }
   .qr-code-cap{margin-top:2px;font-size:12px;font-weight:500;color:var(--muted);text-align:center;}
+
+  /* ── 티켓 카드 (원본 모양 재현) ── */
+  .tk{
+    width:100%;max-width:310px;margin:0 auto;
+    border-radius:16px;overflow:hidden;
+    background:#fff;border:1px solid #e4d3ef;
+    box-shadow:0 8px 22px rgba(122,46,170,.14);
+  }
+  .tk-head{
+    padding:13px 14px;
+    background:#7A2EAA;color:#fff;text-align:center;
+    font-size:18px;font-weight:800;letter-spacing:-.02em;
+  }
+  .tk-body{padding:14px 14px 16px;text-align:center;}
+  .tk-date{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-bottom:12px;font-size:15.5px;font-weight:800;color:#2b2b2b;
+    font-variant-numeric:tabular-nums;
+  }
+  .tk-date::before,.tk-date::after{
+    content:"";width:16px;height:1px;background:#c9c9c9;
+  }
+  .tk .qr-img{max-width:250px;border:0;padding:0;}
+  .tk-code{
+    margin-top:12px;font-size:16px;font-weight:800;letter-spacing:.04em;
+    color:#2b2b2b;word-break:break-all;
+  }
+  .tk-who{margin-top:8px;font-size:14.5px;color:#4a4a4a;}
 
   /* ── 준비물 ── */
   .pack{
@@ -846,26 +869,52 @@
         var slide = document.createElement('div');
         slide.className = 'qr-slide';
 
+        // 원본 티켓과 같은 구성으로 카드를 그린다.
+        // 원본 스크린샷은 해상도가 6종이라 그대로 쓰면 QR이 작아져 스캔이 어렵다.
+        var card = document.createElement('div');
+        card.className = 'tk';
+
+        var head = document.createElement('div');
+        head.className = 'tk-head';
+        head.textContent = '캐리비안베이 이용권';
+
+        var body = document.createElement('div');
+        body.className = 'tk-body';
+
+        var date = document.createElement('div');
+        date.className = 'tk-date';
+        date.textContent = '2026-09-05';
+
         var img = document.createElement('img');
         img.className = 'qr-img';
         img.alt = fam + ' 가정 입장 QR ' + (i + 1) + '번';
         img.src = src(items[i]);
 
+        var code = document.createElement('div');
+        code.className = 'tk-code';
+        code.textContent = items[i].c;
+
+        var who = document.createElement('div');
+        who.className = 'tk-who';
+        who.textContent = '삼성전자 1인';
+
+        body.appendChild(date);
+        body.appendChild(img);
+        body.appendChild(code);
+        body.appendChild(who);
+        card.appendChild(head);
+        card.appendChild(body);
+
         var no = document.createElement('div');
         no.className = 'qr-slide-no';
-        no.textContent = (i + 1) + '번 QR';
-
-        var code = document.createElement('div');
-        code.className = 'qr-code';
-        code.textContent = items[i].c;
+        no.textContent = fam + ' 가정 · ' + (i + 1) + '번';
 
         var cap = document.createElement('div');
         cap.className = 'qr-code-cap';
-        cap.textContent = '스캔이 안 되면 이 번호를 보여주세요';
+        cap.textContent = '스캔이 안 되면 카드의 번호를 보여주세요';
 
-        slide.appendChild(img);
+        slide.appendChild(card);
         slide.appendChild(no);
-        slide.appendChild(code);
         slide.appendChild(cap);
         track.appendChild(slide);
 
