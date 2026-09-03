@@ -217,21 +217,33 @@
   .qr-thumb.on{border-color:var(--sun);}
   body.qr-open{overflow:hidden;}
 
-  /* 카카오 인앱 브라우저처럼 세로가 짧을 때 */
-  @media (max-height:720px){
-    .qr-panel{padding-top:10px;}
-    .qr-head{padding-bottom:8px;}
-    .qr-title{font-size:17px;}
-    .tk-head{padding:10px 14px;font-size:16px;}
-    .tk-body{padding:10px 12px 12px;}
-    .tk-date{margin-bottom:8px;font-size:14.5px;}
-    .qr-hint{margin-top:8px;}
-    .qr-thumbs{padding-top:9px;}
-    .qr-thumb{flex:0 0 44px;height:44px;}
+  /* ── 저장 버튼 ── */
+  .qr-actions{
+    flex:0 0 auto;display:flex;gap:8px;padding:10px 18px 0;
   }
-  @media (max-height:600px){
-    .qr-hint{display:none;}
-    .tk{max-width:min(100%, 400px, 46vh);}
+  .qr-actions button{
+    flex:1 1 0;min-width:0;padding:13px 10px;border:0;border-radius:12px;
+    font:inherit;font-size:15px;font-weight:800;letter-spacing:-.02em;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-save{background:var(--lagoon);color:#fff;}
+  .qr-save-all{background:var(--foam);color:var(--lagoon);}
+  .qr-actions button[disabled]{opacity:.5;}
+  .qr-saved-msg{
+    flex:0 0 auto;margin:8px 18px 0;font-size:12.5px;font-weight:600;
+    color:var(--muted);text-align:center;min-height:17px;
+  }
+  .qr-saved-msg.bad{color:#c23a28;}
+  .qr-thumb{position:relative;}
+  .qr-thumb .tick{
+    position:absolute;right:-3px;top:-3px;width:17px;height:17px;border-radius:50%;
+    background:var(--sun);color:#fff;font-size:11px;font-weight:800;line-height:17px;
+    text-align:center;
+  }
+
+  /* 카카오 인앱 브라우저처럼 세로가 짧을 때 */
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
   }
 
   /* ── 비밀번호 잠금 ── */
@@ -411,8 +423,30 @@
   .closing strong{display:block;color:#fff;font-size:17px;font-weight:700;margin-bottom:10px;}
   .closing .fine{font-size:12.5px;color:#7fa9b5;margin-top:14px;line-height:1.6;}
 
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none !important;}
+  /* 세로가 짧을수록 보조 문구부터 걷어내 QR과 티켓번호를 함께 보이게 한다.
+     티켓번호는 스캔이 안 될 때 쓰는 대안이라 QR과 같은 화면에 있어야 한다. */
+  @media (max-height:780px){
+    .qr-panel{padding-top:10px;}
+    .qr-head{padding-bottom:8px;}
+    .qr-title{font-size:17px;}
+    .tk{max-width:min(100%, 400px, 48vh);}
+    .tk-head{padding:10px 14px;font-size:16px;}
+    .tk-body{padding:10px 12px 12px;}
+    .tk-date{margin-bottom:8px;font-size:14.5px;}
+    .qr-hint{display:none;}
+    .qr-code-cap{display:none;}
+    .qr-actions{padding-top:9px;}
+    .qr-actions button{padding:11px 8px;font-size:14.5px;}
+    .qr-saved-msg{margin-top:6px;}
+    .qr-thumbs{padding-top:9px;}
+    .qr-thumb{flex:0 0 44px;height:44px;}
+  }
+  @media (max-height:600px){
+    .qr-slide-no{display:none;}
+    .tk{max-width:min(100%, 400px, 44vh);}
+    .tk-code{margin-top:9px;font-size:15px;}
+    .tk-who{margin-top:5px;font-size:13.5px;}
+    .qr-thumb{flex:0 0 40px;height:40px;}
   }
 </style>
 </head>
@@ -474,8 +508,8 @@
         <span>맨 위에 우리 가정 이름이 맞는지 먼저 확인해 주세요</span>
       </li>
       <li>
-        <b>QR을 한 장씩 화면 캡처해 두세요</b>
-        <span>사진첩에 저장해 두면 현장에서 신호가 약해도 괜찮아요</span>
+        <b>«전부 저장»을 눌러 사진첩에 담아 두세요</b>
+        <span>미리 저장해 두면 현장에서 신호가 약해도 괜찮아요</span>
       </li>
       <li>
         <b>게이트에서 화면 밝기를 올려 보여줘요</b>
@@ -486,7 +520,7 @@
     <div class="notice warn">
       <h3>이 링크는 소그룹 밖으로 공유하지 말아 주세요</h3>
       <p>이 페이지 하나에 18가정 QR이 모두 들어 있습니다. QR은 먼저 스캔한 사람이 입장되기 때문에, 링크가 밖으로 나가면 정작 우리 가족이 못 들어갈 수 있어요.</p>
-      <p style="margin-top:8px">저장한 QR 캡처도 밖으로 공유하지 말아 주세요. 티켓 번호가 그대로 찍혀 있습니다. 행사가 끝나면 사진첩에서 지워 주세요.</p>
+      <p style="margin-top:8px">저장한 QR 이미지에는 <b>우리 가정 이름이 함께 찍힙니다.</b> 티켓 번호도 그대로 들어 있으니 다른 곳에 공유하지 말아 주세요. 행사가 끝나면 사진첩에서 지워 주세요.</p>
     </div>
 
     <div class="qr-lock" id="qrLock">
@@ -584,7 +618,7 @@
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
             <span class="item-name">입장 QR 캡처<span class="must">필수</span></span>
-            <span class="item-sub">이 페이지에서 우리 가정 이름을 눌러 QR을 사진첩에 저장해 주세요</span>
+            <span class="item-sub">이 페이지에서 우리 가정 이름을 누르고 «전부 저장»으로 사진첩에 담아 주세요</span>
           </span>
         </label></li>
         <li><label>
@@ -726,7 +760,12 @@
       <button type="button" class="qr-close" data-close aria-label="닫기">✕</button>
     </div>
     <div class="qr-track" id="qrTrack"></div>
-    <p class="qr-hint">화면 밝기를 최대로 올려 게이트에 보여주세요.<br>미리 캡처해 사진첩에 저장해 두면 신호가 약해도 괜찮아요.</p>
+    <p class="qr-hint">화면 밝기를 최대로 올려 게이트에 보여주세요.<br>미리 저장해 두면 현장에서 신호가 약해도 괜찮아요.</p>
+    <div class="qr-actions">
+      <button type="button" class="qr-save" id="qrSave">이 QR 저장</button>
+      <button type="button" class="qr-save-all" id="qrSaveAll">전부 저장</button>
+    </div>
+    <p class="qr-saved-msg" id="qrSavedMsg" role="status"></p>
     <div class="qr-thumbs" id="qrThumbs"></div>
   </div>
 </div>
@@ -777,7 +816,9 @@
     var DATA = null;
     var items = [];
     var cur = 0;
+    var curFam = '';
     var busy = false;
+    var saving = false;
 
     function up(el, sel) {
       while (el && el !== document) {
@@ -884,6 +925,20 @@
     } catch (e) {}
 
     /* ── 모달 ── */
+    function refreshTicks() {
+      var done = savedSet();
+      var ts = thumbs.children;
+      for (var i = 0; i < ts.length && i < items.length; i++) {
+        var has = ts[i].querySelector('.tick');
+        if (done[items[i].c] && !has) {
+          var tk = document.createElement('span');
+          tk.className = 'tick';
+          tk.textContent = '\u2713';
+          ts[i].appendChild(tk);
+        }
+      }
+    }
+
     function mark() {
       idxEl.textContent = items.length ? cur + 1 : 0;
       var ts = thumbs.children;
@@ -901,6 +956,124 @@
 
     function src(it) { return 'data:image/png;base64,' + it.d; }
 
+    /* ── 사진첩 저장 ──
+       QR 위에는 아무것도 그리지 않는다. 가정 이름은 아래쪽에만 새긴다.
+       유출된 캡처가 어느 가정에서 나왔는지 알 수 있게 하는 것이 목적이고,
+       휴대폰에서 사용자 정보를 읽어오는 방법은 존재하지 않는다. */
+    var SAVED = 'cb26pass.saved';
+
+    function savedSet() {
+      try { return JSON.parse(localStorage.getItem(SAVED) || '{}'); }
+      catch (e) { return {}; }
+    }
+
+    function markSaved(code) {
+      try {
+        var m = savedSet();
+        m[code] = 1;
+        localStorage.setItem(SAVED, JSON.stringify(m));
+      } catch (e) {}
+    }
+
+    function compose(fam, i, it) {
+      return new Promise(function (res, rej) {
+        var im = new Image();
+        im.onerror = function () { rej(new Error('img')); };
+        im.onload = function () {
+          var W = 1000, PAD = 60, HEAD = 132, Q = 700;
+          var qx = (W - Q) / 2, qy = HEAD + 118;
+          var H = qy + Q + 300;
+          var c = document.createElement('canvas');
+          c.width = W; c.height = H;
+          var g = c.getContext('2d');
+          var F = '"Malgun Gothic","Apple SD Gothic Neo",sans-serif';
+
+          g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+          g.fillStyle = '#7A2EAA'; g.fillRect(0, 0, W, HEAD);
+          g.textAlign = 'center'; g.textBaseline = 'middle';
+          g.fillStyle = '#fff'; g.font = '800 54px ' + F;
+          g.fillText('캐리비안베이 이용권', W / 2, HEAD / 2);
+
+          g.fillStyle = '#2b2b2b'; g.font = '800 46px ' + F;
+          g.fillText('2026-09-05', W / 2, HEAD + 60);
+
+          g.imageSmoothingEnabled = false;
+          g.drawImage(im, qx, qy, Q, Q);
+
+          var y = qy + Q + 66;
+          g.fillStyle = '#2b2b2b'; g.font = '800 50px ' + F;
+          g.fillText(it.c, W / 2, y);
+          g.fillStyle = '#4a4a4a'; g.font = '400 40px ' + F;
+          g.fillText('삼성전자 1인', W / 2, y + 62);
+
+          g.strokeStyle = '#e4d3ef'; g.lineWidth = 2;
+          g.beginPath(); g.moveTo(PAD, y + 110); g.lineTo(W - PAD, y + 110); g.stroke();
+
+          g.fillStyle = '#0d6072'; g.font = '800 44px ' + F;
+          g.fillText(fam + ' 가정 · ' + (i + 1) + '번', W / 2, y + 158);
+          g.fillStyle = '#8a8a8a'; g.font = '400 30px ' + F;
+          g.fillText('우리 가정 전용입니다. 다른 곳에 공유하지 말아 주세요.', W / 2, y + 208);
+
+          var name = 'CB2026_' + fam + '_' + (i + 1) + '번.png';
+          if (c.toBlob) {
+            c.toBlob(function (b) { b ? res({ blob: b, name: name }) : rej(new Error('blob')); }, 'image/png');
+          } else {
+            try {
+              var d = c.toDataURL('image/png').split(',')[1];
+              var bin = atob(d), arr = new Uint8Array(bin.length);
+              for (var k = 0; k < bin.length; k++) arr[k] = bin.charCodeAt(k);
+              res({ blob: new Blob([arr], { type: 'image/png' }), name: name });
+            } catch (e) { rej(e); }
+          }
+        };
+        im.src = src(it);
+      });
+    }
+
+    function toFile(o) {
+      try { return new File([o.blob], o.name, { type: 'image/png' }); }
+      catch (e) { return null; }
+    }
+
+    function download(o) {
+      var url = URL.createObjectURL(o.blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = o.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    }
+
+    function deliver(list) {
+      // 카톡 인앱 브라우저에서 <a download>는 조용히 실패하는 경우가 있어
+      // 공유 시트('사진에 저장')를 먼저 시도한다.
+      var files = [];
+      for (var i = 0; i < list.length; i++) {
+        var f = toFile(list[i]);
+        if (f) files.push(f);
+      }
+      function fallback() {
+        for (var j = 0; j < list.length; j++) download(list[j]);
+        return 'download';
+      }
+      if (files.length === list.length && navigator.share && navigator.canShare) {
+        try {
+          if (navigator.canShare({ files: files })) {
+            return navigator.share({ files: files })
+              .then(function () { return 'share'; })
+              ['catch'](function (e) {
+                // 사용자가 직접 취소한 것은 그대로 알리고,
+                // 그 외의 실패(공유 시트를 못 여는 환경 등)는 다운로드로 되돌린다.
+                if (e && e.name === 'AbortError') throw e;
+                return fallback();
+              });
+          }
+        } catch (e) {}
+      }
+      return Promise.resolve(fallback());
+    }
+
     function hideThumb(img) {
       return function () { img.style.visibility = 'hidden'; };
     }
@@ -913,6 +1086,8 @@
 
     function build(fam) {
       items = (DATA && DATA[fam]) || [];
+      curFam = fam;
+      var done = savedSet();
       titleEl.textContent = fam + ' 가정';
       totalEl.textContent = items.length;
       track.innerHTML = '';
@@ -982,6 +1157,12 @@
         ti.onerror = hideThumb(ti);
         ti.src = src(items[i]);
         tb.appendChild(ti);
+        if (done[items[i].c]) {
+          var tk = document.createElement('span');
+          tk.className = 'tick';
+          tk.textContent = '\u2713';
+          tb.appendChild(tk);
+        }
         thumbs.appendChild(tb);
       }
 
@@ -1000,6 +1181,8 @@
       }
       if (!DATA[fam]) return;
       build(fam);
+      tell('');
+      saveAllBtn.style.display = (DATA[fam] || []).length > 1 ? '' : 'none';
       modal.hidden = false;
       document.body.classList.add('qr-open');
       track.scrollLeft = 0;
@@ -1024,6 +1207,43 @@
     window.addEventListener('popstate', function () {
       if (!modal.hidden) close(true);
     });
+
+    var saveBtn = document.getElementById('qrSave');
+    var saveAllBtn = document.getElementById('qrSaveAll');
+    var savedMsg = document.getElementById('qrSavedMsg');
+
+    function tell(t, bad) {
+      if (!savedMsg) return;
+      savedMsg.textContent = t || '';
+      savedMsg.className = 'qr-saved-msg' + (bad ? ' bad' : '');
+    }
+
+    function doSave(all) {
+      if (saving || !items.length) return;
+      saving = true;
+      saveBtn.disabled = saveAllBtn.disabled = true;
+      tell('이미지를 만드는 중이에요…');
+      var idx = all ? items.map(function (_, i) { return i; }) : [cur];
+      Promise.all(idx.map(function (i) { return compose(curFam, i, items[i]); }))
+        .then(function (list) {
+          return deliver(list).then(function (how) {
+            for (var i = 0; i < idx.length; i++) markSaved(items[idx[i]].c);
+            refreshTicks();
+            tell(how === 'share'
+              ? '공유 창에서 «이미지 저장»을 눌러 주세요.'
+              : (idx.length > 1 ? idx.length + '장을 저장했어요.' : '저장했어요. 사진첩을 확인해 주세요.'));
+          });
+        })['catch'](function (err) {
+          if (err && err.name === 'AbortError') { tell(''); return; }
+          tell('자동 저장이 안 되는 브라우저예요. 화면을 캡처해 주세요.', true);
+        }).then(function () {
+          saving = false;
+          saveBtn.disabled = saveAllBtn.disabled = false;
+        });
+    }
+
+    saveBtn.addEventListener('click', function () { doSave(false); });
+    saveAllBtn.addEventListener('click', function () { doSave(true); });
 
     track.addEventListener('scroll', function () {
       var w = track.clientWidth;
