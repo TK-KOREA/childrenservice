@@ -546,8 +546,8 @@
         <span>맨 위에 우리 가정 이름이 맞는지 먼저 확인해 주세요</span>
       </li>
       <li>
-        <b>«전부 저장»을 눌러 사진첩에 담아 두세요</b>
-        <span>미리 저장해 두면 현장에서 신호가 약해도 괜찮아요</span>
+        <b>집에서 미리 한 번 열어 보세요</b>
+        <span>한 번 열어 두면 현장에서 신호가 없어도 QR이 열립니다</span>
       </li>
       <li>
         <b>게이트에서 화면 밝기를 올려 보여줘요</b>
@@ -655,8 +655,8 @@
           <input type="checkbox">
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
-            <span class="item-name">입장 QR 캡처<span class="must">필수</span></span>
-            <span class="item-sub">이 페이지에서 우리 가정 이름을 누르고 «전부 저장»으로 사진첩에 담아 주세요</span>
+            <span class="item-name">입장 QR 미리 열어보기<span class="must">필수</span></span>
+            <span class="item-sub">집에서 비밀번호를 넣고 우리 가정 QR을 한 번 열어 두면, 현장에서 신호가 없어도 열립니다</span>
           </span>
         </label></li>
         <li><label>
@@ -798,9 +798,9 @@
       <button type="button" class="qr-close" data-close aria-label="닫기">✕</button>
     </div>
     <div class="qr-track" id="qrTrack"></div>
-    <p class="qr-hint">화면 밝기를 최대로 올려 게이트에 보여주세요.<br>미리 저장해 두면 현장에서 신호가 약해도 괜찮아요.</p>
+    <p class="qr-hint">화면 밝기를 최대로 올려 게이트에 보여주세요.<br>이 기기는 신호가 없어도 이 화면을 열 수 있습니다.</p>
     <div class="qr-actions">
-      <button type="button" class="qr-save" id="qrSave">이 QR 저장</button>
+      <button type="button" class="qr-save" id="qrSave">사진첩에 저장</button>
       <button type="button" class="qr-save-all" id="qrSaveAll">전부 저장</button>
     </div>
     <p class="qr-saved-msg" id="qrSavedMsg" role="status"></p>
@@ -812,7 +812,7 @@
   <div class="qr-sheet-head">
     <div>
       <div class="qr-sheet-title">사진첩에 저장하기</div>
-      <div class="qr-sheet-sub">아래 이미지를 <b>꾹 누른 뒤</b> «이미지 저장» 또는 «사진에 추가»를 선택해 주세요.</div>
+      <div class="qr-sheet-sub">아래 이미지를 <b>꾹 누른 뒤</b> «이미지 저장» 또는 «사진에 추가»를 선택해 주세요. 사진첩에 넣으려면 이 방법뿐이에요.<br>저장하지 않아도, 이 기기는 이미 신호 없이 QR을 열 수 있습니다.</div>
     </div>
     <button type="button" class="qr-close" id="qrSheetClose" aria-label="닫기">✕</button>
   </div>
@@ -847,10 +847,21 @@
      복호화 결과: { "가정명": [ { c: 티켓코드, d: base64 PNG }, ... ] }
      키는 PBKDF2-SHA256(비밀번호, salt, 400000)로 유도한다.
      이 파일에는 티켓 데이터도 비밀번호도 들어 있지 않다. */
+  /* 오프라인 지원: 한 번 연 기기는 신호가 없어도 페이지가 열린다.
+     네트워크 우선 전략이라 온라인일 때는 항상 최신본을 받는다.
+     iOS의 카톡 인앱 브라우저는 서비스 워커를 지원하지 않아 등록이 조용히 실패하는데,
+     그 경우에도 기존 동작에는 아무 영향이 없다. */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js')['catch'](function () {});
+    });
+  }
+
   (function () {
     var URL_BUNDLE = 'https://tk-korea.github.io/cb26pass/p.bin';
     var ITER = 400000;
     var STORE = 'cb26pass.pw';
+    var CACHE = 'cb26pass.bundle';
 
     var modal = document.getElementById('qrModal');
     var track = document.getElementById('qrTrack');
@@ -898,10 +909,38 @@
         });
     }
 
-    function unlock(pw) {
-      if (!window.crypto || !crypto.subtle) {
-        return Promise.reject(new Error('nocrypto'));
-      }
+    /* 기기에 담아 두는 것은 '암호문'이다. 비밀번호 없이는 열리지 않는다.
+       한 번 열어 둔 기기는 워터파크에서 신호가 전혀 없어도 QR을 볼 수 있다. */
+    function cacheGet() {
+      try {
+        var b64 = localStorage.getItem(CACHE);
+        if (!b64) return null;
+        var bin = atob(b64), arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        return arr.length > 28 ? arr : null;
+      } catch (e) { return null; }
+    }
+
+    function cachePut(arr) {
+      try {
+        var str = '';
+        for (var i = 0; i < arr.length; i += 8192) {
+          str += String.fromCharCode.apply(null, arr.subarray(i, i + 8192));
+        }
+        localStorage.setItem(CACHE, btoa(str));
+      } catch (e) {}
+    }
+
+    function decryptBytes(pw, b) {
+      var salt = b.slice(0, 16), iv = b.slice(16, 28), ct = b.slice(28);
+      return derive(pw, salt).then(function (key) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+      }).then(function (plain) {
+        return JSON.parse(new TextDecoder().decode(plain));
+      });
+    }
+
+    function grab() {
       var opt = { cache: 'no-store' };
       var timer = null;
       if (typeof AbortController !== 'undefined') {
@@ -909,29 +948,42 @@
         opt.signal = ac.signal;
         timer = setTimeout(function () { try { ac.abort(); } catch (e) {} }, 12000);
       }
-      return fetch(URL_BUNDLE, opt)
-        .then(function (r) {
-          if (timer) { clearTimeout(timer); timer = null; }
-          if (!r.ok) throw new Error('fetch');
-          return r.arrayBuffer();
-        })
-        .then(function (buf) {
-          var b = new Uint8Array(buf);
-          var salt = b.slice(0, 16), iv = b.slice(16, 28), ct = b.slice(28);
-          return derive(pw, salt).then(function (key) {
-            return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
-          });
-        })
-        .then(function (plain) {
-          return JSON.parse(new TextDecoder().decode(plain));
+      return fetch(URL_BUNDLE, opt).then(function (r) {
+        if (timer) { clearTimeout(timer); timer = null; }
+        if (!r.ok) throw new Error('fetch');
+        return r.arrayBuffer();
+      }).then(function (buf) { return new Uint8Array(buf); });
+    }
+
+    function unlock(pw) {
+      if (!window.crypto || !crypto.subtle) {
+        return Promise.reject(new Error('nocrypto'));
+      }
+      var hit = cacheGet();
+      if (hit) {
+        // 캐시로 먼저 연다. 여기서 실패하면 비밀번호가 틀린 것이므로
+        // 신호가 없어도 '비밀번호가 맞지 않아요'를 바로 알려줄 수 있다.
+        return decryptBytes(pw, hit).then(function (data) {
+          // 최신본이 있으면 조용히 갱신해 둔다. 실패해도 아무 영향 없다.
+          setTimeout(function () {
+            grab().then(function (b) { cachePut(b); })['catch'](function () {});
+          }, 1200);
+          return data;
         });
+      }
+      return grab().then(function (b) {
+        return decryptBytes(pw, b).then(function (data) {
+          cachePut(b);
+          return data;
+        });
+      });
     }
 
     function opened() {
       DATA = DATA || {};
       lock.className = 'qr-lock ok';
       lock.querySelector('h3').textContent = '잠금이 해제되었습니다';
-      lock.querySelector('p').textContent = '아래에서 우리 가정 이름을 누르면 QR이 열립니다.';
+      lock.querySelector('p').textContent = '아래에서 우리 가정 이름을 누르면 QR이 열립니다. 이제 이 기기는 신호가 없어도 QR을 볼 수 있어요.';
       form.style.display = 'none';
       say('');
       countBox.className = 'qr-count';
@@ -1112,6 +1164,12 @@
       }));
     }
 
+    // 실기기에서 무엇이 막혔는지 알려면 이름이라도 남아야 한다
+    function errCode(e) {
+      if (!e) return 'unknown';
+      return (e.name || 'Error') + (e.message ? ':' + String(e.message).slice(0, 40) : '');
+    }
+
     function markAll(idx) {
       for (var i = 0; i < idx.length; i++) markSaved(items[idx[i]].c);
       refreshTicks();
@@ -1140,6 +1198,7 @@
       })['catch'](function (e) {
         if (e && e.name === 'AbortError') { tell(''); return; }
         openSheet(list, idx);
+        tell('공유 창을 열지 못했어요. 길게 눌러 저장해 주세요. (' + errCode(e) + ')');
       });
     }
 
@@ -1161,7 +1220,6 @@
       }
       sheetBody.scrollTop = 0;
       sheet.hidden = false;
-      tell('');
     }
 
     function closeSheet() {
@@ -1340,11 +1398,16 @@
       }
       saving = true;
       saveBtn.disabled = saveAllBtn.disabled = true;
-      tell('이미지를 만드는 중이에요…');
+      tell('이미지를 준비하는 중이에요…');
       prepareAll(curFam, items).then(function (objs) {
         trySave(idx.map(function (i) { return objs[i]; }), idx);
-      })['catch'](function () {
-        tell('이미지를 만들지 못했어요. 화면을 캡처해 주세요.', true);
+      })['catch'](function (e) {
+        // 합성이 실패해도 막다른 길이 되면 안 된다.
+        // 워터마크 없는 QR 원본으로라도 길게 눌러 저장할 수 있게 한다.
+        openSheet(idx.map(function (i) {
+          return { url: src(items[i]), name: 'QR' + (i + 1) };
+        }), idx);
+        tell('이미지 합성이 안 돼 QR만 보여드려요. (' + errCode(e) + ')');
       }).then(function () {
         saving = false;
         saveBtn.disabled = saveAllBtn.disabled = false;
