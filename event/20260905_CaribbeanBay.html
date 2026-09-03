@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
 <title>캐리비안베이 어린이 아웃팅 안내 · 9월 5일 토요일</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"></noscript>
 <style>
   :root{
     --abyss:#063a49;
@@ -484,11 +486,12 @@
     <div class="notice warn">
       <h3>이 링크는 소그룹 밖으로 공유하지 말아 주세요</h3>
       <p>이 페이지 하나에 18가정 QR이 모두 들어 있습니다. QR은 먼저 스캔한 사람이 입장되기 때문에, 링크가 밖으로 나가면 정작 우리 가족이 못 들어갈 수 있어요.</p>
+      <p style="margin-top:8px">저장한 QR 캡처도 밖으로 공유하지 말아 주세요. 티켓 번호가 그대로 찍혀 있습니다. 행사가 끝나면 사진첩에서 지워 주세요.</p>
     </div>
 
     <div class="qr-lock" id="qrLock">
       <h3>비밀번호를 입력해 주세요</h3>
-      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 이 기기에서는 다시 묻지 않아요.</p>
+      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 이 브라우저에서는 다시 묻지 않아요. (다른 브라우저로 열면 한 번 더 입력해 주세요.)</p>
       <form class="qr-lock-form" id="qrLockForm" autocomplete="off">
         <input type="password" id="qrPw" aria-label="비밀번호" placeholder="비밀번호" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
         <button type="submit" id="qrPwBtn">확인</button>
@@ -805,8 +808,16 @@
       if (!window.crypto || !crypto.subtle) {
         return Promise.reject(new Error('nocrypto'));
       }
-      return fetch(URL_BUNDLE, { cache: 'no-store' })
+      var opt = { cache: 'no-store' };
+      var timer = null;
+      if (typeof AbortController !== 'undefined') {
+        var ac = new AbortController();
+        opt.signal = ac.signal;
+        timer = setTimeout(function () { try { ac.abort(); } catch (e) {} }, 12000);
+      }
+      return fetch(URL_BUNDLE, opt)
         .then(function (r) {
+          if (timer) { clearTimeout(timer); timer = null; }
           if (!r.ok) throw new Error('fetch');
           return r.arrayBuffer();
         })
@@ -842,15 +853,17 @@
         try { localStorage.setItem(STORE, pw); } catch (e) {}
         opened();
       })['catch'](function (err) {
-        try { localStorage.removeItem(STORE); } catch (e) {}
+        var net = err && (err.message === 'fetch' || err.name === 'TypeError'
+                          || err.name === 'AbortError');
         if (err && err.message === 'nocrypto') {
           say('이 브라우저에서는 열 수 없어요. 크롬이나 사파리로 열어 주세요.', true);
-        } else if (err && err.message === 'fetch') {
-          say('QR을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true);
-        } else if (!quiet) {
-          say('비밀번호가 맞지 않아요.', true);
+        } else if (net) {
+          // 통신 문제일 때는 비밀번호를 지우지 않는다.
+          // 게이트 앞에서 신호가 한 번 튀었다고 다시 입력하게 만들면 안 된다.
+          say('네트워크가 불안정해요. 비밀번호는 그대로 두었으니 잠시 후 다시 열어 주세요.', true);
         } else {
-          say('');
+          try { localStorage.removeItem(STORE); } catch (e) {}
+          if (!quiet) { say('비밀번호가 맞지 않아요.', true); } else { say(''); }
         }
       }).then(function () {
         busy = false;
@@ -888,6 +901,16 @@
 
     function src(it) { return 'data:image/png;base64,' + it.d; }
 
+    function hideThumb(img) {
+      return function () { img.style.visibility = 'hidden'; };
+    }
+
+    function fail(box) {
+      return function () {
+        box.innerHTML = '<p class="qr-fail">QR을 불러오지 못했어요.<br>오픈채팅방에 알려 주세요.</p>';
+      };
+    }
+
     function build(fam) {
       items = (DATA && DATA[fam]) || [];
       titleEl.textContent = fam + ' 가정';
@@ -918,6 +941,7 @@
         var img = document.createElement('img');
         img.className = 'qr-img';
         img.alt = fam + ' 가정 입장 QR ' + (i + 1) + '번';
+        img.onerror = fail(body);
         img.src = src(items[i]);
 
         var code = document.createElement('div');
@@ -955,6 +979,7 @@
         tb.setAttribute('aria-label', (i + 1) + '번 QR 보기');
         var ti = document.createElement('img');
         ti.alt = '';
+        ti.onerror = hideThumb(ti);
         ti.src = src(items[i]);
         tb.appendChild(ti);
         thumbs.appendChild(tb);
@@ -967,6 +992,7 @@
 
     function open(fam) {
       if (!DATA) {
+        if (busy) { say('입장 QR을 불러오는 중이에요. 잠시만요.'); return; }
         say('비밀번호를 먼저 입력해 주세요.', true);
         try { pwEl.focus({ preventScroll: true }); } catch (e) { pwEl.focus(); }
         lock.scrollIntoView({ block: 'center' });
@@ -977,15 +1003,27 @@
       modal.hidden = false;
       document.body.classList.add('qr-open');
       track.scrollLeft = 0;
+      // 안드로이드 뒤로가기가 페이지가 아니라 모달을 닫도록
+      try { history.pushState({ qr: 1 }, ''); } catch (e) {}
     }
 
-    function close() {
+    function close(fromPop) {
       modal.hidden = true;
       document.body.classList.remove('qr-open');
       track.innerHTML = '';
       thumbs.innerHTML = '';
       items = [];
+      // 뒤로가기로 닫힌 게 아니라면 우리가 넣은 히스토리 항목을 되돌린다
+      if (!fromPop) {
+        try {
+          if (history.state && history.state.qr) history.back();
+        } catch (e) {}
+      }
     }
+
+    window.addEventListener('popstate', function () {
+      if (!modal.hidden) close(true);
+    });
 
     track.addEventListener('scroll', function () {
       var w = track.clientWidth;
