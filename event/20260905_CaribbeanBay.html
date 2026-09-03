@@ -125,6 +125,118 @@
   }
   .notice h3{margin:0 0 4px;font-size:16px;font-weight:800;}
   .notice p{margin:0;font-size:14px;color:var(--muted);}
+  .notice.warn{border-left-color:#e2543f;}
+  .notice.warn h3{color:#c23a28;}
+
+  /* ── 입장 QR ── */
+  .qr-steps{counter-reset:s;list-style:none;margin:0;padding:0;}
+  .qr-steps li{position:relative;padding:1px 0 0 38px;}
+  .qr-steps li + li{margin-top:14px;}
+  .qr-steps li::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:0;top:0;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--lagoon);color:#fff;
+    font-size:14px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .qr-steps b{display:block;font-size:15.5px;font-weight:700;}
+  .qr-steps span{display:block;font-size:13.5px;color:var(--muted);}
+  .qr-count{
+    margin-top:20px;background:var(--shell);border:1px solid var(--line);
+    border-radius:18px;padding:18px 16px 14px;
+  }
+  .qr-count h3{margin:0 0 4px;font-size:16px;font-weight:800;}
+  .qr-count-note{margin:0 0 8px;font-size:13px;color:var(--muted);}
+  .qr-count .roster-grid div{font-size:15px;}
+  .qty{font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
+
+  /* ── QR 뷰어 ── */
+  .fam{
+    display:flex;justify-content:space-between;align-items:center;gap:6px;
+    width:100%;padding:11px 0;border:0;border-bottom:1px solid #eef5f7;
+    background:none;font:inherit;color:inherit;text-align:left;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .fam:active{opacity:.5;}
+  .fam .chev{margin-left:7px;color:var(--muted);font-weight:600;font-style:normal;}
+  .qr-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;display:flex;align-items:flex-end;justify-content:center;}
+  .qr-modal[hidden]{display:none;}
+  .qr-back{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(6,58,73,.62);}
+  .qr-panel{
+    position:relative;width:100%;max-width:460px;max-height:92vh;
+    display:flex;flex-direction:column;
+    background:var(--shell);border-radius:22px 22px 0 0;
+    padding:18px 0 20px;box-shadow:0 -10px 40px rgba(6,58,73,.28);
+  }
+  .qr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 20px 14px;}
+  .qr-title{font-size:19px;font-weight:800;letter-spacing:-.02em;}
+  .qr-sub{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .qr-close{
+    flex:0 0 34px;width:34px;height:34px;border-radius:50%;border:0;
+    background:var(--foam);color:var(--lagoon);font-size:16px;font-weight:800;
+    line-height:1;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-track{
+    display:flex;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .qr-track::-webkit-scrollbar{display:none;}
+  .qr-slide{
+    flex:0 0 100%;scroll-snap-align:center;padding:0 20px;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .qr-img{
+    display:block;width:100%;max-width:290px;height:auto;
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;
+  }
+  .qr-slide-no{margin-top:9px;font-size:14px;font-weight:800;color:var(--lagoon);}
+  .qr-fail{margin:0;padding:48px 10px;text-align:center;font-size:14px;color:var(--muted);line-height:1.6;}
+  .qr-hint{margin:12px 20px 0;font-size:12.5px;color:var(--muted);line-height:1.55;text-align:center;}
+  .qr-thumbs{display:flex;gap:8px;overflow-x:auto;padding:14px 20px 0;scrollbar-width:none;-ms-overflow-style:none;}
+  .qr-thumbs::-webkit-scrollbar{display:none;}
+  .qr-thumb{
+    flex:0 0 52px;height:52px;padding:3px;border-radius:10px;
+    border:2px solid var(--line);background:#fff;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .qr-thumb img{display:block;width:100%;height:100%;object-fit:contain;}
+  .qr-thumb.on{border-color:var(--sun);}
+  body.qr-open{overflow:hidden;}
+
+  /* ── 비밀번호 잠금 ── */
+  .qr-lock{
+    margin-top:20px;padding:18px 18px 16px;
+    background:var(--shell);border:1px solid var(--line);
+    border-left:4px solid var(--lagoon);border-radius:14px;
+  }
+  .qr-lock h3{margin:0 0 4px;font-size:16px;font-weight:800;}
+  .qr-lock p{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.55;}
+  .qr-lock-form{display:flex;gap:8px;}
+  .qr-lock-form input{
+    flex:1 1 auto;min-width:0;padding:12px 14px;
+    border:1px solid var(--line);border-radius:11px;
+    font:inherit;font-size:16px;color:var(--ink);background:var(--foam);
+  }
+  .qr-lock-form input:focus{outline:2px solid var(--tide);outline-offset:1px;}
+  .qr-lock-form button{
+    flex:0 0 auto;padding:12px 20px;border:0;border-radius:11px;
+    background:var(--lagoon);color:#fff;font:inherit;font-size:15.5px;font-weight:800;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-lock-form button[disabled]{opacity:.55;}
+  .qr-lock-msg{margin:10px 0 0 !important;font-size:13.5px;font-weight:600;}
+  .qr-lock-msg.bad{color:#c23a28;}
+  .qr-lock.ok{border-left-color:var(--sun);background:var(--sunlight);}
+  .qr-lock.ok h3{color:#8a6a2f;}
+  .qr-count.locked .fam .who{color:var(--muted);}
+  .qr-code{
+    margin-top:8px;font-size:15px;font-weight:800;letter-spacing:.04em;
+    color:var(--ink);font-variant-numeric:tabular-nums;word-break:break-all;
+    text-align:center;
+  }
+  .qr-code-cap{margin-top:2px;font-size:12px;font-weight:500;color:var(--muted);text-align:center;}
 
   /* ── 준비물 ── */
   .pack{
@@ -212,6 +324,7 @@
   .who{font-weight:600;}
   .cnt{font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
   .flag{color:var(--sun);font-weight:800;}
+  .baby{display:inline-block;margin-left:5px;padding:1px 6px;border-radius:6px;background:var(--sunlight);color:#b9760a;font-size:11px;font-weight:700;vertical-align:2px;letter-spacing:-.01em;white-space:nowrap;}
   .roster-total{
     display:flex;justify-content:space-between;align-items:center;
     margin-top:16px;padding:14px 16px;border-radius:14px;
@@ -255,7 +368,7 @@
     <p class="hero-eyebrow">유초등부 소그룹 활동</p>
     <h1>캐리비안베이<br>어린이 아웃팅</h1>
     <p class="hero-date">2026년 9월 5일 토요일</p>
-    <p class="hero-count"><b>17가정 52명</b>이 함께합니다</p>
+    <p class="hero-count"><b>18가정 55명</b>이 함께합니다</p>
     <svg class="wave" viewBox="0 0 460 46" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 26 C 60 4, 110 44, 172 26 S 288 4, 344 24 S 420 44, 460 22 L460 46 L0 46 Z" fill="#e7f2f4"/>
     </svg>
@@ -279,7 +392,7 @@
       <div class="ticket-bottom">
         <div class="cost">
           <span class="cost-tag free">지원</span>
-          <div class="cost-txt">입장 티켓<span>유초등부에서 지원합니다</span></div>
+          <div class="cost-txt">입장 티켓<span>유초등부에서 지원합니다 · QR은 아래에서 확인하세요</span></div>
         </div>
         <div class="cost">
           <span class="cost-tag">1만 원</span>
@@ -293,6 +406,70 @@
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2C6.75 3.2 2.5 6.61 2.5 10.81c0 2.7 1.76 5.07 4.42 6.41-.19.69-.71 2.57-.81 2.97-.13.5.18.5.39.36.16-.11 2.55-1.73 3.59-2.44.62.09 1.26.14 1.91.14 5.25 0 9.5-3.41 9.5-7.61S17.25 3.2 12 3.2z"/></svg>
         오픈채팅방 참여하기
       </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>입장 QR</h2>
+    <p class="lead">아래에서 우리 가정 이름을 누르면 QR이 열립니다. 여러 장이면 옆으로 넘겨 보세요.</p>
+
+    <ol class="qr-steps">
+      <li>
+        <b>비밀번호를 넣고 우리 가정 이름을 눌러요</b>
+        <span>맨 위에 우리 가정 이름이 맞는지 먼저 확인해 주세요</span>
+      </li>
+      <li>
+        <b>QR을 한 장씩 화면 캡처해 두세요</b>
+        <span>사진첩에 저장해 두면 현장에서 신호가 약해도 괜찮아요</span>
+      </li>
+      <li>
+        <b>게이트에서 화면 밝기를 올려 보여줘요</b>
+        <span>가족 인원수만큼 한 장씩 차례로 찍습니다</span>
+      </li>
+    </ol>
+
+    <div class="notice warn">
+      <h3>이 링크는 소그룹 밖으로 공유하지 말아 주세요</h3>
+      <p>이 페이지 하나에 18가정 QR이 모두 들어 있습니다. QR은 먼저 스캔한 사람이 입장되기 때문에, 링크가 밖으로 나가면 정작 우리 가족이 못 들어갈 수 있어요.</p>
+    </div>
+
+    <div class="qr-lock" id="qrLock">
+      <h3>비밀번호를 입력해 주세요</h3>
+      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 이 기기에서는 다시 묻지 않아요.</p>
+      <form class="qr-lock-form" id="qrLockForm" autocomplete="off">
+        <input type="password" id="qrPw" aria-label="비밀번호" placeholder="비밀번호" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit" id="qrPwBtn">확인</button>
+      </form>
+      <p class="qr-lock-msg" id="qrLockMsg" role="status"></p>
+    </div>
+
+    <div class="qr-count locked" id="qrCount">
+      <h3>우리 집 QR 장수</h3>
+      <p class="qr-count-note">36개월 미만 영유아는 QR이 따로 없어요. 장수가 다르면 오픈채팅방에 알려 주세요.</p>
+      <div class="roster-grid">
+        <div><button type="button" class="fam" data-fam="박송연"><span class="who">박송연</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="오윤경"><span class="who">오윤경</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김수영"><span class="who">김수영</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="조정은"><span class="who">조정은</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="최연아"><span class="who">최연아</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김지현"><span class="who">김지현</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="황태호"><span class="who">황태호</span><span class="qty">5장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="국수진"><span class="who">국수진</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김리나"><span class="who">김리나</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="박순애"><span class="who">박순애</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="이성운"><span class="who">이성운</span><span class="qty">5장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="최경해"><span class="who">최경해</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="이혜원"><span class="who">이혜원</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김향희"><span class="who">김향희</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="정석률"><span class="who">정석률</span><span class="qty">4장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="강지훈"><span class="who">강지훈</span><span class="qty">4장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="유주네"><span class="who">유주네</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="지후네"><span class="who">지후네</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+      </div>
+      <div class="roster-total">
+        <span>18가정 합계</span>
+        <b>52장</b>
+      </div>
     </div>
   </section>
 
@@ -350,6 +527,14 @@
           <input type="checkbox">
           <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
           <span class="item-txt">
+            <span class="item-name">입장 QR 캡처<span class="must">필수</span></span>
+            <span class="item-sub">이 페이지에서 우리 가정 이름을 눌러 QR을 사진첩에 저장해 주세요</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
             <span class="item-name">수영복 · 수영모 · 선캡</span>
           </span>
         </label></li>
@@ -385,7 +570,7 @@
           </span>
         </label></li>
       </ul>
-      <p class="progress" id="progress">0 / 5 챙겼어요</p>
+      <p class="progress" id="progress">0 / 6 챙겼어요</p>
     </div>
 
     <div class="rent">
@@ -434,9 +619,9 @@
     <p class="lead">이름 옆 숫자는 그 가정의 인원수입니다. 우리 집 인원이 맞는지 확인해 주세요.</p>
     <div class="roster">
       <div class="roster-grid">
-        <div><span class="who">박송연</span><span class="cnt">3</span></div>
+        <div><span class="who">박송연<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
         <div><span class="who">오윤경</span><span class="cnt">2</span></div>
-        <div><span class="who">김수영</span><span class="cnt">4</span></div>
+        <div><span class="who">김수영<span class="baby">영유아 1명</span></span><span class="cnt">4</span></div>
         <div><span class="who">조정은</span><span class="cnt">3</span></div>
         <div><span class="who">최연아</span><span class="cnt">3</span></div>
         <div><span class="who">김지현</span><span class="cnt">3</span></div>
@@ -452,15 +637,15 @@
         <div><span class="who">강지훈</span><span class="cnt">4</span></div>
         <div><span class="who">유주네</span><span class="cnt">2</span></div>
         <div><span class="who">어유선</span><span class="flag">가족행사</span></div>
-        <div><span class="who">지후네</span><span class="flag">가족행사</span></div>
+        <div><span class="who">지후네<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
       </div>
       <div class="roster-total">
-        <span>17가정 함께합니다</span>
-        <b>52명</b>
+        <span>18가정 함께합니다</span>
+        <b>55명</b>
       </div>
     </div>
     <ul class="footnotes">
-      <li><b>36개월 미만 영유아가 3명</b> 있습니다.</li>
+      <li><b>36개월 미만 영유아는 3명</b>입니다. 김수영·박송연·지후네 가정 각 1명이에요.</li>
       <li>36개월 미만은 입장할 때 나이 확인이 필요합니다. <b>주민등록등본</b>을 꼭 챙겨 와 주세요.</li>
     </ul>
   </section>
@@ -472,6 +657,22 @@
     <p class="fine">운영시간과 대여 요금은 캐리비안베이 사정에 따라 달라질 수 있습니다.<br>당일 정보는 캐리비안베이 앱 ‘캐비’에서 한 번 더 확인해 주세요.</p>
   </div>
 
+</div>
+
+<div class="qr-modal" id="qrModal" hidden>
+  <div class="qr-back" data-close></div>
+  <div class="qr-panel" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+    <div class="qr-head">
+      <div>
+        <div class="qr-title" id="qrTitle">입장 QR</div>
+        <div class="qr-sub"><span id="qrIdx">1</span> / <span id="qrTotal">1</span>번</div>
+      </div>
+      <button type="button" class="qr-close" data-close aria-label="닫기">✕</button>
+    </div>
+    <div class="qr-track" id="qrTrack"></div>
+    <p class="qr-hint">화면 밝기를 최대로 올려 게이트에 보여주세요.<br>미리 캡처해 사진첩에 저장해 두면 신호가 약해도 괜찮아요.</p>
+    <div class="qr-thumbs" id="qrThumbs"></div>
+  </div>
 </div>
 
 <script>
@@ -489,6 +690,251 @@
     }
     for (var i = 0; i < boxes.length; i++) boxes[i].addEventListener('change', update);
     update();
+  })();
+</script>
+
+<script>
+  /* ── 가정별 입장 QR 뷰어 (비밀번호 잠금) ──
+     번들 형식: [salt 16B][iv 12B][AES-GCM 암호문+태그]
+     복호화 결과: { "가정명": [ { c: 티켓코드, d: base64 PNG }, ... ] }
+     키는 PBKDF2-SHA256(비밀번호, salt, 400000)로 유도한다.
+     이 파일에는 티켓 데이터도 비밀번호도 들어 있지 않다. */
+  (function () {
+    var URL_BUNDLE = 'https://tk-korea.github.io/cb26pass/p.bin';
+    var ITER = 400000;
+    var STORE = 'cb26pass.pw';
+
+    var modal = document.getElementById('qrModal');
+    var track = document.getElementById('qrTrack');
+    var thumbs = document.getElementById('qrThumbs');
+    var titleEl = document.getElementById('qrTitle');
+    var idxEl = document.getElementById('qrIdx');
+    var totalEl = document.getElementById('qrTotal');
+    var lock = document.getElementById('qrLock');
+    var form = document.getElementById('qrLockForm');
+    var pwEl = document.getElementById('qrPw');
+    var btn = document.getElementById('qrPwBtn');
+    var msg = document.getElementById('qrLockMsg');
+    var countBox = document.getElementById('qrCount');
+    if (!modal || !track || !thumbs || !form) return;
+
+    var DATA = null;
+    var items = [];
+    var cur = 0;
+    var busy = false;
+
+    function up(el, sel) {
+      while (el && el !== document) {
+        if (el.nodeType === 1 && el.matches && el.matches(sel)) return el;
+        el = el.parentNode;
+      }
+      return null;
+    }
+
+    function say(text, bad) {
+      msg.textContent = text || '';
+      msg.className = 'qr-lock-msg' + (bad ? ' bad' : '');
+    }
+
+    /* ── 복호화 ── */
+    function derive(pw, salt) {
+      var enc = new TextEncoder();
+      return crypto.subtle
+        .importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey'])
+        .then(function (base) {
+          return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: salt, iterations: ITER, hash: 'SHA-256' },
+            base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+        });
+    }
+
+    function unlock(pw) {
+      if (!window.crypto || !crypto.subtle) {
+        return Promise.reject(new Error('nocrypto'));
+      }
+      return fetch(URL_BUNDLE, { cache: 'no-store' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('fetch');
+          return r.arrayBuffer();
+        })
+        .then(function (buf) {
+          var b = new Uint8Array(buf);
+          var salt = b.slice(0, 16), iv = b.slice(16, 28), ct = b.slice(28);
+          return derive(pw, salt).then(function (key) {
+            return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+          });
+        })
+        .then(function (plain) {
+          return JSON.parse(new TextDecoder().decode(plain));
+        });
+    }
+
+    function opened() {
+      DATA = DATA || {};
+      lock.className = 'qr-lock ok';
+      lock.querySelector('h3').textContent = '잠금이 해제되었습니다';
+      lock.querySelector('p').textContent = '아래에서 우리 가정 이름을 누르면 QR이 열립니다.';
+      form.style.display = 'none';
+      say('');
+      countBox.className = 'qr-count';
+    }
+
+    function attempt(pw, quiet) {
+      if (busy) return;
+      busy = true;
+      btn.disabled = true;
+      if (!quiet) say('확인 중입니다…');
+      unlock(pw).then(function (data) {
+        DATA = data;
+        try { localStorage.setItem(STORE, pw); } catch (e) {}
+        opened();
+      })['catch'](function (err) {
+        try { localStorage.removeItem(STORE); } catch (e) {}
+        if (err && err.message === 'nocrypto') {
+          say('이 브라우저에서는 열 수 없어요. 크롬이나 사파리로 열어 주세요.', true);
+        } else if (err && err.message === 'fetch') {
+          say('QR을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true);
+        } else if (!quiet) {
+          say('비밀번호가 맞지 않아요.', true);
+        } else {
+          say('');
+        }
+      }).then(function () {
+        busy = false;
+        btn.disabled = false;
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var pw = pwEl.value.trim();
+      if (!pw) { say('비밀번호를 입력해 주세요.', true); return; }
+      attempt(pw, false);
+    });
+
+    try {
+      var saved = localStorage.getItem(STORE);
+      if (saved) attempt(saved, true);
+    } catch (e) {}
+
+    /* ── 모달 ── */
+    function mark() {
+      idxEl.textContent = items.length ? cur + 1 : 0;
+      var ts = thumbs.children;
+      for (var i = 0; i < ts.length; i++) {
+        ts[i].className = i === cur ? 'qr-thumb on' : 'qr-thumb';
+      }
+    }
+
+    function jump(i) {
+      var w = track.clientWidth;
+      if (!w) return;
+      try { track.scrollTo({ left: w * i, behavior: 'smooth' }); }
+      catch (e) { track.scrollLeft = w * i; }
+    }
+
+    function src(it) { return 'data:image/png;base64,' + it.d; }
+
+    function build(fam) {
+      items = (DATA && DATA[fam]) || [];
+      titleEl.textContent = fam + ' 가정';
+      totalEl.textContent = items.length;
+      track.innerHTML = '';
+      thumbs.innerHTML = '';
+
+      for (var i = 0; i < items.length; i++) {
+        var slide = document.createElement('div');
+        slide.className = 'qr-slide';
+
+        var img = document.createElement('img');
+        img.className = 'qr-img';
+        img.alt = fam + ' 가정 입장 QR ' + (i + 1) + '번';
+        img.src = src(items[i]);
+
+        var no = document.createElement('div');
+        no.className = 'qr-slide-no';
+        no.textContent = (i + 1) + '번 QR';
+
+        var code = document.createElement('div');
+        code.className = 'qr-code';
+        code.textContent = items[i].c;
+
+        var cap = document.createElement('div');
+        cap.className = 'qr-code-cap';
+        cap.textContent = '스캔이 안 되면 이 번호를 보여주세요';
+
+        slide.appendChild(img);
+        slide.appendChild(no);
+        slide.appendChild(code);
+        slide.appendChild(cap);
+        track.appendChild(slide);
+
+        var tb = document.createElement('button');
+        tb.type = 'button';
+        tb.className = 'qr-thumb';
+        tb.setAttribute('data-i', i);
+        tb.setAttribute('aria-label', (i + 1) + '번 QR 보기');
+        var ti = document.createElement('img');
+        ti.alt = '';
+        ti.src = src(items[i]);
+        tb.appendChild(ti);
+        thumbs.appendChild(tb);
+      }
+
+      thumbs.style.display = items.length > 1 ? '' : 'none';
+      cur = 0;
+      mark();
+    }
+
+    function open(fam) {
+      if (!DATA) {
+        say('비밀번호를 먼저 입력해 주세요.', true);
+        try { pwEl.focus({ preventScroll: true }); } catch (e) { pwEl.focus(); }
+        lock.scrollIntoView({ block: 'center' });
+        return;
+      }
+      if (!DATA[fam]) return;
+      build(fam);
+      modal.hidden = false;
+      document.body.classList.add('qr-open');
+      track.scrollLeft = 0;
+    }
+
+    function close() {
+      modal.hidden = true;
+      document.body.classList.remove('qr-open');
+      track.innerHTML = '';
+      thumbs.innerHTML = '';
+      items = [];
+    }
+
+    track.addEventListener('scroll', function () {
+      var w = track.clientWidth;
+      if (!w || !items.length) return;
+      var i = Math.round(track.scrollLeft / w);
+      if (i !== cur && i >= 0 && i < items.length) { cur = i; mark(); }
+    });
+
+    thumbs.addEventListener('click', function (e) {
+      var b = up(e.target, '.qr-thumb');
+      if (!b) return;
+      cur = parseInt(b.getAttribute('data-i'), 10);
+      mark();
+      jump(cur);
+    });
+
+    document.addEventListener('click', function (e) {
+      var f = up(e.target, '.fam');
+      if (f) { open(f.getAttribute('data-fam')); return; }
+      if (up(e.target, '[data-close]')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { close(); }
+      else if (e.key === 'ArrowRight' && cur < items.length - 1) { cur++; mark(); jump(cur); }
+      else if (e.key === 'ArrowLeft' && cur > 0) { cur--; mark(); jump(cur); }
+    });
   })();
 </script>
 </body>
