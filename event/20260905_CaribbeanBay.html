@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>캐리비안베이 어린이 아웃팅 안내 · 9월 5일 토요일</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"></noscript>
+<style>
+  :root{
+    --abyss:#063a49;
+    --lagoon:#0d6072;
+    --tide:#1a8ba3;
+    --foam:#e7f2f4;
+    --shell:#ffffff;
+    --sun:#f5a623;
+    --sunlight:#fff3dc;
+    --ink:#0f2f38;
+    --muted:#5d7d87;
+    --line:#d5e6ea;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--foam);
+    color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:16px;
+    line-height:1.62;
+    word-break:keep-all;
+  }
+  .page{max-width:460px;margin:0 auto;background:var(--foam);overflow:hidden;}
+
+  /* ── 표지 ── */
+  .hero{
+    position:relative;
+    padding:52px 24px 0;
+    background:linear-gradient(168deg,#052f3c 0%,#0d6072 62%,#12798f 100%);
+    color:#fff;
+  }
+  .hero-eyebrow{
+    margin:0 0 14px;
+    font-size:13px;letter-spacing:.14em;color:#8fc9d6;font-weight:600;
+  }
+  .hero h1{
+    margin:0;
+    font-size:37px;line-height:1.2;font-weight:800;letter-spacing:-.03em;
+  }
+  .hero-date{
+    display:inline-block;margin:18px 0 0;
+    color:var(--sun);font-size:19px;font-weight:700;
+  }
+  .hero-count{
+    margin:8px 0 40px;font-size:14px;color:#a9d5df;
+  }
+  .hero-count b{color:#fff;font-weight:700;}
+  .wave{display:block;width:100%;height:46px;}
+
+  /* ── 공통 ── */
+  section{padding:34px 22px 0;}
+  h2{
+    margin:0 0 16px;
+    font-size:21px;font-weight:800;letter-spacing:-.02em;
+  }
+  .lead{margin:-8px 0 18px;color:var(--muted);font-size:14.5px;}
+
+  /* ── 집합 티켓 ── */
+  .ticket{
+    position:relative;margin-top:-26px;
+    background:var(--shell);border-radius:20px;
+    box-shadow:0 14px 30px rgba(6,58,73,.14);
+    overflow:hidden;
+  }
+  .ticket-top{padding:24px 22px 22px;}
+  .ticket-row{display:flex;align-items:baseline;gap:12px;}
+  .ticket-row + .ticket-row{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+  .ticket-key{
+    flex:0 0 68px;color:var(--muted);font-size:14px;font-weight:600;
+  }
+  .ticket-val{font-size:20px;font-weight:800;letter-spacing:-.02em;}
+  .ticket-val small{display:block;font-size:13.5px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:2px;}
+  .big-time{color:var(--lagoon);font-size:26px;font-variant-numeric:tabular-nums;}
+  .perf{
+    position:relative;height:0;border-top:2px dashed var(--line);
+  }
+  .perf::before,.perf::after{
+    content:"";position:absolute;top:-11px;width:22px;height:22px;
+    background:var(--foam);border-radius:50%;
+  }
+  .perf::before{left:-11px;}
+  .perf::after{right:-11px;}
+  .ticket-bottom{
+    padding:20px 22px 24px;background:var(--sunlight);
+  }
+  .cost{display:flex;gap:14px;}
+  .cost + .cost{margin-top:12px;}
+  .cost-tag{
+    flex:0 0 auto;padding:2px 10px;border-radius:999px;
+    background:var(--sun);color:#fff;font-size:13px;font-weight:700;height:26px;line-height:22px;
+  }
+  .cost-tag.free{background:var(--lagoon);}
+  .cost-txt{font-size:15.5px;font-weight:600;}
+  .cost-txt span{display:block;font-weight:500;font-size:13.5px;color:#8a6a2f;}
+
+  /* ── 시간표 ── */
+  .flow{list-style:none;margin:0;padding:0 0 0 20px;border-left:2px solid var(--line);}
+  .flow li{position:relative;padding:0 0 22px 18px;}
+  .flow li:last-child{padding-bottom:4px;}
+  .flow li::before{
+    content:"";position:absolute;left:-27px;top:7px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--shell);border:3px solid var(--line);
+  }
+  .flow li.key::before{background:var(--sun);border-color:var(--sun);width:16px;height:16px;left:-29px;}
+  .flow-time{font-size:15px;font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
+  .flow li.key .flow-time{color:#b9760a;}
+  .flow-txt{font-size:15.5px;font-weight:600;}
+  .flow-sub{font-size:13.5px;color:var(--muted);}
+
+  /* ── 안내 박스 ── */
+  .notice{
+    margin-top:20px;padding:16px 18px;
+    background:var(--shell);border:1px solid var(--line);border-left:4px solid var(--sun);
+    border-radius:14px;
+  }
+  .notice h3{margin:0 0 4px;font-size:16px;font-weight:800;}
+  .notice p{margin:0;font-size:14px;color:var(--muted);}
+  .notice.warn{border-left-color:#e2543f;}
+  .notice.warn h3{color:#c23a28;}
+
+  /* ── 입장 QR ── */
+  .qr-steps{counter-reset:s;list-style:none;margin:0;padding:0;}
+  .qr-steps li{position:relative;padding:1px 0 0 38px;}
+  .qr-steps li + li{margin-top:14px;}
+  .qr-steps li::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:0;top:0;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--lagoon);color:#fff;
+    font-size:14px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .qr-steps b{display:block;font-size:15.5px;font-weight:700;}
+  .qr-steps span{display:block;font-size:13.5px;color:var(--muted);}
+  .qr-count{
+    margin-top:20px;background:var(--shell);border:1px solid var(--line);
+    border-radius:18px;padding:18px 16px 14px;
+  }
+  .qr-count h3{margin:0 0 4px;font-size:16px;font-weight:800;}
+  .qr-count-note{margin:0 0 8px;font-size:13px;color:var(--muted);}
+  .qr-count .roster-grid div{font-size:15px;}
+  .qty{font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
+  .qr-spare{
+    margin-top:14px;padding:2px 14px;
+    border:1px dashed var(--sun);border-radius:14px;background:var(--sunlight);
+  }
+  .qr-spare .fam{border-bottom:0;}
+  .qr-spare .who{color:#8a6a2f;}
+
+  /* ── QR 뷰어 ── */
+  .fam{
+    display:flex;justify-content:space-between;align-items:center;gap:6px;
+    width:100%;padding:11px 0;border:0;border-bottom:1px solid #eef5f7;
+    background:none;font:inherit;color:inherit;text-align:left;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .fam:active{opacity:.5;}
+  .fam .chev{margin-left:7px;color:var(--muted);font-weight:600;font-style:normal;}
+  .qr-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;display:flex;align-items:stretch;justify-content:center;}
+  .qr-modal[hidden]{display:none;}
+  .qr-back{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(6,58,73,.62);}
+  .qr-panel{
+    position:relative;width:100%;max-width:460px;
+    height:100vh;height:100dvh;max-height:none;
+    display:flex;flex-direction:column;
+    background:var(--shell);border-radius:0;
+    padding:14px 0 calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 0 40px rgba(6,58,73,.28);
+  }
+  .qr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 18px 10px;}
+  .qr-title{font-size:19px;font-weight:800;letter-spacing:-.02em;}
+  .qr-sub{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .qr-close{
+    flex:0 0 34px;width:34px;height:34px;border-radius:50%;border:0;
+    background:var(--foam);color:var(--lagoon);font-size:16px;font-weight:800;
+    line-height:1;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-track{
+    flex:1 1 auto;min-height:0;
+    display:flex;overflow-x:auto;overflow-y:hidden;
+    align-items:stretch;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .qr-track::-webkit-scrollbar{display:none;}
+  .qr-slide{
+    flex:0 0 100%;scroll-snap-align:center;padding:0 18px;
+    display:flex;flex-direction:column;align-items:center;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .qr-slide::-webkit-scrollbar{display:none;}
+  /* 내용이 짧으면 가운데로 밀고, 길면 0으로 접혀 스크롤에 자리를 내준다 */
+  .qr-slide::before,.qr-slide::after{content:"";flex:1 1 0;min-height:0;}
+  .qr-slide > *{flex:0 0 auto;}
+  .qr-img{
+    display:block;width:100%;max-width:290px;height:auto;
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;
+  }
+  .qr-slide-no{margin-top:9px;font-size:14px;font-weight:800;color:var(--lagoon);}
+  .qr-fail{margin:0;padding:48px 10px;text-align:center;font-size:14px;color:var(--muted);line-height:1.6;}
+  .qr-hint{margin:10px 18px 0;font-size:12.5px;color:var(--muted);line-height:1.5;text-align:center;}
+  .qr-hint.warn{color:#c23a28;font-weight:700;}
+  .qr-thumbs{flex:0 0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 18px 0;scrollbar-width:none;-ms-overflow-style:none;}
+  .qr-thumbs::-webkit-scrollbar{display:none;}
+  .qr-thumb{
+    flex:0 0 52px;height:52px;padding:3px;border-radius:10px;
+    border:2px solid var(--line);background:#fff;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .qr-thumb img{display:block;width:100%;height:100%;object-fit:contain;}
+  .qr-thumb.on{border-color:var(--sun);}
+  body.qr-open{overflow:hidden;}
+
+  /* ── 공유 버튼 ── */
+  .qr-actions{
+    flex:0 0 auto;display:flex;gap:8px;padding:10px 18px 0;
+  }
+  .qr-actions button{
+    flex:1 1 0;min-width:0;padding:13px 10px;border:0;border-radius:12px;
+    font:inherit;font-size:15px;font-weight:800;letter-spacing:-.02em;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-save{background:var(--lagoon);color:#fff;}
+  .qr-save-all{background:var(--foam);color:var(--lagoon);}
+  .qr-actions button[disabled]{opacity:.5;}
+  .qr-saved-msg{
+    flex:0 0 auto;margin:8px 18px 0;font-size:12.5px;font-weight:600;
+    color:var(--muted);text-align:center;min-height:17px;
+  }
+  .qr-saved-msg.bad{color:#c23a28;}
+  .qr-thumb{position:relative;}
+  .qr-thumb .tick{
+    position:absolute;right:-3px;top:-3px;width:17px;height:17px;border-radius:50%;
+    background:var(--sun);color:#fff;font-size:11px;font-weight:800;line-height:17px;
+    text-align:center;
+  }
+
+  /* ── 길게 눌러 저장 시트 ── */
+  .qr-sheet{
+    position:fixed;top:0;right:0;bottom:0;left:0;z-index:70;
+    display:flex;flex-direction:column;align-items:center;
+    background:var(--shell);
+  }
+  .qr-sheet[hidden]{display:none;}
+  .qr-sheet-head{
+    flex:0 0 auto;width:100%;max-width:460px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding:16px 18px 12px;
+  }
+  .qr-sheet-title{font-size:18px;font-weight:800;letter-spacing:-.02em;}
+  .qr-sheet-sub{margin-top:3px;font-size:13.5px;color:var(--muted);line-height:1.5;}
+  .qr-sheet-note{
+    margin:0 0 12px;padding:10px 12px;border-radius:10px;
+    background:var(--sunlight);color:var(--abyss);
+    font-size:13px;font-weight:700;line-height:1.5;
+  }
+  .qr-sheet-note:empty{display:none;}
+  .qr-sheet-body{
+    flex:1 1 auto;min-height:0;width:100%;max-width:460px;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 18px;
+  }
+  .qr-sheet-body img{
+    display:block;width:100%;max-width:340px;height:auto;margin:0 auto 6px;
+    border:1px solid var(--line);border-radius:12px;
+  }
+  #qrSheetBody p{
+    margin:0 0 18px;text-align:center;font-size:13px;font-weight:700;color:var(--lagoon);
+  }
+  .qr-sheet-foot{
+    flex:0 0 auto;width:100%;max-width:460px;
+    padding:12px 18px calc(14px + env(safe-area-inset-bottom));
+  }
+  .qr-sheet-foot button{
+    width:100%;padding:14px;border:0;border-radius:12px;
+    background:var(--lagoon);color:#fff;font:inherit;font-size:16px;font-weight:800;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-sheet-foot .fine{
+    margin:9px 0 0;text-align:center;font-size:12.5px;color:var(--muted);
+  }
+  /* 인앱 브라우저 탈출. 꼬리말이 아니라 스크롤 영역 안에 둔다.
+     고정 영역이 두꺼워지면 세로가 짧은 기기에서 사진 자리가 사라진다. */
+  #qrEscape{margin:4px 0 18px;}
+  #qrEscape[hidden]{display:none;}
+  .qr-escape{
+    width:100%;padding:13px;border:0;border-radius:12px;
+    background:var(--foam);color:var(--lagoon);
+    font:inherit;font-size:15px;font-weight:800;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-escape-how{
+    margin:9px 0 0;text-align:center;font-size:12.5px;font-weight:400;
+    color:var(--muted);line-height:1.5;
+  }
+
+  /* 카카오 인앱 브라우저처럼 세로가 짧을 때 */
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+
+  /* ── 비밀번호 잠금 ── */
+  .qr-lock{
+    margin-top:20px;padding:18px 18px 16px;
+    background:var(--shell);border:1px solid var(--line);
+    border-left:4px solid var(--lagoon);border-radius:14px;
+  }
+  .qr-lock h3{margin:0 0 4px;font-size:16px;font-weight:800;}
+  .qr-lock p{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.55;}
+  .qr-lock-form{display:flex;gap:8px;}
+  .qr-lock-form input{
+    flex:1 1 auto;min-width:0;padding:12px 14px;
+    border:1px solid var(--line);border-radius:11px;
+    font:inherit;font-size:16px;color:var(--ink);background:var(--foam);
+  }
+  .qr-lock-form input:focus{outline:2px solid var(--tide);outline-offset:1px;}
+  .qr-lock-form button{
+    flex:0 0 auto;padding:12px 20px;border:0;border-radius:11px;
+    background:var(--lagoon);color:#fff;font:inherit;font-size:15.5px;font-weight:800;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .qr-lock-form button[disabled]{opacity:.55;}
+  .qr-lock-msg{margin:10px 0 0 !important;font-size:13.5px;font-weight:600;}
+  .qr-lock-msg.bad{color:#c23a28;}
+  .qr-lock.ok{border-left-color:var(--sun);background:var(--sunlight);}
+  .qr-lock.ok h3{color:#8a6a2f;}
+  .qr-count.locked .fam .who{color:var(--muted);}
+  .qr-code-cap{margin-top:2px;font-size:12px;font-weight:500;color:var(--muted);text-align:center;}
+
+  /* ── 티켓 카드 (원본 모양 재현) ── */
+  .tk{
+    flex:0 0 auto;
+    width:100%;max-width:400px;
+    max-width:min(100%, 400px, 52vh);
+    margin:0 auto;
+    border-radius:16px;overflow:hidden;
+    background:#fff;border:1px solid #e4d3ef;
+    box-shadow:0 8px 22px rgba(122,46,170,.14);
+  }
+  .tk-head{
+    padding:13px 14px;
+    background:#7A2EAA;color:#fff;text-align:center;
+    font-size:18px;font-weight:800;letter-spacing:-.02em;
+  }
+  .tk-body{padding:14px 14px 16px;text-align:center;}
+  .tk-date{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-bottom:12px;font-size:15.5px;font-weight:800;color:#2b2b2b;
+    font-variant-numeric:tabular-nums;
+  }
+  .tk-date::before,.tk-date::after{
+    content:"";width:16px;height:1px;background:#c9c9c9;
+  }
+  .tk .qr-img{max-width:100%;border:0;padding:0;}
+  .tk-code{
+    margin-top:12px;font-size:16px;font-weight:800;letter-spacing:.04em;
+    color:#2b2b2b;word-break:break-all;
+  }
+  .tk-who{margin-top:8px;font-size:14.5px;color:#4a4a4a;}
+
+  /* ── 준비물 ── */
+  .pack{
+    background:var(--sunlight);border-radius:18px;padding:20px 18px;
+  }
+  .pack h3,.rent h3{
+    margin:0 0 4px;font-size:17px;font-weight:800;
+  }
+  .check{list-style:none;margin:0;padding:0;}
+  .check li{border-top:1px solid rgba(180,140,60,.22);}
+  .check li:first-child{border-top:0;}
+  .check label{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:13px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .check input{position:absolute;opacity:0;width:0;height:0;}
+  .box{
+    flex:0 0 24px;height:24px;margin-top:1px;border-radius:8px;
+    border:2px solid #e0b96e;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease,border-color .15s ease;
+  }
+  .box svg{width:14px;height:14px;opacity:0;transform:scale(.6);transition:.15s ease;}
+  .check input:checked + .box{background:var(--sun);border-color:var(--sun);}
+  .check input:checked + .box svg{opacity:1;transform:scale(1);}
+  .check input:focus-visible + .box{outline:3px solid var(--tide);outline-offset:2px;}
+  .item-name{font-size:16px;font-weight:700;transition:opacity .15s ease;}
+  .item-sub{font-size:13px;color:#8a6a2f;line-height:1.45;}
+  .check input:checked ~ .item-txt .item-name{opacity:.45;text-decoration:line-through;}
+  .must{
+    display:inline-block;margin-left:6px;padding:1px 7px;border-radius:6px;
+    background:#e2543f;color:#fff;font-size:11.5px;font-weight:700;vertical-align:2px;
+  }
+  .progress{
+    margin:14px 2px 0;font-size:13.5px;color:#8a6a2f;font-weight:600;
+  }
+
+  .rent{
+    margin-top:14px;background:var(--shell);border-radius:18px;padding:20px 18px;
+    border:1px solid var(--line);
+  }
+  .rent-list{list-style:none;margin:0;padding:0;}
+  .rent-list li{
+    display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+    padding:12px 0;border-top:1px solid var(--line);
+  }
+  .rent-list li:first-child{border-top:0;}
+  .rent-name{font-size:15.5px;font-weight:700;}
+  .rent-name span{display:block;font-size:13px;font-weight:500;color:var(--muted);}
+  .rent-price{
+    flex:0 0 auto;font-size:14.5px;font-weight:700;color:var(--lagoon);
+    font-variant-numeric:tabular-nums;text-align:right;
+  }
+  .rent-price em{display:block;font-style:normal;font-size:12.5px;font-weight:500;color:var(--muted);}
+  .tipline{
+    margin:12px 2px 0;font-size:13px;color:var(--muted);line-height:1.55;
+  }
+
+  /* ── 반입 ── */
+  .bring{display:flex;gap:10px;}
+  .bring div{
+    flex:1;border-radius:16px;padding:16px 14px;text-align:center;
+  }
+  .yes{background:#e3f4ee;border:1px solid #b7e0d0;}
+  .no{background:#fdeceb;border:1px solid #f5cac5;}
+  .bring .mark{font-size:24px;font-weight:800;line-height:1;}
+  .yes .mark{color:#1f8a63;}
+  .no .mark{color:#d4483a;}
+  .bring .what{margin-top:6px;font-size:15.5px;font-weight:700;}
+  .bring .why{font-size:12.5px;color:var(--muted);}
+
+  /* ── 명단 ── */
+  .roster{
+    background:var(--shell);border:1px solid var(--line);border-radius:18px;padding:8px 16px 16px;
+  }
+  .roster-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:0 16px;
+  }
+  .roster-grid div{
+    display:flex;justify-content:space-between;align-items:baseline;gap:6px;
+    padding:10px 0;border-bottom:1px solid #eef5f7;font-size:15.5px;
+  }
+  .who{font-weight:600;}
+  .cnt{font-weight:800;color:var(--lagoon);font-variant-numeric:tabular-nums;}
+  .flag{color:var(--sun);font-weight:800;}
+  .baby{display:inline-block;margin-left:5px;padding:1px 6px;border-radius:6px;background:var(--sunlight);color:#b9760a;font-size:11px;font-weight:700;vertical-align:2px;letter-spacing:-.01em;white-space:nowrap;}
+  .roster-total{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:16px;padding:14px 16px;border-radius:14px;
+    background:var(--lagoon);color:#fff;
+  }
+  .roster-total b{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  .footnotes{list-style:none;margin:14px 2px 0;padding:0;font-size:13px;color:var(--muted);line-height:1.7;}
+  .footnotes b{color:var(--ink);}
+
+  /* ── 오픈채팅 ── */
+  .chat-cta{margin-top:18px;}
+  .chat-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    padding:16px 18px;border-radius:14px;text-decoration:none;
+    background:#fee500;color:#371d1e;
+    font-size:17px;font-weight:800;letter-spacing:-.02em;
+    box-shadow:0 10px 20px rgba(6,58,73,.13);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .chat-btn:active{transform:translateY(1px);box-shadow:0 5px 12px rgba(6,58,73,.13);}
+  .chat-btn svg{width:22px;height:22px;flex:0 0 22px;}
+
+  /* ── 마무리 ── */
+  .closing{
+    margin:34px 0 0;padding:26px 22px 34px;
+    background:var(--abyss);color:#cfe6ec;text-align:center;
+  }
+  .closing p{margin:0 0 6px;font-size:14.5px;}
+  .closing strong{display:block;color:#fff;font-size:17px;font-weight:700;margin-bottom:10px;}
+  .closing .fine{font-size:12.5px;color:#7fa9b5;margin-top:14px;line-height:1.6;}
+
+  /* 세로가 짧을수록 보조 문구부터 걷어내 QR과 티켓번호를 함께 보이게 한다.
+     티켓번호는 스캔이 안 될 때 쓰는 대안이라 QR과 같은 화면에 있어야 한다. */
+  @media (max-height:780px){
+    .qr-panel{padding-top:10px;}
+    .qr-head{padding-bottom:8px;}
+    .qr-title{font-size:17px;}
+    .tk{max-width:min(100%, 400px, 48vh);}
+    .tk-head{padding:10px 14px;font-size:16px;}
+    .tk-body{padding:10px 12px 12px;}
+    .tk-date{margin-bottom:8px;font-size:14.5px;}
+    .qr-hint{display:none;}
+    .qr-hint.warn{display:block;}
+    .qr-code-cap{display:none;}
+    .qr-actions{padding-top:9px;}
+    .qr-actions button{padding:11px 8px;font-size:14.5px;}
+    .qr-saved-msg{margin-top:6px;}
+    .qr-thumbs{padding-top:9px;}
+    .qr-thumb{flex:0 0 44px;height:44px;}
+  }
+  @media (max-height:600px){
+    .qr-slide-no{display:none;}
+    .tk{max-width:min(100%, 400px, 44vh);}
+    .tk-code{margin-top:9px;font-size:15px;}
+    .tk-who{margin-top:5px;font-size:13.5px;}
+    .qr-thumb{flex:0 0 40px;height:40px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <p class="hero-eyebrow">유초등부 소그룹 활동</p>
+    <h1>캐리비안베이<br>어린이 아웃팅</h1>
+    <p class="hero-date">2026년 9월 5일 토요일</p>
+    <p class="hero-count"><b>17가정 53명</b>이 함께합니다</p>
+    <svg class="wave" viewBox="0 0 460 46" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 26 C 60 4, 110 44, 172 26 S 288 4, 344 24 S 420 44, 460 22 L460 46 L0 46 Z" fill="#e7f2f4"/>
+    </svg>
+  </header>
+
+  <section aria-label="모이는 시간과 비용">
+    <div class="ticket">
+      <div class="ticket-top">
+        <div class="ticket-row">
+          <div class="ticket-key">모이는 시간</div>
+          <div class="ticket-val big-time">오전 11:00</div>
+        </div>
+        <div class="ticket-row">
+          <div class="ticket-key">모이는 곳</div>
+          <div class="ticket-val">어드벤처 빌리지 3번
+            <small>짐 두는 곳이자 단체사진 찍는 곳입니다</small>
+          </div>
+        </div>
+      </div>
+      <div class="perf"></div>
+      <div class="ticket-bottom">
+        <div class="cost">
+          <span class="cost-tag free">지원</span>
+          <div class="cost-txt">입장 티켓<span>QR은 아래에서 확인하세요</span></div>
+        </div>
+        <div class="cost">
+          <span class="cost-tag">1만 원</span>
+          <div class="cost-txt">식사비 1인당<span>추후 지원 예정입니다</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-cta">
+      <a class="chat-btn" href="https://open.kakao.com/o/g5J4pwLi" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2C6.75 3.2 2.5 6.61 2.5 10.81c0 2.7 1.76 5.07 4.42 6.41-.19.69-.71 2.57-.81 2.97-.13.5.18.5.39.36.16-.11 2.55-1.73 3.59-2.44.62.09 1.26.14 1.91.14 5.25 0 9.5-3.41 9.5-7.61S17.25 3.2 12 3.2z"/></svg>
+        오픈채팅방 참여하기
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>입장 QR</h2>
+    <p class="lead">우리 가정 이름을 누르면 QR이 열립니다.</p>
+
+    <ol class="qr-steps">
+      <li>
+        <b>비밀번호를 넣고 우리 가정 이름을 눌러요</b>
+      </li>
+      <li>
+        <b>집에서 미리 한 번 열어 보세요</b>
+        <span>한 번 열어 두면 현장에서 신호가 없어도 QR이 열립니다</span>
+      </li>
+      <li>
+        <b>게이트에서 화면 밝기를 올려 보여줘요</b>
+        <span>가족 인원수만큼 한 장씩 차례로 찍습니다</span>
+      </li>
+    </ol>
+
+    <div class="qr-lock" id="qrLock">
+      <h3>비밀번호를 입력해 주세요</h3>
+      <p>오픈채팅방에 공지된 비밀번호입니다. 한 번 입력하면 다시 묻지 않아요.</p>
+      <form class="qr-lock-form" id="qrLockForm" autocomplete="off">
+        <input type="password" id="qrPw" aria-label="비밀번호" placeholder="비밀번호" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="submit" id="qrPwBtn">확인</button>
+      </form>
+      <p class="qr-lock-msg" id="qrLockMsg" role="status"></p>
+    </div>
+
+    <div class="qr-count locked" id="qrCount">
+      <h3>우리 가졍 QR</h3>
+      <p class="qr-count-note">36개월 미만 영유아는 QR이 따로 없어요.</p>
+      <div class="roster-grid">
+        <div><button type="button" class="fam" data-fam="박송연"><span class="who">박송연</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="오윤경"><span class="who">오윤경</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김수영"><span class="who">김수영</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="조정은"><span class="who">조정은</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="최연아"><span class="who">최연아</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김지현"><span class="who">김지현</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="황태호"><span class="who">황태호</span><span class="qty">5장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="국수진"><span class="who">국수진</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="박순애"><span class="who">박순애</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="이성운"><span class="who">이성운</span><span class="qty">5장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="최경해"><span class="who">최경해</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="이혜원"><span class="who">이혜원</span><span class="qty">3장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="김향희"><span class="who">김향희</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="정석률"><span class="who">정석률</span><span class="qty">4장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="강지훈"><span class="who">강지훈</span><span class="qty">4장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="유주네"><span class="who">유주네</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+        <div><button type="button" class="fam" data-fam="지후네"><span class="who">지후네</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+      </div>
+      <div class="roster-total">
+        <span>17가정 합계</span>
+        <b>50장</b>
+      </div>
+      <div class="qr-spare">
+        <div><button type="button" class="fam" data-fam="김리나"><span class="who">남는 티켓</span><span class="qty">2장<i class="chev">›</i></span></button></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>그날의 흐름</h2>
+    <ul class="flow">
+      <li>
+        <div class="flow-time">10:00</div>
+        <div class="flow-txt">개장</div>
+        <div class="flow-sub">가정별로 개장 시간에 맞춰 자유롭게 입장해 놀아요</div>
+      </li>
+      <li class="key">
+        <div class="flow-time">11:00</div>
+        <div class="flow-txt">어드벤처 빌리지 3번에서 모임</div>
+        <div class="flow-sub">잠깐 모여 서로 얼굴 보고 단체사진을 찍습니다</div>
+      </li>
+      <li>
+        <div class="flow-time">11:20</div>
+        <div class="flow-txt">다시 자유 이용</div>
+        <div class="flow-sub">짐은 어드벤처 빌리지 3번에 두고 가정별로 편하게</div>
+      </li>
+      <li>
+        <div class="flow-time">12:30</div>
+        <div class="flow-txt">점심 식사</div>
+        <div class="flow-sub">가정별로 편하게 식사하고 다시 자유롭게 이용합니다</div>
+      </li>
+      <li>
+        <div class="flow-time">18:00</div>
+        <div class="flow-txt">실외 구역 마감</div>
+        <div class="flow-sub">파도풀·야외 슬라이드는 여기까지</div>
+      </li>
+      <li>
+        <div class="flow-time">19:00</div>
+        <div class="flow-txt">실내 구역 마감</div>
+        <div class="flow-sub">퇴장 시간을 넉넉히 잡아 주세요</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>준비물</h2>
+    <p class="lead">탭하면 체크됩니다.</p>
+
+    <div class="pack">
+      <h3>집에서 꼭 챙겨 오세요</h3>
+      <ul class="check" id="checklist">
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">입장 QR 미리 열어보기<span class="must">필수</span></span>
+            <span class="item-sub">한 번 열어 두면 현장에서 신호가 없어도 열립니다</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">수영복 · 수영모 · 선캡</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">세면도구 · 자외선 차단제</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">젖은 수영복 담을 비닐팩</span>
+            <span class="item-sub">현장에서는 주지 않아요</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">분유 · 젖병<span class="must">유아 필수</span></span>
+            <span class="item-sub">현장 판매가 없어요</span>
+          </span>
+        </label></li>
+        <li><label>
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+          <span class="item-txt">
+            <span class="item-name">주민등록등본<span class="must">영유아 필수</span></span>
+            <span class="item-sub">36개월 미만 영유아는 입장할 때 나이 확인이 필요해요</span>
+          </span>
+        </label></li>
+      </ul>
+      <p class="progress" id="progress">0 / 6 챙겼어요</p>
+    </div>
+
+    <div class="rent">
+      <h3>현장에서 빌리거나 살 수 있어요</h3>
+      <ul class="rent-list">
+        <li>
+          <span class="rent-name">타월<span>대여</span></span>
+          <span class="rent-price">대 6,000원 · 중 3,000원<em>보증금 없음</em></span>
+        </li>
+        <li>
+          <span class="rent-name">부력보조복 (자켓)<span>대여</span></span>
+          <span class="rent-price">8,000원</span>
+        </li>
+        <li>
+          <span class="rent-name">유·아동 튜브<span>기프트샵 구입</span></span>
+          <span class="rent-price">공기 주입기 있음</span>
+        </li>
+        <li>
+          <span class="rent-name">방수팩 · 방수 기저귀<span>기프트샵 구입</span></span>
+          <span class="rent-price">현장 구입</span>
+        </li>
+      </ul>
+      <p class="tipline">수영복·수영모·선캡, 세면도구·자외선 차단제도 기프트샵에서 살 수 있어요.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>가지고 들어갈 수 있는 것</h2>
+    <div class="bring">
+      <div class="yes">
+        <div class="mark">O</div>
+        <div class="what">생수</div>
+        <div class="why">병에 담긴 물은 반입돼요</div>
+      </div>
+      <div class="no">
+        <div class="mark">X</div>
+        <div class="what">유리 제품</div>
+        <div class="why">깨질 위험이 있어 반입 금지</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>함께 가는 사람들</h2>
+    <p class="lead">이름 옆 숫자는 그 가정의 인원수입니다.</p>
+    <div class="roster">
+      <div class="roster-grid">
+        <div><span class="who">박송연<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
+        <div><span class="who">오윤경</span><span class="cnt">2</span></div>
+        <div><span class="who">김수영<span class="baby">영유아 1명</span></span><span class="cnt">4</span></div>
+        <div><span class="who">조정은</span><span class="cnt">3</span></div>
+        <div><span class="who">최연아</span><span class="cnt">3</span></div>
+        <div><span class="who">김지현</span><span class="cnt">3</span></div>
+        <div><span class="who">황태호</span><span class="cnt">5</span></div>
+        <div><span class="who">국수진</span><span class="cnt">3</span></div>
+        <div><span class="who">김리나</span><span class="flag">개인사정</span></div>
+        <div><span class="who">박순애</span><span class="cnt">2</span></div>
+        <div><span class="who">이성운</span><span class="cnt">5</span></div>
+        <div><span class="who">최경해</span><span class="cnt">2</span></div>
+        <div><span class="who">이혜원</span><span class="cnt">3</span></div>
+        <div><span class="who">김향희</span><span class="cnt">2</span></div>
+        <div><span class="who">정석률</span><span class="cnt">4</span></div>
+        <div><span class="who">강지훈</span><span class="cnt">4</span></div>
+        <div><span class="who">유주네</span><span class="cnt">2</span></div>
+        <div><span class="who">어유선</span><span class="flag">가족행사</span></div>
+        <div><span class="who">지후네<span class="baby">영유아 1명</span></span><span class="cnt">3</span></div>
+      </div>
+      <div class="roster-total">
+        <span>17가정 함께합니다</span>
+        <b>53명</b>
+      </div>
+    </div>
+    <ul class="footnotes">
+      <li><b>36개월 미만 영유아 3명</b>(김수영·박송연·지후네 각 1명)은 입장할 때 <b>주민등록등본</b>으로 나이 확인이 필요해요.</li>
+    </ul>
+  </section>
+
+  <div class="closing">
+    <strong>9월 5일 토요일, 오전 11시<br>어드벤처 빌리지 3번에서 만나요</strong>
+    <p>인원이나 참석 여부가 바뀌면 오픈채팅방에 미리 알려 주세요.</p>
+    <p class="fine">운영시간과 요금은 당일 캐리비안베이 앱 ‘캐비’에서 한 번 더 확인해 주세요.</p>
+  </div>
+
+</div>
+
+<div class="qr-modal" id="qrModal" hidden>
+  <div class="qr-back" data-close></div>
+  <div class="qr-panel" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+    <div class="qr-head">
+      <div>
+        <div class="qr-title" id="qrTitle">입장 QR</div>
+        <div class="qr-sub"><span id="qrIdx">1</span> / <span id="qrTotal">1</span>번</div>
+      </div>
+      <button type="button" class="qr-close" data-close aria-label="닫기">✕</button>
+    </div>
+    <div class="qr-track" id="qrTrack"></div>
+    <p class="qr-hint" id="qrHint">화면 밝기를 최대로 올려 게이트에 보여주세요.</p>
+    <div class="qr-actions">
+      <button type="button" class="qr-save" id="qrSave">이 QR 사진 공유</button>
+      <button type="button" class="qr-save-all" id="qrSaveAll">전부 공유</button>
+    </div>
+    <p class="qr-saved-msg" id="qrSavedMsg" role="status"></p>
+    <div class="qr-thumbs" id="qrThumbs"></div>
+  </div>
+</div>
+
+<div class="qr-sheet" id="qrSheet" hidden>
+  <div class="qr-sheet-head">
+    <div>
+      <div class="qr-sheet-title">길게 눌러 사진첩에 담기</div>
+      <div class="qr-sheet-sub">아래 사진을 <b>꾹 누른 뒤</b> «이미지 저장» 또는 «사진에 추가»를 눌러 주세요.<br><span id="qrSheetOffline"></span></div>
+    </div>
+    <button type="button" class="qr-close" id="qrSheetClose" aria-label="닫기">✕</button>
+  </div>
+  <div class="qr-sheet-body" id="qrSheetScroll">
+    <div class="qr-sheet-note" id="qrSheetNote" role="status"></div>
+    <div id="qrSheetBody"></div>
+    <div id="qrEscape" hidden>
+      <button type="button" id="qrEscapeBtn" class="qr-escape">다른 브라우저로 열기</button>
+      <p class="qr-escape-how" id="qrEscapeHow"></p>
+    </div>
+  </div>
+  <div class="qr-sheet-foot">
+    <button type="button" id="qrSheetDone">사진첩에 담았어요</button>
+    <p class="fine">잘 안 되면 이 화면을 그대로 캡처해 두셔도 됩니다. 캡처한 사진도 사진첩에 남아요.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var list = document.getElementById('checklist');
+    var out = document.getElementById('progress');
+    if (!list || !out) return;
+    var boxes = list.querySelectorAll('input[type="checkbox"]');
+    function update() {
+      var done = 0;
+      for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) done++;
+      out.textContent = done === boxes.length
+        ? '준비물 다 챙겼어요'
+        : done + ' / ' + boxes.length + ' 챙겼어요';
+    }
+    for (var i = 0; i < boxes.length; i++) boxes[i].addEventListener('change', update);
+    update();
+  })();
+</script>
+
+<script>
+  /* ── 가정별 입장 QR 뷰어 (비밀번호 잠금) ──
+     번들 형식: [salt 16B][iv 12B][AES-GCM 암호문+태그]
+     복호화 결과: { "가정명": [ { c: 티켓코드, d: base64 PNG }, ... ] }
+     키는 PBKDF2-SHA256(비밀번호, salt, 400000)로 유도한다.
+     이 파일에는 티켓 데이터도 비밀번호도 들어 있지 않다. */
+  /* ── 실행 환경 ──
+     카톡 안드로이드 인앱 브라우저는 안드로이드 웹뷰다. 웹뷰에는 공유 시트가
+     아예 없거나(navigator.share 자체가 없다), 있어도 부르는 즉시 AbortError 로
+     죽는다. 그래서 능력 검사만 믿지 않고 웹뷰인지를 한 번 더 걸러낸다.
+     '; wv)' 는 크로미움 웹뷰가 붙이는 표시로 진짜 크롬에는 들어가지 않는다.
+     iOS 카톡은 WKWebView 라 공유 시트가 제대로 뜨므로 막지 않는다. */
+  var UA = navigator.userAgent || '';
+  var IS_ANDROID = /Android/i.test(UA);
+  var IS_IOS = /iPad|iPhone|iPod/i.test(UA);
+  var IS_KAKAO = /KAKAOTALK/i.test(UA);
+  var IS_INAPP_WV = IS_ANDROID && /;\s*wv\)/.test(UA);
+  var SHARE_DEAD = IS_INAPP_WV || (IS_ANDROID && IS_KAKAO);
+
+  /* 오프라인 지원: 한 번 연 기기는 신호가 없어도 페이지가 열린다.
+     네트워크 우선 전략이라 온라인일 때는 항상 최신본을 받는다.
+     iOS 카톡 인앱 브라우저는 서비스 워커를 지원하지 않는다. 그 브라우저에서
+     '신호 없어도 열린다'는 거짓말이 되므로, 약속하는 대신 사진으로 남기라고
+     안내한다. 게이트 앞에서 페이지가 안 열리는 것이 가장 나쁜 결말이다. */
+  var OFFLINE_OK = false;
+  function paintOffline() {
+    OFFLINE_OK = !!(navigator.serviceWorker && navigator.serviceWorker.controller);
+    var hint = document.getElementById('qrHint');
+    var sh = document.getElementById('qrSheetOffline');
+    if (hint) {
+      hint.innerHTML = '화면 밝기를 최대로 올려 게이트에 보여주세요.<br>' + (OFFLINE_OK
+        ? '이 기기는 신호가 없어도 이 화면을 열 수 있습니다.'
+        : '이 브라우저는 신호가 없으면 안 열릴 수 있어요. QR을 사진으로도 남겨 두세요.');
+      hint.className = OFFLINE_OK ? 'qr-hint' : 'qr-hint warn';
+    }
+    if (sh) {
+      sh.textContent = OFFLINE_OK
+        ? '담아 두지 않으셔도 이 기기는 신호 없이 QR을 열 수 있어요.'
+        : '이 브라우저는 신호가 없으면 안 열릴 수 있어요. 꼭 담아 두거나 캡처해 주세요.';
+    }
+  }
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').then(paintOffline)['catch'](paintOffline);
+    });
+    try {
+      navigator.serviceWorker.addEventListener('controllerchange', paintOffline);
+    } catch (e) {}
+  }
+  paintOffline();
+
+  (function () {
+    var URL_BUNDLE = 'https://tk-korea.github.io/cb26pass/p.bin';
+    var ITER = 400000;
+    var STORE = 'cb26pass.pw';
+    var CACHE = 'cb26pass.bundle';
+
+    var modal = document.getElementById('qrModal');
+    var track = document.getElementById('qrTrack');
+    var thumbs = document.getElementById('qrThumbs');
+    var titleEl = document.getElementById('qrTitle');
+    var idxEl = document.getElementById('qrIdx');
+    var totalEl = document.getElementById('qrTotal');
+    var lock = document.getElementById('qrLock');
+    var form = document.getElementById('qrLockForm');
+    var pwEl = document.getElementById('qrPw');
+    var btn = document.getElementById('qrPwBtn');
+    var msg = document.getElementById('qrLockMsg');
+    var countBox = document.getElementById('qrCount');
+    if (!modal || !track || !thumbs || !form) return;
+
+    var DATA = null;
+    var items = [];
+    var cur = 0;
+    var curFam = '';
+    var busy = false;
+    var saving = false;
+    // 모달을 여닫을 때마다 올린다. 늦게 도착한 합성/공유 결과가
+    // 이미 닫힌 화면에 시트를 띄우지 못하게 막는 표식이다.
+    var openGen = 0;
+
+    function up(el, sel) {
+      while (el && el !== document) {
+        if (el.nodeType === 1 && el.matches && el.matches(sel)) return el;
+        el = el.parentNode;
+      }
+      return null;
+    }
+
+    function say(text, bad) {
+      msg.textContent = text || '';
+      msg.className = 'qr-lock-msg' + (bad ? ' bad' : '');
+    }
+
+    /* ── 복호화 ── */
+    function derive(pw, salt) {
+      var enc = new TextEncoder();
+      return crypto.subtle
+        .importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey'])
+        .then(function (base) {
+          return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: salt, iterations: ITER, hash: 'SHA-256' },
+            base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+        });
+    }
+
+    /* 기기에 담아 두는 것은 '암호문'이다. 비밀번호 없이는 열리지 않는다.
+       한 번 열어 둔 기기는 워터파크에서 신호가 전혀 없어도 QR을 볼 수 있다. */
+    function cacheGet() {
+      try {
+        var b64 = localStorage.getItem(CACHE);
+        if (!b64) return null;
+        var bin = atob(b64), arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        return arr.length > 28 ? arr : null;
+      } catch (e) { return null; }
+    }
+
+    function cachePut(arr) {
+      try {
+        var str = '';
+        for (var i = 0; i < arr.length; i += 8192) {
+          str += String.fromCharCode.apply(null, arr.subarray(i, i + 8192));
+        }
+        localStorage.setItem(CACHE, btoa(str));
+      } catch (e) {}
+    }
+
+    function decryptBytes(pw, b) {
+      var salt = b.slice(0, 16), iv = b.slice(16, 28), ct = b.slice(28);
+      return derive(pw, salt).then(function (key) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+      }).then(function (plain) {
+        return JSON.parse(new TextDecoder().decode(plain));
+      });
+    }
+
+    function grab() {
+      var opt = { cache: 'no-store' };
+      var timer = null;
+      if (typeof AbortController !== 'undefined') {
+        var ac = new AbortController();
+        opt.signal = ac.signal;
+        timer = setTimeout(function () { try { ac.abort(); } catch (e) {} }, 12000);
+      }
+      return fetch(URL_BUNDLE, opt).then(function (r) {
+        if (timer) { clearTimeout(timer); timer = null; }
+        if (!r.ok) throw new Error('fetch');
+        return r.arrayBuffer();
+      }).then(function (buf) { return new Uint8Array(buf); });
+    }
+
+    function unlock(pw) {
+      if (!window.crypto || !crypto.subtle) {
+        return Promise.reject(new Error('nocrypto'));
+      }
+      var hit = cacheGet();
+      if (hit) {
+        // 캐시로 먼저 연다. 여기서 실패하면 비밀번호가 틀린 것이므로
+        // 신호가 없어도 '비밀번호가 맞지 않아요'를 바로 알려줄 수 있다.
+        return decryptBytes(pw, hit).then(function (data) {
+          // 최신본이 있으면 조용히 갱신해 둔다. 실패해도 아무 영향 없다.
+          setTimeout(function () {
+            grab().then(function (b) { cachePut(b); })['catch'](function () {});
+          }, 1200);
+          return data;
+        });
+      }
+      return grab().then(function (b) {
+        return decryptBytes(pw, b).then(function (data) {
+          cachePut(b);
+          return data;
+        });
+      });
+    }
+
+    function opened() {
+      DATA = DATA || {};
+      lock.className = 'qr-lock ok';
+      lock.querySelector('h3').textContent = '잠금이 해제되었습니다';
+      lock.querySelector('p').textContent = '아래에서 우리 가정 이름을 누르면 QR이 열립니다.'
+        + (OFFLINE_OK ? ' 이제 이 기기는 신호가 없어도 QR을 볼 수 있어요.'
+                      : ' 이 브라우저는 신호가 없으면 안 열릴 수 있으니, QR을 사진으로도 남겨 두세요.');
+      form.style.display = 'none';
+      say('');
+      countBox.className = 'qr-count';
+    }
+
+    function attempt(pw, quiet) {
+      if (busy) return;
+      busy = true;
+      btn.disabled = true;
+      if (!quiet) say('확인 중입니다…');
+      unlock(pw).then(function (data) {
+        DATA = data;
+        try { localStorage.setItem(STORE, pw); } catch (e) {}
+        opened();
+      })['catch'](function (err) {
+        var net = err && (err.message === 'fetch' || err.name === 'TypeError'
+                          || err.name === 'AbortError');
+        if (err && err.message === 'nocrypto') {
+          say('이 브라우저에서는 열 수 없어요. 크롬이나 사파리로 열어 주세요.', true);
+        } else if (net) {
+          // 통신 문제일 때는 비밀번호를 지우지 않는다.
+          // 게이트 앞에서 신호가 한 번 튀었다고 다시 입력하게 만들면 안 된다.
+          say('네트워크가 불안정해요. 비밀번호는 그대로 두었으니 잠시 후 다시 열어 주세요.', true);
+        } else {
+          try { localStorage.removeItem(STORE); } catch (e) {}
+          if (!quiet) { say('비밀번호가 맞지 않아요.', true); } else { say(''); }
+        }
+      }).then(function () {
+        busy = false;
+        btn.disabled = false;
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var pw = pwEl.value.trim();
+      if (!pw) { say('비밀번호를 입력해 주세요.', true); return; }
+      attempt(pw, false);
+    });
+
+    try {
+      var saved = localStorage.getItem(STORE);
+      if (saved) attempt(saved, true);
+    } catch (e) {}
+
+    /* ── 모달 ── */
+    function refreshTicks() {
+      var done = savedSet();
+      var ts = thumbs.children;
+      for (var i = 0; i < ts.length && i < items.length; i++) {
+        var has = ts[i].querySelector('.tick');
+        if (done[items[i].c] && !has) {
+          var tk = document.createElement('span');
+          tk.className = 'tick';
+          tk.textContent = '\u2713';
+          tk.title = '챙긴 장';
+          tk.setAttribute('aria-label', '챙긴 장');
+          ts[i].appendChild(tk);
+        }
+      }
+    }
+
+    function mark() {
+      idxEl.textContent = items.length ? cur + 1 : 0;
+      var ts = thumbs.children;
+      for (var i = 0; i < ts.length; i++) {
+        ts[i].className = i === cur ? 'qr-thumb on' : 'qr-thumb';
+      }
+    }
+
+    function jump(i) {
+      var w = track.clientWidth;
+      if (!w) return;
+      try { track.scrollTo({ left: w * i, behavior: 'smooth' }); }
+      catch (e) { track.scrollLeft = w * i; }
+    }
+
+    function src(it) { return 'data:image/png;base64,' + it.d; }
+
+    /* 리나네(김리나)가 개인사정으로 불참해 그 가정의 티켓 2장은
+       '남는 티켓'으로 내놓는다. 번들 키는 그대로 두고 표시만 바꾼다. */
+    var SPARE = { '김리나': 1 };
+    function famLabel(fam) { return SPARE[fam] ? '남는 티켓' : fam + ' 가정'; }
+    function famFile(fam) { return SPARE[fam] ? '남는티켓' : fam; }
+
+    /* ── 사진으로 공유 ──
+       QR 위에는 아무것도 그리지 않는다. 가정 이름은 아래쪽에만 새긴다.
+       유출된 캡처가 어느 가정에서 나왔는지 알 수 있게 하는 것이 목적이고,
+       휴대폰에서 사용자 정보를 읽어오는 방법은 존재하지 않는다. */
+    var SAVED = 'cb26pass.saved';
+
+    function savedSet() {
+      try { return JSON.parse(localStorage.getItem(SAVED) || '{}'); }
+      catch (e) { return {}; }
+    }
+
+    function markSaved(code) {
+      try {
+        var m = savedSet();
+        m[code] = 1;
+        localStorage.setItem(SAVED, JSON.stringify(m));
+      } catch (e) {}
+    }
+
+    function compose(fam, i, it) {
+      return new Promise(function (res, rej) {
+        var im = new Image();
+        im.onerror = function () { rej(new Error('img')); };
+        im.onload = function () {
+          var W = 1000, PAD = 60, HEAD = 132, Q = 700;
+          var qx = (W - Q) / 2, qy = HEAD + 118;
+          var H = qy + Q + 300;
+          var c = document.createElement('canvas');
+          c.width = W; c.height = H;
+          var g = c.getContext('2d');
+          var F = '"Malgun Gothic","Apple SD Gothic Neo",sans-serif';
+
+          g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+          g.fillStyle = '#7A2EAA'; g.fillRect(0, 0, W, HEAD);
+          g.textAlign = 'center'; g.textBaseline = 'middle';
+          g.fillStyle = '#fff'; g.font = '800 54px ' + F;
+          g.fillText('캐리비안베이 이용권', W / 2, HEAD / 2);
+
+          g.fillStyle = '#2b2b2b'; g.font = '800 46px ' + F;
+          g.fillText('2026-09-05', W / 2, HEAD + 60);
+
+          g.imageSmoothingEnabled = false;
+          g.drawImage(im, qx, qy, Q, Q);
+
+          var y = qy + Q + 66;
+          g.fillStyle = '#2b2b2b'; g.font = '800 50px ' + F;
+          g.fillText(it.c, W / 2, y);
+          g.fillStyle = '#4a4a4a'; g.font = '400 40px ' + F;
+          g.fillText('삼성전자 1인', W / 2, y + 62);
+
+          g.strokeStyle = '#e4d3ef'; g.lineWidth = 2;
+          g.beginPath(); g.moveTo(PAD, y + 110); g.lineTo(W - PAD, y + 110); g.stroke();
+
+          g.fillStyle = '#0d6072'; g.font = '800 44px ' + F;
+          g.fillText(famLabel(fam) + ' · ' + (i + 1) + '번', W / 2, y + 158);
+          g.fillStyle = '#8a8a8a'; g.font = '400 30px ' + F;
+          g.fillText(SPARE[fam]
+            ? '남는 표입니다. 소그룹 밖으로 전달하지 말아 주세요.'
+            : '우리 가정 전용입니다. 소그룹 밖으로 전달하지 말아 주세요.', W / 2, y + 208);
+
+          var name = 'CB2026_' + famFile(fam) + '_' + (i + 1) + '번.png';
+          if (c.toBlob) {
+            c.toBlob(function (b) { b ? res({ blob: b, name: name }) : rej(new Error('blob')); }, 'image/png');
+          } else {
+            try {
+              var d = c.toDataURL('image/png').split(',')[1];
+              var bin = atob(d), arr = new Uint8Array(bin.length);
+              for (var k = 0; k < bin.length; k++) arr[k] = bin.charCodeAt(k);
+              res({ blob: new Blob([arr], { type: 'image/png' }), name: name });
+            } catch (e) { rej(e); }
+          }
+        };
+        im.src = src(it);
+      });
+    }
+
+    function toFile(o) {
+      try { return new File([o.blob], o.name, { type: 'image/png' }); }
+      catch (e) { return null; }
+    }
+
+    // 모달을 열 때 미리 만들어 둔다. 버튼을 누르는 순간 share()를 곧바로
+    // 부를 수 있어야 iOS가 사용자 제스처로 인정한다.
+    var prepared = {};
+
+    function dropPrepared() {
+      for (var k in prepared) {
+        if (prepared[k]) {
+          if (prepared[k].url) {
+            try { URL.revokeObjectURL(prepared[k].url); } catch (e) {}
+          }
+          prepared[k].data = '';
+        }
+      }
+      prepared = {};
+    }
+
+    /* 합성은 이미지 onload 를 기다린다. 그 이벤트가 영영 오지 않으면
+       버튼이 계속 비활성으로 남으므로 시간 제한을 둔다. */
+    function withTimeout(p, ms) {
+      return new Promise(function (res, rej) {
+        var done = false;
+        var t = setTimeout(function () {
+          if (!done) { done = true; rej(new Error('timeout')); }
+        }, ms);
+        p.then(
+          function (v) { if (!done) { done = true; clearTimeout(t); res(v); } },
+          function (e) { if (!done) { done = true; clearTimeout(t); rej(e); } });
+      });
+    }
+
+    /* 길게 눌러 담기는 blob: 주소를 해석하지 못한다. 안드로이드 웹뷰의 이미지
+       저장은 DownloadManager 를 타는데 http(s) 가 아닌 주소는 거절한다.
+       그래서 시트에 띄울 용도의 data: 주소를 따로 들고 있는다.
+       공유용 File 은 blob 그대로 쓴다(용량이 두 배가 되면 안 되므로). */
+    function toDataUrl(blob) {
+      return new Promise(function (res, rej) {
+        try {
+          var fr = new FileReader();
+          fr.onload = function () { res(String(fr.result)); };
+          fr.onerror = function () { rej(new Error('fr')); };
+          fr.readAsDataURL(blob);
+        } catch (e) { rej(e); }
+      });
+    }
+
+    function prepareAll(fam, list) {
+      return Promise.all(list.map(function (it, i) {
+        if (prepared[it.c]) return prepared[it.c];
+        return withTimeout(compose(fam, i, it), 8000).then(function (o) {
+          try { o.url = URL.createObjectURL(o.blob); } catch (e) { o.url = ''; }
+          // 공유는 여기서 이미 가능하다. data: 는 뒤따라 채운다.
+          prepared[it.c] = o;
+          return toDataUrl(o.blob).then(function (d) { o.data = d; return o; })
+            ['catch'](function () { return o; });
+        });
+      }));
+    }
+
+    // 실기기에서 무엇이 막혔는지 알려면 이름이라도 남아야 한다
+    function errCode(e) {
+      if (!e) return 'unknown';
+      return (e.name || 'Error') + (e.message ? ':' + String(e.message).slice(0, 40) : '');
+    }
+
+    function markAll(idx) {
+      for (var i = 0; i < idx.length; i++) {
+        if (items[idx[i]]) markSaved(items[idx[i]].c);
+      }
+      refreshTicks();
+    }
+
+    /* 공유 시트가 뜨면 «이미지 저장»으로 사진첩에 들어간다.
+       <a download> 는 다운로드 폴더로 가므로 사진첩에는 쓸 수 없다.
+       안드로이드 웹뷰(카톡 인앱)에는 공유 시트가 아예 없으므로 바로 시트로 간다. */
+    function shareIt(list, idx, gen) {
+      if (gen !== openGen) return;
+      var files = [];
+      for (var i = 0; i < list.length; i++) {
+        var f = toFile(list[i]);
+        if (f) files.push(f);
+      }
+      var can = false;
+      if (!SHARE_DEAD && files.length === list.length
+          && navigator.share && navigator.canShare) {
+        try { can = navigator.canShare({ files: files }); } catch (e) { can = false; }
+      }
+      if (!can) {
+        openSheet(list, idx, SHARE_DEAD
+          ? '이 브라우저는 공유 창이 없어 사진을 바로 띄웠어요.'
+          : '공유 창을 쓸 수 없어 사진을 바로 띄웠어요.');
+        tell('');
+        return;
+      }
+      var p;
+      try { p = navigator.share({ files: files }); }
+      catch (e) {
+        openSheet(list, idx, '공유 창이 열리지 않아 사진을 바로 띄웠어요.');
+        tell('');
+        return;
+      }
+      var t0 = Date.now();
+      tell('공유 창을 여는 중이에요…');
+      p.then(function () {
+        if (gen !== openGen) return;
+        markAll(idx);
+        // 어디로 보냈는지는 알 수 없다. 사진첩에 넣었다고 단정하지 않는다.
+        tell('공유를 마쳤어요. 사진첩에 들어갔는지 한 번만 확인해 주세요.');
+      })['catch'](function (e) {
+        if (gen !== openGen) return;
+        // 사람이 시트를 보고 닫으려면 최소 몇 백 ms 는 걸린다. 그보다 빨리
+        // 떨어진 AbortError 는 취소가 아니라 시트가 아예 못 뜬 것이다.
+        // 둘을 구분하지 않으면 눌러도 아무 일 없는 버튼이 된다.
+        if (e && e.name === 'AbortError' && (Date.now() - t0) >= 350) {
+          tell('공유를 취소했어요. QR은 이 화면 그대로 보여주시면 됩니다.');
+          return;
+        }
+        openSheet(list, idx, '공유 창이 열리지 않아 사진을 바로 띄웠어요.');
+        tell('');
+        // 오류 이름은 화면에 쓰지 않는다. 실기기 진단용으로만 남긴다.
+        try { savedMsg.title = errCode(e); } catch (e2) {}
+      });
+    }
+
+    var sheet = document.getElementById('qrSheet');
+    var sheetScroll = document.getElementById('qrSheetScroll');
+    var sheetBody = document.getElementById('qrSheetBody');
+    var sheetNote = document.getElementById('qrSheetNote');
+    var sheetIdx = [];
+
+    /* 이 시트는 모달 위를 불투명하게 덮는다. 모달 쪽 안내문(#qrSavedMsg)은
+       가려져 아무도 못 읽으므로, 왜 이 화면이 떴는지는 시트 안에서 말해야 한다. */
+    function openSheet(list, idx, note) {
+      sheetIdx = idx;
+      if (SHARE_DEAD) {
+        note = (note ? note + ' ' : '')
+          + '꾹 눌러 담기까지 막혀 있으면 화면을 그대로 캡처해 주세요.';
+      }
+      if (sheetNote) sheetNote.textContent = note || '';
+      sheetBody.innerHTML = '';
+      for (var i = 0; i < list.length; i++) {
+        var im = document.createElement('img');
+        // blob: 은 길게 눌러 담기가 안 된다. data: 를 먼저 쓴다.
+        // 마지막 원본은 워터마크가 없으므로 정말 없을 때만 쓴다.
+        im.src = list[i].data || list[i].url
+          || (items[idx[i]] ? src(items[idx[i]]) : '');
+        im.alt = (curFam ? famLabel(curFam) + ' ' : '') + (idx[i] + 1) + '번 입장 QR';
+        var cap = document.createElement('p');
+        cap.textContent = (idx[i] + 1) + '번';
+        sheetBody.appendChild(im);
+        sheetBody.appendChild(cap);
+      }
+      if (sheetScroll) sheetScroll.scrollTop = 0;
+      sheet.hidden = false;
+      paintEscape();
+    }
+
+    function closeSheet() {
+      sheet.hidden = true;
+      sheetBody.innerHTML = '';
+      if (sheetNote) sheetNote.textContent = '';
+    }
+
+    document.getElementById('qrSheetClose').addEventListener('click', closeSheet);
+    document.getElementById('qrSheetDone').addEventListener('click', function () {
+      markAll(sheetIdx);
+      closeSheet();
+      tell('챙긴 것으로 표시해 두었어요.');
+    });
+
+    /* ── 인앱 브라우저 탈출 ──
+       안드로이드 카톡에서 제 기능을 되찾는 유일한 길이다. 다만 비밀번호와
+       암호문 캐시는 카톡 브라우저 저장소에 있어 따라가지 않는다. 게이트 앞에서
+       신호까지 없으면 오히려 QR을 못 보게 되므로, 그때는 막고 캡처를 권한다. */
+    var esc = document.getElementById('qrEscape');
+    var escBtn = document.getElementById('qrEscapeBtn');
+    var escHow = document.getElementById('qrEscapeHow');
+
+    function paintEscape() {
+      if (!esc || !escBtn) return;
+      // 이 시트가 떴다는 것 자체가 공유가 막혔다는 뜻이다.
+      // 아이폰 카톡도 여기까지 왔다면 브라우저를 옮기는 편이 낫다.
+      if (!IS_KAKAO) { esc.hidden = true; return; }
+      esc.hidden = false;
+      // 아이폰 카톡에는 «다른 브라우저로 열기» 메뉴가 없다. 공유 버튼을 거쳐야 한다.
+      escHow.textContent = IS_IOS
+        ? '안 열리면 아래 공유 버튼을 눌러 «Safari로 열기»를 선택해 주세요.'
+        : '안 열리면 오른쪽 아래 ⁝ 를 누르고 «다른 브라우저로 열기»를 선택해 주세요.';
+    }
+
+    if (escBtn) {
+      escBtn.addEventListener('click', function () {
+        if (navigator.onLine === false) {
+          if (sheetNote) {
+            sheetNote.textContent = '지금은 신호가 없어 다른 브라우저로 옮기면 비밀번호를 다시 넣어야 해요. 이 화면을 그대로 캡처해 주세요.';
+          }
+          return;
+        }
+        if (sheetNote) {
+          sheetNote.textContent = '새로 열린 브라우저에서는 비밀번호를 한 번 더 넣어야 해요.';
+        }
+        // 카카오가 공식 지원하는 기능은 아니다. 안 열려도 아래 안내가 남는다.
+        try {
+          location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(location.href);
+        } catch (e) {}
+      });
+    }
+
+    function hideThumb(img) {
+      return function () { img.style.visibility = 'hidden'; };
+    }
+
+    function fail(box) {
+      return function () {
+        box.innerHTML = '<p class="qr-fail">QR을 불러오지 못했어요.<br>오픈채팅방에 알려 주세요.</p>';
+      };
+    }
+
+    function build(fam) {
+      items = (DATA && DATA[fam]) || [];
+      curFam = fam;
+      var done = savedSet();
+      titleEl.textContent = famLabel(fam);
+      totalEl.textContent = items.length;
+      track.innerHTML = '';
+      thumbs.innerHTML = '';
+
+      for (var i = 0; i < items.length; i++) {
+        var slide = document.createElement('div');
+        slide.className = 'qr-slide';
+
+        // 원본 티켓과 같은 구성으로 카드를 그린다.
+        // 원본 스크린샷은 해상도가 6종이라 그대로 쓰면 QR이 작아져 스캔이 어렵다.
+        var card = document.createElement('div');
+        card.className = 'tk';
+
+        var head = document.createElement('div');
+        head.className = 'tk-head';
+        head.textContent = '캐리비안베이 이용권';
+
+        var body = document.createElement('div');
+        body.className = 'tk-body';
+
+        var date = document.createElement('div');
+        date.className = 'tk-date';
+        date.textContent = '2026-09-05';
+
+        var img = document.createElement('img');
+        img.className = 'qr-img';
+        img.alt = famLabel(fam) + ' 입장 QR ' + (i + 1) + '번';
+        img.onerror = fail(body);
+        img.src = src(items[i]);
+
+        var code = document.createElement('div');
+        code.className = 'tk-code';
+        code.textContent = items[i].c;
+
+        var who = document.createElement('div');
+        who.className = 'tk-who';
+        who.textContent = '삼성전자 1인';
+
+        body.appendChild(date);
+        body.appendChild(img);
+        body.appendChild(code);
+        body.appendChild(who);
+        card.appendChild(head);
+        card.appendChild(body);
+
+        var no = document.createElement('div');
+        no.className = 'qr-slide-no';
+        no.textContent = famLabel(fam) + ' · ' + (i + 1) + '번';
+
+        var cap = document.createElement('div');
+        cap.className = 'qr-code-cap';
+        cap.textContent = '스캔이 안 되면 카드의 번호를 보여주세요';
+
+        slide.appendChild(card);
+        slide.appendChild(no);
+        slide.appendChild(cap);
+        track.appendChild(slide);
+
+        var tb = document.createElement('button');
+        tb.type = 'button';
+        tb.className = 'qr-thumb';
+        tb.setAttribute('data-i', i);
+        tb.setAttribute('aria-label', (i + 1) + '번 QR 보기');
+        var ti = document.createElement('img');
+        ti.alt = '';
+        ti.onerror = hideThumb(ti);
+        ti.src = src(items[i]);
+        tb.appendChild(ti);
+        if (done[items[i].c]) {
+          var tk = document.createElement('span');
+          tk.className = 'tick';
+          tk.textContent = '\u2713';
+          tk.title = '챙긴 장';
+          tk.setAttribute('aria-label', '챙긴 장');
+          tb.appendChild(tk);
+        }
+        thumbs.appendChild(tb);
+      }
+
+      thumbs.style.display = items.length > 1 ? '' : 'none';
+      cur = 0;
+      mark();
+    }
+
+    function open(fam) {
+      if (!DATA) {
+        if (busy) { say('입장 QR을 불러오는 중이에요. 잠시만요.'); return; }
+        say('비밀번호를 먼저 입력해 주세요.', true);
+        try { pwEl.focus({ preventScroll: true }); } catch (e) { pwEl.focus(); }
+        lock.scrollIntoView({ block: 'center' });
+        return;
+      }
+      if (!DATA[fam]) return;
+      openGen++;
+      build(fam);
+      tell('');
+      saveAllBtn.style.display = (DATA[fam] || []).length > 1 ? '' : 'none';
+      modal.hidden = false;
+      // 버튼을 누르기 전에 미리 만들어 둔다 (제스처 만료 방지)
+      setTimeout(function () {
+        if (!modal.hidden) { prepareAll(fam, items)['catch'](function () {}); }
+      }, 50);
+      document.body.classList.add('qr-open');
+      track.scrollLeft = 0;
+      // 안드로이드 뒤로가기가 페이지가 아니라 모달을 닫도록
+      try { history.pushState({ qr: 1 }, ''); } catch (e) {}
+    }
+
+    function close(fromPop) {
+      // 닫는 순간 진행 중이던 합성/공유 결과는 모두 무효가 된다.
+      openGen++;
+      closeSheet();
+      dropPrepared();
+      // 합성이 멈춘 채로 닫혔다면 버튼이 비활성으로 남는다. 다시 살려 둔다.
+      saving = false;
+      if (saveBtn) saveBtn.disabled = false;
+      if (saveAllBtn) saveAllBtn.disabled = false;
+      modal.hidden = true;
+      document.body.classList.remove('qr-open');
+      track.innerHTML = '';
+      thumbs.innerHTML = '';
+      items = [];
+      // 뒤로가기로 닫힌 게 아니라면 우리가 넣은 히스토리 항목을 되돌린다
+      if (!fromPop) {
+        try {
+          if (history.state && history.state.qr) history.back();
+        } catch (e) {}
+      }
+    }
+
+    window.addEventListener('popstate', function () {
+      if (!modal.hidden) close(true);
+    });
+
+    var saveBtn = document.getElementById('qrSave');
+    var saveAllBtn = document.getElementById('qrSaveAll');
+    var savedMsg = document.getElementById('qrSavedMsg');
+
+    function tell(t, bad) {
+      if (!savedMsg) return;
+      savedMsg.textContent = t || '';
+      savedMsg.className = 'qr-saved-msg' + (bad ? ' bad' : '');
+    }
+
+    function doSave(all) {
+      if (saving || !items.length) return;
+      var gen = openGen;
+      var idx = all ? items.map(function (_, i) { return i; }) : [cur];
+      var ready = true;
+      for (var i = 0; i < idx.length; i++) {
+        if (!prepared[items[idx[i]].c]) { ready = false; break; }
+      }
+      if (ready) {
+        // 제스처가 살아 있는 동안 바로 호출한다
+        shareIt(idx.map(function (i) { return prepared[items[i].c]; }), idx, gen);
+        return;
+      }
+      saving = true;
+      saveBtn.disabled = saveAllBtn.disabled = true;
+      tell('사진을 준비하는 중이에요…');
+      prepareAll(curFam, items).then(function (objs) {
+        if (gen !== openGen) return;
+        shareIt(idx.map(function (i) { return objs[i]; }), idx, gen);
+      })['catch'](function (e) {
+        if (gen !== openGen) return;
+        // 합성이 실패해도 막다른 길이 되면 안 된다.
+        // 워터마크 없는 QR 원본으로라도 길게 눌러 담을 수 있게 한다.
+        openSheet(idx.map(function (i) {
+          return { data: src(items[i]), name: 'QR' + (i + 1) };
+        }), idx, '꾸민 사진을 못 만들어 QR만 띄웠어요.');
+        tell('');
+        try { savedMsg.title = errCode(e); } catch (e2) {}
+      }).then(function () {
+        saving = false;
+        saveBtn.disabled = saveAllBtn.disabled = false;
+      });
+    }
+
+    saveBtn.addEventListener('click', function () { doSave(false); });
+    saveAllBtn.addEventListener('click', function () { doSave(true); });
+
+    track.addEventListener('scroll', function () {
+      var w = track.clientWidth;
+      if (!w || !items.length) return;
+      var i = Math.round(track.scrollLeft / w);
+      if (i !== cur && i >= 0 && i < items.length) { cur = i; mark(); }
+    });
+
+    thumbs.addEventListener('click', function (e) {
+      var b = up(e.target, '.qr-thumb');
+      if (!b) return;
+      cur = parseInt(b.getAttribute('data-i'), 10);
+      mark();
+      jump(cur);
+    });
+
+    document.addEventListener('click', function (e) {
+      var f = up(e.target, '.fam');
+      if (f) { open(f.getAttribute('data-fam')); return; }
+      if (up(e.target, '[data-close]')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { close(); }
+      else if (e.key === 'ArrowRight' && cur < items.length - 1) { cur++; mark(); jump(cur); }
+      else if (e.key === 'ArrowLeft' && cur > 0) { cur--; mark(); jump(cur); }
+    });
+  })();
+</script>
+</body>
+</html>

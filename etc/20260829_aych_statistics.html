@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ECEFF1">
+<title>두 개의 안양 — 안양시 인구로 본 안양교회 다음세대 비율 분석</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEFF1; --card:#FFFFFF; --ink:#1B2432; --ink2:#526070; --line:#D8DEE4;
+  --city:#8A97A6; --adult:#2E3E5C; --kid:#26896A; --teen:#D69A12; --youth:#C93A3A;
+  --kid-soft:#E3F3EC; --teen-soft:#FBF1D6; --youth-soft:#FAE5E5; --adult-soft:#E4E8F0;
+  --serif:'Noto Serif KR','Nanum Myeongjo','Apple Myungjo','Batang',serif;
+  --sans:'IBM Plex Sans KR','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+}
+*{box-sizing:border-box}
+html{font-size:100%;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
+.page{max-width:32rem;margin:0 auto;padding:1rem 1rem 3rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.875rem;padding:1.25rem 1.125rem;margin:0 0 .875rem}
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.06em;color:var(--ink2);margin:0 0 .375rem}
+h1{font-family:var(--serif);font-weight:700;font-size:2.125rem;line-height:1.2;margin:0 0 .375rem;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:700;font-size:1.25rem;line-height:1.4;margin:0 0 .875rem}
+h3{font-size:.9375rem;font-weight:700;margin:1.25rem 0 .5rem}
+p{margin:0 0 .75rem}
+p:last-child{margin-bottom:0}
+small{font-size:.8125rem;color:var(--ink2)}
+b{font-weight:700}
+.num{font-variant-numeric:tabular-nums}
+.k{color:var(--kid)}.t{color:var(--teen)}.y{color:var(--youth)}.a{color:var(--adult)}
+.fn{font-size:.8125rem;color:var(--ink2);margin:.625rem 0 0;line-height:1.5}
+.takeaway{border-left:3px solid var(--ink);padding:.125rem 0 .125rem .75rem;margin:1rem 0 0;font-weight:600;font-size:.9375rem;line-height:1.6}
+.takeaway .lbl{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;color:var(--ink2);margin-bottom:.125rem}
+.takeaway b{color:var(--youth)}
+.takeaway b.a{color:var(--adult)}.takeaway b.k{color:var(--kid)}.takeaway b.t{color:var(--teen)}.takeaway b.i{color:var(--ink)}
+
+/* hero */
+.hero .sub{font-size:1.0625rem;font-weight:600;margin:0 0 .5rem}
+.hero .basis{font-size:.75rem;color:var(--ink2);line-height:1.5;margin:0 0 1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.thesis{font-family:var(--serif);font-weight:700;font-size:1.25rem;line-height:1.5;margin:0 0 1rem;letter-spacing:-.005em}
+.thesis em{font-style:normal;color:var(--youth)}
+.bandgroup{position:relative;padding-top:1.5rem;margin-top:.25rem}
+.brow{display:grid;grid-template-columns:4.25rem 1fr 3.25rem;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.blab{font-size:.8125rem;font-weight:700;line-height:1.25}
+.blab small{display:block;font-weight:500;font-size:.6875rem}
+.band{display:flex;height:2rem;border-radius:.25rem;overflow:hidden;background:var(--adult-soft)}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:600;flex-shrink:0;overflow:hidden;white-space:nowrap;font-variant-numeric:tabular-nums}
+.seg.kid{background:var(--kid)}.seg.teen{background:var(--teen)}.seg.youth{background:var(--youth)}.seg.adult{background:var(--adult)}.seg.city{background:var(--city)}.seg.old{background:var(--ink)}
+.btot{font-size:1.0625rem;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.cityline{position:absolute;top:0;bottom:.5rem;left:calc(4.75rem + (100% - 8.5rem) * .3394);width:0;border-left:2px dashed var(--ink);pointer-events:none}
+.cityline span{position:absolute;top:-.15rem;left:.375rem;font-size:.6875rem;font-weight:700;white-space:nowrap;background:var(--card);padding:0 .25rem;line-height:1.4}
+.bandnote{font-size:.6875rem;color:var(--ink2);text-align:right;margin:0 0 .5rem}
+.legend{list-style:none;padding:0;margin:.25rem 0 0;display:flex;flex-wrap:wrap;gap:.375rem .875rem;font-size:.75rem;color:var(--ink2)}
+.legend li{display:flex;align-items:center;gap:.3rem}
+.sw{width:.7rem;height:.7rem;border-radius:2px;display:inline-block;flex-shrink:0}
+.sw.kid{background:var(--kid)}.sw.teen{background:var(--teen)}.sw.youth{background:var(--youth)}.sw.adult{background:var(--adult)}.sw.city{background:var(--city)}.sw.old{background:var(--ink)}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:.625rem;padding:.875rem}
+.kpi{padding:.875rem .75rem;border-radius:.625rem;background:var(--paper)}
+.kpi .n{display:block;font-size:1.875rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .n small{font-size:1rem;font-weight:600;color:inherit}
+.kpi .n .vs{font-size:.875rem;font-weight:600;color:var(--ink2);margin:0 .125rem}
+.kpi .l{display:block;font-size:.8125rem;font-weight:600;margin-top:.375rem;line-height:1.35}
+.kpi .d{display:block;font-size:.75rem;color:var(--ink2);margin-top:.125rem;line-height:1.4}
+
+/* chips */
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0 0}
+.chip{background:var(--paper);border-radius:.625rem;padding:.75rem .5rem}
+.chip .n{display:block;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.chip .n small{font-size:.8125rem;font-weight:600;color:inherit}
+.chip .l{display:block;font-size:.75rem;font-weight:700;margin-top:.25rem;line-height:1.3}
+.chip .d{display:block;font-size:.6875rem;color:var(--ink2);margin-top:.125rem;line-height:1.4}
+@media (max-width:23rem){.chips{grid-template-columns:1fr 1fr}.chip:last-child{grid-column:1/-1}}
+
+/* bars */
+.hint{font-size:.8125rem;color:var(--ink2);line-height:1.55;margin:.25rem 0 .75rem}
+.hint b{color:var(--ink)}
+.bars{margin:.5rem 0 0}
+.br{display:grid;grid-template-columns:3.75rem 1fr 3.25rem;gap:.5rem;align-items:center;margin:0 0 .375rem}
+.br .l{font-size:.8125rem;font-weight:500;color:var(--ink2);line-height:1.2}
+.br .l.em{color:var(--ink);font-weight:700}
+.track{height:1.125rem;background:var(--paper);border-radius:3px;overflow:hidden}
+.fill{display:block;height:100%;border-radius:3px}
+.fill.city{background:var(--city)}.fill.kid{background:var(--kid)}.fill.teen{background:var(--teen)}.fill.youth{background:var(--youth)}.fill.adult{background:var(--adult)}
+.br .v{font-size:.875rem;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.bars.big .br{grid-template-columns:3rem 1fr 3.25rem}
+.bars.big .track{height:1.5rem}
+.bars.big .v{font-size:1.125rem}
+.bars.ranked{position:relative;padding:1.375rem 0 1.375rem}
+.bars.ranked .br{grid-template-columns:3rem 1fr 2.75rem}
+.avg{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed;pointer-events:none}
+.avg span{position:absolute;left:.25rem;font-size:.6875rem;font-weight:700;white-space:nowrap;background:var(--card);padding:0 .25rem;line-height:1.4}
+.avg.ad{left:calc(3.5rem + (100% - 6.75rem) * .61);border-color:var(--adult);color:var(--adult)}
+.avg.ad span{top:-.1rem}
+.avg.nx{left:calc(3.5rem + (100% - 6.75rem) * .39);border-color:var(--youth);color:var(--youth)}
+.avg.nx span{bottom:-.1rem}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:.875rem;font-variant-numeric:tabular-nums;margin:.25rem 0 0}
+th,td{padding:.45rem .25rem;text-align:right;border-bottom:1px solid var(--line);line-height:1.35}
+th{font-size:.75rem;font-weight:600;color:var(--ink2);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td:first-child{font-weight:600}
+td:first-child small{display:block;font-size:.6875rem;font-weight:400}
+td:first-child .sw{margin-right:.35rem;vertical-align:-1px}
+tr.sub td{font-weight:700;background:var(--paper)}
+tr.total td{font-weight:700;border-bottom:0;border-top:2px solid var(--ink)}
+td.y{color:var(--youth);font-weight:700}
+td.hi{background:var(--youth-soft)}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.5rem}
+.stage{border-radius:.625rem;padding:.75rem .625rem .625rem;background:var(--paper);border-top:4px solid}
+.stage.kid{border-color:var(--kid)}.stage.teen{border-color:var(--teen)}.stage.youth{border-color:var(--youth)}
+.stage .st{display:block;font-weight:700;font-size:1rem;line-height:1.2}
+.stage .age{display:block;font-size:.6875rem;color:var(--ink2);margin:.125rem 0 .5rem}
+.stage dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.2rem .375rem;font-size:.8125rem}
+.stage dt{color:var(--ink2)}
+.stage dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.stage dd.big{font-size:1.125rem}
+.stage.youth dd.big{color:var(--youth)}
+.stage.teen dd.big{color:var(--teen)}
+.stage.kid dd.big{color:var(--kid)}
+
+/* what-if */
+.whatif{margin-top:.5rem}
+.wrow{display:grid;grid-template-columns:4.25rem 1fr 3.25rem;gap:.5rem;align-items:center}
+.wrow + .wnote{margin:.25rem 0 .875rem}
+.wnote{display:grid;grid-template-columns:4.25rem 1fr;gap:.5rem;font-size:.75rem;color:var(--ink2)}
+.wnote span{grid-column:2}
+.wrow .band{background:transparent;justify-content:flex-start}
+
+/* insights */
+.ins{list-style:none;margin:0;padding:0}
+.ins li{display:grid;grid-template-columns:.75rem 1fr;gap:.75rem;padding:.875rem 0;border-bottom:1px solid var(--line)}
+.ins li:first-child{padding-top:.25rem}
+.ins li:last-child{border-bottom:0;padding-bottom:0}
+.ins .m{width:.75rem;height:.75rem;border-radius:2px;margin-top:.45rem}
+.ins h3{font-family:var(--serif);font-size:1.0625rem;line-height:1.45;margin:0 0 .375rem}
+.ins p{font-size:.9375rem;margin:0}
+
+/* diagnosis */
+.diag{display:grid;gap:.5rem}
+.drow{display:grid;grid-template-columns:3.25rem 1fr;gap:.75rem;align-items:start;padding:.75rem;border-radius:.625rem;background:var(--paper)}
+.pill{font-size:.75rem;font-weight:700;color:#fff;border-radius:999px;padding:.2rem 0;text-align:center;margin-top:.1rem}
+.pill.kid{background:var(--kid)}.pill.teen{background:var(--teen)}.pill.youth{background:var(--youth)}.pill.adult{background:var(--adult)}
+.drow .dt{font-weight:700;font-size:.9375rem;line-height:1.4}
+.drow .dd{font-size:.8125rem;color:var(--ink2);line-height:1.5;margin-top:.125rem}
+.verdict{font-family:var(--serif);font-weight:700;font-size:1.125rem;text-align:center;margin:1rem 0 0;line-height:1.5}
+
+/* direction */
+.dir{display:grid;gap:.75rem}
+.dcard{border-radius:.625rem;padding:.875rem .875rem .75rem;background:var(--paper);border-left:4px solid}
+.dcard.youth{border-color:var(--youth)}.dcard.teen{border-color:var(--teen)}.dcard.kid{border-color:var(--kid)}.dcard.adult{border-color:var(--adult)}
+.dcard .pri{display:block;font-size:.6875rem;font-weight:700;letter-spacing:.06em;color:var(--ink2);margin-bottom:.125rem}
+.dcard h3{font-size:1rem;margin:0 0 .5rem;line-height:1.4}
+.dcard ul{margin:0 0 .625rem;padding-left:1.1rem;font-size:.9375rem}
+.dcard li{margin-bottom:.3rem}
+.goal{font-size:.8125rem;font-weight:700;background:#fff;border-radius:.375rem;padding:.4rem .625rem;display:inline-block;line-height:1.4}
+.goal .lbl{color:var(--ink2);font-weight:600;margin-right:.25rem}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1rem}
+.step{background:var(--adult);color:#fff;border-radius:.625rem;padding:.875rem .75rem}
+.step .s{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;opacity:.8}
+.step .n{display:block;font-size:1.375rem;font-weight:700;line-height:1.2;margin:.2rem 0;font-variant-numeric:tabular-nums}
+.step .d{display:block;font-size:.75rem;line-height:1.45;opacity:.92}
+.step.two{background:var(--kid)}
+
+/* caveat + methods */
+.caveat{background:var(--teen-soft);border-color:#EAD08A}
+.caveat h2{font-size:1.0625rem;margin-bottom:.5rem}
+.caveat p{font-size:.9375rem}
+.methods h2{font-size:1.0625rem}
+.methods ul{margin:0;padding-left:1.1rem;font-size:.8125rem;color:var(--ink2);line-height:1.6}
+.methods li{margin-bottom:.35rem}
+.foot{font-size:.6875rem;color:var(--ink2);text-align:center;margin:1.5rem 0 0}
+
+/* motion */
+.js .reveal{clip-path:inset(0 100% 0 0)}
+.js .reveal.in{animation:reveal .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes reveal{to{clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion:reduce){.js .reveal,.js .reveal.in{clip-path:none;animation:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="card hero">
+  <p class="eyebrow">분석 리포트 · 2026년 8월</p>
+  <h1>두 개의 안양</h1>
+  <p class="sub">안양시 인구 구조로 본 안양교회 다음세대 비율</p>
+  <p class="basis">안양시 인구 2026년 7월 기준 562,143명 &nbsp;·&nbsp; 안양교회 주간 통계 2026년 8월 15일 기준 재적 364명 / 출석 194명</p>
+
+  <p class="thesis">명부(재적)로 보면 교회의 세대 구성은 안양시와 같습니다.<br><em>교회로 실제로 모인 사람(출석)으로 보면 다음세대가 도시보다 적습니다.</em></p>
+
+  <div class="bandgroup">
+    <div class="brow">
+      <div class="blab">안양시<small>인구 구성</small></div>
+      <div class="band reveal">
+        <span class="seg kid" style="flex-basis:8.98%">9.0</span>
+        <span class="seg teen" style="flex-basis:5.03%"></span>
+        <span class="seg youth" style="flex-basis:19.94%">19.9</span>
+        <span class="seg adult" style="flex-basis:66.05%">66.1</span>
+      </div>
+      <div class="btot">33.9%</div>
+    </div>
+    <div class="brow">
+      <div class="blab">안양교회<small>재적</small></div>
+      <div class="band reveal">
+        <span class="seg kid" style="flex-basis:12.91%">12.9</span>
+        <span class="seg teen" style="flex-basis:4.95%"></span>
+        <span class="seg youth" style="flex-basis:16.48%">16.5</span>
+        <span class="seg adult" style="flex-basis:65.66%">65.7</span>
+      </div>
+      <div class="btot">34.3%</div>
+    </div>
+    <div class="brow">
+      <div class="blab">안양교회<small>주간 출석</small></div>
+      <div class="band reveal">
+        <span class="seg kid" style="flex-basis:12.89%">12.9</span>
+        <span class="seg teen" style="flex-basis:4.12%"></span>
+        <span class="seg youth" style="flex-basis:8.25%">8.2</span>
+        <span class="seg adult" style="flex-basis:74.74%">74.7</span>
+      </div>
+      <div class="btot y">25.3%</div>
+    </div>
+    <div class="cityline" aria-hidden="true"><span>도시의 선 33.9%</span></div>
+  </div>
+  <p class="bandnote">오른쪽 숫자 = 다음세대(0~34세) 비율 · 막대 안 숫자는 %</p>
+  <ul class="legend">
+    <li><i class="sw kid"></i>유초 · 0~12세</li>
+    <li><i class="sw teen"></i>중고 · 13~18세</li>
+    <li><i class="sw youth"></i>청년 · 19~34세</li>
+    <li><i class="sw adult"></i>장년 · 35세 이상</li>
+  </ul>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>재적으로 보면 교회의 세대 구성은 도시와 같습니다. 그러나 실제 집회 출석에서는 다음세대가 <b>9%p</b> 줄어들고, 줄어든 몫의 대부분은 <b>청년(16.5% → 8.2%)</b>입니다.</p>
+</header>
+
+<!-- ═══════════ KPI ═══════════ -->
+<section class="card kpis" aria-label="핵심 숫자">
+  <div class="kpi"><span class="n">33.9<small>%</small></span><span class="l">안양시 0~34세 비율</span><span class="d">약 19만 1천 명 / 562,143명</span></div>
+  <div class="kpi"><span class="n">34.3<small>%</small></span><span class="l">교회 다음세대 재적 비율</span><span class="d">125명 / 364명</span></div>
+  <div class="kpi"><span class="n y">25.3<small>%</small></span><span class="l">교회 다음세대 출석 비율</span><span class="d">49명 / 194명</span></div>
+  <div class="kpi"><span class="n"><span class="y">39</span><small class="y">%</small><span class="vs">vs</span><span class="a">61</span><small class="a">%</small></span><span class="l">참석률: 다음세대 vs 장년</span><span class="d">49/125명 vs 145/239명</span></div>
+</section>
+
+<!-- ═══════════ 1. 도시 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">도시의 현재</p>
+  <h2>안양시는 이미 늙어가는 도시입니다</h2>
+  <div class="band reveal" style="height:1.75rem">
+    <span class="seg kid" style="flex-basis:10.49%">10.5</span>
+    <span class="seg city" style="flex-basis:70.07%">70.1</span>
+    <span class="seg old" style="flex-basis:19.44%">19.4</span>
+  </div>
+  <ul class="legend">
+    <li><i class="sw kid"></i>유소년 0~14세 · 58,974명</li>
+    <li><i class="sw city"></i>생산연령 15~64세 · 393,865명</li>
+    <li><i class="sw old"></i>고령 65세 이상 · 109,304명</li>
+  </ul>
+  <div class="chips">
+    <div class="chip"><span class="n">185</span><span class="l">노령화지수</span><span class="d">0~14세 100명당 65세 이상 185명</span></div>
+    <div class="chip"><span class="n">19.4<small>%</small></span><span class="l">65세 이상 비율</span><span class="d">초고령사회 기준 20%까지 0.6%p</span></div>
+    <div class="chip"><span class="n">1.9<small>배</small></span><span class="l">75세 이상 ÷ 0~5세</span><span class="d">38,670명 vs 20,653명</span></div>
+  </div>
+
+  <h3>한 살당 인구 — 세대는 얼마나 두꺼운가</h3>
+  <p class="hint">구간마다 나이 폭이 달라서(50~64세는 15년, 15~18세는 4년) 총인구로는 세대를 비교할 수 없습니다. 그래서 <b>그 나이 한 살에 몇 명이 사는지</b>로 맞춘 값입니다. 막대가 길수록 두꺼운 세대이고, 위가 나이 많은 쪽입니다. 가장 두꺼운 세대는 50~64세이며, 거기서 위아래로 얇아집니다.</p>
+  <div class="bars">
+    <div class="br"><span class="l">65~74세</span><span class="track"><span class="fill city reveal" style="width:77.4%"></span></span><span class="v">7,063</span></div>
+    <div class="br"><span class="l">50~64세</span><span class="track"><span class="fill city reveal" style="width:100%"></span></span><span class="v">9,121</span></div>
+    <div class="br"><span class="l">40~49세</span><span class="track"><span class="fill city reveal" style="width:90.7%"></span></span><span class="v">8,277</span></div>
+    <div class="br"><span class="l">30~39세</span><span class="track"><span class="fill city reveal" style="width:96.2%"></span></span><span class="v">8,772</span></div>
+    <div class="br"><span class="l em">19~29세</span><span class="track"><span class="fill youth reveal" style="width:66.6%"></span></span><span class="v">6,070<small>*</small></span></div>
+    <div class="br"><span class="l em">15~18세</span><span class="track"><span class="fill teen reveal" style="width:54.1%"></span></span><span class="v">4,940<small>*</small></span></div>
+    <div class="br"><span class="l em">6~14세</span><span class="track"><span class="fill kid reveal" style="width:46.7%"></span></span><span class="v">4,258</span></div>
+    <div class="br"><span class="l em">0~5세</span><span class="track"><span class="fill kid reveal" style="width:37.7%"></span></span><span class="v">3,442</span></div>
+  </div>
+  <p class="fn">* 원자료 구간을 나눠 추정한 값. 색은 교회 지역(계층)(유초·중고·청년)에 대응하는 연령대.</p>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>젊을수록 얇아집니다. 0~5세 한 살 인구(3,442명)는 50~64세(9,121명)의 <b class="i">38%</b>입니다. 지금 초등 나이(6~14세)보다 그 아래 세대가 <b class="i">19%</b> 적어, 앞으로 유초·중고 대상 인구는 지금보다 작아집니다.</p>
+</section>
+
+<!-- ═══════════ 2. 교회 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">교회의 현재</p>
+  <h2>지역별, 계층별 재적과 주간 출석</h2>
+  <table>
+    <thead><tr><th>지역(계층)</th><th>재적</th><th>출석</th><th>결석</th><th>참석률</th></tr></thead>
+    <tbody>
+      <tr><td>#1</td><td>44</td><td>25</td><td>20</td><td>57%</td></tr>
+      <tr><td>#2</td><td>47</td><td>26</td><td>21</td><td>55%</td></tr>
+      <tr><td>#3</td><td>36</td><td>27</td><td>9</td><td>75%</td></tr>
+      <tr><td>#4</td><td>39</td><td>23</td><td>17</td><td>59%</td></tr>
+      <tr><td>#5</td><td>24</td><td>14</td><td>10</td><td>58%</td></tr>
+      <tr><td>#6</td><td>49</td><td>30</td><td>19</td><td>61%</td></tr>
+      <tr class="sub"><td>장년 소계</td><td>239</td><td>145</td><td>96</td><td>61%</td></tr>
+      <tr><td><i class="sw kid"></i>유초</td><td>47</td><td>25</td><td>23</td><td>53%</td></tr>
+      <tr><td><i class="sw teen"></i>중고</td><td>18</td><td>8</td><td>10</td><td>44%</td></tr>
+      <tr><td><i class="sw youth"></i>청년</td><td class="hi">60</td><td class="hi">16</td><td class="hi y">44</td><td class="hi y">27%</td></tr>
+      <tr class="sub"><td>다음세대 소계</td><td>125</td><td>49</td><td>77</td><td>39%</td></tr>
+      <tr class="total"><td>전체</td><td>364</td><td>194</td><td>173</td><td>53%</td></tr>
+    </tbody>
+  </table>
+  <p class="fn">#1~#6은 장년 그룹. 원자료에서 세 지역(계층)의 출석+결석이 재적보다 1명씩 많아 합계가 3명 차이 나지만, 원자료 수치를 그대로 사용했습니다.</p>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>재적이 가장 큰 지역(계층)는 <b>청년(60명)</b>입니다. 그런데 출석은 16명으로 아홉 지역(계층) 중 아래에서 세 번째입니다. 결석 173명 가운데 77명(45%)이 다음세대이고, 그중 <b>44명이 청년</b>입니다.</p>
+</section>
+
+<!-- ═══════════ 3. 비교 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">도시 × 교회</p>
+  <h2>세대별로 보면 격차는 한 곳에 몰려 있습니다</h2>
+  <table>
+    <thead><tr><th>세대</th><th>안양시</th><th>교회 재적</th><th>교회 출석</th></tr></thead>
+    <tbody>
+      <tr><td><i class="sw kid"></i>유초<small>0~12세</small></td><td>9.0%</td><td>12.9%</td><td>12.9%</td></tr>
+      <tr><td><i class="sw teen"></i>중고<small>13~18세</small></td><td>5.0%</td><td>4.9%</td><td>4.1%</td></tr>
+      <tr><td><i class="sw youth"></i>청년<small>19~34세</small></td><td>19.9%</td><td>16.5%</td><td class="hi y">8.2%</td></tr>
+      <tr class="sub"><td>다음세대 합계</td><td>33.9%</td><td>34.3%</td><td class="y">25.3%</td></tr>
+      <tr class="total"><td><i class="sw adult"></i>장년<small>35세 이상</small></td><td>66.1%</td><td>65.7%</td><td>74.7%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>안양시 같은 연령 1만 명당 안양교회 출석자 (명)</h3>
+  <div class="bars big">
+    <div class="br"><span class="l em">유초</span><span class="track"><span class="fill kid reveal" style="width:99%"></span></span><span class="v k">5.0</span></div>
+    <div class="br"><span class="l em">장년</span><span class="track"><span class="fill adult reveal" style="width:78%"></span></span><span class="v a">3.9</span></div>
+    <div class="br"><span class="l em">중고</span><span class="track"><span class="fill teen reveal" style="width:57%"></span></span><span class="v t">2.8</span></div>
+    <div class="br"><span class="l em">청년</span><span class="track"><span class="fill youth reveal" style="width:29%"></span></span><span class="v y">1.4</span></div>
+  </div>
+  <p class="fn">교회 전체 평균은 3.5명. 예: 안양시 청년(19~34세) 1만 명 가운데 안양교회 집회에 나오는 사람은 1.4명.</p>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>유초는 장년보다도 높은 도달률입니다. <b>청년은 1만 명당 1.4명</b>으로 유초의 3분의 1이 안 됩니다. 안양시에서 가장 큰 다음세대 집단(19~34세, 19.9%)이 교회에서는 가장 얇습니다.</p>
+</section>
+
+<!-- ═══════════ 4. 파이프라인 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">세대 파이프라인</p>
+  <h2>유초에서 청년으로 갈수록 얇아집니다</h2>
+  <div class="pipe">
+    <div class="stage kid"><span class="st">유초</span><span class="age">0~12세</span>
+      <dl><dt>재적</dt><dd>47</dd><dt>출석</dt><dd>25</dd><dt>참석률</dt><dd class="big">53%</dd></dl></div>
+    <div class="stage teen"><span class="st">중고</span><span class="age">13~18세</span>
+      <dl><dt>재적</dt><dd>18</dd><dt>출석</dt><dd>8</dd><dt>참석률</dt><dd class="big">44%</dd></dl></div>
+    <div class="stage youth"><span class="st">청년</span><span class="age">19~34세</span>
+      <dl><dt>재적</dt><dd>60</dd><dt>출석</dt><dd>16</dd><dt>참석률</dt><dd class="big">27%</dd></dl></div>
+  </div>
+
+  <h3>나이 한 살당 출석 인원 (명)</h3>
+  <div class="bars big">
+    <div class="br"><span class="l em">유초</span><span class="track"><span class="fill kid reveal" style="width:100%"></span></span><span class="v k">1.9</span></div>
+    <div class="br"><span class="l em">중고</span><span class="track"><span class="fill teen reveal" style="width:68%"></span></span><span class="v t">1.3</span></div>
+    <div class="br"><span class="l em">청년</span><span class="track"><span class="fill youth reveal" style="width:53%"></span></span><span class="v y">1.0</span></div>
+  </div>
+  <p class="fn">유초 13년, 중고 6년, 청년 16년 구간으로 나눠 계산. 구간이 긴 청년부의 재적 60명이 실제로는 가장 얇은 층입니다.</p>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>구간 길이를 감안해도 위로 갈수록 얇아집니다. <b class="t">중고는 출석 8명</b>으로 규모 자체가 가장 취약한 연결 고리이고, <b>청년은 44명이 명부에만</b> 남아 있습니다. 출석하는 청년 16명 중 9명은 소그룹 통계에 잡혀 있어, 나오는 청년은 연결돼 있고 문제는 나오지 않는 44명입니다.</p>
+</section>
+
+<!-- ═══════════ 5. 참석률 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">참석률</p>
+  <h2>참석률 하위 세 지역(계층)가 모두 다음세대입니다</h2>
+  <div class="bars ranked">
+    <div class="br"><span class="l">#3</span><span class="track"><span class="fill adult reveal" style="width:75%"></span></span><span class="v">75%</span></div>
+    <div class="br"><span class="l">#6</span><span class="track"><span class="fill adult reveal" style="width:61%"></span></span><span class="v">61%</span></div>
+    <div class="br"><span class="l">#4</span><span class="track"><span class="fill adult reveal" style="width:59%"></span></span><span class="v">59%</span></div>
+    <div class="br"><span class="l">#5</span><span class="track"><span class="fill adult reveal" style="width:58%"></span></span><span class="v">58%</span></div>
+    <div class="br"><span class="l">#1</span><span class="track"><span class="fill adult reveal" style="width:57%"></span></span><span class="v">57%</span></div>
+    <div class="br"><span class="l">#2</span><span class="track"><span class="fill adult reveal" style="width:55%"></span></span><span class="v">55%</span></div>
+    <div class="br"><span class="l em">유초</span><span class="track"><span class="fill kid reveal" style="width:53%"></span></span><span class="v k">53%</span></div>
+    <div class="br"><span class="l em">중고</span><span class="track"><span class="fill teen reveal" style="width:44%"></span></span><span class="v t">44%</span></div>
+    <div class="br"><span class="l em">청년</span><span class="track"><span class="fill youth reveal" style="width:27%"></span></span><span class="v y">27%</span></div>
+    <div class="avg ad" aria-hidden="true"><span>장년 평균 61%</span></div>
+    <div class="avg nx" aria-hidden="true"><span>다음세대 평균 39%</span></div>
+  </div>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>장년 평균 <b class="a">61%</b>, 다음세대 평균 <b>39%</b>. 다음세대는 장년의 3분의 2 수준으로만 출석합니다. 장년 그룹 안에서도 55~75%로 편차가 커서, 높은 그룹의 운영 방식은 다음세대 지역(계층)가 참고할 자료입니다.</p>
+</section>
+
+<!-- ═══════════ 6. 가정 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">가정해 보면</p>
+  <h2>다음세대가 장년만큼만 나온다면</h2>
+  <div class="whatif">
+    <div class="wrow">
+      <div class="blab">지금<small>참석률 39%</small></div>
+      <div class="band reveal">
+        <span class="seg kid" style="flex-basis:11.3%"></span>
+        <span class="seg teen" style="flex-basis:3.6%"></span>
+        <span class="seg youth" style="flex-basis:7.2%"></span>
+        <span class="seg adult" style="flex-basis:65.6%">장년 145</span>
+      </div>
+      <div class="btot">194명</div>
+    </div>
+    <div class="wnote"><span>다음세대 출석 <b>49명</b>(유초 25 · 중고 8 · 청년 16) · 집회 구성 <b>25.3%</b></span></div>
+    <div class="wrow">
+      <div class="blab">장년 수준<small>참석률 61%</small></div>
+      <div class="band reveal">
+        <span class="seg kid" style="flex-basis:13.0%"></span>
+        <span class="seg teen" style="flex-basis:5.0%"></span>
+        <span class="seg youth" style="flex-basis:16.6%"></span>
+        <span class="seg adult" style="flex-basis:65.6%">장년 145</span>
+      </div>
+      <div class="btot k">221명</div>
+    </div>
+    <div class="wnote"><span>다음세대 출석 <b class="k">76명</b> (+27) · 집회 구성 <b class="k">34.4%</b></span></div>
+  </div>
+  <p class="fn">장년 145명은 그대로 두고, 유초·중고·청년 재적 125명이 장년과 같은 61%로 출석한다고 가정. 중간 단계인 참석률 50%에서는 63명, 30.3%.</p>
+  <p class="takeaway"><span class="lbl">한 줄 결론</span>새로 전도하지 않아도, 이미 명부에 있는 다음세대가 장년 수준으로 출석하면 집회소의 세대 구성은 <b class="k">34.4%</b>로 도시(33.9%)와 같아집니다. 첫 과제는 전도보다 <b class="i">회복</b>입니다.</p>
+</section>
+
+<!-- ═══════════ 7. 통찰 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">통계가 말하는 것</p>
+  <h2>다섯 가지 통찰</h2>
+  <ul class="ins">
+    <li><i class="m" style="background:var(--ink)"></i><div>
+      <h3>등록된 사람으로는 도시와 같고, 실제 모인 사람으로는 도시보다 장년이 많습니다.</h3>
+      <p>재적 기준 다음세대 34.3%는 안양시 33.9%와 사실상 같습니다. 그러나 집회 출석에서는 25.3%로 내려가고 장년이 74.7%를 차지해 도시(66.1%)보다 무겁습니다. 격차는 사람을 모으는 단계가 아니라 정착시키는 단계에서 생깁니다.</p></div></li>
+    <li><i class="m" style="background:var(--youth)"></i><div>
+      <h3>청년: 도시에서 가장 큰 다음세대, 교회에서 가장 얇은 출석.</h3>
+      <p>안양시 19~34세는 19.9%로 다음세대 가운데 가장 큰 집단입니다. 안양교회 청년부는 재적 60명으로 교회에서 가장 큰 지역(계층)이지만 출석은 16명(27%)뿐입니다. 안양시 청년 1만 명당 교회 출석자는 1.4명, 유초(5.0명)의 3분의 1 이하입니다. 결석 44명은 교회 전체 결석의 4분의 1입니다.</p></div></li>
+    <li><i class="m" style="background:var(--teen)"></i><div>
+      <h3>중고: 파이프라인의 병목.</h3>
+      <p>재적 18명, 출석 8명. 도시 비율(5.0%)과 비슷한 4.1%이지만 절대 인원이 한 자릿수라 2~3명만 빠져도 공동체가 흔들립니다. 유초 출석 25명이 중고 8명으로 이어지는 다리가 좁고, 이 구간을 지나면 청년 참석률 27%로 떨어집니다.</p></div></li>
+    <li><i class="m" style="background:var(--kid)"></i><div>
+      <h3>유초: 교회의 강점, 그러나 줄어드는 저수지.</h3>
+      <p>출석 비율 12.9%로 도시(9.0%)보다 높고, 1만 명당 5.0명으로 모든 세대 중 도달률 1위입니다. 다만 안양시 0~5세 한 살 인구(3,442명)는 6~14세(4,258명)보다 19% 적어 앞으로 유초 대상 인구 자체가 줄어듭니다. 지금 수준을 유지하는 것만으로는 감소를 뜻합니다.</p></div></li>
+    <li><i class="m" style="background:var(--city)"></i><div>
+      <h3>도시는 초고령사회 문턱에 서 있고, 다음세대 비율은 10년 뒤의 교회를 미리 보여줍니다.</h3>
+      <p>안양시 65세 이상 19.4%, 노령화지수 185. 도시에서 가장 큰 세대인 50~64세(24.3%)가 10년 안에 고령층으로 넘어갑니다. 출석의 74.7%가 장년인 교회는 다음세대 유입이 없으면 도시보다 빠르게 고령화됩니다. 다음세대 비율은 오늘의 지표가 아니라 내일의 예고입니다.</p></div></li>
+  </ul>
+</section>
+
+<!-- ═══════════ 8. 진단 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">현주소 진단</p>
+  <h2>지역별, 계층별 신호</h2>
+  <div class="diag">
+    <div class="drow"><span class="pill kid">양호</span><div><div class="dt">유초 — 도시보다 높은 비율, 참석률 53%</div><div class="dd">지금은 강점. 다만 대상 인구(0~5세)가 줄어들고 있어 현상 유지가 곧 감소가 되는 구조.</div></div></div>
+    <div class="drow"><span class="pill teen">주의</span><div><div class="dt">중고 — 참석률 44%, 출석 8명</div><div class="dd">비율은 도시와 비슷하지만 규모 자체가 위험 수준. 한 자릿수 공동체는 작은 이탈에도 무너집니다.</div></div></div>
+    <div class="drow"><span class="pill youth">위기</span><div><div class="dt">청년 — 참석률 27%, 결석 44명</div><div class="dd">도시 최대 세대와의 격차가 가장 큼. 재적은 교회 1위, 출석은 하위권. 회복 가능한 인원이 가장 많은 곳이기도 합니다.</div></div></div>
+    <div class="drow"><span class="pill adult">안정</span><div><div class="dt">장년 — 참석률 61%, 출석의 75%</div><div class="dd">교회의 토대. 다음세대 사역의 교사·멘토·후원 자원으로 연결되어야 할 층.</div></div></div>
+  </div>
+  <p class="verdict">구조는 건강하고, 흐름은 막혀 있습니다.</p>
+  <p class="fn" style="text-align:center">재적(구조)은 도시와 같지만, 출석(흐름)은 유초 → 중고 → 청년으로 갈수록 끊깁니다.</p>
+</section>
+
+<!-- ═══════════ 9. 방향 ═══════════ -->
+<section class="card">
+  <p class="eyebrow">나아갈 방향</p>
+  <h2>데이터가 가리키는 순서: 회복 → 연결 → 준비 → 자원</h2>
+  <div class="dir">
+    <div class="dcard youth">
+      <span class="pri">우선순위 1 · 회복</span>
+      <h3>청년 44명의 이름을 먼저 부르기</h3>
+      <ul>
+        <li>결석 청년 44명을 개별 명단으로 만들고, 마지막 출석 시점 기준 <b>3개월 미만 / 1년 미만 / 1년 이상</b>으로 나눠 접근 방식을 달리합니다.</li>
+        <li>출석 청년 16명 중 9명이 소그룹에 있습니다. 소그룹을 재연결 통로로 삼아 <b>그룹당 결석자 2~3명</b>씩 맡깁니다.</li>
+        <li>결석 이유는 통계로 알 수 없습니다. 이사·취업·군복무·신앙 문제 등 원인을 직접 묻고 기록하는 것이 첫 단계입니다.</li>
+      </ul>
+      <span class="goal"><span class="lbl">목표</span>참석률 27% → 45% (출석 16명 → 27명)</span>
+    </div>
+    <div class="dcard teen">
+      <span class="pri">우선순위 2 · 연결</span>
+      <h3>중고, 다리 넓히기</h3>
+      <ul>
+        <li>초6 → 중1 전환기에 집중합니다. 유초 출석 25명 가운데 매년 진급하는 아이들을 중고 교사가 <b>진급 전에</b> 만납니다.</li>
+        <li>유초·중고 연합 집회와 행사로 한 자릿수 공동체의 고립감을 줄입니다.</li>
+      </ul>
+      <span class="goal"><span class="lbl">목표</span>출석 8명 → 12명 (참석률 44% → 67%)</span>
+    </div>
+    <div class="dcard kid">
+      <span class="pri">우선순위 3 · 준비</span>
+      <h3>유초, 지키면서 넓히기</h3>
+      <ul>
+        <li>대상 인구가 줄어드는 만큼 부모 세대를 향합니다. 안양시 30대는 87,717명(15.6%)으로 여전히 큰 집단입니다.</li>
+        <li>영유아(0~5세, 20,653명) 가정 초청과 양육 지원으로 <b>가정 단위</b> 유입을 만듭니다.</li>
+      </ul>
+      <span class="goal"><span class="lbl">목표</span>참석률 53% 이상 유지 + 새 가정 유입 수 별도 집계</span>
+    </div>
+    <div class="dcard adult">
+      <span class="pri">우선순위 4 · 자원</span>
+      <h3>장년을 다음세대의 자원으로</h3>
+      <ul>
+        <li>출석 장년 145명이 교사·멘토·후원의 토대입니다. 참석률 75%인 #3 그룹의 운영 경험을 지역(계층) 간에 공유합니다.</li>
+        <li>지금의 통계표에 <b>전환율(유초 → 중고 → 청년)</b>과 <b>결석 기간</b> 항목을 더해 매월 추적합니다.</li>
+      </ul>
+      <span class="goal"><span class="lbl">목표</span>다음세대 지역(계층)당 교사·멘토 확보 인원을 지표로 관리</span>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="s">1단계 목표</span><span class="n">49 → 63명</span><span class="d">다음세대 참석률 39% → 50%<br>집회 구성 25% → 30%</span></div>
+    <div class="step two"><span class="s">2단계 목표</span><span class="n">63 → 76명</span><span class="d">참석률 61%, 장년과 동률<br>집회 구성 34% = 도시 수준</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ 유의 ═══════════ -->
+<section class="card caveat">
+  <h2>읽을 때 유의할 점</h2>
+  <p>교회 통계는 8월 중순 휴가철 <b>한 주</b>의 자료입니다. 청년·중고는 방학과 휴가의 영향이 커서 참석률이 평소보다 낮게 나왔을 수 있습니다. 방향은 유효하지만, 수치는 4주 이상 평균으로 다시 확인하는 것이 좋습니다.</p>
+</section>
+
+<!-- ═══════════ 자료·방법 ═══════════ -->
+<section class="card methods">
+  <h2>자료와 산출 방법</h2>
+  <ul>
+    <li><b>안양시</b>: 2026년 7월 기준 인구 562,143명. 연령대별 구성(유소년·생산연령·고령)과 세부 연령 계층 자료.</li>
+    <li><b>안양교회</b>: 2026년 8월 15일 기준 주간 통계. 재적 364명, 주간 출석 194명, 결석 173명. #1~#6을 장년, 유초·중고·청년을 다음세대로 집계.</li>
+    <li><b>연령 대응</b>: 유초 ≈ 0~12세, 중고 ≈ 13~18세, 청년 ≈ 19~34세, 장년 ≈ 35세 이상.</li>
+    <li><b>추정</b>: 원자료에 없는 구간(6~12세, 13~18세, 19~29세 등)은 해당 구간 안에서 연령별 인구가 고르다고 가정해 나눴습니다. 원자료 구간끼리 겹치는 부분(6~21세와 19~34세 등)이 있습니다.</li>
+    <li><b>1만 명당 출석</b> = 지역(계층) 출석 ÷ 안양시 같은 연령 인구 × 10,000.</li>
+    <li><b>노령화지수</b> = 65세 이상 ÷ 0~14세 × 100.</li>
+    <li>통계표의 개인 이름은 분석에 사용하지 않았습니다.</li>
+  </ul>
+  <p class="foot">두 개의 안양 · 안양교회 다음세대 비율 분석 리포트 · 2026.8</p>
+</section>
+
+</main>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  function show(el){el.classList.add('in');}
+  function showAll(){for(var i=0;i<els.length;i++){show(els[i]);}}
+  if(!('IntersectionObserver' in window)){showAll();return;}
+  /* 잘려 있는 요소(clip-path)는 교차 영역이 0이라 스스로는 화면에 들어온 것으로
+     인식되지 않는다. 그래서 잘리지 않은 부모를 관찰하고, threshold는 0을 쓴다
+     (부모가 화면보다 길면 비율이 0.15에 못 미쳐 영영 안 걸린다). */
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      if(!x.isIntersecting){return;}
+      io.unobserve(x.target);
+      var list=x.target.__reveals||[];
+      for(var k=0;k<list.length;k++){show(list[k]);}
+    });
+  },{threshold:0});
+  for(var j=0;j<els.length;j++){
+    var t=els[j].parentElement||els[j];
+    (t.__reveals||(t.__reveals=[])).push(els[j]);
+    io.observe(t);
+  }
+  /* 안전장치: 어떤 이유로든 애니메이션이 돌지 않으면 그래프를 그냥 보여준다 */
+  setTimeout(function(){if(!document.querySelector('.reveal.in')){showAll();}},2500);
+})();
+</script>
+</body>
+</html>

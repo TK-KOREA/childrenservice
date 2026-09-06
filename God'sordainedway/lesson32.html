@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>하나님께서 정하신 길 제32과 - 교회생활의 특수성과 일반성과 실행성</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F4EF;
+  --paper-2:#E9EDE4;
+  --ink:#1B2420;
+  --ink-2:#4A554E;
+  --ink-3:#626D65;
+  --rule:#D5DBCF;
+
+  --faith:#6A2C43;   --faith-soft:#F1E6EA;
+  --general:#245C6B; --general-soft:#E1ECEF;
+  --life:#3F7538;    --life-soft:#E4EEE0;
+  --revival:#8C6316; --revival-soft:#F5EDDD;
+
+  --serif:'Gowun Batang', 'Nanum Myeongjo', 'Apple SD Gothic Neo', serif;
+  --sans:'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:100%; -webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:1rem;
+  font-weight:400;
+  line-height:1.75;
+  letter-spacing:-.01em;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+
+.wrap{max-width:40rem; margin:0 auto; padding:0 1.25rem}
+
+:focus-visible{outline:2px solid var(--general); outline-offset:3px; border-radius:2px}
+
+/* ─────────── 히어로 ─────────── */
+.hero{padding-top:3.5rem; padding-bottom:2.5rem}
+.lesson{
+  font-size:.8125rem; font-weight:600; letter-spacing:.04em;
+  color:var(--ink-3); margin:0 0 1.25rem;
+}
+.hero h1{
+  font-family:var(--serif); font-weight:700;
+  font-size:2.125rem; line-height:1.34; letter-spacing:-.02em;
+  margin:0 0 1.125rem;
+}
+.hero-lead{
+  font-family:var(--serif); font-size:1.0625rem; line-height:1.85;
+  color:var(--ink-2); margin:0 0 2.75rem; max-width:22rem;
+}
+
+.orbit{margin:0 0 1.75rem; padding:0}
+.orbit svg{display:block; width:100%; height:auto; max-width:21.25rem; margin:0 auto}
+
+.orbit-key{list-style:none; margin:0; padding:0; border-top:1px solid var(--rule)}
+.orbit-key li{
+  display:grid; grid-template-columns:.5rem 4.5rem 1fr; gap:.75rem;
+  align-items:start; padding:.8125rem 0;
+  border-bottom:1px solid var(--rule);
+  font-size:.9375rem; line-height:1.65;
+}
+.orbit-key .swatch{width:.5rem; height:.5rem; border-radius:50%; margin-top:.5rem}
+.orbit-key b{font-weight:600}
+.orbit-key span{color:var(--ink-2)}
+.k1 .swatch{background:var(--faith)}   .k1 b{color:var(--faith)}
+.k2 .swatch{background:var(--general)} .k2 b{color:var(--general)}
+.k3 .swatch{background:var(--life)}    .k3 b{color:var(--life)}
+.k4 .swatch{background:var(--revival)} .k4 b{color:var(--revival)}
+
+/* ─────────── 마디 내비게이션 ─────────── */
+.marks{
+  position:sticky; top:0; z-index:20;
+  background:rgba(242,244,239,.93);
+  backdrop-filter:saturate(140%) blur(8px);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.marks ol{
+  list-style:none; display:flex; gap:.375rem; margin:0 auto; padding:.625rem 1.25rem;
+  max-width:40rem;
+}
+.marks li{flex:1}
+.marks a{
+  display:block; text-align:center; text-decoration:none;
+  font-size:.75rem; font-weight:600; letter-spacing:.01em;
+  color:var(--ink-3); padding:.375rem .125rem .3125rem;
+  border-bottom:2px solid transparent;
+}
+.marks a[aria-current="true"]{color:var(--ink)}
+.marks li:nth-child(1) a[aria-current="true"]{border-color:var(--faith); color:var(--faith)}
+.marks li:nth-child(2) a[aria-current="true"]{border-color:var(--general); color:var(--general)}
+.marks li:nth-child(3) a[aria-current="true"]{border-color:var(--life); color:var(--life)}
+.marks li:nth-child(4) a[aria-current="true"]{border-color:var(--revival); color:var(--revival)}
+
+/* ─────────── 절(힘줄) ─────────── */
+.mv{ --tone:var(--ink); --tone-soft:var(--paper-2); padding-top:3.25rem; padding-bottom:1rem; scroll-margin-top:3.25rem }
+#s1{--tone:var(--faith);   --tone-soft:var(--faith-soft)}
+#s2{--tone:var(--general); --tone-soft:var(--general-soft)}
+#s3{--tone:var(--life);    --tone-soft:var(--life-soft)}
+#s4{--tone:var(--revival); --tone-soft:var(--revival-soft)}
+
+.mv-head{margin:0 0 2rem; padding-left:2.75rem; position:relative}
+.mv-head::before{ /* 마디 */
+  content:attr(data-numeral);
+  position:absolute; left:0; top:.125rem;
+  width:1.875rem; height:1.875rem; border-radius:50%;
+  background:var(--tone); color:var(--paper);
+  font-family:var(--serif); font-weight:700; font-size:.8125rem;
+  display:flex; align-items:center; justify-content:center;
+  letter-spacing:.02em;
+}
+.mv-head::after{ /* 힘줄 */
+  content:""; position:absolute; left:.90625rem; top:2.125rem; bottom:-2rem;
+  width:1px; background:var(--tone); opacity:.28;
+}
+.mv-head h2{
+  font-family:var(--serif); font-weight:700; font-size:1.5rem;
+  line-height:1.45; margin:0 0 .5rem; color:var(--tone);
+}
+.mv-head .refs{
+  font-size:.8125rem; color:var(--ink-3); margin:0 0 .75rem; letter-spacing:.01em;
+}
+.mv-head .gloss{
+  font-family:var(--serif); font-size:1.0625rem; line-height:1.8;
+  color:var(--ink-2); margin:0;
+}
+
+h3{
+  font-family:var(--serif); font-weight:700;
+  font-size:1.1875rem; line-height:1.55; letter-spacing:-.01em;
+  margin:2.75rem 0 .875rem;
+}
+h3 .tag{
+  display:inline-block; font-family:var(--sans); font-size:.75rem; font-weight:600;
+  color:var(--tone); margin-right:.4375rem; vertical-align:.09em;
+}
+h4{
+  font-size:.9375rem; font-weight:600; margin:2rem 0 .625rem; color:var(--ink-2);
+}
+p{margin:0 0 1.0625rem}
+p:last-child{margin-bottom:0}
+
+/* ─────────── 성경 구절 ─────────── */
+.verse{
+  margin:1.5rem 0; padding:.125rem 0 .125rem 1.0625rem;
+  border-left:2px solid var(--tone);
+}
+.verse p{
+  font-family:var(--serif); font-size:1rem; line-height:1.95; margin:0 0 .5rem;
+}
+.verse cite{
+  display:block; font-family:var(--sans); font-style:normal;
+  font-size:.8125rem; font-weight:600; color:var(--tone); letter-spacing:.01em;
+}
+
+/* ─────────── 사역의 말씀 인용 ─────────── */
+.ministry{
+  margin:2rem 0; padding:1.5rem 0 1.25rem;
+  border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+}
+.ministry blockquote{
+  margin:0 0 .875rem;
+  font-family:var(--serif); font-size:1.0625rem; line-height:1.95;
+  color:var(--ink);
+}
+.ministry blockquote p{margin:0 0 .875rem; font:inherit}
+.ministry blockquote p:last-child{margin:0}
+.ministry figcaption{
+  font-size:.75rem; color:var(--ink-3); line-height:1.6;
+}
+.ministry.accent{
+  border:0; background:var(--tone-soft);
+  padding:1.5rem 1.25rem 1.25rem; border-left:3px solid var(--tone);
+}
+
+/* ─────────── 좌우 대조표 ─────────── */
+.split{margin:1.5rem 0; border-top:2px solid var(--ink)}
+.split-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border-bottom:1px solid var(--rule);
+}
+.split-row > div{padding:.8125rem .875rem .8125rem 0; font-size:.9375rem; line-height:1.7}
+.split-row > div + div{padding-left:.875rem; padding-right:0; border-left:1px solid var(--rule)}
+.split-row.head > div{
+  font-weight:600; font-size:.8125rem; letter-spacing:.01em; padding-top:.6875rem; padding-bottom:.6875rem;
+}
+.split-row.head .a{color:var(--ink-3)}
+.split-row.head .b{color:var(--tone)}
+.split .b{color:var(--ink)}
+.split .a{color:var(--ink-2)}
+.split-note{
+  font-size:.875rem; color:var(--ink-2); margin:.875rem 0 0; line-height:1.75;
+}
+.split-note strong{color:var(--tone); font-weight:600}
+
+/* ─────────── 큰 숫자 + 픽토그램 ─────────── */
+.bignum{display:flex; align-items:baseline; gap:.75rem; margin:1.75rem 0 1.125rem}
+.bignum .n{
+  font-family:var(--serif); font-weight:700; font-size:3.75rem; line-height:.9;
+  color:var(--tone);
+}
+.bignum .l{font-size:.9375rem; line-height:1.6; color:var(--ink-2); max-width:14rem}
+
+.seven{list-style:none; margin:1.25rem 0 0; padding:0; border-top:1px solid var(--rule)}
+.seven li{
+  display:grid; grid-template-columns:1.75rem 1fr; gap:.875rem; align-items:start;
+  padding:.9375rem 0; border-bottom:1px solid var(--rule);
+}
+.seven svg{width:1.75rem; height:1.75rem; color:var(--tone); flex:none; margin-top:.0625rem}
+.seven .t{font-size:.9375rem; line-height:1.65; font-weight:500}
+.seven .i{
+  display:block; font-size:.6875rem; font-weight:600; color:var(--ink-3);
+  letter-spacing:.03em; margin-bottom:.125rem;
+}
+
+/* ─────────── 전병 ─────────── */
+.cake{
+  margin:1.75rem 0; padding:1.5rem 1.25rem;
+  background:var(--tone-soft); border-left:3px solid var(--tone);
+}
+.cake svg{display:block; width:100%; max-width:15rem; height:auto; margin:0 auto 1rem}
+.cake p{font-size:.9375rem; line-height:1.75; margin:0; color:var(--ink-2)}
+.cake p strong{color:var(--ink); font-weight:600}
+
+/* ─────────── 열 가지 조언 ─────────── */
+.advice{margin:1.5rem 0 0; border-top:2px solid var(--ink)}
+.advice details{border-bottom:1px solid var(--rule)}
+.advice summary{
+  list-style:none; cursor:pointer; padding:.9375rem 1.75rem .9375rem 0;
+  position:relative; display:block;
+}
+.advice summary::-webkit-details-marker{display:none}
+.advice summary::after{
+  content:"+"; position:absolute; right:.125rem; top:.875rem;
+  font-size:1.125rem; line-height:1; color:var(--ink-3); font-weight:400;
+}
+.advice details[open] summary::after{content:"−"}
+.advice .chip{
+  display:inline-block; font-size:.6875rem; font-weight:600; letter-spacing:.03em;
+  padding:.0625rem .4375rem; border-radius:.125rem; margin-bottom:.375rem;
+}
+.advice .avoid{background:var(--faith-soft); color:var(--faith)}
+.advice .press{background:var(--general-soft); color:var(--general)}
+.advice .txt{display:block; font-size:.9375rem; line-height:1.7; font-weight:500}
+.advice .body{
+  padding:0 0 1.125rem; font-size:.9375rem; line-height:1.85; color:var(--ink-2);
+}
+.advice .body p{margin:0 0 .875rem}
+.advice .body p:last-child{margin:0}
+.advice .body .src{font-size:.75rem; color:var(--ink-3); margin-top:.75rem}
+
+/* ─────────── 자라남 막대 ─────────── */
+.growth{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem;
+  margin:1.5rem 0 .875rem; align-items:end;
+}
+.growth div{text-align:center}
+.growth .bar{
+  background:var(--life-soft); border-bottom:2px solid var(--life);
+  border-radius:.125rem .125rem 0 0; margin-bottom:.5rem;
+}
+.growth .b1{height:.375rem}
+.growth .b2{height:.9375rem}
+.growth .b3{height:2.25rem}
+.growth .b4{height:5rem; background:var(--life)}
+.growth .c{font-size:.75rem; line-height:1.5; color:var(--ink-3)}
+
+.triad{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem;
+  margin:1.5rem 0 .5rem; text-align:center;
+}
+.triad div{padding:.875rem .375rem; background:var(--life-soft); border-radius:.125rem}
+.triad div:last-child{background:var(--life); color:var(--paper)}
+.triad .who{display:block; font-size:.75rem; color:var(--ink-3); margin-bottom:.1875rem}
+.triad div:last-child .who{color:rgba(242,244,239,.75)}
+.triad .did{display:block; font-family:var(--serif); font-size:1rem; font-weight:700}
+
+/* ─────────── 세 구절 카드 ─────────── */
+.three{margin:1.5rem 0; border-top:1px solid var(--rule)}
+.three article{padding:1.0625rem 0; border-bottom:1px solid var(--rule)}
+.three .ref{
+  font-size:.75rem; font-weight:600; color:var(--tone); letter-spacing:.01em;
+  margin:0 0 .375rem;
+}
+.three .t{font-family:var(--serif); font-size:.9375rem; line-height:1.85; margin:0 0 .5rem}
+.three .p{font-size:.8125rem; line-height:1.7; color:var(--ink-2); margin:0}
+.three .p b{color:var(--tone); font-weight:600}
+
+/* ─────────── 흐름도 ─────────── */
+.flow{list-style:none; margin:1.5rem 0 0; padding:0; position:relative}
+.flow::before{
+  content:""; position:absolute; left:.6875rem; top:1rem; bottom:1.5rem;
+  width:1px; background:var(--revival); opacity:.35;
+}
+.flow li{position:relative; padding:0 0 1.375rem 2.5rem}
+.flow li:last-child{padding-bottom:0}
+.flow li::before{
+  content:""; position:absolute; left:.375rem; top:.5rem;
+  width:.625rem; height:.625rem; border-radius:50%;
+  background:var(--paper); border:2px solid var(--revival);
+}
+.flow li:last-child::before{background:var(--revival)}
+.flow .s{font-size:.9375rem; line-height:1.7; font-weight:500}
+.flow .d{display:block; font-size:.8125rem; color:var(--ink-3); line-height:1.6; margin-top:.125rem; font-weight:400}
+.flow li:last-child .s{font-family:var(--serif); font-size:1.125rem; font-weight:700; color:var(--revival)}
+
+/* ─────────── 닫는 말 ─────────── */
+.close{
+  margin:3.5rem 0 0; padding:2.5rem 0 3rem;
+  border-top:1px solid var(--rule); text-align:center;
+}
+.close p{
+  font-family:var(--serif); font-size:1.25rem; line-height:2;
+  color:var(--revival); margin:0 0 .875rem; font-weight:700;
+}
+.close cite{font-style:normal; font-size:.8125rem; color:var(--ink-3)}
+
+footer{
+  border-top:1px solid var(--rule); padding-top:1.75rem; padding-bottom:3.5rem;
+  font-size:.75rem; line-height:1.85; color:var(--ink-3);
+}
+footer b{display:block; font-weight:600; color:var(--ink-2); margin-bottom:.375rem}
+
+@media (min-width:34rem){
+  .hero h1{font-size:2.5rem}
+  .mv-head h2{font-size:1.75rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <p class="lesson">제32과</p>
+  <h1>교회생활의<br>특수성과 일반성과<br>실행성</h1>
+  <p class="hero-lead">믿음은 하나이고, 견해는 넓으며, 생명은 자란다.</p>
+
+  <figure class="orbit">
+    <svg viewBox="0 0 340 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="orbT orbD">
+      <title id="orbT">교회생활의 네 겹 구조</title>
+      <desc id="orbD">중심에 하나의 믿음인 특수성, 그 둘레에 견해를 품는 일반성, 그 위에 자라는 생명의 실행성, 그리고 밖으로 퍼지는 새로운 부흥.</desc>
+
+      <circle cx="170" cy="196" r="166" fill="none" stroke="#8C6316" stroke-opacity=".30" stroke-width="1" stroke-dasharray="2 9"/>
+      <circle cx="170" cy="196" r="152" fill="none" stroke="#8C6316" stroke-opacity=".42" stroke-width="1" stroke-dasharray="3 6"/>
+
+      <circle cx="170" cy="196" r="134" fill="#E4EEE0" stroke="#3F7538" stroke-opacity=".40" stroke-width="1"/>
+      <circle cx="170" cy="196" r="98" fill="#E1ECEF" stroke="#245C6B" stroke-opacity=".45" stroke-width="1"/>
+      <circle cx="170" cy="196" r="54" fill="#6A2C43"/>
+
+      <rect x="112" y="26" width="116" height="20" fill="#F2F4EF"/>
+      <text x="170" y="41" text-anchor="middle" font-family="Gowun Batang, serif" font-size="14" font-weight="700" fill="#8C6316">새로운 부흥</text>
+
+      <text x="170" y="90" text-anchor="middle" font-family="Gowun Batang, serif" font-size="14" font-weight="700" fill="#3F7538">실행성 · 생명</text>
+      <text x="170" y="126" text-anchor="middle" font-family="Gowun Batang, serif" font-size="14" font-weight="700" fill="#245C6B">일반성 · 견해</text>
+
+      <text x="170" y="192" text-anchor="middle" font-family="Gowun Batang, serif" font-size="16" font-weight="700" fill="#F2F4EF">특수성</text>
+      <text x="170" y="214" text-anchor="middle" font-family="IBM Plex Sans KR, sans-serif" font-size="12" fill="#F2F4EF" fill-opacity=".82">하나의 믿음</text>
+    </svg>
+  </figure>
+
+  <ol class="orbit-key">
+    <li class="k1"><i class="swatch"></i><b>특수성</b><span>우리가 믿는 대상. 모든 그리스도인이 동일하게 붙드는 유일한 믿음.</span></li>
+    <li class="k2"><i class="swatch"></i><b>일반성</b><span>서로 달라도 되는 자리. 견해를 판단하지 않고 받아들이는 품.</span></li>
+    <li class="k3"><i class="swatch"></i><b>실행성</b><span>믿음의 항목은 아니지만 반드시 실행되어야 하는 것. 생명이 으뜸.</span></li>
+    <li class="k4"><i class="swatch"></i><b>부흥</b><span>하나님-사람의 생활이 이끌어 올, 역사상 기록된 적 없는 부흥.</span></li>
+  </ol>
+</header>
+
+<nav class="marks" aria-label="본문 이동">
+  <ol>
+    <li><a href="#s1">특수성</a></li>
+    <li><a href="#s2">일반성</a></li>
+    <li><a href="#s3">실행성</a></li>
+    <li><a href="#s4">부흥</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ══════════ I ══════════ -->
+<section class="mv wrap" id="s1" aria-labelledby="h1t">
+  <div class="mv-head" data-numeral="I">
+    <h2 id="h1t">교회생활의 특수성</h2>
+    <p class="refs">딛 1:4, 벧후 1:1, 계 14:12, 딤후 4:7</p>
+    <p class="gloss">양보할 수 없는 하나의 핵. 성경과 하나님, 그리스도, 그리스도의 일, 구원, 교회에 관한 믿음들로 구성된 객관적인 믿음이다.</p>
+  </div>
+
+  <blockquote class="verse">
+    <p>나 바울은 동일한 믿음에 따라 참된 아들이 된 디도에게 편지합니다. 하나님 아버지와 우리 구주 그리스도 예수님에게서 오는 은혜와 평안이 있기를 바랍니다.</p>
+    <cite>딛 1:4</cite>
+  </blockquote>
+
+  <h3><span class="tag">A</span>믿음이라는 한 단어, 두 가지 의미</h3>
+  <p>신약에서 ‘믿음’은 두 가지로 쓰인다. 교회생활의 특수성이라고 할 때의 믿음은 이 가운데 두 번째, 곧 우리가 믿는 대상을 가리킨다.</p>
+
+  <div class="split">
+    <div class="split-row head"><div class="a">주관적 믿음</div><div class="b">객관적 믿음</div></div>
+    <div class="split-row"><div class="a">믿는 <b>행위</b></div><div class="b">믿는 <b>대상</b></div></div>
+    <div class="split-row"><div class="a">우리가 주 예수님을 믿는다</div><div class="b">우리가 믿는 것들, 우리의 믿음</div></div>
+    <div class="split-row"><div class="a">롬 5:1, 엡 2:8, 히 11:1</div><div class="b">딛 1:4, 계 14:12, 딤후 4:7</div></div>
+  </div>
+  <p class="split-note"><strong>교회생활의 특수성은 오른쪽이다.</strong> 이것이 소위 우리 그리스도인의 믿음이다.</p>
+
+  <figure class="ministry">
+    <blockquote><p>이와 같이 우리가 교회생활의 특수성이 믿음이라고 말할 때, 우리는 우리가 믿는 대상인 믿음을 뜻한다. 이것이 소위 우리 그리스도인의 믿음이다. 그리스도인으로서 우리는 유일한 믿음을 갖는다.</p></blockquote>
+    <figcaption>교회생활의 특수성, 일반성, 실행성, 11-12쪽</figcaption>
+  </figure>
+
+  <blockquote class="verse">
+    <p>여기에 성도들의 인내가 있습니다. 그들은 하나님의 계명들과 예수님의 믿음을 지키는 사람들입니다.</p>
+    <cite>계 14:12</cite>
+  </blockquote>
+
+  <h3><span class="tag">B</span>주님의 회복의 일곱 가지 중점</h3>
+  <div class="bignum">
+    <span class="n">7</span>
+    <span class="l">이기는 이가 되기 위해 알아야 할 하나님의 회복의 기본 항목. 그 중심과 목표는 공기와 같은 영이신 그리스도이시다.</span>
+  </div>
+
+  <ol class="seven">
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="8.5" r="4.5"/><circle cx="8" cy="15" r="4.5"/><circle cx="16" cy="15" r="4.5"/></svg>
+      <span class="t"><span class="i">첫째</span>과정을 거치신 삼일 하나님께 참여함</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14v5a7 7 0 0 1-14 0z"/><path d="M19 8.5h2a2 2 0 0 1 0 4h-2"/><path d="M6 21h12"/></svg>
+      <span class="t"><span class="i">둘째</span>모든 것을 포함하시고 모든 것에 미치시는 그리스도에 대한 풍성한 누림</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 13h15a3 3 0 1 1-3 3"/><path d="M3 18h8"/></svg>
+      <span class="t"><span class="i">셋째</span>완결되시고 복합되신 영에 대한 충만한 체험</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 12c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6z"/><path d="M12 15c0-3-2.2-5.2-5.2-5.2C6.8 12.8 9 15 12 15z"/></svg>
+      <span class="t"><span class="i">넷째</span>절대적으로 영원한 생명에 의해 삶</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/><rect x="8.5" y="4" width="7" height="7"/></svg>
+      <span class="t"><span class="i">다섯째</span>그리스도의 몸을 건축함</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3 19h18"/><path d="M12 15V7"/><circle cx="12" cy="5" r="2"/><path d="M7 19v-3M17 19v-3"/></svg>
+      <span class="t"><span class="i">여섯째</span>지방의 터에서 교회들을 실행함</span>
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/></svg>
+      <span class="t"><span class="i">일곱째</span>그리스도의 몸의 하나를 지킴</span>
+    </li>
+  </ol>
+  <p class="split-note" style="margin-top:1.125rem">활력 그룹의 훈련과 실행, 26쪽</p>
+</section>
+
+<!-- ══════════ II ══════════ -->
+<section class="mv wrap" id="s2" aria-labelledby="h2t">
+  <div class="mv-head" data-numeral="II">
+    <h2 id="h2t">교회생활의 일반성</h2>
+    <p class="refs">골 2:19, 롬 14:1, 롬 14:21, 고전 12:24하-25</p>
+    <p class="gloss">바울은 모든 합당한 교리를 알고 있었으나, 교회생활의 실행에 대해서는 매우 일반적이었다. 몸의 하나를 지키려면 반드시 이 일반성을 실행해야 한다.</p>
+  </div>
+
+  <blockquote class="verse">
+    <p>여러분은 믿음이 약한 사람을 받아들이고, 그의 견해에 대해 판단하려고 하지 마십시오.</p>
+    <cite>롬 14:1</cite>
+  </blockquote>
+
+  <blockquote class="verse">
+    <p>하나님은 몸을 고르게 섞으시어 부족한 지체에게 더욱 귀한 것을 주셨습니다. 이것은 몸 안에서 분열이 없이 오히려 지체들이 서로를 동일하게 돌보도록 하시려는 것입니다.</p>
+    <cite>고전 12:24하-25</cite>
+  </blockquote>
+
+  <h3><span class="tag">A</span>일반성도 균형 잡혀야 한다</h3>
+  <p>우리는 특수성이 일반성에 의해 균형 잡히는 것을 보아 왔다. 그런데 일반성 역시 무언가에 의해 균형 잡혀야 한다. 사람은 쉽게 한 면으로 치우치고 극단으로 나아가기 때문이다.</p>
+
+  <div class="cake">
+    <svg viewBox="0 0 240 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ckT">
+      <title id="ckT">뒤집지 않은 전병 — 한 면은 타고 한 면은 날것으로 남는다</title>
+      <defs>
+        <pattern id="hatch" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="5" stroke="#245C6B" stroke-opacity=".55" stroke-width="2"/>
+        </pattern>
+      </defs>
+      <path d="M120 22a44 44 0 0 0 0 88z" fill="url(#hatch)" stroke="#245C6B" stroke-width="1.4"/>
+      <path d="M120 22a44 44 0 0 1 0 88z" fill="#F2F4EF" stroke="#245C6B" stroke-width="1.4"/>
+      <line x1="120" y1="22" x2="120" y2="110" stroke="#245C6B" stroke-width="1.4"/>
+      <text x="58" y="70" text-anchor="middle" font-family="IBM Plex Sans KR, sans-serif" font-size="12" font-weight="600" fill="#245C6B">탄 면</text>
+      <text x="182" y="70" text-anchor="middle" font-family="IBM Plex Sans KR, sans-serif" font-size="12" font-weight="600" fill="#245C6B">날 면</text>
+    </svg>
+    <p><strong>“에브라임은 뒤집지 않은 전병이다.”</strong> (호 7:8) 오븐이나 팬에서 구워지는 전병은 거듭 뒤집어질 필요가 있다. 뒤집지 않으면 한 면은 타고 다른 면은 날 것으로 있을 것이다. 이스라엘 중 얼마는 주님이 보시기에 이러하였고, 이것은 여전히 오늘날 주님의 자녀들에게 있는 문제이다.</p>
+  </div>
+  <p class="split-note">교회생활의 특수성, 일반성, 실행성, 56쪽</p>
+
+  <h3><span class="tag">B</span>우리의 배경을 고려하며 걷는다</h3>
+  <figure class="ministry">
+    <blockquote>
+      <p>우리의 배경은 가볍거나 피상적인 배경이 아니다. 왜냐하면 오랜 세월 동안 우리는 주님을 추구하고, 그분을 알고, 그분을 체험하고, 그분을 살고, 그분 안에서 자라고, 그분께서 우리 안에서 증가되시고 확대되시게 하는 것에 주의를 기울여 왔기 때문이다. … 이 외에도 우리가 가진 더 전진되고 더 깊은 배경은 바로, 그분의 유기체인 교회를 건축하기 위해 필요한 모든 것을 갖도록 하나님의 경륜을 관심하는 것이다.</p>
+      <p>그러므로 우리는 한편으로는 주님께서 우리에게 계시하신 대로 새 길, 곧 하나님께서 정하신 길을 취해야 하며, 다른 한편으로는 우리가 전진해 나가는 동안에 우리의 배경, 우리의 현재의 상황, 지구상의 많은 교회들을 관심해야 한다.</p>
+    </blockquote>
+    <figcaption>활력 그룹의 긴급한 필요에 관한 교통, 1권, 36-37쪽</figcaption>
+  </figure>
+
+  <h3><span class="tag">C</span>빛을 본 후, 내가 있는 지방에서</h3>
+  <p>하나님께서 정하신 길에 관한 빛을 본 후 우리가 있는 지방에서 교회생활을 하는 길에 관한 열 가지 조언. 각 항목을 열면 사역의 말씀이 그대로 펼쳐진다.</p>
+
+  <div class="advice">
+    <details>
+      <summary><span class="chip avoid">삼가라</span><span class="txt">결코 하나님께서 정하신 길을 다른 사람들에게 강요하지 말고 조장하지 말라</span></summary>
+      <div class="body">
+        <p>우리는 새 길을 다른 사람들에게 강요하거나 조장하지 말아야 한다. 새 길을 수행하는 최상의 길은 하나의 본으로서 생활하는 것이다. 사람들의 가정을 방문함으로써 복음을 전하는 것은 전적으로 성경적이다. 물론 어떤 이들은 이런 식으로 복음을 전하는 것을 반가워하지 않을 수도 있다. 그러나 우리는 이것을 그들에게 강요해서는 안 된다. 성도들이 이 길을 취할 것인지의 여부는 그들에게 달려 있다. 우리는 주님께서 그분의 행함을 위하실 것을 신뢰한다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">주변 여건의 제한 아래서 주님께서 인도하시는 대로 실행하기를 힘쓰라</span></summary>
+      <div class="body">
+        <p>당신은 사람들의 가정을 방문함으로써 복음을 전하는 실행을 하지 않는 지방의 교회 안에 있을지도 모른다. 한편으로 당신은 이것을 다른 사람들에게 강요하지 말고 조장하지도 말아야 한다. 다른 한편으로 당신은 이것을 위한 당신의 부담을 스스로 실행할 수 있다.</p>
+        <p>만일 우리가 이 새 길을 조장하지도 어떤 이에게도 강요하지도 않고 조용히 취한다면, 다른 사람들의 마음을 상하게 하지 않을 것이며, 서로 다른 의견을 불러일으키지 않을 것이다. 당신이 사는 지방의 교회가 새 길을 실행하지 않더라도, 당신은 최선을 다해 교회의 정규 집회들에 참석해야 한다. 적어도 주일 집회에 참석해야 하고, 가능하다면 기도 집회에도 참석해야 한다. 사실상, 이런 가정 집회들이 하나님의 눈에는 교회 집회들이다. 당신의 지방에서 모든 것을 사랑스럽게, 부드럽게, 지혜롭게 행하라.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">어느 단계에서나 주님의 겸손과 관용을 표현하라</span></summary>
+      <div class="body">
+        <p>모든 것을 관용과 겸손으로 하라. 결코 어느 것도 오만하게 하지 말라. 만일 우리가 복음을 전파하고 가정 집회를 세우는 선한 일을 하고 있다면, 우리는 교만한 영이나 태도를 갖지 말아야 한다. 만일 우리가 신성한 삼일성 안에서, 또 신성한 삼일성과 함께 살고 있다면, 우리 중 아무도 교만할 수 없다. 어떤 상황에서도 우리는 주님께서 우리에게 주신 한계를 넘어서지 말아야 한다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip avoid">삼가라</span><span class="txt">적극적이지 않은 누구라도 결코 무시하지 말라</span></summary>
+      <div class="body">
+        <p>새 길에 적극적인 사람과 그렇지 않은 사람 사이를 분리하거나 선을 긋지 말라. 우리는 새 길에 적극적인 성도들만 회복 안에 있다는 관념을 갖지 말아야 한다. 한 지방의 교회 안에 있는 형제라면 새 길을 찬성하지 않는다 해도 여전히 회복 안에 있는 것이다.</p>
+        <p>반대하는 것은 불화를 일으키고, 불화는 결국 분열을 낳을 것이다. 이것은 주님의 몸에 손상을 줄 것이다. 비록 작은 불화라 할지라도 교회생활 안에 있는 주님의 축복을 죽일 수 있다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">건축하는 영과 태도를 가지고, 지방의 교회가 현재 실행하는 것에 자신을 복종시키라</span></summary>
+      <div class="body">
+        <p>설사 당신이 있는 지방의 교회가 새 길을 실행하지 않는다 해도, 여전히 당신은 교회에 복종해야 한다. 만일 당신이 집회 중에 기회를 잡아서 새 길을 실행할 것을 조장하거나 그것에 관해 전하거나 가르친다면, 이것은 합당하지 못한 것이며, 당신이 그 교회의 현재의 실행에 복종하지 않는다는 것을 가리킨다.</p>
+        <p>당신이 말하는 것은 그 영의 인도하심에 달려 있다. 교회의 영과 태도와 분위기는 당신이 새 길에 관해 교통하거나 새 길을 실행하는 것에 대해 간증하도록 허용한다. 이것은 조장하거나 설교하거나 가르치는 것과 다르다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip avoid">삼가라</span><span class="txt">누구와도 논쟁하거나 말다툼하거나 싸우지 말라</span></summary>
+      <div class="body">
+        <p>일단 말다툼이 생기고 있다고 느낀다면, 당신은 말하고 있는 것을 중단해야 한다. 만일 한 가정에 다섯 명의 성도들이 함께 모였는데, 그중 두세 명이 반대하고 있다면 새 길에 관해 말하지 말라. 주님의 주권적인 안배 아래에서, 이 반대하는 이들은 자리를 뜰 것이다.</p>
+        <p>우리는 어떤 것을 위해서도 싸우거나 분투할 필요가 없다. 우리는 주님의 새 길이 유익하고 성경적이며 실행할 수 있는 것임을 분명히 안다. 따라서 우리는 조장하지 않고도 그것을 실행한다. 그러나 기회가 있다면, 우리는 성도들과 교통하고 주님의 손에 그 결과를 맡길 수 있다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip avoid">삼가라</span><span class="txt">달콤한 조화 가운데, 어떤 종류의 분열적인 말이나 행동도 피하라</span></summary>
+      <div class="body">
+        <p>때때로 새 길에 아주 적극적인 형제들 가운데 어떤 이들은 분열적인 어조로 말했다. 이것은 지혜롭지 못하고 좋지 않은 것이다. 우리는 분열을 향해 기울어지는 경향을 만들 만한 어떤 것도 피해야 하고 거절해야 한다.</p>
+        <p>그러나 달콤한 조화로 그리스도의 몸의 하나를 지키는 것은 우리에게 달려 있다. 우리의 행위와 말하는 것과 행동으로, 우리는 그 상황을 조절할 수 있고 또 조화를 회복할 수 있다. 우리는 같은 믿음을 가진 형제들이요, 같은 회복 안에서 교회생활을 하고 있다. 이것이 하나를 위한 우리의 근거이다. 우리는 모든 것에 있어서 전부 같을 수 있다는 기대를 하지 말아야 한다. 그러므로 우리는 상황을 통일시키려고 시도하지 말아야 한다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">현재 하고 있는 실행의 흐름에 따라 그 교회의 모든 집회에서 기능을 발휘하라</span></summary>
+      <div class="body">
+        <p>어떤 젊은 성도들은 새 길 안에서 훈련을 받았을 것이다. 그러나 그들이 새 길을 실행하지 않는 교회에 다시 돌아갔을 때, 그들은 기능을 발휘하려고 하지 않았다. 그들은 냉담한 태도로 교회 집회들에 참석했다. 이것은 그릇된 것이다.</p>
+        <p>당신은 자신의 선호에 따르지 않고, 집회 안에 있는 현재의 흐름에 따라 기능을 발휘하도록 힘써야 한다. 현재 진행되고 있는 것이 우상을 숭배하거나 분열적이거나 죄가 아닌 한, 당신이 있는 지방의 교회의 현재의 실행의 흐름을 따라 모든 집회들에서 기능을 발휘하도록 힘써야 한다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">주님의 새로운 움직임을 위해 유력한 기도들을 하라</span></summary>
+      <div class="body">
+        <p>우리는 이 땅 위에 있는 주님의 자녀들 가운데에 현존하는 낡고 전통적인 집회 방식과 봉사 방식이 있다는 것을 반드시 인식해야 한다. 습관을 바꾸기란 어려운 일이다. 포크를 사용하여 먹는 데 익숙한 사람을 젓가락으로 먹도록 전환시키는 것은 어려울 것이다. 전통적인 집회 방식과 봉사 방식은 거의 이천 년이나 된 습관이다.</p>
+        <p>그러므로 우리는 하늘에 속한 이상을 볼 수 있도록 우리 자신을 위해서와 모든 성도들을 위해서 기도해야 한다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="chip press">힘쓰라</span><span class="txt">주님의 새로운 움직임을 관심하는 교회들과 성도들과의 교통을 유지하라</span></summary>
+      <div class="body">
+        <p>우리는 교회들이나 성도들과 단절되거나 멀어져서는 안 된다. 우리는 서로 많은 교통을 가져야 한다. … 나는 많은 교회들이 다른 나라들과 대륙들에 있는 성도들이 어떻게 주님께서 그들의 지방에서 움직이고 계신지를 알게 하는 소식지를 발행할 수 있기를 소망한다. 이것은 모든 성도들에게, 심지어는 외부에 있는 교파 내의 성도들에게까지도 영양을 공급하고 지원하며 도움을 주는 데 기여할 것이다.</p>
+        <p class="src">그리스도의 몸의 건축을 위해 그리스도를 말함, 171-180쪽</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════ III ══════════ -->
+<section class="mv wrap" id="s3" aria-labelledby="h3t">
+  <div class="mv-head" data-numeral="III">
+    <h2 id="h3t">교회생활의 실행성</h2>
+    <p class="refs">엡 4:12-13, 히 10:20, 고전 3:6</p>
+    <p class="gloss">이것들은 우리 그리스도인의 믿음에 속한 항목들이 아니다. 그러나 그것들은 반드시 교회생활의 실행성의 한 부분이 되어야 한다.</p>
+  </div>
+
+  <blockquote class="verse">
+    <p>이것은 성도들을 온전하게 하여 그 사역의 일을 하게 하려는 것, 곧 그리스도의 몸을 건축하게 하려는 것입니다. 그리하여 우리 모두가 믿음에서의 하나와 하나님의 아들에 관한 온전한 지식에서의 하나에 이르게 하고, 충분히 성장한 사람에 이르게 하며, 그리스도의 충만의 신장의 분량에 이르게 하려는 것입니다.</p>
+    <cite>엡 4:12-13</cite>
+  </blockquote>
+
+  <h3><span class="tag">A</span>생명이 으뜸이다</h3>
+  <figure class="ministry accent">
+    <blockquote>
+      <p>생명은 교회생활의 실행성에서 가장 우선적으로 강조되는 것이다. 우리에게는 생명과 생명의 성장이 필요하며, 생명과 생명의 성장을 위해서는 주님을 먹어야 한다. 먹는 것은 충분히 성장한 사람에 이르도록 자라게 한다.</p>
+      <p>나는 우리 모두가 정상적인 교회생활 안에서 생명과 생명의 성장에 속한 문제에 모든 주의를 기울이는 것이 합당한 실행이라는 것을 깨닫기 바란다. 그렇지 않으면 우리가 참된 지방 교회일지라도 온갖 문제들로 가득한 죽은 교회일 것이다.</p>
+    </blockquote>
+    <figcaption>교회생활의 특수성, 일반성, 실행성, 89, 116, 84쪽</figcaption>
+  </figure>
+
+  <h3><span class="tag">B</span>죽음과 부활의 길</h3>
+  <blockquote class="verse">
+    <p>예수님은 휘장, 곧 그분의 육체를 통해서 우리를 위하여 새롭고 살아 있는 길을 열어 놓으셨습니다.</p>
+    <cite>히 10:20</cite>
+  </blockquote>
+
+  <div class="split">
+    <div class="split-row head"><div class="a">옛 길 — 옛 창조</div><div class="b">새 길 — 새 창조</div></div>
+    <div class="split-row"><div class="a">육체로 하나님을 섬김</div><div class="b">우리의 영으로 섬김</div></div>
+    <div class="split-row"><div class="a">고등 교육과 인생의 경험을 자격으로 삼음</div><div class="b">자아와 육체와 타고난 힘을 부인함</div></div>
+    <div class="split-row"><div class="a">타고난 사람의 영역</div><div class="b">전적으로 생명 안에</div></div>
+  </div>
+  <p class="split-note"><strong>새 길의 비결은 죽음과 부활이다.</strong> 타고난 사람은 이 길을 갈 수 없고, 육체는 더더욱 이 길을 갈 수 없다.<br>새 길의 유기적인 실행, 69-70쪽</p>
+
+  <h3><span class="tag">C</span>사람들을 부흥시키는 길</h3>
+  <div class="split">
+    <div class="split-row head"><div class="a">과거의 집회 방식</div><div class="b">성경에 계시된 집회</div></div>
+    <div class="split-row"><div class="a">참석하도록 요청받음</div><div class="b">부흥되도록 요구받음</div></div>
+    <div class="split-row"><div class="a">몇 사람이 찬송·기도·복음을 책임짐</div><div class="b">모든 사람이 기도하고 찬송하며 말하고 간증함</div></div>
+    <div class="split-row"><div class="a">그저 참석하기만 하면 충분</div><div class="b">반드시 영 안에서 살아야 함</div></div>
+  </div>
+  <p class="split-note">우리가 다른 이들에게 상처를 준 것이 양심에 만져진다면, 즉시 주님께 자백하고 그 사람과도 화해해야 한다. 오직 그럴 때에만 우리는 교통을 회복할 수 있고, 집회에서 기능을 발휘할 수 있다.<br>성전의 재건을 위해 뒤처지지 않음, 233-235쪽</p>
+
+  <h3><span class="tag">D</span>각 사람의 은사의 기능과 생명의 역량을 발전시킨다</h3>
+  <p>부정적인 방면에서 하나님께서 정하신 길은 전통적인 방식을 죽이고 폐지한다. 그러나 긍정적인 방면에서는 각 사람의 생명의 은사와 생명의 기능과 생명의 역량을 발전시킨다. 다만 생명의 성장과 확산은 점진적이다.</p>
+
+  <div class="growth">
+    <div><div class="bar b1"></div><div class="c">씨를 뿌린 날</div></div>
+    <div><div class="bar b2"></div><div class="c">다음 날<br>똑같아 보임</div></div>
+    <div><div class="bar b3"></div><div class="c">며칠 뒤<br>똑같아 보임</div></div>
+    <div><div class="bar b4"></div><div class="c">몇 달 뒤<br>초록으로 덮임</div></div>
+  </div>
+  <p class="split-note">정원의 잔디는 점진적으로 자라고 확산된다. 오늘 씨를 뿌리고 다음 날 가서 본다면 정원은 전날과 거의 똑같아 보인다. 결국 몇 달이 지나면, 아름다운 초록색 잔디가 정원을 가득 덮을 것이다.</p>
+
+  <div class="triad">
+    <div><span class="who">바울</span><span class="did">심었고</span></div>
+    <div><span class="who">아볼로</span><span class="did">물을 주었고</span></div>
+    <div><span class="who">하나님</span><span class="did">자라게</span></div>
+  </div>
+  <p class="split-note">고전 3:6 — 그러므로 오랜 시간 동안 인내하면서 합당하고 적절하게 수고하는 것이 필요하다.<br>주님을 섬기고자 하는 이들에게 주신 말씀, 146-147쪽</p>
+
+  <h3><span class="tag">E</span>하나님께서 정하신 길이며 성경적인 길</h3>
+  <p>매우 중요한 세 구절이 초대 교회 집회의 참된 상황과 참된 상태를 보여 준다.</p>
+
+  <div class="three">
+    <article>
+      <p class="ref">행 2:46</p>
+      <p class="t">그들이 날마다 한마음 한뜻으로 성전에 모이고, 이 집 저 집에서 떡을 떼기를 꾸준히 계속하고, 기쁨과 단순한 마음으로 함께 음식을 먹으며,</p>
+      <p class="p">헬라어 원문은 그들이 <b>‘자신들의 가정들에 따라서’</b> 떡을 떼었음을 의미하기도 한다. 그 당시 교회생활은 믿는 이들의 가정에 있었다.</p>
+    </article>
+    <article>
+      <p class="ref">행 5:42</p>
+      <p class="t">그들은 날마다 성전에서 그리고 이 집 저 집에서, 예수님께서 그리스도이시라는 복음을 쉬지 않고 가르치며 전하였다.</p>
+      <p class="p">그들의 복음은 신학도, 단순한 교리도 아니었다. <b>살아 계신 한 인격</b>, 곧 그 당시 유대 종교가 극도로 반대했던 바로 그 그리스도였다.</p>
+    </article>
+    <article>
+      <p class="ref">고전 14:26</p>
+      <p class="t">여러분이 함께 모일 때마다, 각 사람이 찬송시를 가지고 있고, 가르침을 가지고 있고, 계시를 가지고 있고, 다른 언어를 가지고 있고, 통역을 가지고 있습니다. 모든 것을 건축을 위하여 하십시오.</p>
+      <p class="p">한 사람이 말하고 나머지가 듣는 집회가 아니었다. 그들의 교회 집회들은 <b>상호성이 충만</b>했다.</p>
+    </article>
+  </div>
+
+  <figure class="ministry">
+    <blockquote>
+      <p>이것이 1984년 10월에 내가 부득불 성경에 있는 것, 우리가 행하고 있는 것, 우리가 오늘날 기독교 안에서 보는 것 등을 재고하지 않을 수 없었던 이유이다. 나의 눈은 그리스도의 몸을 건축하기 위해 하나님께서 정하신 길을 보도록 한 번 더 빛 비춤을 받았다. 확실히 기독교는 이 길에서 빗나갔다. 우리도 또한 어느 정도 빗나가 있었다. 따라서 나는 우리가 큰 변화, 곧 혁명적인 변화를 가질 필요가 있다는 강한 결단을 내렸다.</p>
+    </blockquote>
+    <figcaption>장로 훈련, 9권, 장로 직분과 하나님께서 정하신 길(1), 29-31쪽</figcaption>
+  </figure>
+</section>
+
+<!-- ══════════ IV ══════════ -->
+<section class="mv wrap" id="s4" aria-labelledby="h4t">
+  <div class="mv-head" data-numeral="IV">
+    <h2 id="h4t">새로운 부흥을<br>갖고자 하는 목마름</h2>
+    <p class="refs">합 3:2하, 호 6:2, 롬 8:20-22, 계 22:17, 벧전 5:2</p>
+    <p class="gloss">하나님께서 선택하신 믿는 이들 안에는 목마름이 있다. 창조물까지도 함께 탄식하며 해산의 진통을 겪고 있다.</p>
+  </div>
+
+  <blockquote class="verse">
+    <p>오, 여호와님! 주님은 주님의 일을 수년 내에 부흥시키십시오. 수년 내에 알려지게 하십시오. 진노 가운데서도 자비를 잊지 마십시오.</p>
+    <cite>합 3:2하</cite>
+  </blockquote>
+
+  <blockquote class="verse">
+    <p>모든 창조물이 지금까지 함께 탄식하며 함께 해산의 진통을 겪고 있는 것을 우리가 압니다.</p>
+    <cite>롬 8:22</cite>
+  </blockquote>
+
+  <h3><span class="tag">A</span>신성한 계시의 최고봉에 도달함으로</h3>
+  <figure class="ministry accent">
+    <blockquote><p>나는 온 땅의 모든 교회들에 있는 성도들, 특히 동역자들과 장로들이 이 계시를 보고 일어나서, 하나님께서 우리에게 새로운 부흥, 곧 역사상 기록된 적이 없는 부흥을 주시도록 기도하기를 소망한다.</p></blockquote>
+    <figcaption>역대상하 라이프 스타디, 2장, 22쪽</figcaption>
+  </figure>
+
+  <h3><span class="tag">B</span>하나님-사람의 생활이 이끌어 오는 것</h3>
+  <p>만일 우리가 하나님-사람의 생활을 실행한다면, 자연스럽게 하나님의 경륜 안에 사는 모형이 세워질 것이다. 이 모형이 바로 주님을 다시 모셔 올 가장 큰 부흥이 될 것이다.</p>
+
+  <ol class="flow">
+    <li><span class="s">하나님-사람의 생활을 하기 원한다고 선포함</span></li>
+    <li><span class="s">하나님의 경륜 안에 사는 모형이 세워짐<span class="d">자연스럽게, 억지가 아니라</span></span></li>
+    <li><span class="s">하나님-사람들이 승리자들, 이기는 이들이 됨<span class="d">곧 예루살렘 안의 시온</span></span></li>
+    <li><span class="s">역사상 본 적이 없는 새로운 부흥</span></li>
+    <li><span class="s">이 시대를 마감함</span></li>
+    <li><span class="s">주님을 다시 모셔 옴</span></li>
+  </ol>
+  <p class="split-note" style="margin-top:1.25rem">역대상하 라이프 스타디, 4장, 37쪽</p>
+
+  <h3><span class="tag">C</span>하나님을 따라 사람들을 목양함으로</h3>
+  <blockquote class="verse">
+    <p>여러분 가운데 있는 하나님의 양 떼를 목양하십시오. 하나님을 따라 감독하되, 억지로 하지 말고 자원해서 하며, 비열한 수단으로 이익을 얻으려고 하지 말고 탐내어서 하지 말고 정성을 다하여 하며,</p>
+    <cite>벧전 5:2</cite>
+  </blockquote>
+  <p>아버지의 사랑하고 용서하는 마음과 구주의 목양하고 찾는 영을 가지고서.</p>
+
+  <figure class="ministry">
+    <blockquote><p>나는 우리가 이 목양의 부담을 받아들임으로써 우리 가운데 진정한 부흥이 있기를 소망한다. 만일 모든 교회들이 이 가르침을 받아들여서 그리스도의 놀라운 목양에 참여한다면 회복 안에 커다란 부흥이 있을 것이다.</p></blockquote>
+    <figcaption>활력 그룹, 영문판, 40쪽</figcaption>
+  </figure>
+
+  <div class="close">
+    <p>그 영과 신부께서 말씀하십니다.<br>“오십시오!”<br>목마른 사람은 오십시오.<br>원하는 사람은 다 생명수를<br>거저 받아 마시십시오.</p>
+    <cite>계 22:17</cite>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <b>참고</b>
+  활력 그룹의 긴급한 필요에 관한 교통, 4장 · 교회생활의 특수성, 일반성, 실행성, 1, 4-7장 · 새 길의 유기적인 실행, 5장 · 성전의 재건을 위해 뒤처지지 않음, 14장 · 주님을 섬기고자 하는 이들에게 주신 말씀, 14장 · 장로 훈련, 9권, 장로 직분과 하나님께서 정하신 길(1), 2장 · 역대상하 라이프 스타디, 2, 4장 · 활력 그룹의 훈련과 실행, 소개의 말 · 그리스도의 몸의 건축을 위해 그리스도를 말함, 12장
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.marks a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.mv'));
+  if(!('IntersectionObserver' in window)) return;
+
+  var visible = {};
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+    var best = null, bestVal = 0;
+    sections.forEach(function(s){
+      var v = visible[s.id] || 0;
+      if(v > bestVal){ bestVal = v; best = s.id; }
+    });
+    links.forEach(function(a){ a.removeAttribute('aria-current'); });
+    if(best && map[best]) map[best].setAttribute('aria-current','true');
+  }, { rootMargin:'-25% 0px -55% 0px', threshold:[0,.15,.4,.75,1] });
+
+  sections.forEach(function(s){ io.observe(s); });
+})();
+</script>
+
+</body>
+</html>
