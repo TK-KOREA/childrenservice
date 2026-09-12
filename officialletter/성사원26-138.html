@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026년 다음세대 복음진리집회</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+:root{
+  --navy:#123A5C;
+  --navy-2:#1B4E77;
+  --teal:#1B7385;
+  --teal-txt:#156070;
+  --coral:#C64830;
+  --coral-txt:#AE3A24;
+  --amber:#E8A93F;
+  --amber-txt:#8A5A08;
+  --sage:#8FB89C;
+  --sage-txt:#336043;
+
+  --ink:#1C2B38;
+  --body:#44545F;
+  --mute:#7F8D99;
+  --line:#DFE6EB;
+  --line2:#EDF1F4;
+  --bg:#F1F5F7;
+  --card:#FFFFFF;
+  --t-teal:#E9F2F4;
+  --t-coral:#FBEDE9;
+  --t-amber:#FDF4E4;
+  --t-rest:#DFE7EC;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  margin:0;background:var(--bg);color:var(--body);
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:16px;line-height:1.7;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:rgba(27,115,133,.14);
+}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+.wrap{max-width:880px;margin:0 auto;padding-left:20px;padding-right:20px;}
+.tn{font-variant-numeric:tabular-nums;}
+
+/* ── 헤더 ── */
+.hero{background:var(--navy);color:#fff;padding-top:42px;padding-bottom:30px;}
+.org{margin:0;font-size:.82rem;color:#9DBCD2;}
+.hero h1{
+  margin:22px 0 0;font-size:clamp(1.8rem,6.4vw,2.6rem);line-height:1.3;
+  font-weight:700;letter-spacing:-.035em;color:#fff;
+}
+.theme{
+  display:inline-block;margin:18px 0 0;padding:7px 15px;border-radius:999px;
+  background:rgba(255,255,255,.13);color:#FFD79A;
+  font-size:clamp(.95rem,3.4vw,1.1rem);font-weight:600;letter-spacing:-.02em;
+}
+.lede{margin:18px 0 0;font-size:.94rem;color:#C3D6E4;max-width:33em;}
+
+.facts{margin:28px 0 0;display:grid;gap:1px;background:rgba(255,255,255,.18);border-radius:10px;overflow:hidden;}
+.facts div{background:var(--navy);padding:15px 16px;}
+.facts dt{margin:0;font-size:.78rem;color:#9DBCD2;}
+.facts dd{margin:3px 0 0;color:#fff;font-size:1rem;font-weight:600;letter-spacing:-.01em;}
+.facts dd small{display:block;color:#AFC9DA;font-size:.83rem;font-weight:400;margin-top:1px;}
+
+.due{
+  margin:22px 0 0;background:var(--card);border-radius:10px;
+  padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  border-left:6px solid var(--coral);
+}
+.due p{margin:0;}
+.due span{display:block;font-size:.8rem;color:var(--mute);}
+.due strong{display:block;font-size:1.35rem;font-weight:800;color:var(--coral-txt);letter-spacing:-.025em;}
+.due em{
+  margin-left:auto;font-style:normal;font-size:.82rem;font-weight:700;
+  background:var(--t-coral);color:var(--coral-txt);padding:6px 13px;border-radius:999px;white-space:nowrap;
+}
+
+
+/* ── 모바일 바로가기 ── */
+.jump{
+  position:sticky;top:0;z-index:30;background:rgba(241,245,247,.95);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.jump div{display:flex;gap:7px;overflow-x:auto;padding:10px 20px;-webkit-overflow-scrolling:touch;}
+.jump div::-webkit-scrollbar{display:none;}
+.jump a{
+  flex:0 0 auto;text-decoration:none;font-size:.83rem;font-weight:700;
+  color:var(--navy);background:#fff;border:1px solid var(--line);
+  padding:7px 14px;border-radius:999px;
+}
+section{scroll-margin-top:56px;}
+@media (min-width:700px){ .jump{display:none;} section{scroll-margin-top:0;} }
+@media print{ .jump{display:none;} }
+
+/* ── 섹션 ── */
+section{padding-top:44px;padding-bottom:4px;}
+.h{display:flex;align-items:flex-end;gap:12px;margin:0 0 18px;flex-wrap:wrap;}
+.h h2{
+  margin:0;font-size:1.18rem;font-weight:800;color:var(--navy);letter-spacing:-.03em;
+  padding-bottom:8px;border-bottom:3px solid var(--teal);
+}
+.h p{margin:0 0 8px auto;font-size:.83rem;color:var(--mute);}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;}
+
+/* ── 대상 ── */
+.who{margin:0;padding:4px 18px;list-style:none;}
+.who li{padding:15px 0;border-bottom:1px solid var(--line2);display:flex;gap:14px;align-items:flex-start;}
+.who li:last-child{border-bottom:0;}
+.who .lv{
+  flex:0 0 auto;font-size:.73rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-top:4px;
+  background:var(--t-teal);color:var(--teal-txt);
+}
+.who li:first-child .lv{background:var(--coral);color:#fff;}
+.who h3{margin:0;font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.who p{margin:2px 0 0;font-size:.89rem;}
+
+/* ── 비용 ── */
+.fees{display:grid;gap:12px;}
+.fee{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+.fee.best{border:2px solid var(--navy);background:var(--card);}
+.fee .r{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+.fee .nm{color:var(--ink);font-size:1rem;font-weight:700;letter-spacing:-.02em;}
+.fee .nm span{font-weight:500;color:var(--mute);font-size:.86rem;margin-left:6px;}
+.fee .nm i{
+  font-style:normal;font-size:.7rem;color:#fff;font-weight:700;background:var(--coral);
+  padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:2px;
+}
+.fee .amt{color:var(--navy);font-size:1.4rem;font-weight:800;white-space:nowrap;letter-spacing:-.03em;}
+.fee .amt b{font-size:.82rem;font-weight:600;margin-left:2px;}
+.bar{display:flex;height:8px;margin:14px 0 9px;border-radius:999px;overflow:hidden;background:var(--line2);}
+.bar i{display:block;height:100%;}
+.bar .a{background:var(--teal);}
+.bar .b{background:var(--amber);}
+.fee .dt{margin:0;font-size:.85rem;color:var(--mute);}
+.key{display:flex;flex-wrap:wrap;margin:14px 0 0;font-size:.82rem;color:var(--body);}
+.key span{display:flex;align-items:center;margin:0 18px 6px 0;}
+.key i{width:12px;height:12px;border-radius:3px;display:block;margin-right:7px;}
+.foot{
+  margin:14px 0 0;background:var(--t-amber);border-radius:10px;padding:14px 16px;
+  font-size:.89rem;color:#6B4A10;
+}
+.foot b{color:var(--amber-txt);font-weight:700;}
+
+/* ── 신청 ── */
+.apply{display:grid;grid-template-columns:1fr;gap:10px;align-items:stretch;}
+.ap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;}
+.ap .n{
+  display:inline-block;margin:0;font-size:.72rem;font-weight:700;color:#fff;
+  background:var(--teal);padding:3px 10px;border-radius:999px;
+}
+.ap h3{margin:9px 0 5px;font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.ap p{margin:0;font-size:.88rem;}
+.ap .v{
+  display:block;margin-top:14px;padding:12px 14px;border-radius:8px;
+  background:var(--t-teal);color:var(--navy);text-decoration:none;
+  font-size:1rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.ap .v em{display:block;font-style:normal;font-size:.78rem;font-weight:500;color:var(--teal-txt);letter-spacing:0;margin-top:2px;}
+.plus{text-align:center;color:var(--mute);font-size:1.3rem;line-height:1;font-weight:700;}
+.result{
+  margin:12px 0 0;background:var(--navy);border-radius:12px;padding:18px 20px;color:#C3D6E4;
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+}
+.result b{color:#fff;font-size:1.02rem;font-weight:800;white-space:nowrap;letter-spacing:-.02em;}
+.result span{font-size:.89rem;}
+
+/* ── 나흘의 흐름 ── */
+.flow{padding:18px 14px 14px;}
+/* 모바일: 세로형 차트 (시간이 위에서 아래로) */
+.chart{display:flex;gap:3px;}
+.ruler{flex:0 0 26px;padding-top:40px;}
+.rl{position:relative;height:640px;}
+.rl span{
+  position:absolute;left:0;top:calc(var(--p)*1%);transform:translateY(-50%);
+  font-size:.67rem;color:var(--mute);font-variant-numeric:tabular-nums;
+}
+.grow{flex:1 1 0;min-width:0;}
+.lab{
+  height:40px;text-align:center;line-height:1.25;
+  font-size:.75rem;color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;
+}
+.lab em{display:block;font-style:normal;font-weight:500;color:var(--mute);font-size:.67rem;}
+.track{
+  position:relative;height:640px;border-radius:5px;overflow:hidden;background:#F3F6F8;
+  background-image:repeating-linear-gradient(to bottom,var(--line) 0 1px,transparent 1px 17.142857%);
+}
+.track b{
+  position:absolute;left:0;right:0;top:calc(var(--s)*1%);height:calc(var(--d)*1%);
+  display:block;overflow:hidden;text-align:center;
+  font-size:.66rem;font-weight:700;line-height:1.2;padding:3px 3px;color:#fff;
+}
+.track b[data-v]::before{content:attr(data-v);}
+.t-meet{background:var(--coral);}
+.t-meal{background:var(--amber);color:#5B3B05 !important;}
+.t-out{background:var(--sage);color:var(--sage-txt) !important;}
+.t-rest{background:var(--t-rest);color:#5E7181 !important;}
+.t-pray{background:var(--teal);}
+.t-night{background:var(--navy);color:#AFC9DA !important;}
+.t-key{background:#fff;box-shadow:inset 0 0 0 2px var(--navy);color:var(--navy) !important;}
+.note{margin:16px 0 0;font-size:.89rem;}
+.note b{color:var(--coral-txt);font-weight:700;}
+
+/* ── 첫날 ── */
+.first{margin:12px 0 0;background:var(--t-amber);border-radius:12px;padding:18px 20px;}
+.first h3{margin:0 0 10px;font-size:.98rem;font-weight:800;color:var(--amber-txt);letter-spacing:-.02em;}
+.first div{
+  display:grid;grid-template-columns:6.6em 1fr;gap:6px 14px;
+  padding:9px 0;border-top:1px solid rgba(138,90,8,.16);font-size:.89rem;color:#6B4A10;
+}
+.first b{color:var(--amber-txt);font-weight:800;font-variant-numeric:tabular-nums;}
+
+/* ── 상세 시간표 ── */
+.days{display:grid;gap:14px;}
+.day{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.day h3{
+  margin:0;padding:12px 16px;background:var(--t-teal);color:var(--navy);
+  font-size:.96rem;font-weight:800;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:7px;font-variant-numeric:tabular-nums;
+}
+.day h3 em{font-style:normal;font-weight:600;color:var(--teal-txt);font-size:.83rem;}
+.day h3 small{margin-left:auto;font-weight:600;color:var(--teal-txt);font-size:.77rem;}
+.rows{margin:0;padding:6px 0;list-style:none;}
+.rows li{
+  display:grid;grid-template-columns:7.4em 1fr;gap:10px;
+  padding:6px 16px;font-size:.88rem;align-items:baseline;
+}
+.rows time{color:var(--mute);font-size:.83rem;font-variant-numeric:tabular-nums;}
+.rows b{font-weight:500;color:var(--body);}
+.rows li.m{background:var(--t-coral);padding-top:9px;padding-bottom:9px;}
+.rows li.m b{color:var(--coral-txt);font-weight:800;font-size:.94rem;}
+.rows li.m time{color:#C07A69;}
+.rows li.k{background:var(--navy);padding-top:9px;padding-bottom:9px;}
+.rows li.k b{color:#fff;font-weight:800;font-size:.94rem;}
+.rows li.k time{color:#9DBCD2;}
+
+/* ── 문의 ── */
+.calls{margin:0;padding:4px 18px;list-style:none;}
+.calls li{border-bottom:1px solid var(--line2);}
+.calls li:last-child{border-bottom:0;}
+.calls a{display:flex;align-items:center;justify-content:space-between;padding:14px 0;text-decoration:none;}
+.calls b{color:var(--ink);font-weight:700;font-size:.97rem;}
+.calls span{color:var(--teal-txt);font-size:1.02rem;font-weight:800;font-variant-numeric:tabular-nums;}
+
+footer{
+  margin-top:44px;background:var(--navy);color:#9DBCD2;
+  padding-top:32px;padding-bottom:44px;font-size:.82rem;line-height:1.9;
+}
+footer b{display:block;color:#fff;font-size:.98rem;font-weight:800;margin-bottom:6px;letter-spacing:-.02em;}
+
+@media (min-width:700px){
+  .wrap{padding-left:36px;padding-right:36px;}
+  .hero{padding-top:60px;padding-bottom:40px;}
+  section{padding-top:58px;}
+  .facts{grid-template-columns:1fr 1fr;}
+  .fees{grid-template-columns:1.2fr 1fr 1fr;align-items:start;}
+  .apply{grid-template-columns:1fr auto 1fr;gap:14px;}
+  .plus{align-self:center;}
+  .days{grid-template-columns:1fr 1fr;align-items:start;}
+  .calls{padding-left:22px;padding-right:22px;}
+  .flow{padding:20px 18px 16px;}
+  .chart{display:block;}
+  .ruler{padding-top:0;margin-left:64px;}
+  .rl{height:16px;}
+  .rl span{left:calc(var(--p)*1%);top:0;transform:translateX(-50%);font-size:.72rem;}
+  .grow{display:grid;grid-template-columns:64px 1fr;align-items:center;margin-bottom:6px;}
+  .lab{height:auto;text-align:left;padding-right:10px;font-size:.79rem;line-height:1.3;}
+  .lab em{font-size:.73rem;}
+  .track{
+    height:34px;
+    background-image:repeating-linear-gradient(to right,var(--line) 0 1px,transparent 1px 17.142857%);
+  }
+  .track b{
+    left:calc(var(--s)*1%);width:calc(var(--d)*1%);top:0;bottom:0;height:auto;right:auto;
+    line-height:34px;font-size:.74rem;padding:0 0 0 6px;text-align:left;white-space:nowrap;
+  }
+  .track b[data-v]::before{content:none;}
+}
+@media (max-width:699px){
+  /* 금액을 줄바꿈해 크게 */
+  .fee .r{display:block;}
+  .fee .amt{display:block;margin-top:7px;font-size:1.6rem;}
+  /* 범례를 2열로 정렬 */
+  .key{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;}
+  .key span{margin:0;}
+  /* 첫날 안내는 시각을 윗줄로 */
+  .first div{display:block;}
+  .first b{display:block;margin-bottom:1px;}
+  /* 터치 영역 확대 */
+  .calls a{padding:17px 0;min-height:58px;}
+  .who li{padding:16px 0;}
+}
+@media (max-width:380px){
+  .wrap{padding-left:15px;padding-right:15px;}
+  .flow{padding-left:10px;padding-right:10px;}
+  .rows li{padding-left:13px;padding-right:13px;grid-template-columns:7em 1fr;}
+}
+@media print{
+  body{background:#fff;}
+  .hero,.result,.rows li.k,footer{background:#fff !important;color:#000 !important;}
+  .hero h1,.org,.lede,.facts dd,.facts dt,.facts div,.theme{color:#000 !important;background:#fff !important;}
+  .card,.fee,.day,.ap{border:1px solid #999 !important;}
+  .track b{font-size:.7rem !important;padding-left:6px !important;}
+  section{padding-top:22px;}
+  .day{break-inside:avoid;}
+  .days{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="org">성경진리사역원 어린이 봉사팀</p>
+    <h1>2026년 다음세대<br>복음진리집회</h1>
+    <p class="theme">죄와 죄들 그리고 하나님의 구원</p>
+    <p class="lede">예비 중학생 어린이들이 역동적인 하나님의 구원을 체험하여, 그리스도인의 믿음의 좋은 시작을 가질 수 있도록 마련된 집회입니다.</p>
+
+    <dl class="facts">
+      <div><dt>기간</dt><dd class="tn">10월 8일(목) ~ 10월 11일(주일)<small>3박 4일</small></dd></div>
+      <div><dt>장소</dt><dd>성경진리사역원<small>경기도 용인시 기흥구 한보라1로 50</small></dd></div>
+      <div><dt>대상</dt><dd>초등학교 6학년<small>이외 청소년, 봉사자 및 학부모</small></dd></div>
+      <div><dt>집회</dt><dd>모두 9번<small>집회 7회, 침례 집회, 주님의 상 집회</small></dd></div>
+    </dl>
+
+    <div class="due">
+      <p><span>신청 마감</span><strong class="tn">9월 28일(월) 18:00</strong></p>
+      <em id="dday"></em>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="바로가기">
+  <div>
+    <a href="#target">참석 대상</a><a href="#cost">비용</a><a href="#apply">신청 방법</a><a href="#flow">일정</a><a href="#sched">시간표</a><a href="#call">문의</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="wrap" id="target">
+  <div class="h"><h2>참석 대상</h2></div>
+  <ul class="who card">
+    <li>
+      <span class="lv">주 대상</span>
+      <div>
+        <h3>초등학교 6학년</h3>
+        <p>중학교 진학을 앞둔 어린이들을 위한 집회입니다.</p>
+      </div>
+    </li>
+    <li>
+      <span class="lv">교회 추천 시</span>
+      <div>
+        <h3>초등학교 5학년</h3>
+        <p>교회의 추천이 있을 경우 참석할 수 있습니다.</p>
+      </div>
+    </li>
+    <li>
+      <span class="lv">함께 참석</span>
+      <div>
+        <h3>청소년, 봉사자 및 학부모</h3>
+        <p>복음 교통이 필요한 청소년과 함께 섬기는 봉사자, 학부모도 참석 대상입니다.</p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="wrap" id="cost">
+  <div class="h"><h2>비용</h2><p>참석 기간에 따라 선택</p></div>
+  <div class="fees">
+    <div class="fee best">
+      <div class="r">
+        <span class="nm">전체 참석 <span>3박 4일</span><i>권장</i></span>
+        <span class="amt tn">195,000<b>원</b></span>
+      </div>
+      <div class="bar" style="width:100%"><i class="a" style="width:84.6%"></i><i class="b" style="width:15.4%"></i></div>
+      <p class="dt tn">숙식비 165,000원 + 운영비 30,000원</p>
+    </div>
+    <div class="fee">
+      <div class="r">
+        <span class="nm">부분 참석 <span>2박 3일</span></span>
+        <span class="amt tn">140,000<b>원</b></span>
+      </div>
+      <div class="bar" style="width:71.8%"><i class="a" style="width:78.6%"></i><i class="b" style="width:21.4%"></i></div>
+      <p class="dt tn">숙식비 110,000원 + 운영비 30,000원</p>
+    </div>
+    <div class="fee">
+      <div class="r">
+        <span class="nm">부분 참석 <span>1박 2일</span></span>
+        <span class="amt tn">75,000<b>원</b></span>
+      </div>
+      <div class="bar" style="width:38.5%"><i class="a" style="width:73.3%"></i><i class="b" style="width:26.7%"></i></div>
+      <p class="dt tn">숙식비 55,000원 + 운영비 20,000원</p>
+    </div>
+  </div>
+  <div class="key">
+    <span><i style="background:#1B7385"></i>숙식비</span>
+    <span><i style="background:#E8A93F"></i>운영비</span>
+  </div>
+  <p class="foot">참석하는 다음세대들이 집회의 유익을 모두 얻을 수 있도록, <b>가급적 전체 참석을 권장합니다.</b></p>
+</section>
+
+<section class="wrap" id="apply">
+  <div class="h"><h2>신청 방법</h2><p>두 가지가 모두 필요합니다</p></div>
+  <div class="apply">
+    <div class="ap">
+      <p class="n">필수 1</p>
+      <h3>신청서 메일 접수</h3>
+      <p>공문 첨부1 &lsquo;2026년 다음세대 복음진리집회 신청서&rsquo;를 작성해 보냅니다.</p>
+      <a class="v" href="mailto:ngbtm@naver.com">ngbtm@naver.com<em>어린이 봉사팀 접수 메일</em></a>
+    </div>
+    <div class="plus">＋</div>
+    <div class="ap">
+      <p class="n">필수 2</p>
+      <h3>비용 입금</h3>
+      <p>선택한 참석 기간에 해당하는 금액을 입금합니다.</p>
+      <span class="v">하나은행 606-910524-86007<em>예금주 임주영</em></span>
+    </div>
+  </div>
+  <p class="result"><b>신청 완료</b><span>비용이 입금되어야 신청이 완료됩니다. 접수만으로는 완료되지 않으며, 9월 28일(월) 18:00까지 두 가지를 모두 마쳐야 합니다.</span></p>
+</section>
+
+<section class="wrap" id="flow">
+  <div class="h"><h2>나흘의 흐름</h2><p>가로축은 하루 06시~23시</p></div>
+
+  <div class="card flow">
+    <div class="chart">
+    <div class="ruler"><div class="rl"><span style="--p:0">06</span><span style="--p:17.143">09</span><span style="--p:34.286">12</span><span style="--p:51.429">15</span><span style="--p:68.571">18</span><span style="--p:85.714">21</span></div></div>
+
+    <div class="grow">
+      <div class="lab">10/8<em>목요일</em></div>
+      <div class="track">
+        <b class="t-key" style="--s:51.429;--d:14.286">접수</b>
+        <b class="t-meal" style="--s:65.714;--d:11.429" data-v="저녁 식사"></b>
+        <b class="t-rest" style="--s:77.143;--d:2.857"></b>
+        <b class="t-meet" style="--s:80;--d:8.571">집회 1</b>
+        <b class="t-rest" style="--s:88.571;--d:4.286" data-v="정비"></b>
+        <b class="t-pray" style="--s:92.857;--d:1.429"></b>
+        <b class="t-night" style="--s:94.286;--d:5.714" data-v="취침"></b>
+      </div>
+    </div>
+
+    <div class="grow">
+      <div class="lab">10/9<em>금요일</em></div>
+      <div class="track">
+        <b class="t-rest" style="--s:4.762;--d:0.952"></b>
+        <b class="t-pray" style="--s:5.714;--d:1.905"></b>
+        <b class="t-rest" style="--s:7.619;--d:3.81" data-v="정비"></b>
+        <b class="t-meal" style="--s:11.429;--d:5.714" data-v="아침 식사"></b>
+        <b class="t-meet" style="--s:17.143;--d:8.571">집회 2</b>
+        <b class="t-rest" style="--s:25.714;--d:2.857"></b>
+        <b class="t-meet" style="--s:28.571;--d:8.571">집회 3</b>
+        <b class="t-meal" style="--s:37.143;--d:5.714" data-v="점심 식사"></b>
+        <b class="t-rest" style="--s:42.857;--d:2.857"></b>
+        <b class="t-out" style="--s:45.714;--d:14.286">운동 및 야외 섞임</b>
+        <b class="t-rest" style="--s:60;--d:5.714" data-v="휴식"></b>
+        <b class="t-meal" style="--s:65.714;--d:5.714" data-v="저녁 식사"></b>
+        <b class="t-rest" style="--s:71.429;--d:2.857"></b>
+        <b class="t-meet" style="--s:74.286;--d:11.429">집회 4</b>
+        <b class="t-rest" style="--s:88.571;--d:4.286" data-v="정비"></b>
+        <b class="t-pray" style="--s:92.857;--d:1.429"></b>
+        <b class="t-night" style="--s:94.286;--d:5.714" data-v="취침"></b>
+      </div>
+    </div>
+
+    <div class="grow">
+      <div class="lab">10/10<em>토요일</em></div>
+      <div class="track">
+        <b class="t-rest" style="--s:4.762;--d:0.952"></b>
+        <b class="t-pray" style="--s:5.714;--d:1.905"></b>
+        <b class="t-rest" style="--s:7.619;--d:3.81" data-v="정비"></b>
+        <b class="t-meal" style="--s:11.429;--d:5.714" data-v="아침 식사"></b>
+        <b class="t-meet" style="--s:17.143;--d:8.571">집회 5</b>
+        <b class="t-rest" style="--s:25.714;--d:2.857"></b>
+        <b class="t-meet" style="--s:28.571;--d:8.571">집회 6</b>
+        <b class="t-meal" style="--s:37.143;--d:5.714" data-v="점심 식사"></b>
+        <b class="t-rest" style="--s:42.857;--d:2.857"></b>
+        <b class="t-out" style="--s:45.714;--d:14.286">운동 및 야외 섞임</b>
+        <b class="t-rest" style="--s:60;--d:5.714" data-v="휴식"></b>
+        <b class="t-meal" style="--s:65.714;--d:5.714" data-v="저녁 식사"></b>
+        <b class="t-meet" style="--s:71.429;--d:17.143">침례 집회</b>
+        <b class="t-rest" style="--s:88.571;--d:4.286" data-v="정비"></b>
+        <b class="t-pray" style="--s:92.857;--d:1.429"></b>
+        <b class="t-night" style="--s:94.286;--d:5.714" data-v="취침"></b>
+      </div>
+    </div>
+
+    <div class="grow">
+      <div class="lab">10/11<em>주일</em></div>
+      <div class="track">
+        <b class="t-rest" style="--s:4.762;--d:0.952"></b>
+        <b class="t-pray" style="--s:5.714;--d:1.905"></b>
+        <b class="t-rest" style="--s:7.619;--d:3.81" data-v="정비"></b>
+        <b class="t-meal" style="--s:11.429;--d:5.714" data-v="아침 식사"></b>
+        <b class="t-meet" style="--s:17.143;--d:8.571">주님의 상</b>
+        <b class="t-rest" style="--s:25.714;--d:2.857"></b>
+        <b class="t-meet" style="--s:28.571;--d:8.571">집회 7</b>
+        <b class="t-meal" style="--s:37.143;--d:5.714" data-v="점심 식사"></b>
+        <b class="t-key" style="--s:42.857;--d:8.571">귀가</b>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="key">
+      <span><i style="background:#C64830"></i>집회</span>
+      <span><i style="background:#E8A93F"></i>식사</span>
+      <span><i style="background:#8FB89C"></i>운동 및 야외 섞임</span>
+      <span><i style="background:#DFE7EC"></i>휴식 · 개인 정비</span>
+      <span><i style="background:#1B7385"></i>아침 부흥 · 단체 기도</span>
+      <span><i style="background:#123A5C"></i>취침</span>
+      <span><i style="background:#fff;box-shadow:inset 0 0 0 2px #123A5C"></i>접수 · 귀가</span>
+    </div>
+  </div>
+
+  <p class="note">오전에 두 번, 저녁에 한 번 모이는 흐름이 반복되며 <b>나흘 동안 모두 9번</b> 모입니다. 오후는 운동과 야외 섞임, 휴식으로 채워집니다.</p>
+
+  <div class="first">
+    <h3>첫날 도착 안내</h3>
+    <div><b>15:00~</b><span>등록 접수를 시작합니다.</span></div>
+    <div><b>17:30~19:30</b><span>도착 시간 차이를 고려해 첫날 석식은 도시락으로 제공됩니다.</span></div>
+    <div><b>20:00</b><span>집회 1로 첫 모임이 시작됩니다.</span></div>
+  </div>
+</section>
+
+<section class="wrap" id="sched">
+  <div class="h"><h2>자세한 시간표</h2></div>
+  <div class="days">
+    <div class="day">
+      <h3>10/8<em>목요일</em><small>도착</small></h3>
+      <ul class="rows">
+        <li class="k"><time>15:00~</time><b>접수 및 등록</b></li>
+        <li><time>17:30~19:30</time><b>저녁 식사 (도시락)</b></li>
+        <li><time>19:30~20:00</time><b>휴식</b></li>
+        <li class="m"><time>20:00~21:30</time><b>집회 1</b></li>
+        <li><time>21:30~22:15</time><b>개인 정비</b></li>
+        <li><time>22:15~22:30</time><b>단체 기도</b></li>
+        <li><time>22:30</time><b>취침</b></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3>10/9<em>금요일</em><small>집회 2, 3, 4</small></h3>
+      <ul class="rows">
+        <li><time>06:50~07:00</time><b>기상 및 이동</b></li>
+        <li><time>07:00~07:20</time><b>단체 아침 부흥</b></li>
+        <li><time>07:20~08:00</time><b>개인 정비</b></li>
+        <li><time>08:00~09:00</time><b>아침 식사</b></li>
+        <li class="m"><time>09:00~10:30</time><b>집회 2</b></li>
+        <li><time>10:30~11:00</time><b>휴식</b></li>
+        <li class="m"><time>11:00~12:30</time><b>집회 3</b></li>
+        <li><time>12:30~13:30</time><b>점심 식사</b></li>
+        <li><time>13:30~14:00</time><b>휴식</b></li>
+        <li><time>14:00~16:30</time><b>운동 및 야외 섞임</b></li>
+        <li><time>16:30~17:30</time><b>휴식</b></li>
+        <li><time>17:30~18:30</time><b>저녁 식사</b></li>
+        <li><time>18:30~19:00</time><b>휴식</b></li>
+        <li class="m"><time>19:00~21:00</time><b>집회 4</b></li>
+        <li><time>21:30~22:15</time><b>개인 정비</b></li>
+        <li><time>22:15~22:30</time><b>단체 기도</b></li>
+        <li><time>22:30</time><b>취침</b></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3>10/10<em>토요일</em><small>집회 5, 6과 침례 집회</small></h3>
+      <ul class="rows">
+        <li><time>06:50~07:00</time><b>기상 및 이동</b></li>
+        <li><time>07:00~07:20</time><b>단체 아침 부흥</b></li>
+        <li><time>07:20~08:00</time><b>개인 정비</b></li>
+        <li><time>08:00~09:00</time><b>아침 식사</b></li>
+        <li class="m"><time>09:00~10:30</time><b>집회 5</b></li>
+        <li><time>10:30~11:00</time><b>휴식</b></li>
+        <li class="m"><time>11:00~12:30</time><b>집회 6</b></li>
+        <li><time>12:30~13:30</time><b>점심 식사</b></li>
+        <li><time>13:30~14:00</time><b>휴식</b></li>
+        <li><time>14:00~16:30</time><b>운동 및 야외 섞임</b></li>
+        <li><time>16:30~17:30</time><b>휴식</b></li>
+        <li><time>17:30~18:30</time><b>저녁 식사</b></li>
+        <li class="m"><time>18:30~21:30</time><b>침례 집회</b></li>
+        <li><time>21:30~22:15</time><b>개인 정비</b></li>
+        <li><time>22:15~22:30</time><b>단체 기도</b></li>
+        <li><time>22:30</time><b>취침</b></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3>10/11<em>주일</em><small>주님의 상 집회 후 귀가</small></h3>
+      <ul class="rows">
+        <li><time>06:50~07:00</time><b>기상 및 이동</b></li>
+        <li><time>07:00~07:20</time><b>단체 아침 부흥</b></li>
+        <li><time>07:20~08:00</time><b>개인 정비</b></li>
+        <li><time>08:00~09:00</time><b>아침 식사</b></li>
+        <li class="m"><time>09:00~10:30</time><b>주님의 상 집회</b></li>
+        <li><time>10:30~11:00</time><b>휴식</b></li>
+        <li class="m"><time>11:00~12:30</time><b>집회 7</b></li>
+        <li><time>12:30~13:30</time><b>점심 식사</b></li>
+        <li class="k"><time>13:30~</time><b>귀가</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="call">
+  <div class="h"><h2>문의</h2><p>어린이 봉사팀</p></div>
+  <ul class="calls card">
+    <li><a href="tel:01022551977"><b>권혁주</b><span>010-2255-1977</span></a></li>
+    <li><a href="tel:01092309554"><b>한승우</b><span>010-9230-9554</span></a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>성경진리사역원</b>
+    경기도 용인시 기흥구 한보라1로 50 (17080)<br>
+    전화 1544-0031 / 팩스 031-286-3132<br>
+    btmkoffice@naver.com<br><br>
+    문서번호 성사원26-138 (2026.09.12)<br>
+    발신 사역의 일(어린이 봉사팀)
+  </div>
+</footer>
+<script>
+(function(){
+  var el=document.getElementById('dday'); if(!el) return;
+  var n=new Date(), k=new Date(n.getTime()+n.getTimezoneOffset()*60000+9*3600000);
+  var d=Math.round((Date.UTC(2026,8,28)-Date.UTC(k.getFullYear(),k.getMonth(),k.getDate()))/86400000);
+  el.textContent = d>0 ? d+'일 남음' : (d===0 ? (k.getHours()<18?'오늘 마감':'마감') : '마감');
+})();
+</script>
+</body>
+</html>
