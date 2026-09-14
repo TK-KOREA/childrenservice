@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026.10.07 서울 → 춘천 일정 / 首爾 → 春川 行程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --ink:#13243F;
+    --ink-2:#46587A;
+    --ink-3:#8494AD;
+    --line:#F2A81D;
+    --line-deep:#7E5B06;
+    --bg:#FFFDF7;
+    --panel:#EDF1F7;
+    --rule:#D6DDE7;
+    --warn:#A3241B;
+    --rail-x:1.10rem;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  html[data-lang="zh"] body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans TC",sans-serif;
+  }
+  html[data-lang="ko"] .zh{display:none}
+  html[data-lang="zh"] .ko{display:none}
+
+  .num{font-family:"Archivo",sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 1.25rem 4rem}
+
+  /* ---------- header ---------- */
+  .masthead{background:var(--ink);color:#fff;margin-bottom:2.25rem}
+  .masthead .wrap{padding-top:1.5rem;padding-bottom:0}
+  .mast-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+  .date{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(2.1rem,6.5vw,3.4rem);line-height:1;letter-spacing:-.035em;margin:0}
+  .date span{color:var(--line)}
+  .dayname{font-size:.9rem;color:#A9BAD4;margin:.55rem 0 0}
+  .trip{font-size:clamp(1.05rem,3vw,1.35rem);font-weight:700;margin:.15rem 0 0;color:#fff}
+
+  .lang{display:flex;gap:0;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{
+    font:inherit;font-size:.82rem;font-weight:600;
+    padding:.42rem 1rem;border:0;cursor:pointer;
+    background:transparent;color:#C6D3E6;
+  }
+  .lang button[aria-pressed="true"]{background:var(--line);color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+
+  /* route strip */
+  .route{margin:1.9rem 0 0;padding-bottom:1.6rem;overflow:hidden}
+  .route-bar{position:relative;display:flex;justify-content:space-between;align-items:flex-start}
+  .route-bar::before{
+    content:"";position:absolute;left:3px;right:3px;top:6px;height:2px;
+    background:var(--line);transform-origin:left center;
+    animation:draw .85s cubic-bezier(.2,.7,.25,1) both;
+  }
+  @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .rstop{position:relative;z-index:1;flex:1;text-align:center;min-width:0}
+  .rstop:first-child{text-align:left}
+  .rstop:last-child{text-align:right}
+  .rstop i{display:block;width:14px;height:14px;border-radius:50%;background:var(--ink);border:3px solid var(--line);margin:0 auto .5rem}
+  .rstop:first-child i{margin-left:0}
+  .rstop:last-child i{margin-right:0}
+  .rstop:first-child i,.rstop:last-child i{background:var(--line)}
+  .rstop b{display:block;font-size:.78rem;font-weight:600;color:#E7EDF6;line-height:1.35}
+  .rstop em{display:block;font-style:normal;font-family:"Archivo",sans-serif;font-size:.72rem;color:#8FA3C0;margin-top:.15rem}
+
+  /* muster band */
+  .muster-band{background:var(--line);color:var(--ink)}
+  .muster-band .wrap{padding-top:1rem;padding-bottom:1.05rem}
+  .muster-head{font-size:.82rem;font-weight:700;margin:0 0 .55rem}
+  .musters{display:flex;gap:1.75rem;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+  .musters li{display:flex;align-items:baseline;gap:.55rem}
+  .musters b{font-family:"Archivo",sans-serif;font-variant-numeric:tabular-nums;font-size:1.6rem;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .musters span{font-size:.85rem;font-weight:600}
+
+  /* ---------- layout ---------- */
+  .cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.9fr);gap:3rem}
+  @media (max-width:860px){.cols{grid-template-columns:1fr;gap:2.5rem}}
+
+  h2{font-size:1.02rem;font-weight:700;margin:0 0 .35rem;letter-spacing:-.01em}
+  .legend{display:flex;gap:1.1rem;flex-wrap:wrap;font-size:.76rem;color:var(--ink-2);margin:0 0 1.5rem;padding:0;list-style:none}
+  .legend li{display:flex;align-items:center;gap:.4rem}
+  .key{width:12px;height:12px;border-radius:50%;border:3px solid var(--ink);background:var(--bg);flex:none}
+  .key.k-hold{background:var(--line);border-color:var(--ink)}
+  .key.k-move{width:3px;height:14px;border:0;border-radius:0;background:repeating-linear-gradient(to bottom,var(--line) 0 4px,transparent 4px 8px)}
+
+  /* ---------- timeline ---------- */
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{position:relative;display:grid;grid-template-columns:3.6rem 2.2rem 1fr;align-items:start}
+  .tl li::before{
+    content:"";position:absolute;left:calc(3.6rem + var(--rail-x));width:3px;
+    top:0;bottom:0;background:var(--line);
+  }
+  .tl li:first-child::before{top:.95rem}
+  .tl li:last-child::before{bottom:auto;height:.95rem}
+  .tl li.move::before{background:repeating-linear-gradient(to bottom,var(--line) 0 5px,transparent 5px 10px)}
+
+  .tl .when{
+    grid-column:1;font-family:"Archivo",sans-serif;font-variant-numeric:tabular-nums;
+    font-weight:600;font-size:.98rem;letter-spacing:-.02em;padding-top:.28rem;color:var(--ink);
+  }
+  .tl .dot{grid-column:2;position:relative;z-index:1;justify-self:start;margin-left:calc(var(--rail-x) - 5.5px);margin-top:.42rem;
+    width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--ink)}
+  .tl .dot.hold{background:var(--line);border-color:var(--ink);width:18px;height:18px;margin-left:calc(var(--rail-x) - 7.5px);margin-top:.3rem}
+  .tl .dot.end{background:var(--ink);border-color:var(--line);width:18px;height:18px;margin-left:calc(var(--rail-x) - 7.5px);margin-top:.3rem}
+
+  .tl .what{grid-column:3;padding:0 0 1.75rem .55rem}
+  .tl li.move .what{padding-bottom:1.4rem}
+  .tl h3{margin:0;font-size:1.04rem;font-weight:700;line-height:1.4;letter-spacing:-.01em}
+  .tl p{margin:.3rem 0 0;font-size:.9rem;color:var(--ink-2);max-width:46ch}
+  .tl .place{display:block;font-size:.82rem;font-weight:600;color:var(--line-deep);margin-top:.15rem}
+
+  .tl li.move .when{color:var(--ink-3);font-weight:500;font-size:.88rem}
+  .tl li.move .what{font-size:.86rem;color:var(--ink-2)}
+  .tl li.move .what p{margin:.15rem 0 0;font-size:.86rem}
+  .move-mode{display:inline-flex;align-items:center;gap:.45rem;font-weight:600;color:var(--ink);font-size:.88rem}
+  .move-mode svg{flex:none}
+
+  .tl li.hold-row .what{
+    background:#FDF3DC;border-left:3px solid var(--line);
+    margin:-.15rem 0 1.75rem;padding:.55rem .8rem .7rem;border-radius:0 4px 4px 0;
+  }
+
+  /* ---------- side panels ---------- */
+  .side>section{margin-bottom:2rem}
+  .side h2{padding-bottom:.5rem;border-bottom:2px solid var(--ink)}
+  .rows{list-style:none;margin:0;padding:0}
+  .rows li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.5rem 0;border-bottom:1px solid var(--rule);font-size:.89rem}
+  .rows li:last-child{border-bottom:0}
+  .rows b{font-family:"Archivo",sans-serif;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  .rows .free{color:var(--ink-3)}
+  .note{font-size:.8rem;color:var(--ink-2);margin:.6rem 0 0;background:var(--panel);padding:.55rem .7rem;border-radius:4px}
+
+  .kit{list-style:none;margin:.4rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+  .kit li{font-size:.84rem;background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:.28rem .75rem}
+
+  .rules{list-style:none;margin:.5rem 0 0;padding:0}
+  .rules li{position:relative;padding:0 0 .7rem 1.15rem;font-size:.88rem;line-height:1.55}
+  .rules li::before{content:"";position:absolute;left:0;top:.62rem;width:5px;height:5px;border-radius:50%;background:var(--line)}
+  .rules li.hot{color:var(--warn);font-weight:600}
+  .rules li.hot::before{background:var(--warn)}
+
+  .temp{display:flex;gap:1.5rem;margin:.6rem 0 0}
+  .temp div b{display:block;font-family:"Archivo",sans-serif;font-size:1.75rem;font-weight:700;line-height:1;letter-spacing:-.03em}
+  .temp div span{font-size:.8rem;color:var(--ink-2)}
+
+  .contact{border:2px solid var(--ink);border-radius:6px;padding:.9rem 1rem}
+  .contact h2{border:0;padding:0;margin-bottom:.5rem}
+  .fill{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem;font-size:.86rem;padding:.45rem 0;border-bottom:1px dashed var(--rule)}
+  .fill:last-of-type{border-bottom:0}
+  .fill i{flex:1;border-bottom:1px solid var(--ink-3);height:1em;font-style:normal}
+  .hotline{margin:.7rem 0 0;font-size:.84rem;background:var(--ink);color:#fff;padding:.55rem .75rem;border-radius:4px}
+  .hotline b{font-family:"Archivo",sans-serif;font-size:1.05rem;color:var(--line)}
+
+  footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.78rem;color:var(--ink-3)}
+
+  main{transition:opacity .18s ease}
+  body.swap main,body.swap .muster-band,body.swap .route{opacity:.25}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+
+  @media (max-width:520px){
+    .tl li{grid-template-columns:3.2rem 1.7rem 1fr}
+    .tl li::before{left:calc(3.2rem + .85rem)}
+    .tl .dot{margin-left:calc(.85rem - 5.5px)}
+    .tl .dot.hold,.tl .dot.end{margin-left:calc(.85rem - 7.5px)}
+    .rstop b{font-size:.68rem}
+    .rstop em{display:none}
+    .musters{gap:1.1rem}
+  }
+
+  @media print{
+    .lang{display:none}
+    body{background:#fff;font-size:11.5pt}
+    .masthead{background:#13243F!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .muster-band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .cols{grid-template-columns:1.5fr .9fr;gap:2rem}
+    .tl li,.side>section{break-inside:avoid}
+    .wrap{padding-bottom:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <div>
+        <p class="date num">2026.10.<span>07</span></p>
+        <p class="dayname"><span class="ko">수요일</span><span class="zh">星期三</span></p>
+        <p class="trip"><span class="ko">서울 → 춘천 하루 일정</span><span class="zh">首爾 → 春川 一日行程</span></p>
+      </div>
+      <div class="lang" role="group" aria-label="Language / 語言">
+        <button type="button" data-set="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-set="zh" aria-pressed="false">繁體中文</button>
+      </div>
+    </div>
+
+    <div class="route">
+      <div class="route-bar">
+        <div class="rstop">
+          <i></i>
+          <b><span class="ko">뉴서울호텔</span><span class="zh">新首爾飯店</span></b>
+          <em class="num">08:40</em>
+        </div>
+        <div class="rstop">
+          <i></i>
+          <b><span class="ko">서울시청</span><span class="zh">首爾市政廳</span></b>
+          <em class="num">09:10</em>
+        </div>
+        <div class="rstop">
+          <i></i>
+          <b><span class="ko">덕수궁</span><span class="zh">德壽宮</span></b>
+          <em class="num">10:05</em>
+        </div>
+        <div class="rstop">
+          <i></i>
+          <b><span class="ko">서울숲</span><span class="zh">首爾林</span></b>
+          <em class="num">12:20</em>
+        </div>
+        <div class="rstop">
+          <i></i>
+          <b><span class="ko">춘천교회</span><span class="zh">春川教會</span></b>
+          <em class="num">18:00</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="muster-band">
+  <div class="wrap">
+    <p class="muster-head"><span class="ko">이 세 번은 늦으면 안 됩니다</span><span class="zh">這三個時間請務必準時</span></p>
+    <ul class="musters">
+      <li><b class="num">08:40</b><span class="ko">호텔 로비</span><span class="zh">飯店大廳</span></li>
+      <li><b class="num">10:45</b><span class="ko">덕수궁 대한문 앞</span><span class="zh">德壽宮 大漢門前</span></li>
+      <li><b class="num">15:50</b><span class="ko">서울숲 정문</span><span class="zh">首爾林 正門</span></li>
+    </ul>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="cols">
+
+    <!-- ======== TIMELINE ======== -->
+    <div>
+      <h2><span class="ko">오늘의 동선</span><span class="zh">今日動線</span></h2>
+      <ul class="legend">
+        <li><span class="key k-hold"></span><span class="ko">집합 지점</span><span class="zh">集合地點</span></li>
+        <li><span class="key"></span><span class="ko">관람·활동</span><span class="zh">參觀與活動</span></li>
+        <li><span class="key k-move"></span><span class="ko">이동 구간</span><span class="zh">移動區間</span></li>
+      </ul>
+
+      <ol class="tl">
+
+        <li class="hold-row">
+          <div class="when num">08:40</div><div class="dot hold"></div>
+          <div class="what">
+            <h3><span class="ko">뉴서울호텔 로비 집합</span><span class="zh">新首爾飯店 大廳集合</span></h3>
+            <p class="ko">인원을 확인하고 일정표를 나눠드립니다. 짐은 버스에 싣습니다.</p>
+            <p class="zh">清點人數、發放行程表，行李先裝上車。</p>
+          </div>
+        </li>
+
+        <li class="move">
+          <div class="when num">09:00</div>
+          <div class="what">
+            <span class="move-mode">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M10 21l1.5-6L9 12.5V9l3-1 3 2.5 2.5 1"/><path d="M10 21l-2-4"/></svg>
+              <span class="ko">도보 5분</span><span class="zh">步行 5 分鐘</span>
+            </span>
+            <p class="ko">약 350m. 버스는 픽업 지점으로 먼저 이동합니다.</p>
+            <p class="zh">約 350 公尺。遊覽車先前往接駁地點。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">09:10</div><div class="dot"></div>
+          <div class="what">
+            <h3><span class="ko">서울시청 하늘광장·하늘전망대</span><span class="zh">首爾市政廳 天空廣場．天空觀景台</span></h3>
+            <span class="place ko">본관 서쪽 8·9층</span>
+            <span class="place zh">本館西側 8、9 樓</span>
+            <p class="ko">무료이고 예약 없이 들어갑니다. 공간이 좁아 20~30명씩 나눠 올라갑니다. 바닥에 건물 이름이 한글과 영문으로 표시돼 있습니다.</p>
+            <p class="zh">免費且不需預約。空間不大，分 20~30 人輪流上樓。地面標示了窗外主要建築的名稱（韓文與英文）。</p>
+          </div>
+        </li>
+
+        <li class="move">
+          <div class="when num">09:55</div>
+          <div class="what">
+            <span class="move-mode">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.2"/><path d="M10 21l1.5-6L9 12.5V9l3-1 3 2.5 2.5 1"/><path d="M10 21l-2-4"/></svg>
+              <span class="ko">도보 5분</span><span class="zh">步行 5 分鐘</span>
+            </span>
+            <p class="ko">서울광장을 가로질러 덕수궁 대한문으로. 단체 매표는 인솔자가 한 번에 합니다.</p>
+            <p class="zh">穿越首爾廣場前往德壽宮大漢門。團體票由領隊統一購買。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">10:05</div><div class="dot"></div>
+          <div class="what">
+            <h3><span class="ko">덕수궁 관람</span><span class="zh">德壽宮 參觀</span></h3>
+            <p class="ko">중화전 → 석조전 외관과 분수대 → 정관헌 순으로 돕니다. 석조전 내부는 사전예약 해설제라 이번에는 외관만 봅니다.</p>
+            <p class="zh">依序參觀中和殿 → 石造殿外觀與噴水池 → 靜觀軒。石造殿內部需事先預約導覽，這次只看外觀。</p>
+          </div>
+        </li>
+
+        <li class="hold-row">
+          <div class="when num">10:45</div><div class="dot hold"></div>
+          <div class="what">
+            <h3><span class="ko">대한문 앞으로 다시 모입니다</span><span class="zh">請回到大漢門前集合</span></h3>
+            <p class="ko">들어간 문으로 나와야 교대의식을 볼 수 있습니다. 10:50에 자리를 잡으면 순라의식부터 보입니다.</p>
+            <p class="zh">要從進去的那道門出來才看得到交接儀式。10:50 就位的話，可以先看到巡邏儀式。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">11:00</div><div class="dot"></div>
+          <div class="what">
+            <h3><span class="ko">왕궁수문장 교대의식</span><span class="zh">王宮守門將 交接儀式</span></h3>
+            <span class="place ko">덕수궁 대한문 앞 · 11:00~11:30 · 무료</span>
+            <span class="place zh">德壽宮 大漢門前 · 11:00~11:30 · 免費</span>
+            <p class="ko">휴대폰으로 royalguard.kr에 들어가면 중국어 해설을 들으며 볼 수 있습니다. 전통복식 체험과 북 치기 체험도 있습니다.</p>
+            <p class="zh">用手機開啟 royalguard.kr 可邊聽中文解說邊觀賞。現場也有傳統服飾體驗與擊鼓體驗。</p>
+          </div>
+        </li>
+
+        <li class="move">
+          <div class="when num">11:35</div>
+          <div class="what">
+            <span class="move-mode">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="7.5" cy="19.5" r="1.6"/><circle cx="16.5" cy="19.5" r="1.6"/></svg>
+              <span class="ko">버스 30~40분</span><span class="zh">遊覽車 30~40 分鐘</span>
+            </span>
+            <p class="ko">서울숲으로 이동합니다.</p>
+            <p class="zh">前往首爾林。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">12:20</div><div class="dot"></div>
+          <div class="what">
+            <h3><span class="ko">점심 — 자유식</span><span class="zh">午餐 — 自由用餐</span></h3>
+            <span class="place ko">성수동 일대 · 개인 부담</span>
+            <span class="place zh">聖水洞一帶 · 費用自理</span>
+            <p class="ko">3~4명씩 조를 짜서 다니세요. 인기 있는 가게는 평일에도 줄을 섭니다.</p>
+            <p class="zh">請 3~4 人一組行動。人氣店家平日也常需要排隊。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">13:30</div><div class="dot"></div>
+          <div class="what">
+            <h3><span class="ko">자유시간</span><span class="zh">自由活動</span></h3>
+            <p class="ko">서울숲 공원에는 사슴방사장과 은행나무숲이 있고, 보행교를 건너면 한강공원까지 나갑니다. 성수동 쪽은 카페와 팝업스토어가 모여 있습니다.</p>
+            <p class="zh">首爾林公園裡有鹿園與銀杏林，走過天橋還能到漢江公園。聖水洞那一側則聚集了咖啡廳與快閃店。</p>
+          </div>
+        </li>
+
+        <li class="hold-row">
+          <div class="when num">15:50</div><div class="dot hold"></div>
+          <div class="what">
+            <h3><span class="ko">서울숲 정문 집합</span><span class="zh">首爾林 正門集合</span></h3>
+            <p class="ko">인원을 확인합니다. 출발하면 춘천까지 쉬지 않으니 화장실을 미리 다녀오세요.</p>
+            <p class="zh">清點人數。出發後直達春川、中途不停車，請先上廁所。</p>
+          </div>
+        </li>
+
+        <li class="move">
+          <div class="when num">16:00</div>
+          <div class="what">
+            <span class="move-mode">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="7.5" cy="19.5" r="1.6"/><circle cx="16.5" cy="19.5" r="1.6"/></svg>
+              <span class="ko">버스 1시간 40분~2시간</span><span class="zh">遊覽車 1 小時 40 分~2 小時</span>
+            </span>
+            <p class="ko">강변북로와 서울양양고속도로를 탑니다. 퇴근 시간과 겹쳐 여유를 두었습니다.</p>
+            <p class="zh">行經江邊北路與首爾襄陽高速公路。因適逢下班尖峰，時間已預留餘裕。</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="when num">18:00</div><div class="dot end"></div>
+          <div class="what">
+            <h3><span class="ko">춘천교회 도착</span><span class="zh">抵達 春川教會</span></h3>
+            <p class="ko">도착 30분 전에 교회에 연락합니다.</p>
+            <p class="zh">抵達前 30 分鐘會先與教會聯繫。</p>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+
+    <!-- ======== SIDE ======== -->
+    <div class="side">
+
+      <section>
+        <h2><span class="ko">비용</span><span class="zh">費用</span></h2>
+        <ul class="rows">
+          <li>
+            <span class="ko">서울시청 하늘전망대</span><span class="zh">首爾市政廳 天空觀景台</span>
+            <b class="free ko">무료</b><b class="free zh">免費</b>
+          </li>
+          <li>
+            <span class="ko">덕수궁</span><span class="zh">德壽宮</span>
+            <b class="num">₩800</b>
+          </li>
+          <li>
+            <span class="ko">수문장 교대의식</span><span class="zh">守門將 交接儀式</span>
+            <b class="free ko">무료</b><b class="free zh">免費</b>
+          </li>
+          <li>
+            <span class="ko">서울숲</span><span class="zh">首爾林</span>
+            <b class="free ko">무료</b><b class="free zh">免費</b>
+          </li>
+          <li>
+            <span class="ko">점심 (개인 부담)</span><span class="zh">午餐（自費）</span>
+            <b class="num">₩12,000~20,000</b>
+          </li>
+        </ul>
+        <p class="note ko">덕수궁은 10인 이상 단체 요금입니다. 외국인은 만 19~64세가 유료이고, 만 18세 이하는 무료입니다. 한국인 기준(만 24세 이하 무료)과 다르니 여권을 챙기세요.</p>
+        <p class="note zh">德壽宮為 10 人以上團體票價。外國人滿 19~64 歲須購票，滿 18 歲以下免費——與韓國人的標準（24 歲以下免費）不同，請攜帶護照備查。</p>
+      </section>
+
+      <section>
+        <h2><span class="ko">준비물</span><span class="zh">攜帶物品</span></h2>
+        <ul class="kit">
+          <li><span class="ko">여권</span><span class="zh">護照</span></li>
+          <li><span class="ko">얇은 겉옷</span><span class="zh">薄外套</span></li>
+          <li><span class="ko">현금 2만 원</span><span class="zh">現金 2 萬韓元</span></li>
+          <li><span class="ko">해외 결제 카드</span><span class="zh">國際信用卡</span></li>
+          <li><span class="ko">교통카드(T-money)</span><span class="zh">交通卡 T-money</span></li>
+          <li><span class="ko">보조배터리</span><span class="zh">行動電源</span></li>
+          <li><span class="ko">걷기 편한 신발</span><span class="zh">好走的鞋</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="ko">날씨</span><span class="zh">天氣</span></h2>
+        <div class="temp">
+          <div><b class="num">15°</b><span class="ko">아침·저녁</span><span class="zh">早晚</span></div>
+          <div><b class="num">23°</b><span class="ko">한낮</span><span class="zh">白天</span></div>
+        </div>
+        <p class="note ko">10월 초 서울의 평년 기온입니다. 대만보다 훨씬 선선하니 겉옷을 꼭 챙기세요.</p>
+        <p class="note zh">為首爾 10 月初的平均氣溫，比台灣涼得多，請務必帶一件外套。</p>
+      </section>
+
+      <section>
+        <h2><span class="ko">꼭 지켜주세요</span><span class="zh">請務必遵守</span></h2>
+        <ul class="rules">
+          <li class="ko">집합 시간은 모두 한국 시간 기준입니다.</li>
+          <li class="zh">所有集合時間皆以韓國時間為準。</li>
+          <li class="ko">자유시간에는 혼자 다니지 말고 3~4명씩 움직이세요.</li>
+          <li class="zh">自由活動時請勿單獨行動，維持 3~4 人一組。</li>
+          <li class="ko">서울숲 주변에는 지하철역이 세 개(성수 Seongsu, 뚝섬 Ttukseom, 서울숲 Seoul Forest) 있습니다. 집합은 서울숲 정문입니다.</li>
+          <li class="zh">首爾林周邊有三個地鐵站（聖水 Seongsu、纛島 Ttukseom、首爾林 Seoul Forest），集合地點是首爾林正門。</li>
+          <li class="hot ko">16:00에 출발하면 춘천까지 쉬지 않습니다.</li>
+          <li class="hot zh">16:00 出發後直達春川，中途不停車。</li>
+          <li class="ko">교대의식은 비가 오거나 집회가 있으면 취소될 수 있습니다.</li>
+          <li class="zh">交接儀式遇雨或有集會時可能取消。</li>
+        </ul>
+      </section>
+
+      <section class="contact">
+        <h2><span class="ko">연락처</span><span class="zh">聯絡方式</span></h2>
+        <div class="fill"><span class="ko">인솔자</span><span class="zh">領隊</span><i></i></div>
+        <div class="fill"><span class="ko">버스 기사</span><span class="zh">司機</span><i></i></div>
+        <div class="fill"><span class="ko">차량 번호</span><span class="zh">車號</span><i></i></div>
+        <p class="hotline">
+          <span class="ko">길을 잃었을 때 — 관광통역안내 <b class="num">1330</b> (중국어 24시간)</span>
+          <span class="zh">迷路時請撥 — 旅遊諮詢熱線 <b class="num">1330</b>（中文、24 小時）</span>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <span class="ko">2026년 10월 7일 수요일 · 뉴서울호텔 → 춘천교회</span>
+    <span class="zh">2026 年 10 月 7 日（三）· 新首爾飯店 → 春川教會</span>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll('.lang button');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setLang(code) {
+      if (root.dataset.lang === code) return;
+      var apply = function () {
+        root.dataset.lang = code;
+        root.setAttribute('lang', code === 'zh' ? 'zh-Hant' : 'ko');
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.set === code));
+        });
+        document.body.classList.remove('swap');
+      };
+      if (reduce) { apply(); return; }
+      document.body.classList.add('swap');
+      window.setTimeout(apply, 170);
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.set); });
+    });
+  })();
+</script>
+
+</body>
+</html>
