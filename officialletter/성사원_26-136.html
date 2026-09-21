@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123A5C">
+<title>2026년 어린이 복음의 일을 위한 집회 신청</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+
+  --bg:#F1F5F7; --card:#FFFFFF; --ink:#1C2B38; --body:#44545F; --mute:#7C8A96;
+  --line:#DFE6EB; --line2:#EDF1F4;
+  --head:#123A5C; --hero:#123A5C; --hero-ink:#FFFFFF; --hero-mute:#9DBCD2; --hero-sub:#C8DAE7; --hero-line:rgba(255,255,255,.17);
+  --teal:#1B7385; --teal-ink:#156070; --t-teal:#E9F2F4;
+  --coral:#C64830; --coral-ink:#AE3A24; --t-coral:#FBEDE9;
+  --amber:#E8A93F; --amber-ink:#8A5A08; --t-amber:#FDF4E4;
+  --sage:#6E9E7F; --sage-ink:#35664A; --t-sage:#EAF3ED;
+  --field:#FFFFFF; --field-line:#CBD6DE;
+  --on-bg:#123A5C; --on-ink:#FFFFFF;
+  --toast-bg:#1C2B38; --toast-ink:#FFFFFF;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1620; --card:#15212C; --ink:#E7EEF3; --body:#B4C1CB; --mute:#80909D;
+    --line:#243442; --line2:#1C2935;
+    --head:#CFE2F0; --hero:#0F2A42; --hero-ink:#FFFFFF; --hero-mute:#8FB0C8; --hero-sub:#B9CEDD; --hero-line:rgba(255,255,255,.12);
+    --teal:#2F97AB; --teal-ink:#86CFDC; --t-teal:#132F38;
+    --coral:#D9573E; --coral-ink:#F29C88; --t-coral:#361D18;
+    --amber:#E8A93F; --amber-ink:#F0C57A; --t-amber:#322814;
+    --sage:#5E8F70; --sage-ink:#A3D3B4; --t-sage:#16291E;
+    --field:#0F1A24; --field-line:#2C3E4D;
+    --on-bg:#86CFDC; --on-ink:#06202A;
+    --toast-bg:#E7EEF3; --toast-ink:#0D1620;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1620; --card:#15212C; --ink:#E7EEF3; --body:#B4C1CB; --mute:#80909D;
+  --line:#243442; --line2:#1C2935;
+  --head:#CFE2F0; --hero:#0F2A42; --hero-ink:#FFFFFF; --hero-mute:#8FB0C8; --hero-sub:#B9CEDD; --hero-line:rgba(255,255,255,.12);
+  --teal:#2F97AB; --teal-ink:#86CFDC; --t-teal:#132F38;
+  --coral:#D9573E; --coral-ink:#F29C88; --t-coral:#361D18;
+  --amber:#E8A93F; --amber-ink:#F0C57A; --t-amber:#322814;
+  --sage:#5E8F70; --sage-ink:#A3D3B4; --t-sage:#16291E;
+  --field:#0F1A24; --field-line:#2C3E4D;
+  --on-bg:#86CFDC; --on-ink:#06202A;
+  --toast-bg:#E7EEF3; --toast-ink:#0D1620;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{background:var(--hero);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  margin:0;background:var(--bg);color:var(--body);
+  font-family:Pretendard,'Pretendard Variable',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',system-ui,sans-serif;
+  font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:rgba(27,115,133,.14);
+}
+a{color:inherit;}
+button{font:inherit;}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+.wrap{max-width:760px;margin:0 auto;padding-left:20px;padding-right:20px;}
+.tn{font-variant-numeric:tabular-nums;}
+
+/* ── 헤더 ── */
+.hero{background:var(--hero);color:var(--hero-ink);padding-top:34px;padding-bottom:28px;}
+.org{margin:0;font-size:.8rem;color:var(--hero-mute);}
+.hero h1{margin:18px 0 0;font-size:clamp(1.6rem,6.4vw,2.4rem);line-height:1.28;font-weight:800;letter-spacing:-.035em;}
+.mode{
+  display:inline-flex;align-items:center;margin:16px 0 0;padding:6px 14px 6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);color:#FFD79A;font-size:.92rem;font-weight:700;
+}
+.mode i{width:8px;height:8px;border-radius:50%;background:#FFD79A;margin-right:8px;display:block;}
+.lede{margin:16px 0 0;font-size:.93rem;color:var(--hero-sub);max-width:34em;}
+
+.facts{margin:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hero-line);border-radius:12px;overflow:hidden;}
+.facts div{background:var(--hero);padding:13px 14px;}
+.facts dt{margin:0;font-size:.76rem;color:var(--hero-mute);}
+.facts dd{margin:2px 0 0;font-size:.98rem;font-weight:700;letter-spacing:-.02em;line-height:1.4;}
+.facts dd small{display:block;margin-top:2px;font-size:.8rem;font-weight:400;color:var(--hero-sub);letter-spacing:0;}
+.facts .w{grid-column:1 / -1;}
+
+.due{
+  margin:16px 0 0;background:var(--card);border-radius:12px;padding:15px 16px 15px 18px;
+  display:flex;align-items:center;gap:12px;border-left:6px solid var(--coral);
+}
+.due p{margin:0;min-width:0;}
+.due span{display:block;font-size:.78rem;color:var(--mute);}
+.due strong{display:block;font-size:1.22rem;font-weight:800;color:var(--coral-ink);letter-spacing:-.025em;line-height:1.35;}
+.due em{
+  margin-left:auto;flex:0 0 auto;font-style:normal;font-size:.8rem;font-weight:800;
+  background:var(--t-coral);color:var(--coral-ink);padding:6px 12px;border-radius:999px;white-space:nowrap;
+}
+.go{
+  display:flex;align-items:center;justify-content:center;margin:12px 0 0;min-height:54px;border-radius:12px;
+  background:var(--coral);color:#fff;font-size:1.02rem;font-weight:800;text-decoration:none;letter-spacing:-.01em;
+}
+
+/* ── 섹션 공통 ── */
+section{padding-top:40px;scroll-margin-top:12px;}
+.h{display:flex;align-items:flex-end;gap:12px;margin:0 0 16px;flex-wrap:wrap;}
+.h h2{margin:0;padding-bottom:7px;border-bottom:3px solid var(--teal);font-size:1.16rem;font-weight:800;color:var(--head);letter-spacing:-.03em;}
+.h p{margin:0 0 8px auto;font-size:.82rem;color:var(--mute);}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;}
+
+/* 일정: 이틀 저녁 */
+.nights{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.night{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+.night .d{display:block;font-size:.76rem;font-weight:700;color:var(--teal-ink);}
+.night b{display:block;margin-top:4px;font-size:1.9rem;line-height:1.1;font-weight:800;color:var(--head);letter-spacing:-.03em;}
+.night em{display:block;font-style:normal;font-size:.85rem;color:var(--mute);margin-top:2px;}
+.night strong{display:inline-block;margin-top:12px;background:var(--t-coral);color:var(--coral-ink);font-size:.88rem;font-weight:800;padding:4px 11px;border-radius:999px;}
+.online{
+  margin:10px 0 0;display:flex;align-items:center;gap:12px;background:var(--t-teal);
+  border-radius:12px;padding:13px 16px;font-size:.9rem;color:var(--ink);
+}
+.online b{flex:0 0 auto;background:var(--teal);color:#fff;font-size:.78rem;font-weight:800;padding:4px 10px;border-radius:999px;}
+
+/* 대상 */
+.who{margin:0;padding:4px 18px;list-style:none;}
+.who li{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line2);font-size:.98rem;color:var(--ink);font-weight:600;letter-spacing:-.015em;}
+.who li:last-child{border-bottom:0;}
+.who li::before{content:'';flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--teal);}
+.who li.top{font-weight:800;}
+.who li.top::before{background:var(--coral);}
+.who li.top span{margin-left:auto;flex:0 0 auto;font-size:.72rem;font-weight:800;color:#fff;background:var(--coral);padding:3px 10px;border-radius:999px;}
+
+/* 내용 */
+.feed{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fd{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 15px 16px;border-top:4px solid var(--c);}
+.fd span{display:block;font-size:.76rem;font-weight:800;color:var(--ci);}
+.fd p{margin:4px 0 0;font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-.015em;}
+.c1{--c:var(--teal);--ci:var(--teal-ink);}
+.c2{--c:var(--amber);--ci:var(--amber-ink);}
+.c3{--c:var(--sage);--ci:var(--sage-ink);}
+.c4{--c:var(--coral);--ci:var(--coral-ink);}
+
+/* 신청 방법 */
+.eq{display:grid;gap:8px;}
+.ap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;}
+.ap .n{display:inline-block;margin:0;font-size:.72rem;font-weight:800;color:#fff;background:var(--teal);padding:3px 10px;border-radius:999px;}
+.ap h3{margin:9px 0 4px;font-size:1.02rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;}
+.ap p{margin:0;font-size:.88rem;}
+.ap p a{color:var(--teal-ink);font-weight:700;}
+.val{
+  margin-top:12px;display:flex;align-items:center;gap:10px;background:var(--t-teal);border-radius:10px;padding:11px 12px 11px 14px;
+}
+.val div{min-width:0;}
+.val b{display:block;color:var(--head);font-size:1.02rem;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.val small{display:block;font-size:.78rem;color:var(--teal-ink);}
+.val a{text-decoration:none;}
+.mini{
+  margin-left:auto;flex:0 0 auto;min-height:36px;padding:0 13px;border-radius:8px;border:1px solid var(--line);
+  background:var(--card);color:var(--teal-ink);font-size:.82rem;font-weight:800;cursor:pointer;
+}
+.plus{text-align:center;color:var(--mute);font-size:1.2rem;font-weight:700;line-height:1;}
+.done{
+  margin-top:10px;background:var(--hero);color:var(--hero-sub);border-radius:14px;padding:16px 18px;font-size:.89rem;
+}
+.done b{display:block;color:#fff;font-size:1rem;font-weight:800;margin-bottom:2px;}
+
+/* 간편 신청 */
+.apply{padding:20px 16px 18px;}
+.apply > p.intro{margin:0 0 18px;font-size:.9rem;}
+.closed{margin:0 0 16px;background:var(--t-coral);color:var(--coral-ink);border-radius:10px;padding:12px 14px;font-size:.88rem;font-weight:700;}
+.fld{margin:0 0 16px;border:0;padding:0;min-width:0;}
+.lbl{display:block;margin:0 0 7px;padding:0;font-size:.88rem;font-weight:800;color:var(--ink);}
+.lbl .r{color:var(--coral-ink);margin-left:2px;}
+.lbl .o{font-weight:500;color:var(--mute);font-size:.8rem;margin-left:4px;}
+.in{
+  display:block;width:100%;height:50px;padding:0 14px;border:1px solid var(--field-line);border-radius:10px;
+  background:var(--field);color:var(--ink);font:inherit;font-size:16px;-webkit-appearance:none;appearance:none;
+}
+textarea.in{height:auto;min-height:78px;padding:12px 14px;line-height:1.55;resize:vertical;}
+.in::placeholder{color:var(--mute);opacity:.8;}
+.in:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--t-teal);}
+.err{display:none;margin:6px 0 0;font-size:.8rem;font-weight:700;color:var(--coral-ink);}
+.fld.bad .in{border-color:var(--coral);}
+.fld.bad .err{display:block;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{position:relative;display:block;}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0;}
+.chip span{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--field-line);background:var(--field);color:var(--body);font-size:.92rem;font-weight:700;
+}
+.chip input:checked + span{background:var(--on-bg);border-color:var(--on-bg);color:var(--on-ink);}
+.chip input:focus-visible + span{outline:2px solid var(--coral);outline-offset:2px;}
+.fld.bad .chip span{border-color:var(--coral);}
+
+.preview{margin:6px 0 0;background:var(--t-teal);border-radius:12px;padding:14px 16px;}
+.preview p{margin:0 0 6px;font-size:.78rem;font-weight:800;color:var(--teal-ink);}
+.preview pre{
+  margin:0;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;font:inherit;font-size:.9rem;line-height:1.65;color:var(--ink);
+  -webkit-user-select:text;user-select:text;
+}
+
+.send{display:grid;gap:10px;margin-top:16px;}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;padding:0 14px;
+  border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  font-size:.98rem;font-weight:800;letter-spacing:-.01em;text-decoration:none;cursor:pointer;-webkit-appearance:none;appearance:none;
+}
+.btn svg{flex:0 0 auto;}
+.btn.kakao{background:#FEE500;border-color:#FEE500;color:#191919;min-height:56px;font-size:1.04rem;}
+.btn.sms{background:var(--teal);border-color:var(--teal);color:#fff;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.two .btn{flex-direction:column;gap:5px;min-height:70px;font-size:.93rem;white-space:nowrap;}
+.btn.plain{background:transparent;color:var(--teal-ink);border-style:dashed;}
+.btn:active{transform:translateY(1px);}
+.hint{margin:2px 0 0;font-size:.82rem;color:var(--mute);line-height:1.6;}
+.hint b{color:var(--body);font-weight:700;}
+
+.pay{
+  margin-top:16px;display:flex;align-items:center;gap:10px;background:var(--t-amber);border-radius:12px;padding:13px 12px 13px 16px;
+}
+.pay div{min-width:0;}
+.pay span{display:block;font-size:.78rem;font-weight:800;color:var(--amber-ink);}
+.pay b{display:block;font-size:1.02rem;font-weight:800;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.pay small{display:block;font-size:.8rem;color:var(--body);}
+.pay .mini{color:var(--amber-ink);}
+
+/* 문의 */
+.calls{padding:6px 18px;}
+.grp{padding:12px 0 6px;border-bottom:1px solid var(--line2);}
+.grp:last-child{border-bottom:0;}
+.grp p{margin:0 0 2px;font-size:.78rem;font-weight:800;color:var(--teal-ink);}
+.grp a{display:flex;align-items:center;justify-content:space-between;min-height:48px;text-decoration:none;}
+.grp a b{color:var(--ink);font-weight:700;}
+.grp a span{color:var(--head);font-weight:800;font-variant-numeric:tabular-nums;}
+
+footer{
+  margin-top:44px;background:var(--hero);color:var(--hero-mute);
+  padding-top:30px;padding-bottom:110px;font-size:.8rem;line-height:1.9;
+}
+footer b{display:block;color:#fff;font-size:.96rem;font-weight:800;margin-bottom:6px;}
+
+/* 하단 고정 신청 버튼 (모바일) */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:var(--card);border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .22s ease;
+}
+.bar.show{transform:none;}
+.bar a{
+  display:flex;align-items:center;justify-content:center;max-width:720px;margin:0 auto;min-height:50px;border-radius:12px;
+  background:var(--coral);color:#fff;font-size:1rem;font-weight:800;text-decoration:none;
+}
+@media (prefers-reduced-motion:reduce){.bar{transition:none;}}
+
+.toast{
+  position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:60;
+  width:max-content;max-width:calc(100% - 32px);padding:12px 16px;border-radius:12px;
+  background:var(--toast-bg);color:var(--toast-ink);font-size:.9rem;font-weight:600;line-height:1.5;text-align:center;
+  opacity:0;transform:translate(-50%,12px);transition:opacity .2s ease,transform .2s ease;pointer-events:none;
+}
+.toast.on{opacity:1;transform:translate(-50%,0);}
+
+@media (min-width:700px){
+  .wrap{padding-left:36px;padding-right:36px;}
+  .hero{padding-top:56px;padding-bottom:40px;}
+  br.m{display:none;}
+  .facts{grid-template-columns:1.35fr .7fr .7fr 1.45fr;}
+  .facts .w{grid-column:auto;}
+  section{padding-top:54px;}
+  .eq{grid-template-columns:1fr auto 1fr;align-items:stretch;}
+  .plus{align-self:center;padding:0 2px;}
+  .apply{padding:26px 26px 24px;}
+  .calls{padding:6px 24px;}
+  .bar{display:none;}
+  footer{padding-bottom:44px;}
+  .go{max-width:320px;}
+  .two .btn{flex-direction:row;gap:8px;min-height:52px;font-size:.98rem;}
+}
+@media (max-width:360px){
+  .wrap{padding-left:15px;padding-right:15px;}
+  .facts{grid-template-columns:1fr;}
+  .two{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="org">성경진리사역원 전국 다음 세대 추진팀</p>
+    <h1>2026년<br class="m"> 어린이 복음의 일을<br>위한 집회</h1>
+    <p class="mode"><i></i>온라인 Zoom 집회</p>
+    <p class="lede">2026년 하반기 어린이 복음의 일을 위한 집회가 온라인으로 열립니다. 위트니스 리 형제님의 어린이의 일 관련 영상과 어린이 복음을 위한 메시지, 간증, 실지적인 실행 방안 등 풍성한 말씀 공급이 있을 예정입니다.</p>
+
+    <dl class="facts">
+      <div class="w"><dt>일시</dt><dd class="tn">9월 28일(월) ~ 29일(화)<small>이틀 모두 저녁 7시 30분</small></dd></div>
+      <div><dt>방식</dt><dd>온라인<small>Zoom</small></dd></div>
+      <div><dt>비용</dt><dd class="tn">5,000원<small>계좌 입금</small></dd></div>
+      <div class="w"><dt>대상</dt><dd>장로 책임 형제님들<small>어린이 봉사자, 학부모님, 부담 있는 모든 성도</small></dd></div>
+    </dl>
+
+    <div class="due">
+      <p><span>신청 마감</span><strong class="tn">9월 24일(목) 23:00</strong></p>
+      <em id="dday"></em>
+    </div>
+    <a class="go" id="hero-go" href="#apply">간편 신청하기</a>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap" id="when">
+  <div class="h"><h2>일정</h2><p>이틀 저녁, 같은 시각</p></div>
+  <div class="nights">
+    <div class="night"><span class="d">첫째 날</span><b class="tn">9.28</b><em>월요일</em><strong class="tn">저녁 7:30</strong></div>
+    <div class="night"><span class="d">둘째 날</span><b class="tn">9.29</b><em>화요일</em><strong class="tn">저녁 7:30</strong></div>
+  </div>
+  <p class="online"><b>Zoom</b><span>온라인으로 진행됩니다.</span></p>
+</section>
+
+<section class="wrap" id="who">
+  <div class="h"><h2>참석 대상</h2></div>
+  <ul class="who card">
+    <li class="top">장로 책임 형제님들<span>우선 대상</span></li>
+    <li>어린이 봉사자들</li>
+    <li>학부모님들</li>
+    <li>어린이 복음의 일에 부담이 있는 모든 성도들</li>
+  </ul>
+</section>
+
+<section class="wrap" id="what">
+  <div class="h"><h2>집회 내용</h2><p>풍성한 말씀 공급</p></div>
+  <div class="feed">
+    <div class="fd c1"><span>영상</span><p>위트니스 리 형제님의 어린이의 일 관련 영상</p></div>
+    <div class="fd c2"><span>말씀</span><p>어린이 복음을 위한 메시지</p></div>
+    <div class="fd c3"><span>나눔</span><p>간증</p></div>
+    <div class="fd c4"><span>실행</span><p>실지적인 실행 방안</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="how">
+  <div class="h"><h2>신청 방법</h2><p>두 가지가 모두 필요합니다</p></div>
+  <div class="eq">
+    <div class="ap">
+      <p class="n">필수 1</p>
+      <h3>신청서 접수</h3>
+      <p>공문 첨부1 신청서를 작성해 이메일로 보냅니다. <a href="#apply">아래 간편 신청</a>으로도 보낼 수 있습니다.</p>
+      <div class="val"><div><a href="mailto:ngbtm@naver.com"><b>ngbtm@naver.com</b></a><small>접수 이메일</small></div></div>
+    </div>
+    <div class="plus">＋</div>
+    <div class="ap">
+      <p class="n">필수 2</p>
+      <h3>비용 5,000원 입금</h3>
+      <p>아래 계좌로 입금합니다.</p>
+      <div class="val">
+        <div><b>606-910524-86007</b><small>하나은행, 예금주 임주영</small></div>
+        <button class="mini" type="button" data-copy="하나은행 606-910524-86007" data-done="계좌번호를 복사했어요">복사</button>
+      </div>
+    </div>
+  </div>
+  <p class="done"><b>신청 완료</b>신청서 접수와 입금이 모두 확인되어야 신청이 완료됩니다. 마감은 9월 24일(목) 23:00입니다.</p>
+</section>
+
+<section class="wrap" id="apply">
+  <div class="h"><h2>간편 신청</h2></div>
+  <div class="card apply">
+    <p class="closed" id="closed" hidden>신청 마감 시각(9월 24일 목요일 23:00)이 지났습니다. 문의처로 연락해 주세요.</p>
+    <p class="intro">작성한 내용이 아래에서 신청 메시지로 만들어집니다. 카카오톡, 문자, 이메일 중 편한 방법으로 보내 주세요.</p>
+
+    <div class="fld" id="fld-name">
+      <label class="lbl" for="f-name">이름<span class="r">*</span></label>
+      <input class="in" id="f-name" autocomplete="name" enterkeyhint="next">
+      <p class="err">이름을 입력해 주세요.</p>
+    </div>
+
+    <div class="fld" id="fld-church">
+      <label class="lbl" for="f-church">소속 교회<span class="r">*</span></label>
+      <input class="in" id="f-church" placeholder="예: ○○ 교회" autocomplete="organization" enterkeyhint="next">
+      <p class="err">소속 교회를 입력해 주세요.</p>
+    </div>
+
+    <fieldset class="fld" id="fld-role">
+      <legend class="lbl">구분<span class="r">*</span></legend>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="role" value="장로 책임 형제"><span>장로 책임 형제</span></label>
+        <label class="chip"><input type="radio" name="role" value="어린이 봉사자"><span>어린이 봉사자</span></label>
+        <label class="chip"><input type="radio" name="role" value="학부모"><span>학부모</span></label>
+        <label class="chip"><input type="radio" name="role" value="그 밖의 성도"><span>그 밖의 성도</span></label>
+      </div>
+      <p class="err">구분을 하나 골라 주세요.</p>
+    </fieldset>
+
+    <div class="fld" id="fld-phone">
+      <label class="lbl" for="f-phone">연락처<span class="r">*</span></label>
+      <input class="in tn" id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" enterkeyhint="next">
+      <p class="err">연락 가능한 휴대폰 번호를 입력해 주세요.</p>
+    </div>
+
+    <fieldset class="fld" id="fld-pay">
+      <legend class="lbl">입금</legend>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="pay" value="입금 예정" checked><span>입금 예정</span></label>
+        <label class="chip"><input type="radio" name="pay" value="입금 완료"><span>입금 완료</span></label>
+      </div>
+    </fieldset>
+
+    <div class="fld">
+      <label class="lbl" for="f-payer">입금자명<span class="o">신청자와 다를 때만</span></label>
+      <input class="in" id="f-payer" autocomplete="off" enterkeyhint="next">
+    </div>
+
+    <div class="fld">
+      <label class="lbl" for="f-memo">남길 말<span class="o">선택</span></label>
+      <textarea class="in" id="f-memo" rows="2"></textarea>
+    </div>
+
+    <div class="preview">
+      <p>보낼 내용</p>
+      <pre id="msg"></pre>
+    </div>
+
+    <div class="send">
+      <button class="btn kakao" type="button" id="b-kakao">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.5c-5.2 0-9.5 3.3-9.5 7.4 0 2.6 1.7 4.9 4.3 6.2l-.9 3.4c-.1.4.3.7.6.5l4-2.7c.5.1 1 .1 1.5.1 5.2 0 9.5-3.3 9.5-7.4S17.2 3.5 12 3.5z"/></svg>
+        카카오톡으로 보내기
+      </button>
+      <p class="hint" id="kakao-hint">공유 창에서 카카오톡을 고른 뒤 <b>받는 사람을 직접 선택</b>합니다. 받을 분이 카카오톡 친구에 없다면 문자로 보내 주세요.</p>
+      <div class="two">
+        <a class="btn sms" id="b-sms" href="#apply">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+          문자로 보내기
+        </a>
+        <a class="btn" id="b-mail" href="#apply">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+          이메일로 보내기
+        </a>
+      </div>
+      <p class="hint">문자는 <b id="to-sms"></b>, 이메일은 <b id="to-mail"></b>으로 바로 보내집니다.</p>
+      <button class="btn plain" type="button" id="b-copy">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>
+        내용만 복사하기
+      </button>
+    </div>
+
+    <div class="pay">
+      <div><span>보낸 뒤 입금까지 마쳐 주세요</span><b>606-910524-86007</b><small>하나은행, 예금주 임주영, 5,000원</small></div>
+      <button class="mini" type="button" data-copy="하나은행 606-910524-86007" data-done="계좌번호를 복사했어요">복사</button>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="call">
+  <div class="h"><h2>문의</h2></div>
+  <div class="card calls">
+    <div class="grp">
+      <p>집회 문의</p>
+      <a href="tel:01049481952"><b>신훈</b><span>010-4948-1952</span></a>
+      <a href="tel:01071011105"><b>노환지</b><span>010-7101-1105</span></a>
+    </div>
+    <div class="grp">
+      <p>신청 및 입금 문의</p>
+      <a href="tel:01077372049"><b>임주영</b><span>010-7737-2049</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>성경진리사역원</b>
+    경기도 용인시 기흥구 한보라1로 50 (17080)<br>
+    전화 1544-0031 / 팩스 031-286-3194<br>
+    ngbtm@naver.com<br><br>
+    문서번호 성사원26-136 (2026.09.05)<br>
+    발신 사역의 일(전국 다음 세대 추진팀)
+  </div>
+</footer>
+
+<div class="bar" id="bar"><a href="#apply" tabindex="-1">간편 신청하기</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ───────── 받는 곳 설정 ─────────
+     신청을 받을 곳이 바뀌면 이 부분만 고치면 됩니다. */
+  var CONFIG = {
+    smsTo: '01077372049',
+    smsLabel: '신청 담당 임주영(010-7737-2049)',
+    emailTo: 'ngbtm@naver.com',
+    emailLabel: '접수처 ngbtm@naver.com',
+    /* 카카오톡 채널 채팅 또는 1:1 오픈채팅 링크를 넣으면
+       '카카오톡으로 보내기'가 그 대화방을 바로 엽니다. 비워 두면 공유 창 방식입니다. */
+    kakaoChatUrl: ''
+  };
+  var TITLE = '2026 어린이 복음의 일을 위한 집회 신청';
+  var DEADLINE = Date.UTC(2026, 8, 24, 14, 0, 0); /* 9월 24일 23:00 (한국 시간) */
+  var KEY = 'kids-gospel-2026-apply';
+
+  function $(s){ return document.querySelector(s); }
+  function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  var el = {
+    name: $('#f-name'), church: $('#f-church'), phone: $('#f-phone'),
+    payer: $('#f-payer'), memo: $('#f-memo'), msg: $('#msg'),
+    sms: $('#b-sms'), mail: $('#b-mail'), kakao: $('#b-kakao'), copy: $('#b-copy'),
+    toast: $('#toast'), bar: $('#bar')
+  };
+
+  /* 알림 */
+  var tTimer;
+  function toast(text){
+    el.toast.textContent = text;
+    el.toast.classList.add('on');
+    clearTimeout(tTimer);
+    tTimer = setTimeout(function(){ el.toast.classList.remove('on'); }, 3000);
+  }
+
+  /* 복사 */
+  function execCopy(text){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }catch(e){ return false; }
+  }
+  function copyText(text){
+    if (navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(text).then(function(){ return true; }, function(){ return execCopy(text); });
+    }
+    return Promise.resolve(execCopy(text));
+  }
+
+  /* 입력값과 메시지 */
+  function radio(n){ var r = document.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ''; }
+  function values(){
+    return {
+      name: el.name.value.trim(), church: el.church.value.trim(), role: radio('role'),
+      phone: el.phone.value.trim(), pay: radio('pay'), payer: el.payer.value.trim(), memo: el.memo.value.trim()
+    };
+  }
+  function build(v, preview){
+    var empty = preview ? '(미입력)' : '';
+    var lines = [
+      '[' + TITLE + ']',
+      '이름: ' + (v.name || empty),
+      '소속 교회: ' + (v.church || empty),
+      '구분: ' + (v.role || empty),
+      '연락처: ' + (v.phone || empty),
+      '입금: ' + (v.pay || '입금 예정') + (v.payer ? ' (입금자명: ' + v.payer + ')' : '')
+    ];
+    if (v.memo) lines.push('남길 말: ' + v.memo);
+    return lines.join('\n');
+  }
+
+  function fmtPhone(s){
+    var d = s.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 3) return d;
+    if (d.length <= 7) return d.slice(0, 3) + '-' + d.slice(3);
+    var cut = d.length === 10 ? 6 : 7;
+    return d.slice(0, 3) + '-' + d.slice(3, cut) + '-' + d.slice(cut);
+  }
+
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function smsHref(text){ return 'sms:' + CONFIG.smsTo + (isIOS ? '&' : '?') + 'body=' + encodeURIComponent(text); }
+  function mailHref(v, text){
+    var subject = '[집회 신청] ' + (v.name || '') + (v.church ? ' / ' + v.church : '');
+    return 'mailto:' + CONFIG.emailTo + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+  }
+
+  function save(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){} }
+  function load(){
+    try{
+      var s = localStorage.getItem(KEY); if (!s) return;
+      var v = JSON.parse(s) || {};
+      ['name', 'church', 'phone', 'payer', 'memo'].forEach(function(k){ if (typeof v[k] === 'string') el[k].value = v[k]; });
+      ['role', 'pay'].forEach(function(n){
+        if (!v[n]) return;
+        $$('input[name="' + n + '"]').forEach(function(r){ r.checked = (r.value === v[n]); });
+      });
+    }catch(e){}
+  }
+
+  function refresh(){
+    var v = values(), text = build(v, false);
+    el.msg.textContent = build(v, true);
+    el.sms.href = smsHref(text);
+    el.mail.href = mailHref(v, text);
+    save(v);
+  }
+
+  /* 확인 */
+  function mark(id, bad){ var f = document.getElementById('fld-' + id); if (f) f.classList.toggle('bad', bad); }
+  function validate(){
+    var v = values();
+    var checks = [
+      ['name', !v.name], ['church', !v.church], ['role', !v.role],
+      ['phone', v.phone.replace(/\D/g, '').length < 10]
+    ];
+    var first = null;
+    checks.forEach(function(c){ mark(c[0], c[1]); if (c[1] && !first) first = c[0]; });
+    if (first){
+      var f = document.getElementById('fld-' + first), input = f.querySelector('input');
+      f.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      setTimeout(function(){ try{ input.focus({ preventScroll: true }); }catch(e){ input.focus(); } }, 380);
+      toast('필수 항목을 확인해 주세요');
+      return false;
+    }
+    return true;
+  }
+
+  function remind(){ setTimeout(function(){ toast('보낸 뒤 입금까지 마쳐야 신청이 완료됩니다'); }, 900); }
+
+  function copyFallback(text){
+    copyText(text).then(function(ok){
+      if (!ok){ toast('보낼 내용을 길게 눌러 복사해 주세요'); return; }
+      var inKakao = /KAKAOTALK/i.test(navigator.userAgent);
+      toast(inKakao ? '신청 내용을 복사했어요. 이 창을 닫고 보낼 대화방에 붙여넣어 주세요'
+                    : '신청 내용을 복사했어요. 카카오톡 대화방에 붙여넣어 보내 주세요');
+    });
+  }
+
+  var shareOK = typeof navigator.share === 'function';
+  try{
+    if (document.featurePolicy && document.featurePolicy.allowsFeature && !document.featurePolicy.allowsFeature('web-share')) shareOK = false;
+  }catch(e){}
+
+  /* 버튼 */
+  el.kakao.addEventListener('click', function(){
+    if (!validate()) return;
+    var text = build(values(), false);
+    if (CONFIG.kakaoChatUrl){
+      copyText(text).then(function(ok){
+        toast(ok ? '신청 내용을 복사했어요. 열린 대화방에 붙여넣어 보내 주세요' : '보낼 내용을 길게 눌러 복사한 뒤 대화방에 붙여넣어 주세요');
+      });
+      window.open(CONFIG.kakaoChatUrl, '_blank', 'noopener');
+      return;
+    }
+    if (shareOK){
+      navigator.share({ title: TITLE, text: text }).then(function(){
+        toast('보낸 뒤 입금까지 마쳐야 신청이 완료됩니다');
+      }, function(err){
+        if (err && err.name === 'AbortError') return;
+        copyFallback(text);
+      });
+      return;
+    }
+    copyFallback(text);
+  });
+
+  el.sms.addEventListener('click', function(e){ if (!validate()){ e.preventDefault(); return; } refresh(); remind(); });
+  el.mail.addEventListener('click', function(e){ if (!validate()){ e.preventDefault(); return; } refresh(); remind(); });
+
+  el.copy.addEventListener('click', function(){
+    if (!validate()) return;
+    copyText(build(values(), false)).then(function(ok){
+      toast(ok ? '신청 내용을 복사했어요' : '보낼 내용을 길게 눌러 복사해 주세요');
+    });
+  });
+
+  $$('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      copyText(b.getAttribute('data-copy')).then(function(ok){
+        toast(ok ? b.getAttribute('data-done') : '계좌번호를 길게 눌러 복사해 주세요');
+      });
+    });
+  });
+
+  /* 입력 */
+  el.phone.addEventListener('input', function(){
+    if (el.phone.selectionStart === el.phone.value.length) el.phone.value = fmtPhone(el.phone.value);
+  });
+  el.phone.addEventListener('blur', function(){ el.phone.value = fmtPhone(el.phone.value); refresh(); });
+  ['name', 'church', 'phone', 'payer', 'memo'].forEach(function(k){
+    el[k].addEventListener('input', function(){ mark(k, false); refresh(); });
+  });
+  $$('input[type="radio"]').forEach(function(r){
+    r.addEventListener('change', function(){ if (r.name === 'role') mark('role', false); refresh(); });
+  });
+  var order = [el.name, el.church, el.phone, el.payer, el.memo];
+  order.slice(0, 4).forEach(function(inp, i){
+    inp.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' && !e.isComposing){ e.preventDefault(); order[i + 1].focus(); }
+    });
+  });
+
+  /* 받는 곳 안내 */
+  $('#to-sms').textContent = CONFIG.smsLabel;
+  $('#to-mail').textContent = CONFIG.emailLabel;
+  if (CONFIG.kakaoChatUrl){
+    $('#kakao-hint').textContent = '신청 창구 대화방이 열립니다. 복사된 신청 내용을 붙여넣어 보내 주세요.';
+  }
+
+  /* 마감까지 남은 날 */
+  (function(){
+    var n = new Date(), k = new Date(n.getTime() + n.getTimezoneOffset() * 60000 + 9 * 3600000);
+    var days = Math.round((Date.UTC(2026, 8, 24) - Date.UTC(k.getFullYear(), k.getMonth(), k.getDate())) / 86400000);
+    var d = $('#dday');
+    if (Date.now() >= DEADLINE){ d.textContent = '마감'; $('#closed').hidden = false; }
+    else d.textContent = days > 0 ? days + '일 남음' : '오늘 마감';
+  })();
+
+  /* 하단 신청 버튼: 헤더 버튼과 신청 양식이 안 보일 때만 */
+  (function(){
+    if (!('IntersectionObserver' in window)) return;
+    var link = el.bar.querySelector('a'), heroVis = true, applyVis = false;
+    function upd(){
+      var show = !heroVis && !applyVis;
+      el.bar.classList.toggle('show', show);
+      el.bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      link.tabIndex = show ? 0 : -1;
+    }
+    new IntersectionObserver(function(es){ heroVis = es[0].isIntersecting; upd(); }).observe($('#hero-go'));
+    new IntersectionObserver(function(es){ applyVis = es[0].isIntersecting; upd(); }, { rootMargin: '0px 0px -25% 0px' }).observe($('#apply'));
+    upd();
+  })();
+
+  load();
+  refresh();
+})();
+</script>
+</body>
+</html>
