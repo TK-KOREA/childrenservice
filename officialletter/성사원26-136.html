@@ -265,7 +265,7 @@ footer b{display:block;color:#fff;font-size:.96rem;font-weight:800;margin-bottom
     </dl>
 
     <div class="due">
-      <p><span>신청 마감</span><strong class="tn">9월 24일(목) 23:00</strong></p>
+      <p><span>신청 마감</span><strong class="tn">9월 23일(수) 밤 11:00</strong></p>
       <em id="dday"></em>
     </div>
     <a class="go" id="hero-go" href="#apply">간편 신청하기</a>
@@ -306,7 +306,7 @@ footer b{display:block;color:#fff;font-size:.96rem;font-weight:800;margin-bottom
 <section class="wrap" id="apply">
   <div class="h"><h2>간편 신청</h2></div>
   <div class="card apply">
-    <p class="closed" id="closed" hidden>신청 마감 시각(9월 24일 목요일 23:00)이 지났습니다. 오윤경 자매에게 문의해 주세요.</p>
+    <p class="closed" id="closed" hidden>신청 마감 시각(9월 23일 수요일 밤 11시)이 지났습니다. 오윤경 자매에게 문의해 주세요.</p>
     <p class="intro">아래 세 가지만 적으면 신청 메시지가 만들어집니다. 카카오톡으로 <b>오윤경 자매</b>에게 보내 주세요.</p>
 
     <div class="fld" id="fld-name">
@@ -387,7 +387,8 @@ footer b{display:block;color:#fff;font-size:.96rem;font-weight:800;margin-bottom
     kakaoChatUrl: ''
   };
   var TITLE = '2026 어린이 복음의 일을 위한 집회 신청';
-  var DEADLINE = Date.UTC(2026, 8, 24, 14, 0, 0); /* 9월 24일 23:00 (한국 시간) */
+  var DUE = [2026, 8, 23];                              /* 마감일 (월은 0부터) */
+  var DEADLINE = Date.UTC(DUE[0], DUE[1], DUE[2], 14, 0, 0); /* 9월 23일 밤 11시 (한국 시간) */
   var KEY = 'kids-gospel-2026-apply';
 
   function $(s){ return document.querySelector(s); }
@@ -540,7 +541,7 @@ footer b{display:block;color:#fff;font-size:.96rem;font-weight:800;margin-bottom
   /* 마감까지 남은 날 */
   (function(){
     var n = new Date(), k = new Date(n.getTime() + n.getTimezoneOffset() * 60000 + 9 * 3600000);
-    var days = Math.round((Date.UTC(2026, 8, 24) - Date.UTC(k.getFullYear(), k.getMonth(), k.getDate())) / 86400000);
+    var days = Math.round((Date.UTC(DUE[0], DUE[1], DUE[2]) - Date.UTC(k.getFullYear(), k.getMonth(), k.getDate())) / 86400000);
     var d = $('#dday');
     if (Date.now() >= DEADLINE){ d.textContent = '마감'; $('#closed').hidden = false; }
     else d.textContent = days > 0 ? days + '일 남음' : '오늘 마감';
