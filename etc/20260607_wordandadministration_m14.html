@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>제14장 교회의 터를 회복함</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:"Hahmlet","Noto Serif KR","AppleMyungjo",serif;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  --bg:#f7f3ec;--surface:#fffdf8;--ink:#2a2320;--ink2:#554940;--ink3:#72655b;--line:#e2d8ca;
+  --ground:#8a5a2b;--ground-bg:#f4e8d9;--ground-ink:#76491f;--ground-line:#d9bf9f;
+  --gold:#a87a12;--gold-bg:#f8efd6;--gold-ink:#765406;--gold-line:#e6d09a;
+  --sea:#1f6f6a;--sea-bg:#e2f1ef;--sea-ink:#175a56;--sea-line:#a9d3ce;
+  --wine:#8a2440;--wine-bg:#f7e7eb;--wine-ink:#7a1f38;--wine-line:#e0b3c0;
+  --old:#b9ab98;--old-bg:#eee8de;--old-ink:#675c50;--old-line:#cfc3b2;
+  --on-accent:#fffdf8;
+  --accent:var(--ground);--accent-bg:var(--ground-bg);--accent-ink:var(--ground-ink);--accent-line:var(--ground-line);
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15110e;--surface:#211b17;--ink:#efe6da;--ink2:#cdc1b2;--ink3:#a79a8a;--line:#3a302a;
+  --ground:#d29c64;--ground-bg:#33251a;--ground-ink:#e8bd8e;--ground-line:#6b4d31;
+  --gold:#e2b64a;--gold-bg:#342a14;--gold-ink:#f2d27c;--gold-line:#6e5820;
+  --sea:#5cc3b8;--sea-bg:#13302d;--sea-ink:#8fded4;--sea-line:#2b5c56;
+  --wine:#e0718e;--wine-bg:#3a1a24;--wine-ink:#f3a0b5;--wine-line:#6b3143;
+  --old:#7d7266;--old-bg:#2a241f;--old-ink:#bcae9e;--old-line:#4d443c;
+  --on-accent:#15110e;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15110e;--surface:#211b17;--ink:#efe6da;--ink2:#cdc1b2;--ink3:#a79a8a;--line:#3a302a;
+  --ground:#d29c64;--ground-bg:#33251a;--ground-ink:#e8bd8e;--ground-line:#6b4d31;
+  --gold:#e2b64a;--gold-bg:#342a14;--gold-ink:#f2d27c;--gold-line:#6e5820;
+  --sea:#5cc3b8;--sea-bg:#13302d;--sea-ink:#8fded4;--sea-line:#2b5c56;
+  --wine:#e0718e;--wine-bg:#3a1a24;--wine-ink:#f3a0b5;--wine-line:#6b3143;
+  --old:#7d7266;--old-bg:#2a241f;--old-ink:#bcae9e;--old-line:#4d443c;
+  --on-accent:#15110e;color-scheme:dark}
+.acc-ground{--accent:var(--ground);--accent-bg:var(--ground-bg);--accent-ink:var(--ground-ink);--accent-line:var(--ground-line)}
+.acc-gold{--accent:var(--gold);--accent-bg:var(--gold-bg);--accent-ink:var(--gold-ink);--accent-line:var(--gold-line)}
+.acc-sea{--accent:var(--sea);--accent-bg:var(--sea-bg);--accent-ink:var(--sea-ink);--accent-line:var(--sea-line)}
+.acc-wine{--accent:var(--wine);--accent-bg:var(--wine-bg);--accent-ink:var(--wine-ink);--accent-line:var(--wine-line)}
+.acc-old{--accent:var(--old-ink);--accent-bg:var(--old-bg);--accent-ink:var(--old-ink);--accent-line:var(--old-line)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(3.5rem + env(safe-area-inset-top))}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.78;
+  word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+p{text-wrap:pretty;margin:0 0 1rem}
+h1,h2,h3{text-wrap:balance;font-family:var(--serif);margin:0;line-height:1.3}
+a{color:var(--accent-ink)}
+.wrap{max-width:35rem;margin:0 auto;padding-inline:1.125rem}
+.ic{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;width:1.25em;height:1.25em;vertical-align:-.22em;flex:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.serif{font-family:var(--serif)}
+
+/* SVG paint classes */
+.f-none{fill:none}.f-bg{fill:var(--bg)}.f-surface{fill:var(--surface)}
+.f-ground{fill:var(--ground)}.f-ground-bg{fill:var(--ground-bg)}.f-gold{fill:var(--gold)}.f-gold-bg{fill:var(--gold-bg)}
+.f-sea{fill:var(--sea)}.f-sea-bg{fill:var(--sea-bg)}.f-wine{fill:var(--wine)}.f-old-bg{fill:var(--old-bg)}.f-old{fill:var(--old)}
+.s-ground{stroke:var(--ground)}.s-gold{stroke:var(--gold)}.s-sea{stroke:var(--sea)}.s-old{stroke:var(--old)}.s-wine{stroke:var(--wine)}.s-line{stroke:var(--line)}
+.t-ink{fill:var(--ink)}.t-ink2{fill:var(--ink2)}.t-ink3{fill:var(--ink3)}.t-ground{fill:var(--ground-ink)}.t-gold{fill:var(--gold-ink)}
+.t-sea{fill:var(--sea-ink)}.t-old{fill:var(--old-ink)}.t-wine{fill:var(--wine-ink)}.t-on{fill:var(--on-accent)}
+.st-gold{stop-color:var(--gold)}.st-ground{stop-color:var(--ground)}.st-old{stop-color:var(--old)}
+svg text{font-family:var(--sans)}
+svg .sf{font-family:var(--serif)}
+
+/* HERO */
+.hero{padding:2.75rem 0 1.5rem;text-align:center}
+.kicker{display:inline-flex;gap:.5rem;align-items:center;font-size:.8125rem;letter-spacing:.06em;color:var(--ground-ink);
+  border:1px solid var(--ground-line);border-radius:999px;padding:.25rem .8rem;background:var(--surface)}
+.hero h1{font-size:clamp(2.5rem,11vw,3.25rem);margin:1.1rem 0 .4rem;font-weight:700;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--ground)}
+.hero .sub{font-size:.9375rem;color:var(--ink3);margin:0 0 1.25rem}
+.hero-art{width:100%;height:auto;display:block;margin:0 auto 1.25rem}
+.hero .lead-q{font-family:var(--serif);font-size:1.125rem;line-height:1.85;text-align:left;border-left:3px solid var(--ground);
+  padding:.25rem 0 .25rem 1rem;margin:0 0 1.25rem}
+.thesis{text-align:left;font-size:.9375rem;color:var(--ink2);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.thesis b{color:var(--ink)}
+
+/* BAR */
+.bar{position:fixed;left:0;right:0;top:0;z-index:30;padding-top:env(safe-area-inset-top);background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .3s}
+.bar.is-shown{transform:none}
+.bar-in{max-width:35rem;margin:0 auto;padding:.45rem 1rem;display:flex;align-items:center;gap:.6rem}
+.bar-pot{width:1.9rem;height:1.9rem;flex:none}
+.bar-txt{flex:1;min-width:0;display:flex;align-items:baseline;gap:.45rem;font-size:.8125rem;white-space:nowrap;overflow:hidden}
+.bar-n{font-family:var(--serif);font-weight:700;color:var(--accent-ink)}
+.bar-beat{font-size:.75rem;padding:.05rem .45rem;border-radius:999px;background:var(--accent-bg);color:var(--accent-ink)}
+.bar-title{overflow:hidden;text-overflow:ellipsis;color:var(--ink2)}
+.bar-toc{flex:none;min-width:2.5rem;min-height:2.5rem;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);display:grid;place-items:center;cursor:pointer}
+.bar-prog{height:2px;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+
+/* FLOW MAP */
+.sec-label{font-size:.8125rem;letter-spacing:.08em;color:var(--ink3);margin:2.25rem 0 .75rem;display:flex;align-items:center;gap:.5rem}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.flow{list-style:none;margin:0;padding:0;position:relative}
+.flow::before{content:"";position:absolute;left:1.05rem;top:.8rem;bottom:.8rem;border-left:2px dashed var(--line)}
+.flow li{position:relative;margin:0 0 .5rem}
+.flow a{display:grid;grid-template-columns:2.2rem 1fr;gap:.75rem;text-decoration:none;color:inherit;padding:.5rem .4rem .5rem 0;border-radius:12px}
+.flow a:hover{background:var(--surface)}
+.flow .num{width:2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:.875rem;
+  background:var(--surface);border:2px solid var(--accent);color:var(--accent-ink);position:relative;z-index:1}
+.flow .ft{display:block;font-family:var(--serif);font-weight:600;line-height:1.45}
+.flow .fb{font-size:.75rem;color:var(--accent-ink);margin-right:.35rem;font-family:var(--sans);font-weight:600}
+.flow .fd{display:block;font-size:.875rem;color:var(--ink3);line-height:1.6;margin-top:.1rem}
+
+/* KEY */
+.key{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;font-size:.875rem;color:var(--ink2)}
+.key ul{list-style:none;margin:0 0 .75rem;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.4rem .75rem}
+.key li{display:flex;gap:.45rem;align-items:center;line-height:1.45}
+.sw{width:.9rem;height:.9rem;border-radius:4px;flex:none;background:var(--c)}
+.sw.dash{background:transparent;border:2px dashed var(--old)}
+.key p{margin:.35rem 0 0}
+.key .k-serif{font-family:var(--serif);color:var(--ink)}
+
+/* CHAPTER */
+.ch{padding:3rem 0 1rem;position:relative}
+.ch-head{margin-bottom:1.5rem}
+.ch-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.ch-n{font-family:var(--serif);font-weight:700;font-size:1.5rem;color:var(--accent)}
+.beat{font-size:.8125rem;font-weight:600;padding:.15rem .65rem;border-radius:999px;background:var(--accent-ink);color:var(--on-accent)}
+.ch-head h2{font-size:clamp(2rem,9vw,2.6rem);font-weight:700;letter-spacing:-.01em}
+.dek{font-size:.9375rem;color:var(--ink3);margin:.6rem 0 0}
+.body{position:relative;padding-left:1.35rem}
+.body::before{content:"";position:absolute;left:.3rem;top:.4rem;bottom:0;width:2px;background:linear-gradient(var(--accent-line),transparent)}
+.node{position:relative;font-size:.8125rem;font-weight:600;color:var(--accent-ink);margin:1.75rem 0 .75rem;display:flex;align-items:center;gap:.4rem}
+.node::before{content:"";position:absolute;left:-1.35rem;top:50%;width:.8rem;height:.8rem;margin-top:-.4rem;margin-left:-.1rem;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.node:first-child{margin-top:0}
+.ed{font-size:.9375rem;color:var(--ink2)}
+.mq{margin:1.25rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--accent)}
+.mq p{font-family:var(--serif);font-size:1.0625rem;line-height:1.9;margin:0}
+.mq.lead p{font-size:1.2rem;font-weight:600;line-height:1.75}
+.mq cite{display:block;font-style:normal;font-size:.75rem;color:var(--ink3);margin-top:.35rem;font-family:var(--sans)}
+.ell{color:var(--ink3)}
+.ch-close{margin:2rem 0 .5rem;padding-top:1rem;border-top:2px solid var(--accent)}
+.ch-close p{font-family:var(--serif);font-size:1.3rem;line-height:1.65;color:var(--accent-ink);font-weight:600;margin:0}
+.ch-close small{display:block;margin-top:.5rem;font-size:.8125rem;color:var(--ink3)}
+.still{padding:3.25rem 0;text-align:center;font-family:var(--serif);font-size:1.3rem;line-height:1.7;color:var(--accent-ink)}
+.still .ic{display:block;margin:0 auto .75rem;width:1.6rem;height:1.6rem;color:var(--accent)}
+.fig{margin:1.5rem 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:.75rem}
+.body .fig,.body .split{margin-left:-1.35rem}
+.fig>svg{width:100%;height:auto;display:block}
+.fig figcaption{font-size:.8125rem;color:var(--ink3);margin-top:.6rem;line-height:1.6}
+.fig-t{font-size:.8125rem;font-weight:600;color:var(--ink2);margin:0 0 .6rem;display:flex;gap:.4rem;align-items:center}
+
+/* chips & verses */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0 1rem}
+.chip{font:inherit;font-size:.8125rem;display:inline-flex;align-items:center;gap:.3rem;min-height:2.25rem;padding:.2rem .75rem;border-radius:999px;
+  border:1.5px solid var(--gold);background:var(--gold-bg);color:var(--gold-ink);cursor:pointer}
+.chip.rel{border-style:dashed;background:transparent}
+.chip .tag{font-size:.6875rem;padding:0 .35rem;border-radius:4px;background:var(--surface);border:1px solid var(--gold-line)}
+.sc{margin:1.25rem 0;padding:1rem 1rem .9rem;background:var(--surface);border:1px solid var(--gold-line);border-top:3px solid var(--gold);border-radius:4px 4px 14px 14px;position:relative}
+.sc-ref{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;font-weight:600;color:var(--gold-ink);margin-bottom:.45rem}
+.sc-ref .tag{font-size:.6875rem;font-weight:500;padding:0 .35rem;border:1px dashed var(--gold);border-radius:4px}
+.sc p{font-family:var(--serif);line-height:1.9;margin:0}
+.vn{font-size:.7em;vertical-align:.45em;color:var(--gold-ink);margin-right:.15em;font-family:var(--sans)}
+mark{background:linear-gradient(transparent 60%,var(--gold-bg) 60%);color:inherit;box-shadow:0 2px 0 var(--gold)}
+.sc-miss{font-size:.875rem;color:var(--ink3);font-family:var(--sans)}
+
+/* timeline */
+.tl{list-style:none;margin:1.25rem 0;padding:0 0 0 1.6rem;position:relative}
+.tl::before{content:"";position:absolute;left:.5rem;top:.5rem;bottom:.5rem;width:3px;border-radius:3px;background:linear-gradient(var(--old),var(--ground) 70%,var(--gold))}
+.tl li{position:relative;margin:0 0 1rem;font-size:.9375rem}
+.tl li::before{content:"";position:absolute;left:-1.42rem;top:.45rem;width:.85rem;height:.85rem;border-radius:50%;background:var(--bg);border:2px dashed var(--old)}
+.tl li.tl-mid::before{border:2px solid var(--ground)}
+.tl li.tl-fin::before{background:var(--gold);border:2px solid var(--gold);box-shadow:0 0 0 5px var(--gold-bg)}
+.tl .yr{font-family:var(--serif);font-weight:700;font-size:1.0625rem;color:var(--ink);margin-right:.4rem}
+.tl .tl-d{display:block;color:var(--ink2);line-height:1.6}
+.tl .tl-tag{display:inline-block;font-size:.75rem;padding:0 .45rem;border-radius:4px;background:var(--accent-bg);color:var(--accent-ink);margin-left:.2rem}
+.clarity{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin:1rem 0}
+.clarity div{border-radius:10px;padding:.55rem .5rem;text-align:center;font-size:.8125rem;line-height:1.4;border:1.5px dashed var(--old);color:var(--old-ink);background:var(--old-bg)}
+.clarity div b{display:block;font-family:var(--serif);font-size:1rem;color:var(--ink)}
+.clarity div.c-fin{border:1.5px solid var(--ground);background:var(--ground);color:var(--on-accent)}
+.clarity div.c-fin b{color:var(--on-accent)}
+
+/* voice */
+.voice{margin:1.25rem 0;display:grid;gap:.6rem}
+.msg{max-width:92%;padding:.75rem .95rem;border-radius:16px;background:var(--surface);border:1px solid var(--line);font-family:var(--serif);font-size:1rem;line-height:1.8}
+.msg .who{display:block;font-family:var(--sans);font-size:.75rem;color:var(--ink3);margin-bottom:.2rem}
+.msg.me{justify-self:end;background:var(--accent-bg);border-color:var(--accent-line);border-bottom-right-radius:4px}
+.msg.them{border-bottom-left-radius:4px}
+.msg.strong{background:var(--accent-ink);color:var(--on-accent);border-color:var(--accent-ink)}
+.msg.strong .who{color:var(--on-accent);opacity:.85}
+.letter{margin:1.25rem 0;padding:1.1rem 1.1rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:6px;position:relative;
+  background-image:repeating-linear-gradient(transparent 0 1.85rem,var(--line) 1.85rem calc(1.85rem + 1px))}
+.letter .who{display:flex;gap:.4rem;align-items:center;font-size:.75rem;color:var(--ink3);margin-bottom:.35rem}
+.letter p{font-family:var(--serif);line-height:1.85rem;margin:0}
+
+/* deeper */
+.deeper{margin:1.25rem 0;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.deeper summary{cursor:pointer;list-style:none;padding:.8rem 1rem;min-height:2.5rem;display:flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:600;color:var(--ink2)}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary::after{content:"+";margin-left:auto;font-size:1.2rem;color:var(--accent);font-weight:400}
+.deeper[open] summary::after{content:"−"}
+.deeper .dp{padding:0 1rem 1rem}
+
+/* big number */
+.bns{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:1.25rem 0}
+.bn{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.9rem .9rem .8rem}
+.bn b{display:block;white-space:nowrap;font-family:var(--serif);font-size:clamp(2rem,9.5vw,2.8rem);line-height:1.05;color:var(--accent)}
+.bn b small{font-size:.4em;margin-left:.1em}
+.bn span{display:block;font-size:.8125rem;color:var(--ink2);line-height:1.5;margin-top:.35rem}
+
+/* before after */
+.ba{display:grid;gap:.5rem;margin:1.25rem 0}
+.ba-box{border-radius:14px;padding:.9rem 1rem;font-size:.9375rem;line-height:1.65}
+.ba-box h4{margin:0 0 .35rem;font-family:var(--serif);font-size:1.0625rem}
+.ba-box .lab{font-size:.75rem;letter-spacing:.05em;display:block;margin-bottom:.2rem}
+.ba-before{border:1.5px dashed var(--old);background:var(--old-bg);color:var(--old-ink)}
+.ba-before h4{color:var(--ink2)}
+.ba-after{border:1.5px solid var(--gold);background:linear-gradient(160deg,var(--gold-bg),var(--surface));color:var(--ink)}
+.ba-after .lab{color:var(--gold-ink)}
+.ba-turn{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.8125rem;color:var(--accent-ink);font-weight:600;text-align:center}
+@media (min-width:30rem){.ba{grid-template-columns:1fr auto 1fr;align-items:stretch}.ba-turn{flex-direction:column;max-width:6.5rem}}
+.titles{display:flex;flex-wrap:wrap;gap:.35rem;margin:.9rem 0 .25rem;list-style:none;padding:0}
+.titles li{font-family:var(--serif);font-size:.9375rem;padding:.2rem .7rem;border-radius:8px;border:1px solid var(--gold-line);background:var(--surface);color:var(--gold-ink)}
+.titles li.t-key{background:var(--gold-ink);border-color:var(--gold-ink);color:var(--on-accent);font-weight:600}
+
+/* steps */
+.steps{list-style:none;margin:1.25rem 0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 1.1rem 3rem;counter-increment:s;font-size:.9375rem;line-height:1.65}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--serif);font-weight:700;border:2px solid var(--accent);color:var(--accent-ink);background:var(--surface)}
+.steps li::after{content:"";position:absolute;left:1rem;top:2.2rem;bottom:.1rem;border-left:2px solid var(--accent-line)}
+.steps li:last-child::after{display:none}
+.steps li.st-fin::before{background:var(--gold);border-color:var(--gold);color:var(--on-accent)}
+.steps b{font-family:var(--serif);display:block;font-size:1.0625rem}
+.steps li.st-fin b{color:var(--gold-ink)}
+
+/* compare table */
+.cmp-wrap{overflow-x:auto;margin:1.25rem 0}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:.875rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table.cmp th,table.cmp td{padding:.65rem .6rem;vertical-align:top;text-align:left;border-bottom:1px solid var(--line)}
+table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:0}
+table.cmp thead th{font-size:.8125rem;font-weight:600}
+table.cmp thead th.h-wine{background:var(--wine-bg);color:var(--wine-ink)}
+table.cmp thead th.h-ground{background:var(--ground);color:var(--on-accent)}
+table.cmp tbody th{font-weight:600;color:var(--ink3);font-size:.75rem;width:2.4rem;padding-inline:.45rem}
+table.cmp td.c-yes{color:var(--ink2)}
+table.cmp td.c-hold{color:var(--ground-ink);font-weight:600;background:var(--ground-bg)}
+.tok{display:inline-block;font-size:.6875rem;font-weight:600;padding:0 .4rem;border-radius:4px;margin-bottom:.15rem}
+.tok-y{background:var(--wine-bg);color:var(--wine-ink);border:1px solid var(--wine-line)}
+.tok-h{background:var(--ground);color:var(--on-accent)}
+
+/* persons */
+.people{display:grid;gap:.5rem;margin:.5rem 0 0}
+.person{display:grid;grid-template-columns:auto 1fr;gap:.2rem .6rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:12px;font-size:.875rem;line-height:1.6;background:var(--bg)}
+.person .ic{grid-row:span 2;color:var(--ink3);margin-top:.2rem}
+.person b{font-family:var(--serif)}
+.person span{color:var(--ink2)}
+
+/* split (per-ministry filter) */
+.split{margin:1.25rem 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:.8rem}
+.split-names{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:.5rem}
+.split-names span{font-family:var(--serif);font-size:.875rem;padding:.15rem .6rem;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+.split>svg{width:100%;height:auto;display:block}
+.split-cols{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.split-cols div{border-radius:12px;padding:.7rem .7rem;font-size:.875rem;line-height:1.55}
+.split-cols h4{margin:0 0 .25rem;font-family:var(--serif);font-size:1rem;display:flex;align-items:center;gap:.3rem}
+.sp-yes{background:var(--wine-bg);border:1.5px solid var(--wine-line)}
+.sp-yes h4{color:var(--wine-ink)}
+.sp-no{background:var(--old-bg);border:1.5px dashed var(--old)}
+.sp-no h4{color:var(--old-ink)}
+.sp-no h4 s{text-decoration-thickness:2px}
+
+/* two visits */
+.visits{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:1.25rem 0}
+.visit{border-radius:14px;padding:.8rem .8rem;font-size:.875rem;line-height:1.6}
+.visit h4{margin:0 0 .3rem;font-family:var(--serif);font-size:1rem}
+.visit .lab{display:block;font-size:.75rem;margin-bottom:.15rem}
+.v-ok{background:var(--sea-bg);border:1.5px solid var(--sea-line)}
+.v-ok .lab,.v-ok h4{color:var(--sea-ink)}
+.v-over{background:var(--surface);border:1.5px solid var(--wine)}
+.v-over .lab,.v-over h4{color:var(--wine-ink)}
+.line-over{display:block;margin-top:.4rem;font-size:.75rem;font-weight:600;color:var(--wine-ink)}
+
+/* chain */
+.chain{list-style:none;margin:1.25rem 0;padding:0}
+.chain li{position:relative;border:1.5px dashed var(--old);background:var(--old-bg);color:var(--ink2);border-radius:12px;padding:.65rem .85rem;font-size:.9375rem;line-height:1.6;margin-bottom:1.7rem}
+.chain li::after{content:"";position:absolute;left:50%;bottom:-1.45rem;width:2px;height:1rem;background:var(--old);transform:translateX(-50%)}
+.chain li::before{content:"";position:absolute;left:50%;bottom:-1.55rem;border:6px solid transparent;border-top-color:var(--old);transform:translateX(-50%)}
+.chain li:last-child{margin-bottom:0;border-style:solid;border-color:var(--old-ink);background:var(--old-ink);color:var(--bg);font-weight:600}
+.chain li:last-child::before,.chain li:last-child::after{display:none}
+.chain .cl{display:block;font-size:.75rem;opacity:.85;margin-bottom:.1rem}
+
+/* verdict / duo */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:1.25rem 0 0}
+.duo div{border:1.5px dashed var(--old);background:var(--old-bg);border-radius:12px;padding:.75rem .75rem;font-size:.875rem;line-height:1.6;color:var(--ink2)}
+.duo h4{margin:0 0 .3rem;font-family:var(--serif);font-size:.9375rem;color:var(--old-ink)}
+.merge{display:block;width:100%;height:auto}
+.verdict{background:var(--ground);color:var(--on-accent);border-radius:14px;padding:.9rem 1rem;text-align:center;font-family:var(--serif);font-size:1.0625rem;line-height:1.7}
+.verdict small{display:block;font-family:var(--sans);font-size:.75rem;opacity:.85;margin-bottom:.2rem}
+
+.ask{margin:1.25rem 0;padding:1rem 1.1rem;border-radius:14px;border:1.5px solid var(--accent-line);background:var(--accent-bg);font-family:var(--serif);font-size:1.0625rem;line-height:1.8;color:var(--accent-ink)}
+.ask .lab{display:block;font-family:var(--sans);font-size:.75rem;color:var(--ink3);margin-bottom:.2rem}
+
+/* BRIDGE */
+.bridge{text-align:center;padding:1.5rem 0 .5rem}
+.bridge::before{content:"";display:block;width:0;height:2.75rem;margin:0 auto .6rem;border-left:2px dashed var(--line)}
+.bridge .br-lab{display:inline-block;font-size:.75rem;letter-spacing:.1em;color:var(--ink3);margin-bottom:.3rem}
+.bridge p{font-family:var(--serif);font-size:1.125rem;color:var(--ink);margin:0 auto;max-width:26rem;line-height:1.7}
+
+/* BAND / SIGNATURE */
+.band{margin:2rem -1.125rem;padding:2rem 1.125rem 1.5rem;background:radial-gradient(120% 90% at 50% 0%,var(--gold-bg),var(--bg) 75%);border-block:1px solid var(--gold-line)}
+.band-k{text-align:center;font-size:.8125rem;letter-spacing:.08em;color:var(--gold-ink);margin-bottom:.4rem}
+.band h3{text-align:center;font-size:1.5rem;margin-bottom:1rem}
+.sig>svg{width:100%;height:auto;display:block;max-width:24rem;margin:0 auto}
+.sig .tea{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1.1s cubic-bezier(.3,.7,.3,1)}
+.sig .steam{opacity:1;transition:opacity .8s}
+.sig .crack,.sig .drip{opacity:0;transition:opacity .4s}
+.sig .lab-t{opacity:1;transition:opacity .6s}
+.js .sig:not(.play) .tea{transform:scaleY(0)}
+.js .sig:not(.play) .steam,.js .sig:not(.play) .lab-t{opacity:0}
+.sig.play .tea{animation:pour 2.4s cubic-bezier(.3,.7,.3,1) both}
+.sig.play .steam{animation:fade 1s 2.2s both}
+.sig.play .lab-t{animation:fade .8s 1.6s both}
+@keyframes pour{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sig.broken .tea{animation:none;transform:scaleY(.08)}
+.sig.broken .steam{animation:none;opacity:0}
+.sig.broken .crack,.sig.broken .drip{opacity:1}
+.sig.broken .drip{animation:drip 1.2s .2s infinite}
+.sig.broken .lab-tea{opacity:0}
+@keyframes drip{from{transform:translateY(0);opacity:1}to{transform:translateY(22px);opacity:0}}
+.sig-cap{text-align:center;font-size:.875rem;color:var(--ink2);min-height:3.2em;margin:.6rem auto 0;max-width:24rem}
+.sig-btns{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.btn{font:inherit;font-size:.8125rem;min-height:2.5rem;padding:.3rem .9rem;border-radius:999px;border:1.5px solid var(--ground);background:var(--surface);color:var(--ground-ink);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem}
+.btn[aria-pressed="true"]{background:var(--ground);color:var(--on-accent)}
+.band .mq{margin-top:1.5rem}
+
+/* FINALE */
+.finale{padding:3.5rem 0 1rem;text-align:center}
+.finale .big{font-family:var(--serif);font-size:clamp(1.7rem,7.6vw,2.2rem);font-weight:700;line-height:1.45;margin:.5rem 0 2rem}
+.finale .big em{font-style:normal;color:var(--ground)}
+.finale .big strong{color:var(--gold-ink);font-weight:700}
+.recap{list-style:none;margin:0 0 2rem;padding:0;text-align:left;display:grid;gap:.4rem}
+.recap li{display:grid;grid-template-columns:2rem 3.6rem 1fr;gap:.5rem;align-items:baseline;padding:.55rem .75rem;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:.875rem;line-height:1.55}
+.recap .rn{font-family:var(--serif);font-weight:700;color:var(--accent)}
+.recap .rb{font-size:.75rem;font-weight:600;color:var(--accent-ink)}
+.still-final{padding:3rem 1rem;border-radius:20px;background:radial-gradient(circle at 50% 40%,var(--gold-bg),transparent 70%);font-family:var(--serif);font-size:1.25rem;line-height:1.8;color:var(--ink)}
+.still-final .ic{display:block;margin:0 auto .8rem;width:1.7rem;height:1.7rem;color:var(--gold)}
+
+footer{margin-top:2.5rem;padding:1.5rem 0 3rem;border-top:1px solid var(--line);font-size:.8125rem;color:var(--ink3);line-height:1.7}
+footer p{margin:0 0 .5rem}
+.totop{display:inline-flex;align-items:center;gap:.3rem;min-height:2.5rem;padding:.2rem .9rem;border:1px solid var(--line);border-radius:999px;color:var(--ink2);text-decoration:none;margin-top:.5rem}
+
+/* SHEET */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.is-open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:80vh;overflow:auto;background:var(--surface);border-radius:20px 20px 0 0;
+  padding:1rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .3s;max-width:36rem;margin:0 auto;box-shadow:0 -8px 30px rgba(0,0,0,.2)}
+.sheet.is-open{transform:none}
+.sheet-h{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.sheet-h h3{font-size:1.125rem;flex:1}
+.sheet-x{min-width:2.5rem;min-height:2.5rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink2);cursor:pointer;display:grid;place-items:center}
+.sheet .rel-note{font-size:.8125rem;color:var(--ink3);border:1px dashed var(--gold);border-radius:10px;padding:.5rem .7rem;margin-bottom:.75rem}
+.sheet .sv{font-family:var(--serif);line-height:1.9;margin:0 0 .5rem}
+.sheet .badge{font-size:.6875rem;padding:0 .4rem;border:1px dashed var(--gold);border-radius:4px;color:var(--gold-ink)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .sig:not(.play) .tea{transform:none}
+  .js .sig:not(.play) .steam,.js .sig:not(.play) .lab-t{opacity:1}
+}
+</style>
+</head>
+<body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-church" viewBox="0 0 24 24"><path d="M3 21h18M5 21V11l7-6 7 6v10M12 2v4M10 4h4M10 21v-5h4v5"/></symbol>
+  <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.4C4 11.5 3 10.5 3 8c0-2.7 1.5-6 4.5-6C9.4 2 11 3.8 11 6.5c0 2.5-2 3.5-2 5.8V16"/><path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-6-4.5-6C14.6 6 13 7.8 13 10.5c0 2.5 2 3.5 2 5.8V20"/><path d="M16 17h4M4 13h4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17h14M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M3 17v-5l2-5h14l2 5v5"/></symbol>
+  <symbol id="i-pot" viewBox="0 0 24 24"><path d="M5 10c0 6 3 10 7 10s7-4 7-10z"/><path d="M8 10c.5-2.5 7.5-2.5 8 0M12 6.5v1M5 12 2 8.5M19 11.5c3 0 3 5 0 5.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol>
+</svg>
+
+<div class="bar acc-ground" id="bar" aria-hidden="true">
+  <div class="bar-in">
+    <svg class="bar-pot" viewBox="0 0 24 24" aria-hidden="true">
+      <defs><clipPath id="mini-clip"><path d="M5 10c0 6 3 10 7 10s7-4 7-10z"/></clipPath></defs>
+      <rect id="mini-tea" class="f-gold" x="0" y="20" width="24" height="12" clip-path="url(#mini-clip)"/>
+      <path d="M5 10c0 6 3 10 7 10s7-4 7-10z M8 10c.5-2.5 7.5-2.5 8 0M5 12 2 8.5M19 11.5c3 0 3 5 0 5.5" class="f-none s-ground" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="bar-txt"><span class="bar-n" id="bar-n">01</span><span class="bar-beat" id="bar-beat">회복</span><span class="bar-title" id="bar-title">회복의 첫 단계</span></div>
+    <a class="bar-toc" href="#flow" tabindex="-1" aria-label="메시지의 흐름(목차)으로"><svg class="ic"><use href="#i-list"/></svg></a>
+  </div>
+  <div class="bar-prog" id="bar-prog"></div>
+</div>
+
+<main class="wrap">
+<header class="hero">
+  <span class="kicker">교회의 행정과 말씀의 사역 · 제14장</span>
+  <h1>교회의 <em>터</em>를<br>회복함</h1>
+  <p class="sub">주님께서 동양에서 일으키신 간증 — 한 지방에 한 교회</p>
+  <svg class="hero-art" viewBox="0 0 340 204" role="img" aria-label="위에 금빛 원 '그리스도'가 있고, 그 빛이 다섯 개의 교회로 내려온다. 다섯 교회는 모두 하나의 갈색 띠 '교회의 터' 위에 서 있으며, 아래에 상하이, 베이징, 톈진, 난징, 광저우라는 지방 이름이 적혀 있다.">
+    <defs>
+      <radialGradient id="h-glow"><stop offset="0" class="st-gold" stop-opacity=".45"/><stop offset="1" class="st-gold" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="170" cy="44" r="44" fill="url(#h-glow)"/>
+    <g class="s-gold" stroke-width="1.5" stroke-dasharray="3 4" fill="none">
+      <path d="M170 74 L38 124"/><path d="M170 74 L104 124"/><path d="M170 74 L170 124"/><path d="M170 74 L236 124"/><path d="M170 74 L302 124"/>
+    </g>
+    <circle cx="170" cy="44" r="30" style="fill:var(--gold-ink)"/>
+    <text x="170" y="49" text-anchor="middle" font-size="13" font-weight="600" class="t-on sf">그리스도</text>
+    <g class="s-sea f-surface" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M26 156v-18l12-10 12 10v18z"/><path d="M92 156v-18l12-10 12 10v18z"/><path d="M158 156v-18l12-10 12 10v18z"/><path d="M224 156v-18l12-10 12 10v18z"/><path d="M290 156v-18l12-10 12 10v18z"/>
+    </g>
+    <g class="s-sea" stroke-width="1.6" fill="none"><path d="M38 128v-6M104 128v-6M170 128v-6M236 128v-6M302 128v-6"/></g>
+    <rect x="8" y="156" width="324" height="18" rx="4" class="f-ground"/>
+    <text x="170" y="169" text-anchor="middle" font-size="12" font-weight="600" class="t-on">교회의 터 · 지방</text>
+    <g font-size="12" text-anchor="middle" class="t-ink3">
+      <text x="38" y="194">상하이</text><text x="104" y="194">베이징</text><text x="170" y="194">톈진</text><text x="236" y="194">난징</text><text x="302" y="194">광저우</text>
+    </g>
+  </svg>
+  <blockquote class="mq lead-q" style="border-left-color:var(--ground)"><p>이 메시지에서 나는 이 시대에 주님께서 우리에게 원하시는 것은 바로 우리가 주님을 위하여 그분의 간증이 되는 것임을 말할 것이다.</p></blockquote>
+  <p class="thesis">1922년 무렵 시작된 회복은 한 걸음씩 전진하여 <b>1934년</b>, 교회의 내용은 <b>중심과 전부이신 그리스도</b>이고 교회의 외적인 표현은 <b>지방이 교회의 터</b>가 된다는 이정표에 이르렀습니다. 복음·생명·진리의 모든 영적인 것은 받아들이되 이 터에서는 한 발자국도 물러서지 않은 것 — 그것이 주님께서 동양에서 일으키신 간증이며, 축복을 담는 ‘찻주전자’입니다.</p>
+</header>
+
+<div class="sec-label" id="flow">메시지의 흐름</div>
+<ol class="flow">
+  <li class="acc-ground"><a href="#c1"><span class="num">01</span><span><span class="ft"><span class="fb">회복</span>주님께서 동양에서 시작하신 회복</span><span class="fd">하나 → 종파의 정의 → 지방의 터, 한 가지씩 회복함</span></span></a></li>
+  <li class="acc-sea"><a href="#c2"><span class="num">02</span><span><span class="ft"><span class="fb">이상</span>니 형제님이 교회의 터를 봄</span><span class="fd">나뉜 형제회를 보며 — 오직 지방만이 경계</span></span></a></li>
+  <li class="acc-gold"><a href="#c3"><span class="num">03</span><span><span class="ft"><span class="fb">확정</span>교회의 터의 문제를 확정함</span><span class="fd">1934년 특별집회 — 내용은 그리스도, 표현은 지방</span></span></a></li>
+  <li class="acc-sea"><a href="#c4"><span class="num">04</span><span><span class="ft"><span class="fb">증거</span>우리가 유지해야 될 하나의 증거</span><span class="fd">종파를 떠나는 조류를 넘어 — 그리스도께서 교회 안에서 표현되심</span></span></a></li>
+  <li class="acc-wine"><a href="#c5"><span class="num">05</span><span><span class="ft"><span class="fb">위임</span>주님이 우리에게 주신 특별한 위임</span><span class="fd">영적인 것은 받아들이고, 터는 한 발자국도 물러서지 않음</span></span></a></li>
+  <li class="acc-old"><a href="#c6"><span class="num">06</span><span><span class="ft"><span class="fb">분별</span>터 이외에 섞임을 가질 수 없음</span><span class="fd">스팍스 형제의 두 번의 방문, 그리고 섞임의 결과</span></span></a></li>
+  <li class="acc-gold"><a href="#c7"><span class="num">07</span><span><span class="ft"><span class="fb">축복</span>터를 실행하는 것은 축복을 가져옴</span><span class="fd">차는 찻주전자에 의존한다</span></span></a></li>
+</ol>
+
+<div class="sec-label">읽는 법</div>
+<div class="key">
+  <ul>
+    <li><span class="sw" style="--c:var(--ground)"></span>교회의 터</li>
+    <li><span class="sw" style="--c:var(--gold)"></span>그리스도 · 축복</li>
+    <li><span class="sw" style="--c:var(--sea)"></span>지방 · 교회의 출현</li>
+    <li><span class="sw" style="--c:var(--wine)"></span>영적인 풍성(복음·생명·진리)</li>
+    <li><span class="sw dash"></span>종파 · 섞임 · 옛 것</li>
+    <li><span class="sw" style="--c:transparent;border:1.5px solid var(--gold)"></span>성경 구절</li>
+  </ul>
+  <p><span class="k-serif">명조체</span>는 지문 원문, 고딕체는 편집자의 정리입니다. 금색 칩을 누르면 성경 구절이 열리며, 점선 칩은 지문이 직접 인용하지 않은 <b>관련</b> 구절입니다.</p>
+</div>
+
+<!-- 01 -->
+<section class="ch acc-ground" id="c1" data-n="01" data-beat="회복" data-title="주님께서 동양에서 시작하신 회복">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">01</span><span class="beat">회복</span></div>
+    <h2>주님께서 동양에서 시작하신 회복</h2>
+    <p class="dek">의문에서 출발하여 말씀을 추구하고, 성경에 부합되지 않는 것을 하나하나 내려놓음</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>주님께서 동양에서 시작하신 회복</p>
+    <blockquote class="mq lead"><p>그러므로 초기부터 우리는 성경에 부합되지 않는 실행들을 하나하나 내려놓기 시작했다. 그러고 나서 우리는 최선을 다해 여러 가지 항목들을 성경의 원래 모습으로 되돌리고자 했다.</p></blockquote>
+    <p class="ed">회복은 한꺼번에 오지 않았습니다. 기독교계의 상황을 주의하는 한 면과 주님의 말씀을 추구하는 다른 한 면이 함께 가면서, 한 가지 한 가지 회복해 나갔습니다.</p>
+
+    <p class="node"><svg class="ic"><use href="#i-anchor"/></svg>교회의 터를 회복함</p>
+    <ol class="tl" aria-label="회복의 첫 번째 단계 연표">
+      <li><span class="yr">1922년 전후</span><span class="tl-d">회복의 전진 속도가 상당히 빨랐던 처음 몇 년</span></li>
+      <li><span class="yr">1924년</span><span class="tl-d">정식으로 회복을 시작함</span></li>
+      <li class="tl-mid"><span class="yr">1925년 경</span><span class="tl-tag">하나</span><span class="tl-d">교회는 종파로 나뉘어서는 안 되고, 유일하게 하나이며, 하나를 유지해야 함에 분명함</span></li>
+      <li class="tl-mid"><span class="yr">1928~1931년</span><span class="tl-tag">종파</span><span class="tl-d">종파에 대해 이전보다 더 분명하게 정의함 — 그러나 터는 아직 분명하지 않음</span></li>
+      <li class="tl-mid"><span class="yr">1932년</span><span class="tl-d">많은 사람들이 교회의 터와 관련하여 분명한 인식을 갖게 됨</span></li>
+      <li class="tl-fin"><span class="yr">1934년</span><span class="tl-tag">지방의 터</span><span class="tl-d">교회가 한 지방 한 지방에 출현한다는 빛이 분명하고 정확하게 열림 — 초기 단계의 회복이 형태를 갖춤</span></li>
+    </ol>
+    <blockquote class="mq"><p>우리는 교회가 특별한 명칭이나 특별한 교통이나 특별한 믿음을 갖고 있다면 이것이 바로 종파라는 것을 알았다.</p></blockquote>
+    <div class="clarity" role="img" aria-label="분명해진 순서: 교회의 하나, 종파의 의미, 그리고 마지막으로 교회의 터">
+      <div><b>하나</b>1925년 경</div>
+      <div><b>종파</b>1928~1931년</div>
+      <div class="c-fin"><b>터</b>1934년</div>
+    </div>
+    <div class="ch-close"><p>주님의 회복이 교회의 터를 회복했을 때 그것은 하나의 경계표였다.</p></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>하나는 보았다. 그렇다면 교회의 경계는 무엇으로 정하는가?</p></div>
+
+<!-- 02 -->
+<section class="ch acc-sea" id="c2" data-n="02" data-beat="이상" data-title="니 형제님이 교회의 터를 봄">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">02</span><span class="beat">이상</span></div>
+    <h2>니 형제님이 교회의 터를 봄</h2>
+    <p class="dek">1933년 유럽 — 분열되고 또 분열된 형제회를 보며 품은 한 가지 의문</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>1933년, 유럽 각 지방</p>
+    <p class="ed">니 형제님은 유럽 각지의 형제회 단체를 방문했습니다. 어떤 곳은 빌라델비아 교회와 같이 초기의 부흥된 모습이었고, 어떤 곳은 이미 라오디게아로 변질되어 있었으며, 어떤 지방은 분열되고 또 분열되어 있었습니다.</p>
+    <div class="chips"><button class="chip" data-v="rev3_7" type="button"><svg class="ic"><use href="#i-book"/></svg>계 3:7</button><button class="chip" data-v="rev3_14" type="button"><svg class="ic"><use href="#i-book"/></svg>계 3:14</button></div>
+    <div class="ask"><span class="lab">속에서 갖게 된 한 가지 의문</span>형제회가 이렇게 나눠져 있는데 도대체 무엇을 기준으로 교회의 경계를 정해야 하는가?</div>
+
+    <p class="node"><svg class="ic"><use href="#i-book"/></svg>말씀으로부터 본 것</p>
+    <blockquote class="mq lead"><p>이렇게 성경을 연구한 결과 그는 하나님의 말씀으로부터 교회가 우주적으로 유일하게 하나이지만 땅 위에서 나타날 때는 한 지방 한 지방에서 출현하며, 또한 하나의 지방마다 오직 하나의 교회가 출현한다는 것을 분명하게 보게 되었다.</p></blockquote>
+    <figure class="fig">
+      <p class="fig-t"><svg class="ic"><use href="#i-church"/></svg>교회를 나누는 유일한 기준</p>
+      <svg viewBox="0 0 340 280" role="img" aria-label="윗줄: 고린도, 에베소, 예루살렘 세 지방에 각각 교회가 하나씩 있다. 지방이 다르면 두 교회일 수 있다. 아랫줄: 한 지방인 예루살렘 안에 교회 둘이 있는 것은 X표로 표시되어 있다. 한 지방 안에는 두 개의 교회가 있을 수 없다.">
+        <text x="6" y="18" font-size="14" font-weight="600" class="t-sea">지방마다 하나의 교회</text>
+        <g class="f-sea-bg s-sea" stroke-width="1.8">
+          <circle cx="58" cy="80" r="50"/><circle cx="170" cy="80" r="50"/><circle cx="282" cy="80" r="50"/>
+        </g>
+        <g class="f-surface s-sea" stroke-width="1.8" stroke-linejoin="round">
+          <path d="M46 76v-14l12-10 12 10v14z"/><path d="M158 76v-14l12-10 12 10v14z"/><path d="M270 76v-14l12-10 12 10v14z"/>
+        </g>
+        <g font-size="15" font-weight="600" text-anchor="middle" class="t-ink">
+          <text x="58" y="102">고린도</text><text x="170" y="102">에베소</text><text x="282" y="102">예루살렘</text>
+        </g>
+        <g class="s-sea" stroke-width="1.5" fill="none"><path d="M86 136 q28 12 56 0M198 136 q28 12 56 0"/></g>
+        <g font-size="13" text-anchor="middle" class="t-sea"><text x="114" y="164">두 교회일 수 있음</text><text x="226" y="164">두 교회일 수 있음</text></g>
+        <line x1="6" y1="180" x2="334" y2="180" class="s-line" stroke-width="1"/>
+        <text x="6" y="202" font-size="14" font-weight="600" class="t-old">한 지방 안에 둘?</text>
+        <circle cx="96" cy="238" r="34" class="f-old-bg s-old" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <g class="f-surface s-old" stroke-width="1.6" stroke-linejoin="round">
+          <path d="M72 236v-12l10-8 10 8v12z"/><path d="M100 236v-12l10-8 10 8v12z"/>
+        </g>
+        <text x="96" y="256" font-size="13" text-anchor="middle" class="t-old">예루살렘</text>
+        <g class="s-wine" stroke-width="3" stroke-linecap="round"><path d="M148 226 l20 20M168 226 l-20 20"/></g>
+        <g font-size="15" class="t-ink2"><text x="184" y="233">두 개의 교회가</text><text x="184" y="254">있을 수 없다</text></g>
+      </svg>
+      <figcaption>지방이 다르면 두 교회이지만, 한 지방 안에서 교회를 나눌 다른 기준은 없습니다.</figcaption>
+    </figure>
+    <blockquote class="mq"><p>고린도와 에베소는 두 개의 교회일 수 있고 에베소와 예루살렘도 두 개의 교회일 수 있지만 예루살렘에는 두 개의 교회가 있을 수 없고 더구나 두 개 이상의 교회는 더욱 있을 수 없다.</p></blockquote>
+    <figure class="sc"><figcaption class="sc-ref"><svg class="ic"><use href="#i-book"/></svg>요한계시록 1:11 <span class="tag">관련</span></figcaption><p class="sc-miss">회복역 성경에서 이 구절을 찾아 읽어 보십시오. <button class="chip rel" data-v="rev1_11" type="button">요한계시록 1:11<span class="tag">관련</span></button></p></figure>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-mail"/></svg>더 깊이 · 지중해에서 온 한 통의 편지</summary>
+      <div class="dp">
+        <p class="ed">1933년 가을, 위트니스 리 형제님은 직업을 내려놓는 문제로 주님 앞에서 갈등하고 있었습니다. 출국 전 니 형제님은 <span class="serif">“형제님 그렇게 분명하지 않을 때에는 기다려 보십시오.”</span>라고만 말했습니다. 그런데 배가 지중해를 항해할 때 쓴 편지가 한 달 뒤에 도착했습니다. 그때 리 형제님은 이미 직장을 내려놓고 중국 동북 지방에서 일한 지 삼 주가 지나 있었습니다.</p>
+        <div class="letter"><span class="who"><svg class="ic"><use href="#i-mail"/></svg>니 형제님의 편지 · 지중해에서</span><p>“위트니스 리 형제님, 당신의 앞날에 관하여 나는 당신이 마땅히 전시간으로 주님을 섬겨야 한다는 느낌이 있습니다. 당신의 느낌은 어떤지요? 주님이 당신을 인도하시기 바랍니다.”</p></div>
+        <p class="ed">이 강한 확증으로 리 형제님은 그해 가을 처음으로 상하이에 갔습니다. 바로 그 무렵 니 형제님은 영국에서 막 돌아와 교회의 터에 대한 빛과, 그리스도께서 중심이시자 전부이시라는 중심적인 빛을 보았습니다.</p>
+      </div>
+    </details>
+    <div class="ch-close"><p>교회는 다른 어떤 것으로 나누어질 수 없고 오직 지방만이 교회를 나눌 수 있는 기준이 된다</p><small>— 그러나 이때까지도 이 빛은 니 형제님 안에서만 분명했습니다.</small></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>한 사람 안에서 분명했던 빛이 어떻게 동역자들 모두의 것이 되었는가?</p></div>
+
+<!-- 03 -->
+<section class="ch acc-gold" id="c3" data-n="03" data-beat="확정" data-title="교회의 터의 문제를 확정함">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">03</span><span class="beat">확정</span></div>
+    <h2>교회의 터의 문제를 확정함</h2>
+    <p class="dek">1934년 1월, 상하이 특별집회와 〈집회생활〉</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>1934년 1월 특별집회</p>
+    <div class="bns">
+      <div class="bn"><b>1934</b><span>큰 이정표를 세운 해</span></div>
+      <div class="bn"><b>120<small>여 명</small></b><span>중국 북부에서 참석한 형제자매들</span></div>
+    </div>
+    <blockquote class="mq lead"><p>교회의 전진의 측면에서 그 특별집회는 매우 큰 전환점이었고, 나 또한 개인적으로 매우 큰 영향을 받았다.</p></blockquote>
+    <p class="ed">모든 사람이 종파의 죄악됨과 교회의 하나의 필요를 보았습니다. 이어 각지의 형제들이 요청한 성경연구 집회가 열렸고, 그 내용이 〈집회생활〉로 출판되었습니다. 리 형제님은 그 원고를 받아 서문을 쓰면서 교회의 출현이 지방적이라는 것을 깊이 이해하게 되었습니다.</p>
+
+    <p class="node"><svg class="ic"><use href="#i-sun"/></svg>내용과 표현</p>
+    <figure class="fig">
+      <svg viewBox="0 0 340 300" role="img" aria-label="동심원 도표. 바깥 원은 교회의 외적인 표현인 지방의 터, 안쪽 원은 교회의 내용, 중심에는 중심과 전부이신 그리스도가 있다. 1934년에 확정된 큰 이정표.">
+        <defs><radialGradient id="c3-core"><stop offset="0" class="st-gold" stop-opacity=".55"/><stop offset="1" class="st-gold" stop-opacity=".12"/></radialGradient></defs>
+        <circle cx="170" cy="150" r="135" class="f-ground-bg s-ground" stroke-width="2"/>
+        <circle cx="170" cy="150" r="82" class="f-gold-bg s-gold" stroke-width="2"/>
+        <circle cx="170" cy="150" r="60" fill="url(#c3-core)"/>
+        <text x="170" y="48" text-anchor="middle" font-size="14" font-weight="600" class="t-ground">외적인 표현 · 지방의 터</text>
+        <text x="170" y="100" text-anchor="middle" font-size="13" font-weight="600" class="t-gold">교회의 내용</text>
+        <text x="170" y="146" text-anchor="middle" font-size="15" font-weight="600" class="t-ink sf">중심과 전부이신</text>
+        <text x="170" y="174" text-anchor="middle" font-size="21" font-weight="700" class="t-gold sf">그리스도</text>
+        <text x="170" y="258" text-anchor="middle" font-size="13" class="t-ground">1934년 · 큰 이정표</text>
+      </svg>
+    </figure>
+    <blockquote class="mq"><p>우리는 교회의 내용이 중심과 전부이신 그리스도임을 보았고 교회의 외적인 표현은 지방이 교회의 터가 된다는 것을 보았다.</p></blockquote>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-book"/></svg>더 깊이 · ‘출현’이라는 단어</summary>
+      <div class="dp"><p class="ed">‘출현’이라는 단어는 그 당시에는 별로 사용되지 않았고, 1950년 대만에 있을 때 비로소 사용하기 시작하면서 교회의 경계가 지방적이라는 것도 언급하기 시작했습니다.</p></div>
+    </details>
+    <div class="ch-close"><p>1934년부터 형제들 가운데서 ‘지방’이라는 문제가 언급되기 시작하였고 지방적인 터와 관련된 빛은 그때 비로소 확정되었다.</p></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>종파를 떠나는 거센 조류 — 그것이 곧 증거인가?</p></div>
+
+<!-- 04 -->
+<section class="ch acc-sea" id="c4" data-n="04" data-beat="증거" data-title="우리가 유지해야 될 하나의 증거">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">04</span><span class="beat">증거</span></div>
+    <h2>우리가 유지해야 될 하나의 증거</h2>
+    <p class="dek">종파를 벗어나는 것에서 그리스도께서 교회 안에서 표현되시는 것으로</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>믿는 이들이 각지에서 열렬하게 종파를 떠남</p>
+    <blockquote class="mq lead"><p>그것은 마치 하나의 조류와 같이 거의 모든 지방에서 구름처럼 사람들이 일어났다.</p></blockquote>
+    <div class="ba">
+      <div class="ba-box ba-before"><span class="lab">1934년의 조류</span><h4>종파를 떠남</h4>편지를 써서 도장을 찍고, 교우 명부에서 이름을 삭제해 달라고 요청함 — 공개적이고 당당하게</div>
+      <div class="ba-turn"><svg class="ic"><use href="#i-arrow-right"/></svg>1935년 초 성명</div>
+      <div class="ba-box ba-after"><span class="lab">우리의 증거</span><h4>다만 종파를 벗어나는 것이 아니라 그리스도</h4>그리스도의 증거는 전적으로 교회 안에 있으며, 교회는 하나이고 그 터는 지방적임</div>
+    </div>
+    <blockquote class="mq"><p>그러므로 니 형제님은 동역자들을 향하여 정중하게 우리의 증거는 다만 종파를 벗어나는 것이 아니라 그리스도이며, 그리스도를 우리의 구주와 생명과 승리의 왕과 만유와 주님과 중심과 모든 것으로 취하는 것이라는 성명을 발표하였다.</p></blockquote>
+    <ul class="titles" aria-label="그리스도를 취함">
+      <li>구주</li><li>생명</li><li>승리의 왕</li><li>만유</li><li>주님</li><li class="t-key">중심</li><li class="t-key">모든 것</li>
+    </ul>
+
+    <p class="node"><svg class="ic"><use href="#i-sun"/></svg>그 간증이 포함하는 것</p>
+    <blockquote class="mq"><p>주님께서 동양에서 우리를 일으키시고 우리를 통해 유지하고자 하신 간증은 바로 그리스도께서 교회 안에서 표현되시는 것이다.</p></blockquote>
+    <ol class="steps">
+      <li><b>사람의 구원</b></li>
+      <li><b>영적으로 온전하게 됨</b></li>
+      <li><b>한 지방 한 지방에서 건축됨</b>모든 성도가 주님에 의해 건축되어 그리스도의 몸인 하나님의 단체적인 처소가 됨</li>
+      <li class="st-fin"><b>그리스도께서 표현을 얻으심</b>이 단체적인 그릇을 통해 — 각지의 교회는 이 증거에서 일치하고 동일한 교통을 가짐</li>
+    </ol>
+    <div class="chips"><button class="chip rel" data-v="eph4_4" type="button"><svg class="ic"><use href="#i-book"/></svg>엡 4:4<span class="tag">관련</span></button></div>
+    <p class="ed">1937년 니 형제님은 더 전진하여 한 지방 한 지방에 교회를 세워 주님의 증거를 유지해야 한다고 말했고, 이 말씀들은 〈정상적인 그리스도인의 교회생활(일의 재고)〉로 출판되었습니다.</p>
+    <div class="ch-close"><p>이것이 바로 주님이 동양에서 우리에게 보여 준 것이며 우리가 유지해야 될 하나의 증거이다.</p></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>구원과 생명은 다른 이들 가운데도 있다. 그렇다면 우리에게 맡겨진 것은 무엇인가?</p></div>
+
+<!-- 05 -->
+<section class="ch acc-wine" id="c5" data-n="05" data-beat="위임" data-title="주님이 우리에게 주신 특별한 위임">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">05</span><span class="beat">위임</span></div>
+    <h2>주님이 우리에게 주신 특별한 위임</h2>
+    <p class="dek">영적인 선배들의 존중과 반대 속에서 얻은 결론과 태도</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>다른 이들을 통해서도 · 우리에게 맡기신 것</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="sr">방면</span></th><th scope="col" class="h-wine">다른 단체들을 통해서도</th><th scope="col" class="h-ground">우리에게 주신 특별한 위임</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">구원</th><td class="c-yes"><span class="tok tok-y">인정·배움</span><br>천천만만의 사람들을 구원하심 — 복음의 방면에서 오히려 배워야 함</td><td class="c-hold" rowspan="3"><span class="tok tok-h">굳게 붙잡음</span><br>한 지방에 한 교회, 하나의 건축, 한 지방에 한 몸의 출현 — 우리 이외에 누구도 관심하지 않음</td></tr>
+          <tr><th scope="row">생명</th><td class="c-yes"><span class="tok tok-y">인정</span><br>헌신하고, 주님을 사랑하며, 주님과 동행하도록 인도함</td></tr>
+          <tr><th scope="row">진리</th><td class="c-yes"><span class="tok tok-y">받아들임</span><br>진리를 가르쳐 사람들을 온전하게 함</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote class="mq lead"><p>그러나 한 지방에 한 교회, 하나의 건축, 한 지방에 한 몸의 출현과 관련하여, 이것은 하나님께서 동양에 있는 우리에게 주신 특별한 위임으로 우리 이외에 누구도 이것을 관심하지 않았다.</p></blockquote>
+    <p class="ed">그들은 <span class="serif">“사람들을 영적으로 온전하게 하면 그것으로 충분하지 어디에서 집회하는지가 왜 그렇게 중요한 것인가?”</span>라고 반문했습니다.</p>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-user"/></svg>더 깊이 · 존경했던 앞선 연장자들</summary>
+      <div class="dp">
+        <div class="people">
+          <div class="person"><svg class="ic"><use href="#i-user"/></svg><b>자(賈) 목사</b><span>장로교의 대표적인 인물, 신학의 가르침에서 상당한 지위. 젊은이들을 귀하게 여겼으나 이 길을 반대함</span></div>
+          <div class="person"><svg class="ic"><use href="#i-user"/></svg><b>청(成) 목사</b><span>1937년 열차 안에서 교회의 터를 붙잡을 필요가 없다고 간절히 권면함</span></div>
+          <div class="person"><svg class="ic"><use href="#i-user"/></svg><b>딩(丁) 목사</b><span>칠십이 넘게 주님 앞에서 산 연장자, 주님의 품으로 가기까지 교통함</span></div>
+          <div class="person"><svg class="ic"><use href="#i-user"/></svg><b>쑹상지에(宋尙節) 박사</b><span>가는 곳마다 수천수만이 회개한 복음의 능력 — 그러나 가는 곳마다 우리를 욕함</span></div>
+        </div>
+      </div>
+    </details>
+    <blockquote class="mq"><p>그러나 지방적인 터의 문제와 그리스도의 몸의 건축은 사역의 문제가 아니라 간증의 문제이다.</p></blockquote>
+    <div class="still"><svg class="ic"><use href="#i-footprints"/></svg>주님은 움직이시는 분으로<br>계속적으로 전진하고 계신다.</div>
+
+    <p class="node"><svg class="ic"><use href="#i-car"/></svg>우리가 직면한 어려움과 출로</p>
+    <p class="ed">1934년 봄, 상하이에서 장완(江灣)으로 가는 긴 길의 승용차 안에서.</p>
+    <div class="voice">
+      <div class="msg them"><span class="who">니 형제님</span>“리 형제님, 당신은 어떻게 했으면 좋겠습니까? 그들이 이렇게 우리를 계속해서 반대하는데 어떻게 하면 좋겠습니까?”</div>
+    </div>
+    <p class="ed">깊이 고려하고 주님 앞에서 찾고 구하며 교통한 뒤 동역자들이 얻은 결론:</p>
+    <blockquote class="mq"><p>우리는 모든 순수한 복음의 능력을 받아들이고, 진리와 생명의 온전하게 함을 포함한 모든 영적인 것들을 받아들이겠지만, 이 터와 이 간증에 대해서는 한 발자국도 물러설 수 없었다.</p></blockquote>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-footprints"/></svg>더 깊이 · 안디옥의 노선과 전쟁의 시련</summary>
+      <div class="dp">
+        <p class="ed">1937년 상하이의 동역자 집회에서 안디옥의 노선이 제기되었습니다. 한 면으로 모든 동역자가 각지로 나가 집회를 세우고, 다른 한 면으로 분량 있는 몇 동역자가 교파로 가서 진리를 가르치며 영적인 것을 공급하는 두 방면의 전진이었습니다.</p>
+        <div class="chips"><button class="chip rel" data-v="acts13_1" type="button"><svg class="ic"><use href="#i-book"/></svg>행 13:1<span class="tag">관련</span></button></div>
+        <p class="ed">그러나 곧 중일 전쟁으로 개척이 정지되고 각지의 간증이 약화되었습니다. 승전 후 다시 모인 동역자들은 과거의 실지적인 경험을 근거로, 처음 본 간증 — 한 지방에 한 교회, 분명한 터 위에 모든 영적인 것을 건축하는 것 — 을 반드시 지켜야 한다는 결론을 얻었습니다.</p>
+      </div>
+    </details>
+    <div class="ch-close"><p>모두가 복음과 영적인 것과 진리에 있어서는 마땅히 서로 교통해야 하지만 터에 있어서 우리는 절대적으로 서 있어야 한다.</p></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>받아들임과 붙잡음 — 그 선은 어디에 있는가?</p></div>
+
+<!-- 06 -->
+<section class="ch acc-old" id="c6" data-n="06" data-beat="분별" data-title="터 이외에 섞임을 가질 수 없음">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">06</span><span class="beat">분별</span></div>
+    <h2>터 이외에 섞임을 가질 수 없음</h2>
+    <p class="dek">스팍스 형제에 관한 교통 — 영적인 공급은 받아들이되 터는 만질 수 없음</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>스팍스 형제에 관한 교통</p>
+    <div class="split">
+      <div class="split-names" aria-label="예로 든 사역자들"><span>마담 귀용</span><span>F. B. 메이어</span><span>앤드루 머리</span><span>제시 펜 루이스</span><span>스팍스 형제</span></div>
+      <svg viewBox="0 0 320 44" aria-hidden="true"><path d="M160 4v14M160 18 C160 30 80 26 80 40M160 18 C160 30 240 26 240 40" class="s-line f-none" stroke-width="2"/><path d="M75 34l5 7 5-7M235 34l5 7 5-7" class="s-line f-none" stroke-width="2"/></svg>
+      <div class="split-cols">
+        <div class="sp-yes"><h4><svg class="ic"><use href="#i-check"/></svg>받아들임</h4>그들의 영적인 공급 — 복음이든 생명이든 진리이든</div>
+        <div class="sp-no"><h4><svg class="ic"><use href="#i-x"/></svg>받아들일 수 없음</h4>그들이 서 있는 터와 그들이 대표하는 조직</div>
+      </div>
+    </div>
+    <blockquote class="mq"><p>그러나 우리는 그들이 서 있는 터와 그들이 대표하는 조직은 받아들일 수 없는데, 이는 그것이 우리의 간증과 일치하지 않을 뿐 아니라 이 간증에 손상을 주기 때문이다.</p></blockquote>
+
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>스팍스 형제가 두 번째 대만을 방문했을 때 야기된 어려움</p>
+    <div class="visits">
+      <div class="visit v-ok"><span class="lab">첫 번째 방문</span><h4>영적인 공급만</h4>터에 대한 문제를 만지지 않음 — 아무런 어려움이 없고 매우 유쾌함</div>
+      <div class="visit v-over"><span class="lab">두 번째 방문</span><h4>터에 간섭함</h4>교회의 터와 관련된 실행에 대해 과도하게 묻고 간섭함<span class="line-over">사역의 한계를 넘어섬</span></div>
+    </div>
+    <div class="voice">
+      <div class="msg them"><span class="who">스팍스 형제 · 한 집회에서</span>“여러분은 그리스도를 한 지방에 제한시켜서 그분을 작은 그리스도가 되시게 했고, 교회를 조그만 교회가 되게 했습니다.”</div>
+    </div>
+    <p class="ed">반면 홍콩에 있던 한 자매는 영적인 연결로 우리 가운데 있었지만 터의 문제를 지나치게 묻거나 간섭하지 않았고, 우리는 그녀를 동역자로 계속 인정했습니다. <span class="serif">“우리는 좁은 사람들이 아니다.”</span></p>
+
+    <p class="node"><svg class="ic"><use href="#i-lock"/></svg>터 이외에 섞임을 가질 수 없음</p>
+    <blockquote class="mq lead"><p>옳은 것은 옳은 것이고 틀린 것은 틀린 것이므로 중간에 어떤 것도 섞을 수 없다.</p></blockquote>
+    <ol class="chain" aria-label="혼합의 결과">
+      <li><span class="cl">시작</span>타협하고 혼합함</li>
+      <li><span class="cl">결과</span>우리는 다른 사람을 온전하게 하지 못했고, 그들도 우리를 도와주지 못함</li>
+      <li><span class="cl">비유</span>맷돌에 갈린 콩이 물을 따라 흘러 내려가듯 시간만 낭비함</li>
+      <li><span class="cl">끝</span>결과적으로 당신만 이상을 버린 사람이 됨</li>
+    </ol>
+    <blockquote class="mq"><p>무릇 혼합된 것들에는 모두 축복이 없으며 양측 모두가 손상을 입게 된다.</p></blockquote>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-lock"/></svg>더 깊이 · 중국 북부, 감옥과 거절</summary>
+      <div class="dp">
+        <p class="ed">교파와 협력하려 하지 않았기 때문에 교파의 친구들이 일본 헌병 앞에서 좋지 않은 말을 했고, 리 형제님은 감옥에 갇혔습니다. 삼 주의 심문 뒤에도 아무 증거가 나오지 않았습니다. 출옥 후 열두 교파가 참가하는 특별집회에서 한 편의 메시지를 전하라는 통지가 다시 왔습니다.</p>
+        <div class="voice">
+          <div class="msg them"><span class="who">기독교연합회 리우(劉) 목사</span>“리 선생님, 당신이 이렇게 하는 것은 매우 위험한 행동입니다.”</div>
+          <div class="msg me strong"><span class="who">위트니스 리</span>“당신이 이렇게 말씀하시는데, 여러분은 기껏해야 나를 다시 감옥에 잡아넣을 뿐일 겁니다. 미안하지만 오늘은 이만 가봐야겠습니다.”</div>
+        </div>
+        <p class="ed">리 형제님은 이것이 우리를 일반적인 기독교와 같아지게 하려는 대적의 궤계임을 분명히 알았습니다.</p>
+      </div>
+    </details>
+    <div class="ch-close"><p>그러므로 우리의 눈은 밝아져서 우리의 생명선이 바로 이 구분에 있다는 것을 보아야 한다.</p></div>
+  </div>
+</section>
+
+<div class="bridge"><span class="br-lab">다음 걸음</span><p>이 터를 지킨 결과는 무엇이었는가?</p></div>
+
+<!-- 07 -->
+<section class="ch acc-gold" id="c7" data-n="07" data-beat="축복" data-title="터를 실행하는 것은 축복을 가져옴">
+  <header class="ch-head">
+    <div class="ch-meta"><span class="ch-n">07</span><span class="beat">축복</span></div>
+    <h2>터를 실행하는 것은 축복을 가져옴</h2>
+    <p class="dek">스팍스 형제가 칭찬한 결과, 그리고 그가 꿰뚫어 보지 못한 원인</p>
+  </header>
+  <div class="body">
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>런던으로 돌아가 게재한 논평</p>
+    <div class="bns">
+      <div class="bn"><b>500<small>여 명</small></b><span>낮 시간, 선발된 그리스도의 일꾼들</span></div>
+      <div class="bn"><b>2,000<small>여 명</small></b><span>매일 저녁, 말씀을 삼킨 믿는 이들</span></div>
+    </div>
+    <div class="ask"><span class="lab">묻고 싶은 것</span>그렇다면 성령은 왜 다른 터에서는 이러한 일을 하시지 않는가?</div>
+    <blockquote class="mq lead"><p>우리가 사람들로부터 칭찬을 얻을 수 있는 결과를 갖게 된 주된 원인은 바로 교회의 터이다.</p></blockquote>
+    <p class="ed">자원도, 인재도, 명성도 더 많은 이들이 곁에서 열심히 일했지만 그러한 역사는 없었습니다. 7, 8년 동안 교파와 섞이지 않은 것 — 스팍스 형제는 이 결과는 보았으나 원인은 보지 못했습니다.</p>
+  </div>
+
+  <div class="band" id="sig-band">
+    <p class="band-k">지방의 터는 우리가 믿고 유지하는 것임</p>
+    <h3>차와 찻주전자</h3>
+    <div class="sig" id="sig">
+      <svg viewBox="0 0 340 236" role="img" aria-label="찻주전자 그림. 찻주전자는 교회의 터를, 그 안에 차오르는 금빛 차는 축복을 나타낸다. 찻주전자가 깨지면 차도 새어나가 없어진다.">
+        <defs>
+          <clipPath id="sg-body"><path d="M110 98 C104 150 120 190 170 192 C220 190 236 150 230 98 Z"/></clipPath>
+          <linearGradient id="sg-tea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="st-gold" stop-opacity=".75"/><stop offset="1" class="st-gold"/></linearGradient>
+        </defs>
+        <g class="steam s-gold f-none" stroke-width="2" stroke-linecap="round" opacity=".7">
+          <path d="M156 60 c-6 -8 6 -12 0 -22"/><path d="M170 56 c-6 -8 6 -12 0 -24"/><path d="M184 60 c-6 -8 6 -12 0 -22"/>
+        </g>
+        <g clip-path="url(#sg-body)"><rect class="tea" x="100" y="108" width="140" height="86" fill="url(#sg-tea)"/></g>
+        <path d="M110 98 C104 150 120 190 170 192 C220 190 236 150 230 98 Z" class="f-none s-ground" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M124 98 C130 74 210 74 216 98" class="f-ground-bg s-ground" stroke-width="3.5"/>
+        <circle cx="170" cy="72" r="6" class="f-ground"/>
+        <path d="M110 126 C92 122 82 108 66 90" class="f-none s-ground" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M112 146 C92 140 76 120 60 98" class="f-none s-ground" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M60 98 L66 90" class="s-ground" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M230 112 C266 108 268 170 226 170" class="f-none s-ground" stroke-width="3.5" stroke-linecap="round"/>
+        <path class="crack s-wine f-none" d="M196 100 L188 122 L200 134 L186 156 L198 170 L190 190" stroke-width="3" stroke-linejoin="round"/>
+        <g class="drip f-gold"><circle cx="190" cy="198" r="3.5"/><circle cx="176" cy="200" r="2.5"/></g>
+        <g class="lab-t">
+          <rect x="130" y="143" width="80" height="26" rx="13" class="f-surface lab-tea"/><text x="170" y="161" text-anchor="middle" font-size="14" font-weight="700" class="t-gold sf lab-tea">차 · 축복</text>
+        </g>
+        <g font-size="13">
+          <circle cx="30" cy="222" r="6" class="f-gold"/><text x="42" y="227" class="t-ink2">차 = 축복</text>
+          <rect x="150" y="216" width="12" height="12" rx="2" class="f-none s-ground" stroke-width="2.5"/><text x="170" y="227" class="t-ink2">찻주전자 = 교회의 터</text>
+        </g>
+      </svg>
+      <p class="sig-cap" id="sig-cap" aria-live="polite">터(찻주전자)가 축복(차)을 붙잡고 있습니다.</p>
+      <div class="sig-btns">
+        <button class="btn" id="sig-break" type="button" aria-pressed="false" aria-controls="sig">찻주전자를 깨 버리면?</button>
+        <button class="btn" id="sig-replay" type="button"><svg class="ic"><use href="#i-pot"/></svg>장면 다시 보기</button>
+      </div>
+    </div>
+    <blockquote class="mq" style="--accent:var(--gold)"><p>우리가 명심해야 할 것은 차는 찻주전자에 의존한다는 사실이다.</p></blockquote>
+  </div>
+
+  <div class="body">
+    <p class="ed">스팍스 형제의 눈에 교회의 터는 ‘병’이었지만, 그것은 잘라내면 살 수 없는 생명선이었습니다. 동기의 좋고 나쁨의 문제가 아니라 빛과 식견의 문제입니다.</p>
+
+    <p class="node"><svg class="ic"><use href="#i-footprints"/></svg>다른 사람을 받아들이지만 주님의 간증을 손상시켜서는 안 됨</p>
+    <div class="duo">
+      <div><h4>터에는 서 있지 않음</h4>단지 본 것을 지키기만 하는 우둔한 사람</div>
+      <div><h4>영적인 풍성을 원하지 않음</h4>단지 터만을 지키는 사람</div>
+    </div>
+    <svg class="merge" viewBox="0 0 320 40" aria-hidden="true"><path d="M80 2 C80 22 160 16 160 36M240 2 C240 22 160 16 160 36" class="s-old f-none" stroke-width="2" stroke-dasharray="4 4"/></svg>
+    <div class="verdict"><small>둘 다 되어서는 안 됨</small>터 위에 서서, 모든 영적인 풍성을 마음을 비우고 받아들임</div>
+    <blockquote class="mq"><p>단지 본 것을 지키지만 이 터에는 서 있지 않는 우둔한 사람이 되어서는 안 되며, 또한 단지 터만을 지킬 뿐 영적인 풍성들은 원하지 않는 사람들이 되어서도 안 된다.</p></blockquote>
+    <details class="deeper">
+      <summary><svg class="ic"><use href="#i-link"/></svg>더 깊이 · 일에 있어 우월감을 피함</summary>
+      <div class="dp">
+        <p class="ed">서양 형제들의 우월감은 의도가 없어도 부지불식간에 흘러나옵니다. 북부 사람의 말투가 무의식중에 나오는 것과 같습니다. 동양은 서양의 영적인 공급을 이미 받아들였고, 서양이 동양의 빛을 받아들이려면 겸손해질 필요가 있습니다.</p>
+        <blockquote class="mq"><p>주님께서 보혈로 이 교통을 덮어주시길 원하는데, 나는 이미 이 일을 놓고 오랫동안 기도하면서 이 동서양의 우월감과 열등감을 깨뜨리고자 하는 전쟁을 치르고 있다.</p></blockquote>
+      </div>
+    </details>
+    <div class="ch-close"><p>그러므로 문제는 우리 스스로 터에 대해 분명해야 한다는 것이다.</p><small>— 우리 모두가 분명하다면 어떤 사람도 마음대로 우리를 동요시킬 수 없습니다.</small></div>
+  </div>
+</section>
+
+<section class="finale" aria-label="피날레">
+  <div class="sec-label">마무리</div>
+  <p class="big">바로 이 <em>터</em>가<br><strong>축복</strong>을 붙잡고 있는 것이다.</p>
+  <ol class="recap">
+    <li class="acc-ground"><span class="rn">01</span><span class="rb">회복</span><span>하나 → 종파 → 터, 한 가지씩 회복하여 1934년에 형태를 갖춤</span></li>
+    <li class="acc-sea"><span class="rn">02</span><span class="rb">이상</span><span>교회는 우주적으로 하나, 땅 위에서는 지방마다 하나</span></li>
+    <li class="acc-gold"><span class="rn">03</span><span class="rb">확정</span><span>내용은 중심과 전부이신 그리스도, 표현은 지방의 터</span></li>
+    <li class="acc-sea"><span class="rn">04</span><span class="rb">증거</span><span>종파를 벗어나는 것이 아니라 그리스도께서 교회 안에서 표현되심</span></li>
+    <li class="acc-wine"><span class="rn">05</span><span class="rb">위임</span><span>모든 영적인 것은 받아들이고, 터는 한 발자국도 물러서지 않음</span></li>
+    <li class="acc-old"><span class="rn">06</span><span class="rb">분별</span><span>혼합에는 축복이 없음 — 생명선은 이 구분에 있음</span></li>
+    <li class="acc-gold"><span class="rn">07</span><span class="rb">축복</span><span>차는 찻주전자에 의존함 — 터가 축복을 붙잡음</span></li>
+  </ol>
+  <div class="still-final"><svg class="ic"><use href="#i-sun"/></svg>다만 우리가 최선을 다해 신실하게 한다면 그 결과 그것은 우리의 일이 아니라 주님의 일이 될 것이다.</div>
+</section>
+
+<footer>
+  <p>참고: 위트니스 리, 제14장 「교회의 터를 회복함」</p>
+  <p>성경 본문: 회복역. 점선 칩과 ‘관련’ 표시는 지문이 직접 인용하지 않았으나 내용이 맞닿은 구절입니다.</p>
+  <p>명조체 인용은 지문 원문 그대로이며(띄어쓰기 보정 제외), ‘…’는 생략 표시입니다. 고딕체 설명과 도표 라벨은 편집자의 정리입니다.</p>
+  <a class="totop" href="#top"><svg class="ic"><use href="#i-arrow-up"/></svg>맨 위로</a>
+</footer>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t" hidden>
+  <div class="sheet-h"><svg class="ic" style="color:var(--gold)"><use href="#i-book"/></svg><h3 id="sheet-t">성경</h3><button class="sheet-x" id="sheet-x" type="button" aria-label="닫기"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="sheet-b"></div>
+</div>
+
+<script>
+(function(){
+document.documentElement.classList.add('js');
+var V={"rev3_7": {"label": "요한계시록 3:7", "rel": false, "verses": []}, "rev3_14": {"label": "요한계시록 3:14", "rel": false, "verses": []}, "rev1_11": {"label": "요한계시록 1:11", "rel": true, "verses": []}, "acts13_1": {"label": "사도행전 13:1", "rel": true, "verses": []}, "eph4_4": {"label": "에베소서 4:4", "rel": true, "verses": []}};
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* sticky bar */
+var bar=$('#bar'),hero=$('.hero'),secs=$$('section.ch'),prog=$('#bar-prog'),tea=$('#mini-tea');
+var bn=$('#bar-n'),bb=$('#bar-beat'),bt=$('#bar-title'),cur=null,tick=false;
+function setCur(s){ if(s===cur) return; cur=s;
+  bn.textContent=s.dataset.n; bb.textContent=s.dataset.beat; bt.textContent=s.dataset.title;
+  var shown=bar.classList.contains('is-shown');
+  var acc=(s.className.match(/acc-\w+/)||['acc-ground'])[0];
+  bar.className='bar '+acc+(shown?' is-shown':''); }
+function onScroll(){ tick=false;
+  var y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+  var past=hero.getBoundingClientRect().bottom<0;
+  bar.classList.toggle('is-shown',past); bar.setAttribute('aria-hidden',past?'false':'true');
+  var r=h>0?Math.min(1,Math.max(0,y/h)):0;
+  prog.style.transform='scaleX('+r+')';
+  tea.setAttribute('y',String(20-13*r));
+  var line=innerHeight*.38, pick=secs[0];
+  secs.forEach(function(s){ if(s.getBoundingClientRect().top<line) pick=s; });
+  setCur(pick); }
+addEventListener('scroll',function(){ if(!tick){tick=true;requestAnimationFrame(onScroll);} },{passive:true});
+addEventListener('resize',onScroll,{passive:true}); onScroll();
+
+/* signature */
+var sig=$('#sig'),cap=$('#sig-cap'),brk=$('#sig-break'),rep=$('#sig-replay');
+var CAP0='터(찻주전자)가 축복(차)을 붙잡고 있습니다.', CAP1='찻주전자를 깨 버리면 찻주전자가 없어질 뿐 아니라 차마저도 새어나가 버립니다.';
+function play(){ sig.classList.remove('play'); void sig.offsetWidth; requestAnimationFrame(function(){requestAnimationFrame(function(){sig.classList.add('play');});}); }
+if(reduce||!('IntersectionObserver' in window)){ sig.classList.add('play'); }
+else{ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ sig.classList.add('play'); io.disconnect(); } }); },{threshold:.45}); io.observe(sig); }
+brk.addEventListener('click',function(){ var on=brk.getAttribute('aria-pressed')!=='true';
+  brk.setAttribute('aria-pressed',String(on)); sig.classList.toggle('broken',on);
+  brk.textContent=on?'다시 온전한 찻주전자로':'찻주전자를 깨 버리면?'; cap.textContent=on?CAP1:CAP0; });
+rep.addEventListener('click',function(){ brk.setAttribute('aria-pressed','false'); sig.classList.remove('broken'); brk.textContent='찻주전자를 깨 버리면?'; cap.textContent=CAP0; play(); });
+
+/* verse sheet */
+var sheet=$('#sheet'),scrim=$('#scrim'),sb=$('#sheet-b'),st=$('#sheet-t'),sx=$('#sheet-x'),opener=null;
+function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function open(k,btn){ var d=V[k]; if(!d) return; opener=btn;
+  st.innerHTML=esc(d.label)+(d.rel?' <span class="badge">관련</span>':'');
+  var h=d.rel?'<p class="rel-note">지문이 직접 인용하지 않았으나 내용이 맞닿은 구절입니다.</p>':'';
+  if(d.verses.length){ d.verses.forEach(function(v){ h+='<p class="sv"><span class="vn">'+(d.multi?v.c+':':'')+v.v+'</span>'+esc(v.t)+'</p>'; }); }
+  else h+='<p class="sv sc-miss">회복역 성경에서 '+esc(d.label)+'을(를) 찾아 읽어 보십시오.</p>';
+  sb.innerHTML=h; sheet.hidden=false; scrim.hidden=false;
+  requestAnimationFrame(function(){ sheet.classList.add('is-open'); scrim.classList.add('is-open'); sx.focus(); });
+  document.body.style.overflow='hidden'; }
+function close(){ sheet.classList.remove('is-open'); scrim.classList.remove('is-open'); document.body.style.overflow='';
+  setTimeout(function(){ sheet.hidden=true; scrim.hidden=true; }, reduce?0:300); if(opener) opener.focus(); }
+$$('.chip[data-v]').forEach(function(b){ b.addEventListener('click',function(){ open(b.dataset.v,b); }); });
+sx.addEventListener('click',close); scrim.addEventListener('click',close);
+document.addEventListener('keydown',function(e){ if(sheet.hidden) return;
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key==='Tab'){ var f=$$('button,[href]',sheet); if(!f.length) return; var a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey&&document.activeElement===z){ e.preventDefault(); a.focus(); } } });
+})();
+</script>
+</body>
+</html>
