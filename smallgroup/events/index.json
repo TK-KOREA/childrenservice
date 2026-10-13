@@ -1,0 +1,23 @@
+{
+  "_help": "행사를 추가할 때: events/<id>.json 을 만들고 아래 목록에 한 줄 넣으세요. id는 날짜_영문이름 (예: 20261017_seoulgrandpark). 날짜가 지나면 자동으로 '지난 행사'로 내려가요.",
+  "events": [
+    {
+      "id": "20261017_seoulgrandpark",
+      "title": "서울대공원 가을 나들이",
+      "date": "2026-10-17",
+      "time": "오후 2시 ~ 5시 · 저녁 식사",
+      "place": "서울대공원 동물원 (과천)",
+      "theme": "zoo"
+    },
+    {
+      "id": "20261004_daebudo",
+      "title": "유초등부 야외 섞임 · 대부도 1박 2일",
+      "date": "2026-10-04",
+      "endDate": "2026-10-05",
+      "time": "1박 2일",
+      "place": "대부도",
+      "theme": "sea",
+      "link": "https://tk-korea.github.io/childrenservice/event/20261004_daebudo.html"
+    }
+  ]
+}

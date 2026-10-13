@@ -1,0 +1,17 @@
+{
+  "name": "어린이소그룹",
+  "short_name": "어린이소그룹",
+  "description": "어린이소그룹 행사 안내와 참석 회신",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF4E8",
+  "theme_color": "#FBF4E8",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

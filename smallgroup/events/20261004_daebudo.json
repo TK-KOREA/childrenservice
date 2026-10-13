@@ -1,0 +1,14 @@
+{
+  "id": "20261004_daebudo",
+  "theme": "sea",
+  "kicker": "유초등부 전체 야외 섞임",
+  "title": "대부도에서\n함께 섞였어요",
+  "lead": "아이들과 함께 뛰놀고, 주님 안에서 즐겁게 섞인 1박 2일이었어요.",
+  "date": "2026-10-04",
+  "endDate": "2026-10-05",
+  "overview": [
+    { "icon": "calendar", "label": "언제", "value": "10월 4일(일) ~ 5일(월)", "sub": "1박 2일" },
+    { "icon": "bus", "label": "출발", "value": "10월 4일(일) 오후 1시 30분" }
+  ],
+  "link": "https://tk-korea.github.io/childrenservice/event/20261004_daebudo.html"
+}
