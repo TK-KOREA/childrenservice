@@ -32,6 +32,18 @@
 
 대부도 회신 기록은 예전 시트에 그대로 있다. 새 시트로 옮기고 싶으면 `20261004_daebudo` 탭에 열 순서를 맞춰 붙여 넣는다.
 
+### 현재 배포 (2026-10-13)
+
+- 스크립트: 독립형 "어린이소그룹 회신 API" (`apps-script/.clasp.json`의 scriptId), 소유 계정 battery777@gmail.com
+- 웹 앱 배포 ID: `AKfycbwRdMpq7FeCPQe4NZUGxQCzRusYhnLd26JAm22uzAmXsoh8vCDP3A557GeBOvd_lyAp4w` (js/config.js에 연결됨)
+- 코드 수정 후 반영 (같은 주소 유지):
+  ```
+  cd smallgroup/apps-script
+  clasp push --force
+  clasp update-deployment AKfycbwRdMpq7FeCPQe4NZUGxQCzRusYhnLd26JAm22uzAmXsoh8vCDP3A557GeBOvd_lyAp4w -d "설명"
+  ```
+- 권한(scope)이 바뀌면 편집기에서 함수를 한 번 실행해 다시 승인해야 한다.
+
 ## 새 행사 추가 (매번)
 
 1. `events/20261017_seoulgrandpark.json`을 복사해 `events/<날짜_이름>.json` 만들고 내용 고치기. 필요 없는 섹션(fees, restaurants 등)은 지우면 화면에서도 빠진다.
