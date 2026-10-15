@@ -168,6 +168,7 @@ a.fact, button.fact { cursor: pointer; }
 .fact .v { flex: 1; min-width: 0; display: grid; }
 .fact .v b { font-size: 16px; font-weight: 600; }
 .fact .v small { color: var(--muted); font-size: 13px; }
+.fact .v small.ok { color: var(--ok); font-weight: 600; }
 .fact .go { color: var(--accent-ink); font-size: 14px; font-weight: 600; }
 
 /* ── 함께 가는 얼굴 ── */

@@ -195,13 +195,13 @@ function factsView(ev) {
   if (ev.dinner) {
     const at = rows.findIndex((r) => r.to === 'bring');
     const d = ev.dinner;
-    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(d.time.split(/\s*~/)[0])} · ${d.name || '식당 정하는 중'}`, sub: d.address, map: d.name && (d.map || d.address || d.name) });
+    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(d.time.split(/\s*~/)[0])} · ${d.name || '식당 정하는 중'}`, sub: d.address, sub2: d.parking, map: d.name && (d.map || d.address || d.name) });
   }
   if (rows.length === 0) return null;
   return h('div', { class: 'facts' }, rows.map((r) => {
     const inner = [
       h('span', { class: 'k' }, r.k),
-      h('span', { class: 'v' }, h('b', null, r.v), r.sub && h('small', null, r.sub)),
+      h('span', { class: 'v' }, h('b', null, r.v), r.sub && h('small', null, r.sub), r.sub2 && h('small', { class: 'ok' }, r.sub2)),
       r.map ? h('span', { class: 'go' }, '지도') : r.to && h('span', { class: 'go' }, icon('chevron', 16)),
     ];
     if (r.map) return h('a', { class: 'fact', href: `https://map.naver.com/p/search/${encodeURIComponent(r.map)}`, target: '_blank', rel: 'noopener' }, inner);
