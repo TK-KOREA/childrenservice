@@ -135,7 +135,7 @@ async function renderEvent(id) {
       past && ev.link && h('a', { class: 'btn ghost block', href: ev.link }, '그때 안내 페이지 보기'),
 
       // ── 자세히 ──
-      ev.schedule && sec('schedule', '일정', null,
+      ev.schedule && sec('schedule', '일정', ev.scheduleLede,
         h('ol', { class: 'timeline', id: 'timeline' }, ev.schedule.map((s) => h('li', { 'data-t': s.time },
           h('time', null, h('small', null, ampm(s.time).split(' ')[0]), ampm(s.time).split(' ')[1]),
           h('div', null,
