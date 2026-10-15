@@ -235,6 +235,7 @@ a.fact, button.fact { cursor: pointer; }
 .prices small { color: var(--muted); font-size: 13px; }
 .prices b { font-size: 17px; font-variant-numeric: tabular-nums; }
 .callout { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; padding: 14px 16px; border-radius: 18px; background: var(--accent-soft); color: var(--accent-ink); }
+.callout.pay { background: var(--ok-soft); color: var(--ok); }
 .callout .ic { margin-top: 2px; }
 .callout strong { display: block; font-size: 16px; }
 .callout p { margin: 4px 0 0; font-size: 14px; color: var(--ink); }

@@ -443,6 +443,7 @@ function statusView(ev, rows) {
 // ───────────────────────── 자세히 ─────────────────────────
 function feesView(f) {
   return h('div', null,
+    f.who && h('div', { class: 'callout pay' }, icon('check', 20), h('div', null, h('strong', null, f.who.title), h('p', null, f.who.body))),
     f.callout && h('div', { class: 'callout' }, icon('info', 20), h('div', null, h('strong', null, f.callout.title), h('p', null, f.callout.body))),
     h('ul', { class: 'prices' }, f.rows.map((r) => h('li', null,
       h('div', null, h('strong', null, r.who), h('small', null, r.age)),
