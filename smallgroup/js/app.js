@@ -145,8 +145,7 @@ async function renderEvent(id) {
 
       ev.fees && sec('fees', '비용', ev.fees.title, feesView(ev.fees)),
       ev.parking && sec('parking', '주차', ev.parking.title, parkingView(ev.parking)),
-      ev.bring && sec('bring', '챙길 것', '챙긴 것을 눌러 표시해 두세요. 이 휴대폰에만 남아요.', bringView(ev)),
-      ev.dinner && sec('food', '저녁 식사', null, dinnerView(ev.dinner)),
+      ev.bring && sec('bring', '챙길 것', null, bringView(ev)),
       ev.notices && sec('notice', '꼭 알아 주세요', null, h('ul', { class: 'notices' }, ev.notices.map((n) => h('li', null, n)))),
       !past && sec('status', '함께 가는 가정', null, h('div', { id: 'status' }, h('p', { class: 'muted' }, '불러오는 중…'))),
 
@@ -192,10 +191,11 @@ function factsView(ev) {
   const rows = [...(ev.summary || (ev.overview || []).slice(0, 2).map((o) => ({ k: o.label, v: o.value, sub: o.sub })))];
   const has = (to) => rows.some((r) => r.to === to);
   if (ev.bring && !has('bring')) rows.push({ k: '챙길 것', v: ev.bring.slice(0, 3).map((b) => b.item).join(', '), to: 'bring' });
-  // 저녁 줄은 식당 이름이 바뀌면 저절로 따라가도록 JSON의 dinner에서 만든다 (챙길 것 앞에).
-  if (ev.dinner && !has('food')) {
+  // 저녁 줄은 식당 이름이 바뀌면 저절로 따라가도록 JSON의 dinner에서 만든다 (챙길 것 앞에, 누르면 지도).
+  if (ev.dinner) {
     const at = rows.findIndex((r) => r.to === 'bring');
-    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(ev.dinner.time.split(/\s*~/)[0])} · ${ev.dinner.name || '식당 정하는 중'}`, to: 'food' });
+    const d = ev.dinner;
+    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(d.time.split(/\s*~/)[0])} · ${d.name || '식당 정하는 중'}`, map: d.name && (d.map || d.address || d.name) });
   }
   if (rows.length === 0) return null;
   return h('div', { class: 'facts' }, rows.map((r) => {
@@ -318,11 +318,20 @@ function rsvpSheet(ev, closed) {
 
   const note = h('textarea', { id: 'f-note', rows: 2, maxlength: 200, placeholder: '알레르기, 늦게 도착 등 (선택)' }, saved?.note || '');
   const submit = h('button', { class: 'btn primary block', type: 'submit' }, '보내기');
+  // 시트가 열려 있으면 화면 아래 알림이 시트 뒤에 가려지므로, 오류는 보내기 버튼 바로 위에 띄운다.
+  const err = h('p', { class: 'form-error', role: 'alert', hidden: true });
+  // 이름 오류는 이름 칸 바로 아래, 나머지는 보내기 버튼 위에.
+  const fail = (msg, near) => {
+    err.textContent = msg; err.hidden = false;
+    if (near) near.after(err); else submit.before(err);
+    (near ? err : submit).scrollIntoView({ block: 'nearest' });
+  };
 
   const form = h('form', { class: 'rsvp', novalidate: true, onsubmit: async (e) => {
     e.preventDefault();
+    err.hidden = true;
     const name = family.value.trim();
-    if (!name) { family.focus(); return toast('가정 이름을 적어 주세요.'); }
+    if (!name) { fail('가정 이름을 적어 주세요.', family); family.focus({ preventScroll: true }); return; }
     const yes = st.attend === 'Y';
     const data = {
       family: name, attend: st.attend,
@@ -332,17 +341,18 @@ function rsvpSheet(ev, closed) {
       dinner: yes && ev.dinner ? st.dinner : 'N',
       note: note.value.trim(),
     };
-    if (yes && data.adults + data.kids + data.toddlers === 0) return toast('함께 가는 사람 수를 넣어 주세요.');
+    if (yes && data.adults + data.kids + data.toddlers === 0) return fail('함께 가는 사람 수를 넣어 주세요.');
     submit.disabled = true; submit.textContent = '보내는 중…';
     try {
       await api.sendRsvp(ev.id, data);
       try { localStorage.setItem(myKey(ev), JSON.stringify(data)); } catch {}
       dlg.close();
-      toast(yes ? '받았어요. 토요일에 만나요!' : '알려 주셔서 고마워요.');
+      toast(yes ? '받았어요. 그날 만나요!' : '알려 주셔서 고마워요.');
       drawMine(ev, api_, false);
       refreshStatus(ev);
-    } catch (err) {
-      toast(err.message);
+    } catch (e2) {
+      // 통신이 끊기면 브라우저 영어 문구("Failed to fetch")가 오므로 우리말로 바꾼다.
+      fail(e2 instanceof TypeError ? '보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.' : e2.message);
     } finally { submit.disabled = false; submit.textContent = '보내기'; }
   } },
     h('div', { class: 'sheet-head' },
@@ -354,6 +364,7 @@ function rsvpSheet(ev, closed) {
     detail,
     h('label', { class: 'label', for: 'f-note' }, '남길 말'), note,
     h('p', { class: 'fine' }, '같은 가정 이름으로 다시 보내면 고쳐져요.'),
+    err,
     submit);
 
   dlg.append(form);
@@ -455,17 +466,6 @@ function bringView(ev) {
       h('span', null, h('strong', null, b.item), b.note && h('small', null, b.note)));
     return btn;
   }));
-}
-
-// 식당이 정해지기 전에는 name을 비워 두면 "정하는 중" 안내가 나간다.
-function dinnerView(d) {
-  return h('div', { class: 'dinner' },
-    h('small', null, d.time),
-    h('strong', null, d.name || '식당은 정하는 중이에요'),
-    !d.name && d.pending && h('p', null, d.pending),
-    d.address && h('p', null, d.address),
-    d.note && h('p', null, d.note),
-    d.name && mapLink(d.map || d.address || d.name));
 }
 
 const mapLink = (q) => h('a', { class: 'map-link', href: `https://map.naver.com/p/search/${encodeURIComponent(q)}`, target: '_blank', rel: 'noopener' },
