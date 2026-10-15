@@ -1,10 +1,15 @@
-// 어린이소그룹: 행사 목록(홈) → 행사 안내 → 참석 회신·현황.
-import { h, icon, toast, md, dday, toDate, won } from './ui.js';
+// 어린이소그룹: 행사 목록(홈) → 행사 한 장 요약 + 회신 시트 → 자세히(일정·비용·준비물·저녁·현황).
+import { h, icon, toast, md, dday as ddayAt, toDate, won } from './ui.js';
 import * as api from './api.js';
 import { GROUP_NAME, CONTACT_NOTE } from './config.js';
 
 const main = document.getElementById('app');
 let index = null;
+
+// 확인용: 주소에 ?now=2026-10-17T14:40 을 붙이면 그 시각 기준으로 화면을 그린다 (당일 화면 미리 보기).
+const NOW_OVERRIDE = Date.parse(new URLSearchParams(location.search).get('now') || '');
+const now = () => (Number.isNaN(NOW_OVERRIDE) ? new Date() : new Date(NOW_OVERRIDE));
+const dday = (s) => ddayAt(s, now());
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 
@@ -27,6 +32,26 @@ async function route() {
 // 마지막 날이 오늘보다 앞이면 지난 행사
 const isPast = (e) => dday(e.endDate || e.date) < 0;
 
+const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+/** "모레 · 토요일" */
+function whenLabel(e) {
+  const d = dday(e.date);
+  const wd = WEEKDAY[toDate(e.date).getDay()];
+  if (d < 0) return isPast(e) ? '지난 행사' : '진행 중';
+  if (d === 0) return `오늘 · ${wd}`;
+  if (d === 1) return `내일 · ${wd}`;
+  if (d === 2) return `모레 · ${wd}`;
+  return `${d}일 뒤 · ${md(e.date)}`;
+}
+
+/** '13:50' → '오후 1:50' */
+function ampm(t) {
+  const [hh, mm] = t.split(':').map(Number);
+  return `${hh < 12 ? '오전' : '오후'} ${hh % 12 || 12}:${String(mm).padStart(2, '0')}`;
+}
+const later = (m) => (m < 60 ? `${m}분 뒤` : `${Math.floor(m / 60)}시간${m % 60 ? ` ${m % 60}분` : ''} 뒤`);
+const toMin = (t) => { const [hh, mm] = t.split(':').map(Number); return hh * 60 + mm; };
+
 // ───────────────────────── 홈 ─────────────────────────
 function renderHome() {
   document.title = GROUP_NAME;
@@ -37,11 +62,9 @@ function renderHome() {
 
   main.replaceChildren(
     h('div', { class: 'wrap home' },
-      h('header', { class: 'home-head' },
-        h('p', { class: 'kicker' }, '우리 아이들 함께 자라요'),
-        h('h1', null, GROUP_NAME)),
+      h('header', { class: 'home-head' }, h('h1', null, GROUP_NAME)),
 
-      next ? nextCard(next) : h('div', { class: 'card empty' }, '지금은 예정된 행사가 없어요. 새 소식이 오면 여기 맨 위에 떠요.'),
+      next ? nextCard(next) : h('div', { class: 'empty' }, '지금은 예정된 행사가 없어요. 새 소식이 오면 여기 맨 위에 떠요.'),
 
       later.length > 0 && h('section', { class: 'sec' },
         h('h2', null, '이어서 있을 행사'),
@@ -55,25 +78,15 @@ function renderHome() {
   );
 }
 
-function ddayLabel(e) {
-  const d = dday(e.date);
-  if (d === 0) return '오늘';
-  if (d < 0) return '진행 중';
-  return `D-${d}`;
-}
-
-// 다가오는 행사: 절취선 있는 입장권 모양
 function nextCard(e) {
-  return h('a', { class: 'ticket next', href: `#/e/${e.id}` },
-    h('div', { class: 't-main' },
-      h('div', { class: 't-art', html: art(e.theme) }),
-      h('div', { class: 't-body' },
-        h('div', { class: 't-kicker' }, '다가오는 행사'),
-        h('h2', { class: 't-title small' }, e.title),
-        h('p', { class: 'meta' }, icon('calendar', 16), `${md(e.date)} · ${e.time}`),
-        h('p', { class: 'meta' }, icon('pin', 16), e.place),
-        h('span', { class: 'btn dark block' }, '안내 보고 참석 회신하기', icon('chevron', 18)))),
-    h('div', { class: 't-stub' }, h('span', { class: 'no' }, 'ADMIT ONE FAMILY'), h('span', { class: 'dd' }, ddayLabel(e))));
+  return h('a', { class: 'next-card', href: `#/e/${e.id}` },
+    h('div', { class: 'art', html: art(e.theme) }),
+    h('div', { class: 'next-body' },
+      h('p', { class: 'when' }, whenLabel(e)),
+      h('h2', null, e.title),
+      h('p', { class: 'meta' }, `${md(e.date)} · ${e.time}`),
+      h('p', { class: 'meta' }, e.place),
+      h('span', { class: 'btn primary block' }, '안내 보고 회신하기')));
 }
 
 function rowCard(e, past = false) {
@@ -88,23 +101,16 @@ function rowCard(e, past = false) {
     icon('chevron', 18));
 }
 
-// ───────────────────────── 행사 안내 ─────────────────────────
+// ───────────────────────── 행사 ─────────────────────────
+let last = { yes: 0 };   // 공유 문구에 쓰는 최근 현황
+
 async function renderEvent(id) {
   const ev = await api.loadEvent(id);
   const meta = index.find((e) => e.id === id) || ev;
   document.title = `${meta.title} | ${GROUP_NAME}`;
   const past = isPast(meta);
-  const closed = past || (ev.deadline && Date.now() > Date.parse(ev.deadline));
-
-  const sections = [
-    ev.passes && ['passes', '탑승권'],
-    ev.schedule && ['schedule', '일정'],
-    ev.fees && ['fees', '입장료'],
-    ev.bring && ['bring', '준비물'],
-    ev.dinner && ['food', '저녁'],
-    !past && ['rsvp', '회신'],
-    !past && ['status', '현황'],
-  ].filter(Boolean);
+  const closed = past || (ev.deadline && now() > Date.parse(ev.deadline));
+  const sheet = past ? null : rsvpSheet(ev, closed);
 
   const page = h('div', { class: 'event' },
     h('div', { class: 'topbar' },
@@ -113,230 +119,210 @@ async function renderEvent(id) {
       h('button', { class: 'icon-btn', type: 'button', 'aria-label': '공유하기', onclick: () => share(meta) }, icon('share', 20))),
 
     h('div', { class: 'wrap' },
-      ticketView(ev, meta, past),
+      // ── 한 장 요약 ──
+      h('div', { class: 'art hero-art', html: art(ev.theme) }),
+      h('p', { class: 'when' }, whenLabel(meta)),
+      h('h1', null, meta.title),
 
-      !past && ev.ticket?.start && h('div', { class: 'count', 'aria-label': '출발까지 남은 시간' },
-        h('div', null, h('b', { id: 'cd-d' }, '0'), h('small', null, '일')),
-        h('div', null, h('b', { id: 'cd-h' }, '0'), h('small', null, '시간')),
-        h('div', null, h('b', { id: 'cd-m' }, '0'), h('small', null, '분'))),
+      !past && h('div', { id: 'now' }),
+      !past && h('div', { id: 'mine' }),
+      factsView(ev),
+      closed && !past && dday(meta.date) > 0 && h('p', { class: 'fine' }, '회신이 마감됐어요. 바꿀 일이 있으면 섬기는 분께 말씀해 주세요.'),
+      !past && h('button', { class: 'faces', id: 'faces', type: 'button', onclick: () => jump('status') },
+        h('span', { class: 'faces-text' }, h('small', null, '함께 가는 가정을 불러오는 중…'))),
 
-      !past && ev.deadlineLabel && h('p', { class: `deadline${closed ? ' closed' : ''}` },
-        icon('clock', 16), closed ? '회신이 마감됐어요' : `회신 마감 ${ev.deadlineLabel}`),
+      past && ev.lead && h('p', { class: 'lead' }, ev.lead),
+      past && ev.link && h('a', { class: 'btn ghost block', href: ev.link }, '그때 안내 페이지 보기'),
 
-      sections.length > 2 && h('nav', { class: 'chips', 'aria-label': '바로가기' },
-        sections.map(([k, label]) => h('a', { href: `#/e/${id}`, onclick: (e) => { e.preventDefault(); jump(k); } }, label))),
-
-      ev.overview && sec('overview', '오는 길', null, h('div', { class: 'card' },
-        ev.overview.map((o) => h('div', { class: 'ov' },
-          h('span', { class: 'ov-ic' }, icon(o.icon, 20)),
-          h('div', null, h('small', null, o.label), h('strong', null, o.value), o.sub && h('span', null, o.sub)))))),
-
-      ev.passes && sec('passes', ev.passes.title, ev.passes.lede, h('div', { class: 'passes' },
-        ev.passes.list.map((p) => h('div', { class: `pass ${p.dir}` },
-          h('div', { class: 'ic' }, icon(p.icon, 24)),
-          h('small', null, p.when), h('strong', null, p.name), h('p', null, p.desc))))),
-
-      ev.schedule && sec('schedule', '오늘의 순서', '당일에는 지금 할 차례에 초록 테두리가 생겨요.',
-        h('ol', { class: 'stubs', id: 'stubs' }, ev.schedule.map((s) => h('li', { class: `stub${s.tag ? ' key' : ''}`, 'data-t': s.time },
-          h('time', null, s.time),
+      // ── 자세히 ──
+      ev.schedule && sec('schedule', '일정', null,
+        h('ol', { class: 'timeline', id: 'timeline' }, ev.schedule.map((s) => h('li', { 'data-t': s.time },
+          h('time', null, h('small', null, ampm(s.time).split(' ')[0]), ampm(s.time).split(' ')[1]),
           h('div', null,
             h('strong', null, s.title, s.tag && h('em', null, s.tag)),
             s.desc && h('p', null, s.desc))))),
-        ev.scheduleNote && h('p', { class: 'note' }, icon('info', 16), ev.scheduleNote)),
+        ev.scheduleNote && h('p', { class: 'fine' }, ev.scheduleNote)),
 
-      ev.fees && sec('fees', '입장료', ev.fees.title, feesView(ev.fees)),
-
-      ev.bring && sec('bring', '챙겼나요?', '챙긴 물건을 누르면 도장이 쾅!', bringView(ev)),
-
+      ev.fees && sec('fees', '비용', ev.fees.title, feesView(ev.fees)),
+      ev.parking && sec('parking', '주차', ev.parking.title, parkingView(ev.parking)),
+      ev.bring && sec('bring', '챙길 것', '챙긴 것을 눌러 표시해 두세요. 이 휴대폰에만 남아요.', bringView(ev)),
       ev.dinner && sec('food', '저녁 식사', null, dinnerView(ev.dinner)),
+      ev.notices && sec('notice', '꼭 알아 주세요', null, h('ul', { class: 'notices' }, ev.notices.map((n) => h('li', null, n)))),
+      !past && sec('status', '함께 가는 가정', null, h('div', { id: 'status' }, h('p', { class: 'muted' }, '불러오는 중…'))),
 
-      ev.notices && sec('notice', '꼭 알아 주세요', null, h('ul', { class: 'notes' }, ev.notices.map((n) => h('li', null, n)))),
-
-      !past && sec('rsvp', '참석 회신', null, rsvpView(ev, closed)),
-      !past && sec('status', '참석 현황', null, h('div', { id: 'status' }, h('p', { class: 'muted' }, '불러오는 중…'))),
-
-      past && ev.link && h('a', { class: 'btn ghost block', href: ev.link }, '그때 안내 페이지 보기'),
       h('p', { class: 'foot' }, CONTACT_NOTE)),
 
     !past && !closed && h('div', { class: 'cta' },
-      h('button', { class: 'btn dark block', type: 'button', onclick: () => jump('rsvp') },
-        '참석 도장 찍기', ev.deadlineLabel && h('span', { class: 'pill' }, ev.deadlineLabel.replace(/ 밤.*$/, '까지'))),
-  ));
+      h('button', { class: 'btn primary block', id: 'cta-btn', type: 'button', onclick: () => sheet.open() }, '참석 회신'),
+      ev.deadlineLabel && h('small', null, deadlineText(ev))),
+    sheet?.el,
+  );
 
   main.replaceChildren(page);
   window.scrollTo(0, 0);
-  startClock(ev);
-
-  // 회신·현황이 화면에 보이면 아래 고정 버튼은 숨긴다 (폼을 가리지 않게)
-  const cta = page.querySelector('.cta');
-  if (cta && 'IntersectionObserver' in window) {
-    const seen = new Set();
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
-      cta.classList.toggle('gone', seen.size > 0);
-    });
-    ['s-rsvp', 's-status'].forEach((k) => io.observe(document.getElementById(k)));
+  if (!past) {
+    drawMine(ev, sheet, closed);
+    startClock(ev);
+    refreshStatus(ev);
   }
-  if (!past) refreshStatus(ev);
 }
 
 function sec(id, title, lede, ...body) {
   return h('section', { class: 'sec', id: `s-${id}` }, h('h2', null, title), lede && h('p', { class: 'lede' }, lede), ...body);
 }
 
-// 행사 입장권. ev.ticket이 없으면 제목·안내문으로 채운다.
-function ticketView(ev, meta, past) {
-  const t = ev.ticket || {};
-  const grid = t.grid || [['DATE', md(meta.date)], ['TIME', meta.time], ['PLACE', meta.place]];
-  return h('article', { class: 'ticket', 'aria-label': `${meta.title} 입장권` },
-    h('div', { class: 't-main' },
-      h('div', { class: 't-art', html: art(ev.theme) }),
-      h('div', { class: 't-body' },
-        h('div', { class: 't-kicker' }, t.kicker || ev.kicker),
-        h('h1', { class: 't-title' }, t.title || meta.title),
-        h('p', { class: 't-sub' }, t.sub || ev.lead),
-        h('div', { class: 't-grid' }, grid.map(([k, v]) => h('div', null, h('small', null, k), h('strong', null, v)))))),
-    h('div', { class: 't-stub' },
-      h('span', { class: 'no' }, t.no || 'ADMIT ONE FAMILY'),
-      h('span', { class: 'dd', id: 'dd' }, past ? 'THANKS' : ddayLabel(meta))),
-    t.stamp && h('div', { class: 'stamp', 'aria-hidden': 'true' }, t.stamp.map((s, i) => [i ? h('br') : null, s])));
+function jump(k) {
+  document.getElementById(`s-${k}`)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 }
 
-// 출발 카운트다운과 당일 "지금 여기" 표시. 30초마다 다시 계산한다.
+/** 마감이 오늘이면 "오늘 밤 10시까지" */
+function deadlineText(ev) {
+  const label = ev.deadlineLabel;
+  if (!ev.deadline) return label;
+  const d = new Date(Date.parse(ev.deadline));
+  const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const left = dday(key);
+  if (left === 0) return label.replace(/^.*?\)\s*/, '오늘 ');
+  if (left === 1) return label.replace(/^.*?\)\s*/, '내일 ');
+  return label;
+}
+
+// 요점 네 줄: 모임·비용은 행사 JSON의 summary, 저녁·챙길 것은 자동으로.
+function factsView(ev) {
+  const rows = [...(ev.summary || (ev.overview || []).slice(0, 2).map((o) => ({ k: o.label, v: o.value, sub: o.sub })))];
+  const has = (to) => rows.some((r) => r.to === to);
+  if (ev.bring && !has('bring')) rows.push({ k: '챙길 것', v: ev.bring.slice(0, 3).map((b) => b.item).join(', '), to: 'bring' });
+  // 저녁 줄은 식당 이름이 바뀌면 저절로 따라가도록 JSON의 dinner에서 만든다 (챙길 것 앞에).
+  if (ev.dinner && !has('food')) {
+    const at = rows.findIndex((r) => r.to === 'bring');
+    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(ev.dinner.time.split(/\s*~/)[0])} · ${ev.dinner.name || '식당 정하는 중'}`, to: 'food' });
+  }
+  if (rows.length === 0) return null;
+  return h('div', { class: 'facts' }, rows.map((r) => {
+    const inner = [
+      h('span', { class: 'k' }, r.k),
+      h('span', { class: 'v' }, h('b', null, r.v), r.sub && h('small', null, r.sub)),
+      r.map ? h('span', { class: 'go' }, '지도') : r.to && h('span', { class: 'go' }, icon('chevron', 16)),
+    ];
+    if (r.map) return h('a', { class: 'fact', href: `https://map.naver.com/p/search/${encodeURIComponent(r.map)}`, target: '_blank', rel: 'noopener' }, inner);
+    if (r.to) return h('button', { class: 'fact', type: 'button', onclick: () => jump(r.to) }, inner);
+    return h('div', { class: 'fact' }, inner);
+  }));
+}
+
+// ───────────────────────── 당일: 지금 · 다음 ─────────────────────────
 let clock;
 function startClock(ev) {
   clearInterval(clock);
-  const start = ev.ticket?.start ? Date.parse(ev.ticket.start) : null;
-  const toMin = (t) => { const [hh, mm] = t.split(':').map(Number); return hh * 60 + mm; };
   const tick = () => {
-    if (!document.body.contains(document.getElementById('stubs') || document.getElementById('cd-d'))) return clearInterval(clock);
-    const now = new Date();
-    if (start) {
-      const ms = Math.max(0, start - now);
-      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      set('cd-d', Math.floor(ms / 864e5)); set('cd-h', Math.floor(ms / 36e5) % 24); set('cd-m', Math.floor(ms / 6e4) % 60);
-    }
-    const kst = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 6e4);
-    const isDay = dday(ev.date) === 0, cur = kst.getHours() * 60 + kst.getMinutes();
-    const items = [...document.querySelectorAll('#stubs .stub')];
-    items.forEach((el, i) => {
-      const s = toMin(el.dataset.t), e = items[i + 1] ? toMin(items[i + 1].dataset.t) : s + 90;
-      el.classList.toggle('now', isDay && cur >= s && cur < e);
-      el.classList.toggle('done', isDay && cur >= e);
-    });
+    if (!document.getElementById('now')) return clearInterval(clock);
+    drawNow(ev);
   };
   tick();
   clock = setInterval(tick, 30000);
 }
 
-function jump(k) {
-  document.getElementById(`s-${k}`)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+function drawNow(ev) {
+  const box = document.getElementById('now');
+  const steps = document.querySelectorAll('#timeline li');
+  const isDay = dday(ev.date) === 0 && ev.schedule?.length;
+  if (!isDay) { box.replaceChildren(); return; }
+
+  const n = now(), cur = n.getHours() * 60 + n.getMinutes();
+  const items = ev.schedule.map((s, i, all) => ({ ...s, s: toMin(s.time), e: all[i + 1] ? toMin(all[i + 1].time) : toMin(s.time) + 90 }));
+  const i = items.findIndex((x) => cur >= x.s && cur < x.e);
+  steps.forEach((el, k) => {
+    el.classList.toggle('is-now', k === i);
+    el.classList.toggle('is-done', cur >= items[k].e);
+  });
+
+  const nextList = (from) => items.slice(from, from + 2).map((x) => h('div', { class: 'next-step' },
+    h('time', null, ampm(x.time).split(' ')[1]),
+    h('div', null, h('b', null, x.title), h('small', null, later(x.s - cur)))));
+
+  if (cur < items[0].s) {
+    const f = items[0];
+    box.replaceChildren(h('div', { class: 'now-card' },
+      h('small', null, `곧 · ${ampm(f.time)}`), h('b', null, f.title), f.desc && h('span', null, f.desc)),
+    ...nextList(1));
+  } else if (i < 0) {
+    box.replaceChildren(h('div', { class: 'now-card calm' }, h('small', null, '오늘'), h('b', null, '함께해서 고마워요'), h('span', null, '조심히 들어가세요.')));
+  } else {
+    const x = items[i];
+    const pct = Math.round(((cur - x.s) / (x.e - x.s)) * 100);
+    box.replaceChildren(h('div', { class: 'now-card' },
+      h('small', null, `지금 · ${ampm(x.time)}부터`), h('b', null, x.title), x.desc && h('span', null, x.desc),
+      h('div', { class: 'bar', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-label': '이 순서 진행' }, h('i', { style: `width:${pct}%` }))),
+    ...nextList(i + 1));
+  }
 }
 
-async function share(e) {
-  const url = `${location.origin}${location.pathname}#/e/${e.id}`;
-  const text = `${e.title} · ${md(e.date)} ${e.time}`;
-  try {
-    if (navigator.share) await navigator.share({ title: e.title, text, url });
-    else { await navigator.clipboard.writeText(`${text}\n${url}`); toast('링크를 복사했어요. 단톡방에 붙여 넣어 주세요.'); }
-  } catch {}
+// ───────────────────────── 회신 시트 ─────────────────────────
+const myKey = (ev) => `sg-me-${ev.id}`;
+function loadMine(ev) { try { return JSON.parse(localStorage.getItem(myKey(ev)) || 'null'); } catch { return null; } }
+
+function drawMine(ev, sheet, closed) {
+  const box = document.getElementById('mine');
+  const me = loadMine(ev);
+  // 회신을 보낸 뒤에는 아래 고정 버튼 대신 초록 줄의 "고치기"를 쓴다.
+  const cta = document.querySelector('.cta');
+  if (cta) cta.hidden = !!me;
+  if (!me) { box.replaceChildren(); return; }
+  const n = (+me.adults) + (+me.kids) + (+me.toddlers);
+  const text = me.attend === 'Y' ? `${me.family} · ${n}명${me.dinner === 'Y' ? ' · 저녁 함께' : ''}` : `${me.family} · 이번엔 못 가요`;
+  box.replaceChildren(h('div', { class: `mine${me.attend === 'Y' ? '' : ' no'}` },
+    icon('check', 18), h('span', null, text),
+    !closed && h('button', { type: 'button', onclick: () => sheet.open() }, '고치기')));
 }
 
-// 요금: 가격표 태그
-function feesView(f) {
-  return h('div', null,
-    h('div', { class: 'tags' }, f.rows.map((r) => h('div', { class: 'tag' },
-      h('strong', null, r.who), h('small', null, r.age),
-      r.was && h('s', null, r.was.toLocaleString('ko-KR')),
-      h('b', null, won(r.price))))),
-    f.save && h('div', { class: 'save', html: f.save }),
-    f.notes?.length > 0 && h('ul', { class: 'fine' }, f.notes.map((n) => h('li', null, n))),
-    f.source && h('p', { class: 'src' }, f.source));
-}
+function rsvpSheet(ev, closed) {
+  const dlg = h('dialog', { class: 'sheet', 'aria-labelledby': 'sheet-title' });
+  if (closed) return { el: dlg, open() {} };
 
-// 준비물: 누르면 "챙김" 도장
-function bringView(ev) {
-  const key = `sg-bring-${ev.id}`;
-  let done = [];
-  try { done = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
-  return h('div', { class: 'bring' }, ev.bring.map((b, i) => {
-    const btn = h('button', { type: 'button', class: b.highlight ? 'hl' : null, 'aria-pressed': String(done.includes(i)), onclick: () => {
-      const on = btn.getAttribute('aria-pressed') !== 'true';
-      btn.setAttribute('aria-pressed', String(on));
-      done = on ? [...done, i] : done.filter((x) => x !== i);
-      try { localStorage.setItem(key, JSON.stringify(done)); } catch {}
-    } },
-      h('strong', null, b.item), b.note && h('small', null, b.note),
-      h('span', { class: 'ok', 'aria-hidden': 'true' }, '챙김'));
-    return btn;
-  }));
-}
-
-// 식당이 정해지기 전에는 name을 비워 두면 "정하는 중" 안내가 나간다.
-function dinnerView(d) {
-  return h('div', { class: `dinner${d.name ? '' : ' pending'}` },
-    h('span', { class: 'plate' }, icon('meal', 26)),
-    h('div', null,
-      h('small', null, d.time),
-      h('strong', null, d.name || '식당은 정하는 중이에요'),
-      !d.name && d.pending && h('p', null, d.pending),
-      d.address && h('p', null, icon('pin', 14), d.address),
-      d.note && h('p', null, d.note),
-      d.name && h('a', { class: 'map-link', href: `https://map.naver.com/p/search/${encodeURIComponent(d.address || d.name)}`, target: '_blank', rel: 'noopener' },
-        icon('map', 14), '지도에서 보기')));
-}
-
-// ───────────────────────── 참석 회신 ─────────────────────────
-function rsvpView(ev, closed) {
-  if (closed) return h('div', { class: 'card empty' }, '회신이 마감됐어요. 변경은 섬기는 분께 직접 말씀해 주세요.');
-
-  const saved = (() => { try { return JSON.parse(localStorage.getItem(`sg-me-${ev.id}`) || 'null'); } catch { return null; } })();
-  const st = { attend: saved?.attend || '', dinner: saved?.dinner || 'Y' };
+  const saved = loadMine(ev);
+  const st = { attend: saved?.attend || 'Y', dinner: saved?.dinner || 'Y' };
 
   const family = h('input', { id: 'f-family', type: 'text', required: true, maxlength: 30, placeholder: '예) 김OO 형제님 가정', value: saved?.family || '', autocomplete: 'off' });
   const counters = {};
-  const counter = (k, label, sub, min = 0) => {
+  const counter = (k, label, sub) => {
     let v = saved?.[k] ?? (k === 'adults' ? 1 : 0);
-    const out = h('output', null, v);
-    const set = (n) => { v = Math.max(min, Math.min(20, n)); out.textContent = v; counters[k].value = v; };
+    const out = h('output', { 'aria-live': 'polite' }, v);
+    const set = (n) => { v = Math.max(0, Math.min(20, n)); out.textContent = v; counters[k].value = v; };
     counters[k] = { value: v };
     return h('div', { class: 'counter' },
-      h('div', null, h('strong', null, label), h('small', null, sub)),
+      h('div', null, h('strong', null, label), sub && h('small', null, sub)),
       h('div', { class: 'stepper' },
         h('button', { type: 'button', 'aria-label': `${label} 한 명 빼기`, onclick: () => set(v - 1) }, '−'),
         out,
         h('button', { type: 'button', 'aria-label': `${label} 한 명 더하기`, onclick: () => set(v + 1) }, '+')));
   };
 
-  const seg = (name, options, onpick) => h('div', { class: 'seg', role: 'radiogroup' }, options.map(([val, label]) => {
+  const seg = (name, label, options, onpick) => h('div', { class: 'seg', role: 'radiogroup', 'aria-label': label }, options.map(([val, text]) => {
     const b = h('button', { type: 'button', role: 'radio', 'aria-checked': String(st[name] === val), onclick: () => {
       st[name] = val;
       b.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
       onpick?.();
-    } }, label);
+    } }, text);
     return b;
   }));
 
   const detail = h('div', { class: 'attend-detail' },
-    h('p', { class: 'label' }, '함께 가는 사람'),
-    h('div', { class: 'card counters' },
+    h('div', { class: 'counters' },
       counter('adults', '어른', '만 19세 이상'),
       counter('kids', '아이', '만 6세 ~ 고등학생'),
       counter('toddlers', '유아', '만 5세 이하')),
     ev.dinner && h('div', null,
-      h('p', { class: 'label' }, '저녁 식사도 함께 하나요?'),
-      seg('dinner', [['Y', '함께 먹어요'], ['N', '나들이만']])));
+      h('p', { class: 'label' }, '저녁도 함께 먹나요?'),
+      seg('dinner', '저녁 식사', [['Y', '함께 먹어요'], ['N', '나들이만']])));
+  const syncAttend = () => { detail.hidden = st.attend !== 'Y'; };
 
-  function syncAttend() { detail.hidden = st.attend !== 'Y'; }
-
-  const note = h('textarea', { rows: 2, maxlength: 200, placeholder: '알레르기, 늦게 도착 등 (선택)' }, saved?.note || '');
-  const submit = h('button', { class: 'btn primary block', type: 'submit' }, saved ? '회신 고치기' : '회신 보내기');
+  const note = h('textarea', { id: 'f-note', rows: 2, maxlength: 200, placeholder: '알레르기, 늦게 도착 등 (선택)' }, saved?.note || '');
+  const submit = h('button', { class: 'btn primary block', type: 'submit' }, '보내기');
 
   const form = h('form', { class: 'rsvp', novalidate: true, onsubmit: async (e) => {
     e.preventDefault();
     const name = family.value.trim();
-    if (!name) { family.focus(); return toast('가정이름을 적어 주세요.'); }
-    if (!st.attend) return toast('참석하는지 골라 주세요.');
+    if (!name) { family.focus(); return toast('가정 이름을 적어 주세요.'); }
     const yes = st.attend === 'Y';
     const data = {
       family: name, attend: st.attend,
@@ -350,117 +336,191 @@ function rsvpView(ev, closed) {
     submit.disabled = true; submit.textContent = '보내는 중…';
     try {
       await api.sendRsvp(ev.id, data);
-      try { localStorage.setItem(`sg-me-${ev.id}`, JSON.stringify(data)); } catch {}
-      toast(yes ? '고마워요! 회신을 받았어요.' : '알려 주셔서 고마워요.');
-      submit.textContent = '회신 고치기';
+      try { localStorage.setItem(myKey(ev), JSON.stringify(data)); } catch {}
+      dlg.close();
+      toast(yes ? '받았어요. 토요일에 만나요!' : '알려 주셔서 고마워요.');
+      drawMine(ev, api_, false);
       refreshStatus(ev);
-      jump('status');
     } catch (err) {
       toast(err.message);
-      submit.textContent = saved ? '회신 고치기' : '회신 보내기';
-    } finally { submit.disabled = false; }
+    } finally { submit.disabled = false; submit.textContent = '보내기'; }
   } },
-    h('p', { class: 'muted' }, '가정마다 한 번만 보내 주세요. 같은 가정이름으로 다시 보내면 고쳐져요.'),
+    h('div', { class: 'sheet-head' },
+      h('h2', { id: 'sheet-title' }, '참석 회신'),
+      h('button', { class: 'icon-btn', type: 'button', 'aria-label': '닫기', onclick: () => dlg.close() }, icon('close', 20))),
     api.isPreview && h('p', { class: 'preview-tag' }, '미리보기 모드 · 회신이 이 기기에만 저장돼요'),
-    h('div', { class: 'card form' },
-      h('label', { class: 'label', for: 'f-family' }, '가정이름'), family,
-      h('p', { class: 'label' }, '참석 여부'),
-      seg('attend', [['Y', '참석해요'], ['N', '이번엔 못 가요']], syncAttend),
-      detail,
-      h('label', { class: 'label' }, '남길 말', note),
-      submit));
+    h('label', { class: 'label', for: 'f-family' }, '가정 이름'), family,
+    seg('attend', '참석 여부', [['Y', '갈게요'], ['N', '이번엔 못 가요']], syncAttend),
+    detail,
+    h('label', { class: 'label', for: 'f-note' }, '남길 말'), note,
+    h('p', { class: 'fine' }, '같은 가정 이름으로 다시 보내면 고쳐져요.'),
+    submit);
 
+  dlg.append(form);
+  // 바깥(어두운 부분)을 누르면 닫는다
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   syncAttend();
-  return form;
+
+  const api_ = { el: dlg, open() { dlg.showModal(); if (!family.value) family.focus(); } };
+  return api_;
 }
 
-// ───────────────────────── 참석 현황 ─────────────────────────
+// ───────────────────────── 현황 ─────────────────────────
 async function refreshStatus(ev) {
   const box = document.getElementById('status');
   if (!box) return;
   try {
     const { responses } = await api.loadStatus(ev.id);
     box.replaceChildren(statusView(ev, responses));
+    drawFaces(responses);
   } catch (err) {
     box.replaceChildren(h('p', { class: 'error' }, err.message));
+    document.getElementById('faces')?.replaceChildren(h('span', { class: 'faces-text' }, h('small', null, '현황을 불러오지 못했어요')));
   }
+}
+
+const sum = (list, k) => list.reduce((a, r) => a + (Number(r[k]) || 0), 0);
+const initial = (name) => String(name).replace(/^예시\)\s*/, '').trim().charAt(0) || '?';
+
+function avatar(name, i) {
+  return h('span', { class: `av t${i % 4}`, 'aria-hidden': 'true' }, initial(name));
+}
+
+function drawFaces(rows) {
+  const box = document.getElementById('faces');
+  if (!box) return;
+  const yes = rows.filter((r) => r.attend === 'Y');
+  last.yes = yes.length;
+  if (yes.length === 0) {
+    box.replaceChildren(h('span', { class: 'faces-text' }, h('b', null, '아직 회신한 가정이 없어요'), h('small', null, '첫 회신을 보내 주세요')));
+    return;
+  }
+  const shown = yes.slice(-4).reverse();
+  const more = yes.length - shown.length;
+  box.replaceChildren(
+    h('span', { class: 'pile' }, shown.map((r, i) => avatar(r.family, i)), more > 0 && h('span', { class: 'av more', 'aria-hidden': 'true' }, `+${more}`)),
+    h('span', { class: 'faces-text' },
+      h('b', null, `${yes.length}가정이 함께 가요`),
+      h('small', null, `어른 ${sum(yes, 'adults')} · 아이 ${sum(yes, 'kids') + sum(yes, 'toddlers')}`)),
+    icon('chevron', 16));
 }
 
 function statusView(ev, rows) {
   const yes = rows.filter((r) => r.attend === 'Y');
   const no = rows.filter((r) => r.attend !== 'Y');
-  const sum = (k, list = yes) => list.reduce((a, r) => a + (Number(r[k]) || 0), 0);
   const diners = yes.filter((r) => r.dinner === 'Y');
-
-  let tab = 'Y';
-  const list = h('div', { class: 'people' });
-  const draw = () => {
-    const shown = tab === 'Y' ? yes : no;
-    if (shown.length === 0) return list.replaceChildren(h('p', { class: 'muted center' }, '아직 없어요.'));
-    list.replaceChildren(...shown.map((r) => h('div', { class: 'person' },
-      h('div', null,
-        h('strong', null, r.family),
-        h('small', null, r.attend === 'Y'
-          ? `어른 ${r.adults} · 아이 ${r.kids} · 유아 ${r.toddlers}${r.dinner === 'Y' ? ' · 저녁 함께' : ''}`
-          : (r.note || '불참'))),
-      r.attend === 'Y' && h('b', null, `${(+r.adults) + (+r.kids) + (+r.toddlers)}명`))));
-  };
-
-  const tabs = h('div', { class: 'seg small' },
-    [['Y', `참석 ${yes.length}`], ['N', `불참 ${no.length}`]].map(([k, label]) => {
-      const b = h('button', { type: 'button', 'aria-pressed': String(tab === k), onclick: () => {
-        tab = k; tabs.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); draw();
-      } }, label);
-      return b;
-    }));
-  draw();
-
-  // 식당 예약 인원
-  const dinnerLine = ev.dinner && h('p', { class: 'note' }, icon('meal', 16),
-    `저녁 함께 ${sum('adults', diners) + sum('kids', diners) + sum('toddlers', diners)}명 · 어른 ${sum('adults', diners)} · 아이 ${sum('kids', diners)} · 유아 ${sum('toddlers', diners)}`);
+  const dinerCount = sum(diners, 'adults') + sum(diners, 'kids') + sum(diners, 'toddlers');
 
   return h('div', null,
-    h('div', { class: 'card stats' },
+    h('div', { class: 'stats' },
       h('div', null, h('b', null, yes.length), h('small', null, '가정')),
-      h('div', null, h('b', null, sum('adults')), h('small', null, '어른')),
-      h('div', null, h('b', null, sum('kids') + sum('toddlers')), h('small', null, '아이'))),
-    dinnerLine,
-    h('div', { class: 'card' }, tabs, list),
+      h('div', null, h('b', null, sum(yes, 'adults')), h('small', null, '어른')),
+      h('div', null, h('b', null, sum(yes, 'kids') + sum(yes, 'toddlers')), h('small', null, '아이')),
+      ev.dinner && h('div', null, h('b', null, dinerCount), h('small', null, '저녁'))),
+    yes.length === 0
+      ? h('p', { class: 'muted' }, '아직 회신한 가정이 없어요.')
+      : h('ul', { class: 'people' }, yes.map((r, i) => h('li', null,
+        avatar(r.family, i),
+        h('div', null,
+          h('strong', null, r.family),
+          h('small', null, `어른 ${r.adults} · 아이 ${(+r.kids) + (+r.toddlers)}${r.dinner === 'Y' ? ' · 저녁 함께' : ''}`)),
+        h('b', null, `${(+r.adults) + (+r.kids) + (+r.toddlers)}명`)))),
+    no.length > 0 && h('p', { class: 'fine' }, `이번엔 못 가요: ${no.map((r) => r.family).join(', ')}`),
     h('button', { class: 'btn ghost small', type: 'button', onclick: () => refreshStatus(ev) }, icon('refresh', 16), '새로고침'));
+}
+
+// ───────────────────────── 자세히 ─────────────────────────
+function feesView(f) {
+  return h('div', null,
+    f.callout && h('div', { class: 'callout' }, icon('info', 20), h('div', null, h('strong', null, f.callout.title), h('p', null, f.callout.body))),
+    h('ul', { class: 'prices' }, f.rows.map((r) => h('li', null,
+      h('div', null, h('strong', null, r.who), h('small', null, r.age)),
+      h('b', null, won(r.price))))),
+    f.save && h('p', { class: 'save', html: f.save }),
+    f.notes?.length > 0 && h('ul', { class: 'fine-list' }, f.notes.map((n) => h('li', null, n))));
+}
+
+function bringView(ev) {
+  const key = `sg-bring-${ev.id}`;
+  let done = [];
+  try { done = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
+  return h('div', { class: 'checklist' }, ev.bring.map((b, i) => {
+    const btn = h('button', { type: 'button', 'aria-pressed': String(done.includes(i)), onclick: () => {
+      const on = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', String(on));
+      done = on ? [...done, i] : done.filter((x) => x !== i);
+      try { localStorage.setItem(key, JSON.stringify(done)); } catch {}
+    } },
+      h('span', { class: 'box' }, icon('check', 14)),
+      h('span', null, h('strong', null, b.item), b.note && h('small', null, b.note)));
+    return btn;
+  }));
+}
+
+// 식당이 정해지기 전에는 name을 비워 두면 "정하는 중" 안내가 나간다.
+function dinnerView(d) {
+  return h('div', { class: 'dinner' },
+    h('small', null, d.time),
+    h('strong', null, d.name || '식당은 정하는 중이에요'),
+    !d.name && d.pending && h('p', null, d.pending),
+    d.address && h('p', null, d.address),
+    d.note && h('p', null, d.note),
+    d.name && mapLink(d.map || d.address || d.name));
+}
+
+const mapLink = (q) => h('a', { class: 'map-link', href: `https://map.naver.com/p/search/${encodeURIComponent(q)}`, target: '_blank', rel: 'noopener' },
+  icon('map', 16), '지도에서 보기');
+
+function parkingView(p) {
+  return h('div', null,
+    h('ul', { class: 'prices' }, p.rows.map(([k, v]) => h('li', null,
+      h('div', null, h('strong', null, k), h('small', null, v))))),
+    p.notes?.length > 0 && h('ul', { class: 'fine-list' }, p.notes.map((n) => h('li', null, n))),
+    p.map && mapLink(p.map),
+    p.source && h('p', { class: 'fine' }, p.source));
+}
+
+async function share(e) {
+  const url = `${location.origin}${location.pathname}#/e/${e.id}`;
+  const text = `${e.title} · ${md(e.date)} ${e.time}${last.yes ? `\n${last.yes}가정이 함께 가요. 회신해 주세요!` : ''}`;
+  try {
+    if (navigator.share) await navigator.share({ title: e.title, text, url });
+    else { await navigator.clipboard.writeText(`${text}\n${url}`); toast('링크를 복사했어요. 단톡방에 붙여 넣어 주세요.'); }
+  } catch {}
 }
 
 // ───────────────────────── 테마 그림 ─────────────────────────
 function art(theme) {
   const sky = 'var(--art-sky)';
   if (theme === 'zoo') {
-    return `<svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMax slice" role="img" aria-label="단풍 든 언덕, 기린, 리프트">
-      <rect width="320" height="168" fill="${sky}"/>
-      <circle cx="250" cy="52" r="26" fill="var(--art-sun)"/>
-      <path d="M0 120 Q70 84 150 110 T320 96 V168 H0z" fill="var(--art-hill1)"/>
-      <path d="M0 140 Q90 112 190 138 T320 128 V168 H0z" fill="var(--art-hill2)"/>
-      <g fill="var(--art-leaf1)"><circle cx="40" cy="112" r="16"/><circle cx="60" cy="118" r="12"/></g><rect x="47" y="118" width="4" height="22" fill="var(--art-trunk)"/>
-      <g fill="var(--art-leaf2)"><circle cx="286" cy="112" r="15"/><circle cx="270" cy="120" r="11"/></g><rect x="282" y="120" width="4" height="20" fill="var(--art-trunk)"/>
-      <path d="M120 20 L320 70" stroke="var(--art-trunk)" stroke-width="1.6"/>
-      <g transform="translate(196 40) rotate(14)"><rect x="-1" y="0" width="2" height="10" fill="var(--art-trunk)"/><rect x="-11" y="10" width="22" height="16" rx="4" fill="var(--art-lift)"/><rect x="-7" y="13" width="14" height="6" rx="2" fill="var(--art-sun)"/></g>
-      <g transform="translate(118 50)" fill="var(--art-giraffe)">
-        <rect x="0" y="0" width="11" height="60" rx="5" transform="rotate(-12 5 60)"/>
-        <ellipse cx="-8" cy="3" rx="12" ry="7.5"/>
-        <ellipse cx="-14" cy="70" rx="28" ry="14"/>
-        <rect x="-36" y="78" width="6" height="30" rx="3"/><rect x="-24" y="80" width="6" height="28" rx="3"/>
-        <rect x="-2" y="78" width="6" height="30" rx="3"/><rect x="8" y="76" width="6" height="32" rx="3"/>
+    return `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMax slice" role="img" aria-label="단풍 든 언덕, 기린, 리프트">
+      <rect width="320" height="120" fill="${sky}"/>
+      <circle cx="252" cy="36" r="20" fill="var(--art-sun)"/>
+      <path d="M0 80 Q80 52 160 74 T320 64 V120 H0z" fill="var(--art-hill1)"/>
+      <path d="M0 98 Q100 78 200 98 T320 92 V120 H0z" fill="var(--art-hill2)"/>
+      <g fill="var(--art-leaf1)"><circle cx="34" cy="80" r="12"/><circle cx="50" cy="85" r="9"/></g><rect x="40" y="85" width="3" height="16" fill="var(--art-trunk)"/>
+      <g fill="var(--art-leaf2)"><circle cx="292" cy="80" r="11"/><circle cx="278" cy="86" r="8"/></g><rect x="289" y="86" width="3" height="14" fill="var(--art-trunk)"/>
+      <path d="M110 8 L320 56" stroke="var(--art-trunk)" stroke-width="1.4"/>
+      <g transform="translate(200 31) rotate(13)"><rect x="-1" y="0" width="2" height="7" fill="var(--art-trunk)"/><rect x="-9" y="7" width="18" height="13" rx="3" fill="var(--art-lift)"/><rect x="-6" y="10" width="12" height="5" rx="2" fill="var(--art-sun)"/></g>
+      <g transform="translate(112 30)" fill="var(--art-giraffe)">
+        <rect x="0" y="0" width="8" height="44" rx="4" transform="rotate(-12 4 44)"/>
+        <ellipse cx="-6" cy="2" rx="9" ry="5.5"/>
+        <ellipse cx="-10" cy="52" rx="21" ry="10.5"/>
+        <rect x="-27" y="58" width="4.5" height="22" rx="2"/><rect x="-18" y="60" width="4.5" height="20" rx="2"/>
+        <rect x="-2" y="58" width="4.5" height="22" rx="2"/><rect x="5" y="57" width="4.5" height="23" rx="2"/>
       </g>
-      <g fill="var(--art-spot)"><circle cx="100" cy="118" r="4"/><circle cx="114" cy="126" r="3.5"/><circle cx="90" cy="128" r="3"/><circle cx="118" cy="90" r="2.6"/><circle cx="114" cy="72" r="2.4"/></g>
+      <g fill="var(--art-spot)"><circle cx="98" cy="80" r="3"/><circle cx="108" cy="86" r="2.6"/><circle cx="91" cy="88" r="2.2"/><circle cx="112" cy="56" r="1.9"/></g>
     </svg>`;
   }
   if (theme === 'sea') {
-    return `<svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMax slice" role="img" aria-label="바다와 언덕">
-      <rect width="400" height="180" fill="${sky}"/><circle cx="320" cy="56" r="22" fill="var(--art-sun)"/>
-      <path d="M0 110 Q90 70 200 105 T400 95 V180 H0z" fill="var(--art-sea1)"/>
-      <path d="M0 135 Q100 115 200 135 T400 130 V180 H0z" fill="var(--art-sea2)"/>
-      <path d="M0 155 Q100 140 200 155 T400 152 V180 H0z" fill="var(--art-sea3)"/>
+    return `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMax slice" role="img" aria-label="바다와 언덕">
+      <rect width="320" height="120" fill="${sky}"/><circle cx="256" cy="38" r="18" fill="var(--art-sun)"/>
+      <path d="M0 74 Q72 46 160 70 T320 63 V120 H0z" fill="var(--art-sea1)"/>
+      <path d="M0 90 Q80 77 160 90 T320 87 V120 H0z" fill="var(--art-sea2)"/>
+      <path d="M0 104 Q80 94 160 104 T320 102 V120 H0z" fill="var(--art-sea3)"/>
     </svg>`;
   }
-  return `<svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <rect width="400" height="180" fill="${sky}"/><circle cx="320" cy="56" r="22" fill="var(--art-sun)"/>
-    <path d="M0 125 Q100 90 200 120 T400 110 V180 H0z" fill="var(--art-hill1)"/></svg>`;
+  return `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <rect width="320" height="120" fill="${sky}"/><circle cx="256" cy="38" r="18" fill="var(--art-sun)"/>
+    <path d="M0 84 Q80 60 160 80 T320 74 V120 H0z" fill="var(--art-hill1)"/></svg>`;
 }

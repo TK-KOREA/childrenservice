@@ -31,6 +31,7 @@ const PATHS = {
   share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',
   back: '<path d="M15 5l-7 7 7 7"/>',
   chevron: '<path d="M9 5l7 7-7 7"/>',
+  close: '<path d="M6 6l12 12M18 6L6 18"/>',
   check: '<path d="M5 12.5l4.5 4.5L19 7"/>',
   map: '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
   phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
@@ -63,9 +64,9 @@ const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 export const toDate = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
 export const md = (s) => { const d = toDate(s); return `${d.getMonth() + 1}월 ${d.getDate()}일(${WEEK[d.getDay()]})`; };
 
-/** 오늘 기준 D-day. 0이면 오늘 */
-export function dday(s) {
-  const t = new Date(); t.setHours(0, 0, 0, 0);
+/** 오늘(또는 now) 기준 D-day. 0이면 오늘 */
+export function dday(s, now = new Date()) {
+  const t = new Date(now); t.setHours(0, 0, 0, 0);
   return Math.round((toDate(s) - t) / 86400000);
 }
 
