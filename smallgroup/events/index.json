@@ -1,5 +1,5 @@
 {
-  "_help": "행사를 추가할 때: events/<id>.json 을 만들고 아래 목록에 한 줄 넣으세요. id는 날짜_영문이름 (예: 20261017_seoulgrandpark). 날짜가 지나면 자동으로 '지난 행사'로 내려가요.",
+  "_help": "행사를 추가할 때: events/<id>.json 을 만들고 아래 목록에 한 줄 넣으세요. id는 날짜_영문이름 (예: 20261017_seoulgrandpark). 그다음 node tools/share-pages.mjs 를 돌려 카톡 미리보기용 e/<id>.html 을 만드세요. 날짜가 지나면 자동으로 '지난 행사'로 내려가요.",
   "events": [
     {
       "id": "20261024_gimpomoonboat",

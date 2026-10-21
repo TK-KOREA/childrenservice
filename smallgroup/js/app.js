@@ -498,7 +498,8 @@ function parkingView(p) {
 }
 
 async function share(e) {
-  const url = `${location.origin}${location.pathname}#/e/${e.id}`;
+  // # 뒤는 미리보기 봇이 못 보므로, 행사별 og 태그를 가진 공유 페이지(tools/share-pages.mjs)를 건넨다.
+  const url = new URL(`e/${e.id}.html`, location.href).href;
   const text = `${e.title} · ${md(e.date)} ${e.time}${last.yes ? `\n${last.yes}가정이 함께 가요. 회신해 주세요!` : ''}`;
   try {
     if (navigator.share) await navigator.share({ title: e.title, text, url });

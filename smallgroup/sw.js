@@ -7,7 +7,7 @@
    - Apps Script(참석 현황) 요청은 다른 출처라 건드리지 않는다.
 
    앱 뼈대(js/css)를 바꿔 배포할 때는 CACHE 이름을 올릴 것. */
-var CACHE = 'sg-v3';
+var CACHE = 'sg-v4';
 var SHELL = [
   './',
   'index.html',
