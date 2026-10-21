@@ -20,18 +20,19 @@ mkdirSync(join(ROOT, 'e'), { recursive: true });
 for (const e of events) {
   if (e.link) continue; // 앱 밖의 따로 만든 행사 페이지는 그 페이지가 미리보기를 가진다.
   const app = `../#/e/${e.id}`;
-  const desc = `${md(e.date)} ${e.time} · ${e.place}. 일정을 보고 참석 여부를 알려 주세요.`;
+  const title = `${e.title} · ${md(e.date)}`;
+  const desc = `${e.time} · ${e.place}. 일정을 보고 참석 여부를 알려 주세요.`;
   const html = `<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>${esc(e.title)} | 어린이소그룹</title>
+<title>${esc(title)} | 어린이소그룹</title>
 <!-- 카톡 링크 미리보기 (tools/share-pages.mjs가 만든 파일, 직접 고치지 말 것) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="어린이소그룹">
-<meta property="og:title" content="${esc(e.title)}">
+<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${BASE}e/${e.id}.html">
 <meta property="og:image" content="${BASE}icons/icon-512.png">
