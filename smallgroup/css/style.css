@@ -30,6 +30,13 @@
   --art-sea1: #9CCFCB;
   --art-sea2: #5EA9A8;
   --art-sea3: #2A7C85;
+  --moon-sky: #22305A;
+  --moon-star: #F4EBC8;
+  --moon-moon: #F6E3A1;
+  --moon-town: #151D38;
+  --moon-lamp: #FFC85C;
+  --moon-water: #2C3D6E;
+  --moon-boat: #E8EEF8;
 
   --t1: #B9572A; --t2: #2F6E4E; --t3: #7E5226; --t4: #41608A;  /* 얼굴 동그라미 */
 
@@ -68,6 +75,10 @@
     --art-sea1: #2B5452;
     --art-sea2: #2E6A69;
     --art-sea3: #3A8A8F;
+    --moon-sky: #182241;
+    --moon-town: #0D1328;
+    --moon-water: #1F2D55;
+    --moon-boat: #C9D3E6;
     color-scheme: dark;
   }
 }
@@ -239,6 +250,12 @@ a.fact, button.fact { cursor: pointer; }
 .callout .ic { margin-top: 2px; }
 .callout strong { display: block; font-size: 16px; }
 .callout p { margin: 4px 0 0; font-size: 14px; color: var(--ink); }
+.boats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.boats li { display: flex; gap: 12px; align-items: center; background: var(--surface); border-radius: 16px; padding: 12px 14px; min-width: 0; }
+.boats li > b { font-size: 17px; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+.boats li div { display: grid; min-width: 0; }
+.boats strong { font-size: 15px; }
+.boats small { color: var(--muted); font-size: 13px; }
 .save { margin: 8px 0 0; padding: 12px 16px; border-radius: 16px; background: var(--ok-soft); color: var(--ok); font-size: 14px; }
 .fine-list { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; display: grid; gap: 4px; }
 

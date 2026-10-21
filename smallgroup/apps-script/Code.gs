@@ -18,6 +18,7 @@
 const SHEET_ID = '1IyfNYLzPEcQbw7bwc1Yt13Ep7uWJLZlGh0UQaYg4rmY';
 
 const EVENTS = [
+  '20261024_gimpomoonboat',
   '20261017_seoulgrandpark',
   '20261004_daebudo',
 ];

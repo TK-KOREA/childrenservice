@@ -143,6 +143,7 @@ async function renderEvent(id) {
             s.desc && h('p', null, s.desc))))),
         ev.scheduleNote && h('p', { class: 'fine' }, ev.scheduleNote)),
 
+      ev.boats && sec('boats', '보트', ev.boats.title, boatsView(ev.boats)),
       ev.fees && sec('fees', '비용', ev.fees.title, feesView(ev.fees)),
       ev.parking && sec('parking', '주차', ev.parking.title, parkingView(ev.parking)),
       ev.bring && sec('bring', '챙길 것', null, bringView(ev)),
@@ -195,7 +196,7 @@ function factsView(ev) {
   if (ev.dinner) {
     const at = rows.findIndex((r) => r.to === 'bring');
     const d = ev.dinner;
-    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(d.time.split(/\s*~/)[0])} · ${d.name || '식당 정하는 중'}`, sub: d.address, sub2: d.parking, map: d.name && (d.map || d.address || d.name) });
+    rows.splice(at < 0 ? rows.length : at, 0, { k: '저녁', v: `${ampm(d.time.split(/\s*~/)[0])} · ${d.name || '식당 정하는 중'}`, sub: d.address || d.sub, sub2: d.parking, map: d.map || d.address });
   }
   if (rows.length === 0) return null;
   return h('div', { class: 'facts' }, rows.map((r) => {
@@ -311,7 +312,7 @@ function rsvpSheet(ev, closed) {
       counter('adults', '어른', '만 19세 이상'),
       counter('kids', '아이', '만 6세 ~ 고등학생'),
       counter('toddlers', '유아', '만 5세 이하')),
-    ev.dinner && h('div', null,
+    ev.dinner && ev.dinner.ask !== false && h('div', null,
       h('p', { class: 'label' }, '저녁도 함께 먹나요?'),
       seg('dinner', '저녁 식사', [['Y', '함께 먹어요'], ['N', '나들이만']])));
   const syncAttend = () => { detail.hidden = st.attend !== 'Y'; };
@@ -338,7 +339,7 @@ function rsvpSheet(ev, closed) {
       adults: yes ? counters.adults.value : 0,
       kids: yes ? counters.kids.value : 0,
       toddlers: yes ? counters.toddlers.value : 0,
-      dinner: yes && ev.dinner ? st.dinner : 'N',
+      dinner: yes && ev.dinner && ev.dinner.ask !== false ? st.dinner : 'N',
       note: note.value.trim(),
     };
     if (yes && data.adults + data.kids + data.toddlers === 0) return fail('함께 가는 사람 수를 넣어 주세요.');
@@ -427,7 +428,7 @@ function statusView(ev, rows) {
       h('div', null, h('b', null, yes.length), h('small', null, '가정')),
       h('div', null, h('b', null, sum(yes, 'adults')), h('small', null, '어른')),
       h('div', null, h('b', null, sum(yes, 'kids') + sum(yes, 'toddlers')), h('small', null, '아이')),
-      ev.dinner && h('div', null, h('b', null, dinerCount), h('small', null, '저녁'))),
+      ev.dinner && ev.dinner.ask !== false && h('div', null, h('b', null, dinerCount), h('small', null, '저녁'))),
     yes.length === 0
       ? h('p', { class: 'muted' }, '아직 회신한 가정이 없어요.')
       : h('ul', { class: 'people' }, yes.map((r, i) => h('li', null,
@@ -472,6 +473,21 @@ function bringView(ev) {
 const mapLink = (q) => h('a', { class: 'map-link', href: `https://map.naver.com/p/search/${encodeURIComponent(q)}`, target: '_blank', rel: 'noopener' },
   icon('map', 16), '지도에서 보기');
 
+// 보트: 종류별 척수와 자리, 배정이 올라오면 보트마다 가정 이름.
+function boatsView(b) {
+  let no = 0;
+  const boats = b.list.flatMap((t) => Array.from({ length: t.count }, () => ({ no: ++no, name: t.name, seats: t.seats })));
+  return h('div', null,
+    b.who && h('div', { class: 'callout pay' }, icon('check', 20), h('div', null, h('strong', null, b.who.title), h('p', null, b.who.body))),
+    h('ul', { class: 'boats' }, boats.map((x) => {
+      const who = b.assign?.find((a) => a.boat === x.no)?.families;
+      return h('li', null,
+        h('b', null, `${x.no}번`),
+        h('div', null, h('strong', null, x.name), h('small', null, who?.length ? who.join(', ') : `${x.seats}자리`)));
+    })),
+    b.notes?.length > 0 && h('ul', { class: 'fine-list' }, b.notes.map((n) => h('li', null, n))));
+}
+
 function parkingView(p) {
   return h('div', null,
     h('ul', { class: 'prices' }, p.rows.map(([k, v]) => h('li', null,
@@ -511,6 +527,19 @@ function art(theme) {
         <rect x="-2" y="58" width="4.5" height="22" rx="2"/><rect x="5" y="57" width="4.5" height="23" rx="2"/>
       </g>
       <g fill="var(--art-spot)"><circle cx="98" cy="80" r="3"/><circle cx="108" cy="86" r="2.6"/><circle cx="91" cy="88" r="2.2"/><circle cx="112" cy="56" r="1.9"/></g>
+    </svg>`;
+  }
+  if (theme === 'moon') {
+    return `<svg viewBox="0 0 320 120" preserveAspectRatio="xMidYMax slice" role="img" aria-label="달 뜬 밤 수로와 불 켜진 보트">
+      <rect width="320" height="120" fill="var(--moon-sky)"/>
+      <g fill="var(--moon-star)"><circle cx="40" cy="18" r="1.2"/><circle cx="92" cy="30" r="1"/><circle cx="150" cy="14" r="1.3"/><circle cx="208" cy="26" r="1"/><circle cx="292" cy="16" r="1.1"/></g>
+      <circle cx="252" cy="34" r="16" fill="var(--moon-moon)"/>
+      <path d="M0 64 H40 V44 H70 V58 H96 V38 H128 V64 H170 V50 H206 V64 H320 V78 H0z" fill="var(--moon-town)"/>
+      <g fill="var(--moon-lamp)"><rect x="48" y="50" width="4" height="4"/><rect x="58" y="50" width="4" height="4"/><rect x="104" y="44" width="4" height="4"/><rect x="114" y="52" width="4" height="4"/><rect x="180" y="56" width="4" height="4"/><rect x="192" y="56" width="4" height="4"/></g>
+      <rect y="78" width="320" height="42" fill="var(--moon-water)"/>
+      <g stroke="var(--moon-lamp)" stroke-width="1.4" opacity=".55"><path d="M50 86h8M106 92h10M184 88h8M248 96h14"/></g>
+      <g transform="translate(120 96)"><path d="M-22 0 H22 L16 8 H-16z" fill="var(--moon-boat)"/><circle cx="0" cy="-4" r="4" fill="var(--moon-moon)"/></g>
+      <g transform="translate(214 104)"><path d="M-14 0 H14 L10 6 H-10z" fill="var(--moon-boat)"/><circle cx="0" cy="-3" r="3" fill="var(--moon-lamp)"/></g>
     </svg>`;
   }
   if (theme === 'sea') {
