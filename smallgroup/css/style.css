@@ -250,12 +250,15 @@ a.fact, button.fact { cursor: pointer; }
 .callout .ic { margin-top: 2px; }
 .callout strong { display: block; font-size: 16px; }
 .callout p { margin: 4px 0 0; font-size: 14px; color: var(--ink); }
-.boats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.boats li { display: flex; gap: 12px; align-items: center; background: var(--surface); border-radius: 16px; padding: 12px 14px; min-width: 0; }
-.boats li > b { font-size: 17px; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
-.boats li div { display: grid; min-width: 0; }
-.boats strong { font-size: 15px; }
-.boats small { color: var(--muted); font-size: 13px; }
+.boat-type + .boat-type { margin-top: 16px; }
+.boat-type h3 { display: flex; align-items: baseline; gap: 6px; margin: 0 0 8px; font-size: 16px; }
+.boat-type h3 small { color: var(--muted); font-size: 13px; font-weight: 500; }
+.boats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.boats li { background: var(--surface); border-radius: 16px; padding: 12px 14px; min-width: 0; }
+.boat-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.boat-head b { font-size: 17px; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+.boat-head small { color: var(--muted); font-size: 13px; }
+.boats li p { margin: 4px 0 0; font-size: 15px; line-height: 1.5; }
 .save { margin: 8px 0 0; padding: 12px 16px; border-radius: 16px; background: var(--ok-soft); color: var(--ok); font-size: 14px; }
 .fine-list { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; display: grid; gap: 4px; }
 

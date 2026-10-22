@@ -473,18 +473,18 @@ function bringView(ev) {
 const mapLink = (q) => h('a', { class: 'map-link', href: `https://map.naver.com/p/search/${encodeURIComponent(q)}`, target: '_blank', rel: 'noopener' },
   icon('map', 16), '지도에서 보기');
 
-// 보트: 종류별 척수와 자리, 배정이 올라오면 보트마다 가정 이름.
+// 보트: 종류마다 1번부터 번호를 매기고, 안배표(boats)가 있으면 보트마다 탈 사람 이름을 보여 준다.
 function boatsView(b) {
-  let no = 0;
-  const boats = b.list.flatMap((t) => Array.from({ length: t.count }, () => ({ no: ++no, name: t.name, seats: t.seats })));
   return h('div', null,
     b.who && h('div', { class: 'callout pay' }, icon('check', 20), h('div', null, h('strong', null, b.who.title), h('p', null, b.who.body))),
-    h('ul', { class: 'boats' }, boats.map((x) => {
-      const who = b.assign?.find((a) => a.boat === x.no)?.families;
-      return h('li', null,
-        h('b', null, `${x.no}번`),
-        h('div', null, h('strong', null, x.name), h('small', null, who?.length ? who.join(', ') : `${x.seats}자리`)));
-    })),
+    b.list.map((t) => {
+      const boats = t.boats || Array.from({ length: t.count }, () => []);
+      return h('div', { class: 'boat-type' },
+        h('h3', null, t.name, h('small', null, `${boats.length}척`)),
+        h('ul', { class: 'boats' }, boats.map((people, i) => h('li', null,
+          h('div', { class: 'boat-head' }, h('b', null, `${i + 1}번`), h('small', null, people.length ? `${people.length}명` : `${t.seats}자리`)),
+          people.length > 0 && h('p', null, people.join(' · '))))));
+    }),
     b.notes?.length > 0 && h('ul', { class: 'fine-list' }, b.notes.map((n) => h('li', null, n))));
 }
 
