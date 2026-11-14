@@ -127,6 +127,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
     <li><b>운전전류는 상별로 비교해야 합니다.</b> 명판 최대값을 단순히 더하면 여름 131A → 74A로 크게 주는 것처럼 보이지만, 차단기가 보는 한 상 기준으로는 여름 최대 <b>61A → 67A</b>로 비슷합니다. 정격 운전 기준으로는 54A → 49A로 조금 줄어듭니다.</li>
     <li><b>배선 변경안(3층 배전반에서 옥상·다락방으로 각각 직결)은 적합합니다.</b> 옥상 분전반은 기존 <b>50A를 유지</b>하고(여름 최대 49A), 다락방 분전반은 <b>그대로 쓰고 전원점만 3층 배전반으로 바꿉니다</b>(MAIN 2P 50A 유지, 겨울 정격 41A·최대 45A).</li>
     <li><b>최종 관문은 3층 배전반 메인 100A입니다.</b> 여름에 이 계통만으로 한 상에 최대 67A가 걸립니다. 그래서 그 상의 강당 조명·콘센트 등 기존 부하는 <b>13A(80% 권장선) ~ 33A(100A) 이내</b>여야 합니다. 공사 전 실측이 필요하며, 다락방은 3층 부하가 가장 적은 상에 연결합니다.</li>
+    <li><b>간선 두 곳은 굵기를 키워야 합니다.</b> 3층 → 옥상 <b>6SQ는 10SQ로</b> 교체합니다(6SQ 허용 약 44~48A로 옥상 50A 차단기보다 작음). 또 3층 배전반 입구가 <b>10SQ</b>라서 100A 차단기와 맞지 않으므로, 지하 1층 → 3층 간선을 <b>35SQ(최소 25SQ)</b>로 교체하는 것을 검토해야 합니다. 그 전까지 3층의 실제 한계는 상당 약 66A입니다.</li>
     <li><b>겨울철 신형 냉난방기의 난방 운전은 하지 않는 것이 맞습니다.</b> 다락방 보일러와 같이 켜면 3층 메인 한 상에 <b>93A</b>가 걸리고, 강당 조명까지 더하면 100A를 넘습니다.</li>
   </ol>
 </div>
@@ -149,7 +150,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <rect x="100" y="36" width="180" height="44" rx="9" class="bx"/>
   <text x="190" y="63" text-anchor="middle" class="t">지하 1층 수전반</text>
   <line x1="190" y1="80" x2="190" y2="110" class="ln" marker-end="url(#ar0)"/>
-  <text x="198" y="100" class="ts">간선 100A</text>
+  <text x="198" y="100" class="ts">간선 10SQ · 100A</text>
   <rect x="90" y="112" width="200" height="50" rx="9" class="bx-amber"/>
   <text x="190" y="133" text-anchor="middle" class="tb">3층 배전반</text>
   <text x="190" y="152" text-anchor="middle" class="ts">MAIN 100A</text>
@@ -179,7 +180,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <rect x="485" y="36" width="180" height="44" rx="9" class="bx"/>
   <text x="575" y="63" text-anchor="middle" class="t">지하 1층 수전반</text>
   <line x1="575" y1="80" x2="575" y2="110" class="ln" marker-end="url(#ar0)"/>
-  <text x="583" y="100" class="ts">간선 100A</text>
+  <text x="583" y="100" class="tred">간선 10SQ → 35SQ 검토</text>
   <rect x="475" y="112" width="200" height="50" rx="9" class="bx-amber"/>
   <text x="575" y="133" text-anchor="middle" class="tb">3층 배전반</text>
   <text x="575" y="152" text-anchor="middle" class="ts">MAIN 100A · 상별 실측</text>
@@ -222,7 +223,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <text x="380" y="37" text-anchor="middle" class="tb">지하 1층 수전반</text>
   <text x="380" y="55" text-anchor="middle" class="ts">한전 인입</text>
   <line x1="380" y1="66" x2="380" y2="106" class="ln" marker-end="url(#ar)"/>
-  <text x="390" y="90" class="tblue">간선 100A</text>
+  <text x="390" y="90" class="tblue">간선 각상 10SQ · 차단기 100A</text>
   <rect x="240" y="110" width="280" height="56" rx="10" class="bx"/>
   <text x="380" y="134" text-anchor="middle" class="tb">3층 배전반 · MAIN 4P 100A</text>
   <text x="380" y="154" text-anchor="middle" class="ts">강당 전체의 관문</text>
@@ -422,7 +423,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <text x="380" y="37" text-anchor="middle" class="tb">지하 1층 수전반</text>
   <text x="380" y="55" text-anchor="middle" class="ts">한전 인입</text>
   <line x1="380" y1="66" x2="380" y2="106" class="ln" marker-end="url(#ar2)"/>
-  <text x="390" y="90" class="tblue">간선 100A (기존)</text>
+  <text x="390" y="90" class="tred">간선 10SQ → 35SQ 교체 검토 (최소 25SQ)</text>
   <rect x="240" y="110" width="280" height="56" rx="10" class="bx-amber"/>
   <text x="380" y="134" text-anchor="middle" class="tb">3층 배전반 · MAIN 4P 100A</text>
   <text x="380" y="154" text-anchor="middle" class="ts">최종 관문 · 상별 실측 필요</text>
@@ -433,7 +434,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <path d="M320 166 V196 H200 V236" class="ln" marker-end="url(#ar2)"/>
   <path d="M440 166 V196 H580 V236" class="ln" marker-end="url(#ar2)"/>
   <text x="192" y="214" text-anchor="end" class="tblue">"A/C" 4P 50A 이상 (기존)</text>
-  <text x="192" y="230" text-anchor="end" class="ts">간선 10㎟ 이상 확인</text>
+  <text x="192" y="230" text-anchor="end" class="tred">간선 6SQ → 10SQ 교체</text>
   <text x="590" y="214" class="tblue">2P 50A 신설 · F-CV 16㎟</text>
   <text x="590" y="230" class="ts">3층 부하가 가장 적은 상</text>
   <rect x="45" y="240" width="310" height="58" rx="10" class="bx-blue"/>
@@ -483,11 +484,11 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <table class="answer">
 <thead><tr><th>구분</th><th>차단기</th><th>전선</th><th>판단 근거</th></tr></thead>
 <tbody>
-<tr><td>⓪ 3층 MAIN</td><td>4P 100A 유지 <span class="tag amber">실측 조건</span></td><td>지하 1층 → 3층 간선 (기존)</td><td>여름 옥상·다락방 몫이 한 상 최대 67A. 그 상의 강당 기존 부하가 13A(80% 기준)~33A 이내여야 함. 넘으면 다락방을 다른 상으로 옮기거나 간선·메인 증설 검토</td></tr>
-<tr><td>① 옥상 MAIN</td><td>4P 50A 유지<br><span class="small">3층 측 "A/C" 4P는 50A 이상</span></td><td>간선 10㎟ 이상 확인</td><td>여름 최대 49A, 정격 38A(77%). 겨울은 신형 난방을 하지 않아 0A</td></tr>
+<tr><td>⓪ 3층 MAIN</td><td>4P 100A 유지 <span class="tag amber">실측 조건</span></td><td>지하 1층 → 3층 간선<br><b>현재 각상 10SQ → 35SQ 교체 검토</b><br><span class="small">(최소 25SQ)</span></td><td>10SQ는 약 66A까지만 안전해 100A 차단기가 전선을 보호하지 못함. 여름 옥상·다락방 몫만 한 상 최대 67A. 교체 전까지 3층 실제 한계는 상당 약 66A로 봐야 함</td></tr>
+<tr><td>① 옥상 MAIN</td><td>4P 50A 유지<br><span class="small">3층 측 "A/C" 4P는 50A 이상</span></td><td>3층 → 옥상 간선<br><b>현재 각상 6SQ → 10SQ 교체</b><br><span class="small">(거리 길면 16SQ)</span></td><td>6SQ는 약 48A, 여름 옥상 고온 보정 시 약 44A로 50A 차단기·최대 부하 49A보다 작음. 10SQ면 약 60A(고온 보정)로 충족</td></tr>
 <tr><td>② 신형 냉난방기 4대</td><td>4P 누전차단기 20A (30mA) × 4</td><td>4㎟ 4C + 접지 4㎟<br><span class="small">(제조사 최소 2.5㎟)</span></td><td>최대 12A × 1.25 = 15A → 20A. 거리·전압강하 여유로 4㎟</td></tr>
 <tr><td>③ 로비 냉방기</td><td>4P 누전차단기 20A</td><td>4㎟ 4C + 접지<br><span class="small">(기존 2.5㎟↑면 유지)</span></td><td>최대 8A, 정속형 기동전류 여유</td></tr>
-<tr><td>④ 다락방 MAIN</td><td>2P 50A 그대로 사용 <span class="tag green">유지</span><br><span class="small">3층 배전반에 공급용 2P 50A 신설</span></td><td>3층 → 다락방 새 간선<br>F-CV 16㎟ 2C + 접지<br><span class="small">(최소 10㎟)</span></td><td>분전반은 손대지 않고 전원점만 옥상 7번 → 3층으로 바꿈. 겨울 보일러 정격 41A(82%), 최대 45A(90%). 보일러는 온도조절로 켜졌다 꺼졌다 해 차단기가 떨어질 수준은 아님. 여유를 더 원하면 메인 차단기만 60A로 교체 가능(같은 자리에 맞는지 확인)</td></tr>
+<tr><td>④ 다락방 MAIN</td><td>2P 50A 그대로 사용 <span class="tag green">유지</span><br><span class="small">3층 배전반에 공급용 2P 50A 신설</span></td><td>3층 → 다락방 새 간선<br>10SQ 이상, <b>16SQ 권장</b> + 접지<br><span class="small">(현재 옥상 경유 5SQ는 철거)</span></td><td>분전반은 손대지 않고 전원점만 옥상 7번 → 3층으로 바꿈. 겨울 보일러 정격 41A(82%), 최대 45A(90%). 보일러는 온도조절로 켜졌다 꺼졌다 해 차단기가 떨어질 수준은 아님. 여유를 더 원하면 메인 차단기만 60A로 교체 가능(같은 자리에 맞는지 확인)</td></tr>
 <tr><td>⑤ 이지보일러 3대</td><td>2P 누전차단기 20A × 3 <span class="tag green">현행 적합</span></td><td>4㎟ 권장</td><td>최대 15A × 1.25 = 18.75A → 20A. 장시간 전열 부하이고 여러 회로가 함께 묶여 감소계수 적용</td></tr>
 <tr><td>⑥ 다락방 벽걸이 2대</td><td>2P 누전차단기 20A × 2 <span class="tag green">현행 적합</span></td><td>2.5㎟</td><td>최대 운전전류 8A·10A (명판)</td></tr>
 </tbody>
@@ -495,21 +496,43 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 </div>
 <p class="small">공사 메모: 구형 6대를 철거하면 옥상의 2P 차단기 6개 자리가 비므로, 그 자리에 신형용 4P 차단기 4개를 넣습니다. 옥상의 다락방 분기(7번)는 직결 후 철거합니다. 다락방 분전반은 그대로 두고, 3층 배전반에 다락방 공급용 2P 50A를 달 자리만 있으면 됩니다.</p>
 
-<h2><span class="no">10</span>공사 전 확인할 것</h2>
+<h2><span class="no">10</span>전선 굵기 점검 (현장 확인값)</h2>
+<p>차단기는 <b>전선이 견딜 수 있는 전류(허용전류)보다 작아야</b> 전선을 지켜 줍니다. 현장 사진에 적힌 굵기로 구간마다 확인했습니다. 막대가 차단기 선(빨강)에 못 미치면 전선이 차단기보다 약한 것입니다.</p>
+<figure>
+  <div class="chartbox"><canvas id="wire"></canvas></div>
+  <figcaption>허용전류는 90℃ 전선(HFIX·F-CV)을 전선관에 넣은 경우(동선, 3상)이며, 옥상 구간은 여름 고온(40℃) 보정을 적용했습니다. 빨간 가로선은 각 구간의 차단기, 검은 점은 예상 최대 부하입니다.</figcaption>
+</figure>
+<div class="tablewrap">
+<table>
+<thead><tr><th>구간</th><th>현재 굵기</th><th>보호 차단기</th><th>현재 허용전류</th><th>예상 최대 부하</th><th>판정</th><th>권장</th></tr></thead>
+<tbody>
+<tr><td>지하 1층 → 3층 간선</td><td>각상 10SQ</td><td>100A</td><td>약 66A</td><td>67A + 강당 부하 (한 상)</td><td><span class="tag red">부족</span></td><td><b>35SQ</b> (최소 25SQ, 약 117A)</td></tr>
+<tr><td>3층 → 옥상 간선</td><td>각상 6SQ</td><td>50A</td><td>약 44~48A</td><td>49A</td><td><span class="tag red">부족</span></td><td><b>10SQ</b> (약 60~66A), 거리 길면 16SQ</td></tr>
+<tr><td>3층 → 다락방 간선 (신설)</td><td>현재 옥상 경유 5SQ</td><td>50A</td><td>약 40A</td><td>45A</td><td><span class="tag red">현행 부족</span></td><td><b>16SQ</b> 신설 (최소 10SQ)</td></tr>
+<tr><td>3층 분기 회로 (조명·콘센트)</td><td>4SQ</td><td>20A</td><td>약 37A</td><td>20A 이하</td><td><span class="tag green">적합</span></td><td>그대로</td></tr>
+<tr><td>다락방 분기 (보일러·벽걸이)</td><td>4SQ</td><td>20A</td><td>약 37A</td><td>15A</td><td><span class="tag green">적합</span></td><td>그대로</td></tr>
+<tr><td>옥상 분기 (구형 냉방기용)</td><td>5SQ</td><td>2P</td><td>—</td><td>—</td><td><span class="tag amber">철거</span></td><td>신형용은 4SQ 4C+접지로 새로 포설</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small">5SQ는 예전 규격 5.5㎟로 보고 계산했습니다. 기존 전선이 70℃급(구형 IV 등)이면 허용전류가 위 값보다 20~25% 더 낮아, 교체 필요성이 더 커집니다. 지금까지 문제가 없었던 것은 모든 기기가 최대치로 동시에 돈 시간이 짧았기 때문으로 보이며, 전선 피복은 과열이 쌓이면 서서히 상합니다.</p>
+<div class="example"><b>예를 들어</b>, 수도관에 비유하면 차단기는 "이 이상은 막는다"는 밸브이고 전선은 관입니다. 밸브는 100까지 열리는데 관이 66까지만 견디면, 밸브가 잠기기 전에 관이 먼저 터집니다. 그래서 관(전선)은 밸브(차단기)보다 굵어야 합니다.</div>
+
+<h2><span class="no">11</span>공사 전 확인할 것</h2>
 <div class="card">
 <ul class="check">
   <li><b>3층 배전반 상별 전류 실측</b> — 여름 피크 시간에 클램프미터로 R·S·T를 재서, 강당 조명·콘센트 등 기존 부하가 가장 적은 상을 찾음 (다락방을 그 상에 연결)</li>
   <li>3층 배전반 <b>"A/C" 4P 차단기 용량</b> — 옥상 50A보다 크거나 같은지</li>
-  <li>3층 → 옥상 <b>간선 굵기</b>(10㎟ 이상), 3층 → 다락방 <b>새 간선 경로와 길이</b></li>
+  <li>3층 → 옥상 간선 <b>6SQ → 10SQ 교체</b>, 3층 → 다락방 <b>새 간선 경로와 길이</b></li>
   <li>3층 배전반에 다락방 공급용 <b>2P 50A 차단기를 달 빈자리</b>가 있는지</li>
-  <li>지하 1층 → 3층 <b>간선 굵기와 한전 계약전력</b></li>
+  <li><b>지하 1층 → 3층 간선이 정말 10SQ인지</b> 지하 1층 쪽에서도 확인하고, 그쪽 차단기 용량과 한전 계약전력 확인 — 10SQ가 맞으면 25~35SQ 교체를 공사 범위에 포함</li>
   <li>가스 온풍기 2대의 <b>철거 여부</b> — 계속 쓰면 3층 부하에 최대 6A 추가</li>
   <li>신형 냉난방기 <b>난방 운전 금지 방법</b> — 리모컨·중앙 제어에서 냉방 전용으로 설정하거나 안내문 부착</li>
   <li>신형 실외기 <b>설치 매뉴얼</b>의 차단기·전선 규격 — 최종 기준으로 우선 적용</li>
 </ul>
 </div>
 
-<h2><span class="no">11</span>계산 가정과 출처</h2>
+<h2><span class="no">12</span>계산 가정과 출처</h2>
 <div class="card small">
 <p><b>가정</b></p>
 <ul>
@@ -518,6 +541,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <li>정격 계산의 3상 전류 = 전력 ÷ (√3 × 380V × 역률 0.99), 단상 전류 = 전력 ÷ (220V × 0.98).</li>
 <li>하루 시뮬레이션: 운영 09~22시, 첫 1시간은 최대 출력, 이후 출력은 외기온에 비례. 보일러는 실온 유지 단계에서 60~100%로 켜졌다 꺼졌다 하는 것으로 봤습니다.</li>
 <li>강당 조명·콘센트 등 3층 배전반의 기존 부하는 자료가 없어 계산에서 뺐습니다. 실측이 필요합니다.</li>
+<li>전선 허용전류는 IEC 60364-5-52(KEC 준용) 동선 표 기준입니다: 90℃ 전선·전선관·3상 기준 4㎟ 37A, 6㎟ 48A, 10㎟ 66A, 16㎟ 88A, 25㎟ 117A, 35㎟ 144A. 옥상 구간은 주위온도 40℃ 보정(0.91)을 적용했습니다. 전선 굵기는 현장 사진의 표기값입니다.</li>
 <li>연속 부하는 차단기 정격의 80% 이내를 권장 기준으로 삼았습니다. 전선 굵기는 일반적인 동선 허용전류 기준이며, 배선 거리·포설 방법·감소계수는 현장 확인이 필요합니다.</li>
 <li>이 보고서는 검토용 계산입니다. 최종 설계와 시공은 전기공사업체가 현장 확인 후 결정해야 합니다.</li>
 </ul>
@@ -565,6 +589,13 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
     ds('운영안 · 다락방 = 3층 메인 다락방 상',D.win_attic,GREEN),
     ds('신형 난방까지 켤 때 · 3층 메인 다락방 상 (금지)',D.win_new,RED,[5,4])]},options:lineOpts(110),
     plugins:[refs([[100,'3층 메인 100A',RED],[50,'다락방 50A',GREEN]])]});
+  new Chart(document.getElementById('wire'),{data:{labels:['지하1층→3층','3층→옥상','3층→다락방'],datasets:[
+    {type:'bar',label:'현재 전선 허용전류',data:[66,44,40],backgroundColor:SUB,borderRadius:4},
+    {type:'bar',label:'권장 전선 허용전류',data:[144,60,88],backgroundColor:GREEN,borderRadius:4},
+    {type:'scatter',label:'차단기',data:[100,50,50],backgroundColor:RED,pointStyle:'line',pointRadius:60,borderColor:RED,borderWidth:3},
+    {type:'scatter',label:'예상 최대 부하',data:[67,49,45],backgroundColor:c('--ink'),pointRadius:6}]},
+    options:{maintainAspectRatio:false,scales:{x:{type:'category'},y:{min:0,max:160,title:{display:true,text:'전류 (A)'}}},plugins:{legend:{position:'bottom'},
+      tooltip:{callbacks:{label:(t)=>t.dataset.label+' '+t.parsed.y+'A'+(t.dataIndex===0&&t.datasetIndex===3?' + 강당 부하':'')}}}}});
 })();
 </script>
 </body>
