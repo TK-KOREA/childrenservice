@@ -75,6 +75,7 @@ th{font-size:13.5px;color:var(--sub);font-weight:700;background:var(--bg);white-
 .example{background:var(--amber-soft);border-radius:14px;padding:16px 18px;margin:16px 0}
 .example b{color:var(--amber)}
 .answer td:first-child{white-space:nowrap;font-weight:700}
+.answer td:nth-child(2),.answer td:nth-child(3){min-width:160px}
 ul.check{list-style:none;padding:0;margin:0}
 ul.check li{padding:12px 0 12px 32px;position:relative;border-bottom:1px dashed var(--line)}
 ul.check li:last-child{border-bottom:0}
@@ -117,15 +118,15 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <div class="card conclusion">
   <ol>
     <li><b>여름은 지금과 비슷한 수준입니다.</b> 구형 단상 냉방기 6대(합계 105A)를 3상 인버터 4대로 바꾸면 정격 기준으로는 상당 약 5A 줄고 구형의 큰 기동전류(73A)도 사라지지만, 한여름 피크(33℃)에는 인버터가 정격보다 세게 돌아 다락방이 물린 상이 약 56A로 지금(54A)과 비슷해집니다. 지금도 이미 50A를 넘나드는 상태입니다.</li>
-    <li><b>겨울이 새 위험입니다.</b> 신형은 난방도 하므로, 겨울에 강당 난방을 켜면 없던 부하가 생깁니다. 다락방 보일러(41A)와 같은 상에 겹치면 <b>최대 89A</b>로 옥상 메인 50A를 크게 넘습니다.</li>
-    <li><b>다락방 전원을 옥상 분전반에서 분리해 별도 계통으로 끌어오는 것</b>이 해법입니다. 분리하면 옥상은 최대 49A, 다락방은 41A로 각각 기존 50A 안에 들어옵니다. 단, 3층 배전반이 아니라 그 위쪽(수전반 등)에서 따로 끌어와야 효과가 있습니다.</li>
+    <li><b>겨울이 새 위험입니다.</b> 신형은 난방도 하므로, 겨울에 강당 난방을 켜면 없던 부하가 생깁니다. 다락방 보일러(최대 45A)와 같은 상에 겹치면 <b>최대 93A</b>로 옥상 메인 50A를 크게 넘습니다.</li>
+    <li><b>다락방 전원을 옥상 분전반에서 분리해 별도 계통으로 끌어오는 것</b>이 해법입니다. 분리하면 옥상은 최대 49A로 기존 50A 안에 들어옵니다. 다락방은 보일러 최대 45A가 계속 켜져 있는 부하라 50A의 90%가 되므로, 분리 공사 때 메인을 60A로 올립니다. 단, 3층 배전반이 아니라 그 위쪽(수전반 등)에서 따로 끌어와야 효과가 있습니다.</li>
   </ol>
 </div>
 <div class="kpis">
   <div class="kpi bad"><div class="v">54A</div><div class="l">현재 여름, 다락방이 물린 상<br>(이미 50A 근접·초과)</div></div>
   <div class="kpi warn"><div class="v">49~56A</div><div class="l">교체 후 여름, 같은 상<br>(정격 ~ 한여름 피크)</div></div>
-  <div class="kpi bad"><div class="v">89A</div><div class="l">교체 후 겨울 최대<br>(분리 안 하고 난방 시)</div></div>
-  <div class="kpi ok"><div class="v">49 / 41A</div><div class="l">분리 후 최대<br>옥상 / 다락방</div></div>
+  <div class="kpi bad"><div class="v">93A</div><div class="l">교체 후 겨울 최대<br>(분리 안 하고 난방 시)</div></div>
+  <div class="kpi ok"><div class="v">49 / 45A</div><div class="l">분리 후 최대<br>옥상 50A / 다락방 60A 기준</div></div>
 </div>
 
 <h2><span class="no">02</span>현재 배선 구조</h2>
@@ -173,11 +174,11 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <rect x="500" y="416" width="130" height="66" rx="10" class="bx"/>
   <text x="565" y="440" text-anchor="middle" class="tb">벽걸이 2대</text>
   <text x="565" y="458" text-anchor="middle" class="ts">2P 20A × 2</text>
-  <text x="565" y="474" text-anchor="middle" class="ts">약 11A (추정)</text>
+  <text x="565" y="474" text-anchor="middle" class="ts">최대 8A + 10A</text>
   <rect x="638" y="416" width="118" height="66" rx="10" class="bx"/>
   <text x="697" y="440" text-anchor="middle" class="tb">이지보일러 3대</text>
   <text x="697" y="458" text-anchor="middle" class="ts">2P 20A × 3</text>
-  <text x="697" y="474" text-anchor="middle" class="ts">13.6A × 3 = 41A</text>
+  <text x="697" y="474" text-anchor="middle" class="ts">최대 15A × 3 = 45A</text>
 </svg>
 <figcaption>주황 상자는 용량이 빠듯한 분전반, 점선 상자는 철거 대상입니다. 3층 "A/C" 차단기가 옥상 분전반의 전원인지는 현장에서 확인이 필요해 점선으로 그렸습니다.</figcaption>
 </figure>
@@ -217,13 +218,13 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <tbody>
 <tr><td>3층 대강당</td><td>신형 냉난방기 × 4<br><span class="small">AP145CSPPHH7ST</span></td><td>3상 380V</td><td>냉 4.95 / 난 5.05kW</td><td>7.6 / 7.8A (최대 10.3 / 12.0A)</td><td><span class="tag blue">신규</span></td></tr>
 <tr><td>3층 로비</td><td>냉방기 × 1<br><span class="small">AP-Q402N</span></td><td>3상 380V</td><td>4.55kW</td><td>8.0A</td><td>유지 · 냉방 전용</td></tr>
-<tr><td>다락방</td><td>벽걸이 13평형<br><span class="small">AR13A9170HCN</span></td><td>단상 220V</td><td>약 1.6kW</td><td>약 7A</td><td><span class="tag amber">추정</span> 냉방 5.2kW</td></tr>
-<tr><td>다락방</td><td>벽걸이 7평형<br><span class="small">AR07A9171HBN</span></td><td>단상 220V</td><td>약 0.8kW</td><td>약 4A</td><td><span class="tag amber">추정</span> 냉방 3.0kW</td></tr>
-<tr><td>다락방</td><td>이지보일러 × 3<br><span class="small">EASY-100</span></td><td>단상 220V</td><td>3kW × 3</td><td>13.6A × 3</td><td>전열 · 겨울 전용</td></tr>
+<tr><td>다락방</td><td>벽걸이 13평형<br><span class="small">AR13A9170HCN</span></td><td>단상 220V</td><td>약 1.6kW <span class="tag amber">추정</span></td><td>약 7A / 최대 10A</td><td>냉방 5.2kW</td></tr>
+<tr><td>다락방</td><td>벽걸이 7평형<br><span class="small">AR07A9171HBN</span></td><td>단상 220V</td><td>750W</td><td>3.7A / 최대 8.0A</td><td>냉방 3.0kW · 명판</td></tr>
+<tr><td>다락방</td><td>이지보일러 × 3<br><span class="small">EASY-100</span></td><td>단상 220V</td><td>3kW × 3</td><td>13.6A / 최대 15A (× 3)</td><td>전열 · 겨울 전용</td></tr>
 </tbody>
 </table>
 </div>
-<p class="small">벽걸이 2대는 라벨에 소비전력이 표시되지 않아, 같은 냉방능력·등급의 제품으로 추정했습니다.</p>
+<p class="small">최대 전류는 명판·제품 정보 값입니다. 13평형 벽걸이의 정격 소비전력은 명판에 없어 같은 급 제품으로 추정했습니다.</p>
 
 <h2><span class="no">04</span>왜 한 상에 몰리나</h2>
 <p>3상 전기는 R·S·T 세 가닥이 나눠서 전기를 실어 나릅니다. 3상 기기(신형 에어컨, 로비 냉방기)는 세 가닥에 똑같이 나눠 싣지만, 다락방 같은 <b>단상 부하는 한 가닥에만</b> 올라탑니다. 차단기는 세 가닥 중 <b>가장 많이 실은 한 가닥</b> 때문에 떨어집니다.</p>
@@ -273,18 +274,40 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <table>
 <thead><tr><th>운전 조건</th><th>합계 전력</th><th>최대 상전류<br>정격 / 최대</th><th>나머지 상</th><th>50A 판정</th></tr></thead>
 <tbody>
-<tr><td>현재 여름<br><span class="small">구형 6대 + 로비 + 다락방 벽걸이</span></td><td>28.6kW</td><td>54A / —</td><td>43A</td><td><span class="tag amber">이미 근접·초과</span></td></tr>
-<tr><td>교체 후 여름 (분리 안 함)<br><span class="small">신형 4대 + 로비 + 다락방 벽걸이</span></td><td>26.8 ~ 33.8kW</td><td>49A / 64A</td><td>38A / 49A</td><td><span class="tag red">정격은 한계, 피크는 초과</span></td></tr>
-<tr><td>교체 후 겨울 (보일러만)</td><td>9kW</td><td>41A / —</td><td>0A</td><td><span class="tag green">가능</span></td></tr>
-<tr><td>교체 후 겨울 + 신형 난방 (분리 안 함)</td><td>29.2 ~ 39.0kW</td><td>72A / 89A</td><td>31A / 48A</td><td><span class="tag red">초과</span></td></tr>
-<tr><td>모든 기기 동시 가동 (분리 안 함)</td><td>36.1 ~ 46.8kW</td><td>91A / 112A</td><td>39A / 56A</td><td><span class="tag red">크게 초과</span></td></tr>
+<tr><td>현재 여름<br><span class="small">구형 6대 + 로비 + 다락방 벽걸이</span></td><td>28.6kW</td><td>54A / 61A</td><td>43A</td><td><span class="tag amber">이미 근접·초과</span></td></tr>
+<tr><td>교체 후 여름 (분리 안 함)<br><span class="small">신형 4대 + 로비 + 다락방 벽걸이</span></td><td>26.8 ~ 34.4kW</td><td>49A / 67A</td><td>38A / 49A</td><td><span class="tag red">정격은 한계, 피크는 초과</span></td></tr>
+<tr><td>교체 후 겨울 (보일러만)</td><td>9 ~ 9.9kW</td><td>41A / 45A</td><td>0A</td><td><span class="tag green">가능</span></td></tr>
+<tr><td>교체 후 겨울 + 신형 난방 (분리 안 함)</td><td>29.2 ~ 39.9kW</td><td>72A / 93A</td><td>31A / 48A</td><td><span class="tag red">초과</span></td></tr>
+<tr><td>모든 기기 동시 가동 (분리 안 함)</td><td>36.1 ~ 48.3kW</td><td>91A / 119A</td><td>39A / 56A</td><td><span class="tag red">크게 초과</span></td></tr>
 <tr><td><b>분리 후 · 옥상</b> 여름</td><td>24.4 ~ 30.6kW</td><td>38A / 49A</td><td>(세 상 같음)</td><td><span class="tag green">가능</span></td></tr>
 <tr><td><b>분리 후 · 옥상</b> 겨울 (신형 난방)</td><td>20.2 ~ 30.0kW</td><td>31A / 48A</td><td>(세 상 같음)</td><td><span class="tag green">가능</span></td></tr>
-<tr><td><b>분리 후 · 다락방</b> 여름 / 겨울</td><td>2.4 / 9kW</td><td>11~15A / 41A</td><td>—</td><td><span class="tag green">다락방 50A 적합</span></td></tr>
+<tr><td><b>분리 후 · 다락방</b> 여름 / 겨울</td><td>2.4 / 9kW</td><td>11~18A / 41~45A</td><td>—</td><td><span class="tag amber">50A는 90% → 60A 권장</span></td></tr>
 </tbody>
 </table>
 </div>
 <p class="small">“현재 여름 54A”는 정속형 구형기가 모두 돌 때의 값입니다. 차단기는 정격의 1.05~1.1배 정도에서는 바로 떨어지지 않아 지금까지 버틴 것으로 보입니다.</p>
+
+<h3>단순 합계(176A → 119A)로 비교하면 안 되는 이유</h3>
+<p>명판 최대 전류를 그냥 더하면 기존 176A, 변경 119A로 57A 줄어 보입니다. 하지만 차단기는 합계가 아니라 <b>세 가닥 중 가장 많이 흐르는 한 가닥</b>을 봅니다. 단상 구형 6대의 105A는 세 상에 35A씩 나뉘어 실리고, 3상 신형 4대의 48A(12A × 4)는 세 상 <b>각각에</b> 48A씩 흐릅니다.</p>
+<div class="compare">
+  <div class="card old">
+    <h4>단순 합계 <span class="tag amber">판단 기준 아님</span></h4>
+    <dl>
+      <dt>기존</dt><dd>105 + 8 + 18 + 45 = 176A</dd>
+      <dt>변경</dt><dd>48 + 8 + 18 + 45 = 119A</dd>
+      <dt>차이</dt><dd>57A 감소처럼 보임</dd>
+    </dl>
+  </div>
+  <div class="card new">
+    <h4>차단기가 보는 값 · R상 <span class="tag blue">판단 기준</span></h4>
+    <dl>
+      <dt>기존</dt><dd>35 + 8 + 18 + 45 = 106A</dd>
+      <dt>변경</dt><dd>48 + 8 + 18 + 45 = 119A</dd>
+      <dt>차이</dt><dd><b style="color:var(--red)">13A 증가</b> (모든 기기 최대 동시 기준)</dd>
+    </dl>
+  </div>
+</div>
+<p class="small">구형 6대, 로비, 다락방 벽걸이 2대(8A+10A), 보일러 3대(15A×3)를 모두 최대로 켠 경우입니다. 정격 운전에서는 신형이 조금 적지만(냉방 19.8kW vs 21.6kW), 최대 출력 합계는 신형이 큽니다(1대 약 7.9kVA vs 3.9kVA).</p>
 
 <h2><span class="no">06</span>하루 시뮬레이션</h2>
 <p>운영 시간 09~22시, 서울 설계일(여름 최고 33℃, 겨울 최저 -10℃)을 가정해 시간대별로 가장 많이 실리는 상의 전류를 계산했습니다. 아침 9시에 튀는 것은 실내를 처음 식히거나 데울 때 최대 출력으로 도는 구간입니다.</p>
@@ -312,8 +335,8 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <path d="M460 70 V100 H580 V140" class="ln" marker-end="url(#ar2)"/>
   <text x="186" y="118" text-anchor="end" class="tblue">간선 10㎟ 이상 확인</text>
   <text x="186" y="134" text-anchor="end" class="ts">(75A 증설 시 F-CV 25㎟)</text>
-  <text x="592" y="118" class="tblue">새 간선 F-CV 10㎟ 2C+E</text>
-  <text x="592" y="134" class="ts">30m 넘으면 16㎟ · 부하 적은 상</text>
+  <text x="592" y="118" class="tblue">새 간선 F-CV 16㎟ 2C+E</text>
+  <text x="592" y="134" class="ts">부하가 가장 적은 상에 연결</text>
   <!-- rooftop -->
   <rect x="45" y="144" width="310" height="58" rx="10" class="bx-blue"/>
   <text x="200" y="169" text-anchor="middle" class="tb">옥상 분전반 · MAIN 4P 50A 유지</text>
@@ -335,8 +358,8 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <text x="200" y="405" text-anchor="middle" class="ts">세 상에 고르게 실림</text>
   <!-- attic -->
   <rect x="425" y="144" width="310" height="58" rx="10" class="bx-blue"/>
-  <text x="580" y="169" text-anchor="middle" class="tb">다락방 분전반 · MAIN 2P 50A</text>
-  <text x="580" y="190" text-anchor="middle" class="ts">현재 용량 그대로 적합</text>
+  <text x="580" y="169" text-anchor="middle" class="tb">다락방 분전반 · MAIN 2P 60A</text>
+  <text x="580" y="190" text-anchor="middle" class="ts">현재 50A → 증설 (보일러 연속부하)</text>
   <line x1="580" y1="202" x2="580" y2="230" class="ln"/>
   <line x1="500" y1="230" x2="660" y2="230" class="ln"/>
   <line x1="500" y1="230" x2="500" y2="262" class="ln" marker-end="url(#ar2)"/>
@@ -344,17 +367,17 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <rect x="425" y="266" width="150" height="74" rx="10" class="bx"/>
   <text x="500" y="290" text-anchor="middle" class="tb">이지보일러 ①~③</text>
   <text x="500" y="309" text-anchor="middle" class="ts">2P 누전 20A × 3</text>
-  <text x="500" y="327" text-anchor="middle" class="ts">4㎟ 권장</text>
+  <text x="500" y="327" text-anchor="middle" class="ts">4㎟ · 최대 15A</text>
   <rect x="585" y="266" width="150" height="74" rx="10" class="bx"/>
   <text x="660" y="290" text-anchor="middle" class="tb">벽걸이 ①②</text>
   <text x="660" y="309" text-anchor="middle" class="ts">2P 누전 20A × 2</text>
-  <text x="660" y="327" text-anchor="middle" class="ts">2.5㎟</text>
+  <text x="660" y="327" text-anchor="middle" class="ts">2.5㎟ · 최대 8·10A</text>
   <rect x="425" y="360" width="310" height="58" rx="10" class="bx-green"/>
-  <text x="580" y="384" text-anchor="middle" class="tb">여름 11~15A · 겨울 41A</text>
+  <text x="580" y="384" text-anchor="middle" class="tb">여름 11~18A · 겨울 41~45A</text>
   <text x="580" y="405" text-anchor="middle" class="ts">벽걸이·보일러는 계절이 달라 겹치지 않음</text>
-  <text x="380" y="452" text-anchor="middle" class="ts">초록 상자: 분리 후 예상 최대 상전류 — 양쪽 모두 50A 이내</text>
+  <text x="380" y="452" text-anchor="middle" class="ts">초록 상자: 분리 후 예상 상전류 — 옥상 50A, 다락방 60A 안에 들어옴</text>
 </svg>
-<figcaption>두 분전반을 3층 배전반에서 나눠 받으면 3층 메인 100A에 다시 합쳐집니다(겨울 최대 89A + 강당 조명·콘센트). 그래서 분리는 3층보다 위쪽 전원에서 해야 합니다.</figcaption>
+<figcaption>두 분전반을 3층 배전반에서 나눠 받으면 3층 메인 100A에 다시 합쳐집니다(겨울 최대 93A + 강당 조명·콘센트). 그래서 분리는 3층보다 위쪽 전원에서 해야 합니다.</figcaption>
 </figure>
 
 <h2><span class="no">08</span>차단기·전선 일람</h2>
@@ -365,9 +388,9 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <tr><td>① 옥상 MAIN</td><td>4P 50A 유지<br><span class="small">(여유: 4P 75A)</span></td><td>간선 10㎟ 이상 확인<br><span class="small">(75A 시 F-CV 25㎟ 4C + 접지 16㎟)</span></td><td>분리 후 최대 49A, 정격 31~38A(62~77%). 분리하지 않으면 125A·50㎟가 필요해 비권장</td></tr>
 <tr><td>② 신형 냉난방기 4대</td><td>4P 누전차단기 20A (30mA) × 4</td><td>4㎟ 4C + 접지 4㎟<br><span class="small">(제조사 최소 2.5㎟)</span></td><td>최대 12A × 1.25 = 15A → 20A. 거리·전압강하 여유로 4㎟</td></tr>
 <tr><td>③ 로비 냉방기</td><td>4P 누전차단기 20A</td><td>4㎟ 4C + 접지<br><span class="small">(기존 2.5㎟↑면 유지)</span></td><td>정격 8A, 정속형 기동전류 여유</td></tr>
-<tr><td>④ 다락방 MAIN</td><td>2P 50A <span class="tag green">적합</span></td><td>F-CV 10㎟ 2C + 접지<br><span class="small">(30m 초과 시 16㎟)</span></td><td>겨울 41A(82%), 여름 11~15A. 벽걸이가 냉방 전용이라 보일러와 동시 가동 없음</td></tr>
-<tr><td>⑤ 이지보일러 3대</td><td>2P 누전차단기 20A × 3 <span class="tag green">현행 적합</span></td><td>4㎟ 권장</td><td>13.6A × 1.25 = 17A → 20A. 장시간 전열 부하이고 여러 회로가 함께 묶여 감소계수 적용</td></tr>
-<tr><td>⑥ 다락방 벽걸이 2대</td><td>2P 누전차단기 20A × 2 <span class="tag green">현행 적합</span></td><td>2.5㎟</td><td>운전전류 4~9A 수준</td></tr>
+<tr><td>④ 다락방 MAIN</td><td>2P 60A로 증설 <span class="tag amber">현재 50A</span></td><td>F-CV 16㎟ 2C + 접지</td><td>보일러 최대 15A × 3 = 45A로 50A의 90% — 장시간 연속 부하 권장선(80%) 초과. 60A면 75%. 여름은 벽걸이 11~18A로 보일러와 계절이 달라 겹치지 않음</td></tr>
+<tr><td>⑤ 이지보일러 3대</td><td>2P 누전차단기 20A × 3 <span class="tag green">현행 적합</span></td><td>4㎟ 권장</td><td>최대 15A × 1.25 = 18.75A → 20A. 장시간 전열 부하이고 여러 회로가 함께 묶여 감소계수 적용</td></tr>
+<tr><td>⑥ 다락방 벽걸이 2대</td><td>2P 누전차단기 20A × 2 <span class="tag green">현행 적합</span></td><td>2.5㎟</td><td>최대 운전전류 8A·10A (명판)</td></tr>
 </tbody>
 </table>
 </div>
@@ -392,6 +415,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 <ul>
 <li>3상 부하는 세 상에 고르게, 구형 6대는 상마다 2대씩, 다락방은 한 상(R상)에 물린 것으로 봤습니다.</li>
 <li>3상 전류 = 전력 ÷ (√3 × 380V × 역률 0.99), 단상 전류 = 전력 ÷ (220V × 0.98). 로비 냉방기는 라벨 정격 8.0A를 그대로 썼습니다.</li>
+<li>다락방 기기는 명판·제품 정보의 최대값(벽걸이 8A·10A, 보일러 15A)을 최대 계산에, 정격값(벽걸이 약 11A 합계, 보일러 3kW ÷ 220V = 13.6A)을 정격 계산에 썼습니다.</li>
 <li>신형기 운전전류는 제품 스펙의 최소/정격/최대 값(냉방 1.6/7.6/10.3A, 난방 1.3/7.8/12.0A)을 그대로 적용했습니다.</li>
 <li>하루 시뮬레이션: 운영 09~22시, 첫 1시간은 최대 출력, 이후 출력은 외기온에 비례. 보일러는 실온 유지 단계에서 60~100%로 켜졌다 꺼졌다 하는 것으로 봤습니다.</li>
 <li>연속 부하는 차단기 정격의 80% 이내를 권장 기준으로 삼았습니다. 전선 굵기는 일반적인 동선 허용전류 기준이며, 배선 거리·포설 방법·감소계수는 현장 확인이 필요합니다.</li>
@@ -440,7 +464,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
 
   const labels=['현재 여름','교체 후 여름 (분리 안 함)','교체 후 겨울 · 보일러만','교체 후 겨울 + 신형 난방 (분리 안 함)','모든 기기 동시 (분리 안 함)','분리 후 옥상 · 여름','분리 후 옥상 · 겨울','분리 후 다락방 · 겨울'];
   const rated=[54.1,49.5,40.9,72.1,91.2,38.4,31.2,40.9];
-  const extra=[0,14.5,0,16.8,20.6,10.8,16.8,0]; // max - rated
+  const extra=[6.9,17.7,4.1,20.9,27.8,10.8,16.8,4.1]; // max - rated
   const col = rated.map((v,i)=> (v+extra[i])>50 ? RED : (i>=5? GREEN: BLUE));
   new Chart(document.getElementById('scen'),{
     type:'bar',
@@ -449,7 +473,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
       {label:'최대 출력 순간 (추가분)',data:extra,backgroundColor:col.map(x=>x+'55'),stack:'s',borderRadius:4}
     ]},
     options:{indexAxis:'y',maintainAspectRatio:false,
-      scales:{x:{stacked:true,max:120,title:{display:true,text:'가장 많이 실린 상의 전류 (A)'}},y:{stacked:true,ticks:{autoSkip:false}}},
+      scales:{x:{stacked:true,max:130,title:{display:true,text:'가장 많이 실린 상의 전류 (A)'}},y:{stacked:true,ticks:{autoSkip:false}}},
       plugins:{legend:{position:'bottom',labels:{generateLabels:()=>[
         {text:'정격 운전',fillStyle:SUB,strokeStyle:SUB,lineWidth:0,datasetIndex:0},
         {text:'최대 출력 순간 (추가분)',fillStyle:SUB+'55',strokeStyle:SUB+'55',lineWidth:0,datasetIndex:1}
@@ -457,13 +481,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
     plugins:[limit('x',50,'50A')]
   });
 
-  const D = {"hours":["8시","9시","10시","11시","12시","13시","14시","15시","16시","17시","18시","19시","20시","21시","22시"],
-  "sum_now":[0.0,57.5,48.9,50.6,52.1,53.2,53.9,54.1,53.9,53.2,52.1,50.6,48.9,48.6,0.0],
-  "sum_new":[0.0,62.4,35.5,42.2,47.9,52.3,55.0,56.0,55.0,52.3,47.9,42.2,35.5,29.9,0.0],
-  "sum_roof":[0.0,47.9,29.6,34.6,38.8,42.1,44.1,44.8,44.1,42.1,38.8,34.6,29.6,24.3,0.0],
-  "win_now":[0.0,41.7,41.7,29.2,27.5,26.2,25.3,25.0,25.3,26.2,27.5,29.2,31.2,33.4,0.0],
-  "win_new":[0.0,87.8,87.8,64.3,61.1,58.6,57.0,56.5,57.0,58.6,61.1,64.3,68.1,72.1,0.0],
-  "win_roof":[0.0,46.0,46.0,35.1,33.6,32.4,31.7,31.4,31.7,32.4,33.6,35.1,36.8,38.7,0.0]};
+  const D = {"hours": ["8시", "9시", "10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시", "18시", "19시", "20시", "21시", "22시"], "sum_now": [0, 61.0, 48.9, 50.6, 52.0, 53.2, 53.9, 54.1, 53.9, 53.2, 52.0, 50.6, 48.9, 48.5, 0], "sum_new": [0.0, 65.9, 35.5, 42.1, 47.9, 52.2, 55.0, 55.9, 55.0, 52.2, 47.9, 42.1, 35.5, 29.9, 0.0], "sum_roof": [0.0, 47.9, 29.6, 34.6, 38.8, 42.1, 44.1, 44.8, 44.1, 42.1, 38.8, 34.6, 29.6, 24.3, 0.0], "win_attic": [0, 45, 45, 31.5, 29.6, 28.2, 27.3, 27.0, 27.3, 28.2, 29.6, 31.5, 33.7, 36.0, 0], "win_new": [0.0, 91.0, 91.0, 66.6, 63.2, 60.6, 59.0, 58.4, 59.0, 60.6, 63.2, 66.6, 70.5, 74.7, 0.0], "win_roof": [0.0, 46.0, 46.0, 35.1, 33.6, 32.4, 31.7, 31.4, 31.7, 32.4, 33.6, 35.1, 36.8, 38.7, 0.0]};
   const lineOpts={maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     scales:{y:{min:0,max:100,title:{display:true,text:'전류 (A)'}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'line',boxWidth:28}}}};
   const ds=(label,data,color,dash)=>({label,data,borderColor:color,backgroundColor:color,borderWidth:2.5,pointRadius:2,tension:.25,borderDash:dash||[]});
@@ -474,7 +492,7 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   new Chart(document.getElementById('win'),{type:'line',data:{labels:D.hours,datasets:[
     ds('교체 후 · 분리 안 함 + 신형 난방',D.win_new,RED),
     ds('교체 후 · 분리 (옥상)',D.win_roof,BLUE),
-    ds('교체 후 · 분리 (다락방)',D.win_now,GREEN,[2,3])]},options:lineOpts,plugins:[limit('y',50,'메인 50A')]});
+    ds('교체 후 · 분리 (다락방)',D.win_attic,GREEN,[2,3])]},options:lineOpts,plugins:[limit('y',50,'메인 50A')]});
 })();
 </script>
 </body>
