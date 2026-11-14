@@ -85,13 +85,6 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
 .lane{fill:var(--bg);stroke:var(--line)}
 .f-blue{fill:var(--blue)} .f-amber{fill:var(--amber)} .f-sub{fill:var(--sub)}
 .dot{fill:currentColor}
-.copybar{position:fixed;right:16px;bottom:16px;z-index:10;display:flex;gap:8px;align-items:center}
-.copybtn{font:700 14px "Noto Sans KR",sans-serif;background:var(--blue);color:#fff;border:0;border-radius:99px;padding:11px 18px;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer}
-.copymsg{font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;display:none}
-.srcbox{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:none;align-items:center;justify-content:center;padding:16px}
-.srcbox .in{background:var(--card);border-radius:14px;padding:14px;width:min(900px,100%);height:min(80vh,700px);display:flex;flex-direction:column;gap:8px}
-.srcbox textarea{flex:1;width:100%;font:12px ui-monospace,Menlo,monospace;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
-@media print{.copybar{display:none}}
 </style>
 </head>
 <body>
@@ -397,21 +390,6 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
 </ul>
 </div>
 
-<div class="copybar"><span class="copymsg" id="copymsg">복사했습니다</span><button class="copybtn" id="copybtn" type="button">HTML 소스 복사</button></div>
-<div class="srcbox" id="srcbox"><div class="in"><div style="display:flex;justify-content:space-between;align-items:center"><b>HTML 소스</b><button class="copybtn" id="srcclose" type="button" style="padding:6px 14px">닫기</button></div><div class="small">전체 선택(Ctrl/⌘+A) 후 복사(Ctrl/⌘+C)하세요.</div><textarea id="srctext" readonly></textarea></div></div>
-<script>
-(function(){
-  const SRC='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
-  const btn=document.getElementById('copybtn'), msg=document.getElementById('copymsg');
-  const box=document.getElementById('srcbox'), ta=document.getElementById('srctext');
-  function showBox(){ta.value=SRC;box.style.display='flex';ta.focus();ta.select();}
-  btn.addEventListener('click',async()=>{
-    try{ await navigator.clipboard.writeText(SRC); msg.style.display='inline-block'; setTimeout(()=>msg.style.display='none',2000);}
-    catch(e){ showBox(); }
-  });
-  document.getElementById('srcclose').addEventListener('click',()=>box.style.display='none');
-})();
-</script>
 </main>
 <script>
 (function(){
