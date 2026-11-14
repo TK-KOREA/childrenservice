@@ -8,11 +8,11 @@
 <meta property="og:title" content="3층 대강당 냉난방기 4대 신규 도입 — 전력 용량 분석">
 <meta property="og:description" content="옥상 분전반 50A 기준 여름·겨울 상전류 분석과 다락방 전원 분리 권장안 (2026년 11월)">
 <link rel="icon" href="../favicon.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
   --bg:#f6f7f9; --card:#ffffff; --ink:#1b1f24; --sub:#5b6470; --line:#d9dee5;
   --blue:#2563eb; --blue-soft:#e8efff; --red:#d43d3d; --red-soft:#fdecec;
   --amber:#c27a00; --amber-soft:#fff4dd; --green:#1f8a4c; --green-soft:#e6f5ec;
@@ -22,51 +22,67 @@
   --blue:#6b9bff;--blue-soft:#1d2a45;--red:#ff7070;--red-soft:#3a1f1f;--amber:#f0b44a;--amber-soft:#382c14;--green:#4cc282;--green-soft:#173326;}
 }
 *{box-sizing:border-box}
-body{word-break:keep-all;margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;line-height:1.65;font-size:15.5px}
-main{max-width:900px;margin:0 auto;padding:28px 18px 80px}
-header .eyebrow{font-size:13px;color:var(--sub);letter-spacing:.02em}
-h1{font-size:26px;line-height:1.35;margin:6px 0 6px;font-weight:800}
-header .meta{font-size:13px;color:var(--sub)}
-h2{font-size:20px;margin:44px 0 10px;font-weight:800;display:flex;gap:10px;align-items:baseline}
-h2 .no{color:var(--blue);font-size:15px;font-weight:700}
-h3{font-size:16px;margin:22px 0 8px}
-p{margin:8px 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px}
+body{word-break:keep-all;overflow-wrap:break-word;margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.75;font-size:16.5px;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+main{max-width:880px;margin:0 auto;padding:40px 24px 96px}
+@media (max-width:680px){main{padding:28px 16px 80px}}
+header .eyebrow{font-size:14px;color:var(--blue);font-weight:700;letter-spacing:0}
+h1{font-size:30px;line-height:1.35;margin:8px 0 10px;font-weight:800;letter-spacing:-.025em}
+header .meta{font-size:14.5px;color:var(--sub);line-height:1.6}
+h2{font-size:23px;line-height:1.4;margin:56px 0 14px;font-weight:800;letter-spacing:-.02em;display:flex;gap:10px;align-items:baseline}
+h2 .no{color:var(--blue);font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+h3{font-size:18px;line-height:1.45;margin:28px 0 10px;font-weight:700}
+@media (max-width:680px){h1{font-size:25px} h2{font-size:21px;margin-top:48px} h3{font-size:17px}}
+p{margin:10px 0}
+b,strong{font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+@media (max-width:680px){.card{padding:18px 16px}}
 .conclusion{border-left:5px solid var(--blue)}
-.conclusion ol{margin:6px 0 0;padding-left:20px}
-.conclusion li{margin:6px 0}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
-.kpi .v{font-size:26px;font-weight:800;line-height:1.2}
-.kpi .l{font-size:12.5px;color:var(--sub)}
+.conclusion ol{margin:0;padding-left:22px}
+.conclusion li{margin:10px 0}
+.conclusion li::marker{font-weight:800;color:var(--blue)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi .v{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .l{font-size:14px;line-height:1.5;color:var(--sub);margin-top:4px}
 .kpi.bad .v{color:var(--red)} .kpi.ok .v{color:var(--green)} .kpi.warn .v{color:var(--amber)}
-@media (max-width:680px){.kpis{grid-template-columns:repeat(2,1fr)}}
-figure{margin:14px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+@media (max-width:680px){.kpis{grid-template-columns:repeat(2,1fr)} .kpi .v{font-size:24px}}
+figure{margin:16px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
 figure svg{width:100%;height:auto;display:block;color:var(--ink)}
-@media (max-width:680px){figure{overflow-x:auto} figure svg{min-width:640px}}
-figcaption{font-size:13px;color:var(--sub);margin-top:8px}
-.chartbox{position:relative;height:340px}
-.chartbox.tall{height:400px}
-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card)}
-th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
-th{font-size:13px;color:var(--sub);font-weight:700;background:var(--bg)}
-.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-.tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:99px;font-weight:700}
+@media (max-width:680px){
+  figure{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  figure svg{min-width:680px}
+  figure:has(> svg)::before{content:"← 옆으로 밀어서 보세요 →";display:block;font-size:13px;color:var(--sub);margin-bottom:8px;position:sticky;left:0}
+}
+figcaption{font-size:14.5px;line-height:1.65;color:var(--sub);margin-top:10px}
+.chartbox{position:relative;height:360px}
+.chartbox.tall{height:440px}
+@media (max-width:680px){.chartbox{height:320px} .chartbox.tall{height:460px}}
+table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.6;background:var(--card);font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:12px 12px;text-align:left;vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+th{font-size:13.5px;color:var(--sub);font-weight:700;background:var(--bg);white-space:nowrap}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch}
+@media (max-width:680px){.tablewrap table{min-width:640px}}
+.tag{display:inline-block;font-size:12.5px;line-height:1.6;padding:1px 8px;border-radius:99px;font-weight:700;white-space:nowrap}
 .tag.red{background:var(--red-soft);color:var(--red)} .tag.blue{background:var(--blue-soft);color:var(--blue)}
 .tag.green{background:var(--green-soft);color:var(--green)} .tag.amber{background:var(--amber-soft);color:var(--amber)}
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:680px){.compare{grid-template-columns:1fr}}
-.compare .card h4{margin:0 0 6px;font-size:15px}
-.compare dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+.compare .card h4{margin:0 0 12px;font-size:17px;line-height:1.45}
+.compare dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15px;line-height:1.6;font-variant-numeric:tabular-nums}
 .compare dt{color:var(--sub)} .compare dd{margin:0;font-weight:500}
 .old{border-top:4px solid var(--sub)} .new{border-top:4px solid var(--blue)}
-.example{background:var(--amber-soft);border-radius:12px;padding:14px 16px;margin:12px 0}
+.example{background:var(--amber-soft);border-radius:14px;padding:16px 18px;margin:16px 0}
 .example b{color:var(--amber)}
 .answer td:first-child{white-space:nowrap;font-weight:700}
 ul.check{list-style:none;padding:0;margin:0}
-ul.check li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed var(--line)}
-ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;height:14px;border:2px solid var(--blue);border-radius:4px}
-.small{font-size:13px;color:var(--sub)}
+ul.check li{padding:12px 0 12px 32px;position:relative;border-bottom:1px dashed var(--line)}
+ul.check li:last-child{border-bottom:0}
+ul.check li:before{content:"";position:absolute;left:4px;top:18px;width:15px;height:15px;border:2px solid var(--blue);border-radius:4px}
+.small{font-size:14px;line-height:1.65;color:var(--sub)}
+.card.small ul{padding-left:20px;margin:6px 0 14px}
+.card.small li{margin:6px 0}
+a{color:var(--blue);text-underline-offset:3px}
 /* SVG classes */
 .bx{fill:var(--card);stroke:currentColor;stroke-width:1.4}
 .bx-blue{fill:var(--blue-soft);stroke:var(--blue);stroke-width:1.6}
@@ -77,11 +93,12 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
 .ln{stroke:currentColor;stroke-width:1.6;fill:none}
 .ln-dash{stroke:var(--sub);stroke-width:1.6;fill:none;stroke-dasharray:6 5}
 .ln-red{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:6 4}
-.t{fill:currentColor;font-size:13px;font-family:"Noto Sans KR",sans-serif}
-.tb{fill:currentColor;font-size:13.5px;font-weight:700;font-family:"Noto Sans KR",sans-serif}
-.ts{fill:var(--sub);font-size:11.5px;font-family:"Noto Sans KR",sans-serif}
-.tred{fill:var(--red);font-size:12px;font-weight:700;font-family:"Noto Sans KR",sans-serif}
-.tblue{fill:var(--blue);font-size:12px;font-weight:700;font-family:"Noto Sans KR",sans-serif}
+svg text{font-family:var(--font);letter-spacing:-.01em}
+.t{fill:currentColor;font-size:13.5px}
+.tb{fill:currentColor;font-size:14.5px;font-weight:700}
+.ts{fill:var(--sub);font-size:12.5px;font-weight:500}
+.tred{fill:var(--red);font-size:12.5px;font-weight:700}
+.tblue{fill:var(--blue);font-size:12.5px;font-weight:700}
 .lane{fill:var(--bg);stroke:var(--line)}
 .f-blue{fill:var(--blue)} .f-amber{fill:var(--amber)} .f-sub{fill:var(--sub)}
 .dot{fill:currentColor}
@@ -250,7 +267,7 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
 <p>가장 많이 실리는 상의 전류를 운전 조건별로 비교했습니다. 진한 막대는 정격 운전, 옅은 막대는 인버터가 최대 출력으로 도는 순간(아침 기동, 혹한·혹서)입니다. 빨간 선이 옥상 메인 50A입니다.</p>
 <figure>
   <div class="chartbox tall"><canvas id="scen"></canvas></div>
-  <figcaption>“분리 안 함”은 지금처럼 다락방이 옥상 분전반에 물린 상태, “분리 후”는 다락방을 별도 계통으로 뺀 상태입니다.</figcaption>
+  <figcaption>막대 색: 빨강은 50A를 넘는 경우, 파랑은 50A 이내, 초록은 다락방을 분리한 뒤입니다. “분리 안 함”은 지금처럼 다락방이 옥상 분전반에 물린 상태, “분리 후”는 다락방을 별도 계통으로 뺀 상태입니다.</figcaption>
 </figure>
 <div class="tablewrap">
 <table>
@@ -285,7 +302,7 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
 <h2><span class="no">07</span>권장 배선안</h2>
 <p>다락방 분전반을 옥상에서 떼어 <b>상위 전원에서 별도로</b> 끌어오고, 옥상 분전반에는 3상 냉난방 부하만 남깁니다. 차단기와 전선 굵기를 그림에 함께 적었습니다.</p>
 <figure>
-<svg viewBox="0 0 760 470" role="img" aria-label="권장 배선안: 상위 전원에서 옥상 분전반과 다락방 분전반을 각각 따로 끌어온다">
+<svg viewBox="0 0 775 470" role="img" aria-label="권장 배선안: 상위 전원에서 옥상 분전반과 다락방 분전반을 각각 따로 끌어온다">
   <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="dot"/></marker></defs>
   <rect x="200" y="14" width="360" height="56" rx="10" class="bx"/>
   <text x="380" y="38" text-anchor="middle" class="tb">상위 전원</text>
@@ -396,8 +413,13 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
   if(!window.Chart) return;
   const css = getComputedStyle(document.documentElement);
   const c = n => css.getPropertyValue(n).trim();
-  Chart.defaults.font.family = '"Noto Sans KR", sans-serif';
+  Chart.defaults.font.family = c('--font');
+  Chart.defaults.font.size = 13;
   Chart.defaults.color = c('--sub');
+  Chart.defaults.plugins.legend.labels.padding = 16;
+  Chart.defaults.plugins.tooltip.titleFont = {size:13, weight:'700'};
+  Chart.defaults.plugins.tooltip.bodyFont = {size:13};
+  Chart.defaults.plugins.tooltip.padding = 10;
   Chart.defaults.borderColor = c('--line');
   const RED=c('--red'), BLUE=c('--blue'), AMBER=c('--amber'), GREEN=c('--green'), SUB=c('--sub');
 
@@ -410,7 +432,7 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
       ctx.save(); ctx.strokeStyle=RED; ctx.lineWidth=2; ctx.setLineDash([6,4]);
       ctx.beginPath();
       if(axis==='x'){ ctx.moveTo(p,a.top); ctx.lineTo(p,a.bottom);} else { ctx.moveTo(a.left,p); ctx.lineTo(a.right,p);}
-      ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle=RED; ctx.font='700 12px "Noto Sans KR"';
+      ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle=RED; ctx.font='700 13px '+c('--font');
       if(axis==='x'){ ctx.textAlign='left'; ctx.fillText(label,p+4,a.bottom-6);} else { ctx.textAlign='right'; ctx.fillText(label,a.right-4,p-6);}
       ctx.restore();
     }
@@ -428,7 +450,10 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
     ]},
     options:{indexAxis:'y',maintainAspectRatio:false,
       scales:{x:{stacked:true,max:120,title:{display:true,text:'가장 많이 실린 상의 전류 (A)'}},y:{stacked:true,ticks:{autoSkip:false}}},
-      plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:(t)=>{const i=t.dataIndex; return t.datasetIndex===0? `정격 ${rated[i]}A` : (extra[i]? `최대 ${(rated[i]+extra[i]).toFixed(1)}A`:'')}}}}},
+      plugins:{legend:{position:'bottom',labels:{generateLabels:()=>[
+        {text:'정격 운전',fillStyle:SUB,strokeStyle:SUB,lineWidth:0,datasetIndex:0},
+        {text:'최대 출력 순간 (추가분)',fillStyle:SUB+'55',strokeStyle:SUB+'55',lineWidth:0,datasetIndex:1}
+      ]}},tooltip:{callbacks:{label:(t)=>{const i=t.dataIndex; return t.datasetIndex===0? `정격 ${rated[i]}A` : (extra[i]? `최대 ${(rated[i]+extra[i]).toFixed(1)}A`:'')}}}}},
     plugins:[limit('x',50,'50A')]
   });
 
@@ -440,7 +465,7 @@ ul.check li:before{content:"";position:absolute;left:4px;top:12px;width:14px;hei
   "win_new":[0.0,87.8,87.8,64.3,61.1,58.6,57.0,56.5,57.0,58.6,61.1,64.3,68.1,72.1,0.0],
   "win_roof":[0.0,46.0,46.0,35.1,33.6,32.4,31.7,31.4,31.7,32.4,33.6,35.1,36.8,38.7,0.0]};
   const lineOpts={maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    scales:{y:{min:0,max:100,title:{display:true,text:'A'}}},plugins:{legend:{position:'bottom'}}};
+    scales:{y:{min:0,max:100,title:{display:true,text:'전류 (A)'}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'line',boxWidth:28}}}};
   const ds=(label,data,color,dash)=>({label,data,borderColor:color,backgroundColor:color,borderWidth:2.5,pointRadius:2,tension:.25,borderDash:dash||[]});
   new Chart(document.getElementById('sum'),{type:'line',data:{labels:D.hours,datasets:[
     ds('현재 (구형 6대, 다락방 상)',D.sum_now,SUB,[5,4]),
