@@ -137,7 +137,83 @@ svg text{font-family:var(--font);letter-spacing:-.01em}
   <div class="kpi ok"><div class="v">45A</div><div class="l">다락방 분전반 겨울 최대<br>MAIN 60A로 증설</div></div>
 </div>
 
-<h2><span class="no">02</span>현재 배선 구조</h2>
+<h2><span class="no">02</span>배선 구조 — 기존과 변경</h2>
+<p>보고서 전체의 출발점이 되는 그림입니다. 왼쪽이 지금, 오른쪽이 공사 후입니다. 주황 상자인 3층 배전반 100A가 양쪽 모두 최종 관문입니다.</p>
+<figure>
+<svg viewBox="0 0 760 450" role="img" aria-label="기존과 변경 배선 비교: 기존은 3층에서 옥상, 옥상에서 다락방으로 줄줄이 이어지고, 변경은 3층에서 옥상과 다락방으로 각각 직결한다">
+  <defs><marker id="ar0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="dot"/></marker></defs>
+  <text x="190" y="22" text-anchor="middle" class="tb">기존 배선</text>
+  <text x="575" y="22" text-anchor="middle" class="tb">변경 배선</text>
+  <line x1="382" y1="8" x2="382" y2="442" class="ln-dash"/>
+  <!-- LEFT -->
+  <rect x="100" y="36" width="180" height="44" rx="9" class="bx"/>
+  <text x="190" y="63" text-anchor="middle" class="t">지하 1층 수전반</text>
+  <line x1="190" y1="80" x2="190" y2="110" class="ln" marker-end="url(#ar0)"/>
+  <text x="198" y="100" class="ts">간선 100A</text>
+  <rect x="90" y="112" width="200" height="50" rx="9" class="bx-amber"/>
+  <text x="190" y="133" text-anchor="middle" class="tb">3층 배전반</text>
+  <text x="190" y="152" text-anchor="middle" class="ts">MAIN 100A</text>
+  <path d="M150 162 V182 H80 V202" class="ln" marker-end="url(#ar0)"/>
+  <path d="M230 162 V182 H255 V202" class="ln" marker-end="url(#ar0)"/>
+  <text x="262" y="196" class="ts">A/C 4P</text>
+  <rect x="10" y="204" width="140" height="50" rx="9" class="bx"/>
+  <text x="80" y="226" text-anchor="middle" class="t">강당 조명·콘센트</text>
+  <text x="80" y="244" text-anchor="middle" class="ts">기존 20A 회로</text>
+  <rect x="175" y="204" width="160" height="50" rx="9" class="bx"/>
+  <text x="255" y="226" text-anchor="middle" class="tb">옥상 분전반</text>
+  <text x="255" y="244" text-anchor="middle" class="ts">MAIN 50A</text>
+  <line x1="300" y1="254" x2="300" y2="294" class="ln" marker-end="url(#ar0)"/>
+  <rect x="220" y="296" width="150" height="54" rx="9" class="bx-rm"/>
+  <text x="295" y="319" text-anchor="middle" class="tb">3층 에어컨 7대</text>
+  <text x="295" y="338" text-anchor="middle" class="ts">구형 6 + 로비 1</text>
+  <path d="M210 254 V274 H80 V294" class="ln" marker-end="url(#ar0)"/>
+  <text x="88" y="270" class="tred">7번 2P (옥상 경유)</text>
+  <rect x="10" y="296" width="140" height="54" rx="9" class="bx"/>
+  <text x="80" y="319" text-anchor="middle" class="tb">다락방 분전반</text>
+  <text x="80" y="338" text-anchor="middle" class="ts">MAIN 50A</text>
+  <line x1="80" y1="350" x2="80" y2="376" class="ln" marker-end="url(#ar0)"/>
+  <rect x="10" y="378" width="140" height="54" rx="9" class="bx"/>
+  <text x="80" y="401" text-anchor="middle" class="t">에어컨 2대</text>
+  <text x="80" y="420" text-anchor="middle" class="t">보일러 3대</text>
+  <!-- RIGHT -->
+  <rect x="485" y="36" width="180" height="44" rx="9" class="bx"/>
+  <text x="575" y="63" text-anchor="middle" class="t">지하 1층 수전반</text>
+  <line x1="575" y1="80" x2="575" y2="110" class="ln" marker-end="url(#ar0)"/>
+  <text x="583" y="100" class="ts">간선 100A</text>
+  <rect x="475" y="112" width="200" height="50" rx="9" class="bx-amber"/>
+  <text x="575" y="133" text-anchor="middle" class="tb">3층 배전반</text>
+  <text x="575" y="152" text-anchor="middle" class="ts">MAIN 100A · 상별 실측</text>
+  <path d="M515 162 V184 H452 V204" class="ln" marker-end="url(#ar0)"/>
+  <line x1="575" y1="162" x2="575" y2="204" class="ln" marker-end="url(#ar0)"/>
+  <path d="M635 162 V184 H698 V204" class="ln" marker-end="url(#ar0)"/>
+  <rect x="395" y="206" width="115" height="62" rx="9" class="bx"/>
+  <text x="452" y="231" text-anchor="middle" class="t">강당 조명·콘센트</text>
+  <text x="452" y="250" text-anchor="middle" class="ts">기존 회로 (유지)</text>
+  <rect x="518" y="206" width="115" height="62" rx="9" class="bx-blue"/>
+  <text x="575" y="226" text-anchor="middle" class="tb">다락방 분전반</text>
+  <text x="575" y="243" text-anchor="middle" class="tblue">MAIN 60A 증설</text>
+  <text x="575" y="259" text-anchor="middle" class="ts">3층 2P 60A 신설</text>
+  <rect x="641" y="206" width="115" height="62" rx="9" class="bx-blue"/>
+  <text x="698" y="226" text-anchor="middle" class="tb">옥상 분전반</text>
+  <text x="698" y="243" text-anchor="middle" class="tblue">MAIN 50A 유지</text>
+  <text x="698" y="259" text-anchor="middle" class="ts" style="font-size:11.5px">A/C 4P 50A↑ (기존)</text>
+  <line x1="575" y1="268" x2="575" y2="296" class="ln" marker-end="url(#ar0)"/>
+  <line x1="698" y1="268" x2="698" y2="296" class="ln" marker-end="url(#ar0)"/>
+  <rect x="518" y="298" width="115" height="58" rx="9" class="bx"/>
+  <text x="575" y="321" text-anchor="middle" class="t">에어컨 2대</text>
+  <text x="575" y="340" text-anchor="middle" class="t">보일러 3대</text>
+  <rect x="641" y="298" width="115" height="58" rx="9" class="bx"/>
+  <text x="698" y="321" text-anchor="middle" class="tb">3층 에어컨 5대</text>
+  <text x="698" y="340" text-anchor="middle" class="ts">신형 4 + 로비 1</text>
+  <text x="452" y="321" text-anchor="middle" class="ts">간선 F-CV 16㎟</text>
+  <text x="452" y="338" text-anchor="middle" class="ts">(3층 → 다락방, 신설)</text>
+  <text x="575" y="384" text-anchor="middle" class="tred">옥상 7번(다락방) 분기 철거</text>
+  <rect x="395" y="398" width="361" height="36" rx="9" class="bx-red"/>
+  <text x="575" y="421" text-anchor="middle" class="tb">겨울철 신형 냉난방기 난방 운전 금지</text>
+</svg>
+<figcaption>주황은 최종 관문(3층 메인 100A), 파랑은 공사로 바뀌는 분전반, 점선 상자는 교체되는 구형 냉방기입니다. 강당 조명·콘센트는 양쪽 모두 3층 메인 100A를 함께 씁니다.</figcaption>
+</figure>
+<h3>기존 배선 상세</h3>
 <p>한전 전기는 지하 1층 수전반에서 100A 간선으로 3층 배전반에 들어옵니다. 지금은 3층 → 옥상 → 다락방으로 <b>줄줄이 이어진 구조</b>라서, 옥상 분전반 50A 하나가 강당 냉방기, 로비 냉방기, 다락방 전체를 함께 감당합니다.</p>
 <figure>
 <svg viewBox="0 0 760 600" role="img" aria-label="현재 배선 구조: 지하 1층 수전반에서 3층 배전반, 3층에서 옥상 50A 분전반, 옥상에서 다락방 분전반으로 이어진다">
