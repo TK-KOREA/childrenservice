@@ -16,12 +16,13 @@
 (function(){
   var q; try{ q=new URLSearchParams(location.search); }catch(e){ q={get:function(){return null;}}; }
   var SCHED=[ /* 이 시각부터 이 테마 */
-    ["0000-00-00T00:00","ticket","출발 준비 · 레일바이크"],
+    ["0000-00-00T00:00","autumn","가을 숲길"],
+    ["2026-11-20T11:00","ticket","출발 · 레일바이크"],
     ["2026-11-20T18:00","stars","천문대에서 별 보기"],
     ["2026-11-21T07:00","autumn","남이섬에서 노는 중"],
     ["2026-11-21T16:00","camp","모닥불과 바베큐"],
     ["2026-11-22T07:00","album","주의 상 집회 · 돌아오는 날"],
-    ["2026-11-22T18:00","album","다녀온 추억"]
+    ["2026-11-22T18:00","autumn","가을 숲길"]
   ];
   function now(){
     var at=q.get("at"); if(at && /^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(at)) return at;
