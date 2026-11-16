@@ -48,7 +48,7 @@
   --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 :root[data-skin="autumn"]{
-  --img:url(img/20261120_bg-autumn.webp); --veil:rgba(250,244,234,.94); --veil0:rgba(250,244,234,0); --hl-bg:rgba(255,252,246,.8); --hl-line:rgba(166,80,31,.2);
+  --img:url(img/20261120_bg-autumn.webp); --veil:rgba(250,244,234,.94); --veil0:rgba(250,244,234,0); --hl-bg:rgba(255,252,246,.92); --hl-line:rgba(166,80,31,.2);
   --bg:#F6EFE3; --surface:#FFFCF6; --ink:#2B2118; --muted:#76665A; --line:#E6D9C6;
   --accent:#A6501F; --accent-ink:#FFFFFF; --soft:#F3E2CC;
   --meal:#F7D46A; --meal-ink:#4A3300; --now:#2F6B3A;
@@ -56,7 +56,7 @@
   --display:"Gowun Dodum",var(--body); --dscale:1; --radius:20px; color-scheme:light;
 }
 :root[data-skin="stars"]{
-  --img:url(img/20261120_bg-stars.webp); --veil:rgba(10,16,40,.86); --veil0:rgba(10,16,40,0); --hl-bg:rgba(13,20,48,.62); --hl-line:rgba(255,255,255,.18);
+  --img:url(img/20261120_bg-stars.webp); --veil:rgba(10,16,40,.86); --veil0:rgba(10,16,40,0); --hl-bg:rgba(13,20,48,.86); --hl-line:rgba(255,255,255,.18);
   --bg:#0D1430; --surface:#151E42; --ink:#ECEFFA; --muted:#A3ADCF; --line:#2A3563;
   --accent:#F5C451; --accent-ink:#1A1400; --soft:#1E2A57;
   --meal:#33306A; --meal-ink:#FFD978; --now:#7FE0C4;
@@ -64,7 +64,7 @@
   --display:"Gowun Dodum",var(--body); --dscale:1; --radius:18px; color-scheme:dark;
 }
 :root[data-skin="ticket"]{
-  --img:url(img/20261120_bg-ticket.webp); --veil:rgba(22,50,64,.92); --veil0:rgba(22,50,64,0); --hl-bg:rgba(22,50,64,.72); --hl-line:rgba(255,255,255,.2);
+  --img:url(img/20261120_bg-ticket.webp); --veil:rgba(22,50,64,.92); --veil0:rgba(22,50,64,0); --hl-bg:rgba(22,50,64,.9); --hl-line:rgba(255,255,255,.2);
   --bg:#E7EEF1; --surface:#FFFFFF; --ink:#18252E; --muted:#5C6C76; --line:#D3DEE3;
   --accent:#C8412C; --accent-ink:#FFFFFF; --soft:#F5E6E2;
   --meal:#FFE7A8; --meal-ink:#5A3D00; --now:#1E7A5B;
@@ -72,7 +72,7 @@
   --display:"Noto Sans KR",var(--body); --dscale:1; --radius:14px; color-scheme:light;
 }
 :root[data-skin="album"]{
-  --img:url(img/20261120_bg-album.webp); --veil:rgba(255,255,255,.95); --veil0:rgba(255,255,255,0); --hl-bg:rgba(231,238,248,.88); --hl-line:transparent;
+  --img:url(img/20261120_bg-album.webp); --veil:rgba(255,255,255,.95); --veil0:rgba(255,255,255,0); --hl-bg:rgba(231,238,248,.95); --hl-line:transparent;
   --bg:#FAF7F1; --surface:#FFFFFF; --ink:#22262E; --muted:#6B6F78; --line:#E6E2DA;
   --accent:#3A64A8; --accent-ink:#FFFFFF; --soft:#E7EEF8;
   --meal:#FFE3A1; --meal-ink:#553A00; --now:#C2456B;
@@ -80,7 +80,7 @@
   --display:"Nanum Pen Script",var(--body); --dscale:1.35; --radius:6px; color-scheme:light;
 }
 :root[data-skin="camp"]{
-  --img:url(img/20261120_bg-camp.webp); --veil:rgba(20,32,50,.86); --veil0:rgba(20,32,50,0); --hl-bg:rgba(20,32,50,.62); --hl-line:rgba(255,255,255,.18);
+  --img:url(img/20261120_bg-camp.webp); --veil:rgba(20,32,50,.86); --veil0:rgba(20,32,50,0); --hl-bg:rgba(20,32,50,.86); --hl-line:rgba(255,255,255,.18);
   --bg:#E8DCC2; --surface:#F7F0E0; --ink:#2C2A22; --muted:#6C6453; --line:#CDBD9C;
   --accent:#2F5D3A; --accent-ink:#FFFFFF; --soft:#E2D6B8;
   --meal:#F3A05A; --meal-ink:#3B1C00; --now:#B23A1E;
@@ -114,13 +114,13 @@ a{color:var(--accent)}
 .hero h1{font-size:calc(36px * var(--dscale))}
 .hero .date{font-size:16px;font-weight:500}
 .dday{align-self:flex-start;margin-top:6px;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;
-  background:var(--hl-bg);backdrop-filter:blur(4px);border:1px solid var(--hl-line)}
+  background:var(--hl-bg);border:1px solid var(--hl-line)}
 .highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.hl{display:block;color:inherit;text-decoration:none;background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(3px);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
+.hl{display:block;color:inherit;text-decoration:none;background:var(--hl-bg);border:1px solid var(--hl-line);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
 .hl b{display:block;font-size:13px;opacity:.85;font-weight:500}
 /* 앨범: 히어로를 폴라로이드처럼 */
 [data-skin="album"] .hero{padding:28px 0 20px;background:transparent}
-[data-skin="album"] .hero .wrap{background:linear-gradient(90deg,var(--veil) 0%,var(--veil) 34%,var(--veil0) 72%),var(--img) right 60%/cover no-repeat,#fff;border:10px solid #fff;padding:22px 20px 26px;box-shadow:0 6px 22px rgba(30,30,40,.12);border-radius:4px;transform:rotate(-1deg);margin:8px auto 0;max-width:728px}
+[data-skin="album"] .hero .wrap{background:linear-gradient(90deg,var(--veil) 0%,var(--veil) 34%,var(--veil0) 72%),var(--img) right 60%/cover no-repeat,#fff;border:10px solid #fff;padding:22px 20px 26px;box-shadow:0 6px 22px rgba(30,30,40,.12);border-radius:4px;margin:8px auto 0;max-width:728px}
 [data-skin="album"] .hero .dday,[data-skin="album"] .hl{background:var(--soft);border-color:transparent}
 [data-skin="ticket"] .hero h1{font-weight:700;letter-spacing:-.01em}
 [data-skin="ticket"] .hero .kicker{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
@@ -185,7 +185,7 @@ ol.tl li.meal + li{border-top-color:transparent}
 ol.tl li.meal .t,ol.tl li.meal small{color:var(--meal-ink)}
 .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--meal-ink);border:1.5px solid currentColor;border-radius:5px;padding:0 5px;margin-right:6px;vertical-align:1px}
 .nowcard{display:none;align-self:stretch;flex-direction:column;gap:2px;margin-top:4px;padding:12px 14px;border-radius:14px;color:inherit;text-decoration:none;
-  background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(4px);box-shadow:inset 4px 0 0 var(--now)}
+  background:var(--hl-bg);border:1px solid var(--hl-line);box-shadow:inset 4px 0 0 var(--now)}
 .nowcard.on{display:flex}
 .nowcard .k{font-size:12px;font-weight:700;opacity:.8}
 .nowcard .v{font-size:17px;font-weight:700;line-height:1.35}
