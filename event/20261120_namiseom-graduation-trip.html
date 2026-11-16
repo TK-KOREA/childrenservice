@@ -116,7 +116,7 @@ a{color:var(--accent)}
 .dday{align-self:flex-start;margin-top:6px;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;
   background:var(--hl-bg);backdrop-filter:blur(4px);border:1px solid var(--hl-line)}
 .highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.hl{background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(3px);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
+.hl{display:block;color:inherit;text-decoration:none;background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(3px);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
 .hl b{display:block;font-size:13px;opacity:.85;font-weight:500}
 /* 앨범: 히어로를 폴라로이드처럼 */
 [data-skin="album"] .hero{padding:28px 0 20px;background:transparent}
@@ -128,7 +128,7 @@ a{color:var(--accent)}
 /* ── 테마 고르기 ───────────────────────────── */
 .skins{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 0 4px}
 .skins > span{font-size:13px;color:var(--muted);margin-right:2px}
-.skin-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 6px;border-radius:999px;
+.skin-btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border-radius:999px;
   border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 14px var(--body);cursor:pointer}
 .skin-btn i{width:24px;height:24px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
 .skin-btn[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset;font-weight:700}
@@ -138,7 +138,7 @@ a{color:var(--accent)}
 .daynav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);margin-top:10px}
 .daynav .wrap{display:grid;grid-template-columns:repeat(5,auto);gap:6px;padding-top:10px;padding-bottom:10px;overflow-x:auto;justify-content:start}
-.daynav a{display:flex;align-items:center;justify-content:center;gap:4px;min-height:40px;padding:0 14px;border-radius:999px;
+.daynav a{display:flex;align-items:center;justify-content:center;gap:4px;min-height:44px;padding:0 14px;border-radius:999px;
   text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);font-size:15px;font-weight:500;white-space:nowrap}
 .daynav a.today{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
 
@@ -184,6 +184,12 @@ ol.tl li.meal{background:var(--meal);border-radius:12px;border-top-color:transpa
 ol.tl li.meal + li{border-top-color:transparent}
 ol.tl li.meal .t,ol.tl li.meal small{color:var(--meal-ink)}
 .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--meal-ink);border:1.5px solid currentColor;border-radius:5px;padding:0 5px;margin-right:6px;vertical-align:1px}
+.nowcard{display:none;align-self:stretch;flex-direction:column;gap:2px;margin-top:4px;padding:12px 14px;border-radius:14px;color:inherit;text-decoration:none;
+  background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(4px);box-shadow:inset 4px 0 0 var(--now)}
+.nowcard.on{display:flex}
+.nowcard .k{font-size:12px;font-weight:700;opacity:.8}
+.nowcard .v{font-size:17px;font-weight:700;line-height:1.35}
+.nowcard .n{font-size:14px;opacity:.85}
 .pend{display:inline-block;font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:1px}
 ol.tl li.now{box-shadow:inset 4px 0 0 var(--now)}
 ol.tl li.now::after{content:"지금";position:absolute;right:8px;top:10px;font-size:12px;font-weight:700;color:#fff;background:var(--now);border-radius:999px;padding:1px 8px}
@@ -191,14 +197,18 @@ ol.tl li.next::after{content:"다음";position:absolute;right:8px;top:10px;font-
 ol.tl li.now .d,ol.tl li.next .d{padding-right:44px}
 
 /* ── 식단 ───────────────────────────── */
-.meals{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.meal-card{display:flex;flex-direction:column;gap:6px;padding:16px}
-.meal-card .when{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted)}
-.meal-card .where-tag{font-size:12px;font-weight:700;border-radius:999px;padding:1px 9px;background:var(--soft);color:var(--ink)}
-.meal-card .where-tag.out{background:var(--meal);color:var(--meal-ink)}
-.meal-card h3{font-size:calc(21px * var(--dscale))}
-.meal-card p{font-size:14px;color:var(--muted);line-height:1.5}
-.meal-card .emoji{font-size:28px;line-height:1}
+.mealgrid{padding:6px}
+.mealgrid table{width:100%;border-collapse:separate;border-spacing:4px;table-layout:fixed}
+.mealgrid th{font-size:13px;font-weight:700;color:var(--muted);padding:4px 2px;text-align:center}
+.mealgrid th[scope=row]{width:40px;text-align:left;padding-left:6px}
+.mealgrid td{background:var(--soft);border-radius:12px;padding:10px 8px;vertical-align:top;font-size:14px;font-weight:700;line-height:1.35}
+.mealgrid td.out{background:var(--meal);color:var(--meal-ink)}
+.mealgrid td.home{background:transparent;color:var(--muted);font-weight:500;text-align:center;vertical-align:middle}
+.mealgrid td i{display:block;font-style:normal;font-size:20px;margin-bottom:2px}
+.mealgrid td small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:2px}
+.legend{display:flex;gap:12px;font-size:13px;color:var(--muted);padding:4px 10px 6px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--soft)}
+.legend span.out::before{background:var(--meal)}
 
 /* ── 꼬치·장소·챙길 것 ───────────────────────────── */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -209,6 +219,13 @@ ol.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:
 ol.steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px}
 .sauce{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
 .sauce div{background:var(--soft);border-radius:12px;padding:12px;font-size:14px;line-height:1.5}
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{border-top:1px solid var(--line)}
+ul.check li:first-child{border-top:0}
+ul.check label{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:center;min-height:44px;padding:4px 0;cursor:pointer}
+ul.check input{width:20px;height:20px;margin:0;accent-color:var(--accent)}
+ul.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.packed{font-size:13px;font-weight:700;color:var(--accent)}
 .sauce b{display:block;font-size:15px;margin-bottom:2px}
 .places{display:flex;flex-direction:column}
 .place{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
@@ -216,10 +233,11 @@ ol.steps li::before{content:counter(s);display:grid;place-items:center;width:28p
 .place b{font-weight:700}
 .place small{grid-column:1;color:var(--muted);font-size:14px}
 .place .acts{grid-row:1 / span 2;grid-column:2;display:flex;gap:6px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;min-width:44px;padding:0 12px;border-radius:999px;
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:56px;padding:0 14px;border-radius:999px;
   border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:14px;font-weight:500;text-decoration:none;white-space:nowrap}
 footer{border-top:1px solid var(--line);padding:22px 0 36px;font-size:14px;color:var(--muted)}
-footer .wrap{display:flex;flex-direction:column;gap:6px}
+footer .wrap{display:flex;flex-direction:column;gap:10px}
+footer .skins{padding:0}
 
 @media (max-width:600px){
   .hero{padding:30px 0 22px;background:linear-gradient(180deg,var(--veil) 0%,var(--veil) 30%,var(--veil0) 52%),var(--img) 70% bottom/cover no-repeat,var(--hero)}
@@ -236,8 +254,6 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   .t{font-size:14px}
   .day-top{padding:16px 16px 12px}
   .day-top .big{font-size:calc(32px * var(--dscale))}
-  .place{grid-template-columns:1fr}
-  .place .acts{grid-row:auto;grid-column:1;margin-top:4px}
 }
 @media print{
   .daynav,.skins{display:none}
@@ -251,27 +267,17 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   <div class="wrap">
     <p class="kicker">안양교회 유초등부 · 6학년 졸업여행</p>
     <h1>가평·남이섬 2박 3일</h1>
-    <p class="date">2026년 11월 20일(금) ~ 22일(주일)</p>
-    <p class="dday" id="dday" aria-live="polite">함께 떠나요</p>
+    <p class="date">11월 20일(금) 12시 안양 → 22일(주일) 오후 귀가</p>
+    <p class="dday" id="dday">함께 떠나요</p>
+    <a class="nowcard" id="nowcard" href="#fri" aria-live="polite"><span class="k">지금</span><span class="v"></span><span class="n"></span></a>
     <div class="highlights">
-      <div class="hl"><b>금</b>레일바이크 타고 별 보기</div>
-      <div class="hl"><b>토</b>남이섬, 저녁엔 숯불 바베큐</div>
-      <div class="hl"><b>주일</b>주의 상 집회, 돈까스 먹고 귀가</div>
+      <a class="hl" href="#fri"><b>금</b>레일바이크 타고 별 보기</a>
+      <a class="hl" href="#sat"><b>토</b>남이섬, 저녁엔 숯불 바베큐</a>
+      <a class="hl" href="#sun"><b>주일</b>주의 상 집회, 돈까스 먹고 귀가</a>
     </div>
   </div>
 </header>
 
-<div class="wrap">
-  <div class="skins" role="group" aria-label="페이지 테마 고르기">
-    <span>테마</span>
-    <button class="skin-btn" type="button" data-pick="auto"><i style="background:conic-gradient(#C8412C 0 20%,#151E42 0 40%,#F7D46A 0 60%,#2F5D3A 0 80%,#3A64A8 0)"></i><span class="auto-label">자동</span></button>
-    <button class="skin-btn" type="button" data-pick="autumn"><i style="background:linear-gradient(135deg,#F7D46A,#A6501F)"></i>가을 숲길</button>
-    <button class="skin-btn" type="button" data-pick="stars"><i style="background:radial-gradient(circle at 70% 30%,#F5C451 0 18%,#151E42 20%)"></i>별밤</button>
-    <button class="skin-btn" type="button" data-pick="ticket"><i style="background:linear-gradient(90deg,#27556B 50%,#C8412C 50%)"></i>승차권</button>
-    <button class="skin-btn" type="button" data-pick="album"><i style="background:#fff;box-shadow:inset 0 0 0 4px #3A64A8"></i>졸업 앨범</button>
-    <button class="skin-btn" type="button" data-pick="camp"><i style="background:linear-gradient(135deg,#2F5D3A 50%,#F3A05A 50%)"></i>캠프 노트</button>
-  </div>
-</div>
 
 <nav class="daynav" aria-label="바로가기">
   <div class="wrap">
@@ -288,7 +294,6 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <section aria-labelledby="h-sched">
   <div class="sec-head">
     <h2 id="h-sched">일정</h2>
-    <p class="muted">색칠된 줄이 식사예요. <span class="pend" style="margin-left:0">확인 중</span> 표시는 시간이 바뀔 수 있어요.</p>
   </div>
   <div class="days">
 
@@ -301,7 +306,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <li class="meal" data-t="12:00"><span class="t">12:00</span><span class="d"><span class="tag">점심</span><b>유부초밥</b><small>안양에서 함께 먹고 출발해요</small></span></li>
         <li data-t="13:00"><span class="t">13:00</span><span class="d">안양 출발<small>가평까지 약 2시간</small></span></li>
         <li data-t="15:00"><span class="t">15:00</span><span class="d">가평레일파크 도착</span></li>
-        <li data-t="15:30"><span class="t">15:30</span><span class="d"><b>가평 레일바이크</b><span class="pend">확인 중</span><small>4인승 3대, 왕복 약 1시간</small></span></li>
+        <li data-t="15:30"><span class="t">15:30</span><span class="d"><b>가평 레일바이크</b><small>4인승 3대, 왕복 약 1시간</small></span></li>
         <li data-t="16:30"><span class="t">16:30</span><span class="d">숙소 체크인</span></li>
         <li class="meal" data-t="17:00"><span class="t">17:00</span><span class="d"><span class="tag">저녁</span><b>피자·파스타</b><small>뚜띠쿠치나 가평점</small></span></li>
         <li data-t="18:00"><span class="t">18:00</span><span class="d">천문대로 출발<small>마지막 길은 좁은 오르막이에요</small></span></li>
@@ -323,9 +328,9 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <li data-t="10:10"><span class="t">10:10</span><span class="d"><b>나눔열차, 단체 사진</b><small>메타세쿼이아길</small></span></li>
         <li data-t="10:30"><span class="t">10:30</span><span class="d">하늘자전거</span></li>
         <li data-t="10:50"><span class="t">10:50</span><span class="d"><b>자전거 타기</b><small>11:50까지 반납</small></span></li>
-        <li class="meal" data-t="12:00"><span class="t">12:00</span><span class="d"><span class="tag">점심</span><b>한식</b><span class="pend">확인 중</span><small>한식당 남문 (섬 안, 밥플렉스 맞은편)</small></span></li>
+        <li class="meal" data-t="12:00"><span class="t">12:00</span><span class="d"><span class="tag">점심</span><b>한식</b><small>한식당 남문 (섬 안, 밥플렉스 맞은편)</small></span></li>
         <li data-t="14:00"><span class="t">14:00</span><span class="d"><b>조별 체험</b><small>형제 조: 모험의 숲 또는 모터보트<br>자매 조: 한복·교복 입어 보기, 공예원</small></span></li>
-        <li data-t="15:00"><span class="t">15:00</span><span class="d">탈곡 체험, 공연, 장터 구경<span class="pend">확인 중</span></span></li>
+        <li data-t="15:00"><span class="t">15:00</span><span class="d">탈곡 체험, 공연, 장터 구경</span></li>
         <li data-t="16:00"><span class="t">16:00</span><span class="d"><b>모닥불 마시멜로</b><small>다 같이 모인 뒤 숙소로 이동</small></span></li>
         <li class="meal" data-t="18:00"><span class="t">저녁</span><span class="d"><span class="tag">저녁</span><b>숯불 바베큐</b><small>내가 만든 꼬치 굽기, 스모어까지</small></span></li>
         <li data-t="20:00"><span class="t">20:00</span><span class="d">숙소 레크리에이션<small>22:00까지</small></span></li>
@@ -352,23 +357,23 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <section id="meals" aria-labelledby="h-meals">
   <div class="sec-head">
     <h2 id="h-meals">무엇을 먹을까</h2>
-    <p class="muted">식당 네 번, 숙소에서 세 번 먹어요.</p>
   </div>
-  <div class="meals">
-    <div class="card meal-card"><p class="when">금 점심 <span class="where-tag out">포장</span></p><span class="emoji" aria-hidden="true">🍱</span><h3>유부초밥</h3><p>정직유부 안양IS비즈타워점에서 받아 출발 전에 먹어요</p></div>
-    <div class="card meal-card"><p class="when">금 저녁 <span class="where-tag out">식당</span></p><span class="emoji" aria-hidden="true">🍕</span><h3>피자·파스타</h3><p>뚜띠쿠치나 가평점. 먹고 천문대로 가요</p></div>
-    <div class="card meal-card"><p class="when">토 아침 <span class="where-tag">숙소</span></p><span class="emoji" aria-hidden="true">🍞</span><h3>토스트·계란·시리얼</h3><p>우유와 함께 간단히 먹고 남이섬으로</p></div>
-    <div class="card meal-card"><p class="when">토 점심 <span class="where-tag out">식당</span></p><span class="emoji" aria-hidden="true">🍚</span><h3>한식</h3><p>남이섬 안 한식당 남문</p></div>
-    <div class="card meal-card"><p class="when">토 저녁 <span class="where-tag">숙소</span></p><span class="emoji" aria-hidden="true">🔥</span><h3>숯불 바베큐</h3><p>삼겹살·목살, 소시지, 새우, 구이용 치즈, 직접 만드는 꼬치</p></div>
-    <div class="card meal-card"><p class="when">주일 아침 <span class="where-tag">숙소</span></p><span class="emoji" aria-hidden="true">🍳</span><h3>누룽지·김·계란프라이</h3><p>속이 편한 아침</p></div>
-    <div class="card meal-card"><p class="when">주일 점심 <span class="where-tag out">식당</span></p><span class="emoji" aria-hidden="true">🍽️</span><h3>수제 돈까스</h3><p>수제돈까스마루 (청평). 먹고 안양으로</p></div>
+  <div class="card mealgrid">
+    <table>
+      <thead><tr><th scope="col"><span class="sr">끼니</span></th><th scope="col">금 20</th><th scope="col">토 21</th><th scope="col">주일 22</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">아침</th><td class="home">집에서</td><td><i aria-hidden="true">🍞</i>토스트·시리얼<small>숙소</small></td><td><i aria-hidden="true">🍳</i>누룽지·계란<small>숙소</small></td></tr>
+        <tr><th scope="row">점심</th><td class="out"><i aria-hidden="true">🍱</i>유부초밥<small>안양</small></td><td class="out"><i aria-hidden="true">🍚</i>한식<small>남이섬 남문</small></td><td class="out"><i aria-hidden="true">🍽️</i>수제 돈까스<small>청평</small></td></tr>
+        <tr><th scope="row">저녁</th><td class="out"><i aria-hidden="true">🍕</i>피자·파스타<small>뚜띠쿠치나</small></td><td><i aria-hidden="true">🔥</i>숯불 바베큐<small>숙소</small></td><td class="home">집에서</td></tr>
+      </tbody>
+    </table>
+    <p class="legend"><span class="out">식당</span><span>숙소에서 만들어 먹어요</span></p>
   </div>
 </section>
 
 <section aria-labelledby="h-bbq">
   <div class="sec-head">
     <h2 id="h-bbq">토요일 밤, 꼬치 만들기</h2>
-    <p class="muted">바베큐에서 꼬치는 각자 만들어요.</p>
   </div>
   <div class="card">
     <div class="two">
@@ -390,9 +395,9 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
       </div>
     </div>
     <div class="sauce">
-      <div><b>간장 버터</b>간장 2 · 올리고당 2 · 버터 1큰술</div>
-      <div><b>순한 매콤달콤</b>케첩 3 · 고추장 1 · 올리고당 2큰술 · 간장 1작은술</div>
-      <div><b>꿀 치즈</b>떡꼬치에 꿀을 바르고 치즈 가루</div>
+      <div><b>간장 버터</b>달콤 짭짤</div>
+      <div><b>순한 매콤달콤</b>케첩에 고추장 조금</div>
+      <div><b>꿀 치즈</b>꿀 바르고 치즈 가루</div>
     </div>
   </div>
 </section>
@@ -400,24 +405,24 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <section id="bring" aria-labelledby="h-bring">
   <div class="sec-head">
     <h2 id="h-bring">챙길 것</h2>
-    <p class="muted">11월 가평은 밤에 많이 추워요. 천문대와 모닥불, 바베큐가 모두 밖이에요.</p>
+    <p class="muted">천문대·모닥불·바베큐가 모두 밤에 밖이라 추워요. <span class="packed" id="packed"></span></p>
   </div>
   <div class="two">
     <div class="card">
       <h3>입을 것</h3>
-      <ul class="list">
-        <li>두꺼운 겉옷, 모자·장갑</li>
-        <li>자전거 타기 편한 바지와 운동화</li>
-        <li>갈아입을 옷 2벌, 잠옷, 양말</li>
+      <ul class="check">
+        <li><label><input type="checkbox" data-k="b1"><span>두꺼운 겉옷, 모자·장갑</span></label></li>
+        <li><label><input type="checkbox" data-k="b2"><span>자전거 타기 편한 바지와 운동화</span></label></li>
+        <li><label><input type="checkbox" data-k="b3"><span>갈아입을 옷 2벌, 잠옷, 양말</span></label></li>
       </ul>
     </div>
     <div class="card">
       <h3>가방에 넣을 것</h3>
-      <ul class="list">
-        <li>성경, 찬송</li>
-        <li>세면도구, 수건</li>
-        <li>멀미하는 사람은 멀미약 (차 타기 30분 전에)</li>
-        <li>휴대폰 충전기, 개인 약</li>
+      <ul class="check">
+        <li><label><input type="checkbox" data-k="b4"><span>성경, 찬송</span></label></li>
+        <li><label><input type="checkbox" data-k="b5"><span>세면도구, 수건</span></label></li>
+        <li><label><input type="checkbox" data-k="b6"><span>멀미하는 사람은 멀미약 (차 타기 30분 전에)</span></label></li>
+        <li><label><input type="checkbox" data-k="b7"><span>휴대폰 충전기, 개인 약</span></label></li>
       </ul>
     </div>
   </div>
@@ -426,13 +431,12 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <section aria-labelledby="h-places">
   <div class="sec-head">
     <h2 id="h-places">가는 곳</h2>
-    <p class="muted">이름을 누르면 네이버 지도에서 열려요.</p>
   </div>
   <div class="card places">
     <div class="place"><b>가평레일파크</b><small>가평읍 장터길 14</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EA%B0%80%ED%8F%89%EB%A0%88%EC%9D%BC%ED%8C%8C%ED%81%AC" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:0315827788">전화</a></span></div>
     <div class="place"><b>뚜띠쿠치나 가평점</b><small>가평읍 호반로 2590-20</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EB%9A%9C%EB%9D%A0%EC%BF%A0%EC%B9%98%EB%82%98%20%EA%B0%80%ED%8F%89%EC%A0%90" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:050714913359">전화</a></span></div>
     <div class="place"><b>자연과별 가평천문대</b><small>북면 백둔로342번길 115-33</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EC%9E%90%EC%97%B0%EA%B3%BC%EB%B3%84%20%EA%B0%80%ED%8F%89%EC%B2%9C%EB%AC%B8%EB%8C%80" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:0315814001">전화</a></span></div>
-    <div class="place"><b>남이섬</b><small>가평 선착장 · 한식당 남문 031-580-8055</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EB%82%A8%EC%9D%B4%EC%84%AC%20%EC%84%A0%EC%B0%A9%EC%9E%A5" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:0315808000">전화</a></span></div>
+    <div class="place"><b>남이섬</b><small>가평 선착장에서 배로 들어가요</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EB%82%A8%EC%9D%B4%EC%84%AC%20%EC%84%A0%EC%B0%A9%EC%9E%A5" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:0315808000">전화</a></span></div>
     <div class="place"><b>수제돈까스마루</b><small>청평면 창말길 13</small><span class="acts"><a class="btn" href="https://map.naver.com/p/search/%EC%88%98%EC%A0%9C%EB%8F%88%EA%B9%8C%EC%8A%A4%EB%A7%88%EB%A3%A8%20%EC%B2%AD%ED%8F%89" target="_blank" rel="noopener">지도</a><a class="btn" href="tel:0315856513">전화</a></span></div>
   </div>
 </section>
@@ -441,8 +445,16 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
 <footer>
   <div class="wrap">
-    <p>시간은 계획 기준이에요. 날씨와 현장 상황에 따라 바뀔 수 있어요.</p>
-    <p>테마는 지금 일정에 맞춰 저절로 바뀌어요. 출발 전과 금요일 낮엔 승차권, 금요일 밤엔 별밤, 토요일 남이섬에선 가을 숲길, 토요일 저녁엔 캠프 노트, 주일엔 졸업 앨범이에요.</p>
+    <p>시간은 날씨와 현장 상황에 따라 바뀔 수 있어요.</p>
+  <div class="skins" role="group" aria-label="페이지 테마 고르기">
+      <span>테마</span>
+      <button class="skin-btn" type="button" data-pick="auto"><i style="background:conic-gradient(#C8412C 0 20%,#151E42 0 40%,#F7D46A 0 60%,#2F5D3A 0 80%,#3A64A8 0)"></i><span class="auto-label">자동</span></button>
+      <button class="skin-btn" type="button" data-pick="autumn"><i style="background:linear-gradient(135deg,#F7D46A,#A6501F)"></i>가을 숲길</button>
+      <button class="skin-btn" type="button" data-pick="stars"><i style="background:radial-gradient(circle at 70% 30%,#F5C451 0 18%,#151E42 20%)"></i>별밤</button>
+      <button class="skin-btn" type="button" data-pick="ticket"><i style="background:linear-gradient(90deg,#27556B 50%,#C8412C 50%)"></i>승차권</button>
+      <button class="skin-btn" type="button" data-pick="album"><i style="background:#fff;box-shadow:inset 0 0 0 4px #3A64A8"></i>졸업 앨범</button>
+      <button class="skin-btn" type="button" data-pick="camp"><i style="background:linear-gradient(135deg,#2F5D3A 50%,#F3A05A 50%)"></i>캠프 노트</button>
+    </div>
   </div>
 </footer>
 
@@ -491,6 +503,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     document.querySelectorAll(".daynav a[data-date]").forEach(function(a){ a.classList.toggle("today",a.dataset.date===now.date); });
     document.querySelectorAll("ol.tl li").forEach(function(li){ li.classList.remove("now","next"); });
     var day=document.querySelector('.day[data-date="'+now.date+'"]');
+    document.getElementById("nowcard").classList.remove("on");
     if(!day) return;
     var items=[].slice.call(day.querySelectorAll("li[data-t]")), cur=-1;
     items.forEach(function(li,i){
@@ -499,12 +512,26 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     });
     if(cur>=0) items[cur].classList.add("now");
     if(cur+1<items.length) items[cur+1].classList.add("next");
+    var nc=document.getElementById("nowcard");
+    function label(li){ var d=li.querySelector(".d").cloneNode(true); d.querySelectorAll(".tag,small").forEach(function(x){x.remove();}); return d.textContent.trim(); }
+    var nx=items[cur+1];
+    nc.querySelector(".k").textContent = cur>=0 ? "지금" : "다음";
+    nc.querySelector(".v").textContent = cur>=0 ? label(items[cur]) : (nx ? nx.querySelector(".t").textContent+" "+label(nx) : "");
+    nc.querySelector(".n").textContent = (cur>=0 && nx) ? "다음 "+nx.querySelector(".t").textContent+" · "+label(nx) : "";
+    nc.href="#"+day.id;
+    nc.classList.add("on");
   }
   update(); setInterval(update,60000);
 
-  /* 여행 기간에 처음 열면 오늘 일정으로 이동 */
-  var n=kst(), d=document.querySelector('.day[data-date="'+n.date+'"]');
-  if(d && !location.hash) setTimeout(function(){ d.scrollIntoView(); },150);
+  /* 챙길 것 체크는 이 기기에만 저장 */
+  var PK="gt2026-bring", st={}, boxes=document.querySelectorAll("ul.check input");
+  try{ st=JSON.parse(localStorage.getItem(PK)||"{}")||{}; }catch(e){}
+  function packed(){ var n=0; boxes.forEach(function(b){ if(b.checked) n++; }); document.getElementById("packed").textContent = n ? n+" / "+boxes.length+" 챙겼어요" : ""; }
+  boxes.forEach(function(b){
+    b.checked=!!st[b.dataset.k];
+    b.addEventListener("change",function(){ st[b.dataset.k]=b.checked; try{ localStorage.setItem(PK,JSON.stringify(st)); }catch(e){} packed(); });
+  });
+  packed();
 })();
 </script>
 </body>
