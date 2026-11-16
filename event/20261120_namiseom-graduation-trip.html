@@ -9,15 +9,33 @@
 <meta property="og:description" content="11월 20일(금)~22일(주일). 레일바이크, 별 보기, 남이섬, 숯불 바베큐. 일정과 식단을 한눈에.">
 <meta name="description" content="11월 20일(금)~22일(주일). 레일바이크, 별 보기, 남이섬, 숯불 바베큐. 일정과 식단을 한눈에.">
 <meta name="theme-color" content="#F6EFE3">
-<link rel="preload" as="image" href="img/20261120_bg-autumn.webp">
 <link rel="icon" href="../favicon.png" type="image/png">
 <script>
-/* 테마를 먼저 정해 깜빡임을 막는다. 주소의 ?skin= 이 가장 우선, 다음은 이 기기에 저장된 선택 */
+/* 테마는 한국 시간 기준 지금 일정에 맞춰 자동으로 정한다. 주소에 ?skin= 이 있으면 그것을 따른다.
+   ?at=2026-11-21T10:00 처럼 붙이면 그 시각인 것처럼 미리 볼 수 있다(확인용). */
 (function(){
-  var ok={autumn:1,stars:1,ticket:1,album:1,camp:1}, s=null;
-  try{ s=new URLSearchParams(location.search).get("skin"); }catch(e){}
-  if(!ok[s]){ try{ s=localStorage.getItem("gt2026-skin"); }catch(e){} }
-  if(ok[s]) document.documentElement.setAttribute("data-skin",s);
+  var q; try{ q=new URLSearchParams(location.search); }catch(e){ q={get:function(){return null;}}; }
+  var SCHED=[ /* 이 시각부터 이 테마 */
+    ["0000-00-00T00:00","ticket","출발 준비 · 레일바이크"],
+    ["2026-11-20T18:00","stars","천문대에서 별 보기"],
+    ["2026-11-21T07:00","autumn","남이섬에서 노는 중"],
+    ["2026-11-21T16:00","camp","모닥불과 바베큐"],
+    ["2026-11-22T07:00","album","주의 상 집회 · 돌아오는 날"],
+    ["2026-11-22T18:00","album","다녀온 추억"]
+  ];
+  function now(){
+    var at=q.get("at"); if(at && /^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(at)) return at;
+    var p={}; new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false})
+      .formatToParts(new Date()).forEach(function(x){ p[x.type]=x.value; });
+    return p.year+"-"+p.month+"-"+p.day+"T"+("0"+(parseInt(p.hour,10)%24)).slice(-2)+":"+p.minute;
+  }
+  function auto(){ var n=now(), r=SCHED[0]; SCHED.forEach(function(x){ if(n>=x[0]) r=x; }); return {skin:r[1],why:r[2]}; }
+  var ok={autumn:1,stars:1,ticket:1,album:1,camp:1}, s=q.get("skin");
+  window.GT={now:now,auto:auto,fixed:!!ok[s]};
+  if(!ok[s]) s=auto().skin;
+  document.documentElement.setAttribute("data-skin",s);
+  var l=document.createElement("link"); l.rel="preload"; l.as="image"; l.href="img/20261120_bg-"+s+".webp"; document.head.appendChild(l);
+  try{ localStorage.removeItem("gt2026-skin"); }catch(e){}
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,7 +127,7 @@ a{color:var(--accent)}
 
 /* ── 테마 고르기 ───────────────────────────── */
 .skins{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 0 4px}
-.skins span{font-size:13px;color:var(--muted);margin-right:2px}
+.skins > span{font-size:13px;color:var(--muted);margin-right:2px}
 .skin-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 6px;border-radius:999px;
   border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 14px var(--body);cursor:pointer}
 .skin-btn i{width:24px;height:24px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
@@ -246,6 +264,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <div class="wrap">
   <div class="skins" role="group" aria-label="페이지 테마 고르기">
     <span>테마</span>
+    <button class="skin-btn" type="button" data-pick="auto"><i style="background:conic-gradient(#C8412C 0 20%,#151E42 0 40%,#F7D46A 0 60%,#2F5D3A 0 80%,#3A64A8 0)"></i><span class="auto-label">자동</span></button>
     <button class="skin-btn" type="button" data-pick="autumn"><i style="background:linear-gradient(135deg,#F7D46A,#A6501F)"></i>가을 숲길</button>
     <button class="skin-btn" type="button" data-pick="stars"><i style="background:radial-gradient(circle at 70% 30%,#F5C451 0 18%,#151E42 20%)"></i>별밤</button>
     <button class="skin-btn" type="button" data-pick="ticket"><i style="background:linear-gradient(90deg,#27556B 50%,#C8412C 50%)"></i>승차권</button>
@@ -423,26 +442,26 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <footer>
   <div class="wrap">
     <p>시간은 계획 기준이에요. 날씨와 현장 상황에 따라 바뀔 수 있어요.</p>
-    <p>테마는 이 기기에만 저장돼요. 다른 사람에게 같은 테마로 보내려면 주소 끝에 <code>?skin=stars</code>처럼 붙여 보내세요.</p>
+    <p>테마는 지금 일정에 맞춰 저절로 바뀌어요. 출발 전과 금요일 낮엔 승차권, 금요일 밤엔 별밤, 토요일 남이섬에선 가을 숲길, 토요일 저녁엔 캠프 노트, 주일엔 졸업 앨범이에요.</p>
   </div>
 </footer>
 
 <script>
 (function(){
-  var root=document.documentElement, KEY="gt2026-skin";
+  var root=document.documentElement;
   var colors={autumn:"#F6EFE3",stars:"#0D1430",ticket:"#1F3C4D",album:"#FAF7F1",camp:"#22392B"};
-  var btns=document.querySelectorAll(".skin-btn");
-  function apply(s){
+  var btns=document.querySelectorAll(".skin-btn"), autoLabel=document.querySelector(".auto-label");
+  var mode=GT.fixed ? root.getAttribute("data-skin") : "auto";  /* 직접 고른 테마는 이번에 보는 동안만 유지 */
+  function apply(){
+    var a=GT.auto(), s=mode==="auto" ? a.skin : mode;
     root.setAttribute("data-skin",s);
-    btns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.pick===s ? "true":"false"); });
+    autoLabel.textContent="자동 · "+a.why;
+    btns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.pick===mode ? "true":"false"); });
     var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute("content",colors[s]);
+    notch && notch();
   }
-  apply(root.getAttribute("data-skin")||"autumn");
   btns.forEach(function(b){
-    b.addEventListener("click",function(){
-      apply(b.dataset.pick);
-      try{ localStorage.setItem(KEY,b.dataset.pick); }catch(e){}
-    });
+    b.addEventListener("click",function(){ mode=b.dataset.pick; apply(); });
   });
 
   /* 승차권 테마의 펀치 구멍을 머리글 아래 선에 맞춘다 */
@@ -456,11 +475,11 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 
   /* 한국 시간 기준 오늘 날짜와 지금 시각 */
   function kst(){
-    var p={}; new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false})
-      .formatToParts(new Date()).forEach(function(x){ p[x.type]=x.value; });
-    return {date:p.year+"-"+p.month+"-"+p.day, min:(parseInt(p.hour,10)%24)*60+parseInt(p.minute,10)};
+    var n=GT.now();
+    return {date:n.slice(0,10), min:(+n.slice(11,13))*60+(+n.slice(14,16))};
   }
   function update(){
+    apply();
     var now=kst(), dd=document.getElementById("dday");
     var start=Date.UTC(2026,10,20), today=Date.UTC(+now.date.slice(0,4),+now.date.slice(5,7)-1,+now.date.slice(8,10));
     var diff=Math.round((start-today)/86400000);
