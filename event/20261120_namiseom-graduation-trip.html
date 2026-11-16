@@ -9,6 +9,7 @@
 <meta property="og:description" content="11월 20일(금)~22일(주일). 레일바이크, 별 보기, 남이섬, 숯불 바베큐. 일정과 식단을 한눈에.">
 <meta name="description" content="11월 20일(금)~22일(주일). 레일바이크, 별 보기, 남이섬, 숯불 바베큐. 일정과 식단을 한눈에.">
 <meta name="theme-color" content="#F6EFE3">
+<link rel="preload" as="image" href="img/20261120_bg-autumn.webp">
 <link rel="icon" href="../favicon.png" type="image/png">
 <script>
 /* 테마를 먼저 정해 깜빡임을 막는다. 주소의 ?skin= 이 가장 우선, 다음은 이 기기에 저장된 선택 */
@@ -29,6 +30,7 @@
   --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 :root[data-skin="autumn"]{
+  --img:url(img/20261120_bg-autumn.webp); --veil:rgba(250,244,234,.94); --veil0:rgba(250,244,234,0); --hl-bg:rgba(255,252,246,.8); --hl-line:rgba(166,80,31,.2);
   --bg:#F6EFE3; --surface:#FFFCF6; --ink:#2B2118; --muted:#76665A; --line:#E6D9C6;
   --accent:#A6501F; --accent-ink:#FFFFFF; --soft:#F3E2CC;
   --meal:#F7D46A; --meal-ink:#4A3300; --now:#2F6B3A;
@@ -36,6 +38,7 @@
   --display:"Gowun Dodum",var(--body); --dscale:1; --radius:20px; color-scheme:light;
 }
 :root[data-skin="stars"]{
+  --img:url(img/20261120_bg-stars.webp); --veil:rgba(10,16,40,.86); --veil0:rgba(10,16,40,0); --hl-bg:rgba(13,20,48,.62); --hl-line:rgba(255,255,255,.18);
   --bg:#0D1430; --surface:#151E42; --ink:#ECEFFA; --muted:#A3ADCF; --line:#2A3563;
   --accent:#F5C451; --accent-ink:#1A1400; --soft:#1E2A57;
   --meal:#33306A; --meal-ink:#FFD978; --now:#7FE0C4;
@@ -43,6 +46,7 @@
   --display:"Gowun Dodum",var(--body); --dscale:1; --radius:18px; color-scheme:dark;
 }
 :root[data-skin="ticket"]{
+  --img:url(img/20261120_bg-ticket.webp); --veil:rgba(22,50,64,.92); --veil0:rgba(22,50,64,0); --hl-bg:rgba(22,50,64,.72); --hl-line:rgba(255,255,255,.2);
   --bg:#E7EEF1; --surface:#FFFFFF; --ink:#18252E; --muted:#5C6C76; --line:#D3DEE3;
   --accent:#C8412C; --accent-ink:#FFFFFF; --soft:#F5E6E2;
   --meal:#FFE7A8; --meal-ink:#5A3D00; --now:#1E7A5B;
@@ -50,6 +54,7 @@
   --display:"Noto Sans KR",var(--body); --dscale:1; --radius:14px; color-scheme:light;
 }
 :root[data-skin="album"]{
+  --img:url(img/20261120_bg-album.webp); --veil:rgba(255,255,255,.95); --veil0:rgba(255,255,255,0); --hl-bg:rgba(231,238,248,.88); --hl-line:transparent;
   --bg:#FAF7F1; --surface:#FFFFFF; --ink:#22262E; --muted:#6B6F78; --line:#E6E2DA;
   --accent:#3A64A8; --accent-ink:#FFFFFF; --soft:#E7EEF8;
   --meal:#FFE3A1; --meal-ink:#553A00; --now:#C2456B;
@@ -57,6 +62,7 @@
   --display:"Nanum Pen Script",var(--body); --dscale:1.35; --radius:6px; color-scheme:light;
 }
 :root[data-skin="camp"]{
+  --img:url(img/20261120_bg-camp.webp); --veil:rgba(20,32,50,.86); --veil0:rgba(20,32,50,0); --hl-bg:rgba(20,32,50,.62); --hl-line:rgba(255,255,255,.18);
   --bg:#E8DCC2; --surface:#F7F0E0; --ink:#2C2A22; --muted:#6C6453; --line:#CDBD9C;
   --accent:#2F5D3A; --accent-ink:#FFFFFF; --soft:#E2D6B8;
   --meal:#F3A05A; --meal-ink:#3B1C00; --now:#B23A1E;
@@ -83,23 +89,20 @@ a{color:var(--accent)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ── 히어로 ───────────────────────────── */
-.hero{position:relative;overflow:hidden;background:var(--hero);color:var(--hero-ink);padding:40px 0 28px}
+.hero{position:relative;overflow:hidden;color:var(--hero-ink);padding:44px 0 32px;
+  background:linear-gradient(90deg,var(--veil) 0%,var(--veil) 34%,var(--veil0) 72%),var(--img) right 60%/cover no-repeat,var(--hero)}
 .hero .wrap{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
 .kicker{font-size:14px;font-weight:500;opacity:.85;letter-spacing:.02em}
 .hero h1{font-size:calc(36px * var(--dscale))}
 .hero .date{font-size:16px;font-weight:500}
 .dday{align-self:flex-start;margin-top:6px;font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;
-  background:rgba(255,255,255,.22);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.35)}
+  background:var(--hl-bg);backdrop-filter:blur(4px);border:1px solid var(--hl-line)}
 .highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.hl{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
+.hl{background:var(--hl-bg);border:1px solid var(--hl-line);backdrop-filter:blur(3px);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4}
 .hl b{display:block;font-size:13px;opacity:.85;font-weight:500}
-.deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.deco > g{display:none}
-[data-skin="autumn"] .deco > .d-autumn,[data-skin="stars"] .deco .d-stars,[data-skin="ticket"] .deco .d-ticket,
-[data-skin="album"] .deco > .d-album,[data-skin="camp"] .deco .d-camp{display:inline}
 /* 앨범: 히어로를 폴라로이드처럼 */
 [data-skin="album"] .hero{padding:28px 0 20px;background:transparent}
-[data-skin="album"] .hero .wrap{background:#fff;padding:22px 20px 26px;box-shadow:0 6px 22px rgba(30,30,40,.12);border-radius:4px;transform:rotate(-1deg);margin:8px auto 0;max-width:728px}
+[data-skin="album"] .hero .wrap{background:linear-gradient(90deg,var(--veil) 0%,var(--veil) 34%,var(--veil0) 72%),var(--img) right 60%/cover no-repeat,#fff;border:10px solid #fff;padding:22px 20px 26px;box-shadow:0 6px 22px rgba(30,30,40,.12);border-radius:4px;transform:rotate(-1deg);margin:8px auto 0;max-width:728px}
 [data-skin="album"] .hero .dday,[data-skin="album"] .hl{background:var(--soft);border-color:transparent}
 [data-skin="ticket"] .hero h1{font-weight:700;letter-spacing:-.01em}
 [data-skin="ticket"] .hero .kicker{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
@@ -201,7 +204,10 @@ footer{border-top:1px solid var(--line);padding:22px 0 36px;font-size:14px;color
 footer .wrap{display:flex;flex-direction:column;gap:6px}
 
 @media (max-width:600px){
-  .hero{padding:30px 0 22px}
+  .hero{padding:30px 0 22px;background:linear-gradient(180deg,var(--veil) 0%,var(--veil) 30%,var(--veil0) 52%),var(--img) 70% bottom/cover no-repeat,var(--hero)}
+  [data-skin="album"] .hero{background:transparent}
+  [data-skin="album"] .hero .wrap{background:linear-gradient(180deg,var(--veil) 0%,var(--veil) 30%,var(--veil0) 52%),var(--img) 70% bottom/cover no-repeat,#fff}
+  .highlights{margin-top:150px}
   .hero h1{font-size:calc(29px * var(--dscale))}
   .highlights{grid-template-columns:1fr;gap:6px}
   .hl{display:flex;gap:10px;align-items:baseline}
@@ -224,44 +230,6 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <body>
 
 <header class="hero">
-  <svg class="deco" viewBox="0 0 400 260" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
-    <!-- 가을 숲길: 메타세쿼이아와 은행잎 -->
-    <g class="d-autumn">
-      <g fill="#8C3F18" opacity=".28">
-        <path d="M300 260 L322 120 L344 260Z"/><path d="M336 260 L362 90 L388 260Z"/><path d="M372 260 L392 140 L412 260Z"/><path d="M262 260 L280 160 L298 260Z"/>
-      </g>
-      <g fill="#F7C948" opacity=".75">
-        <path d="M250 40 q14 -16 28 0 q-6 14 -14 18 q-8 -4 -14 -18Z"/>
-        <path d="M330 30 q12 -14 24 0 q-5 12 -12 15 q-7 -3 -12 -15Z" transform="rotate(20 342 36)"/>
-        <path d="M210 90 q10 -12 20 0 q-4 10 -10 13 q-6 -3 -10 -13Z" transform="rotate(-25 220 95)"/>
-        <path d="M370 70 q9 -10 18 0 q-4 9 -9 11 q-5 -2 -9 -11Z"/>
-      </g>
-    </g>
-    <!-- 별밤: 별과 달 -->
-    <g class="d-stars" fill="#FFF6D6">
-      <circle cx="40" cy="30" r="1.4"/><circle cx="90" cy="70" r="1"/><circle cx="150" cy="22" r="1.6"/><circle cx="210" cy="60" r="1.1"/>
-      <circle cx="260" cy="20" r="1.3"/><circle cx="300" cy="90" r="1"/><circle cx="380" cy="40" r="1.5"/><circle cx="120" cy="120" r="1"/>
-      <circle cx="230" cy="140" r="1.2"/><circle cx="20" cy="150" r="1"/><circle cx="180" cy="200" r="1"/><circle cx="270" cy="220" r="1.3"/>
-      <path d="M350 60 a26 26 0 1 0 22 40 a20 20 0 1 1 -22 -40Z" opacity=".9"/>
-      <path d="M300 150 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3Z"/><path d="M60 200 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2Z"/>
-      <path d="M200 100 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2Z"/>
-    </g>
-    <!-- 승차권: 철길 -->
-    <g class="d-ticket" stroke="#FFFFFF" opacity=".22" fill="none" stroke-width="3">
-      <path d="M180 260 C260 200 300 140 420 110"/><path d="M215 260 C290 210 330 160 420 140"/>
-      <g stroke-width="5"><path d="M196 246 L222 256"/><path d="M228 222 L252 236"/><path d="M258 198 L281 214"/><path d="M290 178 L310 196"/><path d="M322 160 L340 178"/><path d="M356 145 L370 164"/><path d="M390 132 L400 152"/></g>
-      <circle cx="350" cy="50" r="24" stroke-dasharray="4 6"/>
-    </g>
-    <!-- 졸업 앨범: 학사모 -->
-    <g class="d-album" fill="#3A64A8" opacity=".14">
-      <path d="M300 60 L370 85 L300 110 L230 85Z"/><path d="M260 98 v28 q40 20 80 0 v-28 L300 112Z"/><path d="M362 88 v34" stroke="#3A64A8" stroke-width="3"/>
-    </g>
-    <!-- 캠프 노트: 텐트와 모닥불 -->
-    <g class="d-camp">
-      <g fill="#FFF6E2" opacity=".14"><path d="M250 230 L310 130 L370 230Z"/><path d="M0 260 L80 190 L140 230 L220 170 L320 240 L400 200 L400 260Z"/></g>
-      <g opacity=".85"><path d="M352 230 q-12 -20 0 -40 q4 14 12 18 q6 -12 4 -22 q14 16 6 44Z" fill="#F3A05A"/><path d="M358 230 q-4 -10 2 -18 q4 8 8 8 q2 6 -2 10Z" fill="#FFD47A"/></g>
-    </g>
-  </svg>
   <div class="wrap">
     <p class="kicker">안양교회 유초등부 · 6학년 졸업여행</p>
     <h1>가평·남이섬 2박 3일</h1>
