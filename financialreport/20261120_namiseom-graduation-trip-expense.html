@@ -181,6 +181,65 @@ table.settle tr.gap td{font-weight:700;font-size:20px;color:var(--accent);border
 .brow .track{height:14px;margin:0}
 .day th:nth-child(5){width:120px}
 @media(max-width:600px){.brow{grid-template-columns:96px minmax(0,1fr) 84px}.brow .pc{display:none}.cmprow{grid-template-columns:36px minmax(0,1fr);}.cmprow .amt{grid-column:2;text-align:right;margin-top:-6px;font-size:14px}}
+.whole{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.whole span:first-child{font-weight:700}
+.whole b{font-family:var(--display);font-weight:400;font-size:calc(30px * var(--dscale))}
+.pbar{display:flex;height:64px;border-radius:12px;overflow:hidden;background:var(--soft);gap:2px}
+.pseg{height:100%;width:0;transition:width .8s ease;display:flex;align-items:center;padding:0 10px;color:#fff;overflow:hidden;white-space:nowrap}
+.pseg span{font-size:13px;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.pseg b{display:block;font-size:17px}.pseg i{font-style:normal}.pseg span.short i{display:none}
+.plist{margin-top:18px}
+.prow{display:grid;grid-template-columns:minmax(0,1fr) 56px 110px;column-gap:12px;align-items:baseline;padding:9px 0 10px;border-top:1px solid var(--line)}
+.prow:first-child{border-top:0}
+.pname{font-weight:500}
+.ppc{text-align:right;font-weight:700}
+.pamt{text-align:right;color:var(--muted)}
+.ptrack{grid-column:1/-1;height:6px;border-radius:99px;background:var(--soft);margin-top:6px;overflow:hidden}
+.ptotal{border-top:1.5px solid var(--ink);font-weight:700}
+.ptotal .pamt{color:var(--ink)}
+@media(prefers-reduced-motion:reduce){.pseg{transition:none}}
+@media(max-width:600px){.pbar{height:52px}.pseg{padding:0 6px}.pseg span{font-size:12px}.pseg b{font-size:15px}.prow{grid-template-columns:minmax(0,1fr) 48px 92px}}
+.wbox{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start}
+.waffle{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;aspect-ratio:1}
+.waffle i{border-radius:4px;transition:opacity .2s,transform .2s}
+.waffle.focus i{opacity:.18}.waffle.focus i.on{opacity:1;transform:scale(1.06)}
+.prow{width:100%;background:none;border:0;border-top:1px solid var(--line);font:inherit;color:inherit;text-align:left;cursor:pointer;min-height:44px}
+.prow[aria-pressed="true"]{background:var(--soft);border-radius:8px}
+.prow:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.plist{margin-top:0}
+.wnote{font-size:13px;color:var(--muted);margin-top:12px}
+@media(max-width:720px){.wbox{grid-template-columns:minmax(0,1fr);gap:18px}.waffle{max-width:340px;width:100%;margin:0 auto}}
+.dwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:32px;align-items:center}
+.dchart{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto}
+.dchart svg{width:100%;height:100%;display:block}
+.arc{cursor:pointer;transition:opacity .2s,stroke-width .2s}
+.focus .arc{opacity:.2}.focus .arc.on{opacity:1;stroke-width:36}
+.alab{fill:#fff;font:700 10px var(--body);text-anchor:middle;pointer-events:none}
+.focus .alab{opacity:0}
+.dmid{position:absolute;inset:26%;display:grid;place-content:center;text-align:center;gap:2px}
+.dmid small{font-size:13px;color:var(--muted)}
+.dmid b{font-family:var(--display);font-weight:400;font-size:clamp(20px,6vw,26px);line-height:1.1}
+@media(max-width:720px){.dwrap{grid-template-columns:minmax(0,1fr);gap:18px}}
+.binfo{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-height:44px}
+.binfo span:first-child{font-weight:700}
+.binfo b{font-family:var(--display);font-weight:400;font-size:calc(28px * var(--dscale))}
+.bchart{max-width:420px;margin:6px auto 10px}
+.bchart svg{width:100%;height:auto;display:block;overflow:visible}
+.bub{cursor:pointer;transition:opacity .2s;outline:none}
+.bub circle{transition:transform .2s;transform-box:fill-box;transform-origin:center}
+.bub:focus-visible{outline:none}.bub:focus-visible circle{stroke:var(--ink);stroke-width:3}
+.focus .bub{opacity:.25}.focus .bub.on{opacity:1}.focus .bub.on circle{transform:scale(1.04)}
+.bl{fill:#fff;font:500 14px var(--body);text-anchor:middle;pointer-events:none}
+.bv{fill:#fff;font:700 20px var(--body);text-anchor:middle;pointer-events:none}.bv.sm{font-size:14px}
+.lbars{display:grid;gap:8px;margin:10px 0 0}
+.lrow{display:flex;align-items:center;gap:10px;min-height:44px}
+.lbar{width:var(--w);min-width:6px;height:44px;border-radius:10px;display:flex;align-items:center;padding:0 12px;color:#fff;transition:width .6s ease}
+.lt{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;white-space:nowrap}
+.ln{font-weight:700;font-size:15px}.lv{font-size:14px}.lv b{font-size:16px}
+.lrow.out .lbar{flex:none;padding:0}
+.lo{display:none;white-space:nowrap;color:var(--ink)}.lo .ln{font-size:14px}
+.lrow.out .lbar .lt{display:none}.lrow.out .lo{display:inline}
+.ltotal{display:flex;justify-content:space-between;border-top:1.5px solid var(--ink);margin-top:12px;padding-top:10px;font-weight:700}
 @media print{.daynav,.skins{display:none}.card{break-inside:avoid}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
@@ -218,7 +277,7 @@ table.settle tr.gap td{font-weight:700;font-size:20px;color:var(--accent);border
 
   <section id="cat">
     <div class="sec-head"><h2>구분별 지출</h2><p id="catLead"></p></div>
-    <div class="card bars" id="catBars"></div>
+    <div class="card" id="catBars"></div>
   </section>
 
   <section id="list">
@@ -298,7 +357,13 @@ $('cmp').innerHTML=`<div class="cmprow"><span class="lbl">지출</span><div clas
 
 $('catLead').textContent=`숙박과 레저·체험이 전체의 ${Math.round((sum(D.filter(x=>x.c==='숙박'||x.c==='레저·체험')))/T*100)}%입니다.`;
 const cat=CATS.map(c=>{const r=D.filter(x=>x.c===c);return {c,a:sum(r)}}).sort((a,b)=>b.a-a.a);
-$('catBars').innerHTML=cat.map(o=>`<div class="brow"><span class="lbl"><span class="dot" style="background:${col(o.c)}"></span>${o.c}</span><div class="track"><div class="fill" style="background:${col(o.c)}" data-w="${o.a/cat[0].a*100}"></div></div><span class="n amt r">${won(o.a)}</span><span class="n muted r pc">${(o.a/T*100<1?(o.a/T*100).toFixed(1):(o.a/T*100).toFixed(0))}%</span></div>`).join('');
+const pc=v=>{const x=v/T*100;return (x<1?x.toFixed(1):x.toFixed(0))+'%'};
+$('catBars').innerHTML=`<div class="binfo"><span>총 지출</span><b class="n">${won(T)}원</b><span class="n muted">= 100%</span></div>
+<div class="lbars">${cat.map(o=>`<div class="lrow"><div class="lbar" style="--w:${o.a/cat[0].a*100}%;background:${col(o.c)}"><span class="lt"><span class="ln">${o.c}</span><span class="lv n">${won(o.a)} · <b>${pc(o.a)}</b></span></span></div><span class="lo"><span class="ln">${o.c}</span> <span class="lv n">${won(o.a)} · <b>${pc(o.a)}</b></span></span></div>`).join('')}</div>
+<div class="ltotal"><span>합계</span><span class="n">${won(T)} · 100%</span></div>`;
+const lfit=()=>document.querySelectorAll('.lrow').forEach(r=>{r.classList.remove('out');const b=r.querySelector('.lbar'),t=r.querySelector('.lt');if(t.scrollWidth>b.clientWidth-20)r.classList.add('out')});
+const lum=()=>document.querySelectorAll('.lbar').forEach(b=>{const m=getComputedStyle(b).backgroundColor.match(/\d+(\.\d+)?/g)||[0,0,0];const L=(.299*m[0]+.587*m[1]+.114*m[2])/255;b.style.color=L>.62?'#1d1a16':'#fff'});
+lfit();lum();try{new ResizeObserver(lfit).observe($('catBars'))}catch(e){}
 
 const dayTot=DAYS.map(([k])=>sum(D.filter(x=>x.d===k)));
 $('jump').innerHTML=DAYS.map(([k,s,l],i)=>`<a href="#d${i+1}">${k} <span class="n muted" style="margin-left:6px">${won(dayTot[i])}</span></a>`).join('');
@@ -311,11 +376,12 @@ $('days').innerHTML=DAYS.map(([k,s,l],i)=>{const r=D.filter(x=>x.d===k);
 const SK=[['autumn','가을 숲길','linear-gradient(135deg,#F7D46A,#A6501F)'],['stars','별밤','radial-gradient(circle at 70% 30%,#F5C451 0 18%,#151E42 20%)'],['ticket','승차권','linear-gradient(90deg,#27556B 50%,#C8412C 50%)'],['album','졸업 앨범','#fff;box-shadow:inset 0 0 0 4px #3A64A8'],['camp','캠프 노트','linear-gradient(135deg,#2F5D3A 50%,#F3A05A 50%)']];
 const root=document.documentElement;
 $('skins').insertAdjacentHTML('beforeend',SK.map(([k,l,bg])=>`<button class="skin-btn" type="button" data-pick="${k}"><i style="background:${bg}"></i>${l}</button>`).join(''));
-const setSkin=k=>{root.setAttribute('data-skin',k);document.querySelectorAll('.skin-btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pick===k));try{localStorage.setItem('tripSkin',k)}catch(e){}};
+const setSkin=k=>{root.setAttribute('data-skin',k);try{lum()}catch(e){};document.querySelectorAll('.skin-btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pick===k));try{localStorage.setItem('tripSkin',k)}catch(e){}};
 document.querySelectorAll('.skin-btn').forEach(b=>b.addEventListener('click',()=>setSkin(b.dataset.pick)));
 let saved='autumn';try{saved=localStorage.getItem('tripSkin')||'autumn'}catch(e){}
 setSkin(SK.some(s=>s[0]===saved)?saved:'autumn');
 requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('[data-w]').forEach(el=>el.style.width=el.dataset.w+'%')));
+
 }
 </script>
 </body>
