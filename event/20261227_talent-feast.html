@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>달란트 잔치 준비 안내 | 유초등부</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="유초등부 달란트 잔치 준비 안내">
+<meta property="og:description" content="12월 27일(주일) 10:30~12:30. 시장 규칙, 담당자, 시상, 애찬 메뉴를 한눈에.">
+<meta name="description" content="12월 27일(주일) 10:30~12:30. 시장 규칙, 담당자, 시상, 애찬 메뉴를 한눈에.">
+<meta name="theme-color" content="#FBF6EE">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF6EE;
+    --surface: #FFFFFF;
+    --surface-2: #F5EEE3;
+    --ink: #2A2622;
+    --ink-2: #6B625A;
+    --line: #EAE0D2;
+    --green: #1F6B4F;
+    --green-soft: #E3F0E9;
+    --red: #B83A33;
+    --red-soft: #F8E5E2;
+    --gold: #B7852B;
+    --gold-soft: #F7EBD3;
+    --hl: #FFF1BF;
+    --shadow: 0 1px 2px rgba(60,40,20,.06), 0 4px 16px rgba(60,40,20,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17140F;
+      --surface: #221E18;
+      --surface-2: #2B261F;
+      --ink: #F2ECE3;
+      --ink-2: #B5AA9C;
+      --line: #3A342B;
+      --green: #6CC29C;
+      --green-soft: #1D3229;
+      --red: #F08A80;
+      --red-soft: #3A2220;
+      --gold: #E2B55E;
+      --gold-soft: #3A2F1B;
+      --hl: #4A3F14;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17140F; --surface: #221E18; --surface-2: #2B261F; --ink: #F2ECE3; --ink-2: #B5AA9C;
+    --line: #3A342B; --green: #6CC29C; --green-soft: #1D3229; --red: #F08A80; --red-soft: #3A2220;
+    --gold: #E2B55E; --gold-soft: #3A2F1B; --hl: #4A3F14; --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1F6B4F 0%, #17533D 70%);
+    color: #FFF8EC; padding: calc(40px + env(safe-area-inset-top, 0px)) 0 34px; position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -40px; top: -30px; width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(226,181,94,.35), transparent 70%);
+  }
+  .tag { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .02em;
+    padding: 4px 10px; border-radius: 999px; background: rgba(255,248,236,.16); }
+  .hero h1 { font-size: clamp(30px, 8vw, 42px); font-weight: 900; line-height: 1.2; margin: 12px 0 6px; letter-spacing: -.02em; }
+  .hero h1 span { color: #F3CF7F; }
+  .hero p.sub { margin: 0; opacity: .85; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; position: relative; z-index: 1; }
+  .fact { background: rgba(255,248,236,.12); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+  .fact b { display: block; font-size: 12px; font-weight: 500; opacity: .75; }
+  .dday { background: #F3CF7F; color: #3A2A08; font-weight: 900; }
+  .dday b { opacity: .7; }
+
+  /* Sections */
+  section { margin-top: 32px; }
+  h2 { font-size: 21px; font-weight: 900; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; letter-spacing: -.01em; }
+  h2 .emo { font-size: 22px; }
+  .owner { font-size: 14px; color: var(--ink-2); margin: 0 0 14px; }
+  .owner strong { color: var(--green); }
+  h3 { font-size: 16px; margin: 0 0 8px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 12px; }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .grid .card + .card { margin-top: 0; }
+  .label { font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean > li { padding: 10px 0; border-top: 1px solid var(--line); }
+  ul.clean > li:first-child { border-top: 0; padding-top: 0; }
+  ul.clean > li:last-child { padding-bottom: 0; }
+  .row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .row .what { flex: 1; }
+  .who { flex-shrink: 0; text-align: right; font-weight: 700; color: var(--ink); }
+  .note { color: var(--ink-2); font-size: 14px; display: block; margin-top: 2px; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); vertical-align: 1px; }
+
+  /* Timeline */
+  .timeline { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); }
+  .step .d { font-weight: 900; font-size: 18px; }
+  .step .d small { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  .step p { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+  .step.main { background: var(--green); border-color: var(--green); color: #FFF8EC; }
+  .step.main .d small, .step.main p { color: rgba(255,248,236,.85); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .step.main { color: #10231B; } :root:not([data-theme="light"]) .step.main .d small, :root:not([data-theme="light"]) .step.main p { color: #10231B; opacity: .8; } }
+  :root[data-theme="dark"] .step.main { color: #10231B; }
+  :root[data-theme="dark"] .step.main .d small, :root[data-theme="dark"] .step.main p { color: #10231B; opacity: .8; }
+  .step.done { opacity: .55; }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } }
+
+  /* Finder */
+  .finder { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; margin-top: 24px; box-shadow: var(--shadow); }
+  .finder .t { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--ink-2); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0; font: inherit; font-size: 14px; font-weight: 700; padding: 7px 13px; min-height: 36px;
+    border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--bg); }
+  .mytasks { margin-top: 10px; background: var(--hl); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+  .mytasks ol { margin: 6px 0 0; padding-left: 20px; }
+  .mytasks .sec { color: var(--ink-2); font-size: 13px; }
+  .is-mine { background: var(--hl); border-radius: 8px; box-shadow: 0 0 0 6px var(--hl); }
+
+  /* Talent rules */
+  .scale { margin: 6px 0 18px; }
+  .bar { display: grid; grid-template-columns: 50fr 100fr 100fr 80fr; height: 14px; border-radius: 999px; overflow: hidden; }
+  .bar i:nth-child(1) { background: var(--gold); }
+  .bar i:nth-child(2) { background: var(--green); }
+  .bar i:nth-child(3) { background: #6E9C86; }
+  .bar i:nth-child(4) { background: var(--red); }
+  .ticks { display: grid; grid-template-columns: 50fr 100fr 100fr 80fr; font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+  .ticks span { border-left: 1px solid var(--line); padding-left: 4px; }
+  .rules { display: grid; gap: 10px; }
+  .rule { display: grid; grid-template-columns: 6px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 14px 0; box-shadow: var(--shadow); }
+  .rule::before { content: ""; border-radius: 0 4px 4px 0; }
+  .rule.c1::before { background: var(--gold); }
+  .rule.c2::before { background: var(--green); }
+  .rule.c3::before { background: #6E9C86; }
+  .rule.c4::before { background: var(--red); }
+  .rule .range { font-weight: 900; font-size: 17px; }
+  .rule p { margin: 2px 0 0; }
+  .rule ul { margin: 8px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 15px; }
+  .rule ul li + li { margin-top: 3px; }
+  .warn { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .warn span { background: var(--red-soft); color: var(--red); font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 10px; }
+  .warn span.ok { background: var(--green-soft); color: var(--green); }
+
+  /* Awards */
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 8px; border-top: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 13px; color: var(--ink-2); font-weight: 700; border-top: 0; padding-top: 0; }
+  td:first-child { font-weight: 700; white-space: nowrap; }
+  .lock { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; margin: 4px 0 12px; }
+  .lock p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+  .lock-row { display: flex; gap: 8px; }
+  .lock input {
+    flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 9px 12px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .lock input:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+  .lock button {
+    font: inherit; font-weight: 700; padding: 9px 16px; border-radius: 10px; border: 0;
+    background: var(--green); color: var(--bg); cursor: pointer;
+  }
+  .lock button[disabled] { opacity: .55; }
+  .lock .lock-msg { margin: 8px 0 0; font-weight: 700; }
+  .lock .lock-msg:empty { display: none; }
+  .lock-msg.bad { color: var(--red); }
+  .kid { color: var(--ink-2); }
+  .kid.open { color: var(--ink); }
+  .callout { margin-top: 12px; background: var(--gold-soft); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+  .callout b { color: var(--gold); }
+
+  /* Menu */
+  .menu { display: grid; gap: 12px; grid-template-columns: 2fr 1fr; }
+  .menu .card + .card { margin-top: 0; }
+  .menu .side { display: grid; gap: 12px; }
+  .foods { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .food { background: var(--surface-2); border-radius: 10px; padding: 6px 10px; font-size: 15px; }
+  .food small { color: var(--green); font-weight: 700; }
+  @media (max-width: 560px) { .menu { grid-template-columns: 1fr; } }
+
+  footer { margin: 40px 0 32px; text-align: center; font-size: 13px; color: var(--ink-2); }
+
+  @media print {
+    .finder { display: none; }
+    .hero { padding-top: 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card, .rule, .step { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">안양교회 유초등부 · 봉사자 안내</span>
+    <h1><span>달란트 잔치</span><br>준비 안내</h1>
+    <p class="sub">무엇이 정해졌고, 누가 무엇을 맡았는지 한 장에 모았습니다.</p>
+    <div class="facts">
+      <div class="fact"><b>날짜</b>12월 27일(주일)</div>
+      <div class="fact"><b>시간</b>10:30 ~ 12:30</div>
+      <div class="fact"><b>달란트 시장</b>1층 로비 <small>(3층에서 옮김)</small></div>
+      <div class="fact dday" id="dday" hidden><b>남은 날</b><span></span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section aria-labelledby="t-when">
+    <h2 id="t-when"><span class="emo">🗓️</span>준비 일정</h2>
+    <p class="owner">총괄·매주 점검 <strong>강지훈</strong></p>
+    <div class="timeline">
+      <div class="step" data-date="2026-12-06">
+        <div class="d">12/6 <small>주일</small></div>
+        <p>시장 예산·최고 가격 기준 취합 마감</p>
+      </div>
+      <div class="step" data-date="2026-12-20">
+        <div class="d">12/20 <small>주일</small></div>
+        <p>랜덤박스 기부 물품 받기 · 1층 시장 모두 함께 세팅</p>
+      </div>
+      <div class="step main" data-date="2026-12-27">
+        <div class="d">12/27 <small>주일</small></div>
+        <p>달란트 잔치 10:30~12:30</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="finder" id="finder">
+    <div class="t">🙋 내 이름을 누르면 맡은 일만 모아 보여 드려요</div>
+    <div class="chips" id="chips" role="group" aria-label="담당자 선택"></div>
+    <div class="mytasks" id="mytasks" hidden aria-live="polite"></div>
+  </div>
+
+  <section aria-labelledby="t-fixed">
+    <h2 id="t-fixed"><span class="emo">📌</span>정해진 것</h2>
+    <div class="grid" style="margin-top:12px">
+      <div class="card">
+        <div class="label">시간 · 장소</div>
+        작년과 동일, 10:30~12:30<br>달란트 시장은 <b>3층 → 1층 로비</b>
+      </div>
+      <div class="card">
+        <div class="label">말씀</div>
+        중고등부 봉사자와 6학년이 준비<span class="note">주제: 크리스마스에 관하여</span>
+      </div>
+      <div class="card">
+        <div class="label">시상</div>
+        하사가상 — 쿠팡 쿠폰<span class="note">5천 원권이 없으면 다른 쿠폰으로 대체</span>
+      </div>
+      <div class="card">
+        <div class="label">시장 예산 · 최고 가격</div>
+        취합된 기준에 따라 결정 <span class="pill">12/6 마감</span>
+        <ul class="clean" style="margin-top:8px">
+          <li class="row"><span class="what">초등 고학년</span><span class="who">40만 원</span></li>
+          <li class="row"><span class="what">초등 저학년 · 유치</span><span class="who">40만 원</span></li>
+          <li class="row" data-who="오윤경"><span class="what">물건 미리 구입</span><span class="who">오윤경</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-rule">
+    <h2 id="t-rule"><span class="emo">💰</span>달란트 시장 규칙</h2>
+    <p class="owner">아이가 모은 달란트에 따라 이렇게 나뉩니다.</p>
+
+    <div class="scale" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><i></i></div>
+      <div class="ticks"><span>0</span><span>50</span><span>150</span><span>250+</span></div>
+    </div>
+
+    <div class="rules">
+      <div class="rule c1">
+        <div>
+          <div class="range">처음 온 친구 · 50달란트 미만</div>
+          <p>기본 <b>50달란트</b>를 줍니다.</p>
+        </div>
+      </div>
+      <div class="rule c2">
+        <div>
+          <div class="range">시장에서 쓰는 한도: 최대 150달란트</div>
+          <p>누구든 시장에서는 150달란트까지만 사용합니다.</p>
+        </div>
+      </div>
+      <div class="rule c3">
+        <div>
+          <div class="range">150 ~ 249달란트</div>
+          <p>물품을 추가로 사지 않고, 그대로 기본 달란트로 받습니다.</p>
+        </div>
+      </div>
+      <div class="rule c4">
+        <div>
+          <div class="range">250달란트 이상</div>
+          <p>나머지 차액은 <b>실물 그림이 그려진 교환권</b>으로 준비해 잔치 당일 받습니다.</p>
+          <ul>
+            <li>0.8 환산 비율 적용 (예: 350달란트 → 30,000원 선에서 구입)</li>
+            <li>물품 가격은 쿠팡 기준으로 책정</li>
+            <li>물품 가격이 환산 금액보다 비싸면 기본 달란트에서 차감 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="warn">
+      <span>🚫 가족끼리 합산 불가</span>
+      <span class="ok">🎟️ 교환처 부스 필요</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-run">
+    <h2 id="t-run"><span class="emo">👥</span>진행</h2>
+    <div class="card" style="margin-top:12px">
+      <ul class="clean">
+        <li class="row" data-who="강지훈"><span class="what">총괄 · 매주 점검</span><span class="who">강지훈</span></li>
+        <li class="row" data-who="이성운 정석률"><span class="what">당일 사회</span><span class="who">이성운, 정석률</span></li>
+        <li class="row" data-who="이성운 정석률"><span class="what">새로운 친구 소개 준비</span><span class="who">이성운, 정석률</span></li>
+        <li class="row" data-who="오윤경 공은미"><span class="what">찬송 인도</span><span class="who">오윤경, 공은미</span></li>
+        <li class="row" data-who="황아진"><span class="what">반주</span><span class="who">황아진</span></li>
+        <li class="row" data-who="허종렬"><span class="what">격려사</span><span class="who">허종렬</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-award">
+    <h2 id="t-award"><span class="emo">🏆</span>시상 · 달란트 정산</h2>
+    <p class="owner">담당 <strong>고보경</strong></p>
+    <div class="card">
+      <ul class="clean">
+        <li class="row" data-who="고보경"><span class="what">달란트 · 출석 집계</span><span class="who">고보경</span></li>
+        <li class="row" data-who="고보경"><span class="what">하사가 점검표 수합 · 집계</span><span class="who">고보경</span></li>
+        <li class="row" data-who="고보경"><span class="what">개인별 달란트 할당</span><span class="who">고보경</span></li>
+        <li class="row"><span class="what">달란트 목걸이<span class="note">세팅하는 날 함께 준비 (기본 달란트 + 교환권을 넣음)</span></span><span class="who">다 함께</span></li>
+        <li class="row" data-who="강지훈"><span class="what">상장 제작<span class="note">상 이름을 세련되게 다듬기</span></span><span class="who">강지훈</span></li>
+        <li class="row" data-who="오윤경"><span class="what">시상 PPT<span class="note">시상이 지루하지 않게 구성</span></span><span class="who">오윤경</span></li>
+        <li class="row"><span class="what">격려 선물</span><span class="who">기본 달란트 50</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>상 이름과 후보</h3>
+      <form class="lock" id="lock" autocomplete="off">
+        <p>아이들 이름은 비밀번호를 넣어야 보여요. 한 번 넣으면 이 기기에서는 다시 묻지 않아요.</p>
+        <div class="lock-row">
+          <input type="password" id="pw" aria-label="비밀번호" placeholder="비밀번호" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+          <button type="submit" id="pwBtn">보기</button>
+        </div>
+        <p class="lock-msg" id="lockMsg" role="status"></p>
+      </form>
+      <table>
+        <thead><tr><th>상</th><th>후보</th></tr></thead>
+        <tbody>
+          <tr><td>출석상</td><td class="kid" data-i="0">🔒</td></tr>
+          <tr><td>요절상</td><td class="kid" data-i="1">🔒</td></tr>
+          <tr><td>신언상</td><td class="kid" data-i="2">🔒</td></tr>
+          <tr><td>집회를 살리는 상</td><td class="kid" data-i="3">🔒</td></tr>
+          <tr><td>찬송율동상</td><td class="kid" data-i="4">🔒</td></tr>
+          <tr><td>하사가상</td><td>올해 처음 제출한 가정? <span class="pill">미정</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><b>꼭 기억해 주세요</b><br>한 사람에게 상을 몰아주지 말고 균형 있게 수여합니다. 소그룹에 와서 더 격려해 주세요.</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-market">
+    <h2 id="t-market"><span class="emo">🛍️</span>달란트 시장</h2>
+    <p class="owner">담당 <strong>오윤경</strong></p>
+    <div class="grid">
+      <div class="card">
+        <div class="label">물품 정하기</div>
+        <ul class="clean">
+          <li class="row" data-who="원로"><span class="what">물품 목록 · 가격 정하기</span><span class="who">원로</span></li>
+          <li class="row" data-who="원로"><span class="what">금액대별 분류 · 가격표</span><span class="who">원로</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">물품 구매</div>
+        <ul class="clean">
+          <li class="row" data-who="김향희 최연아"><span class="what">저학년 물품 구매</span><span class="who">김향희, 최연아</span></li>
+          <li class="row" data-who="오윤경 이아람 고보경"><span class="what">고학년 물품 구매</span><span class="who">오윤경, 이아람, 고보경</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">랜덤박스 <span class="pill">3달란트</span></div>
+        <ul class="clean">
+          <li>전 주(12/20)에 기부 물품 받기<span class="note">새것으로 받아요</span></li>
+          <li>1인당 3개까지 구매 가능</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">봉사 · 세팅</div>
+        <ul class="clean">
+          <li class="row" data-who="강지훈"><span class="what">판매 봉사 섭외</span><span class="who">강지훈</span></li>
+          <li class="row" data-who="강지훈"><span class="what">부스 배치 · 봉사자 사전 안내</span><span class="who">강지훈</span></li>
+          <li class="row"><span class="what">1층 시장 세팅<span class="note">전 주일 12/20, 모두 함께 모여서</span></span><span class="who">다 함께</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-meal">
+    <h2 id="t-meal"><span class="emo">🍽️</span>애찬</h2>
+    <p class="owner">담당 <strong>원로</strong></p>
+    <div class="card">
+      <ul class="clean">
+        <li class="row" data-who="원로"><span class="what">총괄 · 메뉴 · 인원 파악 · 음식 담당 배정</span><span class="who">원로</span></li>
+        <li class="row"><span class="what">식당 손봉사</span><span class="who">지역별 2명씩</span></li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:20px">🍕 메뉴</h3>
+    <div class="menu">
+      <div class="card">
+        <div class="label">식사</div>
+        <div class="foods">
+          <span class="food">치킨</span>
+          <span class="food">피자</span>
+          <span class="food" data-who="허종렬">떡볶이 <small>허종렬</small></span>
+          <span class="food" data-who="허종렬">오뎅탕 <small>허종렬</small></span>
+          <span class="food">토마토 스파게티</span>
+          <span class="food">크림 스파게티</span>
+          <span class="food">유부초밥</span>
+          <span class="food">주먹밥</span>
+        </div>
+      </div>
+      <div class="side">
+        <div class="card"><div class="label">간식 · 과일</div>빵과 잼, 우유 · 귤</div>
+        <div class="card"><div class="label">준비물</div>접시, 젓가락</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>안양교회 유초등부 · 달란트 잔치 2026</footer>
+</main>
+
+<script>
+(function () {
+  // 오늘 기준으로 남은 날과 지난 일정 표시
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var feast = new Date(2026, 11, 27);
+  var diff = Math.round((feast - today) / 86400000);
+  var dd = document.getElementById('dday');
+  if (diff >= 0) {
+    dd.querySelector('span').textContent = diff === 0 ? '오늘!' : 'D-' + diff;
+    dd.hidden = false;
+  }
+  document.querySelectorAll('.step[data-date]').forEach(function (s) {
+    var p = s.dataset.date.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (d < today) s.classList.add('done');
+  });
+
+  // 담당자별 할 일 모아 보기
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-who]'));
+  var names = ['강지훈'];
+  items.forEach(function (el) {
+    el.dataset.who.split(' ').forEach(function (n) { if (names.indexOf(n) < 0) names.push(n); });
+  });
+  var chips = document.getElementById('chips');
+  var box = document.getElementById('mytasks');
+  var current = null;
+
+  function taskText(el) {
+    var what = el.querySelector('.what');
+    var t = what ? what.firstChild.textContent : el.firstChild.textContent;
+    var h2 = el.closest('section').querySelector('h2');
+    var sec = h2.textContent.replace(h2.querySelector('.emo').textContent, '').trim();
+    return { t: t.trim(), sec: sec };
+  }
+
+  function select(name) {
+    current = current === name ? null : name;
+    chips.querySelectorAll('.chip').forEach(function (c) {
+      c.setAttribute('aria-pressed', String(c.dataset.name === current));
+    });
+    items.forEach(function (el) {
+      el.classList.toggle('is-mine', !!current && el.dataset.who.split(' ').indexOf(current) >= 0);
+    });
+    if (!current) { box.hidden = true; box.innerHTML = ''; return; }
+    var mine = items.filter(function (el) { return el.dataset.who.split(' ').indexOf(current) >= 0; });
+    var html = '<b>' + current + '</b> 님이 맡은 일 ' + mine.length + '가지<ol>';
+    mine.forEach(function (el) {
+      var x = taskText(el);
+      html += '<li>' + x.t + ' <span class="sec">· ' + x.sec + '</span></li>';
+    });
+    box.innerHTML = html + '</ol>';
+    box.hidden = false;
+  }
+
+  names.forEach(function (n) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = n; b.dataset.name = n;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () { select(n); });
+    chips.appendChild(b);
+  });
+})();
+</script>
+
+<script>
+/* 상 후보 아이들 이름 잠금
+   형식: base64([salt 16B][iv 12B][AES-GCM 암호문+태그]), 키 = PBKDF2-SHA256(비밀번호, salt, 400000)
+   복호화 결과: ["출석상 후보", "요절상 후보", ...] (표의 data-i 순서)
+   이 파일에는 이름도 비밀번호도 평문으로 들어 있지 않다. */
+(function () {
+  var KIDS_ENC = 'fZMuD/rVjwbH/iZ/aCQHPbRSQy+FHdEMhwT5etZSaLRaMLm+AznPH9pb+ZgSQW0eCsXfalXInhaK1OII6lfv849tmaTbq0jjlnQass8nCGDStu5qQZtYwjqCg+cKt0XCID6cSPoy1ThCGlIgAs8ihrV/XJG/sd47oTGbN6smfidjy/JbIJZ8tOUtdg0zQ+1tAnVfCHU6bCc=';
+  var ITER = 400000;
+  var STORE = 'talentfeast2026.pw';
+
+  var form = document.getElementById('lock');
+  var pwEl = document.getElementById('pw');
+  var btn = document.getElementById('pwBtn');
+  var msg = document.getElementById('lockMsg');
+  var cells = document.querySelectorAll('.kid');
+
+  function say(text, bad) { msg.textContent = text || ''; msg.className = 'lock-msg' + (bad ? ' bad' : ''); }
+
+  function bytes() {
+    var bin = atob(KIDS_ENC), arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return arr;
+  }
+
+  function decrypt(pw) {
+    var b = bytes(), salt = b.slice(0, 16), iv = b.slice(16, 28), ct = b.slice(28);
+    return crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey'])
+      .then(function (base) {
+        return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: salt, iterations: ITER, hash: 'SHA-256' },
+          base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      })
+      .then(function (key) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct); })
+      .then(function (plain) { return JSON.parse(new TextDecoder().decode(plain)); });
+  }
+
+  function show(list) {
+    cells.forEach(function (td) { td.textContent = list[+td.dataset.i] || ''; td.classList.add('open'); });
+    form.hidden = true;
+  }
+
+  function unlock(pw, quiet) {
+    if (!window.crypto || !crypto.subtle) { say('이 브라우저에서는 열 수 없어요. 크롬이나 사파리로 열어 주세요.', true); return; }
+    btn.disabled = true;
+    if (!quiet) say('확인하는 중…');
+    decrypt(pw).then(function (list) {
+      try { localStorage.setItem(STORE, pw); } catch (e) {}
+      show(list);
+    }).catch(function () {
+      try { localStorage.removeItem(STORE); } catch (e) {}
+      if (!quiet) { say('비밀번호가 맞지 않아요.', true); pwEl.select(); }
+    }).then(function () { btn.disabled = false; });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pw = pwEl.value.trim();
+    if (!pw) { say('비밀번호를 넣어 주세요.', true); pwEl.focus(); return; }
+    unlock(pw, false);
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORE); } catch (e) {}
+  if (saved) unlock(saved, true);
+})();
+</script>
+</body>
+</html>
