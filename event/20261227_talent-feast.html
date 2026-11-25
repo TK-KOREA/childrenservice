@@ -163,7 +163,8 @@
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
   th, td { text-align: left; padding: 10px 8px; border-top: 1px solid var(--line); vertical-align: top; }
   th { font-size: 13px; color: var(--ink-2); font-weight: 700; border-top: 0; padding-top: 0; }
-  td:first-child { font-weight: 700; white-space: nowrap; }
+  td:first-child { font-weight: 700; width: 46%; }
+  td .note { font-weight: 400; font-size: 13px; }
   .lock { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; margin: 4px 0 12px; }
   .lock p { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
   .lock-row { display: flex; gap: 8px; }
@@ -361,11 +362,11 @@
       <table>
         <thead><tr><th>상</th><th>후보</th></tr></thead>
         <tbody>
-          <tr><td>출석상</td><td class="kid" data-i="0">🔒</td></tr>
-          <tr><td>요절상</td><td class="kid" data-i="1">🔒</td></tr>
-          <tr><td>신언상</td><td class="kid" data-i="2">🔒</td></tr>
+          <tr><td>충성된 종 상<span class="note">출석</span></td><td class="kid" data-i="0">🔒</td></tr>
+          <tr><td>말씀 보물 상<span class="note">요절</span></td><td class="kid" data-i="1">🔒</td></tr>
+          <tr><td>주님을 위해 말하는 상<span class="note">신언</span></td><td class="kid" data-i="2">🔒</td></tr>
           <tr><td>집회를 살리는 상</td><td class="kid" data-i="3">🔒</td></tr>
-          <tr><td>찬송율동상</td><td class="kid" data-i="4">🔒</td></tr>
+          <tr><td>기쁨 꽃 피는 상<span class="note">찬송율동</span></td><td class="kid" data-i="4">🔒</td></tr>
           <tr><td>하사가상</td><td>올해 처음 제출한 가정? <span class="pill">미정</span></td></tr>
         </tbody>
       </table>
@@ -511,7 +512,7 @@
 <script>
 /* 상 후보 아이들 이름 잠금
    형식: base64([salt 16B][iv 12B][AES-GCM 암호문+태그]), 키 = PBKDF2-SHA256(비밀번호, salt, 400000)
-   복호화 결과: ["출석상 후보", "요절상 후보", ...] (표의 data-i 순서)
+   복호화 결과: ["충성된 종 상 후보", "말씀 보물 상 후보", ...] (표의 data-i 순서)
    이 파일에는 이름도 비밀번호도 평문으로 들어 있지 않다. */
 (function () {
   var KIDS_ENC = 'fZMuD/rVjwbH/iZ/aCQHPbRSQy+FHdEMhwT5etZSaLRaMLm+AznPH9pb+ZgSQW0eCsXfalXInhaK1OII6lfv849tmaTbq0jjlnQass8nCGDStu5qQZtYwjqCg+cKt0XCID6cSPoy1ThCGlIgAs8ihrV/XJG/sd47oTGbN6smfidjy/JbIJZ8tOUtdg0zQ+1tAnVfCHU6bCc=';
