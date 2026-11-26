@@ -25,7 +25,7 @@
 
   --ink:#1C2B38;
   --body:#44545F;
-  --mute:#7F8D99;
+  --mute:#5F6E7A;
   --line:#DFE6EB;
   --line2:#EDF1F4;
   --bg:#F1F5F7;
@@ -74,8 +74,10 @@ a{color:inherit;}
 .due{
   margin:22px 0 0;background:var(--card);border-radius:10px;
   padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  border-left:6px solid var(--coral);
+  border-left:6px solid var(--coral);text-decoration:none;
 }
+.due .go{flex:0 0 100%;margin-top:2px;padding-top:12px;border-top:1px solid var(--line2);font-size:.88rem;font-weight:700;color:var(--navy);}
+@media (min-width:700px){ .due .go{flex:0 0 auto;margin:0;padding:0;border:0;} }
 .due p{margin:0;}
 .due span{display:block;font-size:.8rem;color:var(--mute);}
 .due strong{display:block;font-size:1.35rem;font-weight:800;color:var(--coral-txt);letter-spacing:-.025em;}
@@ -90,15 +92,17 @@ a{color:inherit;}
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
-.jump div{display:flex;gap:7px;overflow-x:auto;padding:10px 20px;-webkit-overflow-scrolling:touch;}
+.jump div{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:880px;margin:0 auto;padding:9px 20px;-webkit-overflow-scrolling:touch;}
 .jump div::-webkit-scrollbar{display:none;}
 .jump a{
-  flex:0 0 auto;text-decoration:none;font-size:.83rem;font-weight:700;
+  flex:0 0 auto;text-decoration:none;font-size:.85rem;font-weight:700;
   color:var(--navy);background:#fff;border:1px solid var(--line);
-  padding:7px 14px;border-radius:999px;
+  padding:8px 12px;border-radius:999px;min-height:40px;display:flex;align-items:center;
 }
-section{scroll-margin-top:56px;}
-@media (min-width:700px){ .jump{display:none;} section{scroll-margin-top:0;} }
+.jump a.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+section{scroll-margin-top:64px;}
+@media (min-width:700px){ .jump div{padding-left:36px;padding-right:36px;} .jump a{padding:8px 16px;} }
+@media (max-width:380px){ .jump div{padding-left:15px;padding-right:15px;} }
 @media print{ .jump{display:none;} }
 
 /* ── 섹션 ── */
@@ -136,6 +140,7 @@ section{padding-top:44px;padding-bottom:4px;}
   margin:12px 0 0;background:var(--t-amber);border-radius:12px;padding:16px 18px;
   font-size:.88rem;color:#6B4A10;
 }
+.path .t{margin:0 0 8px;font-size:.8rem;font-weight:700;color:var(--amber-txt);}
 .path ol{margin:0;padding:0;list-style:none;display:grid;gap:6px;}
 .path li{display:grid;grid-template-columns:7.6em 1fr;gap:10px;}
 .path b{color:var(--amber-txt);font-weight:800;font-variant-numeric:tabular-nums;}
@@ -225,19 +230,30 @@ section{padding-top:44px;padding-bottom:4px;}
 
 /* ── 제출 ── */
 .send{display:grid;gap:10px;}
-.ap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
-.ap .n{
-  display:inline-block;margin:0;font-size:.72rem;font-weight:700;color:#fff;
-  background:var(--teal);padding:3px 10px;border-radius:999px;
-}
-.ap h3{margin:9px 0 4px;font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.ap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;}
+.ap h3{margin:0 0 4px;font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
 .ap p{margin:0;font-size:.87rem;}
+.ap .val{
+  margin-top:auto;padding-top:12px;display:flex;align-items:stretch;gap:6px;
+}
 .ap .v{
-  display:block;margin-top:12px;padding:11px 14px;border-radius:8px;
+  flex:1 1 auto;min-width:0;display:block;padding:11px 14px;border-radius:8px;
   background:var(--t-teal);color:var(--navy);text-decoration:none;
-  font-size:.98rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+  font-size:.98rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;
 }
 .ap .v em{display:block;font-style:normal;font-size:.76rem;font-weight:500;color:var(--teal-txt);letter-spacing:0;margin-top:2px;}
+.cp{
+  flex:0 0 auto;min-width:52px;border:1px solid var(--line);background:#fff;border-radius:8px;
+  font:inherit;font-size:.8rem;font-weight:700;color:var(--teal-txt);cursor:pointer;padding:0 10px;
+}
+.cp:hover{border-color:var(--teal);}
+.cp.ok{background:var(--teal);border-color:var(--teal);color:#fff;}
+@media (min-width:700px){
+  .ap .val{flex-direction:column;}
+  .ap .v{overflow-wrap:normal;}
+  .cp{align-self:flex-end;min-height:34px;padding:0 14px;}
+}
+@media print{ .cp{display:none;} }
 .result{
   margin:12px 0 0;background:var(--navy);border-radius:12px;padding:18px 20px;color:#C3D6E4;
   display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
@@ -310,16 +326,17 @@ footer b{display:block;color:#fff;font-size:.98rem;font-weight:800;margin-bottom
       <div><dt>훈련 내용</dt><dd>진리 · 생명 · 인성 · 언어<small>초6은 영어·수학 수준별 맞춤 학습 지도</small></dd></div>
     </dl>
 
-    <div class="due">
+    <a class="due" href="#send">
       <p><span>서류 제출 마감</span><strong class="tn">12월 15일(화)</strong></p>
       <em id="dday"></em>
-    </div>
+      <span class="go">제출 방법 보기 ›</span>
+    </a>
   </div>
 </header>
 
 <nav class="jump" aria-label="바로가기">
   <div>
-    <a href="#goal">훈련 목표</a><a href="#span">기간·내용</a><a href="#target">참가 자격</a><a href="#docs">제출 서류</a><a href="#cost">비용</a><a href="#send">제출 방법</a><a href="#call">문의</a>
+    <a href="#span">기간</a><a href="#target">자격</a><a href="#docs">서류</a><a href="#cost">비용</a><a href="#send">제출</a><a href="#call">문의</a>
   </div>
 </nav>
 
@@ -354,6 +371,7 @@ footer b{display:block;color:#fff;font-size:.98rem;font-weight:800;margin-bottom
   </div>
 
   <div class="path">
+    <p class="t">진행 경과</p>
     <ol>
       <li><b>2026. 8. 27</b><span>전국 동역자 모임에서 다음세대 훈련 교통</span></li>
       <li><b>2026. 8. 29</b><span>장로·책임형제들 집회에서 교통</span></li>
@@ -463,22 +481,28 @@ footer b{display:block;color:#fff;font-size:.98rem;font-weight:800;margin-bottom
   <div class="h"><h2>서류 제출 방법</h2><p>12월 15일(화)까지 셋 중 하나로</p></div>
   <div class="send">
     <div class="ap">
-      <p class="n">E-mail</p>
       <h3>메일로 보내기</h3>
-      <p>사진, 서명 등은 먼저 스캔해서 보내고, 원본은 추후 제출합니다.</p>
-      <a class="v" href="mailto:btmkoffice@naver.com">btmkoffice@naver.com<em>스캔본 먼저, 원본은 나중에</em></a>
+      <p>사진·서명이 있는 서류는 스캔해서 먼저 보내고, 원본은 나중에 제출합니다.</p>
+      <div class="val">
+        <a class="v" href="mailto:btmkoffice@naver.com?subject=%EB%8B%A4%EC%9D%8C%EC%84%B8%EB%8C%80%20%ED%9B%88%EB%A0%A8%20%EC%84%9C%EB%A5%98%20%EC%A0%9C%EC%B6%9C%20(%ED%95%99%EC%83%9D%20%EC%9D%B4%EB%A6%84%20%C2%B7%20%EC%B4%886%2F%EA%B3%A03%20%C2%B7%20%EA%B5%90%ED%9A%8C)">btmkoffice@naver.com</a>
+        <button type="button" class="cp" data-copy="btmkoffice@naver.com" aria-label="메일 주소 복사">복사</button>
+      </div>
     </div>
     <div class="ap">
-      <p class="n">팩스</p>
       <h3>팩스로 보내기</h3>
-      <p>작성한 서류를 팩스로 보냅니다.</p>
-      <span class="v">031-286-3132<em>성경진리사역원</em></span>
+      <p>작성한 서류를 그대로 보냅니다.</p>
+      <div class="val">
+        <span class="v">031-286-3132</span>
+        <button type="button" class="cp" data-copy="031-286-3132" aria-label="팩스 번호 복사">복사</button>
+      </div>
     </div>
     <div class="ap">
-      <p class="n">우편</p>
       <h3>우편으로 보내기</h3>
-      <p>원본 서류를 우편으로 보냅니다.</p>
-      <span class="v">경기도 용인시 기흥구 한보라1로 50<em>(17080) 성경진리사역원</em></span>
+      <p>원본 서류를 보냅니다.</p>
+      <div class="val">
+        <span class="v">경기도 용인시 기흥구 한보라1로 50<em>(17080) 성경진리사역원</em></span>
+        <button type="button" class="cp" data-copy="(17080) 경기도 용인시 기흥구 한보라1로 50 성경진리사역원" aria-label="주소 복사">복사</button>
+      </div>
     </div>
   </div>
   <div class="result">
@@ -513,6 +537,41 @@ footer b{display:block;color:#fff;font-size:.98rem;font-weight:800;margin-bottom
   var n=new Date(), k=new Date(n.getTime()+n.getTimezoneOffset()*60000+9*3600000);
   var d=Math.round((Date.UTC(2026,11,15)-Date.UTC(k.getFullYear(),k.getMonth(),k.getDate()))/86400000);
   el.textContent = d>0 ? d+'일 남음' : (d===0 ? '오늘 마감' : '마감');
+})();
+(function(){
+  // 복사 버튼
+  function done(b){ var t=b.textContent; b.textContent='복사됨'; b.classList.add('ok'); setTimeout(function(){ b.textContent=t; b.classList.remove('ok'); },1600); }
+  function fallback(s){ var ta=document.createElement('textarea'); ta.value=s; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); }
+  document.querySelectorAll('.cp').forEach(function(b){
+    b.addEventListener('click',function(){
+      var s=b.getAttribute('data-copy');
+      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(s).then(function(){done(b);},function(){fallback(s);done(b);}); }
+      else { fallback(s); done(b); }
+    });
+  });
+  // 바로가기: 지금 보고 있는 섹션 표시
+  var links=[].slice.call(document.querySelectorAll('.jump a')); if(!links.length) return;
+  var bar=document.querySelector('.jump div');
+  var secs=[].slice.call(document.querySelectorAll('main section'));
+  var map={}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var cur=null, tick=false;
+  function on(id){
+    if(id===cur) return; cur=id;
+    links.forEach(function(a){ a.classList.remove('on'); a.removeAttribute('aria-current'); });
+    var a=map[id]; if(!a) return;
+    a.classList.add('on'); a.setAttribute('aria-current','true');
+    var l=a.offsetLeft-bar.offsetLeft, r=l+a.offsetWidth;
+    if(l<bar.scrollLeft || r>bar.scrollLeft+bar.clientWidth) bar.scrollLeft=l-16;
+  }
+  function update(){
+    tick=false; var id=null;
+    var atEnd=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4;
+    if(atEnd){ id=secs[secs.length-1].id; }
+    else { secs.forEach(function(s){ if(s.getBoundingClientRect().top<=window.innerHeight*0.35) id=s.id; }); }
+    on(id);
+  }
+  window.addEventListener('scroll',function(){ if(!tick){ tick=true; setTimeout(update,60); } },{passive:true});
+  update();
 })();
 </script>
 </body>
