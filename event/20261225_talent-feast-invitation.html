@@ -75,14 +75,15 @@
   .art video {
     position: absolute; left: 0; width: 100%; top: 46.68%; height: 37.74%; object-fit: cover;
     opacity: 0; transition: opacity 1s ease;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 88%, transparent 100%);
-            mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+    /* 위쪽(움직임 없는 커튼)만 흐리게 이음. 아래쪽은 흐리게 하면 영상과 그림의 다리가 겹쳐 보이므로 일정 박스로 덮음 */
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%);
+            mask-image: linear-gradient(180deg, transparent 0, #000 12%);
   }
   .art video.on { opacity: 1; }
 
   /* 일정 */
   .sheet {
-    position: relative; z-index: 2; margin-top: -56px; background: var(--sheet);
+    position: relative; z-index: 2; margin-top: -24.5%; background: var(--sheet);
     border-radius: 28px 28px 0 0; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px));
     box-shadow: 0 -10px 28px -14px rgba(51,35,26,.4);
   }
