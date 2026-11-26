@@ -49,7 +49,7 @@
   /* 머리글 */
   .head {
     position: relative; z-index: 2; text-align: center;
-    padding: calc(32px + env(safe-area-inset-top, 0px)) 20px 0;
+    padding: calc(min(9.7vw, 54px) + 14px + env(safe-area-inset-top, 0px)) 20px 0;
   }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px; margin: 0;
@@ -146,17 +146,25 @@
   .anim.go .art { opacity: 1; transition: opacity .9s var(--ease) .25s; }
   .anim.go .art img { transform: none; transition: transform 1.6s var(--ease) .25s; }
 
-  /* 2. 금화: 양옆 금화가 한 바퀴, 제목 뒤로 금화가 한 번 떨어짐 */
+  /* 2. 잔치: 깃발 줄이 왼쪽부터 걸리고, 제목이 자리 잡으면 색종이가 한 번 터짐. 양옆 금화는 한 바퀴 */
+  .bunting { position: absolute; z-index: 3; left: 0; top: env(safe-area-inset-top, 0px); width: 100%; height: auto; pointer-events: none; overflow: visible; }
+  .flag { transform-box: fill-box; transform-origin: 50% 0; }
+  .anim .bunting .string { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .anim .flag { transform: scaleY(0); }
+  .anim.go .bunting .string { stroke-dashoffset: 0; transition: stroke-dashoffset .8s var(--ease); }
+  .anim.go .flag { animation: hang 1.3s var(--ease) calc(80ms + var(--i) * 45ms) both; }
+  @keyframes hang {
+    0%   { transform: scaleY(0) rotate(0); }
+    30%  { transform: scaleY(1) rotate(9deg); }
+    50%  { transform: scaleY(1) rotate(-6deg); }
+    68%  { transform: scaleY(1) rotate(3deg); }
+    84%  { transform: scaleY(1) rotate(-1.5deg); }
+    100% { transform: scaleY(1) rotate(0); }
+  }
+  .confetti { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .confetti i { position: absolute; left: 0; top: 0; display: block; will-change: transform, opacity; }
   .anim.go .eyebrow svg { animation: flip .9s var(--ease) .75s both; }
   @keyframes flip { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
-  .rain { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: visible; }
-  .rain svg { position: absolute; top: -40px; opacity: 0; animation: fall var(--d) cubic-bezier(.45, 0, .7, 1) var(--w) forwards; }
-  @keyframes fall {
-    0%   { opacity: 0; transform: translateY(0) rotate(0); }
-    12%  { opacity: 1; }
-    75%  { opacity: 1; }
-    100% { opacity: 0; transform: translateY(var(--y)) rotate(var(--r)); }
-  }
 
   /* 3. 아래로 내리면 일정이 올라오고 순서가 차례로 나타남 */
   .anim .sheet { opacity: 0; transform: translateY(48px); }
@@ -171,6 +179,7 @@
 </head>
 <body>
 <main class="card">
+  <svg class="bunting" viewBox="0 0 560 54" aria-hidden="true"><path class="string" d="M-6 4Q280 56 566 4" fill="none" stroke="#8A6A55" stroke-width="1.5" pathLength="1"/><g transform="translate(13.1 7.4) rotate(9.6)"><path class="flag" style="--i:0" d="M-12 0H12L0 21Z" fill="#E4572E"/></g><g transform="translate(51.2 13.4) rotate(8.3)"><path class="flag" style="--i:1" d="M-12 0H12L0 21Z" fill="#F29E38"/></g><g transform="translate(89.3 18.4) rotate(6.9)"><path class="flag" style="--i:2" d="M-12 0H12L0 21Z" fill="#F6C945"/></g><g transform="translate(127.5 22.6) rotate(5.5)"><path class="flag" style="--i:3" d="M-12 0H12L0 21Z" fill="#7BB662"/></g><g transform="translate(165.6 25.8) rotate(4.2)"><path class="flag" style="--i:4" d="M-12 0H12L0 21Z" fill="#4FA3D9"/></g><g transform="translate(203.7 28.2) rotate(2.8)"><path class="flag" style="--i:5" d="M-12 0H12L0 21Z" fill="#9A7BC8"/></g><g transform="translate(241.9 29.5) rotate(1.4)"><path class="flag" style="--i:6" d="M-12 0H12L0 21Z" fill="#E4572E"/></g><g transform="translate(280.0 30.0) rotate(0.0)"><path class="flag" style="--i:7" d="M-12 0H12L0 21Z" fill="#F29E38"/></g><g transform="translate(318.1 29.5) rotate(-1.4)"><path class="flag" style="--i:8" d="M-12 0H12L0 21Z" fill="#F6C945"/></g><g transform="translate(356.3 28.2) rotate(-2.8)"><path class="flag" style="--i:9" d="M-12 0H12L0 21Z" fill="#7BB662"/></g><g transform="translate(394.4 25.8) rotate(-4.2)"><path class="flag" style="--i:10" d="M-12 0H12L0 21Z" fill="#4FA3D9"/></g><g transform="translate(432.5 22.6) rotate(-5.5)"><path class="flag" style="--i:11" d="M-12 0H12L0 21Z" fill="#9A7BC8"/></g><g transform="translate(470.7 18.4) rotate(-6.9)"><path class="flag" style="--i:12" d="M-12 0H12L0 21Z" fill="#E4572E"/></g><g transform="translate(508.8 13.4) rotate(-8.3)"><path class="flag" style="--i:13" d="M-12 0H12L0 21Z" fill="#F29E38"/></g><g transform="translate(546.9 7.4) rotate(-9.6)"><path class="flag" style="--i:14" d="M-12 0H12L0 21Z" fill="#F6C945"/></g></svg>
   <header class="head">
     <p class="eyebrow">
       <svg aria-hidden="true" width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#E8B23A"/><circle cx="11" cy="11" r="6.5" fill="none" stroke="#FFF3C9" stroke-width="2"/></svg>
@@ -227,25 +236,48 @@
     document.querySelectorAll('.program li, .welcome, .addr, .actions').forEach((el, i) => el.style.setProperty('--i', i));
     if (!root.classList.contains('anim')) return;
 
-    // 금화 비: 8개, 한 번만
-    const coin = '<svg width="S" height="S" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#E8B23A"/><circle cx="11" cy="11" r="6.5" fill="none" stroke="#FFF3C9" stroke-width="2"/></svg>';
-    const rain = document.createElement('div');
-    rain.className = 'rain';
-    [[8,18,0],[22,24,260],[36,16,520],[50,22,120],[63,18,380],[77,26,60],[90,16,300],[45,14,640]].forEach(([x, s, w], k) => {
-      rain.insertAdjacentHTML('beforeend', coin.replace(/S/g, s));
-      const el = rain.lastElementChild;
-      el.style.left = x + '%';
-      el.style.setProperty('--w', (900 + w) + 'ms');
-      el.style.setProperty('--d', (1500 + (k % 3) * 250) + 'ms');
-      el.style.setProperty('--y', (230 + (k % 4) * 40) + 'px');
-      el.style.setProperty('--r', (k % 2 ? 300 : -260) + 'deg');
-    });
-    document.querySelector('.head').appendChild(rain);
-    setTimeout(() => rain.remove(), 4000);
-
     // 글꼴을 다 불러온 뒤 시작 (최대 0.9초 기다림)
     let started = false;
-    const go = () => { if (!started) { started = true; requestAnimationFrame(() => root.classList.add('go')); } };
+    const go = () => {
+      if (started) return;
+      started = true;
+      requestAnimationFrame(() => root.classList.add('go'));
+      setTimeout(confetti, 1050);   // 제목 글자가 다 자리 잡을 즈음
+    };
+
+    // 색종이: 제목 양옆에서 한 번 터지고 떨어지며 사라짐
+    function confetti() {
+      if (!Element.prototype.animate) return;
+      const card = document.querySelector('.card');
+      const title = h1.getBoundingClientRect(), box = card.getBoundingClientRect();
+      const layer = document.createElement('div');
+      layer.className = 'confetti';
+      card.appendChild(layer);
+      const colors = ['#E4572E', '#F29E38', '#F6C945', '#7BB662', '#4FA3D9', '#9A7BC8'];
+      const W = box.width, y0 = title.top - box.top + title.height * 0.45;
+      const N = 40;
+      let done = 0;
+      for (let k = 0; k < N; k++) {
+        const side = k % 2 ? 1 : -1;                                  // 왼쪽(-1) / 오른쪽(1)
+        const x0 = W / 2 + side * Math.min(title.width * 0.5, W * 0.42);
+        const vx = -side * (10 + Math.random() * 150);                // 주로 안쪽 위로
+        const vy = -(220 + Math.random() * 200);
+        const g = 520, T = 1.6 + Math.random() * 0.7;
+        const el = document.createElement('i');
+        const w = 6 + Math.random() * 5, round = Math.random() < 0.3;
+        el.style.cssText = `width:${w}px;height:${round ? w : w * 1.6}px;background:${colors[k % 6]};border-radius:${round ? '50%' : '1px'}`;
+        layer.appendChild(el);
+        const spin = (Math.random() * 2 - 1) * 720, frames = [];
+        for (let f = 0; f <= 10; f++) {
+          const t = T * f / 10;
+          const x = x0 + vx * t * (1 - t / (T * 2.2));                // 옆으로는 점점 느려짐
+          const y = y0 + vy * t + 0.5 * g * t * t;
+          frames.push({ transform: `translate(${x}px, ${y}px) rotate(${spin * f / 10}deg) rotateX(${f * 140}deg)`, opacity: f < 7 ? 1 : (10 - f) / 3.5 });
+        }
+        el.animate(frames, { duration: T * 1000, easing: 'linear', delay: Math.random() * 120, fill: 'both' })
+          .finished.then(() => { if (++done === N) layer.remove(); });
+      }
+    }
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
     setTimeout(go, 900);
 
