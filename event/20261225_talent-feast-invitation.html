@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>달란트잔치 초대장 | 안양교회 유초등부</title>
+<meta name="description" content="12월 25일 금요일 오전 10시 30분 · 안양교회 교육관 1층 유초등부실 · 가족, 친구들 모두 환영합니다">
+<meta property="og:type" content="website">
+<meta property="og:title" content="달란트잔치에 초대합니다">
+<meta property="og:description" content="12월 25일(금) 오전 10시 30분 · 안양교회 교육관 1층 유초등부실">
+<meta property="og:url" content="https://tk-korea.github.io/childrenservice/event/20261225_talent-feast-invitation.html">
+<meta property="og:image" content="https://tk-korea.github.io/childrenservice/event/img/20261225_invite-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#FCF3E1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 글꼴: 제목·날짜·장소 = 동글 Bold, 나머지 = 본고딕(Noto Sans KR) Bold. 인쇄용 초대장과 같은 규칙 -->
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Noto+Sans+KR:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FCF3E1;
+    --ink: #33231A;
+    --ink-2: #6B4E3D;
+    --accent: #C8472F;
+    --coin: #E8B23A;
+    --sheet: #FFFFFF;
+    --rule: #EFE4D2;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: 'Noto Sans KR', -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-weight: 700; line-height: 1.5; word-break: keep-all;
+  }
+  .card { position: relative; max-width: 560px; margin: 0 auto; background: var(--cream); overflow: hidden; }
+  @media (min-width: 600px) {
+    body { padding: 32px 0; background: #F1E4CB; }
+    .card { border-radius: 28px; box-shadow: 0 24px 60px -30px rgba(51,35,26,.45); }
+  }
+
+  /* 머리글 */
+  .head {
+    position: relative; z-index: 2; text-align: center;
+    padding: calc(32px + env(safe-area-inset-top, 0px)) 20px 0;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0;
+    font-size: clamp(14px, 4.2vw, 16px); font-weight: 800; letter-spacing: .02em; color: var(--ink-2); white-space: nowrap;
+  }
+  .eyebrow svg { flex: none; }
+  h1 {
+    margin: 6px 0 0; font-family: 'Dongle', sans-serif; font-weight: 700; color: var(--accent);
+    font-size: clamp(104px, 31vw, 156px); line-height: .8; letter-spacing: -.01em;
+  }
+  .copy { margin: 10px 0 0; font-size: clamp(17px, 4.6vw, 21px); line-height: 1.5; }
+  .copy span { display: block; }
+
+  /* 강당 그림: 그림 위쪽 빈 천장을 머리글 밑으로 겹쳐서 이어지게 함 */
+  .art { position: relative; margin-top: -44%; }
+  .art img { display: block; width: 100%; height: auto; }
+  .art::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 52%;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 72%, rgba(252,243,225,0) 100%);
+  }
+
+  /* 일정 */
+  .sheet {
+    position: relative; z-index: 2; margin-top: -56px; background: var(--sheet);
+    border-radius: 28px 28px 0 0; padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -10px 28px -14px rgba(51,35,26,.4);
+  }
+  @media (min-width: 600px) { .sheet { padding: 26px 32px 32px; } }
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .info { grid-template-columns: 1fr; gap: 10px; } }
+  .info div { display: flex; flex-direction: column; }
+  .big { font-family: 'Dongle', sans-serif; font-size: clamp(44px, 12vw, 50px); line-height: .95; }
+  .sub { font-size: clamp(16px, 4.2vw, 19px); color: var(--ink-2); }
+
+  .program { list-style: none; margin: 18px 0 0; padding: 0; border-top: 2px solid var(--rule); }
+  .program li {
+    display: grid; grid-template-columns: 76px 1fr; align-items: baseline;
+    padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 19px;
+  }
+  .program time { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .program small { font-size: 16px; color: var(--ink-2); margin-left: 6px; }
+
+  .welcome { margin: 18px 0 0; text-align: center; font-size: 20px; }
+  .addr { margin: 2px 0 0; text-align: center; font-size: 16px; color: var(--ink-2); }
+
+  .actions { display: grid; gap: 10px; margin-top: 18px; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 52px;
+    border-radius: 14px; border: 2px solid var(--rule); background: var(--sheet); color: var(--ink);
+    font: inherit; font-size: 15px; white-space: nowrap; text-decoration: none; cursor: pointer; padding: 0 4px;
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-size: 18px; }
+  .btn:focus-visible { outline: 3px solid var(--coin); outline-offset: 2px; }
+  @media (hover: hover) { .btn:hover { border-color: var(--ink-2); } .btn.primary:hover { filter: brightness(1.06); } }
+  .toast {
+    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px);
+    background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 15px;
+    opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none;
+  }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="head">
+    <p class="eyebrow">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#E8B23A"/><circle cx="11" cy="11" r="6.5" fill="none" stroke="#FFF3C9" stroke-width="2"/></svg>
+      안양교회 유초등부 · 2026 하반기
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#E8B23A"/><circle cx="11" cy="11" r="6.5" fill="none" stroke="#FFF3C9" stroke-width="2"/></svg>
+    </p>
+    <h1>달란트잔치</h1>
+    <p class="copy">
+      <span>작지만 소중한 달란트를 모아 잔치를 엽니다.</span>
+      <span>사랑과 기쁨이 가득한 이 자리에 여러분을 초대합니다.</span>
+    </p>
+  </header>
+
+  <div class="art">
+    <img src="img/20261225_invite-hall.webp" width="1200" height="1789" alt="깃발과 풍선으로 꾸민 강당에서 아이들이 달란트 시장을 즐기는 그림">
+  </div>
+
+  <section class="sheet" aria-label="잔치 안내">
+    <div class="info">
+      <div><span class="big">12월 25일 금요일</span><span class="sub">오전 10시 30분</span></div>
+      <div><span class="big">1층 유초등부실</span><span class="sub">안양교회 교육관</span></div>
+    </div>
+
+    <ol class="program" aria-label="순서">
+      <li><time>10:30</time><span>찬송·말씀</span></li>
+      <li><time>11:10</time><span>시상</span></li>
+      <li><time>11:35</time><span>달란트 시장</span></li>
+      <li><time>12:30</time><span>애찬<small>지하 1층</small></span></li>
+    </ol>
+
+    <p class="welcome">가족, 친구들 모두 환영합니다</p>
+    <p class="addr">경기도 안양시 만안구 삼막로96번길 83</p>
+
+    <div class="actions">
+      <a class="btn primary" href="https://map.naver.com/p/search/%EC%95%88%EC%96%91%EC%8B%9C%20%EB%A7%8C%EC%95%88%EA%B5%AC%20%EC%82%BC%EB%A7%89%EB%A1%9C96%EB%B2%88%EA%B8%B8%2083" target="_blank" rel="noopener">길 찾기</a>
+      <div class="row">
+        <button class="btn" type="button" id="share">공유하기</button>
+        <button class="btn" type="button" id="cal">달력에 추가</button>
+        <a class="btn" href="20261225_talent-feast-invitation.pdf" download>인쇄용 PDF</a>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const toast = (msg) => {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove('on'), 2200);
+  };
+
+  document.getElementById('share').addEventListener('click', async () => {
+    const data = { title: '달란트잔치에 초대합니다', text: '12월 25일(금) 오전 10시 30분 · 안양교회 교육관 1층 유초등부실', url: location.href };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch (e) { /* 사용자가 닫음 */ }
+      return;
+    }
+    try { await navigator.clipboard.writeText(location.href); toast('주소를 복사했어요'); }
+    catch (e) { toast('주소창의 주소를 복사해 보내 주세요'); }
+  });
+
+  document.getElementById('cal').addEventListener('click', () => {
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//anyang-church//talent-feast//KO',
+      'BEGIN:VEVENT', 'UID:20261225-talent-feast@anyang-church',
+      'DTSTAMP:20261126T000000Z',
+      'DTSTART;TZID=Asia/Seoul:20261225T103000', 'DTEND;TZID=Asia/Seoul:20261225T130000',
+      'SUMMARY:달란트잔치 (안양교회 유초등부)',
+      'LOCATION:안양교회 교육관 1층 유초등부실\\, 경기도 안양시 만안구 삼막로96번길 83',
+      'DESCRIPTION:10:30 찬송·말씀 / 11:10 시상 / 11:35 달란트 시장 / 12:30 애찬(지하 1층)',
+      'URL:' + location.href.split('#')[0],
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    a.download = '달란트잔치.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+</script>
+</body>
+</html>
