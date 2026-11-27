@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123A5C">
+<meta name="robots" content="noindex">
+<title>2027 겨울 어린이 집회 신청 · 안양교회</title>
+<meta name="description" content="2027 겨울 전국 어린이 특별집회 · 어린이 온전하게 하는 훈련 — 안양교회 가정별 신청">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2027 겨울 어린이 집회 신청 · 안양교회">
+<meta property="og:description" content="2027년 1월 15일(금) ~ 17일(주일), 온라인(Zoom) · 가족 모두를 한 번에 신청하세요">
+<script>
+/* 큰 글씨: 지난번 고른 것을 그리기 전에 적용 (깜빡임 방지) */
+try{ if(localStorage.getItem('bigText') === '1') document.documentElement.classList.add('big'); }catch(e){}
+</script>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+/* ───────────────────────── 글꼴 규칙 ─────────────────────────
+   크기는 모두 rem. 기본 17px, 큰 글씨 모드 20px (휴대폰 글꼴 설정도 따라감)
+   본문·라벨·버튼  1rem    (17px / 큰 글씨 20px)
+   입력칸 글씨     1.06rem (18px / 21px) — 휴대폰에서 확대되지 않는 크기
+   보조 설명       .9rem   (15.3px / 18px) — 이 페이지에서 가장 작은 글씨
+   소제목          1.3rem  (22px / 26px)
+   제목            1.65rem (28px / 33px)
+   금액 합계       1.4rem  (24px / 28px)
+   줄 간격: 본문 1.65, 제목 1.3 · 한글 자간은 줄이지 않음
+   색: 본문 #16202A, 보조 글씨 #3F4B57 (흰 바탕 대비 9:1) — 옅은 회색 글씨는 쓰지 않음
+   ─────────────────────────────────────────────────────────── */
+:root{
+  --navy:#123A5C;
+  --navy-2:#0C2A44;
+  --ink:#16202A;
+  --ink-2:#3F4B57;
+  --line:#AEB9C4;
+  --rule:#DCE2E7;
+  --soft:#F3F5F7;
+  --err:#B42318;
+  --err-bg:#FDF0EE;
+  --focus:#F2B33D;
+
+  --t-cap:.9rem;
+  --t-body:1rem;
+  --t-input:1.06rem;
+  --t-h2:1.3rem;
+  --t-h1:1.65rem;
+  --t-num:1.4rem;
+}
+*{box-sizing:border-box;}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+html.big{font-size:125%;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  margin:0;background:#fff;color:var(--ink);
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:var(--t-body);line-height:1.65;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+.wrap{max-width:680px;margin:0 auto;padding-left:20px;padding-right:20px;}
+.tn{font-variant-numeric:tabular-nums;}
+[hidden]{display:none !important;}
+
+/* ── 머리 ── */
+.hero{background:var(--navy);color:#fff;padding-top:14px;padding-bottom:20px;}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.org{margin:0;font-size:var(--t-cap);font-weight:600;color:#C9D8E5;}
+.big-btn{min-height:44px;padding:0 14px;border:1.5px solid rgba(255,255,255,.75);border-radius:8px;background:transparent;color:#fff;font:inherit;font-size:var(--t-cap);font-weight:700;cursor:pointer;white-space:nowrap;}
+.big-btn[aria-pressed="true"]{background:#fff;color:var(--navy);border-color:#fff;}
+.hero h1{margin:10px 0 0;font-size:var(--t-h1);line-height:1.3;font-weight:800;color:#fff;}
+.lede{margin:6px 0 0;color:#DCE6EF;}
+.facts{margin:16px 0 0;border-top:1px solid rgba(255,255,255,.28);}
+.facts div{display:grid;grid-template-columns:3.6em 1fr;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.28);}
+.facts dt{font-size:var(--t-cap);font-weight:600;color:#B9CCDC;padding-top:.12em;}
+.facts dd{margin:0;font-weight:700;color:#fff;}
+.facts dd small{display:block;font-size:var(--t-cap);font-weight:400;color:#DCE6EF;}
+.facts .due dd{color:#FFD27A;}
+.lanes{margin:0;padding:0;list-style:none;}
+.lanes li + li{margin-top:6px;}
+.lanes li span{display:block;font-size:var(--t-cap);font-weight:600;color:#B9CCDC;line-height:1.4;}
+.back{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-weight:700;color:#fff;text-underline-offset:4px;}
+
+/* ── 단계 ── */
+form > section{margin-top:28px;padding-top:28px;border-top:1px solid var(--rule);}
+form > section:first-of-type{margin-top:8px;border-top:0;}
+.h{display:flex;align-items:baseline;gap:10px;margin:0 0 16px;}
+.h .n{font-size:var(--t-h2);font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;}
+.h h2{margin:0;font-size:var(--t-h2);line-height:1.3;font-weight:800;color:var(--ink);}
+.h .opt{margin-left:auto;font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.hint{margin:-10px 0 16px;font-size:var(--t-cap);color:var(--ink-2);}
+
+/* ── 입력 ── */
+.fld{margin:0 0 20px;}
+.fld > label,.lb{display:block;margin:0 0 8px;font-size:var(--t-body);font-weight:700;color:var(--ink);line-height:1.4;}
+.fld > label small,.lb small{margin-left:6px;font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+input[type=text],input[type=tel],textarea{
+  width:100%;min-height:52px;padding:11px 14px;border:1.5px solid var(--line);border-radius:8px;
+  font:inherit;font-size:var(--t-input);color:var(--ink);background:#fff;
+}
+textarea{min-height:100px;resize:vertical;line-height:1.55;}
+::placeholder{color:#66727E;opacity:1;}
+input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid var(--focus);outline-offset:0;border-color:var(--ink);}
+.bad input[type=text],.bad input[type=tel]{border-color:var(--err);}
+.err{display:none;margin:6px 0 0;font-size:var(--t-cap);font-weight:700;color:var(--err);}
+.bad .err{display:block;}
+
+.seg{display:flex;flex-wrap:wrap;gap:8px;}
+.seg label{position:relative;flex:1 1 0;min-width:2.8em;}
+.seg.wide label{flex:1 1 8.5em;}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;}
+.seg span{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52px;padding:6px 6px;
+  border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;
+  font-size:var(--t-body);font-weight:700;color:var(--ink);text-align:center;line-height:1.3;
+}
+.seg span small{font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+.seg input:checked + span{background:var(--navy);border-color:var(--navy);color:#fff;}
+.seg input:checked + span small{color:#DCE6EF;}
+.seg input:focus-visible + span{outline:3px solid var(--focus);outline-offset:2px;}
+.bad .seg span{border-color:var(--err);}
+/* 학년 다섯 칸은 큰 글씨에서도 한 줄 */
+[data-f="grade"] .seg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
+[data-f="grade"] .seg label{min-width:0;}
+[data-f="grade"] .seg span{padding:6px 2px;}
+
+/* ── 참석하는 사람 ── */
+.people{display:grid;gap:16px;}
+.person{margin:0;padding:8px 16px 0;border:1.5px solid var(--rule);border-radius:10px;background:#fff;min-width:0;}
+.person legend{float:left;width:100%;margin:0 0 16px;padding:0 0 6px;display:flex;align-items:center;gap:8px;min-height:44px;border-bottom:1px solid var(--rule);}
+.person legend + *{clear:both;}
+.tag{font-size:var(--t-cap);font-weight:700;color:var(--ink-2);}
+.person legend b{font-size:var(--t-body);font-weight:800;color:var(--ink);}
+.person legend b small{font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.rm{margin-left:auto;min-height:44px;padding:0 2px 0 12px;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:700;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
+.rm:hover{color:var(--err);}
+.to{display:block;margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--soft);font-size:var(--t-cap);font-weight:700;color:var(--navy);}
+/* 이름(또는 본인 표시)과 성별을 한 줄에 */
+.pair{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 8px;align-items:start;}
+.pair .seg{flex-wrap:nowrap;}
+.pair .seg label{flex:0 0 3.1em;min-width:3.1em;}
+.self{align-self:end;margin:0 0 20px;padding:6px 12px;min-height:52px;border-radius:8px;background:var(--soft);display:flex;flex-direction:column;justify-content:center;line-height:1.35;}
+.self b{font-size:var(--t-cap);font-weight:700;color:var(--ink-2);}
+.self span{font-size:var(--t-cap);color:var(--ink);}
+
+.adds{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 0;}
+.add{min-height:56px;padding:8px;border:1.5px solid var(--navy);border-radius:8px;background:#fff;font:inherit;font-size:var(--t-body);font-weight:700;color:var(--navy);cursor:pointer;line-height:1.3;}
+.add:hover{background:var(--soft);}
+.add.me{grid-column:1 / -1;}
+.add small{display:block;font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+.add:disabled{opacity:.45;cursor:default;}
+.limit{margin:10px 0 0;font-size:var(--t-cap);color:var(--ink-2);}
+
+/* ── 교재 (접어 둠) ── */
+.more{border:1.5px solid var(--rule);border-radius:10px;}
+.more summary{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 16px;cursor:pointer;list-style:none;font-weight:700;color:var(--ink);}
+.more summary::-webkit-details-marker{display:none;}
+.more summary span{margin-left:auto;font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.more summary::after{content:'';flex:0 0 auto;width:9px;height:9px;margin:-4px 2px 0;border-right:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);transform:rotate(45deg);}
+.more[open] summary::after{transform:rotate(-135deg);margin-top:4px;}
+.qty{padding:0 16px;border-top:1px solid var(--rule);}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule);}
+.row:last-child{border-bottom:0;}
+.row label{font-weight:700;color:var(--ink);line-height:1.4;}
+.row label small{display:block;margin-top:2px;font-size:var(--t-cap);font-weight:400;color:var(--ink-2);}
+.step{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;flex:0 0 auto;}
+.step button{width:48px;height:48px;border:0;background:var(--soft);color:var(--navy);font-size:1.3rem;font-weight:700;cursor:pointer;}
+.step button:disabled{color:#A3AEB8;cursor:default;}
+.step input{width:2.8em;height:48px;border:0;text-align:center;font:inherit;font-size:var(--t-input);font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;-moz-appearance:textfield;}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+
+/* ── 동의 ── */
+.agree{margin-top:4px;padding:16px;border-radius:10px;background:var(--soft);}
+.agree .lb{margin:0 0 10px;}
+.agree dl{margin:0;display:grid;gap:6px;font-size:var(--t-cap);}
+.agree dl div{display:grid;grid-template-columns:4.6em 1fr;gap:8px;}
+.agree dt{font-weight:600;color:var(--ink-2);}
+.agree dd{margin:0;color:var(--ink);}
+.chk{display:flex;gap:12px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-weight:700;color:var(--ink);line-height:1.4;}
+.chk input{width:24px;height:24px;margin:0;flex:0 0 auto;accent-color:var(--navy);}
+.chk small{display:block;margin-top:2px;font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+.agree.bad .chk{border-color:var(--err);background:var(--err-bg);}
+
+/* ── 합계 ── */
+.sum{margin-top:24px;}
+.sum ul{margin:0;padding:0;list-style:none;}
+.sum li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);}
+.sum li span{color:var(--ink-2);}
+.sum li b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:4px 12px;flex-wrap:wrap;margin-top:-1px;padding-top:12px;border-top:2px solid var(--ink);}
+.total span{font-weight:700;color:var(--ink);}
+.total b{font-size:var(--t-num);font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;}
+.total small{flex:0 0 100%;font-size:var(--t-cap);color:var(--ink-2);}
+
+.send{display:block;width:100%;min-height:60px;margin:24px 0 0;border:0;border-radius:8px;background:var(--navy);color:#fff;font:inherit;font-size:var(--t-input);font-weight:800;cursor:pointer;}
+.send:hover{background:var(--navy-2);}
+.send:disabled{background:#8B97A3;cursor:default;}
+.msg{margin:12px 0 0;padding:12px 14px;border-radius:8px;font-size:var(--t-cap);font-weight:700;}
+.msg.bad{background:var(--err-bg);color:var(--err);}
+.msg.info{background:#FFF4DA;color:#4F3A00;}
+.msg a{color:inherit;}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+
+/* ── 접수 완료 ── */
+#done{padding-top:24px;}
+.done{padding:24px 20px;border:1.5px solid var(--rule);border-radius:10px;}
+.done:focus{outline:none;}
+.done h2{margin:0;display:flex;align-items:center;gap:10px;font-size:var(--t-h2);line-height:1.3;font-weight:800;color:var(--ink);}
+.done h2::before{content:'';flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;}
+.done .id{display:inline-block;margin:14px 0 0;padding:4px 12px;border-radius:6px;background:var(--soft);font-weight:800;letter-spacing:.05em;color:var(--ink);font-variant-numeric:tabular-nums;}
+.done ul{margin:16px 0 20px;padding:0;list-style:none;border-top:1px solid var(--rule);}
+.done ul li{padding:10px 0;border-bottom:1px solid var(--rule);font-weight:700;}
+.done ul li span{display:block;font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+.done p{margin:16px 0 0;font-size:var(--t-cap);color:var(--ink-2);}
+.done p a{color:var(--navy);font-weight:800;}
+.again{display:block;width:100%;min-height:56px;margin:20px 0 0;border:1.5px solid var(--navy);border-radius:8px;background:#fff;font:inherit;font-weight:800;color:var(--navy);cursor:pointer;}
+
+/* ── 아래 합계 막대 ── */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--rule);box-shadow:0 -2px 12px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom);}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px;}
+.bar p{margin:0;display:flex;flex-direction:column;line-height:1.3;}
+.bar p b{font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.bar p span{font-size:1.2rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;}
+.bar button{min-height:48px;padding:0 18px;border:0;border-radius:8px;background:var(--navy);color:#fff;font:inherit;font-weight:800;cursor:pointer;white-space:nowrap;}
+
+footer{margin-top:48px;background:var(--navy);color:#C9D8E5;padding-top:28px;padding-bottom:40px;font-size:var(--t-cap);line-height:1.8;}
+body.has-bar footer{padding-bottom:112px;}
+footer a{color:#fff;}
+footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800;color:#fff;}
+
+@media (min-width:700px){
+  .wrap{padding-left:32px;padding-right:32px;}
+  .hero{padding-top:20px;padding-bottom:28px;}
+  .hero h1{font-size:2rem;margin-top:16px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+  .person{padding:8px 20px 0;}
+}
+@media (max-width:360px){
+  .wrap{padding-left:16px;padding-right:16px;}
+  .person{padding-left:12px;padding-right:12px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <p class="org">안양교회 유초등부</p>
+      <button type="button" class="big-btn" id="big" aria-pressed="false">큰 글씨</button>
+    </div>
+    <h1>2027 겨울 어린이 집회 신청</h1>
+    <p class="lede">가족이 함께 한 번에 신청합니다.</p>
+
+    <dl class="facts">
+      <div><dt>대상</dt><dd>
+        <ul class="lanes">
+          <li><span>초등 1~2학년</span>전국 어린이 특별집회</li>
+          <li><span>초등 3~5학년</span>어린이 온전하게 하는 훈련</li>
+        </ul></dd></div>
+      <div><dt>일시</dt><dd class="tn">2027년 1월 15일(금) ~ 17일(주일)<small>온라인(Zoom) · 주제 성경 ‘신명기’</small></dd></div>
+      <div><dt>회비</dt><dd class="tn">1인 30,000원<small>집회 교재 · 찬송 음원 포함</small></dd></div>
+      <div class="due"><dt>마감</dt><dd class="tn"><span id="close-label"></span><small id="close-left"></small></dd></div>
+    </dl>
+    <a class="back" href="성사원26-162.html">공문 자세히 보기</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+<p class="msg info" id="notice" hidden></p>
+
+<form id="form" novalidate>
+
+<section aria-labelledby="h1">
+  <div class="h"><span class="n">1</span><h2 id="h1">신청하시는 분</h2></div>
+  <p class="hint">집회 안내를 이 번호로 드립니다.</p>
+  <div class="box">
+    <div class="two-col">
+      <div class="fld" data-f="a-name">
+        <label for="a-name">이름</label>
+        <input type="text" id="a-name" autocomplete="name" maxlength="20">
+        <p class="err">이름을 적어 주세요.</p>
+      </div>
+      <div class="fld" data-f="a-phone">
+        <label for="a-phone">휴대폰 번호</label>
+        <input type="tel" id="a-phone" autocomplete="tel" inputmode="tel" maxlength="16" placeholder="010-0000-0000">
+        <p class="err">010으로 시작하는 휴대폰 번호를 적어 주세요.</p>
+      </div>
+    </div>
+    <div class="fld">
+      <label for="a-area">소속 지역 <small>선택</small></label>
+      <input type="text" id="a-area" maxlength="20" placeholder="예: 평촌">
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h2">
+  <div class="h"><span class="n">2</span><h2 id="h2">참석하는 사람</h2></div>
+  <p class="hint">초등 1~5학년(2026년 기준), 학부모, 봉사자, 성도</p>
+  <div class="people" id="people"></div>
+  <div class="adds">
+    <button type="button" class="add" id="add-child">+ 어린이 추가</button>
+    <button type="button" class="add" id="add-adult">+ 어른 추가<small>학부모·봉사자·성도</small></button>
+    <button type="button" class="add me" id="add-me">+ 신청하시는 분도 참석</button>
+  </div>
+  <p class="limit" id="limit" hidden>한 번에 15명까지 신청할 수 있습니다. 더 있으면 한 번 더 신청해 주세요.</p>
+  <p class="msg bad" id="people-err" hidden>참석하는 사람을 한 명 이상 넣어 주세요.</p>
+</section>
+
+<section aria-labelledby="h3">
+  <div class="h"><span class="n">3</span><h2 id="h3">교재 더 받기</h2><span class="opt">선택</span></div>
+  <details class="more" id="more">
+  <summary>수량 고르기<span id="b-state">더 받지 않음</span></summary>
+  <div class="qty">
+    <div class="row"><label for="b-extra">집회 교재 추가<small>1권 10,000원 · 1인 1권은 회비에 포함</small></label>
+      <div class="step"><button type="button" data-t="b-extra" data-d="-1" aria-label="추가 교재 줄이기">−</button><input id="b-extra" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" data-t="b-extra" data-d="1" aria-label="추가 교재 늘리기">+</button></div></div>
+    <div class="row"><label for="b-high">후속 교재 · 고학년<small>1권 5,000원 · 집회 뒤 이어 보는 교재</small></label>
+      <div class="step"><button type="button" data-t="b-high" data-d="-1" aria-label="고학년 후속 교재 줄이기">−</button><input id="b-high" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" data-t="b-high" data-d="1" aria-label="고학년 후속 교재 늘리기">+</button></div></div>
+    <div class="row"><label for="b-low">후속 교재 · 저학년<small>1권 5,000원</small></label>
+      <div class="step"><button type="button" data-t="b-low" data-d="-1" aria-label="저학년 후속 교재 줄이기">−</button><input id="b-low" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" data-t="b-low" data-d="1" aria-label="저학년 후속 교재 늘리기">+</button></div></div>
+  </div>
+  </details>
+</section>
+
+<section aria-labelledby="h4">
+  <div class="h"><span class="n">4</span><h2 id="h4">확인하고 보내기</h2></div>
+  <div class="fld">
+    <label for="memo">남기실 말 <small>선택</small></label>
+    <textarea id="memo" maxlength="300" placeholder="담당자에게 전할 말이 있으면 적어 주세요."></textarea>
+  </div>
+
+  <div class="agree" data-f="agree">
+    <p class="lb">개인정보 수집·이용 동의 <small>필수</small></p>
+    <dl>
+      <div><dt>받는 정보</dt><dd>이름, 학년, 성별, 휴대폰 번호, 지역</dd></div>
+      <div><dt>쓰는 곳</dt><dd>집회 신청서 작성, 교재 발송, 집회 안내</dd></div>
+      <div><dt>전달</dt><dd>성경진리사역원 전국 다음세대 추진팀(집회 주최)</dd></div>
+      <div><dt>보관</dt><dd>집회가 끝나고 2027년 2월 말에 지웁니다.</dd></div>
+    </dl>
+    <label class="chk"><input type="checkbox" id="agree"><span>동의합니다<small>어린이 정보는 보호자로서 동의합니다.</small></span></label>
+    <p class="err">동의해야 신청할 수 있습니다.</p>
+  </div>
+
+  <div class="sum">
+    <ul>
+      <li><span id="s-n-l">집회 신청 0명 × 30,000원</span><b id="s-n">0원</b></li>
+      <li><span id="s-e-l">집회 교재 추가 0권</span><b id="s-e">0원</b></li>
+      <li><span id="s-f-l">후속 교재 0권</span><b id="s-f">0원</b></li>
+    </ul>
+    <div class="total" aria-live="polite"><span>이 가정 회비</span><b id="s-total">0원</b><small id="pay-guide"></small></div>
+  </div>
+
+  <div class="hp" aria-hidden="true"><label>홈페이지<input type="text" id="hp" tabindex="-1" autocomplete="off"></label></div>
+  <button type="submit" class="send" id="send">신청하기</button>
+  <p class="msg bad" id="send-err" hidden></p>
+</section>
+
+</form>
+
+<section id="done" hidden>
+  <div class="done" tabindex="-1" id="done-card">
+    <h2>신청이 접수되었습니다</h2>
+    <span class="id" id="d-id"></span>
+    <ul id="d-list"></ul>
+    <div class="total"><span>이 가정 회비</span><b id="d-total">0원</b><small id="d-guide"></small></div>
+    <p id="d-fix">고칠 내용이 있으면 담당자에게 접수번호를 알려 주세요.</p>
+    <button type="button" class="again" id="again">다른 가정 신청하기</button>
+  </div>
+</section>
+
+</main>
+
+<!-- 아래에 붙는 합계 막대: 적는 동안 인원과 회비를 보여 주고, 보내는 곳으로 바로 갑니다 -->
+<div class="bar" id="bar" hidden>
+  <div class="wrap bar-in">
+    <p><b id="bar-n">0명</b><span id="bar-t">0원</span></p>
+    <button type="button" id="bar-go">확인하고 보내기</button>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <b>안양교회 유초등부</b>
+    2027 겨울 전국 어린이 특별집회 · 어린이 온전하게 하는 훈련<br>
+    공문 성사원26-162 (성경진리사역원 전국 다음세대 추진팀)<br>
+    <span id="foot-contact" hidden></span>
+  </div>
+</footer>
+
+<script>
+/* ───────── 설정: 여기만 고치면 됩니다 ───────── */
+var CONFIG = {
+  // Apps Script 웹 앱 주소 (배포 후 붙여 넣기). 비어 있으면 신청을 받지 않습니다.
+  endpoint: 'https://script.google.com/macros/s/AKfycby9ptqxJoc6zG7aqWnF68YlX-FQ6qLMpnN7YET9auBdkDGluI6AMi-oqWEHJuPir__yWg/exec',
+  // 교회 신청 마감 (공문 마감 12/14 오후 9시보다 하루 앞서 정리할 시간을 둡니다)
+  closeAt: '2026-12-13T21:00:00+09:00',
+  closeLabel: '12월 13일(주일) 오후 9시',
+  // 회비 내는 방법 안내
+  payGuide: '회비는 교회에서 모아 한꺼번에 입금합니다. 내는 방법은 담당자가 따로 알려 드립니다.',
+  // 문의 담당자 (비워 두면 '담당자'로만 표시)
+  contactName: '',
+  contactPhone: ''
+};
+/* ─────────────────────────────────────────── */
+
+(function(){
+  var PRICE = { person:30000, extra:10000, follow:5000 };
+  var MAX_PEOPLE = 15;
+  var GRADES = ['초1','초2','초3','초4','초5'];
+  var MEET = {
+    low:  { key:'초등 저학년', name:'전국 어린이 특별집회', sub:'초등 저학년' },
+    high: { key:'초등 고학년', name:'어린이 온전하게 하는 훈련', sub:'초등 고학년' }
+  };
+  var form = document.getElementById('form');
+  var list = document.getElementById('people');
+  var seq = 0;
+  var submitId = null;
+
+  function $(id){ return document.getElementById(id); }
+  function won(n){ return n.toLocaleString('ko-KR') + '원'; }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function digits(s){
+    var d = String(s||'').replace(/\D/g,'');
+    return /^8210/.test(d) ? '0' + d.slice(2) : d;   // 자동 완성이 +82 10-… 으로 넣을 때
+  }
+  function fmtPhone(s){
+    var d = digits(s).slice(0,11);
+    if(d.length < 4) return d;
+    if(d.length < 8) return d.slice(0,3) + '-' + d.slice(3);
+    return d.slice(0,3) + '-' + d.slice(3, d.length-4) + '-' + d.slice(-4);
+  }
+  function phoneOk(s){ return /^01[016789]\d{7,8}$/.test(digits(s)); }
+  function meetOf(grade){ return GRADES.indexOf(grade) < 0 ? null : (GRADES.indexOf(grade) < 2 ? MEET.low : MEET.high); }
+
+  /* 담당자 */
+  var who = CONFIG.contactName ? CONFIG.contactName + ' 담당자' : '담당자';
+  function contactHtml(){
+    if(!CONFIG.contactPhone) return esc(who);
+    return esc(who) + '(<a href="tel:' + digits(CONFIG.contactPhone) + '">' + esc(CONFIG.contactPhone) + '</a>)';
+  }
+
+  /* 마감 표시 */
+  $('close-label').textContent = CONFIG.closeLabel;
+  var closed = Date.now() >= new Date(CONFIG.closeAt).getTime();
+  (function(){
+    var end = new Date(CONFIG.closeAt), k = new Date(Date.now() + 9*3600000), e = new Date(end.getTime() + 9*3600000);
+    var d = Math.round((Date.UTC(e.getUTCFullYear(),e.getUTCMonth(),e.getUTCDate()) - Date.UTC(k.getUTCFullYear(),k.getUTCMonth(),k.getUTCDate()))/86400000);
+    $('close-left').textContent = closed ? '마감되었습니다' : (d > 0 ? d + '일 남음' : '오늘 마감');
+  })();
+  $('pay-guide').textContent = CONFIG.payGuide;
+  if(CONFIG.contactName || CONFIG.contactPhone){ $('foot-contact').innerHTML = '문의 ' + contactHtml(); $('foot-contact').hidden = false; }
+
+  function lockForm(html){
+    var n = $('notice'); n.innerHTML = html; n.hidden = false;
+    $('send').disabled = true;
+  }
+  if(closed) lockForm('교회 신청이 마감되었습니다. 꼭 참석해야 하면 ' + contactHtml() + '에게 연락해 주세요.');
+  else if(!CONFIG.endpoint) lockForm('신청 받기를 준비하고 있습니다. 조금 뒤에 다시 열어 주세요.');
+
+  /* 사람 카드 */
+  function seg(name, items, wide, label){
+    return '<div class="seg' + (wide ? ' wide' : '') + '" role="radiogroup" aria-label="' + esc(label || '') + '">' + items.map(function(it){
+      return '<label><input type="radio" name="' + name + '" value="' + esc(it.v) + '"><span>' + esc(it.t) + (it.s ? '<small>' + esc(it.s) + '</small>' : '') + '</span></label>';
+    }).join('') + '</div>';
+  }
+  function isMe(el){ return el.getAttribute('data-me') === '1'; }
+  function nameOf(el){ return isMe(el) ? $('a-name').value.trim() : el.querySelector('#' + el.id + '-name').value.trim(); }
+  function radio(el, key){ var r = el.querySelector('input[name="' + el.id + '-' + key + '"]:checked'); return r ? r.value : ''; }
+
+  /* 아무것도 넣지 않은 카드는 신청에서 뺍니다 (본인 카드는 빼지 않음) */
+  function isBlank(el){
+    if(isMe(el)) return false;
+    var typed = [].some.call(el.querySelectorAll('input[type=text], input[type=tel]'), function(i){ return i.value.trim(); });
+    return !typed && !el.querySelector('input[type=radio]:checked');
+  }
+  function filled(){ return [].filter.call(list.querySelectorAll('.person'), function(el){ return !isBlank(el); }); }
+  function hasKids(){ return [].some.call(list.querySelectorAll('.person[data-type="child"]'), function(el){ return !isBlank(el); }); }
+
+  function addPerson(type, preset){
+    preset = preset || {};
+    seq++;
+    var id = 'p' + seq, me = !!preset.me;
+    var el = document.createElement('fieldset');
+    el.className = 'person' + (type === 'adult' ? ' adult' : '');
+    el.setAttribute('data-type', type);
+    if(me) el.setAttribute('data-me', '1');
+    el.id = id;
+    var h = '<legend><span class="tag">' + (type === 'adult' ? '어른' : '어린이') + '</span><b class="nm"></b>'
+          + '<button type="button" class="rm">빼기</button></legend>';
+    var gender = '<div class="fld" data-f="gender"><span class="lb">성별</span>' + seg(id + '-gender', [{v:'남',t:'남'},{v:'여',t:'여'}], false, '성별') + '<p class="err">골라 주세요.</p></div>';
+    if(me){
+      h += '<div class="pair"><p class="self"></p>' + gender + '</div>';
+    } else {
+      h += '<div class="pair"><div class="fld" data-f="name"><label for="' + id + '-name">이름</label>'
+         + '<input type="text" id="' + id + '-name" maxlength="20" autocomplete="off"><p class="err">이름을 적어 주세요.</p></div>'
+         + gender + '</div>';
+    }
+    if(type === 'child'){
+      h += '<div class="fld" data-f="grade"><span class="lb">학년<small>2026년 기준</small></span>'
+         + seg(id + '-grade', GRADES.map(function(g){ return {v:g, t:g.replace('초',''), s:'학년'}; }), false, '학년')
+         + '<p class="to" hidden></p><p class="err">학년을 골라 주세요.</p></div>';
+    } else {
+      h += '<div class="fld" data-f="kind"><span class="lb">구분</span>'
+         + seg(id + '-kind', [{v:'학부모',t:'학부모'},{v:'봉사자',t:'봉사자'},{v:'성도',t:'성도'}], false, '구분')
+         + '<p class="err">구분을 골라 주세요.</p></div>'
+         + '<div class="fld" data-f="meet"><span class="lb">참석할 집회</span>'
+         + seg(id + '-meet', [{v:MEET.low.key, t:'특별집회', s:'1~2학년과 함께'},{v:MEET.high.key, t:'온전하게 하는 훈련', s:'3~5학년과 함께'}], true, '참석할 집회')
+         + '<p class="err">참석할 집회를 골라 주세요.</p></div>';
+      if(!me){
+        h += '<div class="fld" data-f="phone"><label for="' + id + '-phone">휴대폰 번호</label>'
+           + '<input type="tel" id="' + id + '-phone" inputmode="tel" maxlength="16" placeholder="010-0000-0000">'
+           + '<p class="err">010으로 시작하는 휴대폰 번호를 적어 주세요.</p></div>';
+      }
+    }
+    el.innerHTML = h;
+    list.appendChild(el);
+
+    el.querySelector('.rm').addEventListener('click', function(){
+      // 적은 내용이 있는 카드는 한 번 묻고 뺍니다 (잘못 눌러 지우는 일 막기)
+      var nm = nameOf(el);
+      if(!isMe(el) && !isBlank(el) && !window.confirm((nm ? nm + ' 님을' : '이 사람을') + ' 명단에서 뺄까요?')) return;
+      el.remove(); renumber(); calc();
+      var last = list.querySelector('.person:last-child input'); (last || $('add-child')).focus();
+    });
+    el.addEventListener('change', function(){ refresh(el); renumber(); calc(); });
+    el.addEventListener('input', function(ev){
+      if(ev.target.type === 'tel'){ ev.target.value = fmtPhone(ev.target.value); }
+      clearBad(ev.target); renumber(); calc();
+    });
+
+    if(preset.kind){ var r = el.querySelector('input[name="' + id + '-kind"][value="' + preset.kind + '"]'); if(r) r.checked = true; }
+    if(preset.meet){ var m = el.querySelector('input[name="' + id + '-meet"][value="' + preset.meet + '"]'); if(m) m.checked = true; }
+    syncMe(); renumber(); refresh(el); calc();
+    return el;
+  }
+
+  function refresh(el){
+    if(el.getAttribute('data-type') !== 'child') return;
+    var g = radio(el, 'grade'), m = meetOf(g), to = el.querySelector('.to');
+    to.hidden = !m;
+    if(m){ to.textContent = '참석: ' + m.name; }
+  }
+
+  /* 카드 제목에 번호 대신 적은 이름을 보여 줍니다. 15명이 넘으면 추가 버튼을 막습니다. */
+  function renumber(){
+    var c = 0, a = 0, cards = list.querySelectorAll('.person');
+    cards.forEach(function(el){
+      var child = el.getAttribute('data-type') === 'child', n = child ? ++c : ++a, nm = nameOf(el);
+      el.querySelector('.nm').innerHTML = nm ? esc(nm) : '<small>' + n + '</small>';
+      el.querySelector('.rm').setAttribute('aria-label', (nm || ((child ? '어린이 ' : '어른 ') + n)) + ' 빼기');
+    });
+    var full = cards.length >= MAX_PEOPLE;
+    ['add-child','add-adult','add-me'].forEach(function(id){ $(id).disabled = full; });
+    $('limit').hidden = !full;
+    $('add-me').hidden = !!list.querySelector('.person[data-me]');
+    $('people-err').hidden = true;
+  }
+
+  /* 본인 카드: 이름은 카드 제목에 나오므로 여기서는 번호만 보여 줍니다 */
+  function syncMe(){
+    var me = list.querySelector('.person[data-me]'); if(!me) return;
+    var nm = $('a-name').value.trim(), ph = $('a-phone').value.trim();
+    me.querySelector('.self').innerHTML = nm && ph
+      ? '<b>신청하시는 분</b><span>' + esc(ph) + '</span>'
+      : '<b>신청하시는 분</b><span>이름·번호는 1번에 적어 주세요</span>';
+  }
+
+  /* 같은 가정 어린이들이 한 집회로 모이면 어른 카드에 미리 골라 둡니다 */
+  function familyMeet(){
+    var keys = {};
+    list.querySelectorAll('.person[data-type="child"]').forEach(function(el){ var m = meetOf(radio(el,'grade')); if(m) keys[m.key] = 1; });
+    var k = Object.keys(keys); return k.length === 1 ? k[0] : '';
+  }
+
+  $('add-child').addEventListener('click', function(){ addPerson('child').querySelector('input[type=text]').focus(); });
+  $('add-adult').addEventListener('click', function(){
+    addPerson('adult', { kind: hasKids() ? '학부모' : '', meet: familyMeet() }).querySelector('input[type=text]').focus();
+  });
+  $('add-me').addEventListener('click', function(){
+    var el = addPerson('adult', { me: true, kind: hasKids() ? '학부모' : '', meet: familyMeet() });
+    el.querySelector('input[type=radio]').focus();
+  });
+  $('a-phone').addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); clearBad(e.target); syncMe(); });
+  $('a-name').addEventListener('input', function(e){ clearBad(e.target); syncMe(); renumber(); });
+  $('agree').addEventListener('change', function(e){ clearBad(e.target); });
+
+  /* 휴대폰 키보드의 '이동/완료'(Enter)가 신청을 보내지 않게 합니다.
+     같은 칸 묶음 안에 다음 입력 칸이 있으면 그리로, 없으면 키보드를 닫습니다. */
+  var TYPING = 'input[type=text]:not(#hp), input[type=tel]';
+  function nextField(el){
+    var group = el.closest('.person, .box'); if(!group) return null;
+    var all = [].slice.call(group.querySelectorAll(TYPING));
+    return all[all.indexOf(el) + 1] || null;
+  }
+  form.addEventListener('focusin', function(e){
+    if(e.target.matches && e.target.matches(TYPING)) e.target.setAttribute('enterkeyhint', nextField(e.target) ? 'next' : 'done');
+  });
+  form.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' || e.isComposing || !e.target.matches || !e.target.matches('input')) return;
+    if(e.target.type === 'checkbox') return;
+    e.preventDefault();
+    var n = e.target.matches(TYPING) && nextField(e.target);
+    if(n) n.focus(); else e.target.blur();
+  });
+
+  /* 교재 수량 */
+  function num(id){ var v = parseInt($(id).value, 10); return isNaN(v) || v < 0 ? 0 : Math.min(v, 20); }
+  document.querySelectorAll('.step button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-t');
+      $(id).value = Math.min(20, Math.max(0, num(id) + parseInt(b.getAttribute('data-d'), 10))); calc();
+    });
+  });
+  ['b-extra','b-high','b-low'].forEach(function(id){ $(id).addEventListener('input', calc); });
+
+  function calc(){
+    var n = filled().length, e = num('b-extra'), f = num('b-high') + num('b-low');
+    $('s-n-l').textContent = '집회 신청 ' + n + '명 × 30,000원'; $('s-n').textContent = won(n * PRICE.person);
+    $('s-e-l').textContent = '집회 교재 추가 ' + e + '권';         $('s-e').textContent = won(e * PRICE.extra);
+    $('s-f-l').textContent = '후속 교재 ' + f + '권';               $('s-f').textContent = won(f * PRICE.follow);
+    $('s-total').textContent = won(n * PRICE.person + e * PRICE.extra + f * PRICE.follow);
+    document.querySelectorAll('.step button[data-d="-1"]').forEach(function(b){ b.disabled = num(b.getAttribute('data-t')) === 0; });
+    $('bar-n').textContent = '참석 ' + n + '명';
+    $('bar-t').textContent = won(n * PRICE.person + e * PRICE.extra + f * PRICE.follow);
+    $('b-state').textContent = e + f ? (e + f) + '권 · ' + won(e * PRICE.extra + f * PRICE.follow) : '더 받지 않음';
+    barState.n = n; showBar();
+  }
+
+  /* 합계 막대: 사람을 넣었고, 4번(보내기)이 아직 안 보이고, 글자를 치는 중이 아닐 때만 */
+  var barState = { n:0, end:false, typing:false };
+  function showBar(){
+    $('bar').hidden = closed || form.hidden || !barState.n || barState.end || barState.typing;
+    document.body.classList.toggle('has-bar', !$('bar').hidden);
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ barState.end = es[0].isIntersecting; showBar(); }, { rootMargin:'0px 0px -40px 0px' })
+      .observe(document.querySelector('section[aria-labelledby="h4"]'));
+  }
+  form.addEventListener('focusin', function(e){ if(e.target.matches('input[type=text], input[type=tel], input[type=number], textarea')){ barState.typing = true; showBar(); } });
+  form.addEventListener('focusout', function(){ barState.typing = false; setTimeout(showBar, 50); });
+  $('bar-go').addEventListener('click', function(){
+    document.querySelector('section[aria-labelledby="h4"]').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  /* 검사 */
+  function clearBad(input){ var f = input.closest('.fld, .agree'); if(f) f.classList.remove('bad'); $('send-err').hidden = true; }
+  function mark(f, bad){ f.classList.toggle('bad', !!bad); return !bad; }
+
+  function collect(){
+    var ok = true, first = null, misses = 0;
+    function check(f, good){ if(!mark(f, !good)){ ok = false; misses++; if(!first) first = f; } }
+    list.querySelectorAll('.fld.bad').forEach(function(f){ f.classList.remove('bad'); });
+
+    check(document.querySelector('[data-f="a-name"]'), $('a-name').value.trim());
+    check(document.querySelector('[data-f="a-phone"]'), phoneOk($('a-phone').value));
+    var aName = $('a-name').value.trim(), aPhone = fmtPhone($('a-phone').value);
+
+    var people = [], kids = [];
+    filled().forEach(function(el){
+      var child = el.getAttribute('data-type') === 'child', me = isMe(el);
+      var name = nameOf(el);
+      if(!me) check(el.querySelector('[data-f="name"]'), name);
+      check(el.querySelector('[data-f="gender"]'), radio(el,'gender'));
+      if(child){
+        var g = radio(el,'grade');
+        check(el.querySelector('[data-f="grade"]'), g);
+        var m = meetOf(g);
+        people.push({ name:name, kind:g, gender:radio(el,'gender'), meeting: m ? m.key : '', phone: aPhone + '(' + aName + ')', note:'' });
+        kids.push(name);
+      } else {
+        var kind = radio(el,'kind'), meet = radio(el,'meet');
+        var ph = me ? aPhone : el.querySelector('#' + el.id + '-phone').value;
+        check(el.querySelector('[data-f="kind"]'), kind);
+        check(el.querySelector('[data-f="meet"]'), meet);
+        if(!me) check(el.querySelector('[data-f="phone"]'), phoneOk(ph));
+        people.push({ name:name, kind:kind, gender:radio(el,'gender'), meeting:meet, phone: fmtPhone(ph), note:'' });
+      }
+    });
+    /* 비고: 학부모는 자녀 이름, 성도는 '성도' */
+    people.forEach(function(p){
+      if(p.kind === '학부모' && kids.length) p.note = '학부모(' + kids.join(', ') + ')';
+      if(p.kind === '성도') p.note = '성도';
+    });
+    if(!people.length){ ok = false; misses++; $('people-err').hidden = false; if(!first) first = $('people-err'); }
+
+    check(document.querySelector('[data-f="agree"]'), $('agree').checked);
+
+    if(!ok){
+      $('send-err').textContent = misses > 1 ? '빠진 곳 ' + misses + '군데를 확인해 주세요.' : '빠진 곳을 확인해 주세요.';
+      $('send-err').hidden = false;
+      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var inp = first.querySelector && first.querySelector('input'); if(inp) setTimeout(function(){ inp.focus({ preventScroll:true }); }, 300);
+      return null;
+    }
+    return {
+      applicant: { name: aName, phone: aPhone, area: $('a-area').value.trim() },
+      people: people,
+      books: { extra: num('b-extra'), followHigh: num('b-high'), followLow: num('b-low') },
+      memo: $('memo').value.trim()
+    };
+  }
+
+  function newId(){
+    var abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', a = new Uint8Array(6), s = '';
+    (window.crypto || window.msCrypto).getRandomValues(a);
+    for(var i = 0; i < 6; i++) s += abc[a[i] % abc.length];
+    return s.slice(0,3) + '-' + s.slice(3);
+  }
+
+  /* 보내기 */
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if(closed || !CONFIG.endpoint) return;
+    var data = collect(); if(!data) return;
+    if(!submitId) submitId = newId();   // 다시 보내도 같은 접수번호 → 한 번으로 셉니다
+    data.id = submitId; data.hp = $('hp').value; data.client = new Date().toISOString();
+
+    var btn = $('send'); btn.disabled = true; btn.textContent = '보내는 중…';
+    $('send-err').hidden = true;
+
+    fetch(CONFIG.endpoint, { method:'POST', body: JSON.stringify(data) })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if(res && res.ok){ showDone(data, res); return; }
+        if(res && res.error === 'closed'){ fail('교회 신청이 마감되었습니다. ' + who + '에게 연락해 주세요.'); return; }
+        fail('신청을 받지 못했습니다' + (res && res.error ? '(' + res.error + ')' : '') + '. 내용을 확인하고 다시 눌러 주세요.');
+      })
+      .catch(function(){
+        fail('인터넷 연결을 확인하고 한 번 더 눌러 주세요. 두 번 들어가도 한 번으로 셉니다.');
+      });
+  });
+
+  function fail(text){
+    var btn = $('send'); btn.disabled = false; btn.textContent = '신청하기';
+    $('send-err').textContent = text; $('send-err').hidden = false;
+  }
+
+  function showDone(data, res){
+    form.hidden = true;
+    $('d-id').textContent = '접수번호 ' + (res.id || data.id);
+    $('d-list').innerHTML = data.people.map(function(p){
+      var m = p.meeting === MEET.low.key ? MEET.low.name : MEET.high.name;
+      return '<li>' + esc(p.name) + ' <span>' + esc(p.kind) + ' · ' + esc(m) + '</span></li>';
+    }).join('');
+    var total = typeof res.amount === 'number' ? res.amount
+      : data.people.length * PRICE.person + data.books.extra * PRICE.extra + (data.books.followHigh + data.books.followLow) * PRICE.follow;
+    $('d-total').textContent = won(total);
+    $('d-guide').textContent = CONFIG.payGuide;
+    $('d-fix').innerHTML = '고칠 내용이 있으면 ' + contactHtml() + '에게 접수번호를 알려 주세요.';
+    $('done').hidden = false; showBar();
+    window.scrollTo({ top: Math.max(0, $('done-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior: 'smooth' });
+    $('done-card').focus({ preventScroll:true });
+  }
+
+  $('again').addEventListener('click', function(){ location.reload(); });
+
+  /* 큰 글씨 모드: 기본 17px → 20px. 이 기기에 기억해 둡니다 */
+  function setBig(on){
+    document.documentElement.classList.toggle('big', on);
+    $('big').setAttribute('aria-pressed', on ? 'true' : 'false');
+    try{ localStorage.setItem('bigText', on ? '1' : '0'); }catch(e){}
+  }
+  setBig(document.documentElement.classList.contains('big'));
+  $('big').addEventListener('click', function(){ setBig(!document.documentElement.classList.contains('big')); });
+
+  addPerson('child');
+})();
+</script>
+</body>
+</html>
