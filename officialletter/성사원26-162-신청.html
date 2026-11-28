@@ -257,6 +257,31 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .done p a{color:var(--navy);font-weight:800;}
 .again{display:block;width:100%;min-height:56px;margin:20px 0 0;border:1.5px solid var(--navy);border-radius:8px;background:#fff;font:inherit;font-weight:800;color:var(--navy);cursor:pointer;}
 
+.done h2.plain::before{display:none;}
+.again + .again{margin-top:10px;}
+
+/* ── 신청 고치기 ── */
+.edit-entry{margin:20px 0 0;}
+.edit-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:10px 16px;border:1.5px solid var(--rule);border-radius:10px;background:#fff;font:inherit;color:var(--ink-2);text-align:left;cursor:pointer;}
+.edit-toggle b{flex:0 0 auto;font-weight:800;color:var(--navy);}
+.edit-toggle b::after{content:'';display:inline-block;width:8px;height:8px;margin:0 2px 0 10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);}
+.edit-toggle[aria-expanded="true"] b::after{transform:translateY(1px) rotate(-135deg);}
+.edit-panel{margin-top:8px;padding:16px 16px 4px;border:1.5px solid var(--rule);border-radius:10px;background:#fff;}
+.mine{display:grid;gap:8px;margin:0 0 18px;}
+.mine p{margin:0;font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.mine button{min-height:56px;padding:8px 14px;border:1.5px solid var(--navy);border-radius:8px;background:#fff;font:inherit;font-weight:800;color:var(--navy);text-align:left;cursor:pointer;line-height:1.35;}
+.mine button span{display:block;font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
+.load-btn{display:block;width:100%;min-height:52px;margin:0 0 16px;border:0;border-radius:8px;background:var(--navy);color:#fff;font:inherit;font-weight:800;cursor:pointer;}
+.load-btn:disabled{background:#8B97A3;cursor:default;}
+.edit-panel .msg{margin:-4px 0 16px;}
+#e-id{letter-spacing:.06em;}
+.editing{margin:20px 0 0;padding:14px 16px;border-radius:10px;background:#E9F0F6;border-left:4px solid var(--navy);}
+.editing b{display:block;font-weight:800;color:var(--navy);}
+.editing > span{display:block;margin-top:2px;font-size:var(--t-cap);color:var(--ink-2);}
+.ed-actions{display:flex;flex-wrap:wrap;gap:0 20px;margin-top:4px;}
+.ed-actions button{min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
+.ed-actions .danger{color:var(--err);}
+
 /* ── 아래 합계 막대 ── */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--rule);box-shadow:0 -2px 12px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom);}
 .bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px;}
@@ -321,6 +346,35 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
 <main class="wrap">
 
 <p class="msg info" id="notice" hidden></p>
+
+<!-- 이미 신청한 가정: 접수번호 + 휴대폰 번호로 불러와 고치기 -->
+<div class="edit-entry" id="edit-entry">
+  <button type="button" class="edit-toggle" id="edit-toggle" aria-expanded="false" aria-controls="edit-panel">이미 신청하셨나요?<b>신청 고치기</b></button>
+  <div class="edit-panel" id="edit-panel" hidden>
+    <div class="mine" id="mine" hidden></div>
+    <div class="two-col">
+      <div class="fld">
+        <label for="e-id">접수번호</label>
+        <input type="text" id="e-id" maxlength="7" placeholder="예: AB3-K7Q" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      </div>
+      <div class="fld">
+        <label for="e-phone">신청할 때 적은 휴대폰 번호</label>
+        <input type="tel" id="e-phone" inputmode="tel" maxlength="16" placeholder="010-0000-0000" autocomplete="tel">
+      </div>
+    </div>
+    <button type="button" class="load-btn" id="e-load">신청 불러오기</button>
+    <p class="msg bad" id="e-err" hidden></p>
+  </div>
+</div>
+
+<div class="editing" id="editing" hidden>
+  <b>접수번호 <span id="ed-id"></span> 신청을 고치는 중</b>
+  <span>고친 뒤 맨 아래 ‘고친 내용 보내기’를 누르세요.</span>
+  <div class="ed-actions">
+    <button type="button" id="ed-new">새로 신청하기로 돌아가기</button>
+    <button type="button" class="danger" id="ed-cancel">이 신청 취소하기</button>
+  </div>
+</div>
 
 <form id="form" novalidate>
 
@@ -408,12 +462,22 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
 
 <section id="done" hidden>
   <div class="done" tabindex="-1" id="done-card">
-    <h2>신청이 접수되었습니다</h2>
+    <h2 id="d-title">신청이 접수되었습니다</h2>
     <span class="id" id="d-id"></span>
     <ul id="d-list"></ul>
     <div class="total"><span>이 가정 회비</span><b id="d-total">0원</b><small id="d-guide"></small></div>
     <p id="d-fix">고칠 내용이 있으면 담당자에게 접수번호를 알려 주세요.</p>
+    <button type="button" class="again" id="d-edit">신청 내용 고치기</button>
     <button type="button" class="again" id="again">다른 가정 신청하기</button>
+  </div>
+</section>
+
+<section id="cancelled" hidden>
+  <div class="done" tabindex="-1" id="cancel-card">
+    <h2 class="plain">신청을 취소했습니다</h2>
+    <span class="id" id="c-id"></span>
+    <p id="c-note"></p>
+    <button type="button" class="again" id="c-again">새로 신청하기</button>
   </div>
 </section>
 
@@ -757,22 +821,162 @@ var CONFIG = {
     return s.slice(0,3) + '-' + s.slice(3);
   }
 
-  /* 보내기 */
+  /* ───────── 신청 고치기 ─────────
+     접수번호 + 신청할 때 적은 휴대폰 번호로 불러옵니다.
+     이 기기에서 한 신청은 기억해 두었다가 한 번에 불러올 수 있게 합니다. */
+  var mode = { id: null, auth: null };   // 고치는 중이면 접수번호와 확인용 휴대폰 번호
+  var lastDone = null;                   // 방금 접수·수정한 내용 (완료 화면에서 바로 고치기)
+  var MINE_KEY = 'w2027apps';
+
+  function api(body){
+    return fetch(CONFIG.endpoint, { method:'POST', body: JSON.stringify(body) }).then(function(r){ return r.json(); });
+  }
+  function mineList(){
+    try{ var v = JSON.parse(localStorage.getItem(MINE_KEY) || '[]'); return Array.isArray(v) ? v : []; }catch(e){ return []; }
+  }
+  function mineWrite(l){ try{ localStorage.setItem(MINE_KEY, JSON.stringify(l.slice(0, 5))); }catch(e){} renderMine(); }
+  function mineSave(id, phone, name){
+    mineWrite([{ id:id, phone:phone, name:name }].concat(mineList().filter(function(x){ return x.id !== id; })));
+  }
+  function mineDrop(id){ mineWrite(mineList().filter(function(x){ return x.id !== id; })); }
+  function renderMine(){
+    var l = mineList(), box = $('mine');
+    box.innerHTML = l.length ? '<p>이 기기에서 한 신청</p>' + l.map(function(x, i){
+      return '<button type="button" data-i="' + i + '">접수번호 ' + esc(x.id) + ' 불러오기<span>' + esc(x.name || '') + ' · ' + esc(x.phone || '') + '</span></button>';
+    }).join('') : '';
+    box.hidden = !l.length;
+  }
+  $('mine').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-i]'); if(!b) return;
+    var x = mineList()[+b.getAttribute('data-i')]; if(x) loadApp(x.id, x.phone, b);
+  });
+
+  function openPanel(open){
+    $('edit-panel').hidden = !open;
+    $('edit-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  $('edit-toggle').addEventListener('click', function(){
+    var open = $('edit-panel').hidden; openPanel(open);
+    if(open && !mineList().length) $('e-id').focus();
+  });
+  $('e-id').addEventListener('input', function(e){
+    var v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    e.target.value = v.length > 3 ? v.slice(0, 3) + '-' + v.slice(3) : v;
+    $('e-err').hidden = true;
+  });
+  $('e-phone').addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); $('e-err').hidden = true; });
+  $('e-id').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); $('e-phone').focus(); } });
+  $('e-phone').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); $('e-load').click(); } });
+  $('e-phone').setAttribute('enterkeyhint', 'go');
+  $('e-load').addEventListener('click', function(){ loadApp($('e-id').value.trim(), $('e-phone').value, $('e-load')); });
+
+  function editErr(text){ openPanel(true); var m = $('e-err'); m.innerHTML = text; m.hidden = false; }
+
+  function loadApp(id, phone, btn){
+    if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(id) || !phoneOk(phone)){
+      editErr('접수번호(예: AB3-K7Q)와 휴대폰 번호를 확인해 주세요.'); return;
+    }
+    var label = btn.innerHTML; btn.disabled = true; btn.textContent = '불러오는 중…';
+    $('e-err').hidden = true;
+    api({ action:'load', id:id, auth: fmtPhone(phone) }).then(function(res){
+      btn.disabled = false; btn.innerHTML = label;
+      if(res && res.ok){ enterEdit(res.id, fmtPhone(phone), res.data); return; }
+      if(res && res.error === 'closed'){ editErr('신청이 마감되어 고칠 수 없습니다. ' + contactHtml() + '께 연락해 주세요.'); return; }
+      editErr('신청을 찾지 못했습니다. 접수번호와 신청할 때 적은 휴대폰 번호를 확인해 주세요. 취소한 신청은 불러올 수 없습니다.');
+    }).catch(function(){
+      btn.disabled = false; btn.innerHTML = label;
+      editErr('인터넷 연결을 확인하고 다시 눌러 주세요.');
+    });
+  }
+
+  function pick(el, key, val){
+    var r = el.querySelector('input[name="' + el.id + '-' + key + '"][value="' + val + '"]'); if(r) r.checked = true;
+  }
+
+  /** 불러온 신청을 화면 칸에 채웁니다 */
+  function fillForm(d){
+    var aName = d.applicant.name, aPh = digits(d.applicant.phone), meDone = false;
+    $('a-name').value = aName; $('a-phone').value = fmtPhone(d.applicant.phone);
+    list.innerHTML = '';
+    d.people.forEach(function(p){
+      var el;
+      if(GRADES.indexOf(p.kind) >= 0){
+        el = addPerson('child');
+        el.querySelector('#' + el.id + '-name').value = p.name;
+        pick(el, 'grade', p.kind);
+      } else if(!meDone && p.name === aName && digits(p.phone).indexOf(aPh) === 0){
+        el = addPerson('adult', { me:true, kind:p.kind, meet:p.meeting }); meDone = true;
+      } else {
+        el = addPerson('adult', { kind:p.kind, meet:p.meeting });
+        el.querySelector('#' + el.id + '-name').value = p.name;
+        el.querySelector('#' + el.id + '-phone').value = fmtPhone(p.phone);
+      }
+      pick(el, 'gender', p.gender);
+      refresh(el);
+    });
+    if(!d.people.length) addPerson('child');
+    $('b-extra').value = d.books.extra; $('b-high').value = d.books.followHigh; $('b-low').value = d.books.followLow;
+    $('more').open = true;
+    $('memo').value = d.memo || '';
+    $('agree').checked = true;                    // 처음 신청할 때 동의했음
+    document.querySelectorAll('.bad').forEach(function(f){ if(f.classList.contains('fld') || f.classList.contains('agree')) f.classList.remove('bad'); });
+    syncMe(); renumber(); calc();
+  }
+
+  function enterEdit(id, auth, d){
+    mode.id = id; mode.auth = auth;
+    fillForm(d);
+    $('done').hidden = true; $('cancelled').hidden = true; form.hidden = false;
+    openPanel(false); $('edit-entry').hidden = true;
+    $('ed-id').textContent = id; $('editing').hidden = false;
+    $('send').disabled = false; $('send').textContent = '고친 내용 보내기'; $('send-err').hidden = true;
+    mineSave(id, auth, d.applicant.name);
+    showBar();
+    window.scrollTo({ top: Math.max(0, $('editing').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
+  }
+
+  $('ed-new').addEventListener('click', function(){ location.href = location.pathname; });
+  $('ed-cancel').addEventListener('click', function(){
+    if(!mode.id) return;
+    if(!window.confirm('접수번호 ' + mode.id + ' 신청을 취소할까요?\n취소하면 되돌릴 수 없고, 다시 참석하려면 새로 신청해야 합니다.')) return;
+    var b = $('ed-cancel'); b.disabled = true; b.textContent = '취소하는 중…';
+    api({ action:'cancel', id:mode.id, auth:mode.auth }).then(function(res){
+      b.disabled = false; b.textContent = '이 신청 취소하기';
+      if(res && res.ok){
+        mineDrop(mode.id);
+        $('c-id').textContent = '접수번호 ' + mode.id;
+        $('c-note').innerHTML = '회비를 이미 냈다면 ' + contactHtml() + '께 알려 주세요.';
+        form.hidden = true; $('editing').hidden = true; $('cancelled').hidden = false; showBar();
+        window.scrollTo({ top: Math.max(0, $('cancel-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
+        $('cancel-card').focus({ preventScroll:true });
+        return;
+      }
+      window.alert(res && res.error === 'closed' ? '신청이 마감되어 취소할 수 없습니다.' : '취소하지 못했습니다. 이미 취소되었는지 확인해 주세요.');
+    }).catch(function(){ b.disabled = false; b.textContent = '이 신청 취소하기'; window.alert('인터넷 연결을 확인하고 다시 눌러 주세요.'); });
+  });
+  $('c-again').addEventListener('click', function(){ location.href = location.pathname; });
+
+  /* 보내기 (새 신청 또는 고친 내용) */
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
     if(closed || !CONFIG.endpoint) return;
     var data = collect(); if(!data) return;
-    if(!submitId) submitId = newId();   // 다시 보내도 같은 접수번호 → 한 번으로 셉니다
-    data.id = submitId; data.hp = $('hp').value; data.client = new Date().toISOString();
+    if(mode.id){ data.action = 'update'; data.id = mode.id; data.auth = mode.auth; }
+    else { if(!submitId) submitId = newId(); data.id = submitId; }   // 다시 보내도 같은 접수번호 → 한 번으로 셉니다
+    data.hp = $('hp').value; data.client = new Date().toISOString();
 
     var btn = $('send'); btn.disabled = true; btn.textContent = '보내는 중…';
     $('send-err').hidden = true;
 
-    fetch(CONFIG.endpoint, { method:'POST', body: JSON.stringify(data) })
-      .then(function(r){ return r.json(); })
-      .then(function(res){
-        if(res && res.ok){ showDone(data, res); return; }
+    api(data).then(function(res){
+        if(res && res.ok){
+          var id = res.id || data.id;
+          if(mode.id) mode.auth = data.applicant.phone;   // 번호를 바꿨으면 다음부터는 새 번호로
+          mineSave(id, data.applicant.phone, data.applicant.name);
+          showDone(data, res); return;
+        }
         if(res && res.error === 'closed'){ fail('교회 신청이 마감되었습니다. ' + who + '께 연락해 주세요.'); return; }
+        if(res && res.error === 'not_found'){ fail('이 신청을 찾지 못했습니다. 이미 취소되었을 수 있습니다. ' + who + '께 연락해 주세요.'); return; }
         fail('신청을 받지 못했습니다' + (res && res.error ? '(' + res.error + ')' : '') + '. 내용을 확인하고 다시 눌러 주세요.');
       })
       .catch(function(){
@@ -781,13 +985,16 @@ var CONFIG = {
   });
 
   function fail(text){
-    var btn = $('send'); btn.disabled = false; btn.textContent = '신청하기';
+    var btn = $('send'); btn.disabled = false; btn.textContent = mode.id ? '고친 내용 보내기' : '신청하기';
     $('send-err').textContent = text; $('send-err').hidden = false;
   }
 
   function showDone(data, res){
-    form.hidden = true;
-    $('d-id').textContent = '접수번호 ' + (res.id || data.id);
+    var id = res.id || data.id;
+    lastDone = { id:id, auth:data.applicant.phone, data:data };
+    form.hidden = true; $('editing').hidden = true;
+    $('d-title').textContent = res.updated ? '신청을 고쳤습니다' : '신청이 접수되었습니다';
+    $('d-id').textContent = '접수번호 ' + id;
     $('d-list').innerHTML = data.people.map(function(p){
       var m = p.meeting === MEET.low.key ? MEET.low.name : MEET.high.name;
       return '<li>' + esc(p.name) + ' <span>' + esc(p.kind) + ' · ' + esc(m) + '</span></li>';
@@ -796,13 +1003,24 @@ var CONFIG = {
       : data.people.length * PRICE.person + data.books.extra * PRICE.extra + (data.books.followHigh + data.books.followLow) * PRICE.follow;
     $('d-total').textContent = won(total);
     $('d-guide').textContent = CONFIG.payGuide;
-    $('d-fix').innerHTML = '고칠 내용이 있으면 ' + contactHtml() + '께 접수번호를 알려 주세요.';
+    $('d-fix').innerHTML = '마감 전까지 아래 ‘신청 내용 고치기’로 고칠 수 있습니다. 다른 기기에서는 접수번호와 휴대폰 번호로 불러옵니다. 문의: ' + contactHtml();
     $('done').hidden = false; showBar();
     window.scrollTo({ top: Math.max(0, $('done-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior: 'smooth' });
     $('done-card').focus({ preventScroll:true });
   }
 
-  $('again').addEventListener('click', function(){ location.reload(); });
+  $('d-edit').addEventListener('click', function(){
+    if(!lastDone) return;
+    var d = lastDone.data;
+    enterEdit(lastDone.id, lastDone.auth, {
+      applicant: { name: d.applicant.name, phone: d.applicant.phone },
+      people: d.people, books: d.books, memo: d.memo
+    });
+  });
+  $('again').addEventListener('click', function(){ location.href = location.pathname; });
+
+  renderMine();
+  if(closed || !CONFIG.endpoint) $('edit-entry').hidden = true;
 
   /* 큰 글씨 모드: 기본 17px → 20px. 이 기기에 기억해 둡니다 */
   function setBig(on){
