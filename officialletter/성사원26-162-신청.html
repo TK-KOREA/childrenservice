@@ -281,6 +281,18 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .ed-actions{display:flex;flex-wrap:wrap;gap:0 20px;margin-top:4px;}
 .ed-actions button{min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
 .ed-actions .danger{color:var(--err);}
+.ed-confirm{margin-top:10px;padding:12px 14px 14px;border:1.5px solid var(--err);border-radius:8px;background:#fff;}
+.ed-confirm b{display:block;font-weight:800;color:var(--err);}
+.ed-confirm > span{display:block;margin-top:2px;font-size:var(--t-cap);color:var(--ink);}
+.ed-confirm-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.ed-confirm-btns button{min-height:48px;padding:0 8px;border-radius:8px;font:inherit;font-weight:800;cursor:pointer;}
+.ed-confirm-btns .keep{border:1.5px solid var(--navy);background:#fff;color:var(--navy);}
+.ed-confirm-btns .drop{border:0;background:var(--err);color:#fff;}
+.ed-confirm-btns button:disabled{opacity:.6;cursor:default;}
+/* 고치기 전후 회비 */
+.total .diff{flex:0 0 100%;font-size:var(--t-cap);font-weight:700;color:var(--ink);}
+/* 취소된 신청의 접수번호는 강조색을 쓰지 않습니다 */
+#c-id{background:var(--soft);border-color:var(--rule);}
 
 /* ── 아래 합계 막대 ── */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--rule);box-shadow:0 -2px 12px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom);}
@@ -354,7 +366,7 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
     <div class="mine" id="mine" hidden></div>
     <div class="two-col">
       <div class="fld">
-        <label for="e-id">접수번호</label>
+        <label for="e-id">접수번호 <small>접수 완료 화면에 나온 번호</small></label>
         <input type="text" id="e-id" maxlength="7" placeholder="예: AB3-K7Q" autocomplete="off" autocapitalize="characters" spellcheck="false">
       </div>
       <div class="fld">
@@ -363,16 +375,25 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
       </div>
     </div>
     <button type="button" class="load-btn" id="e-load">신청 불러오기</button>
-    <p class="msg bad" id="e-err" hidden></p>
+    <p class="msg bad" id="e-err" role="alert" hidden></p>
   </div>
 </div>
 
 <div class="editing" id="editing" hidden>
   <b>접수번호 <span id="ed-id"></span> 신청을 고치는 중</b>
   <span>고친 뒤 맨 아래 ‘고친 내용 보내기’를 누르세요.</span>
-  <div class="ed-actions">
+  <div class="ed-actions" id="ed-actions">
     <button type="button" id="ed-new">새로 신청하기로 돌아가기</button>
     <button type="button" class="danger" id="ed-cancel">이 신청 취소하기</button>
+  </div>
+  <!-- 취소 확인: 휴대폰 기본 창의 '확인/취소'는 헷갈려서 화면 안에서 묻습니다 -->
+  <div class="ed-confirm" id="ed-confirm" role="alertdialog" aria-labelledby="ed-confirm-t" aria-describedby="ed-confirm-d" hidden>
+    <b id="ed-confirm-t">이 신청을 취소할까요?</b>
+    <span id="ed-confirm-d">취소하면 되돌릴 수 없습니다. 다시 참석하려면 새로 신청해야 합니다.</span>
+    <div class="ed-confirm-btns">
+      <button type="button" class="keep" id="ed-keep">그대로 두기</button>
+      <button type="button" class="drop" id="ed-drop">신청 취소하기</button>
+    </div>
   </div>
 </div>
 
@@ -450,7 +471,7 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
       <li><span id="s-e-l">집회 교재 추가 0권</span><b id="s-e">0원</b></li>
       <li><span id="s-f-l">후속 교재 0권</span><b id="s-f">0원</b></li>
     </ul>
-    <div class="total" aria-live="polite"><span>이 가정 회비</span><b id="s-total">0원</b><small id="pay-guide"></small></div>
+    <div class="total" aria-live="polite"><span>이 가정 회비</span><b id="s-total">0원</b><span class="diff" id="s-diff" hidden></span><small id="pay-guide"></small></div>
   </div>
 
   <div class="hp" aria-hidden="true"><label>홈페이지<input type="text" id="hp" tabindex="-1" autocomplete="off"></label></div>
@@ -465,7 +486,7 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
     <h2 id="d-title">신청이 접수되었습니다</h2>
     <span class="id" id="d-id"></span>
     <ul id="d-list"></ul>
-    <div class="total"><span>이 가정 회비</span><b id="d-total">0원</b><small id="d-guide"></small></div>
+    <div class="total"><span>이 가정 회비</span><b id="d-total">0원</b><span class="diff" id="d-diff" hidden></span><small id="d-guide"></small></div>
     <p id="d-fix">고칠 내용이 있으면 담당자에게 접수번호를 알려 주세요.</p>
     <button type="button" class="again" id="d-edit">신청 내용 고치기</button>
     <button type="button" class="again" id="again">다른 가정 신청하기</button>
@@ -732,7 +753,12 @@ var CONFIG = {
     $('s-n-l').textContent = '집회 신청 ' + n + '명 × 30,000원'; $('s-n').textContent = won(n * PRICE.person);
     $('s-e-l').textContent = '집회 교재 추가 ' + e + '권';         $('s-e').textContent = won(e * PRICE.extra);
     $('s-f-l').textContent = '후속 교재 ' + f + '권';               $('s-f').textContent = won(f * PRICE.follow);
-    $('s-total').textContent = won(n * PRICE.person + e * PRICE.extra + f * PRICE.follow);
+    var tot = n * PRICE.person + e * PRICE.extra + f * PRICE.follow;
+    $('s-total').textContent = won(tot);
+    // 고치는 중이면 처음 신청한 회비와 비교해 보여 줍니다 (이미 냈다면 차액을 알 수 있게)
+    if(typeof mode !== 'undefined' && mode && mode.id && mode.before != null){
+      $('s-diff').textContent = feeDiff(mode.before, tot); $('s-diff').hidden = false;
+    } else { $('s-diff').hidden = true; }
     document.querySelectorAll('.step button[data-d="-1"]').forEach(function(b){ b.disabled = num(b.getAttribute('data-t')) === 0; });
     $('bar-n').textContent = '참석 ' + n + '명';
     $('bar-t').textContent = won(n * PRICE.person + e * PRICE.extra + f * PRICE.follow);
@@ -873,16 +899,15 @@ var CONFIG = {
   function editErr(text){ openPanel(true); var m = $('e-err'); m.innerHTML = text; m.hidden = false; }
 
   function loadApp(id, phone, btn){
-    if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(id) || !phoneOk(phone)){
-      editErr('접수번호(예: AB3-K7Q)와 휴대폰 번호를 확인해 주세요.'); return;
-    }
+    if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(id)){ editErr('접수번호 6자리를 확인해 주세요. (예: AB3-K7Q)'); $('e-id').focus(); return; }
+    if(!phoneOk(phone)){ editErr('휴대폰 번호를 확인해 주세요.'); $('e-phone').focus(); return; }
     var label = btn.innerHTML; btn.disabled = true; btn.textContent = '불러오는 중…';
     $('e-err').hidden = true;
     api({ action:'load', id:id, auth: fmtPhone(phone) }).then(function(res){
       btn.disabled = false; btn.innerHTML = label;
       if(res && res.ok){ enterEdit(res.id, fmtPhone(phone), res.data); return; }
       if(res && res.error === 'closed'){ editErr('신청이 마감되어 고칠 수 없습니다. ' + contactHtml() + '께 연락해 주세요.'); return; }
-      editErr('신청을 찾지 못했습니다. 접수번호와 신청할 때 적은 휴대폰 번호를 확인해 주세요. 취소한 신청은 불러올 수 없습니다.');
+      editErr('신청을 찾지 못했습니다. 접수번호와 휴대폰 번호를 다시 확인해 주세요. 모르시면 ' + contactHtml() + '께 물어 주세요.');
     }).catch(function(){
       btn.disabled = false; btn.innerHTML = label;
       editErr('인터넷 연결을 확인하고 다시 눌러 주세요.');
@@ -923,8 +948,17 @@ var CONFIG = {
     syncMe(); renumber(); calc();
   }
 
+  function feeOf(d){
+    return d.people.length * PRICE.person + d.books.extra * PRICE.extra + (d.books.followHigh + d.books.followLow) * PRICE.follow;
+  }
+  function feeDiff(before, now){
+    var dd = now - before;
+    return dd ? '처음 신청 ' + won(before) + ' → 지금 ' + won(now) + ' (' + (dd > 0 ? '+' : '−') + won(Math.abs(dd)) + ')' : '처음 신청과 같은 금액입니다';
+  }
+
   function enterEdit(id, auth, d){
-    mode.id = id; mode.auth = auth;
+    mode.id = id; mode.auth = auth; mode.before = feeOf(d);
+    closeConfirm();
     fillForm(d);
     $('done').hidden = true; $('cancelled').hidden = true; form.hidden = false;
     openPanel(false); $('edit-entry').hidden = true;
@@ -936,13 +970,24 @@ var CONFIG = {
   }
 
   $('ed-new').addEventListener('click', function(){ location.href = location.pathname; });
+  var CONFIRM_D = '취소하면 되돌릴 수 없습니다. 다시 참석하려면 새로 신청해야 합니다.';
+  function closeConfirm(){
+    $('ed-confirm').hidden = true; $('ed-actions').hidden = false;
+    $('ed-confirm-d').textContent = CONFIRM_D; $('ed-drop').disabled = false; $('ed-drop').textContent = '신청 취소하기';
+  }
   $('ed-cancel').addEventListener('click', function(){
     if(!mode.id) return;
-    if(!window.confirm('접수번호 ' + mode.id + ' 신청을 취소할까요?\n취소하면 되돌릴 수 없고, 다시 참석하려면 새로 신청해야 합니다.')) return;
-    var b = $('ed-cancel'); b.disabled = true; b.textContent = '취소하는 중…';
+    $('ed-confirm-t').textContent = '접수번호 ' + mode.id + ' 신청을 취소할까요?';
+    $('ed-actions').hidden = true; $('ed-confirm').hidden = false;
+    $('ed-keep').focus();
+  });
+  $('ed-keep').addEventListener('click', function(){ closeConfirm(); $('ed-cancel').focus(); });
+  $('ed-drop').addEventListener('click', function(){
+    var b = $('ed-drop'); b.disabled = true; b.textContent = '취소하는 중…';
+    var fail = function(text){ b.disabled = false; b.textContent = '신청 취소하기'; $('ed-confirm-d').innerHTML = '<strong style="color:var(--err)">' + text + '</strong>'; };
     api({ action:'cancel', id:mode.id, auth:mode.auth }).then(function(res){
-      b.disabled = false; b.textContent = '이 신청 취소하기';
       if(res && res.ok){
+        closeConfirm();
         mineDrop(mode.id);
         $('c-id').textContent = '접수번호 ' + mode.id;
         $('c-note').innerHTML = '회비를 이미 냈다면 ' + contactHtml() + '께 알려 주세요.';
@@ -951,8 +996,8 @@ var CONFIG = {
         $('cancel-card').focus({ preventScroll:true });
         return;
       }
-      window.alert(res && res.error === 'closed' ? '신청이 마감되어 취소할 수 없습니다.' : '취소하지 못했습니다. 이미 취소되었는지 확인해 주세요.');
-    }).catch(function(){ b.disabled = false; b.textContent = '이 신청 취소하기'; window.alert('인터넷 연결을 확인하고 다시 눌러 주세요.'); });
+      fail(res && res.error === 'closed' ? '신청이 마감되어 취소할 수 없습니다.' : '취소하지 못했습니다. 이미 취소된 신청일 수 있습니다.');
+    }).catch(function(){ fail('인터넷 연결을 확인하고 다시 눌러 주세요.'); });
   });
   $('c-again').addEventListener('click', function(){ location.href = location.pathname; });
 
@@ -1003,7 +1048,12 @@ var CONFIG = {
       : data.people.length * PRICE.person + data.books.extra * PRICE.extra + (data.books.followHigh + data.books.followLow) * PRICE.follow;
     $('d-total').textContent = won(total);
     $('d-guide').textContent = CONFIG.payGuide;
-    $('d-fix').innerHTML = '마감 전까지 아래 ‘신청 내용 고치기’로 고칠 수 있습니다. 다른 기기에서는 접수번호와 휴대폰 번호로 불러옵니다. 문의: ' + contactHtml();
+    $('d-fix').textContent = '마감 전까지 고칠 수 있습니다. 다른 휴대폰에서는 접수번호와 휴대폰 번호로 불러오세요.';
+    if(res.updated && mode.before != null){
+      $('d-diff').textContent = feeDiff(mode.before, total) + (total !== mode.before ? ' · 이미 냈다면 ' + who + '께 알려 주세요' : '');
+      $('d-diff').hidden = false;
+      mode.before = total;                      // 한 번 더 고치면 이 금액과 비교
+    } else { $('d-diff').hidden = true; }
     $('done').hidden = false; showBar();
     window.scrollTo({ top: Math.max(0, $('done-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior: 'smooth' });
     $('done-card').focus({ preventScroll:true });
