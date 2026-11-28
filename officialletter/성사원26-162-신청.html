@@ -293,6 +293,10 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .edit-panel .msg{margin:-4px 0 16px;}
 .editing{margin:20px 0 0;padding:14px 16px;border-radius:10px;background:#E9F0F6;border-left:4px solid var(--navy);}
 .editing b{display:block;font-weight:800;color:var(--navy);}
+/* 입금 상태: 확인됨은 남색 글씨+체크, 아직이면 회색 */
+.editing .pay{display:inline-flex;align-items:center;gap:6px;margin:6px 0 2px;padding:3px 10px;border-radius:999px;font-size:var(--t-cap);font-weight:700;background:#fff;color:var(--ink-2);border:1px solid var(--rule);}
+.editing .pay.ok{color:var(--navy);border-color:var(--navy);}
+.editing .pay.ok::before{content:'';width:14px;height:14px;border-radius:50%;background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;}
 .editing > span{display:block;margin-top:2px;font-size:var(--t-cap);color:var(--ink-2);}
 .ed-actions{display:flex;flex-wrap:wrap;gap:0 20px;margin-top:4px;}
 .ed-actions button{min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
@@ -396,6 +400,7 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
 
 <div class="editing" id="editing" hidden>
   <b>접수번호 <span id="ed-id"></span> 신청을 고치는 중</b>
+  <span class="pay" id="ed-pay" hidden></span>
   <span>고친 뒤 맨 아래 ‘고친 내용 보내기’를 누르세요.</span>
   <div class="ed-actions" id="ed-actions">
     <button type="button" id="ed-new">새로 신청하기로 돌아가기</button>
@@ -780,7 +785,7 @@ var CONFIG = {
     $('s-total').textContent = won(tot);
     // 고치는 중이면 처음 신청한 회비와 비교해 보여 줍니다 (이미 냈다면 차액을 알 수 있게)
     if(typeof mode !== 'undefined' && mode && mode.id && mode.before != null){
-      $('s-diff').textContent = feeDiff(mode.before, tot); $('s-diff').hidden = false;
+      $('s-diff').textContent = feeDiff(mode.before, tot) + (mode.paid && tot !== mode.before ? ' · 입금하신 금액과 차이가 납니다' : ''); $('s-diff').hidden = false;
     } else { $('s-diff').hidden = true; }
     document.querySelectorAll('.step button[data-d="-1"]').forEach(function(b){ b.disabled = num(b.getAttribute('data-t')) === 0; });
     $('bar-n').textContent = '참석 ' + n + '명';
@@ -953,7 +958,7 @@ var CONFIG = {
     var box = $('choices');
     box.innerHTML = '<p>이 번호로 한 신청이 ' + apps.length + '건 있습니다. 고칠 신청을 고르세요.</p>' + apps.map(function(a, i){
       var names = a.data.people.map(function(x){ return x.name; }).join(', ');
-      return '<button type="button" data-c="' + i + '">접수번호 ' + esc(a.id) + ' 고치기<span>' + esc(names) + ' · ' + a.data.people.length + '명</span></button>';
+      return '<button type="button" data-c="' + i + '">접수번호 ' + esc(a.id) + ' 고치기<span>' + esc(names) + ' · ' + a.data.people.length + '명 · ' + (a.data.paid ? '입금 확인됨' : '입금 전') + '</span></button>';
     }).join('');
     box.hidden = false;
     box.querySelector('button').focus();
@@ -1006,7 +1011,9 @@ var CONFIG = {
   }
 
   function enterEdit(id, auth, d){
-    mode.id = id; mode.auth = auth; mode.before = feeOf(d);
+    mode.id = id; mode.auth = auth; mode.before = feeOf(d); mode.paid = !!d.paid;
+    $('ed-pay').textContent = mode.paid ? '회비 입금 확인됨' : '회비 입금 전';
+    $('ed-pay').className = 'pay' + (mode.paid ? ' ok' : ''); $('ed-pay').hidden = false;
     closeConfirm();
     fillForm(d);
     $('done').hidden = true; $('cancelled').hidden = true; form.hidden = false;
@@ -1039,7 +1046,7 @@ var CONFIG = {
         closeConfirm();
         mineDrop(mode.id);
         $('c-id').textContent = '접수번호 ' + mode.id;
-        $('c-note').innerHTML = '회비를 이미 냈다면 ' + contactHtml() + '께 알려 주세요.';
+        $('c-note').innerHTML = mode.paid ? '입금하신 회비는 ' + contactHtml() + '께 말씀해 주세요.' : '다시 참석하려면 새로 신청해 주세요.';
         form.hidden = true; $('editing').hidden = true; $('cancelled').hidden = false; showBar();
         openPanel(false); $('hero-edit').hidden = true; $('start').hidden = true;
         window.scrollTo({ top: Math.max(0, $('cancel-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
@@ -1086,7 +1093,7 @@ var CONFIG = {
 
   function showDone(data, res){
     var id = res.id || data.id;
-    lastDone = { id:id, auth:data.applicant.phone, data:data };
+    lastDone = { id:id, auth:data.applicant.phone, data:data, paid: !!(res.updated && mode.paid) };
     form.hidden = true; $('editing').hidden = true;
     $('d-title').textContent = res.updated ? '신청을 고쳤습니다' : '신청이 접수되었습니다';
     $('d-id').textContent = '접수번호 ' + id;
@@ -1102,7 +1109,7 @@ var CONFIG = {
     $('d-guide').textContent = CONFIG.payGuide;
     $('d-fix').textContent = '마감 전까지 신청할 때 적은 휴대폰 번호로 고칠 수 있습니다.';
     if(res.updated && mode.before != null){
-      $('d-diff').textContent = feeDiff(mode.before, total) + (total !== mode.before ? ' · 이미 냈다면 ' + who + '께 알려 주세요' : '');
+      $('d-diff').textContent = feeDiff(mode.before, total) + (total !== mode.before ? (mode.paid ? ' · 이미 입금하셨으니 차액은 ' + who + '께 알려 주세요' : '') : '');
       $('d-diff').hidden = false;
       mode.before = total;                      // 한 번 더 고치면 이 금액과 비교
     } else { $('d-diff').hidden = true; }
@@ -1117,7 +1124,7 @@ var CONFIG = {
     var d = lastDone.data;
     enterEdit(lastDone.id, lastDone.auth, {
       applicant: { name: d.applicant.name, phone: d.applicant.phone },
-      people: d.people, books: d.books, memo: d.memo
+      people: d.people, books: d.books, memo: d.memo, paid: lastDone.paid || false
     });
   });
   $('again').addEventListener('click', function(){ location.href = location.pathname; });
