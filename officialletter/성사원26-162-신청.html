@@ -259,6 +259,12 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 
 .done h2.plain::before{display:none;}
 .again + .again{margin-top:10px;}
+/* 카톡으로 보내기: 카카오톡 노란색은 이 버튼에만 씁니다 */
+.share{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;margin:20px 0 0;border:0;border-radius:8px;background:#FEE500;color:#191919;font:inherit;font-weight:800;cursor:pointer;}
+.share:hover{background:#F5DC00;}
+.share-note{margin:8px 0 0 !important;font-size:var(--t-cap);color:var(--ink-2);text-align:center;}
+.share-note.ok{color:var(--navy);font-weight:700;}
+.share-note + .again{margin-top:14px;}
 
 /* ── 신청 고치기 ── */
 .edit-entry{margin:20px 0 0;}
@@ -274,7 +280,6 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .load-btn{display:block;width:100%;min-height:52px;margin:0 0 16px;border:0;border-radius:8px;background:var(--navy);color:#fff;font:inherit;font-weight:800;cursor:pointer;}
 .load-btn:disabled{background:#8B97A3;cursor:default;}
 .edit-panel .msg{margin:-4px 0 16px;}
-#e-id{letter-spacing:.06em;}
 .editing{margin:20px 0 0;padding:14px 16px;border-radius:10px;background:#E9F0F6;border-left:4px solid var(--navy);}
 .editing b{display:block;font-weight:800;color:var(--navy);}
 .editing > span{display:block;margin-top:2px;font-size:var(--t-cap);color:var(--ink-2);}
@@ -359,23 +364,18 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
 
 <p class="msg info" id="notice" hidden></p>
 
-<!-- 이미 신청한 가정: 접수번호 + 휴대폰 번호로 불러와 고치기 -->
+<!-- 이미 신청한 가정: 신청할 때 적은 휴대폰 번호로 불러와 고치기 -->
 <div class="edit-entry" id="edit-entry">
   <button type="button" class="edit-toggle" id="edit-toggle" aria-expanded="false" aria-controls="edit-panel">이미 신청하셨나요?<b>신청 고치기</b></button>
   <div class="edit-panel" id="edit-panel" hidden>
     <div class="mine" id="mine" hidden></div>
-    <div class="two-col">
-      <div class="fld">
-        <label for="e-id">접수번호 <small>접수 완료 화면에 나온 번호</small></label>
-        <input type="text" id="e-id" maxlength="7" placeholder="예: AB3-K7Q" autocomplete="off" autocapitalize="characters" spellcheck="false">
-      </div>
-      <div class="fld">
-        <label for="e-phone">신청할 때 적은 휴대폰 번호</label>
-        <input type="tel" id="e-phone" inputmode="tel" maxlength="16" placeholder="010-0000-0000" autocomplete="tel">
-      </div>
+    <div class="fld">
+      <label for="e-phone">신청할 때 적은 휴대폰 번호</label>
+      <input type="tel" id="e-phone" inputmode="tel" maxlength="16" placeholder="010-0000-0000" autocomplete="tel">
     </div>
     <button type="button" class="load-btn" id="e-load">신청 불러오기</button>
     <p class="msg bad" id="e-err" role="alert" hidden></p>
+    <div class="mine" id="choices" hidden></div>
   </div>
 </div>
 
@@ -488,6 +488,11 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
     <ul id="d-list"></ul>
     <div class="total"><span>이 가정 회비</span><b id="d-total">0원</b><span class="diff" id="d-diff" hidden></span><small id="d-guide"></small></div>
     <p id="d-fix">고칠 내용이 있으면 담당자에게 접수번호를 알려 주세요.</p>
+    <button type="button" class="share" id="d-share">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3.2c-5.3 0-9.6 3.4-9.6 7.6 0 2.7 1.8 5.1 4.5 6.4-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.6.1 1.3.2 2 .2 5.3 0 9.6-3.4 9.6-7.6S17.3 3.2 12 3.2z"/></svg>
+      <span id="d-share-t">카톡으로 보내기</span>
+    </button>
+    <p class="share-note" id="d-share-note" role="status">가족에게 보내 두면 신청 내용과 회비를 함께 볼 수 있습니다.</p>
     <button type="button" class="again" id="d-edit">신청 내용 고치기</button>
     <button type="button" class="again" id="again">다른 가정 신청하기</button>
   </div>
@@ -874,7 +879,7 @@ var CONFIG = {
   }
   $('mine').addEventListener('click', function(e){
     var b = e.target.closest('button[data-i]'); if(!b) return;
-    var x = mineList()[+b.getAttribute('data-i')]; if(x) loadApp(x.id, x.phone, b);
+    var x = mineList()[+b.getAttribute('data-i')]; if(x) loadApp(x.phone, b, x.id);
   });
 
   function openPanel(open){
@@ -883,36 +888,50 @@ var CONFIG = {
   }
   $('edit-toggle').addEventListener('click', function(){
     var open = $('edit-panel').hidden; openPanel(open);
-    if(open && !mineList().length) $('e-id').focus();
-  });
-  $('e-id').addEventListener('input', function(e){
-    var v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
-    e.target.value = v.length > 3 ? v.slice(0, 3) + '-' + v.slice(3) : v;
-    $('e-err').hidden = true;
+    if(open && !mineList().length) $('e-phone').focus();
   });
   $('e-phone').addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); $('e-err').hidden = true; });
-  $('e-id').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); $('e-phone').focus(); } });
   $('e-phone').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); $('e-load').click(); } });
   $('e-phone').setAttribute('enterkeyhint', 'go');
-  $('e-load').addEventListener('click', function(){ loadApp($('e-id').value.trim(), $('e-phone').value, $('e-load')); });
+  $('e-load').addEventListener('click', function(){ loadApp($('e-phone').value, $('e-load')); });
 
   function editErr(text){ openPanel(true); var m = $('e-err'); m.innerHTML = text; m.hidden = false; }
 
-  function loadApp(id, phone, btn){
-    if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}$/.test(id)){ editErr('접수번호 6자리를 확인해 주세요. (예: AB3-K7Q)'); $('e-id').focus(); return; }
+  /** 신청할 때 적은 휴대폰 번호로 불러옵니다. id를 주면(이 기기에 저장된 신청) 그 신청 하나만 */
+  function loadApp(phone, btn, id){
     if(!phoneOk(phone)){ editErr('휴대폰 번호를 확인해 주세요.'); $('e-phone').focus(); return; }
     var label = btn.innerHTML; btn.disabled = true; btn.textContent = '불러오는 중…';
-    $('e-err').hidden = true;
-    api({ action:'load', id:id, auth: fmtPhone(phone) }).then(function(res){
+    $('e-err').hidden = true; $('choices').hidden = true;
+    var body = { action:'load', auth: fmtPhone(phone) }; if(id) body.id = id;
+    api(body).then(function(res){
       btn.disabled = false; btn.innerHTML = label;
-      if(res && res.ok){ enterEdit(res.id, fmtPhone(phone), res.data); return; }
+      if(res && res.ok && res.apps && res.apps.length){
+        if(res.apps.length === 1){ enterEdit(res.apps[0].id, fmtPhone(phone), res.apps[0].data); return; }
+        showChoices(res.apps, fmtPhone(phone)); return;     // 같은 번호로 여러 번 신청한 경우
+      }
       if(res && res.error === 'closed'){ editErr('신청이 마감되어 고칠 수 없습니다. ' + contactHtml() + '께 연락해 주세요.'); return; }
-      editErr('신청을 찾지 못했습니다. 접수번호와 휴대폰 번호를 다시 확인해 주세요. 모르시면 ' + contactHtml() + '께 물어 주세요.');
+      editErr('이 번호로 한 신청을 찾지 못했습니다. 신청할 때 적은 번호인지 확인해 주세요. 모르시면 ' + contactHtml() + '께 물어 주세요.');
     }).catch(function(){
       btn.disabled = false; btn.innerHTML = label;
       editErr('인터넷 연결을 확인하고 다시 눌러 주세요.');
     });
   }
+
+  var choiceApps = [], choicePhone = '';
+  function showChoices(apps, phone){
+    choiceApps = apps; choicePhone = phone;
+    var box = $('choices');
+    box.innerHTML = '<p>이 번호로 한 신청이 ' + apps.length + '건 있습니다. 고칠 신청을 고르세요.</p>' + apps.map(function(a, i){
+      var names = a.data.people.map(function(x){ return x.name; }).join(', ');
+      return '<button type="button" data-c="' + i + '">접수번호 ' + esc(a.id) + ' 고치기<span>' + esc(names) + ' · ' + a.data.people.length + '명</span></button>';
+    }).join('');
+    box.hidden = false;
+    box.querySelector('button').focus();
+  }
+  $('choices').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-c]'); if(!b) return;
+    var a = choiceApps[+b.getAttribute('data-c')]; if(a) enterEdit(a.id, choicePhone, a.data);
+  });
 
   function pick(el, key, val){
     var r = el.querySelector('input[name="' + el.id + '-' + key + '"][value="' + val + '"]'); if(r) r.checked = true;
@@ -1047,8 +1066,11 @@ var CONFIG = {
     var total = typeof res.amount === 'number' ? res.amount
       : data.people.length * PRICE.person + data.books.extra * PRICE.extra + (data.books.followHigh + data.books.followLow) * PRICE.follow;
     $('d-total').textContent = won(total);
+    lastDone.total = total;
+    $('d-share-note').className = 'share-note';
+    $('d-share-note').textContent = '가족에게 보내 두면 신청 내용과 회비를 함께 볼 수 있습니다.';
     $('d-guide').textContent = CONFIG.payGuide;
-    $('d-fix').textContent = '마감 전까지 고칠 수 있습니다. 다른 휴대폰에서는 접수번호와 휴대폰 번호로 불러오세요.';
+    $('d-fix').textContent = '마감 전까지 고칠 수 있습니다. 다른 휴대폰에서는 신청할 때 적은 휴대폰 번호로 불러오세요.';
     if(res.updated && mode.before != null){
       $('d-diff').textContent = feeDiff(mode.before, total) + (total !== mode.before ? ' · 이미 냈다면 ' + who + '께 알려 주세요' : '');
       $('d-diff').hidden = false;
@@ -1069,8 +1091,60 @@ var CONFIG = {
   });
   $('again').addEventListener('click', function(){ location.href = location.pathname; });
 
+  /* 카톡으로 보내기: 휴대폰의 공유 창(카카오톡 선택)으로, 공유 창이 없으면 글을 복사합니다 */
+  function shareText(x){
+    var lines = ['[2027 겨울 어린이 집회 신청]', '접수번호 ' + x.id];
+    x.data.people.forEach(function(p){
+      lines.push('· ' + p.name + ' (' + p.kind + ') ' + (p.meeting === MEET.low.key ? MEET.low.name : MEET.high.name));
+    });
+    lines.push('회비 ' + won(x.total), '');
+    lines.push('신청 고치기: ' + location.origin + location.pathname + '?edit=' + x.id);
+    lines.push('(신청할 때 적은 휴대폰 번호로 불러옵니다)');
+    return lines.join('\n');
+  }
+  function copyText(t){
+    if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(ok, no){
+      var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', '');
+      a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select();
+      var done = false; try{ done = document.execCommand('copy'); }catch(e){}
+      a.remove(); if(done) ok(); else no();
+    });
+  }
+  function shareNote(text, ok){ var n = $('d-share-note'); n.textContent = text; n.className = 'share-note' + (ok ? ' ok' : ''); }
+  var canShare = !!navigator.share;
+  if(!canShare) $('d-share-t').textContent = '카톡에 붙여 넣을 내용 복사';
+  $('d-share').addEventListener('click', function(){
+    if(!lastDone) return;
+    var text = shareText(lastDone);
+    if(canShare){
+      navigator.share({ title:'2027 겨울 어린이 집회 신청', text:text }).catch(function(err){
+        if(err && err.name === 'AbortError') return;        // 공유 창을 그냥 닫음
+        copyText(text).then(function(){ shareNote('복사했습니다. 카톡 대화창에 붙여 넣으세요.', true); },
+                            function(){ shareNote('보내지 못했습니다. 접수번호를 적어 두세요.'); });
+      });
+      return;
+    }
+    copyText(text).then(function(){ shareNote('복사했습니다. 카톡 대화창에 붙여 넣으세요.', true); },
+                        function(){ shareNote('복사하지 못했습니다. 접수번호를 적어 두세요.'); });
+  });
+
   renderMine();
   if(closed || !CONFIG.endpoint) $('edit-entry').hidden = true;
+
+  /* 카톡으로 받은 '신청 고치기' 링크(?edit=접수번호)로 열면 불러오기 칸을 열어 둡니다.
+     이 기기에 같은 신청이 저장돼 있으면 휴대폰 번호도 채웁니다. */
+  (function(){
+    var m = /[?&]edit=([A-Za-z0-9]{3})-?([A-Za-z0-9]{3})/.exec(location.search);
+    if(!m || closed || !CONFIG.endpoint) return;
+    var id = (m[1] + '-' + m[2]).toUpperCase();
+    var saved = mineList().filter(function(x){ return x.id === id; })[0];
+    if(saved) $('e-phone').value = saved.phone;
+    openPanel(true);
+    setTimeout(function(){
+      window.scrollTo(0, Math.max(0, $('edit-entry').getBoundingClientRect().top + window.pageYOffset - 16));
+    }, 0);
+  })();
 
   /* 큰 글씨 모드: 기본 17px → 20px. 이 기기에 기억해 둡니다 */
   function setBig(on){
