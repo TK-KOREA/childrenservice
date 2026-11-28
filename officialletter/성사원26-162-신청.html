@@ -121,7 +121,14 @@ html.big .hero-top{min-height:min(calc(96vw + 104px),624px);background-position:
 .lanes{margin:0;padding:0;list-style:none;}
 .lanes li + li{margin-top:6px;}
 .lanes li span{display:block;font-size:var(--t-cap);font-weight:600;color:#B9CCDC;line-height:1.4;}
-.back{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-weight:700;color:#fff;text-underline-offset:4px;}
+.back{display:inline-flex;align-items:center;min-height:44px;font-size:var(--t-cap);font-weight:700;color:#fff;text-underline-offset:4px;}
+/* 새로 신청하는 가정이 첫 화면에서 바로 시작하도록 */
+.hero-cta{display:block;width:100%;min-height:52px;margin:14px 0 0;border:0;border-radius:8px;background:#fff;color:var(--navy);font:inherit;font-size:var(--t-input);font-weight:800;cursor:pointer;}
+.hero-cta:hover{background:#EEF3F7;}
+.hero-links{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px;margin-top:4px;}
+.hero-edit{min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:600;color:#DCE6EF;cursor:pointer;text-align:left;}
+.hero-edit u{color:#fff;font-weight:800;text-underline-offset:4px;}
+@media (min-width:700px){ .hero-cta{max-width:320px;} }
 
 /* ── 단계 ── */
 form > section{margin-top:28px;padding-top:28px;border-top:1px solid var(--rule);}
@@ -176,6 +183,10 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .person legend b small{font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
 .rm{margin-left:auto;min-height:44px;padding:0 2px 0 12px;border:0;background:none;font:inherit;font-size:var(--t-cap);font-weight:700;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
 .rm:hover{color:var(--err);}
+.person .skip{display:none;font-size:var(--t-cap);font-weight:600;color:var(--ink-2);}
+.person.blank{border-style:dashed;background:transparent;box-shadow:none;}
+.person.blank .skip{display:inline;}
+.person.blank .nm{display:none;}
 .to{display:block;margin:10px 0 0;padding:8px 12px;border-radius:6px;background:var(--soft);font-size:var(--t-cap);font-weight:700;color:var(--navy);}
 /* 이름(또는 본인 표시)과 성별을 한 줄에 */
 .pair{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 8px;align-items:start;}
@@ -356,7 +367,11 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
       <div><dt>일시</dt><dd class="tn">2027년 1월 15일(금) ~ 17일(주일)<small>온라인(Zoom) · 주제 성경 ‘신명기’</small></dd></div>
       <div><dt>회비</dt><dd class="tn">1인 30,000원<small>집회 교재 · 찬송 음원 포함</small></dd></div>
     </dl>
-    <a class="back" href="성사원26-162.html">공문 자세히 보기</a>
+    <button type="button" class="hero-cta" id="start">지금 신청하기</button>
+    <div class="hero-links">
+      <button type="button" class="hero-edit" id="hero-edit">이미 신청했어요 · <u>신청 고치기</u></button>
+      <a class="back" href="성사원26-162.html">공문 보기</a>
+    </div>
   </div>
 </header>
 
@@ -365,8 +380,8 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
 <p class="msg info" id="notice" hidden></p>
 
 <!-- 이미 신청한 가정: 신청할 때 적은 휴대폰 번호로 불러와 고치기 -->
-<div class="edit-entry" id="edit-entry">
-  <button type="button" class="edit-toggle" id="edit-toggle" aria-expanded="false" aria-controls="edit-panel">이미 신청하셨나요?<b>신청 고치기</b></button>
+<div class="edit-entry" id="edit-entry" hidden>
+  <button type="button" class="edit-toggle" id="edit-toggle" aria-expanded="false" aria-controls="edit-panel">신청 고치기<b>접기</b></button>
   <div class="edit-panel" id="edit-panel" hidden>
     <div class="mine" id="mine" hidden></div>
     <div class="fld">
@@ -625,7 +640,7 @@ var CONFIG = {
     el.setAttribute('data-type', type);
     if(me) el.setAttribute('data-me', '1');
     el.id = id;
-    var h = '<legend><span class="tag">' + (type === 'adult' ? '어른' : '어린이') + '</span><b class="nm"></b>'
+    var h = '<legend><span class="tag">' + (type === 'adult' ? '어른' : '어린이') + '</span><b class="nm"></b><span class="skip">비워 두면 빠집니다</span>'
           + '<button type="button" class="rm">빼기</button></legend>';
     var gender = '<div class="fld" data-f="gender"><span class="lb">성별</span>' + seg(id + '-gender', [{v:'남',t:'남'},{v:'여',t:'여'}], false, '성별') + '<p class="err">골라 주세요.</p></div>';
     if(me){
@@ -689,6 +704,9 @@ var CONFIG = {
       el.querySelector('.nm').innerHTML = nm ? esc(nm) : '<small>' + n + '</small>';
       el.querySelector('.rm').setAttribute('aria-label', (nm || ((child ? '어린이 ' : '어른 ') + n)) + ' 빼기');
     });
+    // 다른 사람이 들어 있는데 아무것도 안 적은 카드는 '빠진다'고 알려 줍니다 (혼자 신청하는 어른 등)
+    var someone = filled().length > 0;
+    cards.forEach(function(el){ el.classList.toggle('blank', someone && isBlank(el)); });
     var full = cards.length >= MAX_PEOPLE;
     ['add-child','add-adult','add-me'].forEach(function(id){ $(id).disabled = full; });
     $('limit').hidden = !full;
@@ -885,12 +903,22 @@ var CONFIG = {
   });
 
   function openPanel(open){
-    $('edit-panel').hidden = !open;
+    $('edit-entry').hidden = !open; $('edit-panel').hidden = !open;
     $('edit-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
   }
-  $('edit-toggle').addEventListener('click', function(){
-    var open = $('edit-panel').hidden; openPanel(open);
-    if(open && !mineList().length) $('e-phone').focus();
+  // 머리의 '이미 신청했어요 · 신청 고치기' → 불러오기 칸을 열고 그리로
+  $('hero-edit').addEventListener('click', function(){
+    openPanel(true);
+    window.scrollTo({ top: Math.max(0, $('edit-entry').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
+    if(!mineList().length) $('e-phone').focus({ preventScroll:true });
+  });
+  // 칸 위쪽 '접기'
+  $('edit-toggle').addEventListener('click', function(){ openPanel(false); $('hero-edit').focus(); });
+  // '지금 신청하기' → 1번 칸으로
+  $('start').addEventListener('click', function(){
+    var t = form.hidden ? $('done') : document.querySelector('section[aria-labelledby="h1"]');
+    window.scrollTo({ top: Math.max(0, t.getBoundingClientRect().top + window.pageYOffset - 8), behavior:'smooth' });
+    if(!form.hidden) $('a-name').focus({ preventScroll:true });
   });
   $('e-phone').addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); $('e-err').hidden = true; });
   $('e-phone').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.isComposing){ e.preventDefault(); $('e-load').click(); } });
@@ -1013,6 +1041,7 @@ var CONFIG = {
         $('c-id').textContent = '접수번호 ' + mode.id;
         $('c-note').innerHTML = '회비를 이미 냈다면 ' + contactHtml() + '께 알려 주세요.';
         form.hidden = true; $('editing').hidden = true; $('cancelled').hidden = false; showBar();
+        openPanel(false); $('hero-edit').hidden = true; $('start').hidden = true;
         window.scrollTo({ top: Math.max(0, $('cancel-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
         $('cancel-card').focus({ preventScroll:true });
         return;
@@ -1078,6 +1107,7 @@ var CONFIG = {
       mode.before = total;                      // 한 번 더 고치면 이 금액과 비교
     } else { $('d-diff').hidden = true; }
     $('done').hidden = false; showBar();
+    openPanel(false); $('hero-edit').hidden = true; $('start').hidden = true;
     window.scrollTo({ top: Math.max(0, $('done-card').getBoundingClientRect().top + window.pageYOffset - 16), behavior: 'smooth' });
     $('done-card').focus({ preventScroll:true });
   }
@@ -1135,7 +1165,7 @@ var CONFIG = {
   });
 
   renderMine();
-  if(closed || !CONFIG.endpoint) $('edit-entry').hidden = true;
+  if(closed || !CONFIG.endpoint){ $('edit-entry').hidden = true; $('hero-edit').hidden = true; $('start').hidden = true; }
 
   /* 카톡으로 받은 '신청 고치기' 링크(?edit=접수번호)로 열면 불러오기 칸을 열어 둡니다.
      이 기기에 같은 신청이 저장돼 있으면 휴대폰 번호도 채웁니다. */
