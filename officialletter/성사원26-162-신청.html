@@ -492,7 +492,7 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3.2c-5.3 0-9.6 3.4-9.6 7.6 0 2.7 1.8 5.1 4.5 6.4-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.6.1 1.3.2 2 .2 5.3 0 9.6-3.4 9.6-7.6S17.3 3.2 12 3.2z"/></svg>
       <span id="d-share-t">카톡으로 보내기</span>
     </button>
-    <p class="share-note" id="d-share-note" role="status">가족에게 보내 두면 신청 내용과 회비를 함께 볼 수 있습니다.</p>
+    <p class="share-note" id="d-share-note" role="status" hidden></p>
     <button type="button" class="again" id="d-edit">신청 내용 고치기</button>
     <button type="button" class="again" id="again">다른 가정 신청하기</button>
   </div>
@@ -870,10 +870,12 @@ var CONFIG = {
     mineWrite([{ id:id, phone:phone, name:name }].concat(mineList().filter(function(x){ return x.id !== id; })));
   }
   function mineDrop(id){ mineWrite(mineList().filter(function(x){ return x.id !== id; })); }
+  /** 화면에 보이는 번호는 가운데를 가립니다 (여러 가정이 같이 쓰는 휴대폰을 위해) */
+  function maskPhone(ph){ var d = digits(ph); return d.length >= 10 ? d.slice(0, 3) + '-****-' + d.slice(-4) : ''; }
   function renderMine(){
     var l = mineList(), box = $('mine');
     box.innerHTML = l.length ? '<p>이 기기에서 한 신청</p>' + l.map(function(x, i){
-      return '<button type="button" data-i="' + i + '">접수번호 ' + esc(x.id) + ' 불러오기<span>' + esc(x.name || '') + ' · ' + esc(x.phone || '') + '</span></button>';
+      return '<button type="button" data-i="' + i + '">접수번호 ' + esc(x.id) + ' 고치기<span>' + esc(x.name || '') + ' · ' + esc(maskPhone(x.phone)) + '</span></button>';
     }).join('') : '';
     box.hidden = !l.length;
   }
@@ -1067,10 +1069,9 @@ var CONFIG = {
       : data.people.length * PRICE.person + data.books.extra * PRICE.extra + (data.books.followHigh + data.books.followLow) * PRICE.follow;
     $('d-total').textContent = won(total);
     lastDone.total = total;
-    $('d-share-note').className = 'share-note';
-    $('d-share-note').textContent = '가족에게 보내 두면 신청 내용과 회비를 함께 볼 수 있습니다.';
+    $('d-share-note').className = 'share-note'; $('d-share-note').textContent = ''; $('d-share-note').hidden = true;
     $('d-guide').textContent = CONFIG.payGuide;
-    $('d-fix').textContent = '마감 전까지 고칠 수 있습니다. 다른 휴대폰에서는 신청할 때 적은 휴대폰 번호로 불러오세요.';
+    $('d-fix').textContent = '마감 전까지 신청할 때 적은 휴대폰 번호로 고칠 수 있습니다.';
     if(res.updated && mode.before != null){
       $('d-diff').textContent = feeDiff(mode.before, total) + (total !== mode.before ? ' · 이미 냈다면 ' + who + '께 알려 주세요' : '');
       $('d-diff').hidden = false;
@@ -1103,15 +1104,19 @@ var CONFIG = {
     return lines.join('\n');
   }
   function copyText(t){
-    if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
-    return new Promise(function(ok, no){
-      var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', '');
-      a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select();
-      var done = false; try{ done = document.execCommand('copy'); }catch(e){}
-      a.remove(); if(done) ok(); else no();
-    });
+    // 예전 방식(글 상자를 골라 복사): 클립보드 권한이 막혀 있어도 대부분 됩니다
+    var legacy = function(){
+      return new Promise(function(ok, no){
+        var a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', '');
+        a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select();
+        var done = false; try{ done = document.execCommand('copy'); }catch(e){}
+        a.remove(); if(done) ok(); else no();
+      });
+    };
+    if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).catch(legacy);
+    return legacy();
   }
-  function shareNote(text, ok){ var n = $('d-share-note'); n.textContent = text; n.className = 'share-note' + (ok ? ' ok' : ''); }
+  function shareNote(text, ok){ var n = $('d-share-note'); n.textContent = text; n.className = 'share-note' + (ok ? ' ok' : ''); n.hidden = false; }
   var canShare = !!navigator.share;
   if(!canShare) $('d-share-t').textContent = '카톡에 붙여 넣을 내용 복사';
   $('d-share').addEventListener('click', function(){
