@@ -166,7 +166,7 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .seg span small{font-size:var(--t-cap);font-weight:500;color:var(--ink-2);}
 .seg input:checked + span{background:var(--navy);border-color:var(--navy);color:#fff;}
 .seg input:checked + span small{color:#DCE6EF;}
-.seg input:focus-visible + span{outline:3px solid var(--focus);outline-offset:2px;}
+.seg input:focus-visible + span{outline:3px solid var(--navy);outline-offset:2px;}
 .bad .seg span{border-color:var(--err);}
 /* 학년 다섯 칸은 큰 글씨에서도 한 줄 */
 [data-f="grade"] .seg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
@@ -251,6 +251,10 @@ input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:3px solid va
 .msg{margin:12px 0 0;padding:12px 14px;border-radius:8px;font-size:var(--t-cap);font-weight:700;}
 .msg.bad{background:var(--err-bg);color:var(--err);}
 .msg.info{background:#FFF4DA;color:#4F3A00;}
+.notice-card{margin:24px 0 0;padding:20px;border:1.5px solid var(--rule);border-radius:10px;background:#fff;}
+.notice-card b{display:block;font-family:var(--display);font-size:var(--t-h2);font-weight:700;line-height:1.3;color:var(--ink);}
+.notice-card span{display:block;margin-top:8px;color:var(--ink-2);}
+.notice-card a{color:var(--navy);font-weight:800;}
 .msg a{color:inherit;}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 
@@ -614,17 +618,22 @@ var CONFIG = {
     var end = new Date(CONFIG.closeAt), k = new Date(Date.now() + 9*3600000), e = new Date(end.getTime() + 9*3600000);
     var d = Math.round((Date.UTC(e.getUTCFullYear(),e.getUTCMonth(),e.getUTCDate()) - Date.UTC(k.getUTCFullYear(),k.getUTCMonth(),k.getUTCDate()))/86400000);
     $('close-left').textContent = closed ? '마감' : (d > 0 ? 'D-' + d : '오늘 마감');
-    if(closed){ $('due').classList.add('closed'); $('due').lastChild.textContent = '신청이 마감되었습니다'; }
+    if(closed){ $('due').classList.add('closed'); $('due').lastChild.textContent = CONFIG.closeLabel; }
   })();
   $('pay-guide').textContent = CONFIG.payGuide;
   if(CONFIG.contactName || CONFIG.contactPhone){ $('foot-contact').innerHTML = '문의: ' + contactHtml(); $('foot-contact').hidden = false; }
 
-  function lockForm(html){
-    var n = $('notice'); n.innerHTML = html; n.hidden = false;
+  /* 마감 뒤(또는 준비 중)에는 신청서를 아예 숨기고 안내 카드 하나만 보여 줍니다
+     (다 적고 나서야 보낼 수 없다는 걸 알게 되지 않도록) */
+  function lockForm(title, body){
+    var n = $('notice');
+    n.innerHTML = '<b>' + title + '</b><span>' + body + '</span>';
+    n.className = 'notice-card'; n.hidden = false;
     $('send').disabled = true;
+    form.hidden = true;
   }
-  if(closed) lockForm('교회 신청이 마감되었습니다. 꼭 참석해야 하면 ' + contactHtml() + '께 연락해 주세요.');
-  else if(!CONFIG.endpoint) lockForm('신청 받기를 준비하고 있습니다. 조금 뒤에 다시 열어 주세요.');
+  if(closed) lockForm('신청이 마감되었습니다', '꼭 참석해야 하면 ' + contactHtml() + '께 연락해 주세요.');
+  else if(!CONFIG.endpoint) lockForm('신청 받기를 준비하고 있습니다', '조금 뒤에 다시 열어 주세요.');
 
   /* 사람 카드 */
   function seg(name, items, wide, label){
