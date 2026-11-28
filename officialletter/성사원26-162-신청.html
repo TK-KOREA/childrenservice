@@ -24,7 +24,7 @@ try{ if(localStorage.getItem('bigText') === '1') document.documentElement.classL
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap">
 <style>
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
 /* ───────────────────────── 글꼴 규칙 ─────────────────────────
    크기는 모두 rem. 기본 17px, 큰 글씨 모드 20px (휴대폰 글꼴 설정도 따라감)
@@ -413,6 +413,15 @@ footer b{display:block;margin-bottom:4px;font-size:var(--t-body);font-weight:800
     <div class="ed-confirm-btns">
       <button type="button" class="keep" id="ed-keep">그대로 두기</button>
       <button type="button" class="drop" id="ed-drop">신청 취소하기</button>
+    </div>
+  </div>
+  <!-- 고친 내용이 있는데 '새로 신청하기로 돌아가기'를 누르면 한 번 묻습니다 -->
+  <div class="ed-confirm" id="ed-leave" role="alertdialog" aria-labelledby="ed-leave-t" aria-describedby="ed-leave-d" hidden>
+    <b id="ed-leave-t">고친 내용을 버리고 새로 신청할까요?</b>
+    <span id="ed-leave-d">아직 보내지 않은 고친 내용은 사라집니다.</span>
+    <div class="ed-confirm-btns">
+      <button type="button" class="keep" id="ed-stay">계속 고치기</button>
+      <button type="button" class="drop" id="ed-leave-go">고친 내용 버리기</button>
     </div>
   </div>
 </div>
@@ -1014,10 +1023,12 @@ var CONFIG = {
     mode.id = id; mode.auth = auth; mode.before = feeOf(d); mode.paid = !!d.paid;
     $('ed-pay').textContent = mode.paid ? '회비 입금 확인됨' : '회비 입금 전';
     $('ed-pay').className = 'pay' + (mode.paid ? ' ok' : ''); $('ed-pay').hidden = false;
-    closeConfirm();
+    closeConfirm(); closeLeave();
     fillForm(d);
+    mode.snap = formSnap();                        // 처음 불러온 상태 (고쳤는지 알아보려고)
     $('done').hidden = true; $('cancelled').hidden = true; form.hidden = false;
     openPanel(false); $('edit-entry').hidden = true;
+    $('start').hidden = true; $('hero-edit').hidden = true;   // 고치는 중에는 머리의 새 신청·고치기 입구를 숨김
     $('ed-id').textContent = id; $('editing').hidden = false;
     $('send').disabled = false; $('send').textContent = '고친 내용 보내기'; $('send-err').hidden = true;
     mineSave(id, auth, d.applicant.name);
@@ -1025,7 +1036,21 @@ var CONFIG = {
     window.scrollTo({ top: Math.max(0, $('editing').getBoundingClientRect().top + window.pageYOffset - 16), behavior:'smooth' });
   }
 
-  $('ed-new').addEventListener('click', function(){ location.href = location.pathname; });
+  /** 화면 칸의 지금 상태를 한 줄로 (불러온 뒤 고쳤는지 비교) */
+  function formSnap(){
+    return [].map.call(form.querySelectorAll('input, textarea'), function(i){
+      return i.type === 'radio' || i.type === 'checkbox' ? (i.checked ? '1' : '0') : i.value;
+    }).join('\u0001') + '|' + list.children.length;
+  }
+  function closeLeave(){ $('ed-leave').hidden = true; $('ed-actions').hidden = false; }
+  function startOver(){ location.href = location.pathname; }
+  $('ed-new').addEventListener('click', function(){
+    if(!mode.id || mode.snap === formSnap()){ startOver(); return; }   // 고친 것이 없으면 바로
+    $('ed-confirm').hidden = true; $('ed-actions').hidden = true; $('ed-leave').hidden = false;
+    $('ed-stay').focus();
+  });
+  $('ed-stay').addEventListener('click', function(){ closeLeave(); $('ed-new').focus(); });
+  $('ed-leave-go').addEventListener('click', startOver);
   var CONFIRM_D = '취소하면 되돌릴 수 없습니다. 다시 참석하려면 새로 신청해야 합니다.';
   function closeConfirm(){
     $('ed-confirm').hidden = true; $('ed-actions').hidden = false;
